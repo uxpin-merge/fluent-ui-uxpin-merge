@@ -4,7 +4,7 @@ module.exports = {
       {
         name: 'General',
         include: [
-          'src/components/PrimaryButton/PrimaryButton.tsx',
+          'src/components/Button/Button.tsx',
         ],
       },
     ],
