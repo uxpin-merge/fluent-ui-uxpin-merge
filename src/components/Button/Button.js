@@ -13,12 +13,6 @@ class Button extends React.Component {
   render() {
     let iconProps = { iconName: this.props.iconName }
 
-    let styles = {
-      root: {
-        borderRadius: this.props.rounded ? 100 : 0
-      }
-    }
-
     if (this.props.iconPosition === "end") styles.flexContainer = {
       flexDirection: 'row-reverse'
     }
@@ -63,7 +57,7 @@ Button.propTypes = {
    * @uxpindescription The displayed text on the button
    * @uxpinpropname Text
    * */
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 
   /**
    * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
@@ -72,7 +66,7 @@ Button.propTypes = {
   primary: PropTypes.bool,
 
   /**
-   * @uxpindescription The exact name from the PayPal icon library (Optional)
+   * @uxpindescription The exact name from the Fluent icon library (Optional)
    * @uxpinpropname Icon Name
    * */
   iconName: PropTypes.string,
@@ -88,12 +82,6 @@ Button.propTypes = {
    * @uxpinpropname Icon Position
    * */
   iconPosition: PropTypes.oneOf(['start', 'end']),
-
-  /**
-   * @uxpindescription Sets whether to display the button in the rounded PayPal UI style.
-   * @uxpinpropname Rounded
-   * */
-  rounded: PropTypes.bool,
 
   /**
    * @uxpindescription Tooltip for the control
@@ -115,8 +103,7 @@ Button.propTypes = {
 Button.defaultProps = {
   primary: true,
   disabled: false,
-  rounded: true,
-  text: "Basic Button",
+  text: "Hello! PP Fluent!",
   tooltip: ''
 };
 
