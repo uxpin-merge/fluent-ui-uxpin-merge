@@ -20,7 +20,7 @@ class Button extends React.Component {
     }
 
     const tooltipId = _.uniqueId('tooltip_');
-    const calloutProps = {  
+    const ttProps = {  
       gapSpace: 0,
       target: `#${buttonID}`,
     };
@@ -30,6 +30,7 @@ class Button extends React.Component {
         <TooltipHost
           content={this.props.tooltip}
           id={tooltipId}
+          calloutProps={ttProps}
         >
           {this.props.primary ?
             <PrimaryButtonM
