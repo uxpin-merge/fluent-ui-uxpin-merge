@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@uxpin/merge-cli": "^2.7.5"
+    "@uxpin/merge-cli": "^2.7.5",
+    "prettier": "2.2.1"
   }
 }

@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types';
 import { PrimaryButton as PrimaryButtonM, DefaultButton as DefaultButtonM } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
+
+
 class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ class Button extends React.Component {
     }
 
     const tooltipId = _.uniqueId('tooltip_');
-    const ttProps = {  
+    const ttProps = {
       gapSpace: 2,
       target: `#${buttonID}`,
     };
@@ -90,16 +92,16 @@ Button.propTypes = {
    * */
   tooltip: PropTypes.string,
 
-   /**
-   * @uxpindescription To disable the control
-   * @uxpinpropname Disabled
-   * */
+  /**
+  * @uxpindescription To disable the control
+  * @uxpinpropname Disabled
+  * */
   disabled: PropTypes.bool,
 
-    /**
-   * @uxpindescription Fires when the button is clicked on.
-   * @uxpinpropname Click
-   * */
+  /**
+ * @uxpindescription Fires when the button is clicked on.
+ * @uxpinpropname Click
+ * */
   onClick: PropTypes.func,
 };
 
