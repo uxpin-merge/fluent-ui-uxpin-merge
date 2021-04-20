@@ -29,14 +29,12 @@ class Button extends React.Component {
             <PrimaryButtonM
               {...this.props}
               iconProps={iconProps}
-              styles={styles}
               aria-describedby={tooltipId}
             />
             :
             <DefaultButtonM
               {...this.props}
               iconProps={iconProps}
-              styles={styles}
               aria-describedby={tooltipId}
             />
           }
@@ -93,7 +91,7 @@ Button.propTypes = {
    * @uxpindescription Fires when the button is clicked on.
    * @uxpinpropname Click
    * */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 
@@ -103,6 +101,8 @@ Button.propTypes = {
 Button.defaultProps = {
   primary: true,
   disabled: false,
+  iconName: "Home",
+  iconPosition: "start",
   text: "Hello! PP Fluent!",
   tooltip: 'This is a tooltip',
 };
