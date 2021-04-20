@@ -104,7 +104,7 @@ Button.defaultProps = {
   primary: true,
   disabled: false,
   text: "Hello! PP Fluent!",
-  tooltip: ''
+  tooltip: 'This is a tooltip',
 };
 
 
