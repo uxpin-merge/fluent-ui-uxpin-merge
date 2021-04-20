@@ -9,7 +9,7 @@ module.exports = {
   },
   resolve: {
     modules: [__dirname, "node_modules"],
-    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"]
+    extensions: ["*", ".js", ".jsx"]
   },
   devtool: "source-map",
   module: {
@@ -29,18 +29,13 @@ module.exports = {
         ]
       },
       {
-        exclude: /node_modules/,
-        test: /\.(ts|tsx)$/,
-        use: 'awesome-typescript-loader',
-      },
-      {
         loader: require.resolve('babel-loader', { paths: ['./node_modules/@uxpin/merge-cli'] }),
         test: /\.js?$/,
         exclude: /node_modules/,
         options: {
           presets: [
             require.resolve('@babel/preset-env', { paths: ['./node_modules/@uxpin/merge-cli'] }),
-            require.resolve('@babel/preset-react', { paths: ['./node_modules/@uxpin/merge-cli'] })
+            require.resolve('@babel/preset-react', { paths: ['./node_modules/@uxpin/merge-cli'] }),
           ],
         }
       },
