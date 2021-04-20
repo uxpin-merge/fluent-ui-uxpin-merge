@@ -11,6 +11,8 @@ class Button extends React.Component {
   }
 
   render() {
+    const buttonID = _.uniqueId('button_');
+
     let iconProps = { iconName: this.props.iconName }
 
     if (this.props.iconPosition === "end") styles.flexContainer = {
@@ -18,6 +20,10 @@ class Button extends React.Component {
     }
 
     const tooltipId = _.uniqueId('tooltip_');
+    const calloutProps = {  
+      gapSpace: 0,
+      target: `#${buttonID}`,
+    };
 
     return (
       <div>
@@ -28,12 +34,14 @@ class Button extends React.Component {
           {this.props.primary ?
             <PrimaryButtonM
               {...this.props}
+              id={buttonID}
               iconProps={iconProps}
               aria-describedby={tooltipId}
             />
             :
             <DefaultButtonM
               {...this.props}
+              id={buttonID}
               iconProps={iconProps}
               aria-describedby={tooltipId}
             />
