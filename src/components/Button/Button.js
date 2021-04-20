@@ -21,7 +21,7 @@ class Button extends React.Component {
 
     const tooltipId = _.uniqueId('tooltip_');
     const ttProps = {  
-      gapSpace: 0,
+      gapSpace: 2,
       target: `#${buttonID}`,
     };
 
