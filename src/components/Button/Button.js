@@ -79,12 +79,6 @@ Button.propTypes = {
   iconName: PropTypes.string,
 
   /**
-   * @uxpindescription To disable the control
-   * @uxpinpropname Disabled
-   * */
-  disabled: PropTypes.bool,
-
-  /**
    * @uxpindescription The location to display an icon, if one is set
    * @uxpinpropname Icon Position
    * */
@@ -96,7 +90,13 @@ Button.propTypes = {
    * */
   tooltip: PropTypes.string,
 
-  /**
+   /**
+   * @uxpindescription To disable the control
+   * @uxpinpropname Disabled
+   * */
+  disabled: PropTypes.bool,
+
+    /**
    * @uxpindescription Fires when the button is clicked on.
    * @uxpinpropname Click
    * */
@@ -110,10 +110,10 @@ Button.propTypes = {
 Button.defaultProps = {
   primary: true,
   disabled: false,
-  iconName: "Home",
+  iconName: "",
   iconPosition: "start",
-  text: "Hello! PP Fluent!",
-  tooltip: 'This is a tooltip',
+  text: "Button Text",
+  tooltip: '',
 };
 
 
