@@ -8,6 +8,12 @@ module.exports = {
           'src/components/ActionButton/ActionButton.js',
         ],
       },
+      {
+        name: 'Utilities',
+        include: [
+          'src/components/Separator/Separator.js',
+        ],
+      },
     ],
     wrapper: 'src/components/UXPinWrapper/UXPinWrapper.js',
     webpackConfig: 'uxpin.webpack.config.js',

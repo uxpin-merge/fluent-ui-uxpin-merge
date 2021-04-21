@@ -1,0 +1,7 @@
+# Separator
+  
+```jsx
+<Separator />
+```
+  
+ 
