@@ -31,44 +31,44 @@ class Link extends React.Component {
         }
     }
 
-    set() {
-        //Because any prop change in UXPin causes the control to remount, let's figure these out once and store them.
-        let role = this.props.linkType;
+    // set() {
+    //     // //Because any prop change in UXPin causes the control to remount, let's figure these out once and store them.
+    //     // let role = this.props.linkType;
 
-        //Primary and Disclosure share the same color
-        let linkColor = role === "secondary" ? secondaryColor
-            : primaryColor; //Default
+    //     // //Primary and Disclosure share the same color
+    //     // let linkColor = role === "secondary" ? secondaryColor
+    //     //     : primaryColor; //Default
 
-        //Primary and Disclosure share the same color
-        let hoverColor = role === "secondary" ? secondaryHoverColor
-            : primaryHoverColor; //Default
+    //     // //Primary and Disclosure share the same color
+    //     // let hoverColor = role === "secondary" ? secondaryHoverColor
+    //     //     : primaryHoverColor; //Default
 
-        //Disclosure only varies on the resting state textDecoration style
-        let decor = role === "disclosure" ? disclosureTextDecor
-            : textDecor; //Default
+    //     // //Disclosure only varies on the resting state textDecoration style
+    //     // let decor = role === "disclosure" ? disclosureTextDecor
+    //     //     : textDecor; //Default
 
-        this.setState(
-            {
-                linkColor: linkColor,
-                hoverColor: hoverColor,
-                decoration: decor,
-                hoverDecoration: hoverTextDecor
-            }
-        )
-    }
+    //     // this.setState(
+    //     //     {
+    //     //         linkColor: linkColor,
+    //     //         hoverColor: hoverColor,
+    //     //         decoration: decor,
+    //     //         hoverDecoration: hoverTextDecor
+    //     //     }
+    //     // )
+    // }
 
-    componentDidMount() {
-        this.set()
-    }
+    // componentDidMount() {
+    //     this.set()
+    // }
 
 
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.linkType !== this.props.linkType
-        ) {
-            this.set();
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (
+    //         prevProps.linkType !== this.props.linkType
+    //     ) {
+    //         this.set();
+    //     }
+    // }
 
 
     _onLinkClick() {
