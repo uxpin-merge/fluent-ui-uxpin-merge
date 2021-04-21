@@ -138,8 +138,8 @@ Slider.defaultProps = {
   step: 1,
   value: 2,
   showValue: true,
-  vertical: false,
-  verticalHeight: 300
+  // vertical: false,
+  // verticalHeight: 300
 };
 
 
