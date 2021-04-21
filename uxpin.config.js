@@ -13,6 +13,7 @@ module.exports = {
         include: [
           'src/components/Button/Button.js',
           'src/components/ActionButton/ActionButton.js',
+          'src/components/CompoundButton/CompoundButton.js',
         ],
       },
       {
