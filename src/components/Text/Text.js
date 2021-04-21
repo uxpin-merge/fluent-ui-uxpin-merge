@@ -63,6 +63,16 @@ Text.propTypes = {
   value: PropTypes.string,
 
   /**
+  * @uxpindescription To apply bold formatting
+  */
+  bold: PropTypes.bool,
+
+  /**
+   * @uxpindescription To apply italic formatting
+   */
+  italic: PropTypes.bool,
+
+  /**
    * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
    */
   size: PropTypes.oneOf([
@@ -77,16 +87,6 @@ Text.propTypes = {
     'xxLarge',
     'mega',
   ]),
-
-  /**
-   * @uxpindescription To apply bold formatting
-   */
-  bold: PropTypes.bool,
-
-  /**
-   * @uxpindescription To apply italic formatting
-   */
-  italic: PropTypes.bool,
 
   /**
    * @uxpindescription Text alignment
