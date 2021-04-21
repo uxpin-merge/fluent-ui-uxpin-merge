@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {
-    Separator as FSeparator,
-    Icon,
-    Text
-} from '@fluentui/react/lib/*';
+import { Separator as FSeparator } from '@fluentui/react/lib/Separator';
+import { Text } from '@fluentui/react/lib/Text';
+import { Icon } from '@fluentui/react/lib/Icon';
 import * as PropTypes from 'prop-types';
 
 
