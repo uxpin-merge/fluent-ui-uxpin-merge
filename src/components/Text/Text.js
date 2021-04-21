@@ -30,10 +30,8 @@ class Text extends React.Component {
         color: textColor,
         fontWeight: this.props.bold ? 'bold' : 'normal',
         fontStyle: this.props.italic ? 'italic' : 'normal',
-        //Fixes the 'nudge up/down' issues for larger and smaller sizes
-        display: 'block',
-        //Fixes the janked line height issues for larger and smaller sizes
-        lineHeight: 'normal',
+        display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
+        lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
         textAlign: this.props.align,
       }
     }
