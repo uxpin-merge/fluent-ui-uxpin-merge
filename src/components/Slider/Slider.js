@@ -41,6 +41,8 @@ class Slider extends React.Component {
       return;
     }
 
+    console.log("In onValueChange func " + newValue);
+
     //We MUST  set the state with the updated slider value. This will force the control to update in UXPin at runtime.
     this.setState({ _sliderValue: newValue });
 
