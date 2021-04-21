@@ -14,14 +14,6 @@ class CompoundButton extends React.Component {
   }
 
 
-  // _onClick() {
-  //   //Raise this event to UXPin. 
-  //   if (this.props.onClick) {
-  //     this.props.onClick();
-  //   }
-  // }
-
-
   render() {
 
     let styles = {
