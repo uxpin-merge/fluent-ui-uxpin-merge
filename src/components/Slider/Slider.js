@@ -9,13 +9,15 @@ class Slider extends React.Component {
     super(props);
 
     //Set the default value
-    this.set();
+    this.state = {
+      _sliderValue: this.props.sliderValue
+    }
   }
 
   set() {
     //Track the slider value state within the control
     this.setState({
-      _sliderValue: this.props.value
+      _sliderValue: this.props.sliderValue
     })
   }
 
@@ -25,7 +27,7 @@ class Slider extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
-      prevProps.value !== this.props.value
+      prevProps.sliderValue !== this.props.sliderValue
     ) {
       this.set();
     }
@@ -55,6 +57,8 @@ class Slider extends React.Component {
     //Get the updated slider value from
     const sliderValue = this.state._sliderValue;
 
+    console.log("Slider value: " + sliderValue);
+
     return (
       <FSlider
         // className={this.getSliderClasses()}
@@ -78,7 +82,7 @@ Slider.propTypes = {
    * @uxpinbind onChange
    * @uxpinpropname * Value
    * */
-  value: PropTypes.number,
+  sliderValue: PropTypes.number,
 
   /**
    * @uxpindescription Description label of the Slider
@@ -139,7 +143,7 @@ Slider.defaultProps = {
   min: 0,
   max: 10,
   step: 1,
-  value: 2,
+  sliderValue: 2,
   showValue: true,
   // vertical: false,
   // verticalHeight: 300
