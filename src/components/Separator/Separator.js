@@ -48,20 +48,15 @@ class Separator extends React.Component {
 
         //Let's see if the user entered a valid text color value. This method returns undefined if not. 
         var txColor = UxpColors.getHexFromHexOrToken(this.props.textColor);
-
-        console.log("TXColor: " + txColor);
-
         if (!txColor) {
             txColor = defaultTextColor;
         }
-
-        console.log("Now TXColor: " + txColor);
 
         const contentStyles = {
             content: {
                 background: bgColor,
                 borderRadius: 100,
-                padding: 2,
+                padding: 6,
             }
         }
 
