@@ -80,7 +80,7 @@ class Separator extends React.Component {
 
         let fTextStyles = {
             root: {
-                color = txColor,
+                color: txColor,
             }
         }
 
