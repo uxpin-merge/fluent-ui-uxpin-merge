@@ -36,6 +36,8 @@ class Checkbox extends React.Component {
   _onSelectionChange(isChecked) {
     //Assumption: Microsoft sends true or false, and we don't need to validate the value.
 
+    console.log("New checked value: " + isChecked);
+
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
       { isChecked: isChecked }
@@ -43,7 +45,7 @@ class Checkbox extends React.Component {
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onChange) {
-      this.props.onChange(isChecked.toString());
+      this.props.onChange(isChecked);
     }
   }
 
