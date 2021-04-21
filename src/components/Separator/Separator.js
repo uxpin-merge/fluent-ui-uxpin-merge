@@ -58,8 +58,8 @@ class Separator extends React.Component {
         console.log("Now TXColor: " + txColor);
 
         const contentStyles = {
-            background: 'white',
-            backgroundColor: 'white',
+            // background: 'white',
+            // backgroundColor: 'white',
 
             content: {
                 background: bgColor,
