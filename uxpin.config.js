@@ -2,16 +2,17 @@ module.exports = {
   components: {
     categories: [
       {
-        name: 'General',
+        name: 'Utilities',
         include: [
-          'src/components/Button/Button.js',
-          'src/components/ActionButton/ActionButton.js',
+          'src/components/Text/Text.js',
+          'src/components/Separator/Separator.js',
         ],
       },
       {
-        name: 'Utilities',
+        name: 'Buttons',
         include: [
-          'src/components/Separator/Separator.js',
+          'src/components/Button/Button.js',
+          'src/components/ActionButton/ActionButton.js',
         ],
       },
     ],
