@@ -3,7 +3,7 @@ import {
     Separator as FSeparator,
     Icon,
     Text
-} from 'office-ui-fabric-react';
+} from '@fluentui/react/lib/*';
 import * as PropTypes from 'prop-types';
 
 
