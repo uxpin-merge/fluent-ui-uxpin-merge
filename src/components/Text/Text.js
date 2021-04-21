@@ -40,7 +40,6 @@ class Text extends React.Component {
 
 
     return (
-
       <FText
         {...this.props}
         styles={fTextStyles}
