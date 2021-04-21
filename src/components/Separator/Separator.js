@@ -6,19 +6,6 @@ import * as PropTypes from 'prop-types';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
-/**
- * UPDATED April 21, 2020 by Anthony Hand
- * - Added file to our TPX UX Experimental library on UXPin.
- * 
- * TODOs
- * - Control needs to be updated with the proper PayPal UI theme. 
- * 
- */
-
-
-const defaultTextColor = '#000000';
-const defaultBgColor = '#ffffff';
-
 
 class Separator extends React.Component {
     constructor(props) {
@@ -30,6 +17,9 @@ class Separator extends React.Component {
 
 
     render() {
+
+        const defaultTextColor = UxpColors.textColor;
+        const defaultBgColor = UxpColors.pageColor;
 
         const iconStyles = {
             root: {
@@ -56,7 +46,6 @@ class Separator extends React.Component {
             content: {
                 background: bgColor,
                 borderRadius: 100,
-                //padding: 6,
             }
         }
 

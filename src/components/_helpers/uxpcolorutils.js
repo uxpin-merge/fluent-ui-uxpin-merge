@@ -2,6 +2,9 @@
 
 export const UxpColors = {
 
+    textColor: '#000000',
+    pageColor: '#ffffff',
+
     //******  Greys  ******  
     black: '#000000',
     white: '#ffffff',
