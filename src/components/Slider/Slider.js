@@ -35,8 +35,9 @@ class Slider extends React.Component {
 
   _onValueChange(newValue) {
     //The newValue object here is the new slider value already as a number.
+
+    //Let's cut down on noise & return if it's the same value. 
     if (newValue === this.state._sliderValue) {
-      console.log("It's the same, so we're just returning.")
       return;
     }
 
@@ -44,8 +45,8 @@ class Slider extends React.Component {
     this.setState({ _sliderValue: newValue });
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
-    if (this.props.onChange) {
-      this.props.onChange(newValue.toString());
+    if (this.props.onValueChange) {
+      this.props.onValueChange(newValue.toString());
     }
   }
 
@@ -60,8 +61,6 @@ class Slider extends React.Component {
   render() {
     //Get the updated slider value from
     const sliderValue = this.state._sliderValue;
-
-    console.log("Slider value: " + sliderValue);
 
     return (
       <FSlider
@@ -135,7 +134,7 @@ Slider.propTypes = {
    * @uxpindescription Fires when the control's Value property changes.
    * @uxpinpropname * Value Changed
    * */
-  onChange: PropTypes.func,
+  onValueChange: PropTypes.func,
 };
 
 
