@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ActionButton as ActionButtonM } from '@fluentui/react/lib/ActionButton';
+import { ActionButton as ActionButtonM } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
