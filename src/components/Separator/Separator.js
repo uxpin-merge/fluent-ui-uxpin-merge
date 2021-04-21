@@ -102,6 +102,7 @@ class Separator extends React.Component {
                 { showText ?
                     <Text
                         {...this.props}
+                        styles={fTextStyles}
                     >{this.props.text}</Text>
                     : ''
                 }
