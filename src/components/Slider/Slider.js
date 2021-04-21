@@ -7,6 +7,9 @@ import { Slider as FSlider } from '@fluentui/react/lib/Slider';
 class Slider extends React.Component {
   constructor(props) {
     super(props);
+
+    //Set the default value
+    this.set();
   }
 
   set() {
