@@ -35,6 +35,10 @@ class Slider extends React.Component {
 
   _onValueChange(newValue) {
     //The newValue object here is the new slider value already as a number.
+    if (newValue === this.state._sliderValue) {
+      console.log("It's the same, so we're just returning.")
+      return;
+    }
 
     //We MUST  set the state with the updated slider value. This will force the control to update in UXPin at runtime.
     this.setState({ _sliderValue: newValue });
