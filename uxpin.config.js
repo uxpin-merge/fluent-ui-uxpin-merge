@@ -21,6 +21,7 @@ module.exports = {
         name: 'Input',
         include: [
           'src/components/Checkbox/Checkbox.js',
+          'src/components/Slider/Slider.js',
         ],
       },
     ],
