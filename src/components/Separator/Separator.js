@@ -58,13 +58,10 @@ class Separator extends React.Component {
         console.log("Now TXColor: " + txColor);
 
         const contentStyles = {
-            // background: 'white',
-            // backgroundColor: 'white',
-
             content: {
                 background: bgColor,
                 borderRadius: 100,
-                padding: 20,
+                padding: 2,
             }
         }
 
