@@ -3,6 +3,7 @@ import { Separator as FSeparator } from '@fluentui/react/lib/Separator';
 import { Text } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
 import * as PropTypes from 'prop-types';
+import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 /**
@@ -39,21 +40,17 @@ class Separator extends React.Component {
             },
         };
 
-        //TODO: Hex color validation
-        var bgColor = defaultBgColor;
-        var txColor = defaultTextColor;
+        //Let's see if the user entered a valid background color value. This method returns undefined if not. 
+        var bgColor = UxpColors.getHexFromHexOrToken(this.props.bgColor);
+        if (!bgColor) {
+            bgColor = defaultBgColor;
+        }
 
-        // //Let's see if the user entered a valid background color value. This method returns undefined if not. 
-        // var bgColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.bgColor);
-        // if (!bgColor) {
-        //     bgColor = defaultBgColor;
-        // }
-
-        // //Let's see if the user entered a valid text color value. This method returns undefined if not. 
-        // var txColor = TpxUxColors.getHexFromHexOrPpuiToken(this.props.textColor);
-        // if (!txColor) {
-        //     txColor = defaultTextColor;
-        // }
+        //Let's see if the user entered a valid text color value. This method returns undefined if not. 
+        var txColor = UxpColors.getHexFromHexOrToken(this.props.textColor);
+        if (!txColor) {
+            txColor = defaultTextColor;
+        }
 
         const contentStyles = {
             background: 'red',
