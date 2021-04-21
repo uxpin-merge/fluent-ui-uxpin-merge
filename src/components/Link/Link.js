@@ -5,70 +5,13 @@ import { Text } from '@fluentui/react/lib/Text';
 
 
 
-
-
-// const primaryColor = '#0070BA';         //"blue-600";   //Also disclosure
-// const primaryHoverColor = '#003087';    //"blue-800";   //Also disclosure
-
-// const secondaryColor = '#000000';       //"black";
-// const secondaryHoverColor = "#000000";  //"black";
-
-// const textDecor = "none";               //Primary and secondary
-// const hoverTextDecor = "underline";     //Primary and secondary
-
-// const disclosureTextDecor = "underline dotted";
-
-
 class Link extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            // linkColor: "",
-            // hoverColor: "",
-            // decoration: "",
-            // hoverDecoration: ""
         }
     }
-
-    // set() {
-    //     // //Because any prop change in UXPin causes the control to remount, let's figure these out once and store them.
-    //     // let role = this.props.linkType;
-
-    //     // //Primary and Disclosure share the same color
-    //     // let linkColor = role === "secondary" ? secondaryColor
-    //     //     : primaryColor; //Default
-
-    //     // //Primary and Disclosure share the same color
-    //     // let hoverColor = role === "secondary" ? secondaryHoverColor
-    //     //     : primaryHoverColor; //Default
-
-    //     // //Disclosure only varies on the resting state textDecoration style
-    //     // let decor = role === "disclosure" ? disclosureTextDecor
-    //     //     : textDecor; //Default
-
-    //     // this.setState(
-    //     //     {
-    //     //         linkColor: linkColor,
-    //     //         hoverColor: hoverColor,
-    //     //         decoration: decor,
-    //     //         hoverDecoration: hoverTextDecor
-    //     //     }
-    //     // )
-    // }
-
-    // componentDidMount() {
-    //     this.set()
-    // }
-
-
-    // componentDidUpdate(prevProps) {
-    //     if (
-    //         prevProps.linkType !== this.props.linkType
-    //     ) {
-    //         this.set();
-    //     }
-    // }
 
 
     _onLinkClick() {
@@ -86,20 +29,6 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
-        //Assemble the Link style
-        // let linkStyles = {
-        //     root: {
-        //         color: this.state.linkColor,
-        //         textDecoration: this.state.decoration,
-        //         selectors: {
-        //             ':hover': {
-        //                 color: this.state.hoverColor,
-        //                 textDecoration: this.state.hoverDecoration,
-        //             },
-        //         },
-        //     }
-        // }
-
         //We assemble the Link Text style next
         let linkTextStyles = {
             root: {
@@ -116,11 +45,10 @@ class Link extends React.Component {
 
             <FLink
                 {...this.props}
-                // styles={this.props.disabled ? '' : linkStyles}
                 disabled={this.props.disabled}
                 href={this.props.linkHref}
                 target={linkTarget} //Force open in a new window
-            // onClick={() => { this._onLinkClick() }}
+                onClick={() => { this._onLinkClick() }}
             >
                 <Text
                     {...this.props}
@@ -131,14 +59,8 @@ class Link extends React.Component {
             </FLink>
 
         );
-
     }
-
 }
-
-
-
-
 
 
 /** 

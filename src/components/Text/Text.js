@@ -73,6 +73,11 @@ Text.propTypes = {
   italic: PropTypes.bool,
 
   /**
+  * @uxpindescription Text alignment
+  */
+  align: PropTypes.oneOf(['left', 'center', 'right']),
+
+  /**
    * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
    */
   size: PropTypes.oneOf([
@@ -87,11 +92,6 @@ Text.propTypes = {
     'xxLarge',
     'mega',
   ]),
-
-  /**
-   * @uxpindescription Text alignment
-   */
-  align: PropTypes.oneOf(['left', 'center', 'right']),
 
   /**
    * @uxpindescription To restrict the Text to a single line, truncating any extra with ellipses. If unchecked, you can manually set the width and height. 
