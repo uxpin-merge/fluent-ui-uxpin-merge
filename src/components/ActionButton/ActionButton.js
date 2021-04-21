@@ -45,7 +45,7 @@ class ActionButton extends React.Component {
 
     const tooltipId = _.uniqueId('tooltip_');
     const ttProps = {
-      gapSpace: 2,
+      gapSpace: 0,
       target: `#${buttonID}`,
     };
 
