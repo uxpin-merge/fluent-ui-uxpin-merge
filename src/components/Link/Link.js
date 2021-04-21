@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
-import { Text as FText } from '@fluentui/react/lib/Text';
+import { Text } from '@fluentui/react/lib/Text';
 
 
 
