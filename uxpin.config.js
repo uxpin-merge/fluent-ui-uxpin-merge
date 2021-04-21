@@ -15,6 +15,12 @@ module.exports = {
           'src/components/ActionButton/ActionButton.js',
         ],
       },
+      {
+        name: 'Input',
+        include: [
+          'src/components/Checkbox/Checkbox.js',
+        ],
+      },
     ],
     wrapper: 'src/components/UXPinWrapper/UXPinWrapper.js',
     webpackConfig: 'uxpin.webpack.config.js',
