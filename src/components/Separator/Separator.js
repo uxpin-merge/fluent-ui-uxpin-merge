@@ -1,10 +1,14 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { Separator as FSeparator } from '@fluentui/react/lib/Separator';
 import { Text } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
-import * as PropTypes from 'prop-types';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
+
+
+const defaultTextColor = "#000000";
+const defaultBgColor = "#ffffff";
 
 
 class Separator extends React.Component {
@@ -17,9 +21,6 @@ class Separator extends React.Component {
 
 
     render() {
-
-        const defaultTextColor = UxpColors.textColor;
-        const defaultBgColor = UxpColors.pageColor;
 
         const iconStyles = {
             root: {

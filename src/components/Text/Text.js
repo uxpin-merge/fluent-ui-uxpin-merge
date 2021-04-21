@@ -5,6 +5,9 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
+const defaultTextColor = "#000000";
+
+
 class Text extends React.Component {
 
   constructor(props) {
@@ -15,7 +18,6 @@ class Text extends React.Component {
   }
 
   render() {
-    const defaultTextColor = UxpColors.textColor;
 
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
     var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
