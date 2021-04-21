@@ -58,13 +58,18 @@ class Separator extends React.Component {
         console.log("Now TXColor: " + txColor);
 
         const contentStyles = {
-            background: 'red',
-            backgroundColor: 'red',
+            background: 'white',
+            backgroundColor: 'white',
 
             content: {
                 background: bgColor,
-                //color: txColor,
                 borderRadius: 100,
+            }
+        }
+
+        let fTextStyles = {
+            root: {
+                color: txColor,
             }
         }
 
@@ -76,12 +81,6 @@ class Separator extends React.Component {
         let showText = false;
         if (this.props.text && this.props.text.trim().length > 0) {
             showText = true;
-        }
-
-        let fTextStyles = {
-            root: {
-                color: txColor,
-            }
         }
 
         return (
