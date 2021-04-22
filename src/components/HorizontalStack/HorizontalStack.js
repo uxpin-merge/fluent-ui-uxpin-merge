@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text as Text } from '@fluentui/react/lib/Text';
-import { UxpNumberParser } from '../_helpers/uxpnumberparser.js';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
