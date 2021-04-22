@@ -11,15 +11,22 @@ class Toggle extends React.Component {
     super(props);
 
     //Track the checked state within the control
-    // this.state = {
-    //   _isChecked: false,
-    // }
+    var checked = false;
+    if (this.props.isChecked) {
+      checked = this.props.isChecked;
+    }
+
+    this.state = {
+      _isChecked: checked,
+    }
   }
 
   set() {
     this.setState(
       { _isChecked: this.props.isChecked }
     )
+
+    console.log("Setting state: " + this.props.isChecked);
   }
 
   componentDidMount() {
@@ -27,26 +34,25 @@ class Toggle extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    //Handles prop updates in the UXPin Editor
     if (prevProps.isChecked !== this.props.isChecked) {
       this.set();
     }
   }
 
-  _onSelectionChange(newValue) {
+  _onSelectionChange(isChecked) {
     //Assumption: That Microsoft really is only sending true or false, and we don't need to validate the value.
-
-    let checked = newValue.toString();
 
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
-      { _isChecked: checked }
+      { _isChecked: isChecked }
     )
 
-    console.log("New checked value: " + checked);
+    console.log("New checked value: " + isChecked);
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onCheckChanged) {
-      this.props.onCheckChanged(checked);
+      this.props.onCheckChanged(isChecked);
     }
   }
 
@@ -119,12 +125,12 @@ Toggle.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Toggle.defaultProps = {
+  isChecked: true,
   label: "Toggle Switch",
   onText: "On",
   offText: "Off",
   inlineLabel: true,
-  isChecked: true,
-  disabled: false
+  disabled: false,
 };
 
 
