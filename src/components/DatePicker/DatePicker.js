@@ -47,7 +47,7 @@ class DatePicker extends React.Component {
         }
         else {
             //If it's not a real date, that's OK. Null is the preferred value.
-            //dt = null;
+            dt = null;
         }
 
         this.setState(
@@ -141,7 +141,7 @@ class DatePicker extends React.Component {
                 isRequired={this.props.required}
 
                 onSelectDate={(d, sdr) => this._onChange(d)}
-                formatDate={(d) => this._onFormatDate(d)}
+                //formatDate={(d) => this._onFormatDate(d)}
                 parseDateFromString={(d) => this._onParseDate(d)}
             />
         );
