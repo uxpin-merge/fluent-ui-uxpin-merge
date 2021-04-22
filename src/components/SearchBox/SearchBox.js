@@ -13,17 +13,12 @@ class SearchBox extends React.Component {
     this.state = {
       _textValue: this.props.textValue,
     }
-
-    console.log("constructor, textValue: " + this.props.textValue);
   }
 
   set() {
     this.setState(
       { _textValue: this.props.textValue }
     )
-
-    console.log("set, textValue: " + this.props.textValue)
-    console.log("set, state: " + this.state._textValue);;
   }
 
   componentDidMount() {
