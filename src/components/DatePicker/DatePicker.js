@@ -43,7 +43,7 @@ class DatePicker extends React.Component {
         //Let's see if we can parse a real date
         var dt = UxpDateTimeUtils.parseDate(this.props.calDate);
 
-        console.log("set. parsed date: " + dt);
+        console.log("set. raw Cal Date: " + this.props.calDate);
 
         //If it doesn't come back as undefined, then we can use it. 
         if (dt) {
@@ -66,8 +66,8 @@ class DatePicker extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.calDate !== this.props.calDate) {
-            console.log("comp did update");
-            //this.set();
+            console.log("comp did update. OLD: " + prevProps.calDate + " NEW: " + this.props.calDate);
+            this.set();
         }
     }
 
@@ -153,7 +153,6 @@ class DatePicker extends React.Component {
 
                 onSelectDate={(d, sdr) => this._onChange(d)}
                 formatDate={(d) => this._onFormatDate(d)}
-                // onFormatDate={(d) => this._onFormatDate(d)}
                 parseDateFromString={(d) => this._onParseDate(d)}
             />
         );
