@@ -24,6 +24,7 @@ module.exports = {
           'src/components/Checkbox/Checkbox.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
+          'src/components/TextField/TextField.js',
         ],
       },
     ],
