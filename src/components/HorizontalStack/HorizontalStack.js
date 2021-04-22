@@ -73,7 +73,9 @@ class HorizontalStack extends React.Component {
         if (colWidths.length) {
             var i;
             for (i = 0; i < colWidths.length; i++) {
-                var width = UxpNumberParser.parsePercentOrInt(colWidths[i]);
+                let w = colWidths[i];
+                console.log("Going to parse this next: " + w);
+                var width = UxpNumberParser.parsePercentOrInt(w);
 
                 console.log("A col width: " + width);
 
