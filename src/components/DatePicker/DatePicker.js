@@ -103,7 +103,7 @@ class DatePicker extends React.Component {
      */
     _onParseDate(str) {
         console.log("_onParseDate: " + str);
-        return TpxUxDateTimeUtils.parseDate(str);
+        return UxpDateTimeUtils.parseDate(str);
     }
 
 
