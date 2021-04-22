@@ -2,6 +2,12 @@ module.exports = {
   components: {
     categories: [
       {
+        name: 'Extras',
+        include: [
+          'src/components/HorizontalStack/HorizontalStack.js',
+        ],
+      },
+      {
         name: 'Utilities',
         include: [
           'src/components/Image/Image.js',
