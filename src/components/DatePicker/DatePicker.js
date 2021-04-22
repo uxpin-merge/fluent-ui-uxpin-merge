@@ -43,7 +43,7 @@ class DatePicker extends React.Component {
         //Let's see if we can parse a real date
         var dt = UxpDateTimeUtils.parseDate(this.props.calDate);
 
-        console.log("set. raw Cal Date: " + this.props.calDate + " TYPE: " + typeof this.props.calDate);
+        console.log("set. raw Cal Date: " + this.props.calDate + " TYPE: " + typeof this.props.calDate.toString());
 
         //If it doesn't come back as undefined, then we can use it. 
         if (dt) {
@@ -55,7 +55,7 @@ class DatePicker extends React.Component {
         }
 
         this.setState(
-            //       { selectedDate: dt }
+            { selectedDate: dt }
         )
     }
 
@@ -67,16 +67,17 @@ class DatePicker extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.calDate !== this.props.calDate) {
             console.log("comp did update. OLD: " + prevProps.calDate + " NEW: " + this.props.calDate);
-            this.set();
+            //this.set();
         }
     }
 
 
     /**
-     * We'll immediately use the date. In the future, we may use the date range, too. 
+     * 
      * @param {*} date - The selected date
      */
     _onChange(date) {
+        console.log("onchange: " + date);
 
         this.setState(
             { selectedDate: date }
@@ -85,7 +86,6 @@ class DatePicker extends React.Component {
         if (this.props.onChange) {
             //Format this before surfacing with style: 'Feb 8, 2020' 
             let dt = UxpDateTimeUtils.getFormattedDate(date);
-            console.log("onchange: " + dt);
             this.props.onChange(dt);
         }
     }
