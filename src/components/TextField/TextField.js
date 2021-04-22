@@ -56,6 +56,8 @@ class TextField extends React.Component {
     //Get the value from State.
     let textVal = this.state._textValue;
 
+    let pwdType = this.props.isPassword ? "password" : undefined;
+
     //Set the prefix, if the user has set one. The default MUST be undefined.
     //Microsoft requires that we explicitly set this to undefined if there is no text value. 
     var prefix = undefined;
@@ -82,6 +84,7 @@ class TextField extends React.Component {
         iconProps={{ iconName: this.props.icon }}
         prefix={prefix}
         suffix={suffix}
+        type={pwdType}
         autoComplete={showAutoComplete}
         onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
       />
@@ -155,6 +158,18 @@ TextField.propTypes = {
   required: PropTypes.bool,
 
   /**
+   * @uxpindescription To turn on password masking
+   * @uxpinpropname Password
+   * */
+  isPassword: PropTypes.bool,
+
+  /**
+   * @uxpindescription Whether the user may optionally view their password, when the Password prop is true
+   * @uxpinpropname Can Reveal Password
+   * */
+  canRevealPassword: PropTypes.bool,
+
+  /**
    * @uxpindescription To set the control to read-only mode
    * @uxpinpropname Read Only
    * */
@@ -183,7 +198,9 @@ TextField.defaultProps = {
   textValue: "",
   placeholder: "Enter some text",
   readOnly: false,
-  disabled: false
+  disabled: false,
+  isPassword: false,
+  canRevealPassword: true,
 };
 
 
