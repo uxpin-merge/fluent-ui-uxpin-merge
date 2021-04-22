@@ -18,8 +18,6 @@ export const UxpNumberParser = {
      */
     parsePercentOrInt: function (rawStr) {
 
-        console.log("entering parsePercentOrInt with " + rawStr);
-
         var num = undefined;
         var isPercent = false;
 

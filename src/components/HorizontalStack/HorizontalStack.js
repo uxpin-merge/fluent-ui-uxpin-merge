@@ -68,16 +68,11 @@ class HorizontalStack extends React.Component {
         var columnWidths = [];
         let colWidths = this.props.widths.split("\n");
 
-        console.log("Col widths: " + colWidths);
-
         if (colWidths.length) {
             var i;
             for (i = 0; i < colWidths.length; i++) {
                 let w = colWidths[i];
-                console.log("Going to parse this next: " + w);
                 var width = UxpNumberParser.parsePercentOrInt(w);
-
-                console.log("A col width: " + width);
 
                 if (!width)
                     width = defaultColWidth;
@@ -200,7 +195,7 @@ class HorizontalStack extends React.Component {
         const topStackItemStyles = {
             root: {
                 background: color,        //undefined is OK
-                height: this.props.stackHeight || 'auto'
+                height: 'auto',
             },
         };
 
@@ -355,13 +350,13 @@ HorizontalStack.propTypes = {
      * */
     bgColor: PropTypes.string,
 
-    /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
-     * @uxpindescription The height of the stack
-     * @uxpinpropname Stack Height
-     */
-    stackHeight: PropTypes.string,
+    // /**
+    //  * Don't show this prop in the UXPin Editor. 
+    //  * @uxpinignoreprop 
+    //  * @uxpindescription The height of the stack
+    //  * @uxpinpropname Stack Height
+    //  */
+    // stackHeight: PropTypes.string,
 }
 
 
