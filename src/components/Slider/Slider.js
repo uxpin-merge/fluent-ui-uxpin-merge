@@ -60,7 +60,7 @@ class Slider extends React.Component {
 
   render() {
     //Get the updated slider value from
-    const sliderValue = this.state._sliderValue;
+    let sliderValue = this.state._sliderValue;
 
     return (
       <FSlider
