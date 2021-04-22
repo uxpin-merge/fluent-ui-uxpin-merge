@@ -9,8 +9,15 @@ import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils.js';
 
 
 
-
-
+const dayPickerStrings = {
+    months: UxpDateTimeUtils.months,
+    shortMonths: UxpDateTimeUtils.monthsShort,
+    days: UxpDateTimeUtils.days,
+    shortDays: UxpDateTimeUtils.daysShort,
+    goToToday: 'Go to Today',
+    weekNumberFormatString: 'Week {0}',
+    invalidInputErrorMessage: 'Invalid date format.',
+};
 
 const workWeekDays = [
     DayOfWeek.Monday,
@@ -99,16 +106,6 @@ class DatePicker extends React.Component {
 
 
     render() {
-
-        const dayPickerStrings = {
-            months: UxpDateTimeUtils.months,
-            shortMonths: UxpDateTimeUtils.monthsShort,
-            days: UxpDateTimeUtils.days,
-            shortDays: UxpDateTimeUtils.daysShort,
-            goToToday: 'Go to Today',
-            weekNumberFormatString: 'Week {0}',
-            invalidInputErrorMessage: 'Invalid date format.',
-        };
 
         let calProps = {
             dateRangeType: DateRangeType.Day,  //Typically, we're looking for a day rather than a month or week
