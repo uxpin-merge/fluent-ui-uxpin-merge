@@ -35,6 +35,12 @@ module.exports = {
           'src/components/Toggle/Toggle.js',
         ],
       },
+      {
+        name: 'Pickers',
+        include: [
+          'src/components/DatePicker/DatePicker.js',
+        ],
+      },
     ],
     wrapper: 'src/components/UXPinWrapper/UXPinWrapper.js',
     webpackConfig: 'uxpin.webpack.config.js',
