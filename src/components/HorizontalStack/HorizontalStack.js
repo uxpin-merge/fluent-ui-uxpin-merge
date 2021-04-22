@@ -184,7 +184,7 @@ class HorizontalStack extends React.Component {
         //Styles with dynamic values
 
         //Let's see if the user entered a valid color value. This method returns undefined if not. 
-        var color = UxpColors.getHexFromHexOrPpuiToken(this.props.bgColor);
+        var color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
         if (!color)
             color = 'transparent';
 
