@@ -49,7 +49,7 @@ class HorizontalStack extends React.Component {
         super(props);
 
         this.state = {
-            colWidths: []
+            colWidths: ["50%", "50%"]
         }
     }
 
