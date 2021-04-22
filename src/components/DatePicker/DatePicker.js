@@ -47,7 +47,7 @@ class DatePicker extends React.Component {
         }
         else {
             //If it's not a real date, that's OK. Null is the preferred value.
-            dt = null;
+            //dt = null;
         }
 
         this.setState(
@@ -60,9 +60,7 @@ class DatePicker extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (
-            prevProps.calDate !== this.props.calDate
-        ) {
+        if (prevProps.calDate !== this.props.calDate) {
             this.set();
         }
     }
