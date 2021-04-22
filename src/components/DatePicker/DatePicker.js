@@ -60,11 +60,13 @@ class DatePicker extends React.Component {
     }
 
     componentDidMount() {
+        console.log("comp did mount");
         this.set();
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.calDate !== this.props.calDate) {
+            console.log("comp did update");
             this.set();
         }
     }
