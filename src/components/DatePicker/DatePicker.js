@@ -5,7 +5,7 @@ import {
     DayOfWeek,
     DateRangeType
 } from '@fluentui/react/lib/Calendar';
-import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
+import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils.js';
 
 
 
