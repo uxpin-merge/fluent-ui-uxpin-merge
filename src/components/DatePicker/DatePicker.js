@@ -93,6 +93,7 @@ class DatePicker extends React.Component {
      * @param {*} dateStr 
      */
     _onFormatDate(dateStr) {
+        console.log("_onFormatDate: " + dateStr);
         return UxpDateTimeUtils.getFormattedDate(dateStr);
     }
 
@@ -101,6 +102,7 @@ class DatePicker extends React.Component {
      * @param {*} str - The string the user entered which might be a date
      */
     _onParseDate(str) {
+        console.log("_onParseDate: " + str);
         return TpxUxDateTimeUtils.parseDate(str);
     }
 
