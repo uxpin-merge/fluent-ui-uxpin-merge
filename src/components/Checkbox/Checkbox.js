@@ -11,7 +11,6 @@ class Checkbox extends React.Component {
 
     //Track the checked state within the control
     this.state = {
-      //Initialize with the props value
       isChecked: false,
     }
   }
