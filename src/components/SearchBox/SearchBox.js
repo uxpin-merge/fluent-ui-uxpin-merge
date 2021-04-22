@@ -10,21 +10,24 @@ class SearchBox extends React.Component {
     super(props);
 
     this.setState({
-      //Initialize with the props value
-      currentValue: this.props.textValue
+      _textValue: this.props.textValue
     })
+
+    console.log("constructor, textValue: " + this.props.textValue);
   }
 
   set() {
     this.setState({
-      //Initialize with the props value
-      currentValue: this.props.textValue
+      _textValue: this.props.textValue
     })
+
+    console.log("set, textValue: " + this.props.textValue)
+    console.log("set, state: " + this.state._textValue);;
   }
 
-  componentDidMount() {
-    this.set();
-  }
+  // componentDidMount() {
+  //   this.set();
+  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps.textValue !== this.props.textValue) {
@@ -36,11 +39,11 @@ class SearchBox extends React.Component {
     //We only want to know what the new value should be.
 
     //Get the value. 
-    const textVal = newValue.toString();
+    let textVal = newValue.toString();
 
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
-      { currentValue: textVal }
+      { _textValue: textVal }
     )
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
@@ -55,7 +58,7 @@ class SearchBox extends React.Component {
 
     //Set the state with an empty string. This will force the control to update in UXPin at runtime.
     this.setState(
-      { currentValue: "" }
+      { _textValue: "" }
     )
 
     //Raise this event to UXPin. 
@@ -78,7 +81,7 @@ class SearchBox extends React.Component {
   render() {
 
     //Get the value from State.
-    var textVal = this.state.currentValue;
+    let textVal = this.state._textValue;
 
     return (
       <FSearchBox
