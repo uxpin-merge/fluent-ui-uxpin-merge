@@ -11,7 +11,7 @@ class Toggle extends React.Component {
 
     //Track the checked state within the control
     this.state = {
-      isChecked: false,
+      _isChecked: false,
     }
   }
 
