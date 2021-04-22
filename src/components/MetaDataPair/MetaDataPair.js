@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Shimmer, ShimmerElementType } from '@fluentui/react/lib/Shimmer';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { VerticalStack } from '../VerticalStack/VerticalStack';
@@ -39,43 +38,12 @@ const defaultLeftWidth = 212;
 //Default gutter padding. 
 const defaultGutter = 24;
 
-const defaultShimmerDuration = 1;
-
 
 class MetaDataPair extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-        }
-    }
-
-    componentDidMount() {
-        this.set();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.shimmer !== this.props.shimmer ||
-            prevProps.shimmerDuration !== this.props.shimmerDuration
-        ) {
-            this.set();
-        }
-    }
-
-    set() {
-        this.setState({
-            shimmer: this.props.shimmer
-        })
-        if (this.props.shimmer) {
-            setTimeout(
-                () => {
-                    this.setState({
-                        shimmer: false
-                    })
-                },
-                (this.props.shimmerDuration || defaultShimmerDuration) * 1000
-            )
         }
     }
 
@@ -162,19 +130,7 @@ class MetaDataPair extends React.Component {
 
         return (
             <React.Fragment>
-                {this.state.shimmer && (
-                    <VerticalStack
-                        showInstructions={false}
-                        gutterPadding={10}
-                    >
-                        <Shimmer shimmerElements={[
-                            { type: ShimmerElementType.line, height: 24, width: leftW },
-                            { type: ShimmerElementType.gap, width: pad, },
-                            { type: ShimmerElementType.line, height: 24 },
-                        ]} />
-                    </VerticalStack>
-                )}
-                {!this.state.shimmer && (
+                {(
                     <Stack
                         {...this.props}
                         tokens={stackTokens}
@@ -299,18 +255,6 @@ MetaDataPair.propTypes = {
      */
     stretch: PropTypes.bool,
 
-    /**
-    * @uxpindescription Whether to display the shimmer 
-    * @uxpinpropname Shimmer
-    */
-    shimmer: PropTypes.bool,
-
-    /**
-    * @uxpindescription Shimmer duration inseconds
-    * @uxpinpropname Shimmer Duration
-    */
-    shimmerDuration: PropTypes.number,
-
 }
 
 
@@ -327,8 +271,6 @@ MetaDataPair.defaultProps = {
     leftWidth: defaultLeftWidth,
     gutterPadding: defaultGutter,
     stretch: true,
-    shimmer: false,
-    shimmerDuration: defaultShimmerDuration
 }
 
 
