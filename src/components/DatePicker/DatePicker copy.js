@@ -28,7 +28,9 @@ const workWeekDays = [
 ];
 
 
+
 class DatePicker extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -41,12 +43,14 @@ class DatePicker extends React.Component {
         //Let's see if we can parse a real date
         var dt = UxpDateTimeUtils.parseDate(this.props.calDate);
 
+        console.log("set. raw Cal Date: " + this.props.calDate + " TYPE: " + typeof this.props.calDate.toString());
+
         //If it doesn't come back as undefined, then we can use it. 
         if (dt) {
             dt = new Date(dt);
         }
         else {
-            //If it's not a real date, that's OK. Null is the preferred value.
+            //If it's not a real date, then 'null' is the preferred value.
             dt = null;
         }
 
@@ -56,23 +60,24 @@ class DatePicker extends React.Component {
     }
 
     componentDidMount() {
+        console.log("comp did mount");
         this.set();
     }
 
     componentDidUpdate(prevProps) {
-        if (
-            prevProps.calDate !== this.props.calDate
-        ) {
-            this.set();
+        if (prevProps.calDate !== this.props.calDate) {
+            console.log("comp did update. OLD: " + prevProps.calDate + " NEW: " + this.props.calDate);
+            //this.set();
         }
     }
 
 
     /**
-     * We'll immediately use the date. In the future, we may use the date range, too. 
+     * 
      * @param {*} date - The selected date
      */
     _onChange(date) {
+        console.log("onchange: " + date);
 
         this.setState(
             { selectedDate: date }
@@ -87,11 +92,13 @@ class DatePicker extends React.Component {
 
 
     /**
-     * A callback to format the date as in our preferred way
+     * A callback to format the date in our opinionated way
      * @param {*} dateStr 
      */
     _onFormatDate(dateStr) {
-        return UxpDateTimeUtils.getFormattedDate(dateStr);
+        let dt = UxpDateTimeUtils.getFormattedDate(dateStr);
+        console.log("on format date: " + dt);
+        return dt;
     }
 
     /**
@@ -99,7 +106,9 @@ class DatePicker extends React.Component {
      * @param {*} str - The string the user entered which might be a date
      */
     _onParseDate(str) {
-        return UxpDateTimeUtils.parseDate(str);
+        let dt = UxpDateTimeUtils.parseDate(str);
+        console.log('on parse date ' + dt);
+        return dt;
     }
 
 
@@ -149,7 +158,6 @@ class DatePicker extends React.Component {
         );
     }
 }
-
 
 
 
