@@ -8,10 +8,11 @@ class SearchBox extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.setState({
-    //   //Initialize with the props value
-    //   currentValue: this.props.textValue
-    // })
+
+    this.setState({
+      //Initialize with the props value
+      currentValue: this.props.textValue
+    })
   }
 
   set() {
