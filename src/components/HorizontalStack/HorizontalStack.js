@@ -110,7 +110,7 @@ class HorizontalStack extends React.Component {
             case rightAlign:
                 return endAlign;
             default:
-                return this.props.align;
+                return startAlign;
         }
     }
 
@@ -123,7 +123,7 @@ class HorizontalStack extends React.Component {
             case rightAlign:
                 return `flex-${endAlign}`;
             default:
-                return this.props.align;
+                return `flex-${startAlign}`;
         }
     }
 
@@ -180,6 +180,8 @@ class HorizontalStack extends React.Component {
         //For Outer Stack
 
         let hAlign = this._getHorizontalAlignmentToken();
+        let doStretch = this.props.align === stretchAlign ? true : false;
+
         let vAlign = this._getVerticalAlignmentToken();
 
         //Styles with dynamic values
@@ -234,7 +236,7 @@ class HorizontalStack extends React.Component {
                                     width: stackItemWidth,
                                 }
                             }}
-                            horizontalAlign={this.props.stretch ? stretchAlign : hAlign}
+                            horizontalAlign={doStretch ? stretchAlign : hAlign}
                         >
                             {child}
                         </Stack>
@@ -312,7 +314,7 @@ HorizontalStack.propTypes = {
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Horiz Alignment
      */
-    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
+    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
     /**
      * @uxpindescription To vertically align all content within the stack 
@@ -320,11 +322,11 @@ HorizontalStack.propTypes = {
      */
     vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign]),
 
-    /**	
-     * @uxpindescription To stretch the children horizontally
-     * @uxpinpropname Stretch Contents	
-     */
-    stretch: PropTypes.bool,
+    // /**	
+    //  * @uxpindescription To stretch the children horizontally
+    //  * @uxpinpropname Stretch Contents	
+    //  */
+    // stretch: PropTypes.bool,
 
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
@@ -349,14 +351,6 @@ HorizontalStack.propTypes = {
      * @uxpinpropname Bg Color
      * */
     bgColor: PropTypes.string,
-
-    // /**
-    //  * Don't show this prop in the UXPin Editor. 
-    //  * @uxpinignoreprop 
-    //  * @uxpindescription The height of the stack
-    //  * @uxpinpropname Stack Height
-    //  */
-    // stackHeight: PropTypes.string,
 }
 
 
@@ -369,7 +363,7 @@ HorizontalStack.defaultProps = {
     gutterPadding: 12,
     align: leftAlign,
     vAlign: topAlign,
-    stretch: true,
+    // stretch: true,
     addSpanner: false,
     spannerIndex: 1,
     bgColor: '',

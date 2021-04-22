@@ -29,9 +29,6 @@ const defaultPadding = "0";
 class VerticalStack extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-        }
     }
 
     _getHorizontalAlignmentToken() {
@@ -122,10 +119,8 @@ class VerticalStack extends React.Component {
                     let stack = (
                         <StackItem
                             key={i}
-                            align={doStretch ? stretchAlign : ''}
-                            // Does this child span the remaining space?
+                            align={doStretch ? stretchAlign : hAlign}
                             grow={false}
-                        // grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
                         >
                             {child}
                         </StackItem>
@@ -215,12 +210,6 @@ VerticalStack.propTypes = {
      */
     align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
-    // /**	
-    //  * @uxpindescription To stretch the contents within each section	
-    //  * @uxpinpropname Stretch Contents	
-    //  */
-    // stretch: PropTypes.bool,
-
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
      * @uxpinpropname Add Spanner
@@ -254,7 +243,6 @@ VerticalStack.defaultProps = {
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
-    // stretch: true,
     addSpanner: false,
     spannerIndex: 1,
     spannerHeight: 48,
