@@ -11,9 +11,9 @@ class Toggle extends React.Component {
     super(props);
 
     //Track the checked state within the control
-    this.state = {
-      _isChecked: false,
-    }
+    // this.state = {
+    //   _isChecked: false,
+    // }
   }
 
   set() {
@@ -35,18 +35,18 @@ class Toggle extends React.Component {
   _onSelectionChange(newValue) {
     //Assumption: That Microsoft really is only sending true or false, and we don't need to validate the value.
 
-    let checked = newValue;
+    let checked = newValue.toString();
 
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
     this.setState(
       { _isChecked: checked }
     )
 
-    console.log("New checked value: " + checked.toString());
+    console.log("New checked value: " + checked);
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onCheckChanged) {
-      this.props.onCheckChanged(checked.toString());
+      this.props.onCheckChanged(checked);
     }
   }
 
@@ -55,8 +55,8 @@ class Toggle extends React.Component {
 
     return (
       <FToggle
-        checked={checked}
         {...this.props}
+        checked={checked}
         onChange={(e, v) => { this._onSelectionChange(v); }}   //Only catch the new value
       />
     );
