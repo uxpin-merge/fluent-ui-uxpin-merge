@@ -9,25 +9,26 @@ class SearchBox extends React.Component {
   constructor(props) {
     super(props);
 
-    this.setState({
-      _textValue: this.props.textValue
-    })
+    //Track the control's text value internally
+    this.state = {
+      _textValue: this.props.textValue,
+    }
 
     console.log("constructor, textValue: " + this.props.textValue);
   }
 
   set() {
-    this.setState({
-      _textValue: this.props.textValue
-    })
+    this.setState(
+      { _textValue: this.props.textValue }
+    )
 
     console.log("set, textValue: " + this.props.textValue)
     console.log("set, state: " + this.state._textValue);;
   }
 
-  // componentDidMount() {
-  //   this.set();
-  // }
+  componentDidMount() {
+    this.set();
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.textValue !== this.props.textValue) {
