@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import { Slider as FSlider } from '@fluentui/react/lib/Slider';
-
+import { mergeStyles } from '@fluentui/merge-styles';
 
 
 class Slider extends React.Component {
@@ -51,12 +51,12 @@ class Slider extends React.Component {
   }
 
   // //TODO: Figure out how to handle sizing, especially vertical.
-  // getSliderClasses() {
-  //   return mergeStyles({
-  //     height: this.props.vertical ? this.props.verticalHeight : 'auto',
-  //     marginBottom: 4,
-  //   });
-  // }
+  getSliderClasses() {
+    return mergeStyles({
+      height: this.props.vertical ? this.props.verticalHeight : 'auto',
+      marginBottom: 4,
+    });
+  }
 
   render() {
     //Get the updated slider value from
@@ -64,12 +64,13 @@ class Slider extends React.Component {
 
     return (
       <FSlider
-        // className={this.getSliderClasses()}
+        className={this.getSliderClasses()}
         {...this.props}
         value={sliderValue}
         onChange={(v) => {
           this._onValueChange(v);
         }}
+
       />
     );
   }
@@ -82,7 +83,7 @@ Slider.propTypes = {
 
   /**
    * @uxpindescription The value of the Slider. This prop's live value is available for scripting.
-   * @uxpinbind onChange
+   * @uxpinbind onValueChange
    * @uxpinpropname * Value
    * */
   sliderValue: PropTypes.number,
@@ -116,13 +117,13 @@ Slider.propTypes = {
   //  * @uxpindescription Optional flag to render the slider vertically. Defaults to rendering horizontal
   //  * @uxpinpropname Vertical
   //  * */
-  // vertical: PropTypes.bool,
+  vertical: PropTypes.bool,
 
   // /**
   //  * @uxpindescription Height for the vertical slider, including the label
   //  * @uxpinpropname Vertical Height
   //  * */
-  // verticalHeight: PropTypes.number,
+  verticalHeight: PropTypes.number,
 
   /**
    * @uxpindescription Optional flag whether to display the current Slider value
@@ -149,8 +150,8 @@ Slider.defaultProps = {
   step: 1,
   sliderValue: 2,
   showValue: true,
-  // vertical: false,
-  // verticalHeight: 300
+  vertical: false,
+  verticalHeight: 300
 };
 
 
