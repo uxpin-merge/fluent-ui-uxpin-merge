@@ -4,5 +4,5 @@ import HorizontalStack from '../HorizontalStack';
 
 
 export default (
-    <HorizontalStack uxpId="pphorizontalstack1" />
+    <HorizontalStack uxpId="horizontalstack1" />
 );
