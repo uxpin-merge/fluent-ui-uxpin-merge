@@ -67,7 +67,7 @@ class DatePicker extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.calDate !== this.props.calDate) {
             console.log("comp did update");
-            this.set();
+            //this.set();
         }
     }
 
