@@ -4,7 +4,7 @@ import Text from '../../Text/Text';
 
 
 
-const instructions = 'Right side can host any Merge control.';
+const instructions = 'Right side meta-data display with any Merge control.';
 
 
 export default (

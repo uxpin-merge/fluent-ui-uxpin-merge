@@ -24,7 +24,7 @@ const horizontalAlign = 'start';
 
 const innerVerticalAlign = 'center';
 
-const instructionText = `Click to change the text label shown on the left side.`;
+const instructionText = `Left Side Meta-Data Label.`;
 
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
