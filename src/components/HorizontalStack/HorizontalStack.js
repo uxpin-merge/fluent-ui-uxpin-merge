@@ -23,7 +23,7 @@ const stretchAlign = 'stretch';
 
 const instructionText = `Horizontal Stack Instructions: 
 1) Determine number of columns. 
-2) Drag in any Merge controls onto the canvas, incl PP Stacks and Groups. 
+2) Drag in any Merge controls onto the canvas, incl other Stacks and Groups. 
 3) In the Layers Panel, drag and drop them onto this control.`;
 
 //This is displayed in the codeeditor. It must retain the line break.

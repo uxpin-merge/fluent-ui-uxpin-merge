@@ -94,8 +94,6 @@ class VerticalStack extends React.Component {
                 background: color,        //undefined is OK
                 height: 'auto',
                 width: 'auto',
-                // height: this.props.stackHeight || 'auto',
-                // width: this.props.stackWidth || 'auto'
             },
         };
 
@@ -129,7 +127,8 @@ class VerticalStack extends React.Component {
                             key={i}
                             align={this.props.stretch ? stretchAlign : ''}
                             // Does this child span the remaining space?
-                            grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
+                            grow={false}
+                        // grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
                         >
                             {child}
                         </StackItem>
@@ -238,22 +237,22 @@ VerticalStack.propTypes = {
     spannerIndex: PropTypes.number,
 
     /**
-     * @uxpindescription To make a child fill remaining space, similar to addSpanner property, but for an existing child element.
-     * @uxpinpropname Span Child
-     */
-    spanChild: PropTypes.bool,
-
-    /**
-     * @uxpindescription The 1-based index for the child to be spanned.
-     * @uxpinpropname Child Spanner Index
-     */
-    childSpannerIndex: PropTypes.number,
-
-    /**
      * @uxpindescription The Spanner's height (pixels)
      * @uxpinpropname Spanner Height
      */
     spannerHeight: PropTypes.number,
+
+    // /**
+    //  * @uxpindescription To make a child fill remaining space, similar to addSpanner property, but for an existing child element.
+    //  * @uxpinpropname Span Child
+    //  */
+    // spanChild: PropTypes.bool,
+
+    // /**
+    //  * @uxpindescription The 1-based index for the child to be spanned.
+    //  * @uxpinpropname Child Spanner Index
+    //  */
+    // childSpannerIndex: PropTypes.number,
 
     /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
@@ -287,8 +286,8 @@ VerticalStack.defaultProps = {
     gutterPadding: 12,
     align: leftAlign,
     stretch: true,
-    spanChild: false,
-    childSpannerIndex: 1,
+    // spanChild: false,
+    // childSpannerIndex: 1,
     addSpanner: false,
     spannerIndex: 1,
     spannerHeight: 48,
