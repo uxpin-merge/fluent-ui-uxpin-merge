@@ -147,7 +147,8 @@ class DatePicker extends React.Component {
                 isRequired={this.props.required}
 
                 onSelectDate={(d, sdr) => this._onChange(d)}
-                onFormatDate={(d) => this._onFormatDate(d)}
+                formatDate={(d) => this._onFormatDate(d)}
+                // onFormatDate={(d) => this._onFormatDate(d)}
                 parseDateFromString={(d) => this._onParseDate(d)}
             />
         );
