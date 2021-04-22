@@ -74,6 +74,7 @@ class VerticalStack extends React.Component {
         //For Outer Stack
 
         let hAlign = this._getHorizontalAlignmentToken();
+        let doStretch = this.props.align === stretchAlign ? true : false;
 
         //Styles with dynamic values
 
@@ -121,7 +122,7 @@ class VerticalStack extends React.Component {
                     let stack = (
                         <StackItem
                             key={i}
-                            align={this.props.stretch ? stretchAlign : ''}
+                            align={doStretch ? stretchAlign : ''}
                             // Does this child span the remaining space?
                             grow={false}
                         // grow={this.props.spanChild && this.props.childSpannerIndex === i + 1 ? true : false}
@@ -253,7 +254,7 @@ VerticalStack.defaultProps = {
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
-    stretch: true,
+    // stretch: true,
     addSpanner: false,
     spannerIndex: 1,
     spannerHeight: 48,
