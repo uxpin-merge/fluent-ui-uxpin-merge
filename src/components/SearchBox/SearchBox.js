@@ -8,6 +8,10 @@ class SearchBox extends React.Component {
 
   constructor(props) {
     super(props);
+    // this.setState({
+    //   //Initialize with the props value
+    //   currentValue: this.props.textValue
+    // })
   }
 
   set() {
@@ -22,9 +26,7 @@ class SearchBox extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.textValue !== this.props.textValue
-    ) {
+    if (prevProps.textValue !== this.props.textValue) {
       this.set();
     }
   }
@@ -41,7 +43,7 @@ class SearchBox extends React.Component {
     )
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
-    if (this.props.onsBChange) {
+    if (this.props.onSBChange) {
       this.props.onSBChange(textVal);
     }
   }
@@ -55,9 +57,9 @@ class SearchBox extends React.Component {
       { currentValue: "" }
     )
 
-    //Raise this event to UXPin. We'll send them the value in case they can catch it.
+    //Raise this event to UXPin. 
     if (this.props.onSBClear) {
-      this.props.onSBClear("");
+      this.props.onSBClear();
     }
   }
 
@@ -65,9 +67,9 @@ class SearchBox extends React.Component {
   _onSearch() {
     //When the user hits 'enter' on their keyboard to search, let's communicate that to UXPin.
 
-    //Raise this event to UXPin. We'll send them the current text value in case they can catch it.
+    //Raise this event to UXPin.
     if (this.props.onSBSearch) {
-      this.props.onSBSearch(this.state.currentValue);
+      this.props.onSBSearch();
     }
   }
 
