@@ -81,7 +81,7 @@ class Image extends React.Component {
 Image.propTypes = {
 
     /**
-    * @uxpindescription The URL to an image file. 
+    * @uxpindescription The URL to an image file. TIP: Put any image on screen, in the UXPin Preview, right-click and copy the image URL, then paste that URL into this box. Then move the original image off canvas -- but don't delete it!
     * @uxpinpropname Img URL
     * @uxpincontroltype textfield(6)
     */
