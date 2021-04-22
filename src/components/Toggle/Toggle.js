@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Toggle as FToggle } from '@fluentui/react/lib/Toggle';
+import { check } from 'prettier';
 
 
 
@@ -40,6 +41,8 @@ class Toggle extends React.Component {
     this.setState(
       { _isChecked: checked }
     )
+
+    console.log("New checked value: " + checked.toString());
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onCheckChanged) {
