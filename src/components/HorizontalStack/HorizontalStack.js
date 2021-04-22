@@ -322,12 +322,6 @@ HorizontalStack.propTypes = {
      */
     vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign]),
 
-    // /**	
-    //  * @uxpindescription To stretch the children horizontally
-    //  * @uxpinpropname Stretch Contents	
-    //  */
-    // stretch: PropTypes.bool,
-
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
      * @uxpinpropname Add Spanner
@@ -347,7 +341,7 @@ HorizontalStack.propTypes = {
     wrap: PropTypes.bool,
 
     /**
-     * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
+     * @uxpindescription Use a color token or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
      * */
     bgColor: PropTypes.string,
@@ -363,7 +357,6 @@ HorizontalStack.defaultProps = {
     gutterPadding: 12,
     align: leftAlign,
     vAlign: topAlign,
-    // stretch: true,
     addSpanner: false,
     spannerIndex: 1,
     bgColor: '',
