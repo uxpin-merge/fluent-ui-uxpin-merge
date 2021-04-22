@@ -1,18 +1,5 @@
-/**
- * This file contains a few useful helper utilities. 
- * Feel free to utilize them if they prove useful, or to contribute updates.
- * USE AT YOUR OWN RISK!!
- * Anthony Hand, TPX UX team
- */
 
-
-/**
- * TPX UX Number Parser
- * This is a convenience utility for parsing a string for a number or percentage within it, or for a list of numbers within it.  
- * Support for this utility class may be terminated at any time without notice. 
- * Added by: Anthony Hand  
- */
-export const TpxUxNumberParser = {
+export const UxpNumberParser = {
 
     /**
      * Parses a string that contains a positive int value. 
@@ -29,16 +16,18 @@ export const TpxUxNumberParser = {
      * @example '125%' - Returns undefined
      * @example '-569' - Returns '569'
      */
-    parsePercentOrInt : function (rawStr) {
-        
+    parsePercentOrInt: function (rawStr) {
+
+        console.log("entering parsePercentOrInt with " + rawStr);
+
         var num = undefined;
         var isPercent = false;
 
-        if (typeof(rawStr) == 'number') {
+        if (typeof (rawStr) == 'number') {
             num = Number(rawStr);
         }
-        
-        if (typeof(rawStr) == 'string') {
+
+        if (typeof (rawStr) == 'string') {
             isPercent = rawStr.includes('%');
 
             let regex = /\d+/g;
@@ -46,17 +35,17 @@ export const TpxUxNumberParser = {
 
             if (result && result.length) {
                 num = Number(result[0]);
-            } 
+            }
         }
 
-        if (num && typeof(num) == 'number') {
+        if (num && typeof (num) == 'number') {
 
             if (isPercent) {
                 //Validate it's between 0-100%
-                if (num > -1 && num < 101 ) {
+                if (num > -1 && num < 101) {
                     return num + '%';
                 }
-            } 
+            }
             else {
                 //We'll return the number as-is 
                 return num;
@@ -77,12 +66,12 @@ export const TpxUxNumberParser = {
      * @example '5 6 9 38 50' - Returns undefined 
      * @example '38px' - Returns undefined
      */
-	parsePercent : function (rawStr) {
-        if (!rawStr || typeof(rawStr) != 'string')
-            return undefined;	
-            
+    parsePercent: function (rawStr) {
+        if (!rawStr || typeof (rawStr) != 'string')
+            return undefined;
+
         let isPercent = rawStr.includes('%');
-            
+
         if (isPercent) {
             //Let's let the other method do all the hard work
             return this.parsePercentOrInt(rawStr);
@@ -90,7 +79,7 @@ export const TpxUxNumberParser = {
 
         //If we made it this far, it wasn't parsable
         return undefined;
-	},
+    },
 
 
     /**
@@ -100,11 +89,11 @@ export const TpxUxNumberParser = {
      * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
      * @example '38px' - Returns an array of numbers: [38]
      */
-    parseInts : function (rawList) {
+    parseInts: function (rawList) {
         //Let's let this other function do all the hard work
-    	return this.parseIntsAdjusted(rawList, 0);
+        return this.parseIntsAdjusted(rawList, 0);
     },
-    
+
     /**
      * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
      * 		An additional option is available for adjusting the number, for example, to convert a 1-based index to a 0-based index.
@@ -115,10 +104,10 @@ export const TpxUxNumberParser = {
      * @example '1 3 5 6 9 38' - With an adjustmentNumber of '-1', returns an array of numbers: [0,2,4,5,8,37]
      * @example '38px' - Returns an array of numbers: [38]
       */
-    parseIntsAdjusted : function (rawList, adjustmentNumber) {
+    parseIntsAdjusted: function (rawList, adjustmentNumber) {
         //Let's let this other function do all the hard work
         //Pass garbage strings in for the min and max so that they'll be ignored. 
-    	return this.parseIntsWithOptions(rawList, adjustmentNumber, "foo", "foo");
+        return this.parseIntsWithOptions(rawList, adjustmentNumber, "foo", "foo");
     },
 
     /**
@@ -134,8 +123,8 @@ export const TpxUxNumberParser = {
      * @example '1, 3, 5, 6, 9, 38, 55, 100, 500' - With minValue of 5 and maxValue of 100, returns an array of numbers: [5,6,9,38,55,100]
      * @example '38px' - Returns an array of numbers: [38]
      */
-    parseIntsWithOptions : function (rawList, adjustmentNumber, minValue, maxValue) {
-        if (!rawList || typeof(rawList) != 'string')
+    parseIntsWithOptions: function (rawList, adjustmentNumber, minValue, maxValue) {
+        if (!rawList || typeof (rawList) != 'string')
             return [];
 
         //Find positive Ints only
@@ -143,36 +132,36 @@ export const TpxUxNumberParser = {
         let result = rawList.match(regex);
 
         var indexList = [];
-        
+
         //Now we have to go through, validate the numbers, and adjust them, if necessary
         if (result && result.length) {
-        
-        	let min = Number(minValue);
+
+            let min = Number(minValue);
             let max = Number(maxValue);
-        	
-        	var adjNum = parseInt(adjustmentNumber);
-    		if (isNaN(adjNum)) {
-    			adjNum = 0;
+
+            var adjNum = parseInt(adjustmentNumber);
+            if (isNaN(adjNum)) {
+                adjNum = 0;
             }
-            
+
             var i;
             for (i = 0; i < result.length; i++) {
-            	var num = result[i];
+                var num = result[i];
                 num = parseInt(num, 10);
-            	
-            	if (!isNaN(num)) {
+
+                if (!isNaN(num)) {
                     num = num + adjNum;
-            		
-					if (!isNaN(min) && num < min) {
-						//Do nothing with this value. Too low or minValue is not defined.
-					} 
-					else if (!isNaN(max) && num > max) {
-						//Do nothing with this value. Too high or maxValue is not defined.
-					} 
-					else {
-						indexList.push(num);
-					}
-            	} //Num validation
+
+                    if (!isNaN(min) && num < min) {
+                        //Do nothing with this value. Too low or minValue is not defined.
+                    }
+                    else if (!isNaN(max) && num > max) {
+                        //Do nothing with this value. Too high or maxValue is not defined.
+                    }
+                    else {
+                        indexList.push(num);
+                    }
+                } //Num validation
             } //for loop
         } //if results
 
