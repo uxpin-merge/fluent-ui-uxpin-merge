@@ -5,6 +5,7 @@ module.exports = {
         name: 'Extras',
         include: [
           'src/components/HorizontalStack/HorizontalStack.js',
+          'src/components/MetaDataPair/MetaDataPair.js',
           'src/components/VerticalStack/VerticalStack.js',
         ],
       },
@@ -38,7 +39,7 @@ module.exports = {
       {
         name: 'Pickers',
         include: [
-          'src/components/DatePicker/DatePicker.js',
+
         ],
       },
     ],
