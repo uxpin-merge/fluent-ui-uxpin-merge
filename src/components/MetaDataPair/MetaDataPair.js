@@ -24,9 +24,7 @@ const horizontalAlign = 'start';
 
 const innerVerticalAlign = 'center';
 
-const instructionText = `Meta Data Pair: 
-1) Drag in a Text (or other) control onto the canvas. 
-2) In the Layers Panel, drag and drop it onto this control.`;
+const instructionText = `Click to change the text label shown on the left side.`;
 
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
