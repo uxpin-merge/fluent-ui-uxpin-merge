@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Shimmer, ShimmerElementType } from '@fluentui/react/lib/Shimmer';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { Text as FText } from '@fluentui/react/lib/Text';
+import { Text } from '@fluentui/react/lib/Text';
 import { VerticalStack } from '../VerticalStack/VerticalStack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpNumberParser } from '../_helpers/uxpnumberutils';
