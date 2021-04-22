@@ -11,10 +11,6 @@ const verticalAlign = 'start';
 const leftAlign = 'left';
 const centerAlign = 'center';
 const rightAlign = 'right';
-
-const startAlign = 'start';
-const endAlign = 'end';
-
 const stretchAlign = 'stretch';
 
 const instructionText = `Vertical Stack Instructions: 
@@ -47,7 +43,7 @@ class VerticalStack extends React.Component {
             case rightAlign:
                 return 'end';
             default:
-                return this.props.align;
+                return 'start';
         }
     }
 
@@ -216,13 +212,13 @@ VerticalStack.propTypes = {
      * @uxpindescription To horizontally align all content within the stack 
      * @uxpinpropname Alignment
      */
-    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
+    align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
-    /**	
-     * @uxpindescription To stretch the contents within each section	
-     * @uxpinpropname Stretch Contents	
-     */
-    stretch: PropTypes.bool,
+    // /**	
+    //  * @uxpindescription To stretch the contents within each section	
+    //  * @uxpinpropname Stretch Contents	
+    //  */
+    // stretch: PropTypes.bool,
 
     /**
      * @uxpindescription To insert a spanner to fill empty space between two elements. 
@@ -242,39 +238,11 @@ VerticalStack.propTypes = {
      */
     spannerHeight: PropTypes.number,
 
-    // /**
-    //  * @uxpindescription To make a child fill remaining space, similar to addSpanner property, but for an existing child element.
-    //  * @uxpinpropname Span Child
-    //  */
-    // spanChild: PropTypes.bool,
-
-    // /**
-    //  * @uxpindescription The 1-based index for the child to be spanned.
-    //  * @uxpinpropname Child Spanner Index
-    //  */
-    // childSpannerIndex: PropTypes.number,
-
     /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
      * */
     bgColor: PropTypes.string,
-
-    // /**
-    //  * Don't show this prop in the UXPin Editor. 
-    //  * @uxpinignoreprop 
-    //  * @uxpindescription The height of the stack
-    //  * @uxpinpropname Stack Height
-    //  */
-    // stackHeight: PropTypes.string,
-
-    // /**
-    //  * Don't show this prop in the UXPin Editor. 
-    //  * @uxpinignoreprop 
-    //  * @uxpindescription The width of the stack
-    //  * @uxpinpropname Stack Width
-    //  */
-    // stackWidth: PropTypes.string,
 }
 
 
@@ -286,8 +254,6 @@ VerticalStack.defaultProps = {
     gutterPadding: 12,
     align: leftAlign,
     stretch: true,
-    // spanChild: false,
-    // childSpannerIndex: 1,
     addSpanner: false,
     spannerIndex: 1,
     spannerHeight: 48,
