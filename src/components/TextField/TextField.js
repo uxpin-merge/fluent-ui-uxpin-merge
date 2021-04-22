@@ -171,7 +171,7 @@ TextField.propTypes = {
    * @uxpindescription Fires when the control's Value property changes.
    * @uxpinpropname * Value Changed
    * */
-  onTFChange: PropTypes.func
+  onTFChange: PropTypes.func,
 };
 
 
@@ -182,7 +182,6 @@ TextField.defaultProps = {
   label: "Basic Text Field",
   textValue: "",
   placeholder: "Enter some text",
-  autoAdjustHeight: false,
   readOnly: false,
   disabled: false
 };
