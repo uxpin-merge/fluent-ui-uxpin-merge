@@ -369,7 +369,6 @@ HorizontalStack.defaultProps = {
     align: leftAlign,
     vAlign: topAlign,
     stretch: true,
-    fillParent: false,
     addSpanner: false,
     spannerIndex: 1,
     bgColor: '',
