@@ -25,6 +25,7 @@ module.exports = {
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
           'src/components/TextField/TextField.js',
+          'src/components/Toggle/Toggle.js',
         ],
       },
     ],
