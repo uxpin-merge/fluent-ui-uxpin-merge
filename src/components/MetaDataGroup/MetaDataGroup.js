@@ -102,7 +102,7 @@ class MetaDataGroup extends React.Component {
         } //If props.children
 
         //if Header Text is defined
-        var headerTxt = undefined;
+        var headerTxt = '';
         if (this.props.value) {
             headerTxt = (
                 <Text
