@@ -5,6 +5,7 @@ module.exports = {
         name: 'Extras',
         include: [
           'src/components/HorizontalStack/HorizontalStack.js',
+          'src/components/MetaDataGroup/MetaDataGroup.js',
           'src/components/MetaDataPair/MetaDataPair.js',
           'src/components/VerticalStack/VerticalStack.js',
         ],
