@@ -1,6 +1,8 @@
 import * as React from 'react';
-import PPMetaDataGroup from '../PPMetaDataGroup';
+import MetaDataGroup from '../MetaDataGroup';
+
+
 
 export default (
-    <PPMetaDataGroup uxpId = "ppmetadatagroup1" />
-); 
+    <MetaDataGroup uxpId="metadatagroup1" />
+);
