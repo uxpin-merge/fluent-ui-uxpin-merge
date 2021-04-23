@@ -80,8 +80,10 @@ class MetaDataGroup extends React.Component {
         if (this.props.children) {
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
-            let childList = React.Children.toArray(this.props.children);
+            // let childList = React.Children.toArray(this.props.children);
 
+            console.log("Yes children");
+            let childList = this.props.children;
 
 
             // //Now, we configure the StackItems
@@ -114,6 +116,8 @@ class MetaDataGroup extends React.Component {
             );
         }
 
+        console.log("Return next");
+
         return (
             <VerticalStack
                 {...this.props}
@@ -139,10 +143,6 @@ class MetaDataGroup extends React.Component {
         //         verticalAlign={verticalAlign}
         //         wrap={false}
         //         styles={topStackItemStyles}>
-
-
-
-
 
         //     </Stack>
         // );
