@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MetaDataGroup from '../MetaDataGroup';
-import Text from '../../MetaDataPair/MetaDataPair';
+import MetaDataPair from '../../MetaDataPair/MetaDataPair';
 import Text from '../../Text/Text';
 
 
