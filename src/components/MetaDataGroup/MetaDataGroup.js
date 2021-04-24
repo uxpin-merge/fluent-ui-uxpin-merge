@@ -91,11 +91,6 @@ class MetaDataGroup extends React.Component {
         var stackList = [];
         if (this.props.children) {
 
-            var leftColWidth = this.props.leftWidth;
-            // if (this.props.leftWidth && !isNaN(this.props.leftWidth) && this.props.leftWidth > 0) {
-            //     leftColWidth = this.props.leftWidth.trim();
-            // }
-
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
@@ -104,7 +99,6 @@ class MetaDataGroup extends React.Component {
                 var i;
                 for (i = 0; i < childList.length; i++) {
                     let child = childList[i];
-                    child.leftWidth = leftColWidth;
 
                     let stack = (
                         <StackItem
@@ -201,12 +195,6 @@ MetaDataGroup.propTypes = {
     gutterPadding: PropTypes.number,
 
     /**
-     * @uxpindescription Default left column width for any MetaDataPair or other child objects that know how to use the prop. 
-     * @uxpinpropname Left Width
-     */
-    leftWidth: PropTypes.number,
-
-    /**
      * @uxpindescription To stretch the contents of each row
      * @uxpinpropname Stretch Contents
      */
@@ -226,7 +214,6 @@ MetaDataGroup.defaultProps = {
     color: 'black',
     gutterPadding: 12,
     stretch: true,
-    leftWidth: 212,
 }
 
 
