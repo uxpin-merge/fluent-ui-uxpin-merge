@@ -90,10 +90,11 @@ class MetaDataGroup extends React.Component {
         //Set up the StackItems
         var stackList = [];
         if (this.props.children) {
-            var leftColWidth = 0;
-            if (this.props.leftWidth && !isNaN(this.props.leftWidth) && this.props.leftWidth > 0) {
-                leftColWidth = this.props.leftWidth.trim();
-            }
+
+            var leftColWidth = this.props.leftWidth;
+            // if (this.props.leftWidth && !isNaN(this.props.leftWidth) && this.props.leftWidth > 0) {
+            //     leftColWidth = this.props.leftWidth.trim();
+            // }
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
