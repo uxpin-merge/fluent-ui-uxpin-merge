@@ -10,10 +10,7 @@ const instructions2 = 'Add any Merge control to the right side of a MetaDataPair
 export default (
     <MetaDataGroup uxpId="metadatagroup1">
         <MetaDataPair uxpId="metadatapair1" >
-            {/* <Text uxpId="text1" value={instructions1} /> */}
-        </MetaDataPair>
-        <MetaDataPair uxpId="metadatapair1" >
-            {/* <Text uxpId="text1" value={instructions2} /> */}
+            <Text uxpId="text1" value={instructions2} />
         </MetaDataPair>
     </MetaDataGroup>
 );
