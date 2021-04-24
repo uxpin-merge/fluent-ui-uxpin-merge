@@ -4,7 +4,7 @@ import Text from '../../Text/Text';
 
 
 
-const instructions = 'Right side meta-data display with any Merge control.';
+const instructions = 'Add any Merge control to the right side of a MetaDataPair';
 
 
 export default (

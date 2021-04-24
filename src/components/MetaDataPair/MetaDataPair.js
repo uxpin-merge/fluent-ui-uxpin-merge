@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
-import { VerticalStack } from '../VerticalStack/VerticalStack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpNumberParser } from '../_helpers/uxpnumberutils';
 
@@ -24,7 +23,7 @@ const horizontalAlign = 'start';
 
 const innerVerticalAlign = 'center';
 
-const instructionText = `Left Side Meta-Data Label.`;
+const instructionText = `Left Side Label`;
 
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
