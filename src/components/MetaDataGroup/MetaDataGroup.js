@@ -75,34 +75,6 @@ class MetaDataGroup extends React.Component {
         //****************************
         //For Inner Stack
 
-        //Set up the StackItems
-        var stackList = [];
-        if (this.props.children) {
-
-            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
-            // let childList = React.Children.toArray(this.props.children);
-
-            console.log("Yes children");
-            let childList = this.props.children;
-
-
-            // //Now, we configure the StackItems
-            // if (childList.length) {
-            //     var i;
-            //     for (i = 0; i < childList.length; i++) {
-            //         let child = childList[i];
-            //         let stack = (
-            //             <StackItem
-            //                 grow={this.props.stretch ? true : ''}
-            //                 align={this.props.stretch ? "stretch" : ''}   >
-            //                 { child}
-            //             </StackItem>
-            //         );
-            //         stackList.push(stack);
-            //     }
-            // }
-        } //If props.children
-
         //if Header Text is defined
         var headerTxt = '';
         if (this.props.value) {
@@ -116,36 +88,63 @@ class MetaDataGroup extends React.Component {
             );
         }
 
+        //Set up the StackItems
+        var stackList = [];
+        if (this.props.children) {
+
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            //Now, we configure the StackItems
+            if (childList.length) {
+                var i;
+                for (i = 0; i < childList.length; i++) {
+                    let child = childList[i];
+                    let stack = (
+                        <StackItem
+                            grow={this.props.stretch ? true : ''}
+                            align={this.props.stretch ? "stretch" : ''}   >
+                            { child}
+                        </StackItem>
+                    );
+                    stackList.push(stack);
+                }
+            }
+        } //If props.children
+
         console.log("Return next");
 
+        // return (
+        //     <VerticalStack
+        //         {...this.props}
+        //         align={horizAlign}
+        //         internalPadding={0}
+        //         gutterPadding={gap}
+        //         bgColor={this.props.bgColor}
+        //     >
+
+        //         { headerTxt}
+        //         { stackList}
+
+        //     </VerticalStack>
+        // );
+
         return (
-            <VerticalStack
+
+            <Stack
                 {...this.props}
-                align={horizAlign}
-                internalPadding={0}
-                gutterPadding={gap}
-                bgColor={this.props.bgColor}
-            >
+                tokens={stackTokens}
+                horizontal={false}
+                horizontalAlign={horizontalAlign}
+                verticalAlign={verticalAlign}
+                wrap={false}
+                styles={topStackItemStyles}>
 
                 { headerTxt}
                 { stackList}
 
-            </VerticalStack>
+            </Stack>
         );
-
-        // return (
-
-        //     <Stack
-        //         {...this.props}
-        //         tokens={stackTokens}
-        //         horizontal={false}
-        //         horizontalAlign={horizontalAlign}
-        //         verticalAlign={verticalAlign}
-        //         wrap={false}
-        //         styles={topStackItemStyles}>
-
-        //     </Stack>
-        // );
     }
 }
 
