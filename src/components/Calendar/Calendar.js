@@ -45,7 +45,7 @@ class Calendar extends React.Component {
 
         var dt = '';
         let tempDt = this._parseDate(this.props.uxpValue);
-        (if tempDt) {
+        if (tempDt) {
             dt = tempDt;
         }
         // let dt = this._parseDate(this.props.uxpValue);
