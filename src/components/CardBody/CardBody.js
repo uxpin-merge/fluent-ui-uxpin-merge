@@ -16,9 +16,6 @@ const rightAlign = 'right';
 const stretchAlign = 'stretch';
 
 
-//Use this color if the UXPin user doesn't enter a valid hex or color token.
-const defaultTextColor = "#000000";
-
 //In case we can't parse user-entered internal padding info or it's unspecified
 const defaultPadding = "12";
 
@@ -60,7 +57,7 @@ class CardBody extends React.Component {
             color = 'transparent';
 
         //For internal padding within the stack. 
-        let internalPadding = this.props.internalPadding > 0 ? this.props.internalPadding : defaultPadding;
+        let internalPadding = this.props.internalPadding > -1 ? this.props.internalPadding : defaultPadding;
 
         const topStackItemStyles = {
             root: {
@@ -84,8 +81,9 @@ class CardBody extends React.Component {
         //For Inner Stack
 
         //Set up the StackItems
-        var stackList = [];
+        var stackList = '';
         if (this.props.children) {
+            stackList = [];
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
