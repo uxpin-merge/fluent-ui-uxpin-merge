@@ -26,14 +26,10 @@ const workWeekDays = [
     DayOfWeek.Friday
 ];
 
-var todayDate = "Jan 1, 2022";
 
 
 class Calendar extends React.Component {
     constructor(props) {
-
-        todayDate = Date.now();
-
         super(props);
 
         this.state = {
@@ -159,7 +155,7 @@ Calendar.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Calendar.defaultProps = {
-    uxpValue: todayDate,
+    uxpValue: "Jan 1, 2022",
     showWeekNumbers: false,
 };
 
