@@ -32,8 +32,10 @@ class Calendar extends React.Component {
     constructor(props) {
         super(props);
 
+        let dt = Date.now();
+
         this.state = {
-            selectedDate: null //null or a Date
+            selectedDate: dt
         }
     }
 
