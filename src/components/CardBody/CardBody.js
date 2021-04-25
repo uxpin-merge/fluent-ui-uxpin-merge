@@ -68,6 +68,8 @@ class CardBody extends React.Component {
         //****************************
         //For Outer Stack
 
+        let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
+
         let hAlign = this._getHorizontalAlignmentToken();
         let doStretch = this.props.align === stretchAlign ? true : false;
 
@@ -85,6 +87,7 @@ class CardBody extends React.Component {
             root: {
                 background: color,        //undefined is OK
                 height: 'auto',
+                minHeight: mHeight + 'px',
                 width: 'auto',
             },
         };
@@ -165,6 +168,12 @@ CardBody.propTypes = {
     children: PropTypes.node,
 
     /**
+    * @uxpindescription The minimum height of the control   
+    * @uxpinpropname Min Height
+    */
+    boxHeight: PropTypes.number,
+
+    /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding within the stack. Value must be 0 or more. 
      * @uxpinpropname Padding
@@ -185,12 +194,6 @@ CardBody.propTypes = {
     align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
     /**
-     * @uxpindescription The Spanner's height (pixels)
-     * @uxpinpropname Spanner Height
-     */
-    spannerHeight: PropTypes.number,
-
-    /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
      * */
@@ -202,6 +205,7 @@ CardBody.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 CardBody.defaultProps = {
+    boxHeight: 10,
     internalPadding: 12,
     gutterPadding: 12,
     align: leftAlign,
