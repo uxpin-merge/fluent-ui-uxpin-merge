@@ -7,6 +7,7 @@ module.exports = {
           'src/components/HorizontalStack/HorizontalStack.js',
           'src/components/MetaDataGroup/MetaDataGroup.js',
           'src/components/MetaDataPair/MetaDataPair.js',
+          'src/components/Shape/Shape.js',
           'src/components/VerticalStack/VerticalStack.js',
         ],
       },
