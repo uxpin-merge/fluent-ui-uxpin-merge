@@ -92,8 +92,13 @@ export const UxpDateTimeUtils = {
 			return undefined;
 		}
 
+		console.log("getFormattedDate. dateStr: " + dateStr);
+
 		//Get the parts
 		let dt = new Date(dateStr);
+
+		console.log("getFormattedDate. dt: " + dt);
+
 		let year = dt.getFullYear();
 		let date = dt.getDate();
 		let i = dt.getMonth() //0-based
