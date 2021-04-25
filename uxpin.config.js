@@ -38,9 +38,9 @@ module.exports = {
         ],
       },
       {
-        name: 'Pickers',
+        name: 'Surfaces',
         include: [
-
+          'src/components/Dialog/Dialog.js',
         ],
       },
     ],
