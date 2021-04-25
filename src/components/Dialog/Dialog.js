@@ -54,6 +54,9 @@ class Dialog extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+
+        console.log("comp did update: " + this.props.show);
+
         if (
             prevProps.show !== this.props.show
         ) {
@@ -64,10 +67,12 @@ class Dialog extends React.Component {
 
     dismissControl() {
         //Set the control to not open to dismiss it.
-        this.props.isOpen = false;
-        // this.setState(
-        //     { open: false }
-        // )
+
+        console.log("Dismiss control");
+
+        this.setState(
+            { open: false }
+        )
     }
 
     _onDismissClicked() {
