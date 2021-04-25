@@ -1,8 +1,8 @@
 import * as React from 'react';
-import VerticalStack from '../VerticalStack';
+import CardBody from '../CardBody';
 
 
 
 export default (
-    <VerticalStack uxpId="verticalstack1" />
+    <CardBody uxpId="cardbody1" />
 );
