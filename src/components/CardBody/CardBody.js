@@ -15,8 +15,6 @@ const centerAlign = 'center';
 const rightAlign = 'right';
 const stretchAlign = 'stretch';
 
-const instructionText = `The CardBody can host any Merge control`;
-
 
 //Use this color if the UXPin user doesn't enter a valid hex or color token.
 const defaultTextColor = "#000000";
@@ -45,27 +43,6 @@ class CardBody extends React.Component {
     }
 
     render() {
-
-        //****************************
-        // Instructions
-        let fTextStyles = {
-            root: {
-                color: defaultTextColor,
-                fontWeight: 'normal',
-                fontStyle: 'normal',
-                display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-            }
-        }
-
-        let instructions = (
-            <Text
-                {...this.props}
-                styles={fTextStyles}
-                variant={'medium'}>
-                {instructionText}
-            </Text>
-        );
 
         //****************************
         //For Outer Stack
@@ -146,7 +123,6 @@ class CardBody extends React.Component {
                 wrap={false}
                 styles={topStackItemStyles}>
 
-                {_.isEmpty(this.props.children) && instructions}
                 {stackList}
 
             </Stack>
