@@ -68,11 +68,15 @@ class Dialog extends React.Component {
     dismissControl() {
         //Set the control to not open to dismiss it.
 
-        console.log("Dismiss control");
+        console.log("Dismiss control (before) " + this.props.show);
 
         this.setState(
             { open: false }
         )
+
+        this.props.show = false;
+
+        console.log("Dismiss control (after) " + this.props.show);
     }
 
     _onDismissClicked() {
@@ -138,7 +142,7 @@ class Dialog extends React.Component {
                         color: "white",
                         textAlign: "center",
                         verticalAlign: "middle",
-                        background: 'var(--color-blue-800)',
+                        background: "purple",
                         borderRadius: 10
                     }}><br /><em><strong>Dialog:</strong></em><br />Move this marker offscreen</div>
                 <FDialog
