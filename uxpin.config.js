@@ -40,7 +40,7 @@ module.exports = {
       {
         name: 'Pickers',
         include: [
-          'src/components/Calendar/Calendar.js',
+
         ],
       },
       {
