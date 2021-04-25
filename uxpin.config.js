@@ -14,6 +14,7 @@ module.exports = {
         name: 'Cards',
         include: [
           'src/components/CardHeader/CardHeader.js',
+          'src/components/CardBody/CardBody.js',
         ],
       },
       {
