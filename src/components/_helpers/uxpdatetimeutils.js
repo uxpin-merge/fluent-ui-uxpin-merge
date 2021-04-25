@@ -43,8 +43,10 @@ export const UxpDateTimeUtils = {
 
 
 	parseDate: function (dateStr) {
+		console.log("util parse date: " + dateStr);
 
 		if (this.isValidDate(dateStr)) {
+			console.log("util parse date. Yes! It's valid ");
 			return new Date(dateStr);
 		}
 
@@ -88,11 +90,14 @@ export const UxpDateTimeUtils = {
 	},
 
 	getFormattedDate: function (dateStr) {
+
+		console.log("getFormattedDate. ENTERED dateStr: " + dateStr);
+
 		if (!this.isValidDate(dateStr)) {
 			return undefined;
 		}
 
-		console.log("getFormattedDate. dateStr: " + dateStr);
+		console.log("getFormattedDate. dateStr is valid: " + dateStr);
 
 		//Get the parts
 		let dt = new Date(dateStr);
