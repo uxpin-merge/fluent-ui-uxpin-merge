@@ -7,14 +7,14 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-
-
 //****** STYLES */
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
 const defaultTextColor = "#000000";
 
 const defaultIconSize = 24;
+
+//TODO: Choose good default icon name
 const defaultIconName = '';
 
 //****** OTHER */
@@ -223,7 +223,7 @@ CardHeader.defaultProps = {
     value: defaultHeaderText,
     textColor: defaultTextColor,
     size: 'large',
-    bold: true,
+    bold: false,
     italic: false,
     iconName: defaultIconName,
     iconSize: defaultIconSize,
