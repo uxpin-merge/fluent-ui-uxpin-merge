@@ -11,6 +11,12 @@ module.exports = {
         ],
       },
       {
+        name: 'Cards',
+        include: [
+          'src/components/CardHeader/CardHeader.js',
+        ],
+      },
+      {
         name: 'Utilities',
         include: [
           'src/components/Image/Image.js',
@@ -35,12 +41,6 @@ module.exports = {
           'src/components/Slider/Slider.js',
           'src/components/TextField/TextField.js',
           'src/components/Toggle/Toggle.js',
-        ],
-      },
-      {
-        name: 'Pickers',
-        include: [
-
         ],
       },
       {
