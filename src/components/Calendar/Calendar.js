@@ -10,10 +10,10 @@ import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
 
 
 const dayPickerStrings = {
-    months: TpxUxDateTimeUtils.months,
-    shortMonths: TpxUxDateTimeUtils.monthsShort,
-    days: TpxUxDateTimeUtils.days,
-    shortDays: TpxUxDateTimeUtils.daysShort,
+    months: UxpDateTimeUtils.months,
+    shortMonths: UxpDateTimeUtils.monthsShort,
+    days: UxpDateTimeUtils.days,
+    shortDays: UxpDateTimeUtils.daysShort,
     goToToday: 'Go to Today',
     weekNumberFormatString: 'Week {0}',
 };
