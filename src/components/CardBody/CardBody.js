@@ -87,7 +87,7 @@ class CardBody extends React.Component {
             root: {
                 background: color,        //undefined is OK
                 height: 'auto',
-                minHeight: mHeight + 'px',
+                //minHeight: mHeight + 'px',
                 width: 'auto',
             },
         };
