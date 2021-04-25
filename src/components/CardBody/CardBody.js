@@ -5,6 +5,8 @@ import { Text as Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
+//The smallest allowed box size
+const defaultBoxSize = '1';
 
 const verticalAlign = 'start';
 
