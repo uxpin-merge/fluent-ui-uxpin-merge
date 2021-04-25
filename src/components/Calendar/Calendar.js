@@ -43,7 +43,12 @@ class Calendar extends React.Component {
 
         console.log("set! : " + this.props.uxpValue);
 
-        let dt = this._parseDate(this.props.uxpValue);
+        var dt = '';
+        let tempDt = this._parseDate(this.props.uxpValue);
+        (if tempDt) {
+            dt = tempDt;
+        }
+        // let dt = this._parseDate(this.props.uxpValue);
         this.setState(
             { selectedDate: dt }
         )
