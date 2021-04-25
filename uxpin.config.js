@@ -38,6 +38,12 @@ module.exports = {
         ],
       },
       {
+        name: 'Pickers',
+        include: [
+          'src/components/Calendar/Calendar.js',
+        ],
+      },
+      {
         name: 'Surfaces',
         include: [
           'src/components/Dialog/Dialog.js',
