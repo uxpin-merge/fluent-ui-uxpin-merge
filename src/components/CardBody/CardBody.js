@@ -181,7 +181,7 @@ CardBody.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 CardBody.defaultProps = {
-    boxHeight: 10,
+    boxHeight: 12,
     internalPadding: 12,
     gutterPadding: 12,
     align: leftAlign,
