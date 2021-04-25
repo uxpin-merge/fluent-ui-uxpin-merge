@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ActionButton } from '@fluentui/react/lib/Button';
 import { FontIcon } from '@fluentui/react/lib/Icon'
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
@@ -16,7 +15,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 const defaultTextColor = "#000000";
 
 const defaultIconSize = 24;
-const defaultIconName = 'Home';
+const defaultIconName = '';
 
 //****** OTHER */
 
@@ -33,8 +32,8 @@ class CardHeader extends React.Component {
 
     _onClick() {
         //Raise this event to UXPin. 
-        if (this.props.onClick) {
-            this.props.onClick();
+        if (this.props.onHeaderClick) {
+            this.props.onHeaderClick();
         }
     }
 
@@ -153,7 +152,7 @@ class CardHeader extends React.Component {
 CardHeader.propTypes = {
 
     /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
+     * @uxpindescription The exact name from the icon library (Optional)
      * @uxpinpropname Icon Name
      * */
     iconName: PropTypes.string,
@@ -165,7 +164,7 @@ CardHeader.propTypes = {
     iconSize: PropTypes.number,
 
     /**
-     * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
+     * @uxpindescription Use a color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Icon Color
      * */
     iconColor: PropTypes.string,
@@ -213,7 +212,7 @@ CardHeader.propTypes = {
      * @uxpindescription Fires when the Header is clicked on.
      * @uxpinpropname Click
      * */
-    onClick: PropTypes.func,
+    onHeaderClick: PropTypes.func,
 }
 
 
