@@ -26,11 +26,14 @@ const workWeekDays = [
     DayOfWeek.Friday
 ];
 
-const todayDate = Date.now();
+var todayDate = "Jan 1, 2022";
 
 
 class Calendar extends React.Component {
     constructor(props) {
+
+        todayDate = Date.now();
+
         super(props);
 
         this.state = {
