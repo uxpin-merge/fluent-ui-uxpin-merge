@@ -44,7 +44,6 @@ class Shape extends React.Component {
         }
     }
 
-
     _getHorizontalAlignmentToken() {
         switch (this.props.align) {
             case leftAlign:
@@ -213,7 +212,6 @@ class Shape extends React.Component {
                 {stackList}
 
             </Stack>
-
         );
     }
 
@@ -223,8 +221,7 @@ class Shape extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-PPShape.propTypes = {
-
+Shape.propTypes = {
     /**
      * Don't show this prop in the UXPin Editor. 
      * @uxpinignoreprop 
