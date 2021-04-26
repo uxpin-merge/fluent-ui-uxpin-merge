@@ -17,7 +17,7 @@ const iconName = "Eye";
 
 
 export default (
-    <Card uxpId="card1">
+    <Card uxpId="card1" style={{ width: '100%' }} >
         <CardHeader uxpId="cardheader1" />
         <CardBody uxpId="cardbody1" >
             <Text uxpId="text1" value={instructions} />
