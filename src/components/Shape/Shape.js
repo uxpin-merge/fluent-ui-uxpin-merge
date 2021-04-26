@@ -32,7 +32,7 @@ const borderDotted = 'dotted';
 
 const defaultBorderThickness = '1';
 const defaultBorderColor = 'grey-300';
-const defaultBorderRadius = '4';
+const defaultBorderRadius = '0';
 
 
 
