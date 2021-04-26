@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ActionButton, TooltipHost } from 'office-ui-fabric-react';
 import * as PropTypes from 'prop-types';
+import { ActionButton } from '@fluentui/react/lib/Button';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
 
