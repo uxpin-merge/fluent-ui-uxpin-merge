@@ -16,6 +16,8 @@ const borderDashed = 'dashed';
 const borderSolid = 'solid';
 const borderDotted = 'dotted';
 
+const minHeight = '40px';
+
 //A StackItem that will spring to fill available space. 
 const spanner = (<StackItem grow={1}><span /></StackItem>);
 
@@ -68,6 +70,7 @@ class CardFooter extends React.Component {
                 display: 'flex',
                 overflow: 'hidden',
                 width: '100%',
+                minHeight: minHeight,
                 borderTop: bStyle,
             },
         };
