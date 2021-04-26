@@ -55,6 +55,18 @@ class TextField extends React.Component {
     }
   }
 
+  _onFocus() {
+    if (this.props.onTFFocused) {
+      this.props.onTFFocused();
+    }
+  }
+
+  _onBlur() {
+    if (this.props.onTFBlurred) {
+      this.props.onTFBlurred();
+    }
+  }
+
 
   render() {
 
@@ -98,7 +110,10 @@ class TextField extends React.Component {
         borderless={frameless}
         autoComplete={showAutoComplete}
         onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
+        onFocus={() => { this._onFocus() }}
+        onBlur={() => { this._onBlur() }}
       />
+
     );
   }
 }
@@ -204,6 +219,20 @@ TextField.propTypes = {
    * @uxpinpropname * Value Changed
    * */
   onTFChange: PropTypes.func,
+
+  /**
+   * We give this property a unique name to avoid collisions. 
+   * @uxpindescription Fires when the control gains focus
+   * @uxpinpropname Focused
+   * */
+  onTFFocused: PropTypes.func,
+
+  /**
+ * We give this property a unique name to avoid collisions. 
+ * @uxpindescription Fires when the control loses focus
+ * @uxpinpropname Blurred
+ * */
+  onTFBlurred: PropTypes.func,
 };
 
 
