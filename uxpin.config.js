@@ -2,7 +2,7 @@ module.exports = {
   components: {
     categories: [
       {
-        name: 'Extras',
+        name: 'Containers',
         include: [
           'src/components/HorizontalStack/HorizontalStack.js',
           'src/components/MetaDataGroup/MetaDataGroup.js',
@@ -44,6 +44,7 @@ module.exports = {
           'src/components/Checkbox/Checkbox.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
+          'src/components/TextArea/TextArea.js',
           'src/components/TextField/TextField.js',
           'src/components/Toggle/Toggle.js',
         ],
