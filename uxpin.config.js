@@ -16,6 +16,7 @@ module.exports = {
         include: [
           'src/components/CardHeader/CardHeader.js',
           'src/components/CardBody/CardBody.js',
+          'src/components/CardFooter/CardFooter.js',
         ],
       },
       {
