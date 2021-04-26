@@ -141,7 +141,7 @@ class Shape extends React.Component {
             bRadius = '50%';
         }
         else {
-            bRadius = this.props.borderRadius > 0 ? this.props.borderRadius : 0;
+            bRadius = this.props.borderRadius > -1 ? this.props.borderRadius : 0;
         }
 
         const topStackItemStyles = {
