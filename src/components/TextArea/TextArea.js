@@ -51,6 +51,18 @@ class TextArea extends React.Component {
     }
   }
 
+  _onFocus() {
+    if (this.props.onTFFocused) {
+      this.props.onTFFocused();
+    }
+  }
+
+  _onBlur() {
+    if (this.props.onTFBlurred) {
+      this.props.onTFBlurred();
+    }
+  }
+
 
   render() {
 
@@ -64,6 +76,8 @@ class TextArea extends React.Component {
         multiline={true}
         autoComplete={false}
         onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
+        onFocus={() => { this._onFocus() }}
+        onBlur={() => { this._onBlur() }}
       />
     );
   }
@@ -82,6 +96,12 @@ TextArea.propTypes = {
    * @uxpincontroltype textfield(2)
    * */
   label: PropTypes.string,
+
+  /**
+   * @uxpindescription To display the 'required' flag on the label
+   * @uxpinpropname Required
+   * */
+  required: PropTypes.bool,
 
   /**
    * We give this property a unique name to avoid collisions.
@@ -135,12 +155,6 @@ TextArea.propTypes = {
   borderless: PropTypes.bool,
 
   /**
-   * @uxpindescription To display the 'required' flag on the label
-   * @uxpinpropname Required
-   * */
-  required: PropTypes.bool,
-
-  /**
    * @uxpindescription To set the control to read-only mode
    * @uxpinpropname Read Only
    * */
@@ -158,6 +172,20 @@ TextArea.propTypes = {
    * @uxpinpropname * Value Changed
    * */
   onTFChange: PropTypes.func,
+
+  /**
+   * We give this property a unique name to avoid collisions. 
+   * @uxpindescription Fires when the control gains focus
+   * @uxpinpropname Focused
+   * */
+  onTFFocused: PropTypes.func,
+
+  /**
+ * We give this property a unique name to avoid collisions. 
+ * @uxpindescription Fires when the control loses focus
+ * @uxpinpropname Blurred
+ * */
+  onTFBlurred: PropTypes.func,
 };
 
 
