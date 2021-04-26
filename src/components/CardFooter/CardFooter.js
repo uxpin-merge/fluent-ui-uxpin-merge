@@ -81,9 +81,13 @@ class CardFooter extends React.Component {
         //With one number, the padding applies to both rows and columns. 
         //Let's make sure we have a positive number.
         let pad = this.props.gutterPadding > 0 ? this.props.gutterPadding : 0;
+
+        //Let's make sure we have a positive number. 
+        let cardPad = this.props.cardPadding < 0 ? 0 : this.props.cardPadding;
+
         const stackTokens = {
             childrenGap: pad,
-            padding: 0,
+            padding: cardPad,
         };
 
         //****************************
@@ -173,6 +177,14 @@ CardFooter.propTypes = {
     children: PropTypes.node,
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
+     * @uxpindescription Inner padding for Card Footer. Value must be 0 or more.  
+     * @uxpinpropname Card Padding
+     */
+    cardPadding: PropTypes.number,
+
+    /**
      * @uxpindescription To show or hide the top border  
      * @uxpinpropname Border Style
      */
@@ -222,6 +234,7 @@ CardFooter.defaultProps = {
     vAlign: middleAlign,
     addSpanner: false,
     spannerIndex: 1,
+    cardPadding: 12,
 }
 
 

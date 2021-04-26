@@ -212,6 +212,8 @@ CardHeader.propTypes = {
     ]),
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Inner padding for Card Header. Value must be 0 or more.  
      * @uxpinpropname Card Padding
