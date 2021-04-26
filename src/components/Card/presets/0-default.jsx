@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Card from '../Card';
-import CardHeader from '../../CardHeader';
-import CardBody from '../../CardBody';
-import CardFooter from '../../CardFooter';
+import CardHeader from '../../CardHeader/CardHeader';
+import CardBody from '../../CardBody/CardBody';
+import CardFooter from '../../CardFooter/CardFooter';
 
 
 
