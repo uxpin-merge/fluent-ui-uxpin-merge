@@ -34,6 +34,7 @@ module.exports = {
           'src/components/ActionButton/ActionButton.js',
           'src/components/Button/Button.js',
           'src/components/CompoundButton/CompoundButton.js',
+          'src/components/ToggleButton/ToggleButton.js',
         ],
       },
       {
