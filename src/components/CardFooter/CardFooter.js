@@ -178,6 +178,7 @@ CardFooter.propTypes = {
 
     /**
      * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Inner padding for Card Footer. Value must be 0 or more.  
      * @uxpinpropname Card Padding
@@ -234,7 +235,7 @@ CardFooter.defaultProps = {
     vAlign: middleAlign,
     addSpanner: false,
     spannerIndex: 1,
-    cardPadding: 12,
+    cardPadding: 6,
 }
 
 
