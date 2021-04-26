@@ -299,7 +299,7 @@ Shape.propTypes = {
     borderThickness: PropTypes.number,
 
     /**
-     * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
+     * @uxpindescription Use a color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Border Color
      * */
     borderColor: PropTypes.string,

@@ -106,11 +106,15 @@ class Card extends React.Component {
         //Let's see if the user entered a valid color value. This method returns undefined if not. 
         let cardBgColor = UxpColors.getHexFromHexOrToken(this.props.bgColor);
 
+        let bColor = UxpColors.getHexFromHexOrToken(this.props.borderColor);
+        let bStyle = bColor ? '1px solid ' + bColor : '';
+
         let cardShadow = this.state.hovered ? elevationShadow1 : elevationShadow0;
 
         const divStyles = {
             backgroundColor: cardBgColor,
             borderRadius: borderRadius,
+            border: bStyle,
             boxShadow: this.props.showShadow ? cardShadow : '',
             padding: cardPad + 'px',
             margin: this.props.margin,
@@ -249,6 +253,12 @@ Card.propTypes = {
     bgColor: PropTypes.string,
 
     /**
+     * @uxpindescription Use a color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
+     * @uxpinpropname Border Color
+     * */
+    borderColor: PropTypes.string,
+
+    /**
      * @uxpindescription To show or hide the card's background shadow  
      * @uxpinpropname Show Shadow
      */
@@ -277,6 +287,7 @@ Card.defaultProps = {
     gutterPadding: 24,
     align: leftAlign,
     bgColor: '',
+    borderColor: 'purple', //'#F5F7FA'
     showShadow: true,
     shimmer: true,
     shimmerDuration: defaultShimmerDuration
