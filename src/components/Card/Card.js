@@ -287,7 +287,7 @@ Card.defaultProps = {
     gutterPadding: 24,
     align: leftAlign,
     bgColor: '',
-    borderColor: 'purple', //'#F5F7FA'
+    borderColor: '#640487', //'#F5F7FA'
     showShadow: true,
     shimmer: true,
     shimmerDuration: defaultShimmerDuration
