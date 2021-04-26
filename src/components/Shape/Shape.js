@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { Text as Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+
 
 
 //The smallest allowed box size
@@ -34,15 +34,6 @@ const defaultBorderThickness = '1';
 const defaultBorderColor = 'grey-300';
 const defaultBorderRadius = '4';
 
-const instructionText = `Shape Instructions: 
-1) Set sizing and other desired properties.
-2) Optionally, drag any Merge controls onto the canvas. 
-3) In the Layers Panel, drag and drop Merge controls onto this control. 
-4) Uncheck the "Show Instructions" box.`;
-
-
-//Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
-const defaultTextColor = "#000000";
 
 
 class Shape extends React.Component {
@@ -124,32 +115,6 @@ class Shape extends React.Component {
     }
 
     render() {
-
-        //****************************
-        //For Text control: Instructions
-        //Let's see if we need to show instructions
-        let instructionStack = '';
-        if (this.props.showInstructions) {
-
-            let fTextStyles = {
-                root: {
-                    color: defaultTextColor,
-                    fontWeight: 'normal',
-                    fontStyle: 'normal',
-                    display: 'block',         //Fixes the 'nudge up/down' issues for larger and smaller sizes
-                    lineHeight: 'normal',     //Fixes the janked line height issues for larger and smaller sizes
-                }
-            }
-
-            instructionStack = (
-                <Text
-                    {...this.props}
-                    styles={fTextStyles}
-                    variant={'medium'}>
-                    {instructionText}
-                </Text>
-            );
-        }
 
         //Styles with dynamic values
 
@@ -245,8 +210,6 @@ class Shape extends React.Component {
                 styles={topStackItemStyles}
                 onClick={() => { this._onClick() }}>
 
-                {instructionStack}
-
                 {stackList}
 
             </Stack>
@@ -269,12 +232,6 @@ PPShape.propTypes = {
      * @uxpinpropname Right Contents
      */
     children: PropTypes.node,
-
-    /**
-     * @uxpindescription To show or hide the instructional text  
-     * @uxpinpropname Show Instructions
-     */
-    //showInstructions: PropTypes.bool,
 
     /**
      * @uxpindescription To set the shape to a circle rather than a rectangle  
@@ -357,12 +314,6 @@ PPShape.propTypes = {
     borderRadius: PropTypes.number,
 
     /**
-     * @uxpindescription To stretch the contents within each section
-     * @uxpinpropname Stretch Contents
-     */
-    stretch: PropTypes.bool,
-
-    /**
      * @uxpindescription Fires when the control is clicked on.
      * @uxpinpropname Click
      * */
@@ -374,7 +325,6 @@ PPShape.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Shape.defaultProps = {
-    //showInstructions: true,
     isCircle: false,
     boxWidth: 50,
     boxHeight: 50,
@@ -388,7 +338,6 @@ Shape.defaultProps = {
     borderThickness: defaultBorderThickness,
     borderColor: defaultBorderColor,
     borderRadius: defaultBorderRadius,
-    stretch: false,
 }
 
 
