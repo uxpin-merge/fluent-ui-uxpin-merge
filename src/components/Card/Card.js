@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { Shimmer, ShimmerElementType } from '@fluentui/react/lib/Shimmer';
-import VerticalStack from '../VerticalStack/VerticalStack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import _ from 'lodash';
 
@@ -34,36 +32,6 @@ class Card extends React.Component {
 
         this.state = {
             hovered: false,
-            shimmer: true
-        }
-    }
-
-    componentDidMount() {
-        this.set();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.shimmer !== this.props.shimmer ||
-            prevProps.shimmerDuration !== this.props.shimmerDuration
-        ) {
-            this.set();
-        }
-    }
-
-    set() {
-        this.setState({
-            shimmer: this.props.shimmer
-        })
-        if (this.props.shimmer) {
-            setTimeout(
-                () => {
-                    this.setState({
-                        shimmer: false
-                    })
-                },
-                (this.props.shimmerDuration || defaultShimmerDuration) * 1000
-            )
         }
     }
 
@@ -166,36 +134,20 @@ class Card extends React.Component {
                 style={divStyles}
                 onMouseEnter={() => this._setHover(true)}
                 onMouseLeave={() => this._setHover(false)} >
-                {this.state.shimmer && (
-                    <VerticalStack
-                        showInstructions={false}
-                        gutterPadding={10}
-                    >
-                        <Shimmer shimmerElements={[
-                            { type: ShimmerElementType.line, height: 24 },
-                        ]} />
-                        <Shimmer shimmerElements={[
-                            { type: ShimmerElementType.line, height: 50 }
-                        ]} />
-                        <Shimmer shimmerElements={[
-                            { type: ShimmerElementType.line, height: 24, },
-                        ]} />
-                    </VerticalStack>
-                )}
-                {!this.state.shimmer && (
-                    <Stack
-                        tokens={stackTokens}
-                        horizontal={false}
-                        horizontalAlign={hAlign}
-                        verticalAlign={verticalAlign}
-                        wrap={false}
-                        styles={topStackItemStyles}
-                    >
 
-                        {stackList}
+                <Stack
+                    tokens={stackTokens}
+                    horizontal={false}
+                    horizontalAlign={hAlign}
+                    verticalAlign={verticalAlign}
+                    wrap={false}
+                    styles={topStackItemStyles}
+                >
 
-                    </Stack>
-                )}
+                    {stackList}
+
+                </Stack>
+
             </div>
         );
     }
@@ -264,17 +216,6 @@ Card.propTypes = {
      */
     showShadow: PropTypes.bool,
 
-    /**
-    * @uxpindescription Whether to display the shimmer 
-    * @uxpinpropname Shimmer
-    */
-    shimmer: PropTypes.bool,
-
-    /**
-    * @uxpindescription Shimmer duration inseconds
-    * @uxpinpropname Shimmer Duration
-    */
-    shimmerDuration: PropTypes.number,
 }
 
 
@@ -287,10 +228,8 @@ Card.defaultProps = {
     gutterPadding: 24,
     align: leftAlign,
     bgColor: '',
-    borderColor: '#640487', //'#F5F7FA'
+    borderColor: '#F5F7FA',
     showShadow: true,
-    shimmer: true,
-    shimmerDuration: defaultShimmerDuration
 }
 
 
