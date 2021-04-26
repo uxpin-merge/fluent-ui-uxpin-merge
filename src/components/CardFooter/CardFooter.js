@@ -16,7 +16,7 @@ const borderDashed = 'dashed';
 const borderSolid = 'solid';
 const borderDotted = 'dotted';
 
-const minHeight = '40px';
+const minHeight = '10px';
 
 //A StackItem that will spring to fill available space. 
 const spanner = (<StackItem grow={1}><span /></StackItem>);
