@@ -123,7 +123,7 @@ class Card extends React.Component {
 
         const stackTokens = {
             childrenGap: pad,
-            padding: 0,
+            padding: '0px',
         };
 
         //****************************
@@ -140,9 +140,8 @@ class Card extends React.Component {
             if (childList.length) {
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
-                        let child = React.cloneElement(childList[i], {
-                            cardTheme: this.props.cardTheme,
-                        });
+                        let child = childList[i];
+
                         let stack = (
                             <StackItem
                                 align={'stretch'}
