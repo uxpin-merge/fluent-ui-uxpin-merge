@@ -227,7 +227,7 @@ Card.defaultProps = {
     cardPadding: 0,
     gutterPadding: 24,
     align: leftAlign,
-    bgColor: '',
+    bgColor: '#ffffff',
     borderColor: '#F5F7FA',
     showShadow: true,
 }

@@ -117,6 +117,12 @@ TextArea.propTypes = {
   errorMessage: PropTypes.string,
 
   /**
+   * @uxpindescription Whether the control's height should increase with its contents
+   * @uxpinpropname Auto Adj Height
+   * */
+  autoAdjustHeight: PropTypes.bool,
+
+  /**
    * @uxpindescription Whether to allow the user to resize it at runtime
    * @uxpinpropname Resizable
    * */
@@ -157,6 +163,7 @@ TextArea.defaultProps = {
   textValue: "",
   placeholder: "Enter some text",
   rows: '3',
+  autoAdjustHeight: false,
   resizable: true,
   readOnly: false,
   disabled: false,
