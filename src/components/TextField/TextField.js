@@ -107,6 +107,12 @@ TextField.propTypes = {
   label: PropTypes.string,
 
   /**
+   * @uxpindescription To display the 'required' flag on the label
+   * @uxpinpropname Required
+   * */
+  required: PropTypes.bool,
+
+  /**
    * We give this property a unique name to avoid collisions.
    * @uxpindescription Current value of the text field. This prop's live value is available for scripting.
    * @uxpinpropname * Value
@@ -152,12 +158,6 @@ TextField.propTypes = {
   suffix: PropTypes.string,
 
   /**
-   * @uxpindescription To display the 'required' flag on the label
-   * @uxpinpropname Required
-   * */
-  required: PropTypes.bool,
-
-  /**
    * @uxpindescription To turn on password masking
    * @uxpinpropname Password
    * */
@@ -168,6 +168,18 @@ TextField.propTypes = {
    * @uxpinpropname Reveal Password
    * */
   canRevealPassword: PropTypes.bool,
+
+  /**
+   * @uxpindescription Whether to show only a bottom border line for the control and position the label to the left. 
+   * @uxpinpropname Underlined
+   * */
+  underlined: PropTypes.bool,
+
+  /**
+   * @uxpindescription Whether to show the control's border lines
+   * @uxpinpropname Borderless
+   * */
+  borderless: PropTypes.bool,
 
   /**
    * @uxpindescription To set the control to read-only mode
@@ -197,6 +209,8 @@ TextField.defaultProps = {
   label: "Basic Text Field",
   textValue: "",
   placeholder: "Enter some text",
+  underlined: false,
+  borderless: false,
   readOnly: false,
   disabled: false,
   isPassword: false,

@@ -129,6 +129,12 @@ TextArea.propTypes = {
   resizable: PropTypes.bool,
 
   /**
+   * @uxpindescription Whether to show the control's border lines
+   * @uxpinpropname Borderless
+   * */
+  borderless: PropTypes.bool,
+
+  /**
    * @uxpindescription To display the 'required' flag on the label
    * @uxpinpropname Required
    * */
@@ -164,6 +170,7 @@ TextArea.defaultProps = {
   placeholder: "Enter some text",
   rows: '3',
   autoAdjustHeight: false,
+  borderless: false,
   resizable: true,
   readOnly: false,
   disabled: false,
