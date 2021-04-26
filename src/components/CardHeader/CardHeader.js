@@ -56,9 +56,12 @@ class CardHeader extends React.Component {
         //With one number, the padding applies to both rows and columns.
         let pad = '12px';
 
+        //Let's make sure we have a positive number. 
+        let cardPad = this.props.cardPadding < 0 ? 0 : this.props.cardPadding;
+
         const stackTokens = {
             childrenGap: pad,
-            padding: 0,
+            padding: cardPad,
         };
 
         //****************************
@@ -209,6 +212,13 @@ CardHeader.propTypes = {
     ]),
 
     /**
+     * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
+     * @uxpindescription Inner padding for Card Header. Value must be 0 or more.  
+     * @uxpinpropname Card Padding
+     */
+    cardPadding: PropTypes.number,
+
+    /**
      * @uxpindescription Fires when the Header is clicked on.
      * @uxpinpropname Click
      * */
@@ -228,6 +238,7 @@ CardHeader.defaultProps = {
     iconName: defaultIconName,
     iconSize: defaultIconSize,
     iconColor: defaultTextColor,
+    cardPadding: 12,
 }
 
 
