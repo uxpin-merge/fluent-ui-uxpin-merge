@@ -4,6 +4,11 @@ import { TextField as FTextField } from '@fluentui/react/lib/TextField';
 
 
 
+const borderFramed = "framed";
+const borderUnderlined = "underlined";
+const borderBorderless = "borderless";
+
+
 class TextField extends React.Component {
 
   constructor(props) {
@@ -58,6 +63,10 @@ class TextField extends React.Component {
 
     let pwdType = this.props.isPassword ? "password" : "";
 
+    let isUnderlined = this.props.borderType === borderUnderlined ? true : false;
+
+    let frameless = this.props.borderType === borderBorderless ? true : false;
+
     //Set the prefix, if the user has set one. The default MUST be undefined.
     //Microsoft requires that we explicitly set this to undefined if there is no text value. 
     var prefix = undefined;
@@ -85,6 +94,8 @@ class TextField extends React.Component {
         prefix={prefix}
         suffix={suffix}
         type={pwdType}
+        underlined={isUnderlined}
+        borderless={frameless}
         autoComplete={showAutoComplete}
         onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
       />
@@ -170,16 +181,10 @@ TextField.propTypes = {
   canRevealPassword: PropTypes.bool,
 
   /**
-   * @uxpindescription Whether to show only a bottom border line for the control and position the label to the left. 
-   * @uxpinpropname Underlined
-   * */
-  underlined: PropTypes.bool,
-
-  /**
-   * @uxpindescription Whether to show the control's border lines
-   * @uxpinpropname Borderless
-   * */
-  borderless: PropTypes.bool,
+   * @uxpindescription How to show the control's border. If Underlined, then the label moves inline and to the left.   
+   * @uxpinpropname Border Type
+   */
+  borderType: PropTypes.oneOf([borderFramed, borderUnderlined, borderBorderless]),
 
   /**
    * @uxpindescription To set the control to read-only mode
@@ -209,8 +214,7 @@ TextField.defaultProps = {
   label: "Basic Text Field",
   textValue: "",
   placeholder: "Enter some text",
-  underlined: false,
-  borderless: false,
+  borderType: borderFramed,
   readOnly: false,
   disabled: false,
   isPassword: false,
