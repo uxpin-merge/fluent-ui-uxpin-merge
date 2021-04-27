@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ProgressIndicator as FProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
-import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
@@ -14,8 +13,6 @@ const defaultBlue = '#0070BA';
 const successGreen = '#299976';
 const warningYellow = '#FF9600';
 const errorRed = '#D20000';
-
-const minBarHeight = 1;
 
 
 class ProgressIndicator extends React.Component {
@@ -49,47 +46,14 @@ class ProgressIndicator extends React.Component {
         : this.props.roleType === roleError ? errorRed
           : defaultBlue;
 
-    var bHeight = UxpNumberParser.parseInts(this.props.indicatorHeight);
-    if (!bHeight || bHeight < 1) {
-      bHeight = minBarHeight;
-    }
-
-    console.log("progress bg color: " + bgColor + " and height: " + bHeight);
-
-
     return {
       selectors: {
         '& .ms-ProgressIndicator-progressBar': {
-          //height: bHeight,
           backgroundColor: bgColor,
         },
 
       }
     }
-
-    // return {
-    //   selectors: {
-    //     '& .ms-ProgressIndicator-progressTrack': {
-    //       borderRadius: 100
-    //     },
-    //     '& .ms-ProgressIndicator-progressBar': {
-    //       //height: 6,
-    //       width: 50,
-    //       backgroundColor: this.props.roleType === roleSuccess ? successGreen
-    //         : this.props.status === roleWarning ? warningYellow
-    //           : this.props.status === roleError ? errorRed
-    //             : defaultBlue,
-    //       borderRadius: 100
-    //     },
-    //     '& .ms-Button': {
-    //       verticalAlign: 'middle',
-    //       paddingRight: 8,
-    //     },
-    //     'span': {
-    //       verticalAlign: 'middle'
-    //     }
-    //   }
-    // }
   }
 
   //Determine what value to set as the progress indicator's value, if at all. 
