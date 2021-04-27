@@ -90,7 +90,7 @@ class TextArea extends React.Component {
 TextArea.propTypes = {
 
   /**
-   * @uxpindescription The label for the Text Field
+   * @uxpindescription The label for the Text Area
    * @uxpinpropname Label
    * @uxpincontroltype textfield(2)
    * */
