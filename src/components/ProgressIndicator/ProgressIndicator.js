@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ProgressIndicator as FProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
@@ -14,6 +15,7 @@ const successGreen = '#299976';
 const warningYellow = '#FF9600';
 const errorRed = '#D20000';
 
+const minBarHeight = 1;
 
 
 class ProgressIndicator extends React.Component {
@@ -42,29 +44,45 @@ class ProgressIndicator extends React.Component {
 
   getProgressIndicatorClasses() {
 
+    var bgColor = this.props.roleType === roleSuccess ? successGreen
+      : this.props.roleType === roleWarning ? warningYellow
+        : this.props.roleType === roleError ? errorRed
+          : defaultBlue;
+
+    console.log("progress bg color: " + bgColor);
+
     return {
       selectors: {
-        '& .ms-ProgressIndicator-progressTrack': {
-          borderRadius: 100
-        },
         '& .ms-ProgressIndicator-progressBar': {
-          height: 6,
-          width: 50,
-          backgroundColor: this.props.roleType === roleSuccess ? successGreen
-            : this.props.status === roleWarning ? warningYellow
-              : this.props.status === roleError ? errorRed
-                : defaultBlue,
-          borderRadius: 100
+          backgroundColor: bgColor,
         },
-        '& .ms-Button': {
-          verticalAlign: 'middle',
-          paddingRight: 8,
-        },
-        'span': {
-          verticalAlign: 'middle'
-        }
+
       }
     }
+
+    // return {
+    //   selectors: {
+    //     '& .ms-ProgressIndicator-progressTrack': {
+    //       borderRadius: 100
+    //     },
+    //     '& .ms-ProgressIndicator-progressBar': {
+    //       //height: 6,
+    //       width: 50,
+    //       backgroundColor: this.props.roleType === roleSuccess ? successGreen
+    //         : this.props.status === roleWarning ? warningYellow
+    //           : this.props.status === roleError ? errorRed
+    //             : defaultBlue,
+    //       borderRadius: 100
+    //     },
+    //     '& .ms-Button': {
+    //       verticalAlign: 'middle',
+    //       paddingRight: 8,
+    //     },
+    //     'span': {
+    //       verticalAlign: 'middle'
+    //     }
+    //   }
+    // }
   }
 
   //Determine what value to set as the progress indicator's value, if at all. 
@@ -101,13 +119,18 @@ class ProgressIndicator extends React.Component {
   render() {
 
     //Get a validated percentage value
-    const percent = this._getValidatedPercent()
+    let percent = this._getValidatedPercent()
+
+    var bHeight = UxpNumberParser.parseInts(this.props.indicatorHeight);
+    if (!bHeight || bHeight < 1) {
+      bHeight = minBarHeight;
+    }
 
     return (
       <FProgressIndicator
         {...this.props}
         percentComplete={percent}
-        barHeight={6}  //TODO: Should this be hard coded?
+        barHeight={bHeight}
         className={this.getProgressIndicatorClasses()}
       />
     );
@@ -139,10 +162,16 @@ ProgressIndicator.propTypes = {
   roleType: PropTypes.oneOf([roleDefault, roleSuccess, roleWarning, roleError]),
 
   /**
+   * @uxpindescription Control height. Value must be 0 or more. 
+   * @uxpinpropname Height
+   */
+  indicatorHeight: PropTypes.number,
+
+  /**
    * @uxpindescription To display in indeterminate mode rather than show a percent
    * @uxpinpropname Indeterminate
    * */
-  indeterminate: PropTypes.bool
+  indeterminate: PropTypes.bool,
 }
 
 

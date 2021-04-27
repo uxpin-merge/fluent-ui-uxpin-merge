@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { TextField } from '@fluentui/react/lib/TextField';
-import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
