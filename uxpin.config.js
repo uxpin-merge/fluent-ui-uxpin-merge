@@ -53,6 +53,7 @@ module.exports = {
         name: 'Progress',
         include: [
           'src/components/ProgressIndicator/ProgressIndicator.js',
+          'src/components/Spinner/Spinner.js',
         ],
       },
       {
