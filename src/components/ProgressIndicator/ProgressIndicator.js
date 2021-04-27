@@ -49,11 +49,18 @@ class ProgressIndicator extends React.Component {
         : this.props.roleType === roleError ? errorRed
           : defaultBlue;
 
-    console.log("progress bg color: " + bgColor);
+    var bHeight = UxpNumberParser.parseInts(this.props.indicatorHeight);
+    if (!bHeight || bHeight < 1) {
+      bHeight = minBarHeight;
+    }
+
+    console.log("progress bg color: " + bgColor + " and height: " + bHeight);
+
 
     return {
       selectors: {
         '& .ms-ProgressIndicator-progressBar': {
+          height: bHeight,
           backgroundColor: bgColor,
         },
 
@@ -120,11 +127,6 @@ class ProgressIndicator extends React.Component {
 
     //Get a validated percentage value
     let percent = this._getValidatedPercent()
-
-    var bHeight = UxpNumberParser.parseInts(this.props.indicatorHeight);
-    if (!bHeight || bHeight < 1) {
-      bHeight = minBarHeight;
-    }
 
     return (
       <FProgressIndicator
