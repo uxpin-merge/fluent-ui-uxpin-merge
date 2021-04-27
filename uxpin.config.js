@@ -50,6 +50,12 @@ module.exports = {
         ],
       },
       {
+        name: 'Progress',
+        include: [
+          'src/components/ProgressIndicator/ProgressIndicator.js',
+        ],
+      },
+      {
         name: 'Surfaces',
         include: [
           'src/components/Dialog/Dialog.js',
