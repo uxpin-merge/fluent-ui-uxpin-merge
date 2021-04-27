@@ -2,10 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ProgressIndicator as FProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
 
-import { mergeStyles } from '@uifabric/merge-styles';
-import { getTokens } from '../_helpers/parser.jsx'
-
-
 
 
 const roleDefault = 'default';
@@ -46,7 +42,7 @@ class ProgressIndicator extends React.Component {
 
   getProgressIndicatorClasses() {
 
-    return mergeStyles({
+    return {
       selectors: {
         '& .ms-ProgressIndicator-progressTrack': {
           borderRadius: 100
@@ -68,7 +64,7 @@ class ProgressIndicator extends React.Component {
           verticalAlign: 'middle'
         }
       }
-    })
+    }
   }
 
   //Determine what value to set as the progress indicator's value, if at all. 
