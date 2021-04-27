@@ -60,7 +60,7 @@ class ProgressIndicator extends React.Component {
     return {
       selectors: {
         '& .ms-ProgressIndicator-progressBar': {
-          height: bHeight,
+          //height: bHeight,
           backgroundColor: bgColor,
         },
 
@@ -132,7 +132,6 @@ class ProgressIndicator extends React.Component {
       <FProgressIndicator
         {...this.props}
         percentComplete={percent}
-        barHeight={bHeight}
         className={this.getProgressIndicatorClasses()}
       />
     );
@@ -167,7 +166,7 @@ ProgressIndicator.propTypes = {
    * @uxpindescription Control height. Value must be 0 or more. 
    * @uxpinpropname Height
    */
-  indicatorHeight: PropTypes.number,
+  barHeight: PropTypes.number,
 
   /**
    * @uxpindescription To display in indeterminate mode rather than show a percent
