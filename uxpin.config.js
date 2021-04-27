@@ -50,6 +50,12 @@ module.exports = {
         ],
       },
       {
+        name: 'Items & Lists',
+        include: [
+          'src/components/Persona/Persona.js',
+        ],
+      },
+      {
         name: 'Progress',
         include: [
           'src/components/ProgressIndicator/ProgressIndicator.js',
