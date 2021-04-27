@@ -145,6 +145,13 @@ class ProgressIndicator extends React.Component {
 ProgressIndicator.propTypes = {
 
   /**
+   * @uxpindescription The label for the control
+   * @uxpinpropname Label
+   * @uxpincontroltype textfield(2)
+   * */
+  label: PropTypes.string,
+
+  /**
    * @uxpindescription Use a value between 0 - 1.0
    * @uxpinpropname Percent
    * */
@@ -181,6 +188,7 @@ ProgressIndicator.propTypes = {
  * 
  */
 ProgressIndicator.defaultProps = {
+  label: '',
   roleType: roleDefault,
   percent: "0.5",
   description: '',
