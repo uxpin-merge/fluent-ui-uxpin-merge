@@ -15,7 +15,7 @@ let personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office
 //Fix the weird line height issue in the top line of the Persona
 const personaStyles = {
     root: {
-        lineHeight: '1.25',
+        lineHeight: '1.35',
     },
 };
 
