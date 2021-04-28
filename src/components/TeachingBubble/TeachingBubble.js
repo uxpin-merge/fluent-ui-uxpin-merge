@@ -1,14 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {
-    Coachmark as FCoachmark
-} from '@fluentui/react/lib/Coachmark';
-import { TeachingBubbleContent } from '@fluentui/react/lib/TeachingBubble';
+import { TeachingBubble as FTeachingBubble } from '@fluentui/react/lib/TeachingBubble';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 
 
 
-class Coachmark extends React.Component {
+
+class TeachingBubble extends React.Component {
     constructor(props) {
         super(props);
 
@@ -18,6 +16,7 @@ class Coachmark extends React.Component {
 
         this._targetElm = React.createRef();
     }
+
 
     set() {
         var isOpen = false;
@@ -36,7 +35,9 @@ class Coachmark extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.show !== this.props.show) {
+        if (
+            prevProps.show !== this.props.show
+        ) {
             this.set();
         }
     }
@@ -93,7 +94,6 @@ class Coachmark extends React.Component {
             hideSecondaryButton = true;
         }
 
-
         let pIconProps = { iconName: this.props.primaryButtonIcon };
         let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' } };
 
@@ -101,7 +101,6 @@ class Coachmark extends React.Component {
             <>
                 <div
                     className="trigger"
-                    onClick={() => { this.setState({ open: !this.state.open }) }}
                     ref={this._targetElm}
                     style={{
                         width: 20,
@@ -111,34 +110,28 @@ class Coachmark extends React.Component {
                     }} />
 
                 {this.state.open && (
-                    <FCoachmark
-                        {...this.props}
+                    <FTeachingBubble
                         target={this._targetElm.current}
-                        positioningContainerProps={{
-                            doNotLayer: false,
-                            directionalHint: DirectionalHint[this.props.direction],
-                            directionalHintFixed: true,
-                        }}>
-                        <TeachingBubbleContent
-                            headline={this.props.title}
-                            footerContent={this.props.footerText}
-                            hasCloseIcon={true}
-                            primaryButtonProps={{
-                                text: this.props.primaryButtonLabel,
-                                hidden: hidePrimaryButton,
-                                iconProps: pIconProps,
-                                onClick: () => { this._onPrimaryButtonClicked() }
-                            }}
-                            secondaryButtonProps={{
-                                text: this.props.secondaryButtonLabel,
-                                hidden: hideSecondaryButton,
-                                iconProps: sIconProps,
-                                onClick: () => { this._onSecondaryButtonClicked() }
-                            }}
-                            onDismiss={() => { this._onDismissClicked() }} >
-                            {this.props.text}
-                        </TeachingBubbleContent>
-                    </FCoachmark>
+                        {...this.props}
+                        calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
+                        headline={this.props.title}
+                        footerContent={this.props.footerText}
+                        hasCloseButton={this.props.hasCloseButton}
+                        primaryButtonProps={{
+                            text: this.props.primaryButtonLabel,
+                            hidden: hidePrimaryButton,
+                            iconProps: pIconProps,
+                            onClick: () => { this._onPrimaryButtonClicked() }
+                        }}
+                        secondaryButtonProps={{
+                            text: this.props.secondaryButtonLabel,
+                            hidden: hideSecondaryButton,
+                            iconProps: sIconProps,
+                            onClick: () => { this._onSecondaryButtonClicked() }
+                        }}
+                        onDismiss={() => { this._onDismissClicked() }} >
+                        {this.props.text}
+                    </FTeachingBubble>
                 )}
             </>
         );
@@ -149,12 +142,12 @@ class Coachmark extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-Coachmark.propTypes = {
+TeachingBubble.propTypes = {
 
     /**
-     * @uxpindescription Whether to display the Coachmark 
+     * @uxpindescription Whether to display the TeachingBubble 
      * @uxpinpropname Show
-     */
+    */
     show: PropTypes.bool,
 
     /**
@@ -171,12 +164,13 @@ Coachmark.propTypes = {
 
     /**
      * @uxpindescription The main message text
-     * @uxpincontroltype textfield(4)
+     * @uxpincontroltype textfield(5)
      */
     text: PropTypes.string,
 
     /**    
     * @uxpindescription Footer text to display in the bottom left corner. 
+    * @uxpinpropname Footer Text
     */
     footerText: PropTypes.string,
 
@@ -187,7 +181,7 @@ Coachmark.propTypes = {
     primaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
+     * @uxpindescription The exact name from the icon library (Optional)
      * @uxpinpropname Icon: Primary Button
      */
     primaryButtonIcon: PropTypes.string,
@@ -199,13 +193,20 @@ Coachmark.propTypes = {
     secondaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
+     * @uxpindescription The exact name from the icon library (Optional)
      * @uxpinpropname Icon: Secondary Button
      */
     secondaryButtonIcon: PropTypes.string,
 
     /**
+     * @uxpindescription Whether to display the Close button
+     * @uxpinpropname Show Close Button
+     * */
+    hasCloseButton: PropTypes.bool,
+
+    /**
      * @uxpindescription The control's display direction
+     * @uxpinpropname Direction
      */
     direction: PropTypes.oneOf([
         "topLeftEdge",
@@ -247,12 +248,13 @@ Coachmark.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-Coachmark.defaultProps = {
+TeachingBubble.defaultProps = {
     show: true,
-    title: "Basic Coachmark",
-    text: "Welcome to the land of Coachmarks!",
+    title: "Basic TeachingBubble",
+    text: "Set my 'Show' property to true to view me in a mockup.",
     footerText: "",
     direction: "bottomCenter",
+    hasCloseButton: true,
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
     secondaryButtonIcon: "Close",
@@ -260,4 +262,4 @@ Coachmark.defaultProps = {
 }
 
 
-export { Coachmark as default };
+export { TeachingBubble as default };

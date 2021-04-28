@@ -59,6 +59,7 @@ module.exports = {
         name: 'Notification & Engagement',
         include: [
           'src/components/Coachmark/Coachmark.js',
+          'src/components/TeachingBubble/TeachingBubble.js',
         ],
       },
       {
