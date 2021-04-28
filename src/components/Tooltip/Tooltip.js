@@ -35,10 +35,12 @@ class Tooltip extends React.Component {
                     targetElement={this._targetElm}
                     calloutProps={{
                         hidden: !this.props.show,
-                        isBeakVisible: this.props.showBeak
+                        isBeakVisible: this.props.showBeak,
+                        gapSpace: 4,
                     }}
                     content={this.props.text}
-                    directionalHint={DirectionalHint[this.props.direction]}
+                    directionalHint={this.props.direction}
+                // directionalHint={DirectionalHint[this.props.direction]}
                 />
             </div>
         );
