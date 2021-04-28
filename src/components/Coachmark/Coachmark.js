@@ -106,7 +106,7 @@ class Coachmark extends React.Component {
                     style={{
                         width: 20,
                         height: 20,
-                        background: this.props.showMarker ? '#F5FBFE' : 'transparent',
+                        background: this.props.showMarker ? '#640487' : 'transparent',
                         borderRadius: 4,
                     }} />
 
@@ -117,7 +117,7 @@ class Coachmark extends React.Component {
                         positioningContainerProps={{
                             doNotLayer: false,
                             directionalHint: DirectionalHint[this.props.direction],
-                            directionalHintFixed: false
+                            directionalHintFixed: true,
                         }}>
                         <TeachingBubbleContent
                             headline={this.props.title}
@@ -252,7 +252,7 @@ Coachmark.defaultProps = {
     title: "Basic Coachmark",
     text: "Welcome to the land of Coachmarks!",
     footerText: "",
-    direction: "bottomAutoEdge",
+    direction: "bottomCenter",
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
     secondaryButtonIcon: "Close",
