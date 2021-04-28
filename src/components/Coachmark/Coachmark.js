@@ -110,7 +110,7 @@ class Coachmark extends React.Component {
                         borderRadius: 4,
                     }} />
 
-                {this.state.show && (
+                {this.state.open && (
                     <FCoachmark
                         {...this.props}
                         target={this._targetElm.current}
