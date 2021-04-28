@@ -102,10 +102,10 @@ Tooltip.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Tooltip.defaultProps = {
-    open: true,
+    show: true,
     showBeak: true,
     text: "I'm a basic tooltip",
-    direction: "bottomCenter",
+    direction: "topCenter",
     showMarker: true,
 }
 
