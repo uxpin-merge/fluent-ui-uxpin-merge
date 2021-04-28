@@ -56,9 +56,17 @@ module.exports = {
         ],
       },
       {
+        name: 'Surfaces',
+        include: [
+          'src/components/Dialog/Dialog.js',
+          'src/components/Tooltip/Tooltip.js',
+        ],
+      },
+      {
         name: 'Notification & Engagement',
         include: [
           'src/components/Coachmark/Coachmark.js',
+
           'src/components/TeachingBubble/TeachingBubble.js',
         ],
       },
@@ -67,12 +75,6 @@ module.exports = {
         include: [
           'src/components/ProgressIndicator/ProgressIndicator.js',
           'src/components/Spinner/Spinner.js',
-        ],
-      },
-      {
-        name: 'Surfaces',
-        include: [
-          'src/components/Dialog/Dialog.js',
         ],
       },
     ],
