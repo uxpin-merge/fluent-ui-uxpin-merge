@@ -56,6 +56,12 @@ module.exports = {
         ],
       },
       {
+        name: 'Notification & Engagement',
+        include: [
+          'src/components/Coachmark/Coachmark.js',
+        ],
+      },
+      {
         name: 'Progress',
         include: [
           'src/components/ProgressIndicator/ProgressIndicator.js',
