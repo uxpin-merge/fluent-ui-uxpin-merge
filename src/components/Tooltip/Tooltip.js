@@ -36,7 +36,7 @@ class Tooltip extends React.Component {
                     calloutProps={{
                         hidden: !this.props.show,
                         isBeakVisible: this.props.showBeak,
-                        gapSpace: 4,
+                        gapSpace: 2,
                     }}
                     content={this.props.text}
                     directionalHint={this.props.direction}
