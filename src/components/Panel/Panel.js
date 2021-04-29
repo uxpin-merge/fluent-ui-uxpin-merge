@@ -166,19 +166,16 @@ class Panel extends React.Component {
                             </Stack>
 
                             {/* Children Area */}
-                            <div style={{ overflowY: 'auto' }}>
-
-                                <Stack
-                                    tokens={{
-                                        padding: 24,
-                                        childrenGap: 24
-                                    }}
-                                    horizontalAlign={'stretch'}
-                                    verticalAlign={'start'}
-                                >
-                                    {this.props.children}
-                                </Stack>
-                            </div>
+                            <Stack
+                                tokens={{
+                                    padding: 24,
+                                    childrenGap: 24
+                                }}
+                                horizontalAlign={'stretch'}
+                                verticalAlign={'start'}
+                            >
+                                {this.props.children}
+                            </Stack>
                         </Stack>
 
                     </div>
