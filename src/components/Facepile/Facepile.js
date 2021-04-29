@@ -181,7 +181,7 @@ class Facepile extends React.Component {
     _onClick(persona) {
         console.log("_on click: " + persona.text)
 
-        let index = _getSelectedPersonaIndex(persona);
+        let index = this._getSelectedPersonaIndex(persona);
 
         console.log("_on click: p index: " + index);
 
