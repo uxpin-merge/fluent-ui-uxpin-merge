@@ -175,7 +175,7 @@ Facepile.propTypes = {
 
     /**
      * @uxpindescription Fires when one of the personas is clicked on.
-     * @uxpinpropname Click
+     * @uxpinpropname * Click
      * */
     onClick: PropTypes.func,
 
