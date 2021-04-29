@@ -78,11 +78,11 @@ class Facepile extends React.Component {
 
     //Get the index of the persona that the user clicked on. 
     _getSelectedPersonaIndex(persona) {
-        let selectedInitials = persona.imageInitials.toLowerCase().trim();
+        let selectedInitials = persona.text.toLowerCase().trim();
 
         var i;
         for (i = 0; i < this.state.personaList.length; i++) {
-            let initials = this.state.personaList[i].imageInitials.toLowerCase().trim();
+            let initials = this.state.personaList[i].text.toLowerCase().trim();
             if (initials === selectedInitials)
                 return i + 1; //Use a 1-based index
         }
@@ -181,9 +181,15 @@ class Facepile extends React.Component {
     _onClick(persona) {
         console.log("_on click: " + persona.text)
 
+        let index = _getSelectedPersonaIndex(persona);
+
+        console.log("_on click: p index: " + index);
+
+        this.props.selectedIndex = index;
+
         //Raise this event to UXPin. 
         if (this.props.onClick) {
-            this.props.onClick();
+            this.props.onClick(index);
         }
     }
 
