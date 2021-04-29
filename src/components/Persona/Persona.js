@@ -46,7 +46,9 @@ class Persona extends React.Component {
     render() {
 
         console.log("Going to try something next...");
-        console.log("Persona presence code: .none: " + UxpPersonaData.presenceCode.none);
+        console.log("Persona female url: .female: " + UxpPersonaData.personaFemaleUrl);
+        console.log("ANNIE " + UxpPersonaData.personaAnnie);
+        console.log("Presence codes: " + UxpPersonaData.presenceCodes);
 
         return (
             <FPersona

@@ -162,7 +162,7 @@ export const UxpPersonaData = {
     /** 
     * The Persona Presence codes.
     */
-    presence: {
+    presenceCodes: {
         away: 3,
         blocked: 5,
         busy: 6,
@@ -171,7 +171,6 @@ export const UxpPersonaData = {
         offline: 1,
         online: 2,
     },
-
 
     /** 
      * The Persona Presence code for Away.
