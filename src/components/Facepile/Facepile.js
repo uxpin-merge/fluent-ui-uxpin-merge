@@ -5,6 +5,7 @@ import {
     OverflowButtonType
 } from '@fluentui/react/lib/Facepile';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
+import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
