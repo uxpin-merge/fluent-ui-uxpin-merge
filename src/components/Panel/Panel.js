@@ -84,7 +84,7 @@ class Panel extends React.Component {
         this.dismissControl();
 
         if (this.props.onDismiss) {
-            this.props.onDismiss();
+            this.props.onDismiss(false);
         }
 
         console.log("    > Leaving _onDismissClicked. open: " + this.state.open);
@@ -178,7 +178,6 @@ Panel.propTypes = {
 
     /**
      * @uxpindescription To show or hide the panel 
-     * @uxpinbind onDismiss
      */
     show: PropTypes.bool,
 
