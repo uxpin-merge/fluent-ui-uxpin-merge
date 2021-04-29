@@ -10,19 +10,15 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 const defaultHeight = 900;
 const defaultWidth = 1440;
 
-const headerStyles = {
-    root: {
-        flexGrow: 1,
-        padding: 24
-    }
-};
-
 const sizeToWidthMap = {
     small: 300,
     medium: 600,
     large: 900,
     extraLarge: 1200,
 }
+
+//A StackItem that will spring to fill available space. 
+const spanner = (<StackItem grow={1}><span /></StackItem>);
 
 
 
@@ -152,6 +148,8 @@ class Panel extends React.Component {
                                         {headerTxt}
                                         {subheaderTxt}
                                     </Stack>
+
+                                    {spanner}
 
                                     <Stack.Item>
                                         <ActionButton
