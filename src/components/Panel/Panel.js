@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import { Stack } from '@fluentui/react/lib/Stack';
 import { Text as Text } from '@fluentui/react/lib/Text';
 import ActionButton from '../ActionButton/ActionButton';
 import { UxpColors } from '../_helpers/uxpcolorutils';
@@ -53,15 +53,14 @@ class Panel extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        // if (this.props.show)
-        //     console.log("Entering componentDidUpdate. show: " + this.props.show);
+        console.log("Entering componentDidUpdate. show: " + this.props.show);
 
-        if (this.prevProps.show !== this.props.show) {
+        if (prevProps.show !== this.props.show) {
             this.set();
         }
 
         // if (this.state.open)
-        //     console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
+        console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     dismissControl() {
