@@ -94,7 +94,7 @@ class Panel extends React.Component {
                         height: this.props.height || defaultHeight,
                         boxShadow: `rgba(0, 0, 0, 0.22) 0px 25.6px 57.6px 0px, rgba(0, 0, 0, 0.18) 0px 4.8px 14.4px 0px`,
                         float: 'right',
-                        backgroundColor: '#000000',
+                        backgroundColor: '#ffffff',
                     }}>
                         {/* Main vertical stack */}
                         <Stack
