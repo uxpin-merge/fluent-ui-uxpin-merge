@@ -86,9 +86,8 @@ class Facepile extends React.Component {
         }
     }
 
-    _onRenderPersonaCoin(personaProps, pControl) {
-        console.log("_onRenderPersonaCoin: " + personaProps.toString());
-        console.log("pControl: " + pControl.propTypes);
+    _onRenderPersonaCoin(personaProps) {
+        console.log("_onRenderPersonaCoin: " + personaProps.text);
 
         return (
             <div
@@ -105,9 +104,8 @@ class Facepile extends React.Component {
 
     }
 
-    _onRenderSinglePersona(personaProps, pControl) {
+    _onRenderSinglePersona(personaProps) {
         console.log("_onRenderSinglePersona: " + personaProps.text.toString());
-        console.log("_onRenderSinglePersona pControl: " + pControl.propTypes);
 
         return (
             <div
@@ -174,8 +172,8 @@ class Facepile extends React.Component {
                 maxDisplayablePersonas={this.props.faceCount}
                 personas={this.state.personaList.slice(0, this.props.number)}
 
-                onRenderPersona={(p, c) => { this._onRenderPersonaCoin(p, c); }}
-                onRenderPersonaCoin={(p, c) => { this._onRenderSinglePersona(p, c); }}
+                onRenderPersona={(p) => { this._onRenderSinglePersona(p); }}
+                onRenderPersonaCoin={(p) => { this._onRenderPersonaCoin(p); }}
 
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
