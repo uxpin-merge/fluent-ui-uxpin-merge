@@ -17,9 +17,6 @@ const sizeToWidthMap = {
     extraLarge: 1200,
 }
 
-//A StackItem that will spring to fill available space. 
-const spanner = (<StackItem grow={1}><span /></StackItem>);
-
 
 
 class Panel extends React.Component {
@@ -144,12 +141,11 @@ class Panel extends React.Component {
                                         }}
                                         horizontalAlign={'start'}
                                         verticalAlign={'start'}
+                                        grow={1}
                                     >
                                         {headerTxt}
                                         {subheaderTxt}
                                     </Stack>
-
-                                    {spanner}
 
                                     <Stack.Item>
                                         <ActionButton
