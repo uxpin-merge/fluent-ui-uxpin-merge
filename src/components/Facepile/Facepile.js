@@ -74,16 +74,16 @@ class Facepile extends React.Component {
     }
 
     _onClickOverflow(event) {
-        //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
-        if (this.props.onClick) {
-            this.props.onOverflowClick("overflow");
+        //Raise this event to UXPin. 
+        if (this.props.onOverflowClick) {
+            this.props.onOverflowClick();
         }
     }
 
     _onClickAddButton(event) {
-        //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
-        if (this.props.onClick) {
-            this.props.onAddClick("add");
+        //Raise this event to UXPin. 
+        if (this.props.onAddClick) {
+            this.props.onAddClick();
         }
     }
 
@@ -135,6 +135,13 @@ class Facepile extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Facepile.propTypes = {
+
+    /**
+     * @uxpindescription Used only at runtime for scripting, returns the 1-based index of the face the user clicked on.
+     * @uxpinbind onClick
+     * @uxpinpropname * Selected Index
+     * */
+    selectedIndex: PropTypes.number,
 
     /**
     * @uxpindescription The maximum number of faces to display inline; the rest will go in the overflow, if shown. A value between 5-10 is recommended.
@@ -191,10 +198,11 @@ Facepile.propTypes = {
  */
 Facepile.defaultProps = {
     size: 'size32',
+    selectedIndex: '',
     number: 5,
     faceCount: 5,
     showAddButton: false,
-    showOverflowButton: true
+    showOverflowButton: true,
 };
 
 
