@@ -155,12 +155,9 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
-        //Let's return the index of the Persona that was clicked on. 
-        let index = this._getSelectedPersonaIndex(persona);
-
-        //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
+        //Raise this event to UXPin. 
         if (this.props.onClick) {
-            this.props.onClick(index);
+            this.props.onClick();
         }
     }
 
