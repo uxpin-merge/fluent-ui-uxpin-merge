@@ -53,13 +53,15 @@ class Panel extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("Entering componentDidUpdate. show: " + this.props.show);
+        if (this.props.show)
+            console.log("Entering componentDidUpdate. show: " + this.props.show);
 
         if (this.prevProps.show !== this.props.show) {
             this.set();
         }
 
-        console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
+        if (this.state.open)
+            console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     dismissControl() {
