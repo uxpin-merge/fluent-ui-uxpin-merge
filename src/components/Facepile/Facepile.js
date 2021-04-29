@@ -106,8 +106,8 @@ class Facepile extends React.Component {
     }
 
     _onRenderSinglePersona(personaProps, pControl) {
-        console.log("_onRenderPersonaCoin: " + personaProps.toString());
-        console.log("pControl: " + pControl.propTypes);
+        console.log("_onRenderSinglePersona: " + personaProps.text.toString());
+        console.log("_onRenderSinglePersona pControl: " + pControl.propTypes);
 
         return (
             <div
