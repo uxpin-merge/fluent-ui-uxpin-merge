@@ -99,7 +99,7 @@ class Panel extends React.Component {
             );
         }
 
-        let overlayBg = this.props.darkOverlay ? darkOverlay : overlayLight;
+        let overlayBg = this.props.darkOverlay ? overlayDark : overlayLight;
 
 
         return (
@@ -232,6 +232,7 @@ Panel.propTypes = {
 
     /**
      * @uxpindescription Whether to make the overlay dark or leave it light
+     * @uxpinpropname Dark Overlay
      */
     darkOverlay: PropTypes.bool,
 
