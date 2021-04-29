@@ -105,6 +105,25 @@ class Facepile extends React.Component {
 
     }
 
+    _onRenderSinglePersona(personaProps, pControl) {
+        console.log("_onRenderPersonaCoin: " + personaProps.toString());
+        console.log("pControl: " + pControl.propTypes);
+
+        return (
+            <div
+                className={customPersonaCoinDivStyles}>
+
+                <Persona
+                    {...personaProps}
+                    personaSize={PersonaSize[this.props.size]}
+                    className={customPersonaStyles}
+                />
+
+            </div>
+        );
+
+    }
+
     _onClickOverflow(event) {
         //Raise this event to UXPin. 
         if (this.props.onOverflowClick) {
@@ -156,6 +175,8 @@ class Facepile extends React.Component {
                 personas={this.state.personaList.slice(0, this.props.number)}
 
                 onRenderPersona={(p, c) => { this._onRenderPersonaCoin(p, c); }}
+                onRenderPersonaCoin={(p, c) => { this._onRenderSinglePersona(p, c); }}
+
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
                 overflowButtonProps={overflowButtonParams}
