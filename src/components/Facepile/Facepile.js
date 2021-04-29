@@ -113,7 +113,7 @@ class Facepile extends React.Component {
         console.log("_onRenderPersonaCoin: " + personaProps.text);
 
         let plainCardProps = {
-            onrenderPlainCard: _onRenderCompactCard,
+            onRenderPlainCard: _onRenderCompactCard,
             renderData: personaProps,
         };
 
