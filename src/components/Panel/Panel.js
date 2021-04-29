@@ -37,11 +37,8 @@ class Panel extends React.Component {
     }
 
     set() {
-        var isOpen = false;
 
-        if (this.props.show) {
-            isOpen = true;
-        }
+        let isOpen = this.props.show ? true : false;
 
         this.setState(
             { open: isOpen }
@@ -54,9 +51,7 @@ class Panel extends React.Component {
 
     componentDidUpdate(prevProps) {
 
-        if (
-            prevProps.show !== this.props.show
-        ) {
+        if (prevProps.show !== this.props.show) {
             this.set();
         }
     }
@@ -73,17 +68,21 @@ class Panel extends React.Component {
     }
 
     _onDismissClicked() {
+        console.log("Entering _onDismissClicked. show: " + this.state.open);
+
         this.dismissControl();
 
         if (this.props.onDismiss) {
             this.props.onDismiss();
         }
+
+        console.log("Entering _onDismissClicked. show: " + this.state.open);
     }
 
     render() {
         return (
             <>
-                {this.props.show && <div
+                {this.state.open && <div
                     style={{
                         width: this.props.width,
                         height: this.props.height || defaultHeight,
@@ -148,7 +147,7 @@ class Panel extends React.Component {
 
                 </div>}
 
-                {!this.props.show && <div
+                {!this.state.open && <div
                     style={{
                         width: 0,
                         height: 0,
