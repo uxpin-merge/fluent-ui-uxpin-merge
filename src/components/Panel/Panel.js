@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { ScrollablePane } from '@fluentui/react/lib/ScrollablePane';
 import { Stack } from '@fluentui/react/lib/Stack';
-import { Text as Text } from '@fluentui/react/lib/Text';
+import { Text } from '@fluentui/react/lib/Text';
 import ActionButton from '../ActionButton/ActionButton';
-import { UxpColors } from '../_helpers/uxpcolorutils';
+
 
 
 
@@ -158,16 +159,18 @@ class Panel extends React.Component {
                             </Stack>
 
                             {/* Children Area */}
-                            <Stack
-                                tokens={{
-                                    padding: 24,
-                                    childrenGap: 24
-                                }}
-                                horizontalAlign={'stretch'}
-                                verticalAlign={'start'}
-                            >
-                                {this.props.children}
-                            </Stack>
+                            <ScrollablePane>
+                                <Stack
+                                    tokens={{
+                                        padding: 24,
+                                        childrenGap: 24
+                                    }}
+                                    horizontalAlign={'stretch'}
+                                    verticalAlign={'start'}
+                                >
+                                    {this.props.children}
+                                </Stack>
+                            </ScrollablePane>
                         </Stack>
 
                     </div>
