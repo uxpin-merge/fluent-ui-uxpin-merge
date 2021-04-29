@@ -166,22 +166,18 @@ class Panel extends React.Component {
                             </Stack>
 
                             {/* Children Area */}
-                            <div style={{ position: 'relative', zIndex: 0 }}>
-                                <ScrollablePane
-                                    styles={scrollPaneStyles}
-                                    scrollbarVisibility={ScrollbarVisibility.auto}
+                            <div style={{ overflowY: 'auto' }}>
+
+                                <Stack
+                                    tokens={{
+                                        padding: 24,
+                                        childrenGap: 24
+                                    }}
+                                    horizontalAlign={'stretch'}
+                                    verticalAlign={'start'}
                                 >
-                                    <Stack
-                                        tokens={{
-                                            padding: 24,
-                                            childrenGap: 24
-                                        }}
-                                        horizontalAlign={'stretch'}
-                                        verticalAlign={'start'}
-                                    >
-                                        {this.props.children}
-                                    </Stack>
-                                </ScrollablePane>
+                                    {this.props.children}
+                                </Stack>
                             </div>
                         </Stack>
 
