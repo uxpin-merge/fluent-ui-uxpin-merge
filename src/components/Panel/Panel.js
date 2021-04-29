@@ -37,15 +37,12 @@ class Panel extends React.Component {
     }
 
     set() {
-        console.log("Entering set.");
 
         let isOpen = this.props.show ? true : false;
 
         this.setState(
             { open: isOpen }
         )
-
-        console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     componentDidMount() {
@@ -53,18 +50,12 @@ class Panel extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("Entering componentDidUpdate. show: " + this.props.show);
-
         if (prevProps.show !== this.props.show) {
             this.set();
         }
-
-        // if (this.state.open)
-        console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     dismissControl() {
-        console.log("Entering dismissControl. open: " + this.state.open);
         //Set the control to not open to dismiss it.
         //We have to set the state and prop twice.
 
@@ -73,24 +64,45 @@ class Panel extends React.Component {
         )
 
         this.props.show = false;
-
-        console.log("    > Leaving dismissControl. show: " + this.props.show);
-        console.log("    > Leaving dismissControl. open: " + this.state.open);
     }
 
     _onDismissClicked() {
-        console.log("Entering _onDismissClicked. open: " + this.state.open);
-
         this.dismissControl();
 
+        //Raise this event to UXPin.
         if (this.props.onDismiss) {
-            this.props.onDismiss(false);
+            this.props.onDismiss();
         }
-
-        console.log("    > Leaving _onDismissClicked. open: " + this.state.open);
     }
 
     render() {
+
+        //if Header Text is defined
+        var headerTxt = '';
+        if (this.props.headerText) {
+            headerTxt = (
+                <Text
+                    variant='xLarge'
+                    block>
+                    {this.props.headerText.trim()}
+                </Text>
+            );
+        }
+
+        //if Sub-Header Text is defined
+        var subheaderTxt = '';
+        if (this.props.subheaderText) {
+            subheaderTxt = (
+                <Text
+                    variant='medium'
+                    block>
+                    {this.props.subheaderText.trim()}
+                </Text>
+            );
+        }
+
+
+
         return (
             <>
                 {this.state.open && <div
@@ -119,19 +131,29 @@ class Panel extends React.Component {
                             {/* Header Area */}
                             <Stack>
                                 {/* Header and Close button */}
-                                <Stack horizontal>
-                                    <Text
-                                        variant='large'
-                                        block
-                                        styles={headerStyles}>
-                                        {this.props.headerText}
-                                    </Text>
-
-                                    <Stack.Item styles={{
-                                        root: {
-                                            padding: 12
-                                        }
+                                <Stack
+                                    horizontal={true}
+                                    verticalAlign={'center'}
+                                    horizontalAlign={'start'}
+                                    tokens={{
+                                        padding: 24,
+                                        childrenGap: 12,
                                     }}>
+
+                                    {/* Children Area */}
+                                    <Stack
+                                        tokens={{
+                                            padding: 0,
+                                            childrenGap: 6,
+                                        }}
+                                        horizontalAlign={'start'}
+                                        verticalAlign={'start'}
+                                    >
+                                        {headerTxt}
+                                        {subheaderTxt}
+                                    </Stack>
+
+                                    <Stack.Item>
                                         <ActionButton
                                             iconName="Close"
                                             text="Close"
@@ -188,6 +210,12 @@ Panel.propTypes = {
     headerText: PropTypes.string,
 
     /**
+     * @uxpindescription The text to be displayed in the header of the panel, immediately under the Header Text
+     * @uxpinpropname Sub-Header Text
+     */
+    subheaderText: PropTypes.string,
+
+    /**
      * @uxpindescription The panel height
      */
     height: PropTypes.number,
@@ -216,6 +244,7 @@ Panel.defaultProps = {
     height: defaultHeight,
     width: defaultWidth,
     headerText: 'Panel Header',
+    subheaderText: '',
 }
 
 
