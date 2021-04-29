@@ -94,8 +94,18 @@ class Facepile extends React.Component {
 
                 <Persona
                     {...personaProps}
-                    personaSize={PersonaSize[this.props.size]}
-                    className={customPersonaStyles} />
+                    hidePersonaDetails={true}
+                    size={PersonaSize[this.props.size]}
+                    imageUrl={personaProps.imageUrl}
+                    imageInitials={personaProps.imageInitials}
+                    initialsColor={personaProps.initialsColor}
+                    text={personaProps.text}
+                    secondaryText={personaProps.secondaryText}
+                    tertiaryText={personaProps.tertiaryText}
+                    optionalText={personaProps.optionalText}
+                    presence={PersonaPresence[personaProps.presence]}
+                    className={customPersonaStyles}
+                />
 
             </div>
         );
@@ -111,7 +121,16 @@ class Facepile extends React.Component {
 
                 <Persona
                     {...personaProps}
-                    personaSize={PersonaSize[this.props.size]}
+                    hidePersonaDetails={false}
+                    size={PersonaSize[this.props.size]}
+                    imageUrl={personaProps.imageUrl}
+                    imageInitials={personaProps.imageInitials}
+                    initialsColor={personaProps.initialsColor}
+                    text={personaProps.text}
+                    secondaryText={personaProps.secondaryText}
+                    tertiaryText={personaProps.tertiaryText}
+                    optionalText={personaProps.optionalText}
+                    presence={PersonaPresence[personaProps.presence]}
                     className={customPersonaStyles}
                 />
 
