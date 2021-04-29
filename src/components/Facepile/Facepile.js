@@ -92,11 +92,13 @@ class Facepile extends React.Component {
         return (
             <div
                 className={customPersonaCoinDivStyles}>
+
                 <Persona
                     {...personaProps}
                     personaSize={PersonaSize[this.props.size]}
                     className={customPersonaStyles}
                 />
+
             </div>
         );
 
@@ -154,7 +156,7 @@ class Facepile extends React.Component {
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
                 overflowButtonProps={overflowButtonParams}
-                onRenderPersona={(p) => this._onRenderPersonaCoin(p)}
+                onRenderPersona={(p) => { this._onRenderPersonaCoin(p); }}
             />
         )
     }
