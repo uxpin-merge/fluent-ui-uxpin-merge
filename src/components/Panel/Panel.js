@@ -111,7 +111,7 @@ class Panel extends React.Component {
                         width: this.props.width,
                         height: this.props.height || defaultHeight,
                         color: '#000000',
-                        backgroundColor: 'rgba(255, 255, 255, 0.4)'
+                        backgroundColor: 'rgba(0, 0, 0, 0.4)'
                     }}
                 >
                     <div style={{
