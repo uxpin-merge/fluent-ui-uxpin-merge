@@ -4,13 +4,26 @@ import {
     Facepile as FFacepile,
     OverflowButtonType
 } from '@fluentui/react/lib/Facepile';
-import { PersonaSize } from '@fluentui/react/lib/Persona';
+import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
 
 //The max count for the persona list 
-let maxPersonaCount = 99;
+const maxPersonaCount = 99;
+
+const customPersonaStyles = {
+    display: 'unset',
+};
+
+const customPersonaCoinDivStyles = {
+    selectors: {
+        '&hover': {
+            cursor: 'pointer',
+        },
+    },
+};
+
 
 
 class Facepile extends React.Component {
@@ -73,6 +86,22 @@ class Facepile extends React.Component {
         }
     }
 
+    _onRenderPersonaCoin(personaProps) {
+        console.log("Persona props: " + personaProps.toString());
+
+        return (
+            <div
+                className={customPersonaCoinDivStyles}>
+                <Persona
+                    {...personaProps}
+                    personaSize={PersonaSize[this.props.size]}
+                    className={customPersonaStyles}
+                />
+            </div>
+        );
+
+    }
+
     _onClickOverflow(event) {
         //Raise this event to UXPin. 
         if (this.props.onOverflowClick) {
@@ -125,6 +154,7 @@ class Facepile extends React.Component {
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
                 overflowButtonProps={overflowButtonParams}
+                onRenderPersona={(p) => this._onRenderPersonaCoin(p)}
             />
         )
     }
@@ -175,6 +205,7 @@ Facepile.propTypes = {
 
     /**
      * @uxpindescription Fires when one of the personas is clicked on.
+     * @uxpinpropname * Click
      * */
     onClick: PropTypes.func,
 
