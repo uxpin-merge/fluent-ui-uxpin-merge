@@ -6,7 +6,7 @@ import {
     PersonaInitialsColor
 } from '@fluentui/react/lib/Persona';
 import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
-import UxpPersonaData from '../_helpers/uxppersonadata';
+import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
 //This is the default URL to use for a generic female user
@@ -26,9 +26,6 @@ class Persona extends React.Component {
     constructor(props) {
         super(props);
 
-        // console.log("Persona presence code: [away]: " + UxpPersonaData.presenceCode[away]);
-        console.log("Persona presence code: .none: " + UxpPersonaData.presenceCode.none);
-
         //State currently unused. 
         this.state = {
         }
@@ -47,6 +44,10 @@ class Persona extends React.Component {
 
 
     render() {
+
+        console.log("Persona presence code: .none: " + UxpPersonaData.presenceCode.none);
+
+        console.log("Persona presence code: [away]: " + UxpPersonaData.presenceCode[away]);
 
         return (
             <FPersona
