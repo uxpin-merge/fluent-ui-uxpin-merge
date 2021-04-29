@@ -18,7 +18,7 @@ export const UxpPersonaData = {
         text: "Annie Lindqvist",
         presence: 2, //"online",
         initialsColor: 8, // "blue",
-        email: "alindqvist@paypal.com",
+        email: "alindqvist@company.com",
         role: "Sr. Software Engineer",
     },
 
@@ -33,7 +33,7 @@ export const UxpPersonaData = {
         text: "Abhik Rao",
         presence: 3, // "away",
         initialsColor: 12, //"orange",
-        email: "arao@paypal.com",
+        email: "arao@company.com",
         role: "Director, Engineering",
     },
 
@@ -48,7 +48,7 @@ export const UxpPersonaData = {
         text: "Miguel Hernandez",
         presence: 6, //"busy",
         initialsColor: 2, //"warmGray",
-        email: "mhernandez@paypal.com",
+        email: "mhernandez@company.com",
         role: "Engineering Manager",
     },
 
@@ -63,7 +63,7 @@ export const UxpPersonaData = {
         text: "Yuki Abe",
         presence: 4, //"dnd",
         initialsColor: 17, //"lightRed",
-        email: "yabe@paypal.com",
+        email: "yabe@company.com",
         role: "Sr. User Experience Designer",
     },
 
@@ -78,7 +78,7 @@ export const UxpPersonaData = {
         text: "Jian Wang",
         presence: 2, //"online",
         initialsColor: 4, //"lightGreen",
-        email: "jwang@paypal.com",
+        email: "jwang@company.com",
         role: "Program Manager",
     },
 
@@ -93,7 +93,7 @@ export const UxpPersonaData = {
         text: "Mark Johnson",
         presence: 6, //"busy",
         initialsColor: 2, //"darkBlue",
-        email: "mjohnson@paypal.com",
+        email: "mjohnson@company.com",
         role: "Software Engineer",
     },
 
@@ -109,7 +109,7 @@ export const UxpPersonaData = {
         text: "Kiara Chowdhury",
         presence: 2, //"online",
         initialsColor: 19, //"burgundy",
-        email: "kchowdhury@paypal.com",
+        email: "kchowdhury@company.com",
         role: "Software Engineering Intern",
     },
 
@@ -125,7 +125,7 @@ export const UxpPersonaData = {
         text: "Patricia Green",
         presence: 2, //"online",
         initialsColor: 10, //"purple",
-        email: "pgreen@paypal.com",
+        email: "pgreen@company.com",
         role: "Vice President, Engineering",
     },
 
@@ -140,7 +140,7 @@ export const UxpPersonaData = {
         text: "Lucia Ramirez",
         presence: 2, //"online",
         initialsColor: 8, //"pink",
-        email: "lramirez@paypal.com",
+        email: "lramirez@company.com",
         role: "Product Marketing Manager",
     },
 
@@ -155,7 +155,7 @@ export const UxpPersonaData = {
         text: "Kaasni Rama",
         presence: 2, //"online",
         initialsColor: 14, //"darkRed",
-        email: "krama@paypal.com",
+        email: "krama@company.com",
         role: "Sr. Software Engineer",
     },
 
@@ -173,159 +173,36 @@ export const UxpPersonaData = {
     },
 
     /** 
-     * The Persona Presence code for Away.
+     * The Persona Initials Color codes.
      */
-    presenceAway: 3,
-
-    /** 
-     * The Persona Presence code for Blocked.
-     */
-    presenceBlocked: 5,
-
-    /** 
-    * The Persona Presence code for Busy.
-    */
-    presenceBusy: 6,
-
-    /** 
-    * The Persona Presence code for Do Not Disturb.
-    */
-    presenceDnd: 4,
-
-    /** 
-     * The Persona Presence code for None; i.e., no Presence displayed at all.
-     */
-    presenceNone: 0,
-
-    /** 
-     * The Persona Presence code for Offline.
-     */
-    presenceOffline: 1,
-
-    /** 
-     * The Persona Presence code for Online.
-     */
-    presenceOnline: 2,
-
-    /** 
-     * The Persona Initials Color code for Black.
-     */
-    initialsColorBlack: 11,
-
-    /** 
-     * The Persona Initials Color code for Blue.
-     */
-    initialsColorBlue: 1,
-
-    /** 
-     * The Persona Initials Color code for Burgundy.
-     */
-    initialsColorBurgundy: 19,
-
-    /** 
-     * The Persona Initials Color code for cool gray.
-     */
-    initialsColorCoolGray: 21,
-
-    /** 
-     * The Persona Initials Color code for cyan.
-     */
-    initialsColorCyan: 23,
-
-    /** 
-     * The Persona Initials Color code for dark blue.
-     */
-    initialsColorDarkBlue: 2,
-
-    /** 
-     * The Persona Initials Color code for dark green.
-     */
-    initialsColorDarkGreen: 6,
-
-    /** 
-     * The Persona Initials Color code for dark red.
-     */
-    initialsColorDarkRed: 14,
-
-    /** 
-     * The Persona Initials Color code for gold.
-     */
-    initialsColorGold: 18,
-
-    /** 
-     * The Persona Initials Color code for gray.
-     */
-    initialsColorGray: 22,
-
-    /** 
-    * The Persona Initials Color code for green.
-    */
-    initialsColorGreen: 5,
-
-    /** 
-     * The Persona Initials Color code for light blue.
-     */
-    initialsColorLightBlue: 0,
-
-    /** 
-     * The Persona Initials Color code for light green.
-     */
-    initialsColorLightGreen: 4,
-
-    /** 
-     * The Persona Initials Color code for light pink.
-     */
-    initialsColorLightPink: 7,
-
-    /** 
-     * The Persona Initials Color code for light red.
-     */
-    initialsColorLightRed: 17,
-
-    /** 
-     * The Persona Initials Color code for magenta.
-     */
-    initialsColorMagenta: 9,
-
-    /** 
-     * The Persona Initials Color code for orange.
-     */
-    initialsColorOrange: 12,
-
-    /** 
-     * The Persona Initials Color code for pink.
-     */
-    initialsColorPink: 8,
-
-    /** 
-     * The Persona Initials Color code for purple.
-     */
-    initialsColorPurple: 10,
-
-    /** 
-     * The Persona Initials Color code for rust.
-     */
-    initialsColorRust: 24,
-
-    /** 
-     * The Persona Initials Color code for teal.
-     */
-    initialsColorTeal: 3,
-
-    /** 
-     * The Persona Initials Color code for violet.
-     */
-    initialsColorViolet: 16,
-
-    /** 
-     * The Persona Initials Color code for warm gray.
-     */
-    initialsColorWarmGray: 20,
-
-
+    initialsColors: {
+        black: 11,
+        blue: 1,
+        burgundy: 19,
+        coolGray: 21,
+        cyan: 23,
+        darkBlue: 2,
+        darkGreen: 6,
+        darkRed: 14,
+        gold: 18,
+        gray: 22,
+        green: 5,
+        lightBlue: 0,
+        lightGreen: 4,
+        lightPink: 7,
+        lightRed: 17,
+        magenta: 9,
+        orange: 12,
+        pink: 8,
+        purple: 10,
+        rust: 24,
+        teal: 3,
+        violet: 16,
+        warmGray: 20,
+    },
 
     /**
-     * We build our own list of personas with PayPal data.
+     * We build our own list of sample personas.
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      * Note that we use 'text' for the full name to be consistent with Microsoft's Persona props. 
      * @param {number} count The first 10 personas are unique. After that, there are repeats. 
@@ -337,7 +214,7 @@ export const UxpPersonaData = {
         personas.push(this.personaAnnie);
         if (count == 1) return personas;
 
-        personas.push(this.personaMiguel)
+        personas.push(this.personaMiguel);
         if (count == 2) return personas;
 
         personas.push(this.personaAbhik);
@@ -418,24 +295,24 @@ export const UxpPersonaData = {
 
         switch (p) {
             case "available":                  //Not officially supported
-                return this.presenceOnline;
+                return this.presenceCodes.online;
             case "away":
-                return this.presenceAway;
+                return this.presenceCodes.away;
             case "blocked":
-                return this.presenceBlocked;
+                return this.presenceCodes.blocked;
             case "busy":
-                return this.presenceBusy;
+                return this.presenceCodes.busy;
             case "dnd":
-                return this.presenceDnd;
+                return this.presenceCodes.dnd;
             case "none":
-                return this.presenceNone;
+                return this.presenceCodes.none;
             case "offline":
-                return this.presenceOffline;
+                return this.presenceCodes.offline;
             case "online":
-                return this.presenceOnline;
+                return this.presenceCodes.online;
 
             default:
-                return this.presenceNone;
+                return this.presenceCodes.none;
         }
     },
 
@@ -453,54 +330,54 @@ export const UxpPersonaData = {
 
         switch (c) {
             case "black":
-                return this.initialsColorBlack;
+                return this.initialsColors.black;
             case "blue":
-                return this.initialsColorBlue;
+                return this.initialsColors.blue;
             case "burgundy":
-                return this.initialsColorBurgundy;
+                return this.initialsColors.burgundy;
             case "coolgray":
-                return this.initialsColorCoolGray;
+                return this.initialsColors.coolGray;
             case "cyan":
-                return this.initialsColorCyan;
+                return this.initialsColors.cyan;
             case "darkblue":
-                return this.initialsColorDarkBlue;
+                return this.initialsColors.darkBlue;
             case "darkgreen":
-                return this.initialsColorDarkGreen;
+                return this.initialsColors.darkGreen;
             case "darkred":
-                return this.initialsColorDarkRed;
+                return this.initialsColors.darkRed;
             case "gold":
-                return this.initialsColorGold;
+                return this.initialsColors.gold;
             case "gray":
-                return this.initialsColorGray;
+                return this.initialsColors.gray;
             case "green":
-                return this.initialsColorGreen;
+                return this.initialsColors.green;
             case "lightblue":
-                return this.initialsColorLightBlue;
+                return this.initialsColors.lightBlue;
             case "lightgreen":
-                return this.initialsColorLightGreen;
+                return this.initialsColors.lightGreen;
             case "lightpink":
-                return this.initialsColorLightPink;
+                return this.initialsColors.lightPink;
             case "lightred":
-                return this.initialsColorLightRed;
+                return this.initialsColors.lightRed;
             case "magenta":
-                return this.initialsColorMagenta;
+                return this.initialsColors.magenta;
             case "orange":
-                return this.initialsColorOrange;
+                return this.initialsColors.orange;
             case "pink":
-                return this.initialsColorPink;
+                return this.initialsColors.pink;
             case "purple":
-                return this.initialsColorPurple;
+                return this.initialsColors.purple;
             case "rust":
-                return this.initialsColorRust;
+                return this.initialsColors.rust;
             case "teal":
-                return this.initialsColorTeal;
+                return this.initialsColors.teal;
             case "violet":
-                return this.initialsColorViolet;
+                return this.initialsColors.violet;
             case "warmgray":
-                return this.initialsColorWarmGray;
+                return this.initialsColors.warmGray;
 
             default:
-                return this.initialsColorDarkBlue;
+                return this.initialsColors.darkBlue;
         }
     },
 

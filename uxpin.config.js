@@ -53,6 +53,7 @@ module.exports = {
         name: 'Items & Lists',
         include: [
           'src/components/Persona/Persona.js',
+          'src/components/Facepile/Facepile.js',
         ],
       },
       {

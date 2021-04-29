@@ -45,9 +45,6 @@ class Persona extends React.Component {
 
     render() {
 
-        console.log("Going to try something next...");
-        console.log("Persona female url: .female: " + UxpPersonaData.personaFemaleUrl);
-        console.log("ANNIE " + UxpPersonaData.personaAnnie.presence);
         console.log("Presence codes: " + UxpPersonaData.presenceCodes.away);
 
         return (
