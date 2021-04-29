@@ -10,6 +10,7 @@ import ActionButton from '../ActionButton/ActionButton';
 
 const defaultHeight = 900;
 const defaultWidth = 1440;
+const defaultContentPadding = 24;
 
 const sizeToWidthMap = {
     small: 300,
@@ -102,8 +103,6 @@ class Panel extends React.Component {
             }
         }
 
-
-
         return (
             <>
                 {this.state.open && <div
@@ -166,6 +165,7 @@ class Panel extends React.Component {
                             </Stack>
 
                             {/* Children Area */}
+                            {<div style={{ position: ‘relative’, zIndex: 0 }}>}
                             <ScrollablePane
                                 styles={scrollPaneStyles}>
                                 <Stack
