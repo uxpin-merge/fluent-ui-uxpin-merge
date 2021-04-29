@@ -12,6 +12,9 @@ const defaultHeight = 900;
 const defaultWidth = 1440;
 const defaultContentPadding = 24;
 
+const overlayDark = 'rgba(0, 0, 0, 0.4)';
+const overlayLight = 'rgba(255, 255, 255, 0.4)';
+
 const sizeToWidthMap = {
     small: 300,
     medium: 600,
@@ -96,13 +99,8 @@ class Panel extends React.Component {
             );
         }
 
-        //For the ScrollPane
-        let w = sizeToWidthMap[this.props.size] - (2 * defaultContentPadding);
-        let scrollPaneStyles = {
-            root: {
-                maxWidth: w,
-            }
-        }
+        let overlayBg = this.props.darkOverlay ? darkOverlay : overlayLight;
+
 
         return (
             <>
@@ -111,7 +109,7 @@ class Panel extends React.Component {
                         width: this.props.width,
                         height: this.props.height || defaultHeight,
                         color: '#000000',
-                        backgroundColor: 'rgba(0, 0, 0, 0.4)'
+                        backgroundColor: overlayBg,
                     }}
                 >
                     <div style={{
@@ -233,6 +231,11 @@ Panel.propTypes = {
     size: PropTypes.oneOf(['small', 'medium', 'large', 'extraLarge']),
 
     /**
+     * @uxpindescription Whether to make the overlay dark or leave it light
+     */
+    darkOverlay: PropTypes.bool,
+
+    /**
     * @uxpindescription Fired when the user clicks on the Close button
     * @uxpinpropname Dismiss
     */
@@ -247,6 +250,7 @@ Panel.defaultProps = {
     width: defaultWidth,
     headerText: 'Panel Header',
     subheaderText: '',
+    darkOverlay: false,
 }
 
 
