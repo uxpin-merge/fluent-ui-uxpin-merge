@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ScrollablePane } from '@fluentui/react/lib/ScrollablePane';
+import { ScrollablePane, ScrollbarVisibility } from '@fluentui/react/lib/ScrollablePane';
 import { Stack } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import ActionButton from '../ActionButton/ActionButton';
@@ -97,9 +97,10 @@ class Panel extends React.Component {
         }
 
         //For the ScrollPane
+        let w = sizeToWidthMap[this.props.size] - (2 * defaultContentPadding);
         let scrollPaneStyles = {
             root: {
-                maxWidth: sizeToWidthMap[this.props.size],
+                maxWidth: w,
             }
         }
 
@@ -167,7 +168,9 @@ class Panel extends React.Component {
                             {/* Children Area */}
                             <div style={{ position: 'relative', zIndex: 0 }}>
                                 <ScrollablePane
-                                    styles={scrollPaneStyles}>
+                                    styles={scrollPaneStyles}
+                                    scrollbarVisibility={ScrollbarVisibility.auto}
+                                >
                                     <Stack
                                         tokens={{
                                             padding: 24,
