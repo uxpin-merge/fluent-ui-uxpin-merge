@@ -179,7 +179,7 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
-        console.log("on click: " + personaIndex)
+        console.log("_on click: " + persona.text)
 
         //Raise this event to UXPin. 
         if (this.props.onClick) {
