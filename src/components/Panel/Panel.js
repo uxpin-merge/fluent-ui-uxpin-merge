@@ -74,6 +74,7 @@ class Panel extends React.Component {
 
         this.props.show = false;
 
+        console.log("    > Leaving dismissControl. show: " + this.props.show);
         console.log("    > Leaving dismissControl. open: " + this.state.open);
     }
 
