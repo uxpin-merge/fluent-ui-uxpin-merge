@@ -37,7 +37,7 @@ class Panel extends React.Component {
     }
 
     set() {
-        console.log("Entering set. show: " + this.props.show);
+        console.log("Entering set.");
 
         let isOpen = this.props.show ? true : false;
 
@@ -53,15 +53,15 @@ class Panel extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.show)
-            console.log("Entering componentDidUpdate. show: " + this.props.show);
+        // if (this.props.show)
+        //     console.log("Entering componentDidUpdate. show: " + this.props.show);
 
         if (this.prevProps.show !== this.props.show) {
             this.set();
         }
 
-        if (this.state.open)
-            console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
+        // if (this.state.open)
+        //     console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     dismissControl() {
