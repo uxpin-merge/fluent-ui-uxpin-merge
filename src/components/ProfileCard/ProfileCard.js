@@ -203,7 +203,10 @@ class ProfileCard extends React.Component {
                         hideOverflow={true}
                         onDismiss={(this._onDismiss.bind(this))}
                     >
-                        <Stack styles={stackStyles} tokens={verticalGapStackTokens} >
+                        <Stack
+                            styles={stackStyles}
+                            tokens={verticalGapStackTokens} >
+
                             <StackItem align={'start'}>
                                 <Persona
                                     {...this.props}
