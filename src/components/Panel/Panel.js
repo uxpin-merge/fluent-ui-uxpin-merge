@@ -95,6 +95,13 @@ class Panel extends React.Component {
             );
         }
 
+        //For the ScrollPane
+        let scrollPaneStyles = {
+            root: {
+                maxWidth: sizeToWidthMap[this.props.size],
+            }
+        }
+
 
 
         return (
@@ -159,7 +166,8 @@ class Panel extends React.Component {
                             </Stack>
 
                             {/* Children Area */}
-                            <ScrollablePane>
+                            <ScrollablePane
+                                styles={scrollPaneStyles}>
                                 <Stack
                                     tokens={{
                                         padding: 24,
