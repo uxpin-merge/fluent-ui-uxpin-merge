@@ -4,6 +4,7 @@ import {
     Facepile as FFacepile,
     OverflowButtonType
 } from '@fluentui/react/lib/Facepile';
+import { HoverCard } from '@fluentui/react/lib/HoverCard';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
@@ -87,28 +88,59 @@ class Facepile extends React.Component {
         }
     }
 
+    _onRenderCompactCard(personaProps) {
+        return (
+            <Persona
+                {...personaProps}
+                hidePersonaDetails={false}
+                size={PersonaSize['size72']}
+                imageUrl={personaProps.imageUrl}
+                imageInitials={personaProps.imageInitials}
+                initialsColor={personaProps.initialsColor}
+                text={personaProps.text}
+                secondaryText={personaProps.secondaryText}
+                tertiaryText={personaProps.tertiaryText}
+                optionalText={personaProps.optionalText}
+                presence={PersonaPresence[personaProps.presence]}
+                className={customPersonaStyles}
+            />
+        );
+    }
+
     _onRenderPersonaCoin(personaProps) {
         console.log("_onRenderPersonaCoin: " + personaProps.text);
 
+        let plainCardProps = {
+            onrenderPlainCard: this._onRenderCompactCard,
+            renderData: personaProps,
+        };
+
+
         return (
-            <div className={customPersonaCoinDivStyles}>
+            <HoverCard
+                type={'plain'}
+                instantOpenOnClick={true}
+                plainCardProps={plainCardProps}
+            >
+                <div className={customPersonaCoinDivStyles}>
 
-                <Persona
-                    {...personaProps}
-                    hidePersonaDetails={true}
-                    size={PersonaSize[this.props.size]}
-                    imageUrl={personaProps.imageUrl}
-                    imageInitials={personaProps.imageInitials}
-                    initialsColor={personaProps.initialsColor}
-                    text={personaProps.text}
-                    secondaryText={personaProps.secondaryText}
-                    tertiaryText={personaProps.tertiaryText}
-                    optionalText={personaProps.optionalText}
-                    presence={PersonaPresence[personaProps.presence]}
-                    className={customPersonaStyles}
-                />
+                    <Persona
+                        {...personaProps}
+                        hidePersonaDetails={true}
+                        size={PersonaSize[this.props.size]}
+                        imageUrl={personaProps.imageUrl}
+                        imageInitials={personaProps.imageInitials}
+                        initialsColor={personaProps.initialsColor}
+                        text={personaProps.text}
+                        secondaryText={personaProps.secondaryText}
+                        tertiaryText={personaProps.tertiaryText}
+                        optionalText={personaProps.optionalText}
+                        presence={PersonaPresence[personaProps.presence]}
+                        className={customPersonaStyles}
+                    />
 
-            </div>
+                </div>
+            </HoverCard>
         );
 
     }
@@ -156,8 +188,6 @@ class Facepile extends React.Component {
 
     _onClick(personaIndex) {
         console.log("on click: " + personaIndex)
-
-        this.props.selectedIndex = personaIndex;
 
         //Raise this event to UXPin. 
         if (this.props.onClick) {
