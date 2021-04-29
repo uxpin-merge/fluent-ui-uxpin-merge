@@ -54,7 +54,7 @@ class Facepile extends React.Component {
         var i;
         for (i = 0; i < rawPersonas.length; i++) {
             var persona = rawPersonas[i];
-            persona.onClick = ((e, p) => this._onClick(p));
+            persona.onClick = ((e, p) => this._onClick(i + 1));
             configuredPersonas.push(persona);
         }
 
@@ -154,7 +154,11 @@ class Facepile extends React.Component {
         }
     }
 
-    _onClick(persona) {
+    _onClick(personaIndex) {
+        console.log("on click: " + personaIndex)
+
+        this.props.selectedIndex = personaIndex;
+
         //Raise this event to UXPin. 
         if (this.props.onClick) {
             this.props.onClick();
