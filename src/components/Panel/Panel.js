@@ -73,6 +73,8 @@ class Panel extends React.Component {
     }
 
     _onDismissClicked() {
+        this.dismissControl();
+
         if (this.props.onDismiss) {
             this.props.onDismiss();
         }
