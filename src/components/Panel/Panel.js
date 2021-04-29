@@ -32,17 +32,20 @@ class Panel extends React.Component {
         super(props);
 
         this.state = {
-            open: false
+            open: false,
         }
     }
 
     set() {
+        console.log("Entering set. show: " + this.props.show);
 
         let isOpen = this.props.show ? true : false;
 
         this.setState(
             { open: isOpen }
         )
+
+        console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     componentDidMount() {
@@ -50,13 +53,17 @@ class Panel extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log("Entering componentDidUpdate. show: " + this.props.show);
 
-        if (prevProps.show !== this.props.show) {
+        if (this.prevProps.show !== this.props.show) {
             this.set();
         }
+
+        console.log("    > Leaving componentDidUpdate. open: " + this.state.open);
     }
 
     dismissControl() {
+        console.log("Entering dismissControl. open: " + this.state.open);
         //Set the control to not open to dismiss it.
         //We have to set the state and prop twice.
 
@@ -65,10 +72,12 @@ class Panel extends React.Component {
         )
 
         this.props.show = false;
+
+        console.log("    > Leaving dismissControl. open: " + this.state.open);
     }
 
     _onDismissClicked() {
-        console.log("Entering _onDismissClicked. show: " + this.state.open);
+        console.log("Entering _onDismissClicked. open: " + this.state.open);
 
         this.dismissControl();
 
@@ -76,7 +85,7 @@ class Panel extends React.Component {
             this.props.onDismiss();
         }
 
-        console.log("Entering _onDismissClicked. show: " + this.state.open);
+        console.log("    > Leaving _onDismissClicked. open: " + this.state.open);
     }
 
     render() {
