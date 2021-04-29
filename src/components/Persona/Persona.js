@@ -26,7 +26,7 @@ class Persona extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log("Persona presence code: [away]: " + UxpPersonaData.presenceCode[away]);
+        // console.log("Persona presence code: [away]: " + UxpPersonaData.presenceCode[away]);
         console.log("Persona presence code: .none: " + UxpPersonaData.presenceCode.none);
 
         //State currently unused. 
