@@ -162,9 +162,8 @@ class Facepile extends React.Component {
                     optionalText={personaProps.optionalText}
                     presence={PersonaPresence[personaProps.presence]}
                     className={customPersonaStyles}
-                >
-                    {personaProps.text}
-                </Persona>
+                    onClick={() => { this._onClick(personaProps) }}
+                />
 
             </div>
         );
