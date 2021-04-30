@@ -111,16 +111,11 @@ class Facepile extends React.Component {
     _onRenderPersonaCoin(personaProps) {
         console.log("_onRenderPersonaCoin: " + personaProps.text);
 
-        let plainCardProps = {
-            onRenderPlainCard: (this._onRenderCompactCard(personaProps)),
-            renderData: personaProps,
-        };
-
         return (
             <HoverCard
                 type={HoverCardType.plain}
-                plainCardProps={plainCardProps}
                 instantOpenOnClick={true}
+                onRenderPlainCard={() => { this._onRenderCompactCard(personaProps) }}
             >
 
                 <div className={customPersonaCoinDivStyles}>
