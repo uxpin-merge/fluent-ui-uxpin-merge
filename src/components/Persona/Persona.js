@@ -45,8 +45,6 @@ class Persona extends React.Component {
 
     render() {
 
-        console.log("Presence codes: " + UxpPersonaData.presenceCodes.away);
-
         return (
             <FPersona
                 {...this.props}
