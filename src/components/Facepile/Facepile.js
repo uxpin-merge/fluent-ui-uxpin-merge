@@ -144,11 +144,7 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
-        console.log("_on click: " + persona.text)
-
         let index = this._getSelectedPersonaIndex(persona);
-
-        console.log("_on click: p index: " + index);
 
         this.props.selectedIndex = index;
 
@@ -209,16 +205,16 @@ Facepile.propTypes = {
     selectedIndex: PropTypes.number,
 
     /**
-    * @uxpindescription The maximum number of faces to display inline; the rest will go in the overflow, if shown. A value between 5-10 is recommended.
-    * @uxpinpropname Inline Face Count
-    */
-    faceCount: PropTypes.number,
-
-    /**
     * @uxpindescription The total number of persons to represent in the control 
     * @uxpinpropname Total Count
     */
     number: PropTypes.number,
+
+    /**
+    * @uxpindescription The maximum number of faces to display inline; the rest will go in the overflow, if shown. A value between 5-10 is recommended.
+    * @uxpinpropname Inline Face Count
+    */
+    faceCount: PropTypes.number,
 
     /**
     * @uxpindescription The control's size 
