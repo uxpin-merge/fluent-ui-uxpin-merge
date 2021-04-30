@@ -14,18 +14,6 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 //The max count for the persona list 
 const maxPersonaCount = 99;
 
-const customPersonaStyles = {
-    display: 'unset',
-};
-
-const customPersonaCoinDivStyles = {
-    selectors: {
-        '&hover': {
-            cursor: 'pointer',
-        },
-    },
-};
-
 
 
 class Facepile extends React.Component {
@@ -55,7 +43,6 @@ class Facepile extends React.Component {
         var i;
         for (i = 0; i < rawPersonas.length; i++) {
             var persona = rawPersonas[i];
-            // persona.onClick = ((e, p) => this._onClick(p));
             configuredPersonas.push(persona);
         }
 
@@ -86,30 +73,9 @@ class Facepile extends React.Component {
         }
     }
 
-    _onRenderCompactCard(personaProps) {
-        console.log("_onRenderCompactCard: " + personaProps.text);
-
-        return (
-            <Persona
-                {...personaProps}
-                hidePersonaDetails={false}
-                size={PersonaSize['size72']}
-                imageUrl={personaProps.imageUrl}
-                imageInitials={personaProps.imageInitials}
-                initialsColor={personaProps.initialsColor}
-                text={personaProps.text}
-                secondaryText={personaProps.secondaryText}
-                tertiaryText={personaProps.tertiaryText}
-                optionalText={personaProps.optionalText}
-                presence={PersonaPresence[personaProps.presence]}
-                className={customPersonaStyles}
-            />
-        );
-    }
-
     _onRenderPersonaCoin(personaProps) {
-        console.log("_onRenderPersonaCoin: " + personaProps.text);
-        // className={customPersonaCoinDivStyles}
+
+        // className={customPersonaStyles}
 
         return (
             <div style={{ cursor: 'pointer' }} >
@@ -122,11 +88,9 @@ class Facepile extends React.Component {
                     imageInitials={personaProps.imageInitials}
                     initialsColor={personaProps.initialsColor}
                     text={personaProps.text}
-                    secondaryText={personaProps.secondaryText}
-                    tertiaryText={personaProps.tertiaryText}
-                    optionalText={personaProps.optionalText}
+                    secondaryText={personaProps.role}
+                    tertiaryText={personaProps.email}
                     presence={PersonaPresence[personaProps.presence]}
-                    className={customPersonaStyles}
                     onClick={() => { this._onClick(personaProps) }}
                 />
 
@@ -137,7 +101,6 @@ class Facepile extends React.Component {
     }
 
     _onRenderSinglePersona(personaProps) {
-        console.log("_onRenderSinglePersona: " + personaProps.text);
 
         //Sizes 16 and 28 aren's supported in the Persona control.
         let pSize = this.props.size === 'size16' ? 'size24'
@@ -155,7 +118,6 @@ class Facepile extends React.Component {
                     imageInitials={personaProps.imageInitials}
                     initialsColor={personaProps.initialsColor}
                     text={personaProps.text}
-
                     secondaryText={personaProps.role}
                     tertiaryText={personaProps.email}
                     presence={PersonaPresence[personaProps.presence]}
