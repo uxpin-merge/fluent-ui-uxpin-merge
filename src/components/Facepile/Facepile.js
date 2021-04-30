@@ -164,7 +164,7 @@ class Facepile extends React.Component {
                     imageInitials={personaProps.imageInitials}
                     initialsColor={personaProps.initialsColor}
                     text={personaProps.text}
-                    secondaryText={secondaryT}
+                    secondaryText={personaProps.text}
                     tertiaryText={personaProps.tertiaryText}
                     optionalText={personaProps.optionalText}
                     presence={PersonaPresence[personaProps.presence]}
