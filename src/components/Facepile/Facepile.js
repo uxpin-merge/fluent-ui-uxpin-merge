@@ -55,6 +55,7 @@ class Facepile extends React.Component {
         var i;
         for (i = 0; i < rawPersonas.length; i++) {
             var persona = rawPersonas[i];
+            // persona.onClick = ((e, p) => this._onClick(p));
             configuredPersonas.push(persona);
         }
 
@@ -68,9 +69,7 @@ class Facepile extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (
-            prevProps.number !== this.props.number
-        ) {
+        if (prevProps.number !== this.props.number) {
             this.set();
         }
     }
@@ -110,40 +109,41 @@ class Facepile extends React.Component {
 
     _onRenderPersonaCoin(personaProps) {
         console.log("_onRenderPersonaCoin: " + personaProps.text);
-        // onRenderPlainCard={(p) => { this._onRenderCompactCard(personaProps) }}
 
         return (
-            <HoverCard
-                type={HoverCardType.plain}
-                instantOpenOnClick={true}
-            >
+            <div className={customPersonaCoinDivStyles}>
 
-                <div className={customPersonaCoinDivStyles}>
+                <Persona
+                    {...personaProps}
+                    hidePersonaDetails={true}
+                    size={PersonaSize[this.props.size]}
+                    imageUrl={personaProps.imageUrl}
+                    imageInitials={personaProps.imageInitials}
+                    initialsColor={personaProps.initialsColor}
+                    text={personaProps.text}
+                    secondaryText={personaProps.secondaryText}
+                    tertiaryText={personaProps.tertiaryText}
+                    optionalText={personaProps.optionalText}
+                    presence={PersonaPresence[personaProps.presence]}
+                    className={customPersonaStyles}
+                    onClick={() => { this._onClick(personaProps) }}
+                />
 
-                    <Persona
-                        {...personaProps}
-                        hidePersonaDetails={true}
-                        size={PersonaSize[this.props.size]}
-                        imageUrl={personaProps.imageUrl}
-                        imageInitials={personaProps.imageInitials}
-                        initialsColor={personaProps.initialsColor}
-                        text={personaProps.text}
-                        secondaryText={personaProps.secondaryText}
-                        tertiaryText={personaProps.tertiaryText}
-                        optionalText={personaProps.optionalText}
-                        presence={PersonaPresence[personaProps.presence]}
-                        className={customPersonaStyles}
-                        onClick={() => { this._onClick(personaProps) }}
-                    />
+            </div>
 
-                </div>
-            </HoverCard>
         );
 
     }
 
     _onRenderSinglePersona(personaProps) {
-        console.log("_onRenderSinglePersona: " + personaProps.text.toString());
+        console.log("_onRenderSinglePersona: " + personaProps.text);
+
+        //Sizes 16 and 28 aren's supported in the Persona control.
+        let pSize = this.props.size === 'size16' ? 'size24'
+            : this.props.size === 'size28' ? 'size24'
+                : this.props.size;
+
+        console.log("_onRenderSinglePersona: pSize: " + pSize);
 
         return (
             <div
@@ -152,7 +152,7 @@ class Facepile extends React.Component {
                 <Persona
                     {...personaProps}
                     hidePersonaDetails={false}
-                    size={PersonaSize[this.props.size]}
+                    size={PersonaSize[pSize]}
                     imageUrl={personaProps.imageUrl}
                     imageInitials={personaProps.imageInitials}
                     initialsColor={personaProps.initialsColor}
@@ -224,8 +224,8 @@ class Facepile extends React.Component {
                 maxDisplayablePersonas={this.props.faceCount}
                 personas={this.state.personaList.slice(0, this.props.number)}
 
-                onRenderPersona={(p) => this._onRenderSinglePersona(p)}
-                onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
+                //onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                //onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
 
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
