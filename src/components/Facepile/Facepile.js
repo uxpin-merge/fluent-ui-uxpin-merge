@@ -138,9 +138,6 @@ class Facepile extends React.Component {
 
     _onRenderSinglePersona(personaProps) {
         console.log("_onRenderSinglePersona: " + personaProps.text);
-        console.log("    secondary: " + personaProps.secondaryText);
-        console.log("    tertiary: " + personaProps.tertiaryText);
-        console.log("    optional: " + personaProps.optionalText);
 
         //Sizes 16 and 28 aren's supported in the Persona control.
         let pSize = this.props.size === 'size16' ? 'size24'
@@ -151,20 +148,28 @@ class Facepile extends React.Component {
 
         let index = this._getSelectedPersonaIndex(personaProps) - 1;
         console.log("    : index: " + index);
-        let secondaryT = this.state.personaList[index].secondaryText;
-        console.log("    : secondaryT: " + secondaryT);
+        let p = this.state.personaList[index];
+        let secondaryT = p.role;
+        let tertiaryT = p.email;
+        let optionalT = p.imageInitials;
+        console.log("    : role: " + secondaryT);
+        console.log("    : personaProps role: " + personaProps.role);
+        console.log("    : email: " + tertiaryT);
+        console.log("    : imageInitials: " + optionalT);
 
         return (
             <div style={{ cursor: 'pointer' }} >
 
                 <Persona
+                    {...this.props}
                     hidePersonaDetails={false}
                     size={PersonaSize[pSize]}
                     imageUrl={personaProps.imageUrl}
                     imageInitials={personaProps.imageInitials}
                     initialsColor={personaProps.initialsColor}
                     text={personaProps.text}
-                    secondaryText={personaProps.text}
+
+                    secondaryText={secondaryT}
                     tertiaryText={personaProps.tertiaryText}
                     optionalText={personaProps.optionalText}
                     presence={PersonaPresence[personaProps.presence]}
