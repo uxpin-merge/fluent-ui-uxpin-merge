@@ -138,14 +138,16 @@ class Facepile extends React.Component {
 
     _onRenderSinglePersona(personaProps) {
         console.log("_onRenderSinglePersona: " + personaProps.text);
+        console.log("    secondary: " + personaProps.secondaryText);
+        console.log("    tertiary: " + personaProps.tertiaryText);
+        console.log("    optional: " + personaProps.optionalText);
 
         //Sizes 16 and 28 aren's supported in the Persona control.
         let pSize = this.props.size === 'size16' ? 'size24'
             : this.props.size === 'size28' ? 'size24'
                 : this.props.size;
 
-        console.log("_onRenderSinglePersona: pSize: " + pSize);
-        // {...personaProps}
+        console.log("    : pSize: " + pSize);
 
         return (
             <div style={{ cursor: 'pointer' }} >
