@@ -149,7 +149,7 @@ class Facepile extends React.Component {
 
 
 
-        let index = this._getSelectedPersonaIndex(persona);
+        let index = this._getSelectedPersonaIndex(personaProps);
         console.log("    : index: " + index);
         let secondaryT = this.state.personaList[index].secondaryText;
         console.log("    : secondaryT: " + secondaryT);
