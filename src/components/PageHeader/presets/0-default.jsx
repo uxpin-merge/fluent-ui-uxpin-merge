@@ -1,8 +1,8 @@
 import * as React from 'react';
-import PPPageHeader from '../PPPageHeader';
+import PageHeader from '../PageHeader';
 
 
 
 export default (
-    <PPPageHeader uxpId="pppageheader1" />
+    <PageHeader uxpId="pageheader1" />
 );
