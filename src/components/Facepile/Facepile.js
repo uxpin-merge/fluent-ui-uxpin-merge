@@ -145,13 +145,13 @@ class Facepile extends React.Component {
                 : this.props.size;
 
         console.log("_onRenderSinglePersona: pSize: " + pSize);
+        // {...personaProps}
 
         return (
             <div style={{ cursor: 'pointer' }} >
 
                 <Persona
-                    {...personaProps}
-                    hidePersonaDetails={true}
+                    hidePersonaDetails={false}
                     size={PersonaSize[pSize]}
                     imageUrl={personaProps.imageUrl}
                     imageInitials={personaProps.imageInitials}
