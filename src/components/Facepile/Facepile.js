@@ -4,7 +4,7 @@ import {
     Facepile as FFacepile,
     OverflowButtonType
 } from '@fluentui/react/lib/Facepile';
-import { HoverCard } from '@fluentui/react/lib/HoverCard';
+import { HoverCard, HoverCardType, IPlainCardProps } from '@fluentui/react/lib/HoverCard';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
@@ -55,7 +55,6 @@ class Facepile extends React.Component {
         var i;
         for (i = 0; i < rawPersonas.length; i++) {
             var persona = rawPersonas[i];
-            // persona.onClick = ((e, p) => this._onClick(p));
             configuredPersonas.push(persona);
         }
 
@@ -112,27 +111,38 @@ class Facepile extends React.Component {
     _onRenderPersonaCoin(personaProps) {
         console.log("_onRenderPersonaCoin: " + personaProps.text);
 
+        let plainCardProps: IPlainCardProps = {
+            onRenderPlainCard: this._onRenderCompactCard,
+            renderData: personaProps,
+        };
+
         return (
+            <HoverCard
+                type={HoverCardType.plain}
+                plainCardProps={plainCardProps}
+                instantOpenOnClick={true}
+            >
 
-            <div className={customPersonaCoinDivStyles}>
+                <div className={customPersonaCoinDivStyles}>
 
-                <Persona
-                    {...personaProps}
-                    hidePersonaDetails={true}
-                    size={PersonaSize[this.props.size]}
-                    imageUrl={personaProps.imageUrl}
-                    imageInitials={personaProps.imageInitials}
-                    initialsColor={personaProps.initialsColor}
-                    text={personaProps.text}
-                    secondaryText={personaProps.secondaryText}
-                    tertiaryText={personaProps.tertiaryText}
-                    optionalText={personaProps.optionalText}
-                    presence={PersonaPresence[personaProps.presence]}
-                    className={customPersonaStyles}
-                    onClick={() => { this._onClick(personaProps) }}
-                />
+                    <Persona
+                        {...personaProps}
+                        hidePersonaDetails={true}
+                        size={PersonaSize[this.props.size]}
+                        imageUrl={personaProps.imageUrl}
+                        imageInitials={personaProps.imageInitials}
+                        initialsColor={personaProps.initialsColor}
+                        text={personaProps.text}
+                        secondaryText={personaProps.secondaryText}
+                        tertiaryText={personaProps.tertiaryText}
+                        optionalText={personaProps.optionalText}
+                        presence={PersonaPresence[personaProps.presence]}
+                        className={customPersonaStyles}
+                        onClick={() => { this._onClick(personaProps) }}
+                    />
 
-            </div>
+                </div>
+            </HoverCard>
         );
 
     }
