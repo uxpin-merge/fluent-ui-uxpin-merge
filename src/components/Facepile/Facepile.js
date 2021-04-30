@@ -109,9 +109,10 @@ class Facepile extends React.Component {
 
     _onRenderPersonaCoin(personaProps) {
         console.log("_onRenderPersonaCoin: " + personaProps.text);
+        // className={customPersonaCoinDivStyles}
 
         return (
-            <div className={customPersonaCoinDivStyles}>
+            <div style={{ cursor: 'pointer' }} >
 
                 <Persona
                     {...personaProps}
@@ -224,7 +225,7 @@ class Facepile extends React.Component {
                 maxDisplayablePersonas={this.props.faceCount}
                 personas={this.state.personaList.slice(0, this.props.number)}
 
-                onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                //onRenderPersona={(p) => this._onRenderSinglePersona(p)}
                 onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
 
                 addButtonProps={addButtonParams}
