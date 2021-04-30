@@ -144,19 +144,6 @@ class Facepile extends React.Component {
             : this.props.size === 'size28' ? 'size24'
                 : this.props.size;
 
-
-
-        let index = this._getSelectedPersonaIndex(personaProps) - 1;
-        console.log("    : index: " + index);
-        let p = this.state.personaList[index];
-        let secondaryT = p.role;
-        let tertiaryT = p.email;
-        let optionalT = p.imageInitials;
-        console.log("    : role: " + secondaryT);
-        console.log("    : personaProps role: " + personaProps.role);
-        console.log("    : email: " + tertiaryT);
-        console.log("    : imageInitials: " + optionalT);
-
         return (
             <div style={{ cursor: 'pointer' }} >
 
@@ -169,11 +156,9 @@ class Facepile extends React.Component {
                     initialsColor={personaProps.initialsColor}
                     text={personaProps.text}
 
-                    secondaryText={secondaryT}
-                    tertiaryText={personaProps.tertiaryText}
-                    optionalText={personaProps.optionalText}
+                    secondaryText={personaProps.role}
+                    tertiaryText={personaProps.email}
                     presence={PersonaPresence[personaProps.presence]}
-                    className={customPersonaStyles}
                     onClick={() => { this._onClick(personaProps) }}
                 />
 
