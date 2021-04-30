@@ -147,12 +147,11 @@ class Facepile extends React.Component {
         console.log("_onRenderSinglePersona: pSize: " + pSize);
 
         return (
-            <div
-                className={customPersonaCoinDivStyles}>
+            <div style={{ cursor: 'pointer' }} >
 
                 <Persona
                     {...personaProps}
-                    hidePersonaDetails={false}
+                    hidePersonaDetails={true}
                     size={PersonaSize[pSize]}
                     imageUrl={personaProps.imageUrl}
                     imageInitials={personaProps.imageInitials}
@@ -163,7 +162,9 @@ class Facepile extends React.Component {
                     optionalText={personaProps.optionalText}
                     presence={PersonaPresence[personaProps.presence]}
                     className={customPersonaStyles}
-                />
+                >
+                    {personaProps.text}
+                </Persona>
 
             </div>
         );
@@ -225,7 +226,7 @@ class Facepile extends React.Component {
                 maxDisplayablePersonas={this.props.faceCount}
                 personas={this.state.personaList.slice(0, this.props.number)}
 
-                //onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                onRenderPersona={(p) => this._onRenderSinglePersona(p)}
                 onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
 
                 addButtonProps={addButtonParams}
