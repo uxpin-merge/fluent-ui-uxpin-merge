@@ -33,7 +33,6 @@ class SpinButton extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
-            this._valueChanged();
         }
     }
 
