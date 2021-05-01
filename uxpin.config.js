@@ -61,6 +61,7 @@ module.exports = {
           'src/components/Facepile/Facepile.js',
           'src/components/Nav/Nav.js',
           'src/components/Persona/Persona.js',
+          'src/components/Pivot/Pivot.js',
         ],
       },
       {
