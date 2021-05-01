@@ -95,15 +95,6 @@ export const getTokens = inputStr => {
       )
     }
 
-
-    // if (token.type === 'link') suggestions.push(() => <Link key={unique}>{token.target}</Link>)
-    // if (token.type === 'icon') suggestions.push(() => <ActionButton key={unique} style={{
-    //   height: 16,
-    //   width: 26,
-    //   padding: 0,
-    //   margin: 0,
-    // }}
-    //   iconProps={{ iconName: token.target }} />)
     return suggestions
   }
 

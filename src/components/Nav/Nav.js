@@ -35,7 +35,6 @@ class Nav extends React.Component {
         }
     }
 
-
     componentDidMount() {
         this.setState(
             { selectedIndex: this.props.selectedIndex }
@@ -58,42 +57,46 @@ class Nav extends React.Component {
         }
     }
 
-
     getLeftIcon(str) {
         let tokens = getTokens(str).tokens;
 
         let leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
 
-        console.log("getLeftIcon left: " + leftIcon.target);
-        return leftIcon ? leftIcon.target : undefined;
+        return leftIcon ? leftIcon.target : '';
     }
-
 
     //Parse the nav items
     setItems(callback) {
+
+        let itemlist = csv2arr(this.props.items)
+            .flat()
+            .map((val, i) => ({
+                name: getTokens(val).text,
+                key: i + 1,  //Setting the key to the 1-based index
+                disabled: this.state.disabledIndexes.includes(i + 1),
+                icon: this.getLeftIcon(val)
+            }));
+
+        console.log("Found these nav items: ");
+        var i;
+        for (i = 0; i < itemlist.length; i++) {
+            let item = itemlist[i];
+            console.log("    " + item.key + " " + item.text + " " + item.icon);
+        }
+
         this.setState({
-            links: csv2arr(this.props.items)
-                .flat()
-                .map((val, i) => ({
-                    name: getTokens(val).text,
-                    key: i + 1,  //Setting the key to the 1-based index
-                    disabled: this.state.disabledIndexes.includes(i + 1),
-                    icon: this.getLeftIcon(val)
-                }))
+            links: itemlist,
         }, callback)
     }
 
-
     //Parse the disabled items
     setDisabledIndexes(callback) {
-        // let disabledIndexes = csv2arr(this.props.disabled).flat().map(i => parseInt(i.trim()))
         let disabledIndexes = UxpNumberParser.parseInts(this.props.disabled);
 
         this.setState(
             { disabledIndexes },
             callback)
     }
-
 
     onMenuClick(event, element) {
         event.preventDefault();
@@ -110,7 +113,6 @@ class Nav extends React.Component {
             this.props[`onLink${index}Click`](index);
         }
     }
-
 
     render() {
 
