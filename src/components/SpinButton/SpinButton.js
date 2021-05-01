@@ -70,7 +70,7 @@ class SpinButton extends React.Component {
     */
     _getValidatedNumber(newValue) {
         console.log("getValidated. newValue: " + newValue);
-
+        console.log("        newValue type: " + Object.prototype.toString.call(newValue));
 
         newValue = this._removeSuffix(newValue);
 
