@@ -26,6 +26,8 @@ class SpinButton extends React.Component {
         //Sometimes the props aren't in sync with this display value. 
         if (this.props.value !== displayValue)
             this.props.value = displayValue;
+
+
     }
 
     componentDidMount() {
@@ -40,6 +42,8 @@ class SpinButton extends React.Component {
             console.log("    >>>> old: " + prevProps.value + " new: " + this.props.value);
 
             this.set();
+
+            this._valueChanged();
         }
     }
 
@@ -159,7 +163,7 @@ class SpinButton extends React.Component {
 
         //Raise this event to UXPin. 
         if (this.props.onSBChange) {
-            this.props.onSBChange(this.props.value);
+            this.props.onSBChange(this.state._currentValue);
         }
     }
 
@@ -251,7 +255,7 @@ SpinButton.propTypes = {
  */
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
-    sbValue: '1',
+    value: '1',
     min: 0,
     max: 10,
     step: 1,
