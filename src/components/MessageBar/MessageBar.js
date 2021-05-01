@@ -38,7 +38,7 @@ class MessageBar extends React.Component {
     render() {
         console.log("Entered render");
 
-        let dismissHandler = this.showDismissButton && this.props.onDismissClicked ? this._onDismiss() : undefined;
+        let dismissHandler = this.showDismissButton ? this._onDismiss() : undefined;
 
         let truncated = !this.isMultiline;
 
@@ -50,7 +50,7 @@ class MessageBar extends React.Component {
                 truncated={truncated}
                 onDismiss={() => dismissHandler}
             >
-                {"Hello!"}
+                {this.props.message}
             </FMessageBar>
         );
     }
