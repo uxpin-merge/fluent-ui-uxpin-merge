@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
 import { getTokens, csv2arr } from '../_helpers/parser';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
@@ -61,11 +62,9 @@ class Nav extends React.Component {
     getLeftIcon(str) {
         let tokens = getTokens(str).tokens;
 
-        console.log("getLeftIcon tokens: " + tokens.toString());
-
         let leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
 
-        console.log("getLeftIcon left: " + leftIcon);
+        console.log("getLeftIcon left: " + leftIcon.target);
         return leftIcon ? leftIcon.target : undefined;
     }
 
@@ -87,7 +86,9 @@ class Nav extends React.Component {
 
     //Parse the disabled items
     setDisabledIndexes(callback) {
-        let disabledIndexes = csv2arr(this.props.disabled).flat().map(i => parseInt(i.trim()))
+        // let disabledIndexes = csv2arr(this.props.disabled).flat().map(i => parseInt(i.trim()))
+        let disabledIndexes = UxpNumberParser.parseInts(this.props.disabled);
+
         this.setState(
             { disabledIndexes },
             callback)
@@ -124,13 +125,12 @@ class Nav extends React.Component {
         if (this.props.stretch) {
             height = '100%'
         }
-        let width = this.props.controlWidth > 0 ? this.props.controlWidth : 'auto';
 
         let navStyles = {
             root: {
                 height,
                 minHeight: mHeight,
-                width,
+                width: 'auto',
                 paddingTop: topPad + 'px',
                 backgroundColor: isStyled ? defaultStyledBgColor : 'transparent',
                 borderRight: isStyled ? "1px solid " + defaultStyledBorderColor : 'none',
@@ -170,12 +170,6 @@ Nav.propTypes = {
      * @uxpinpropname Top Padding
      */
     navTopPadding: PropTypes.number,
-
-    /**
-    * @uxpindescription The width of the control   
-    * @uxpinpropname Width
-    */
-    controlWidth: PropTypes.number,
 
     /**
     * @uxpindescription The height of the control   
