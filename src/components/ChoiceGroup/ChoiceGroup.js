@@ -81,7 +81,7 @@ class ChoiceGroup extends React.Component {
       .map((val, index) => ({
         text: getTokens(val).text,
         key: index,
-        disabled: false,
+        disabled: this.props.disabled,
         iconProps: this.getIconProps(val)
       }));
 
@@ -164,6 +164,12 @@ ChoiceGroup.propTypes = {
   required: PropTypes.bool,
 
   /**
+   * @uxpindescription Whether to show the control as disabled
+   * @uxpinpropname Disabled
+   * */
+  disabled: PropTypes.bool,
+
+  /**
    * @uxpindescription Fires when the selected index value changes.
    * @uxpinpropname * Index Changed
    * */
@@ -176,7 +182,7 @@ ChoiceGroup.propTypes = {
 ChoiceGroup.defaultProps = {
   label: 'Basic ChoiceGroup',
   items: defaultChoices,
-  selectedIndex: 1,
+  selectedIndex: 0,
   required: false,
   tiled: false
 };
