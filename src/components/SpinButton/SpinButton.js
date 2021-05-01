@@ -16,9 +16,11 @@ class SpinButton extends React.Component {
         }
         let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
 
+        console.log("    set: " + displayValue);
+
         //Track the current numerical value within the control
         this.setState(
-            { _currentValue: displayValue }
+            { _currentValue: displayValue, }
         );
 
         //Sometimes the props aren't in sync with this display value. 
@@ -31,7 +33,11 @@ class SpinButton extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+
         if (prevProps.sbValue !== this.props.sbValue) {
+
+            console.log("comp did update. old: " + prevProps.sbValue + " new: " + this.props.sbValue);
+
             this.set();
         }
     }
@@ -182,18 +188,18 @@ class SpinButton extends React.Component {
 SpinButton.propTypes = {
 
     /**
-     * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
-     * @uxpinbind onSBChange
-     * @uxpinpropname * Value
-     * */
-    sbValue: PropTypes.number,
-
-    /**
      * @uxpindescription Description label of the SpinButton
      * @uxpinpropname Label
      * @uxpincontroltype textfield(2)
      * */
     label: PropTypes.string,
+
+    /**
+     * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
+     * @uxpinbind onSBChange
+     * @uxpinpropname * Value
+     * */
+    sbValue: PropTypes.number,
 
     /**
     * @uxpindescription The minimum value of the SpinButton
