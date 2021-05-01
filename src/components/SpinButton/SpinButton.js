@@ -8,186 +8,60 @@ class SpinButton extends React.Component {
     constructor(props) {
         super(props);
 
-        //Track the checked state within the control
-        this.state = {
-            _currentValue: '0',
-        }
+        // //Track the checked state within the control
+        // this.state = {
+        //     _currentValue: '0',
+        // }
     }
 
-    set() {
-        var s = '';
-        if (this.props.suffix) {
-            s = ' ' + this.props.suffix.trim();
-        }
-        let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
+    // set() {
+    //     var s = '';
+    //     if (this.props.suffix) {
+    //         s = ' ' + this.props.suffix.trim();
+    //     }
+    //     let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
 
-        console.log("    set: " + displayValue);
+    //     console.log("    set: " + displayValue);
 
-        //Track the current numerical value within the control
-        this.setState(
-            { _currentValue: displayValue, }
-        );
+    //     //Track the current numerical value within the control
+    //     this.setState(
+    //         { _currentValue: displayValue, }
+    //     );
 
-        //Sometimes the props aren't in sync with this display value. 
-        if (this.props.sbValue !== displayValue)
-            this.props.sbValue = displayValue;
-    }
+    //     //Sometimes the props aren't in sync with this display value. 
+    //     if (this.props.sbValue !== displayValue)
+    //         this.props.sbValue = displayValue;
+    // }
 
-    componentDidMount() {
-        this.set();
-    }
+    // componentDidMount() {
+    //     this.set();
+    // }
 
-    componentDidUpdate(prevProps) {
-        console.log("comp did update. new: " + this.props.sbValue);
-        console.log("        value: " + this.props.value);
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.sbValue !== this.props.sbValue) {
+    //         this.set();
+    //     }
+    // }
 
-        if (prevProps.sbValue !== this.props.sbValue) {
-            this.set();
-        }
-    }
-
-    _hasSuffix(rawStr) {
-        var success = false;
-
-        if (this.props.suffix && rawStr) {
-            let s = this.props.suffix.trim();
-            success = rawStr.includes(s);
-        }
-
-        return success;
-    }
-
-    _removeSuffix(rawStr) {
-        //We want the returned value to always be converted to a String
-        var newValue = '';
-        if (rawStr)
-            newValue = rawStr.toString();
-
-        if (this._hasSuffix(newValue)) {
-            let s = this.props.suffix.trim();
-            let index = newValue.indexOf(s);
-
-            return newValue.substring(0, index);
-        }
-
-        //If we made it this far. we don't have a suffix. 
-        return newValue;
-    }
-
-    /* 
-    *  ************* UTILITY METHOD
-    *  Validate the proposed new value to set in the control. 
-    *  newValue: Should be a number, but might be a string or something else.   
-    *  Returns a validated and cleansed numeric value.
-    */
-    _getValidatedNumber(newValue) {
-
-        //Now, it's a String
-        newValue = this._removeSuffix(newValue);
-
-        if (!newValue
-            || newValue.trim().length === 0
-            || isNaN(+newValue)) {
-
-            return '0';
-        }
-
-        else if (Number(newValue) > this.props.max)
-            return this.props.max.toString();
-
-        else if (Number(newValue) < this.props.min)
-            return this.props.min.toString();
-
-        return newValue;
-    }
-
-    /* 
-    *  This event is fired when the user manually changes the value in the TextBox part of the control.
-    *  This value comes in as a string. 
-    **/
-    _onValidate(newValue) {
-        let n = this._getValidatedNumber(newValue);
-
-        var s = '';
-        if (this.props.suffix) {
-            s = ' ' + this.props.suffix.trim();
-        }
-
-        console.log("on validate: " + n + s);
-        // this.props.sbValue = n + s;
-
-        console.log("props: " + this.props.toString());
-
-        return n + s;
-    }
-
-    /* 
-    *  This event is fired when the user increments or decrements the value using the Up/Down Arrow buttons. 
-    *  The old value comes in as a string. 
-    *  We have to increment or decrement ourselves.
-    *  This method calculates what the new value should be. 
-    **/
-    _onIncDec(oldValue, isIncrement) {
-        // ************************
-        // Validate and normalize the Value First
-        let parsedVal = this._getValidatedNumber(oldValue);
-
-        //Parse it back to a number
-        let n = Number(parsedVal);
-
-        //Prep the suffix
-        var s = '';
-        if (this.props.suffix) {
-            s = ' ' + this.props.suffix.trim();
-        }
-
-        if (isIncrement) {
-            //Add the step value
-            //Validate that we haven't gone outside the bounds...
-            let m = this._getValidatedNumber(n + this.props.step);
-            console.log("on increment: " + m + s);
-            // this.props.sbValue = m + s;
-
-            return m + s;
-        }
-
-        //Subtract the step value
-        //Validate that we haven't gone outside the bounds...
-        let m = this._getValidatedNumber(n - this.props.step);
-        console.log("on decrement: " + m + s);
-        // this.props.sbValue = m + s;
-        return m + s;
-    }
 
     /* 
     *  Notify UXPin that the value has changed. 
     */
-    _valueChanged(v) {
-
-        console.log("_valueChanged event: " + v);
-
+    _valueChanged(newValue) {
         //Raise this event to UXPin. 
         if (this.props.onSBChange) {
-            this.props.onSBChange();
+            this.props.onSBChange(newValue);
         }
     }
 
     render() {
-        let displayValue = this.state._currentValue;
-
-        console.log("render props.sbValue: " + this.props.sbValue);
-        console.log("render props.value: " + this.props.value);
-        console.log("render state: " + displayValue);
 
         return (
 
             <FSpinButton
                 {...this.props}
-                defaultValue={this.props.sbValue}
+                defaultValue={this.props.value}
                 onChange={(evt, v) => { this._valueChanged(v) }}
-            // onValidate={(v) => { this._onValidate(v) }}
-            // onIncrement={(v) => { this._onIncDec(v, true) }}
-            // onDecrement={(v) => { this._onIncDec(v, false) }}
             />
         );
     }
@@ -211,7 +85,7 @@ SpinButton.propTypes = {
      * @uxpinbind onSBChange
      * @uxpinpropname * Value
      * */
-    sbValue: PropTypes.number,
+    value: PropTypes.number,
 
     /**
     * @uxpindescription The minimum value of the SpinButton
@@ -230,12 +104,6 @@ SpinButton.propTypes = {
     * @uxpinpropname Step
     * */
     step: PropTypes.number,
-
-    /**
-     * @uxpindescription A short string value to show after the number (Optional)
-     * @uxpinpropname Suffix
-     * */
-    suffix: PropTypes.string,
 
     /**
      * @uxpindescription A little tooltip that will display on hover
@@ -263,12 +131,11 @@ SpinButton.propTypes = {
  */
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
-    sbValue: '1',
+    value: '1',
     min: 0,
     max: 10,
     step: 1,
     title: '',
-    suffix: '',
     disabled: false,
 };
 
