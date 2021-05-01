@@ -186,9 +186,9 @@ class SpinButton extends React.Component {
         // Save and propagate the new value
 
         //Update the value in State to force an update. Convert back to a string.
-        this.setState(
-            { _currentValue: displayValue }
-        )
+        // this.setState(
+        //     { _currentValue: displayValue }
+        // )
 
         // this.props.sbValue = displayValue;
 
@@ -207,7 +207,7 @@ class SpinButton extends React.Component {
         return (
             <FSpinButton
                 {...this.props}
-                value={this.state._currentValue}
+                value={this.props.sbValue}
                 onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
                 onDecrement={(v) => { this._onIncDec(v, false); }}
