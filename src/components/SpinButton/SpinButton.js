@@ -70,7 +70,6 @@ class SpinButton extends React.Component {
     */
     _getValidatedNumber(newValue) {
         console.log("getValidated. newValue: " + newValue);
-        console.log("        newValue type: " + Object.prototype.toString.call(newValue));
 
         //Now, it's a String
         newValue = this._removeSuffix(newValue);
@@ -91,8 +90,6 @@ class SpinButton extends React.Component {
 
         else if (Number(newValue) < this.props.min)
             return this.props.min.toString();
-
-        console.log("       validating... " + r);
 
         return newValue;
     }
