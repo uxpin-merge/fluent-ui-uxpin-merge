@@ -78,6 +78,8 @@ class MessageBar extends React.Component {
     // }
 
     _getTokenizedText(text) {
+        return text;
+
         let itemlist = getTokens(text).mixed.map((val, i) => ({
             type: val.type,
             text: getTokens(val).text,
