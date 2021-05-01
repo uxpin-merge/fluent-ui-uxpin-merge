@@ -72,7 +72,7 @@ class Nav extends React.Component {
 
         var i;
         for (i = 0; i < items.length; i++) {
-            let item = itemlist[i];
+            let item = items[i];
 
             //0 is always a parent
             if (i === 0)
