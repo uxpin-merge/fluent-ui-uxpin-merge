@@ -39,6 +39,7 @@ class SpinButton extends React.Component {
 
     componentDidUpdate(prevProps) {
         console.log("comp did update. new: " + this.props.sbValue);
+        console.log("        value: " + this.props.value);
 
         if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
@@ -182,10 +183,10 @@ class SpinButton extends React.Component {
 
             <FSpinButton
                 {...this.props}
-                value={displayValue}
-                onValidate={(v) => { this._onValidate(v) }}
-                onIncrement={(v) => { this._onIncDec(v, true) }}
-                onDecrement={(v) => { this._onIncDec(v, false) }}
+                value={this.props.sbValue}
+            // onValidate={(v) => { this._onValidate(v) }}
+            // onIncrement={(v) => { this._onIncDec(v, true) }}
+            // onDecrement={(v) => { this._onIncDec(v, false) }}
             />
         );
     }
