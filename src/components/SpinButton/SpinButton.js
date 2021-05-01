@@ -14,7 +14,7 @@ class SpinButton extends React.Component {
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
-        let displayValue = this._getValidatedNumber(this.props.value) + s;
+        let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
 
         //Track the current numerical value within the control
         this.setState(
@@ -27,7 +27,7 @@ class SpinButton extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.value !== this.props.value) {
+        if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
         }
     }
@@ -49,7 +49,7 @@ class SpinButton extends React.Component {
         //We want the returned value to always be converted to a String
         var newValue = '';
         if (rawStr)
-            newValue = String(rawStr);
+            newValue = rawStr.toString();
 
         if (this._hasSuffix(newValue)) {
             let s = this.props.suffix.trim();
@@ -77,6 +77,7 @@ class SpinButton extends React.Component {
 
         console.log("     after removeSuffix: " + newValue);
 
+
         if (!newValue
             || newValue.trim().length === 0
             || isNaN(+newValue)) {
@@ -85,40 +86,81 @@ class SpinButton extends React.Component {
             return '0';
         }
 
-        if (parseFloat(newValue) > this.props.max)
-            return String(this.props.max);
+        else if (Number(newValue) > this.props.max)
+            return this.props.max.toString();
 
-        if (parseFloat(newValue) < this.props.min)
-            return String(this.props.min);
+        else if (Number(newValue) < this.props.min)
+            return this.props.min.toString();
 
-        console.log("       validating... " + newValue);
+        console.log("       validating... " + r);
+
         return newValue;
-
-
-
-
-        //We have to parse the value and convert it to a number. It might be a letter or word instead. 
-        var newNumber = parseFloat(newValue);
-
-        //If the user put in a string or other non-number, we must check for it. 
-        //If it's 'Not a Number', then we will set it to the min value.
-        if (isNaN(newNumber)) {
-            newNumber = this.props.min;
-        }
-
-        //Check for min
-        if (newNumber < this.props.min) {
-            newNumber = this.props.min;
-        }
-
-        //Check for max
-        if (newNumber > this.props.max) {
-            newNumber = this.props.max;
-        }
-
-        return newNumber;
     }
 
+    /* *************************
+    *  EVENT HANDLERS
+    *  We have to synthesize an onChange event by tracking these 3 separate events. 
+    *  Then we push the new value to the single event sink, valueChanged().
+    *  *************************
+    **/
+
+    /* 
+    *  This event is fired when the user manually changes the value in the TextBox part of the control.
+    *  This value comes in as a string. 
+    **/
+    _onValidate(newValue) {
+        console.log("on validate with... " + newValue);
+        let n = this._getValidatedNumber(newValue);
+
+        //Store it first...
+        this._valueChanged(n);
+
+        var s = '';
+        if (this.props.suffix) {
+            s = ' ' + this.props.suffix.trim();
+        }
+
+        return n + s;
+    }
+
+    /* 
+    *  This event is fired when the user increments or decrements the value using the Up/Down Arrow buttons. 
+    *  The old value comes in as a string. 
+    *  We have to increment or decrement ourselves.
+    *  This method calculates what the new value should be. 
+    **/
+    _onIncDec(oldValue, isIncrement) {
+        console.log("_onIncDec with... " + oldValue);
+
+        // ************************
+        // Validate and normalize the Value First
+        let parsedVal = this._getValidatedNumber(oldValue);
+
+        //Parse it back to a number
+        let n = Number(parsedVal);
+
+        //Prep the suffix
+        var s = '';
+        if (this.props.suffix) {
+            s = ' ' + this.props.suffix.trim();
+        }
+
+        console.log("         incdec " + n);
+
+        if (isIncrement) {
+            //Add the step value
+            //Validate that we haven't gone outside the bounds...
+            let m = this._getValidatedNumber(n + this.props.step);
+            this._valueChanged(m);
+            return m + s;
+        }
+
+        //Subtract the step value
+        //Validate that we haven't gone outside the bounds...
+        let m = this._getValidatedNumber(n - this.props.step);
+        this._valueChanged(m);
+        return m + s;
+    }
 
     /* 
     *  ************* SAVE NEW VALUE, PUBLISH EVENT
@@ -135,9 +177,9 @@ class SpinButton extends React.Component {
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
-        let displayValue = this._getValidatedNumber(newValue) + s;
+        let displayValue = newValue + s;
 
-        console.log("_valueChanged: " + displayValue);
+        console.log("_valueChanged event: " + displayValue);
 
         // ************************
         // Save and propagate the new value
@@ -147,86 +189,27 @@ class SpinButton extends React.Component {
             { _currentValue: displayValue }
         )
 
-        this.props.value = displayValue;
+        this.props.sbValue = displayValue;
 
         //Raise this event to UXPin. We'll send them the value in case they can catch it.
         //Let's send it as a number.
-        if (this.props.onChange) {
-            this.props.onChange(displayValue);
+        if (this.props.onSBChange) {
+            this.props.onSBChange(displayValue);
         }
     }
-
-
-    /* *************************
-    *  EVENT HANDLERS
-    *  We have to synthesize an onChange event by tracking these 3 separate events. 
-    *  Then we push the new value to the single event sink, valueChanged().
-    *  *************************
-    **/
-
-    /* 
-    *  This event is fired when the user manually changes the value in the TextBox part of the control.
-    *  This value comes in as a string. 
-    **/
-    _onValidate(newValue) {
-        var s = '';
-        if (this.props.suffix) {
-            s = ' ' + this.props.suffix.trim();
-        }
-        return this._getValidatedNumber(newValue) + s;
-    }
-
-    /* 
-    *  This event is fired when the user increments or decrements the value using the Up/Down Arrow buttons. 
-    *  The old value comes in as a string. 
-    *  We have to increment or decrement ourselves.
-    *  This method calculates what the new value should be. 
-    **/
-    _onIncDec(oldValue, isIncrement) {
-
-        // ************************
-        // Validate and normalize the Value First
-        let parsedVal = this._getValidatedNumber(oldValue);
-
-        //Parse it back to a number, add the step.
-        let n = parseFloat(parsedVal)
-
-        //Prep the suffix
-        var s = '';
-        if (this.props.suffix) {
-            s = ' ' + this.props.suffix.trim();
-        }
-
-        console.log("incdec " + n);
-
-        if (isIncrement) {
-            //Add the step value
-            //Validate that we haven't gone outside the bounds...
-            return this._getValidatedNumber(n + this.props.step) + s;
-        }
-
-        //Subtract the step value
-        //Validate that we haven't gone outside the bounds...
-        return this._getValidatedNumber(n - this.props.step) + s;
-
-    }
-
 
     // ************************
 
 
     render() {
 
-        //Get the value from state.
-        var newValue = this.state._currentValue;
-
         return (
             <FSpinButton
                 {...this.props}
-                // value={newValue}
-                onValidate={(v, evt) => { this._onValidate(v); }}
-                onIncrement={(v, evt) => { this._onIncDec(v, true); }}
-                onDecrement={(v, evt) => { this._onIncDec(v, false); }}
+                value={this.state._currentValue}
+                onValidate={(v) => { this._onValidate(v); }}
+                onIncrement={(v) => { this._onIncDec(v, true); }}
+                onDecrement={(v) => { this._onIncDec(v, false); }}
             />
         );
     }
@@ -240,10 +223,10 @@ SpinButton.propTypes = {
 
     /**
      * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
-     * @uxpinbind onChange
+     * @uxpinbind onSBChange
      * @uxpinpropname * Value
      * */
-    value: PropTypes.number,
+    sbValue: PropTypes.number,
 
     /**
      * @uxpindescription Description label of the SpinButton
@@ -293,7 +276,7 @@ SpinButton.propTypes = {
     * @uxpindescription Fires when the control's Value property changes.
     * @uxpinpropname * Value Changed
     * */
-    onChange: PropTypes.func,
+    onSBChange: PropTypes.func,
 };
 
 
