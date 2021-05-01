@@ -162,9 +162,9 @@ class SpinButton extends React.Component {
     /* 
     *  Notify UXPin that the value has changed. 
     */
-    _valueChanged() {
+    _valueChanged(v) {
 
-        console.log("_valueChanged event: " + this.props.sbValue);
+        console.log("_valueChanged event: " + v);
 
         //Raise this event to UXPin. 
         if (this.props.onSBChange) {
@@ -184,6 +184,7 @@ class SpinButton extends React.Component {
             <FSpinButton
                 {...this.props}
                 defaultValue={this.props.sbValue}
+                onChange={(v) => { this._valueChanged(v) }}
             // onValidate={(v) => { this._onValidate(v) }}
             // onIncrement={(v) => { this._onIncDec(v, true) }}
             // onDecrement={(v) => { this._onIncDec(v, false) }}
