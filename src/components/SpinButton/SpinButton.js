@@ -10,13 +10,15 @@ class SpinButton extends React.Component {
     }
 
     set() {
-        console.log("set");
+
 
         var s = '';
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
         let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
+
+        console.log("set. new State val: " + displayValue);
 
         //Track the current numerical value within the control
         this.setState(
@@ -199,15 +201,15 @@ class SpinButton extends React.Component {
         }
     }
 
-    // ************************
-
 
     render() {
 
         return (
+
             <FSpinButton
                 {...this.props}
-                value={this.props.sbValue}
+                value={this.state._currentValue}
+
                 onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
                 onDecrement={(v) => { this._onIncDec(v, false); }}
