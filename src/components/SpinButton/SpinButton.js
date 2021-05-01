@@ -91,12 +91,6 @@ class SpinButton extends React.Component {
         return newValue;
     }
 
-    /* *************************
-    *  EVENT HANDLERS
-    *  We have to synthesize an onChange event by tracking these 3 separate events. 
-    *  *************************
-    **/
-
     /* 
     *  This event is fired when the user manually changes the value in the TextBox part of the control.
     *  This value comes in as a string. 
@@ -108,6 +102,8 @@ class SpinButton extends React.Component {
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
+
+        console.log("on validate: " + n + s);
 
         return n + s;
     }
@@ -136,12 +132,14 @@ class SpinButton extends React.Component {
             //Add the step value
             //Validate that we haven't gone outside the bounds...
             let m = this._getValidatedNumber(n + this.props.step);
+            console.log("on increment: " + m + s);
             return m + s;
         }
 
         //Subtract the step value
         //Validate that we haven't gone outside the bounds...
         let m = this._getValidatedNumber(n - this.props.step);
+        console.log("on decrement: " + m + s);
         return m + s;
     }
 
@@ -160,6 +158,8 @@ class SpinButton extends React.Component {
 
 
     render() {
+
+        console.log("render: " + this.props.sbValue);
 
         return (
 
