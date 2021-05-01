@@ -27,6 +27,8 @@ class MessageBar extends React.Component {
             msg = this._getTokenizedText(this.props.message);
         }
 
+        console.log("       set. tokenized text: " + msg);
+
         this.setState(
             { message: msg }
         )
@@ -138,6 +140,11 @@ class MessageBar extends React.Component {
 
         console.log("    Render. Return next");
 
+        var msg = '';
+        if (this.state.message) {
+            msg = this.state.message;
+        }
+
         return (
 
             <FMessageBar
@@ -154,7 +161,7 @@ class MessageBar extends React.Component {
                 //The Close icon only displays when the event is handled
                 onDismiss={this.props.showDismissButton && this.props.onDismissClicked ? this._onDismiss.bind(this) : undefined}
             >
-                {this.state.message}
+                {msg}
             </FMessageBar>
         );
     }
