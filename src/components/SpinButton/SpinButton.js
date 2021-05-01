@@ -35,10 +35,8 @@ class SpinButton extends React.Component {
     _hasSuffix(rawStr) {
         var success = false;
 
-        if (this.props.suffix) {
+        if (this.props.suffix && rawStr) {
             let s = this.props.suffix.trim();
-            //Convert it in case it came through as a number
-            rawStr = String(rawStr);
             success = rawStr.includes(s);
         }
 
@@ -46,20 +44,22 @@ class SpinButton extends React.Component {
     }
 
 
-    //We want the returned value to always be converted to a Float
-    _removeSuffice(rawStr) {
 
-        if (this._hasSuffix(rawStr)) {
+    _removeSuffix(rawStr) {
+        //We want the returned value to always be converted to a String
+        var newValue = '';
+        if (rawStr)
+            newValue = String(rawStr);
+
+        if (this._hasSuffix(newValue)) {
             let s = this.props.suffix.trim();
-            rawStr = String(rawStr);
-            let index = rawStr.indexOf(s);
-            let newValue = rawStr.substring(0, index);
+            let index = newValue.indexOf(s);
 
-            return parseFloat(newValue);
+            return newValue.substring(0, index);
         }
 
         //If we made it this far. we don't have a suffix. 
-        return parseFloat(rawStr);
+        return newValue;
     }
 
     /* 
@@ -71,26 +71,27 @@ class SpinButton extends React.Component {
     _getValidatedNumber(newValue) {
         console.log("getValidated. newValue: " + newValue);
 
+
+        newValue = this._removeSuffix(newValue);
+
+        console.log("     after removeSuffix: " + newValue);
+
         if (!newValue
-            || String(newValue).trim().length === 0
+            || newValue.trim().length === 0
             || isNaN(+newValue)) {
 
             console.log("_getValidated. Nope. 0");
             return '0';
         }
 
-        newValue = this._removeSuffice(newValue);
-
         if (parseFloat(newValue) > this.props.max)
-            return this.props.max;
+            return String(this.props.max);
 
         if (parseFloat(newValue) < this.props.min)
-            return this.props.min;
+            return String(this.props.min);
 
-
-
-        console.log("validating... " + String(newValue));
-        return String(newValue);
+        console.log("       validating... " + newValue);
+        return newValue;
 
 
 
@@ -134,6 +135,8 @@ class SpinButton extends React.Component {
             s = ' ' + this.props.suffix.trim();
         }
         let displayValue = this._getValidatedNumber(newValue) + s;
+
+        console.log("_valueChanged: " + displayValue);
 
         // ************************
         // Save and propagate the new value
