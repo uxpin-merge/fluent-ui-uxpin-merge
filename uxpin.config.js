@@ -44,6 +44,7 @@ module.exports = {
         name: 'Input',
         include: [
           'src/components/Checkbox/Checkbox.js',
+          'src/components/Choicegroup/Choicegroup.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
           'src/components/SpinButton/SpinButton.js',

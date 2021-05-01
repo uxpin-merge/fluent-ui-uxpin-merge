@@ -6,9 +6,6 @@ import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
-
-
-
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
 const defaultNavItems = `icon(Dashboard) Overview
@@ -65,28 +62,6 @@ class Nav extends React.Component {
         return leftIcon ? leftIcon.target : '';
     }
 
-    getGroupings(items) {
-        let groupList = [];
-
-        let rawItemList = csv2arr(this.props.items);
-
-        var i;
-        for (i = 0; i < items.length; i++) {
-            //0 is always a parent
-            if (i === 0)
-                groupList.push(i);
-
-            else {
-                var rawItem = rawItemList[i].toString();
-                console.log("raw item: " + rawItem);
-                if (!rawItem.startsWith('-'))
-                    groupList.push(i);
-            }
-        }
-
-        return groupList;
-    }
-
     //Parse the nav items
     setItems(callback) {
 
@@ -98,15 +73,6 @@ class Nav extends React.Component {
                 disabled: this.state.disabledIndexes.includes(i + 1),
                 icon: this.getLeftIcon(val)
             }));
-
-        this.getGroupings(itemlist);
-
-        console.log("Found these nav items: ");
-        var i;
-        for (i = 0; i < itemlist.length; i++) {
-            let item = itemlist[i];
-            console.log("    " + item.key + " " + item.name + " " + item.icon);
-        }
 
         this.setState({
             links: itemlist,
