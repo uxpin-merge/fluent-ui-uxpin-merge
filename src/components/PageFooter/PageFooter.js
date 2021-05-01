@@ -598,6 +598,7 @@ PageFooter.defaultProps = {
     borderThickness: defaultBorderThickness,
     borderColor: defaultBorderColor,
     internalPadding: defaultInternalPadding,
+    width: '1440px',
 };
 
 
