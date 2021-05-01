@@ -99,6 +99,7 @@ class MessageBar extends React.Component {
     }
 
     render() {
+        console.log("Entered render");
 
         //Figure out whether we need to display any action buttons, and configure them.
         let hasActionButtons = false;
@@ -119,6 +120,8 @@ class MessageBar extends React.Component {
         if (!this.props.multiline) {
             truncate = true;
         }
+
+        console.log("    Render. Return next");
 
         return (
 
