@@ -8,6 +8,7 @@ module.exports = {
           'src/components/MetaDataGroup/MetaDataGroup.js',
           'src/components/MetaDataPair/MetaDataPair.js',
           'src/components/PageHeader/PageHeader.js',
+          'src/components/PageFooter/PageFooter.js',
           'src/components/Shape/Shape.js',
           'src/components/VerticalStack/VerticalStack.js',
         ],
