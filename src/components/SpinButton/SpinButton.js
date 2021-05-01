@@ -7,6 +7,11 @@ import { SpinButton as FSpinButton } from '@fluentui/react/lib/SpinButton';
 class SpinButton extends React.Component {
     constructor(props) {
         super(props);
+
+        //Track the checked state within the control
+        this.state = {
+            _currentValue: '0',
+        }
     }
 
     set() {
@@ -23,9 +28,9 @@ class SpinButton extends React.Component {
             { _currentValue: displayValue, }
         );
 
-        // //Sometimes the props aren't in sync with this display value. 
-        // if (this.props.sbValue !== displayValue)
-        //     this.props.sbValue = displayValue;
+        //Sometimes the props aren't in sync with this display value. 
+        if (this.props.sbValue !== displayValue)
+            this.props.sbValue = displayValue;
     }
 
     componentDidMount() {
@@ -36,9 +41,6 @@ class SpinButton extends React.Component {
         console.log("comp did update. old: " + prevProps.sbValue + " new: " + this.props.sbValue);
 
         if (prevProps.sbValue !== this.props.sbValue) {
-
-            console.log("    >>>> old: " + prevProps.sbValue + " new: " + this.props.sbValue);
-
             this.set();
         }
     }
@@ -167,7 +169,6 @@ class SpinButton extends React.Component {
     render() {
         let displayValue = this.state._currentValue;
 
-
         console.log("render props.sbValue: " + this.props.sbValue);
         console.log("render props.value: " + this.props.value);
         console.log("render state: " + displayValue);
@@ -177,7 +178,6 @@ class SpinButton extends React.Component {
             <FSpinButton
                 {...this.props}
                 value={displayValue}
-
                 onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
                 onDecrement={(v) => { this._onIncDec(v, false); }}
