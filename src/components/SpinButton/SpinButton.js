@@ -10,6 +10,8 @@ class SpinButton extends React.Component {
     }
 
     set() {
+        console.log("set");
+
         var s = '';
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
@@ -42,8 +44,6 @@ class SpinButton extends React.Component {
 
         return success;
     }
-
-
 
     _removeSuffix(rawStr) {
         //We want the returned value to always be converted to a String
@@ -182,11 +182,11 @@ class SpinButton extends React.Component {
         // Save and propagate the new value
 
         //Update the value in State to force an update. Convert back to a string.
-        this.setState(
-            { _currentValue: displayValue }
-        )
+        // this.setState(
+        //     { _currentValue: displayValue }
+        // )
 
-        this.props.sbValue = displayValue;
+        // this.props.sbValue = displayValue;
 
         //Raise this event to UXPin. We'll send them the value in case they can catch it.
         //Let's send it as a number.
@@ -287,8 +287,9 @@ SpinButton.defaultProps = {
     max: 10,
     step: 1,
     title: '',
-    disabled: false
-}
+    suffix: '',
+    disabled: false,
+};
 
 
 export { SpinButton as default };
