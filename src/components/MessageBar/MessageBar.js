@@ -78,12 +78,10 @@ class MessageBar extends React.Component {
     // }
 
     _getTokenizedText(text) {
-        let itemlist = csv2arr(this.props.items)
-            .flat()
-            .map((val, i) => ({
-                type: val.type,
-                text: getTokens(val).text,
-            }));
+        let itemlist = getTokens(text).mixed.map((val, i) => ({
+            type: val.type,
+            text: getTokens(val).text,
+        }));
 
         var i;
         for (i = 0; i < itemlist.length; i++) {
@@ -91,7 +89,7 @@ class MessageBar extends React.Component {
             console.log("found an item... type: " + item.type + " text: " + item.text);
         }
 
-        return itemlist.toString();
+        //return itemlist.toString();
     }
 
     _onDismiss() {
