@@ -38,10 +38,18 @@ class MessageBar extends React.Component {
     render() {
         console.log("Entered render");
 
+        let dismissHandler = this.showDismissButton && this.props.onDismissClicked ? this._onDismiss() : undefined;
+
+        let truncated = !this.isMultiline;
+
 
         return (
 
-            <FMessageBar>
+            <FMessageBar
+                {...this.props}
+                truncated={truncated}
+                onDismiss={() => dismissHandler}
+            >
                 {"Hello!"}
             </FMessageBar>
         );
@@ -79,7 +87,7 @@ MessageBar.propTypes = {
     * @uxpindescription Whether to allow the text to wrap across multiple lines 
     * @uxpinpropname Multiline
     */
-    multiline: PropTypes.bool,
+    isMultiline: PropTypes.bool,
 
     /** 
     * @uxpindescription Whether to show the dismiss button 
@@ -125,7 +133,7 @@ MessageBar.propTypes = {
 MessageBar.defaultProps = {
     message: "This is a Basic Message Bar. link(Learn More...)",
     messageBarType: "info",
-    multiline: true,
+    isMultiline: true,
     button1Text: "Yes",
     button2Text: "No",
     showDismissButton: true
