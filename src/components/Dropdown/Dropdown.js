@@ -31,7 +31,7 @@ class Dropdown extends React.Component {
     var index = undefined;
     var list = [];
 
-    let selected = UxpNumberParser.parsparseIntsAdjustedeInts(this.props.selected, 1);
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, 1);
 
     if (selected && selected.length > 0) {
       index = selected[0];
