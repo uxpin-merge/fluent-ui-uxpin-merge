@@ -19,10 +19,10 @@ class Dropdown extends React.Component {
     super(props);
 
     this.state = {
-      //default must be undefined
+      //0 based. default must be undefined
       _selectedIndex: undefined,
 
-      //default must be an empty array
+      //0 based. default must be an empty array
       _selectedIndices: [],
     }
   }
@@ -31,7 +31,8 @@ class Dropdown extends React.Component {
     var index = undefined;
     var list = [];
 
-    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, 1);
+    //Props are 1 based. Subtract 1 from whatever the user entered.
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
 
     if (selected && selected.length > 0) {
       index = selected[0];
