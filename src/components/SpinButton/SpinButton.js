@@ -29,6 +29,10 @@ class SpinButton extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log("componentDidUpdate prevprops " + prevProps.sbValue);
+        console.log("                   current props " + this.props.sbValue);
+
+
         if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
         }
@@ -182,9 +186,9 @@ class SpinButton extends React.Component {
         // Save and propagate the new value
 
         //Update the value in State to force an update. Convert back to a string.
-        // this.setState(
-        //     { _currentValue: displayValue }
-        // )
+        this.setState(
+            { _currentValue: displayValue }
+        )
 
         // this.props.sbValue = displayValue;
 
