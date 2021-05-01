@@ -65,6 +65,30 @@ class Nav extends React.Component {
         return leftIcon ? leftIcon.target : '';
     }
 
+    getGroupings(items) {
+        let groupList = [];
+
+        let rawItemList = csv2arr(this.props.items);
+
+        var i;
+        for (i = 0; i < items.length; i++) {
+            let item = itemlist[i];
+
+            //0 is always a parent
+            if (i === 0)
+                groupList.push(i);
+
+            else {
+                rawItem = rawItemList[i];
+                console.log("raw item: " + rawItem);
+                if (!rawItem.startsWith('-'))
+                    groupList.push(i);
+            }
+        }
+
+        return groupList;
+    }
+
     //Parse the nav items
     setItems(callback) {
 
@@ -77,11 +101,13 @@ class Nav extends React.Component {
                 icon: this.getLeftIcon(val)
             }));
 
+        this.getGroupings(itemlist);
+
         console.log("Found these nav items: ");
         var i;
         for (i = 0; i < itemlist.length; i++) {
             let item = itemlist[i];
-            console.log("    " + item.key + " " + item.text + " " + item.icon);
+            console.log("    " + item.key + " " + item.name + " " + item.icon);
         }
 
         this.setState({
