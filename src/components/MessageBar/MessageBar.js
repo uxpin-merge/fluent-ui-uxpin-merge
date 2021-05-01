@@ -46,37 +46,52 @@ class MessageBar extends React.Component {
 
     //Tokenize the string coming in from UXPin for the description and 
     //    comments (Body Copy) to support the link(Link Text) feature.
+    // _getTokenizedText(text) {
+
+    //     var tokens = getTokens(text).mixed.map((el, i) => {
+
+    //         console.log("get token. el " + el.toString());
+
+    //         if (el.type) {
+    //             console.log("   el type " + el.type);
+    //         }
+
+    //         if (typeof (el) === 'string') {
+    //             console.log("get token. el string " + el.toString());
+    //             return (<span key={i}> {el} </span>);
+    //         }
+    //         else if (el.type === 'link') {
+    //             console.log("get token. el link " + el.suggestions);
+    //             if (el.suggestions) {
+    //                 console.log("    has el link " + el.suggestions[0]);
+    //                 return el.suggestions[0];
+    //             }
+    //         }
+    //         else if (el.suggestions[0]) {
+    //             // if there's a suggestion, call the function
+    //             return el.suggestions[0];
+    //         } else {
+    //             // there's no suggestion, return the text
+    //             return (<span key={i}> {el.tokenString} </span>);
+    //         }
+    //     });
+
+    //     return tokens;
+    // }
+
     _getTokenizedText(text) {
+        let itemlist = csv2arr(this.props.items)
+            .flat()
+            .map((val, i) => ({
+                type: val.type,
+                text: getTokens(val).text,
+            }));
 
-        var tokens = getTokens(text).mixed.map((el, i) => {
-
-            console.log("get token. el " + el.toString());
-
-            if (el.type) {
-                console.log("   el type " + el.type);
-            }
-
-            if (typeof (el) === 'string') {
-                console.log("get token. el string " + el.toString());
-                return (<span key={i}> {el} </span>);
-            }
-            else if (el.type === 'link') {
-                console.log("get token. el link " + el.suggestions);
-                if (el.suggestions) {
-                    console.log("    el link " + el.suggestions[0]);
-                    return el.suggestions[0];
-                }
-            }
-            else if (el.suggestions[0]) {
-                // if there's a suggestion, call the function
-                return el.suggestions[0];
-            } else {
-                // there's no suggestion, return the text
-                return (<span key={i}> {el.tokenString} </span>);
-            }
-        });
-
-        return tokens;
+        var i;
+        for (i = 0; i < itemlist.length; i++) {
+            let item = itemlist[i];
+            console.log("found an item... type: " + item.type + " text: " + item.text);
+        }
     }
 
     _onDismiss() {
