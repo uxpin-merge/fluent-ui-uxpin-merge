@@ -83,8 +83,9 @@ export const getTokens = inputStr => {
     //   colorMutator = mutatorsArray.filter(m => m.indexOf('color') !== -1)[0]
     // }
     let suggestions = []
-    if (token.type === 'link') suggestions.push(() => <Link key={Math.random()}>{token.target}</Link>)
-    if (token.type === 'icon') suggestions.push(() => <ActionButton key={Math.random()} style={{
+    let unique = _.uniqueId('token_')
+    if (token.type === 'link') suggestions.push(() => <Link key={unique}>{token.target}</Link>)
+    if (token.type === 'icon') suggestions.push(() => <ActionButton key={unique} style={{
       height: 16,
       width: 26,
       padding: 0,
