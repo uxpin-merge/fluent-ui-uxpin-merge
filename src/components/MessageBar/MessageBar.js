@@ -22,10 +22,15 @@ class MessageBar extends React.Component {
     }
 
     set() {
-        let message = this._getTokenizedText(this.props.message);
+        console.log("set. props.message: " + this.props.message);
+        var msg = '';
+
+        if (this.props.message) {
+            msg = this._getTokenizedText(this.props.message);
+        }
 
         this.setState(
-            { message: message }
+            { message: msg }
         )
     }
 
@@ -34,9 +39,7 @@ class MessageBar extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (
-            prevProps.message !== this.props.message
-        ) {
+        if (prevProps.message !== this.props.message) {
             this.set();
         }
     }
