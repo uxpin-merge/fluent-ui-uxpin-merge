@@ -113,6 +113,7 @@ class SpinButton extends React.Component {
         }
 
         console.log("on validate: " + n + s);
+        this.props.sbValue = n + s;
 
         return n + s;
     }
@@ -142,6 +143,7 @@ class SpinButton extends React.Component {
             //Validate that we haven't gone outside the bounds...
             let m = this._getValidatedNumber(n + this.props.step);
             console.log("on increment: " + m + s);
+            this.props.sbValue = m + s;
             return m + s;
         }
 
@@ -149,6 +151,7 @@ class SpinButton extends React.Component {
         //Validate that we haven't gone outside the bounds...
         let m = this._getValidatedNumber(n - this.props.step);
         console.log("on decrement: " + m + s);
+        this.props.sbValue = m + s;
         return m + s;
     }
 
