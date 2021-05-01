@@ -49,12 +49,12 @@ class MessageBar extends React.Component {
             if (typeof (el) === 'string') {
                 return (<span key={i}> {el} </span>);
             }
-            else if (el.type == 'link') {
-                return el.suggestions[0]();
+            else if (el.type === 'link') {
+                return el.suggestions[0];
             }
             else if (el.suggestions[0]) {
                 // if there's a suggestion, call the function
-                return el.suggestions[0]();
+                return el.suggestions[0];
             } else {
                 // there's no suggestion, return the text
                 return (<span key={i}> {el.tokenString} </span>);
