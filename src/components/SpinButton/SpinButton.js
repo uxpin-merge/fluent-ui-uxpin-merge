@@ -115,6 +115,8 @@ class SpinButton extends React.Component {
         console.log("on validate: " + n + s);
         // this.props.sbValue = n + s;
 
+        console.log("props: " + this.props.toString());
+
         return n + s;
     }
 
@@ -144,6 +146,7 @@ class SpinButton extends React.Component {
             let m = this._getValidatedNumber(n + this.props.step);
             console.log("on increment: " + m + s);
             // this.props.sbValue = m + s;
+
             return m + s;
         }
 
@@ -164,10 +167,9 @@ class SpinButton extends React.Component {
 
         //Raise this event to UXPin. 
         if (this.props.onSBChange) {
-            this.props.onSBChange(this.state._currentValue);
+            this.props.onSBChange();
         }
     }
-
 
     render() {
         let displayValue = this.state._currentValue;
