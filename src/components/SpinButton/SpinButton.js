@@ -33,6 +33,7 @@ class SpinButton extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
+            this._valueChanged();
         }
     }
 
@@ -104,9 +105,6 @@ class SpinButton extends React.Component {
     _onValidate(newValue) {
         let n = this._getValidatedNumber(newValue);
 
-        //Notify UXPin
-        this._valueChanged();
-
         var s = '';
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
@@ -139,14 +137,12 @@ class SpinButton extends React.Component {
             //Add the step value
             //Validate that we haven't gone outside the bounds...
             let m = this._getValidatedNumber(n + this.props.step);
-            this._valueChanged();
             return m + s;
         }
 
         //Subtract the step value
         //Validate that we haven't gone outside the bounds...
         let m = this._getValidatedNumber(n - this.props.step);
-        this._valueChanged();
         return m + s;
     }
 
