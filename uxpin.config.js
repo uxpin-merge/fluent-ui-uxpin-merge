@@ -57,6 +57,7 @@ module.exports = {
       {
         name: 'Items & Lists',
         include: [
+          'src/components/ActivityItem/ActivityItem.js',
           'src/components/Facepile/Facepile.js',
           'src/components/Nav/Nav.js',
           'src/components/Persona/Persona.js',

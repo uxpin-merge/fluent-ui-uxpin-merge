@@ -80,7 +80,6 @@ class MessageBar extends React.Component {
     }
 
     render() {
-        console.log("Entered render");
 
         let dismissHandler = this.showDismissButton ? this._onDismiss() : undefined;
 
@@ -88,7 +87,7 @@ class MessageBar extends React.Component {
 
         let message = this.state.message;
 
-        //Adding ANY buttons to the control appears to cause errors. 
+        //Adding ANY buttons to the control appears to cause fatal errors. 
         // var btn1 = '';
         // var btn2 = '';
         // var btnActions = '';
@@ -134,12 +133,6 @@ class MessageBar extends React.Component {
                 truncated={truncated}
                 messageBarType={MessageBarType[this.props.messageBarType]}
                 onDismiss={() => dismissHandler}
-                actions={
-                    <>
-                        <MessageBarButton>Yes</MessageBarButton>
-                        <MessageBarButton>No</MessageBarButton>
-                    </>
-                }
             >
                 {message}
             </FMessageBar>
