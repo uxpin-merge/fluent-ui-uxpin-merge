@@ -72,14 +72,12 @@ class Nav extends React.Component {
 
         var i;
         for (i = 0; i < items.length; i++) {
-            let item = items[i];
-
             //0 is always a parent
             if (i === 0)
                 groupList.push(i);
 
             else {
-                rawItem = rawItemList[i];
+                var rawItem = rawItemList[i];
                 console.log("raw item: " + rawItem);
                 if (!rawItem.startsWith('-'))
                     groupList.push(i);
