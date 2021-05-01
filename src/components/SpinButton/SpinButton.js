@@ -24,6 +24,10 @@ class SpinButton extends React.Component {
         this.setState(
             { _currentValue: displayValue }
         );
+
+        //Sometimes the props aren't in sync with this display value. 
+        if (this.props.sbValue !== displayValue)
+            this.props.sbValue = displayValue;
     }
 
     componentDidMount() {
