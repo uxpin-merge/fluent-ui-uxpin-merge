@@ -10,11 +10,16 @@ class SpinButton extends React.Component {
     }
 
     set() {
+        var s = '';
+        if (this.props.suffix) {
+            s = ' ' + this.props.suffix.trim();
+        }
+        let displayValue = this._getValidatedNumber(newValue) + s;
+
         //Track the current numerical value within the control
-        this.setState({
-            //Initialize with the props value. This state variable holds a string. 
-            _currentValue: this.props.value
-        });
+        this.setState(
+            { _currentValue: displayValue }
+        );
     }
 
     componentDidMount() {
@@ -27,6 +32,30 @@ class SpinButton extends React.Component {
         }
     }
 
+    _hasSuffix(rawStr) {
+        var success = false;
+
+        if (this.props.suffix) {
+            let s = this.props.suffix.trim();
+            success = rawStr.includes(s);
+        }
+
+        return success;
+    }
+
+    _removeSuffice(rawStr) {
+
+        if (this._hasSuffix(rawStr)) {
+            let s = this.props.suffix.trim();
+            let index = rawStr.indexOf(s);
+
+            return rawStr.substring(0, index);
+        }
+
+        //If we made it this far. we don't have a suffix. 
+        return rawStr;
+    }
+
     /* 
     *  ************* UTILITY METHOD
     *  Validate the proposed new value to set in the control. 
@@ -34,6 +63,24 @@ class SpinButton extends React.Component {
     *  Returns a validated and cleansed numeric value.
     */
     _getValidatedNumber(newValue) {
+
+        newValue = this._removeSuffice(newValue);
+
+        if (!newValue
+            || parseFloat(newValue) > this.props.max
+            || parseFloat(newValue) > this.props.min
+            || newValue.trim().length === 0
+            || isNaN(+newValue)) {
+
+            console.log("_getValidated. Nope. 0");
+            return '0';
+        }
+
+        console.log("validating... " + String(newValue));
+        return String(newValue);
+
+
+
 
         //We have to parse the value and convert it to a number. It might be a letter or word instead. 
         var newNumber = parseFloat(newValue);
@@ -69,7 +116,11 @@ class SpinButton extends React.Component {
         // Validate Value First
         //We have to parse and validate the value first against the min and max allowed.
         //Then we return it to a string so it can be stored properly
-        let displayValue = this._getValidatedNumber(newValue).toString();
+        var s = '';
+        if (this.props.suffix) {
+            s = ' ' + this.props.suffix.trim();
+        }
+        let displayValue = this._getValidatedNumber(newValue) + s;
 
         // ************************
         // Save and propagate the new value
@@ -78,6 +129,8 @@ class SpinButton extends React.Component {
         this.setState(
             { _currentValue: displayValue }
         )
+
+        this.props.value = displayValue;
 
         //Raise this event to UXPin. We'll send them the value in case they can catch it.
         //Let's send it as a number.
@@ -138,7 +191,6 @@ class SpinButton extends React.Component {
 
         return (
             <FSpinButton
-                title={this.props.title}
                 {...this.props}
                 value={newValue}
                 onValidate={(v) => { this._onValidate(v); }}
@@ -186,6 +238,12 @@ SpinButton.propTypes = {
     * @uxpinpropname Step
     * */
     step: PropTypes.number,
+
+    /**
+     * @uxpindescription A short string value to show after the number (Optional)
+     * @uxpinpropname Suffix
+     * */
+    suffix: PropTypes.string,
 
     /**
      * @uxpindescription A little tooltip that will display on hover
