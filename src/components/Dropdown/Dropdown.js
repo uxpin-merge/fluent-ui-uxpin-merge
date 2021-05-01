@@ -127,10 +127,6 @@ class Dropdown extends React.Component {
     }
   }
 
-  _onBlur() {
-    console.log("on blur");
-  }
-
   render() {
 
     //We set both props in the Return.
@@ -159,7 +155,6 @@ class Dropdown extends React.Component {
         selectedKey={sIndex}
         selectedKeys={mIndices}
         onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
-        onBlur={() => { this._onBlur() }}
       />
 
     );
