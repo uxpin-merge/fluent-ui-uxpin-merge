@@ -6,12 +6,11 @@ import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
-const defaultItems = {
-`Apples
+const defaultItems = `Apples
 Bananas
 "I love you, Grapes!"
-Pears`
-}
+Pears`;
+
 
 class Dropdown extends React.Component {
 
