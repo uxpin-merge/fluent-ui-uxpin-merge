@@ -85,7 +85,12 @@ class MessageBar extends React.Component {
             <FMessageBar
                 {...this.props}
                 truncated={truncated}
-
+                actions={
+                    <div>
+                        <MessageBarButton>Yes</MessageBarButton>
+                        <MessageBarButton>No</MessageBarButton>
+                    </div>
+                }
                 messageBarType={MessageBarType[this.props.messageBarType]}
                 onDismiss={() => dismissHandler}
             >
