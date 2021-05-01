@@ -10,15 +10,11 @@ class SpinButton extends React.Component {
     }
 
     set() {
-
-
         var s = '';
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
         let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
-
-        console.log("set. new State val: " + displayValue);
 
         //Track the current numerical value within the control
         this.setState(
@@ -35,10 +31,6 @@ class SpinButton extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("componentDidUpdate prevprops " + prevProps.sbValue);
-        console.log("                   current props " + this.props.sbValue);
-
-
         if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
         }
@@ -79,19 +71,14 @@ class SpinButton extends React.Component {
     *  Returns a validated and cleansed numeric value.
     */
     _getValidatedNumber(newValue) {
-        console.log("getValidated. newValue: " + newValue);
 
         //Now, it's a String
         newValue = this._removeSuffix(newValue);
-
-        console.log("     after removeSuffix: " + newValue);
-
 
         if (!newValue
             || newValue.trim().length === 0
             || isNaN(+newValue)) {
 
-            console.log("_getValidated. Nope. 0");
             return '0';
         }
 
@@ -107,7 +94,6 @@ class SpinButton extends React.Component {
     /* *************************
     *  EVENT HANDLERS
     *  We have to synthesize an onChange event by tracking these 3 separate events. 
-    *  Then we push the new value to the single event sink, valueChanged().
     *  *************************
     **/
 
@@ -116,11 +102,10 @@ class SpinButton extends React.Component {
     *  This value comes in as a string. 
     **/
     _onValidate(newValue) {
-        console.log("on validate with... " + newValue);
         let n = this._getValidatedNumber(newValue);
 
-        //Store it first...
-        this._valueChanged(n);
+        //Notify UXPin
+        this._valueChanged();
 
         var s = '';
         if (this.props.suffix) {
@@ -137,8 +122,6 @@ class SpinButton extends React.Component {
     *  This method calculates what the new value should be. 
     **/
     _onIncDec(oldValue, isIncrement) {
-        console.log("_onIncDec with... " + oldValue);
-
         // ************************
         // Validate and normalize the Value First
         let parsedVal = this._getValidatedNumber(oldValue);
@@ -152,56 +135,31 @@ class SpinButton extends React.Component {
             s = ' ' + this.props.suffix.trim();
         }
 
-        console.log("         incdec " + n);
-
         if (isIncrement) {
             //Add the step value
             //Validate that we haven't gone outside the bounds...
             let m = this._getValidatedNumber(n + this.props.step);
-            this._valueChanged(m);
+            this._valueChanged();
             return m + s;
         }
 
         //Subtract the step value
         //Validate that we haven't gone outside the bounds...
         let m = this._getValidatedNumber(n - this.props.step);
-        this._valueChanged(m);
+        this._valueChanged();
         return m + s;
     }
 
     /* 
-    *  ************* SAVE NEW VALUE, PUBLISH EVENT
-    *  We call this event to save the new value and do other important logic to make sure we can actually use the proposed new value.
-    *  This value comes in as a float, but could be a string. 
+    *  Notify UXPin that the value has changed. 
     */
-    _valueChanged(newValue) {
+    _valueChanged() {
 
-        // ************************
-        // Validate Value First
-        //We have to parse and validate the value first against the min and max allowed.
-        //Then we return it to a string so it can be stored properly
-        var s = '';
-        if (this.props.suffix) {
-            s = ' ' + this.props.suffix.trim();
-        }
-        let displayValue = newValue + s;
+        console.log("_valueChanged event: " + this.props.sbValue);
 
-        console.log("_valueChanged event: " + displayValue);
-
-        // ************************
-        // Save and propagate the new value
-
-        //Update the value in State to force an update. Convert back to a string.
-        // this.setState(
-        //     { _currentValue: displayValue }
-        // )
-
-        // this.props.sbValue = displayValue;
-
-        //Raise this event to UXPin. We'll send them the value in case they can catch it.
-        //Let's send it as a number.
+        //Raise this event to UXPin. 
         if (this.props.onSBChange) {
-            this.props.onSBChange(displayValue);
+            this.props.onSBChange(this.props.sbValue);
         }
     }
 
