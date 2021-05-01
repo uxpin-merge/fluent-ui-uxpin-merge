@@ -77,7 +77,7 @@ class Nav extends React.Component {
                 groupList.push(i);
 
             else {
-                var rawItem = rawItemList[i];
+                var rawItem = rawItemList[i].toString();
                 console.log("raw item: " + rawItem);
                 if (!rawItem.startsWith('-'))
                     groupList.push(i);
