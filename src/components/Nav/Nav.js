@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
-import { getTokens, csv2arr, getTs } from '../_helpers/parser.jsx';
+import { getTokens, csv2arr } from '../_helpers/parser';
 
 
 
