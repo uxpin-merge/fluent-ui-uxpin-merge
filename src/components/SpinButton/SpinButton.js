@@ -14,7 +14,7 @@ class SpinButton extends React.Component {
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
-        let displayValue = this._getValidatedNumber(newValue) + s;
+        let displayValue = this._getValidatedNumber(this.props.value) + s;
 
         //Track the current numerical value within the control
         this.setState(
