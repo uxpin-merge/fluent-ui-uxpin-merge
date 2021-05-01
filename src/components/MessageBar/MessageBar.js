@@ -89,7 +89,7 @@ class MessageBar extends React.Component {
             console.log("found an item... type: " + item.type + " text: " + item.text);
         }
 
-        //return itemlist.toString();
+        return "";
     }
 
     _onDismiss() {
