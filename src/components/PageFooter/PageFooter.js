@@ -40,8 +40,8 @@ const dividerStyle = {
 }
 
 const logoURL = 'https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/fpfv4zlqg5cyaek0q4ln';
-const logoWidth = '100px';
-const logoHeight = '50px';
+const logoWidth = '120px';
+const logoHeight = '60px';
 const logoFit = ImageFit.contain;
 
 //Default nav items to populate the control with.
