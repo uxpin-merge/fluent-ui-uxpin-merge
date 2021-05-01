@@ -72,6 +72,7 @@ class SpinButton extends React.Component {
         console.log("getValidated. newValue: " + newValue);
         console.log("        newValue type: " + Object.prototype.toString.call(newValue));
 
+        //Now, it's a String
         newValue = this._removeSuffix(newValue);
 
         console.log("     after removeSuffix: " + newValue);
@@ -168,7 +169,11 @@ class SpinButton extends React.Component {
     *  This value comes in as a string. 
     **/
     _onValidate(newValue) {
-        this._valueChanged(newValue);
+        var s = '';
+        if (this.props.suffix) {
+            s = ' ' + this.props.suffix.trim();
+        }
+        return this._getValidatedNumber(newValue) + s;
     }
 
     /* 
@@ -180,20 +185,30 @@ class SpinButton extends React.Component {
     _onIncDec(oldValue, isIncrement) {
 
         // ************************
-        // Validate Value First
-        // Initialize it with validated old value
+        // Validate and normalize the Value First
         let parsedVal = this._getValidatedNumber(oldValue);
+
+        //Parse it back to a number, add the step.
+        let n = parseFloat(parsedVal)
+
+        //Prep the suffix
+        var s = '';
+        if (this.props.suffix) {
+            s = ' ' + this.props.suffix.trim();
+        }
+
+        console.log("incdec " + n);
 
         if (isIncrement) {
             //Add the step value
-            //newValue = parsedVal + this.props.step;
-            this._valueChanged(parsedVal + this.props.step);
+            //Validate that we haven't gone outside the bounds...
+            return this._getValidatedNumber(n + this.props.step) + s;
         }
-        else {
-            //Subtract the step value
-            //newValue = parsedVal - this.props.step;
-            this._valueChanged(parsedVal - this.props.step);
-        }
+
+        //Subtract the step value
+        //Validate that we haven't gone outside the bounds...
+        return this._getValidatedNumber(n - this.props.step) + s;
+
     }
 
 
@@ -208,10 +223,10 @@ class SpinButton extends React.Component {
         return (
             <FSpinButton
                 {...this.props}
-                value={newValue}
-                onValidate={(v) => { this._onValidate(v); }}
-                onIncrement={(v) => { this._onIncDec(v, true); }}
-                onDecrement={(v) => { this._onIncDec(v, false); }}
+                // value={newValue}
+                onValidate={(v, evt) => { this._onValidate(v); }}
+                onIncrement={(v, evt) => { this._onIncDec(v, true); }}
+                onDecrement={(v, evt) => { this._onIncDec(v, false); }}
             />
         );
     }
