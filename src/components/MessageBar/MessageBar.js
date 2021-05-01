@@ -5,7 +5,7 @@ import {
     MessageBarButton,
     MessageBarType
 } from '@fluentui/react/lib/MessageBar';
-import { getTokens, csv2arr } from '../_helpers/parser';
+import { getTokens } from '../_helpers/parser';
 
 
 
@@ -14,86 +14,6 @@ class MessageBar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            message: "",
-        }
-    }
-
-    set() {
-        console.log("set. props.message: " + this.props.message);
-        var msg = '';
-
-        if (this.props.message) {
-            msg = this._getTokenizedText(this.props.message);
-        }
-
-        console.log("       set. tokenized text: " + msg);
-
-        this.setState(
-            { message: msg }
-        )
-    }
-
-    componentDidMount() {
-        this.set();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.message !== this.props.message) {
-            this.set();
-        }
-    }
-
-    //Tokenize the string coming in from UXPin for the description and 
-    //    comments (Body Copy) to support the link(Link Text) feature.
-    // _getTokenizedText(text) {
-
-    //     var tokens = getTokens(text).mixed.map((el, i) => {
-
-    //         console.log("get token. el " + el.toString());
-
-    //         if (el.type) {
-    //             console.log("   el type " + el.type);
-    //         }
-
-    //         if (typeof (el) === 'string') {
-    //             console.log("get token. el string " + el.toString());
-    //             return (<span key={i}> {el} </span>);
-    //         }
-    //         else if (el.type === 'link') {
-    //             console.log("get token. el link " + el.suggestions);
-    //             if (el.suggestions) {
-    //                 console.log("    has el link " + el.suggestions[0]);
-    //                 return el.suggestions[0];
-    //             }
-    //         }
-    //         else if (el.suggestions[0]) {
-    //             // if there's a suggestion, call the function
-    //             return el.suggestions[0];
-    //         } else {
-    //             // there's no suggestion, return the text
-    //             return (<span key={i}> {el.tokenString} </span>);
-    //         }
-    //     });
-
-    //     return tokens;
-    // }
-
-    _getTokenizedText(text) {
-        return text;
-
-        let itemlist = getTokens(text).mixed.map((val, i) => ({
-            type: val.type,
-            text: getTokens(val).text,
-        }));
-
-        var i;
-        for (i = 0; i < itemlist.length; i++) {
-            let item = itemlist[i];
-            console.log("found an item... type: " + item.type + " text: " + item.text);
-        }
-
-        return "";
     }
 
     _onDismiss() {
@@ -118,50 +38,11 @@ class MessageBar extends React.Component {
     render() {
         console.log("Entered render");
 
-        //Figure out whether we need to display any action buttons, and configure them.
-        let hasActionButtons = false;
-        var actionButtons = [];
-
-        if (this.props.button2Text) {
-            let btn = (<MessageBarButton style={{ fontSize: '8px', fontWeight: 'lighter' }} onClick={() => { this._onClickButton2(); }}>{this.props.button2Text}</MessageBarButton>);
-            actionButtons.push(btn);
-            hasActionButtons = true;
-        }
-        if (this.props.button1Text) {
-            let btn = (<MessageBarButton primary style={{ fontSize: '8px', fontWeight: 'lighter' }} onClick={() => { this._onClickButton1(); }}>{this.props.button1Text}</MessageBarButton>);
-            actionButtons.push(btn);
-            hasActionButtons = true;
-        }
-
-        let truncate = false;
-        if (!this.props.multiline) {
-            truncate = true;
-        }
-
-        console.log("    Render. Return next");
-
-        var msg = '';
-        if (this.state.message) {
-            msg = this.state.message;
-        }
 
         return (
 
-            <FMessageBar
-                {...this.props}
-                messageBarType={MessageBarType[this.props.messageBarType]}
-                isMultiline={this.props.multiline}
-                truncated={truncate}
-                actions={
-                    (hasActionButtons) ?
-                        <div>{actionButtons}</div>
-                        : ''
-                }
-                dismissIconProps={this.props.showDismissButton && { iconName: "Clear", style: { fontSize: 16 } }}
-                //The Close icon only displays when the event is handled
-                onDismiss={this.props.showDismissButton && this.props.onDismissClicked ? this._onDismiss.bind(this) : undefined}
-            >
-                {msg}
+            <FMessageBar>
+                {"Hello!"}
             </FMessageBar>
         );
     }
