@@ -42,12 +42,50 @@ class MessageBar extends React.Component {
 
         let truncated = !this.isMultiline;
 
+        var btn1 = '';
+        var btn2 = '';
+        var btnActions = '';
+        var hasBtns = false;
+
+        if (this.props.button1Text) {
+            btn1 = (
+                <MessageBarButton
+                    primary
+                    style={{ fontSize: '10px', fontWeight: 'lighter' }}
+                    onClick={() => { this._onClickButton1(); }}>
+                    {this.props.button1Text}
+                </MessageBarButton>
+            );
+            hasBtns = true;
+        }
+
+        if (this.props.button2Text) {
+            btn2 = (
+                <MessageBarButton
+                    style={{ fontSize: '10px', fontWeight: 'lighter' }}
+                    onClick={() => { this._onClickButton2(); }}>
+                    {this.props.button2Text}
+                </MessageBarButton>);
+            hasBtns = true;
+        }
+
+        if (hasBtns) {
+            btnActions = (
+                <div>
+                    {btn2}
+                    {btn1}
+                </div>
+            )
+        }
+
 
         return (
 
             <FMessageBar
                 {...this.props}
                 truncated={truncated}
+                actions={btnActions}
+                messageBarType={MessageBarType[this.props.messageBarType]}
                 onDismiss={() => dismissHandler}
             >
                 {this.props.message}
