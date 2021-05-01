@@ -39,10 +39,9 @@ const dividerStyle = {
     borderLeft: '1px solid #CBD2D6',
 }
 
-const logoURL = 'https://randomuser.me/api/portraits/women/15.jpg';
-// const logoURL = 'https://uc.uxpin.com/files/135332/142253/FullColor_Horizontal_Logo_RGB-a8f6cc.png';
-const logoWidth = '102px';
-const logoHeight = '102px';
+const logoURL = 'https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/fpfv4zlqg5cyaek0q4ln';
+const logoWidth = '100px';
+const logoHeight = '50px';
 const logoFit = ImageFit.contain;
 
 //Default nav items to populate the control with.
