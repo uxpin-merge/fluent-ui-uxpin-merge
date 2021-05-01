@@ -77,11 +77,7 @@ export const getTokens = inputStr => {
   }
 
   const getSuggestions = token => {
-    // let mutatorsArray = getMutators(token.tokenString)
-    // let colorMutator = null
-    // if (mutatorsArray && mutatorsArray.filter(m => m.indexOf('color') !== -1)) {
-    //   colorMutator = mutatorsArray.filter(m => m.indexOf('color') !== -1)[0]
-    // }
+
     let suggestions = []
     let unique = _.uniqueId('token_')
     if (token.type === 'link') suggestions.push(() => <Link key={unique}>{token.target}</Link>)
@@ -91,13 +87,6 @@ export const getTokens = inputStr => {
       padding: 0,
       margin: 0,
     }}
-      // className={mergeStyles({
-      //   selectors: {
-      //     '& i': {
-      //       color: colorMutator ? `var(--${colorMutator})` : 'var(--color-grey-600)'
-      //     }
-      //   }
-      // })}
       iconProps={{ iconName: token.target }} />)
     return suggestions
   }
