@@ -285,7 +285,7 @@ SpinButton.propTypes = {
  */
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
-    value: '1',
+    sbValue: '1',
     min: 0,
     max: 10,
     step: 1,
