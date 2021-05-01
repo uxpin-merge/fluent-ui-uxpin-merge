@@ -180,17 +180,17 @@ MessageBar.propTypes = {
     */
     showDismissButton: PropTypes.bool,
 
-    /**
-     * @uxpindescription The text to display on the Primary Button (Optional)
-     * @uxpinpropname Primary Button Text
-     */
-    button1Text: PropTypes.string,
+    // /**
+    //  * @uxpindescription The text to display on the Primary Button (Optional)
+    //  * @uxpinpropname Primary Button Text
+    //  */
+    // button1Text: PropTypes.string,
 
-    /**
-     * @uxpindescription The text to display on the Secondary Button (Optional)
-     * @uxpinpropname Secondary Button Text
-     */
-    button2Text: PropTypes.string,
+    // /**
+    //  * @uxpindescription The text to display on the Secondary Button (Optional)
+    //  * @uxpinpropname Secondary Button Text
+    //  */
+    // button2Text: PropTypes.string,
 
     /**
      * @uxpindescription Fires when the Close button is clicked on
@@ -198,17 +198,17 @@ MessageBar.propTypes = {
      */
     onDismissClicked: PropTypes.func,
 
-    /**
-     * @uxpindescription Fires when the Primary Button is clicked on
-     * @uxpinpropname Primary Click
-     */
-    onClick1: PropTypes.func,
+    // /**
+    //  * @uxpindescription Fires when the Primary Button is clicked on
+    //  * @uxpinpropname Primary Click
+    //  */
+    // onClick1: PropTypes.func,
 
-    /**
-     * @uxpindescription Fires when the Secondary Button is clicked on
-     * @uxpinpropname Secondary Click
-     */
-    onClick2: PropTypes.func
+    // /**
+    //  * @uxpindescription Fires when the Secondary Button is clicked on
+    //  * @uxpinpropname Secondary Click
+    //  */
+    // onClick2: PropTypes.func
 };
 
 
@@ -219,8 +219,8 @@ MessageBar.defaultProps = {
     message: "This is a Basic Message Bar. link(Learn More...)",
     messageBarType: "info",
     isMultiline: true,
-    button1Text: "Yes",
-    button2Text: "No",
+    // button1Text: "Yes",
+    // button2Text: "No",
     showDismissButton: true
 };
 
