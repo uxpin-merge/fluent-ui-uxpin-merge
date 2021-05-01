@@ -14,6 +14,50 @@ class MessageBar extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            message: ""
+        }
+    }
+
+    set() {
+        let message = this._getTokenizedText(this.props.message);
+
+        this.setState(
+            { message: message }
+        )
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.message !== this.props.message) {
+            this.set();
+        }
+    }
+
+    //Tokenize the string coming in from UXPin for the description and 
+    //    comments (Body Copy) to support the link(Link Text) feature.
+    _getTokenizedText(text) {
+
+        var tokens = getTokens(text).mixed.map((el, i) => {
+            if (typeof (el) === 'string') {
+                return (<span key={i}> {el} </span>);
+            }
+            else if (el.type == 'link') {
+                return el.suggestions[0]();
+            }
+            else if (el.suggestions[0]) {
+                // if there's a suggestion, call the function
+                return el.suggestions[0]();
+            } else {
+                // there's no suggestion, return the text
+                return (<span key={i}> {el.tokenString} </span>);
+            }
+        });
+
+        return tokens;
     }
 
     _onDismiss() {
@@ -42,41 +86,44 @@ class MessageBar extends React.Component {
 
         let truncated = !this.isMultiline;
 
-        var btn1 = '';
-        var btn2 = '';
-        var btnActions = '';
-        var hasBtns = false;
+        let message = this.state.message;
 
-        if (this.props.button1Text) {
-            btn1 = (
-                <MessageBarButton
-                    primary
-                    style={{ fontSize: '10px', fontWeight: 'lighter' }}
-                    onClick={() => { this._onClickButton1(); }}>
-                    {this.props.button1Text}
-                </MessageBarButton>
-            );
-            hasBtns = true;
-        }
+        //Adding ANY buttons to the control appears to cause errors. 
+        // var btn1 = '';
+        // var btn2 = '';
+        // var btnActions = '';
+        // var hasBtns = false;
 
-        if (this.props.button2Text) {
-            btn2 = (
-                <MessageBarButton
-                    style={{ fontSize: '10px', fontWeight: 'lighter' }}
-                    onClick={() => { this._onClickButton2(); }}>
-                    {this.props.button2Text}
-                </MessageBarButton>);
-            hasBtns = true;
-        }
+        // if (this.props.button1Text) {
+        //     btn1 = (
+        //         <MessageBarButton
+        //             primary
+        //             style={{ fontSize: '10px', fontWeight: 'lighter' }}
+        //             onClick={() => { this._onClickButton1(); }}>
+        //             {this.props.button1Text}
+        //         </MessageBarButton>
+        //     );
+        //     hasBtns = true;
+        // }
 
-        if (hasBtns) {
-            btnActions = (
-                <div>
-                    {btn2}
-                    {btn1}
-                </div>
-            )
-        }
+        // if (this.props.button2Text) {
+        //     btn2 = (
+        //         <MessageBarButton
+        //             style={{ fontSize: '10px', fontWeight: 'lighter' }}
+        //             onClick={() => { this._onClickButton2(); }}>
+        //             {this.props.button2Text}
+        //         </MessageBarButton>);
+        //     hasBtns = true;
+        // }
+
+        // if (hasBtns) {
+        //     btnActions = (
+        //         <div>
+        //             {btn2}
+        //             {btn1}
+        //         </div>
+        //     )
+        // }
 
         // actions={btnActions}
 
@@ -85,16 +132,10 @@ class MessageBar extends React.Component {
             <FMessageBar
                 {...this.props}
                 truncated={truncated}
-                actions={
-                    <div>
-                        <MessageBarButton>Yes</MessageBarButton>
-                        <MessageBarButton>No</MessageBarButton>
-                    </div>
-                }
                 messageBarType={MessageBarType[this.props.messageBarType]}
                 onDismiss={() => dismissHandler}
             >
-                {this.props.message}
+                {message}
             </FMessageBar>
         );
     }
