@@ -5,9 +5,7 @@ import {
     MessageBarButton,
     MessageBarType
 } from '@fluentui/react/lib/MessageBar';
-import { getTokens } from '../_helpers/parser';
-import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-
+import { getTokens, csv2arr } from '../_helpers/parser';
 
 
 
@@ -92,6 +90,8 @@ class MessageBar extends React.Component {
             let item = itemlist[i];
             console.log("found an item... type: " + item.type + " text: " + item.text);
         }
+
+        return itemlist.toString();
     }
 
     _onDismiss() {
