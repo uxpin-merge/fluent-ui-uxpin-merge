@@ -74,7 +74,7 @@ module.exports = {
         name: 'Notification & Engagement',
         include: [
           'src/components/Coachmark/Coachmark.js',
-
+          'src/components/MessageBar/MessageBar.js',
           'src/components/TeachingBubble/TeachingBubble.js',
         ],
       },
