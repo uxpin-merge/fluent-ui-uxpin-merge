@@ -23,9 +23,9 @@ class SpinButton extends React.Component {
             { _currentValue: displayValue, }
         );
 
-        //Sometimes the props aren't in sync with this display value. 
-        if (this.props.sbValue !== displayValue)
-            this.props.sbValue = displayValue;
+        // //Sometimes the props aren't in sync with this display value. 
+        // if (this.props.sbValue !== displayValue)
+        //     this.props.sbValue = displayValue;
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ class SpinButton extends React.Component {
 
         if (prevProps.sbValue !== this.props.sbValue) {
 
-            console.log("    >>>> old: " + prevProps.value + " new: " + this.props.sbValue);
+            console.log("    >>>> old: " + prevProps.sbValue + " new: " + this.props.sbValue);
 
             this.set();
         }
@@ -165,14 +165,18 @@ class SpinButton extends React.Component {
 
 
     render() {
+        let displayValue = this.state._currentValue;
 
-        console.log("render: " + this.props.sbValue);
+
+        console.log("render props: " + this.props.sbValue);
+        console.log("render state: " + displayValue);
 
         return (
 
             <FSpinButton
                 {...this.props}
-                value={this.state._currentValue}
+                value={displayValue}
+
                 onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
                 onDecrement={(v) => { this._onIncDec(v, false); }}
@@ -251,7 +255,7 @@ SpinButton.propTypes = {
  */
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
-    value: '1',
+    sbValue: '1',
     min: 0,
     max: 10,
     step: 1,
