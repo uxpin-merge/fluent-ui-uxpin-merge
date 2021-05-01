@@ -30,8 +30,6 @@ const defaultInternalPadding = 24;
 const defaultTextStackPadding = 6;
 
 const defaultTextStackMinWidth = '300px';
-const defaultCorpInfoMaxWidth = '1000px';
-
 
 const dividerStyle = {
     width: 1,
@@ -347,13 +345,28 @@ class PageFooter extends React.Component {
             },
         };
 
-        let logoProps = {
-            shouldFadeIn: true,
-            src: logoURL,
-            imageFit: logoFit,
-            maximizeFrame: true,
-            width: logoWidth,
-            height: logoHeight,
+        var logoStack = '';
+        if (this.props.logoURL) {
+
+            let logoW = this.props.logoWidth > -1 ? this.props.logoWidth + 'px' : logoWidth;
+            let logoH = this.props.logoHeight > -1 ? this.props.logoHeight + 'px' : logoHeight;
+
+            let logoProps = {
+                shouldFadeIn: true,
+                src: this.props.logoURL,
+                imageFit: logoFit,
+                maximizeFrame: true,
+                width: logoW,
+                height: logoH,
+            }
+
+            logoStack = (
+                <StackItem>
+                    <Image
+                        {...logoProps}
+                    />
+                </StackItem>
+            );
         }
 
         //With one number, the padding applies to both rows and columns.
@@ -428,11 +441,7 @@ class PageFooter extends React.Component {
 
                 {divider}
 
-                <StackItem>
-                    <Image
-                        {...logoProps}
-                    />
-                </StackItem>
+                {logoStack}
 
                 <StackItem>
                     <Stack                                  //Right side Company Info Stack
@@ -469,12 +478,6 @@ class PageFooter extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 PageFooter.propTypes = {
-
-    /**
-     * @uxpindescription Specify a text color with a Hex or color token, such as '#ffffff' or 'blue-700'. 
-     * @uxpinpropname Text Color
-     */
-    textColor: PropTypes.string,
 
     /**
      * @uxpindescription The 1st line of text. Enter product team name. Use format:  Display Text | http://www.website.com (Optional)
@@ -517,6 +520,25 @@ PageFooter.propTypes = {
     links: PropTypes.string,
 
     /**
+     * @uxpindescription The full URL to an image file. (Optional)
+     * @uxpinpropname Logo URL 
+     * @uxpincontroltype textfield(6)
+     */
+    logoURL: PropTypes.string,
+
+    /**
+     * @uxpindescription The width to reserve for the logo
+     * @uxpinpropname Logo Width
+     */
+    logoWidth: PropTypes.number,
+
+    /**
+     * @uxpindescription The height to reserve for the logo
+     * @uxpinpropname Logo Height
+     */
+    logoHeight: PropTypes.number,
+
+    /**
      * @uxpindescription The text to show on the Copyright line (Optional)
      * @uxpinpropname Copyright 
      * @uxpincontroltype textfield(4)
@@ -531,16 +553,22 @@ PageFooter.propTypes = {
     confidentiality: PropTypes.string,
 
     /**
-     * @uxpindescription The thickness of the bottom border line 
-     * @uxpinpropname Border Line Thickness
+     * @uxpindescription Specify a text color with a Hex or color token, such as '#ffffff' or 'blue-700'. 
+     * @uxpinpropname Text Color
      */
-    borderThickness: PropTypes.number,
+    textColor: PropTypes.string,
 
     /**
      * @uxpindescription Specify a text color with a Hex or color token, such as '#ffffff' or 'blue-700'. 
      * @uxpinpropname Border Color
      */
     borderColor: PropTypes.string,
+
+    /**
+     * @uxpindescription The thickness of the bottom border line 
+     * @uxpinpropname Border Line Thickness
+     */
+    borderThickness: PropTypes.number,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
@@ -562,6 +590,9 @@ PageFooter.defaultProps = {
     line2Value: defaultLine2Text,
     line3Value: defaultLine3Text,
     links: defaultLinks,
+    logoURL: logoURL,
+    logoWidth: logoWidth,
+    logoHeight: logoHeight,
     copyright: copyright,
     confidentiality: confidentiality,
     borderThickness: defaultBorderThickness,
