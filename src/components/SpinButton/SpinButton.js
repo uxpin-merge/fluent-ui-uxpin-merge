@@ -14,7 +14,7 @@ class SpinButton extends React.Component {
         if (this.props.suffix) {
             s = ' ' + this.props.suffix.trim();
         }
-        let displayValue = this._getValidatedNumber(this.props.value) + s;
+        let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
 
         console.log("    set: " + displayValue);
 
@@ -24,10 +24,8 @@ class SpinButton extends React.Component {
         );
 
         //Sometimes the props aren't in sync with this display value. 
-        if (this.props.value !== displayValue)
-            this.props.value = displayValue;
-
-
+        if (this.props.sbValue !== displayValue)
+            this.props.sbValue = displayValue;
     }
 
     componentDidMount() {
@@ -35,15 +33,13 @@ class SpinButton extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("comp did update. old: " + prevProps.value + " new: " + this.props.value);
+        console.log("comp did update. old: " + prevProps.sbValue + " new: " + this.props.sbValue);
 
-        if (prevProps.value !== this.props.value) {
+        if (prevProps.sbValue !== this.props.sbValue) {
 
-            console.log("    >>>> old: " + prevProps.value + " new: " + this.props.value);
+            console.log("    >>>> old: " + prevProps.value + " new: " + this.props.sbValue);
 
             this.set();
-
-            this._valueChanged();
         }
     }
 
@@ -159,7 +155,7 @@ class SpinButton extends React.Component {
     */
     _valueChanged() {
 
-        console.log("_valueChanged event: " + this.props.value);
+        console.log("_valueChanged event: " + this.props.sbValue);
 
         //Raise this event to UXPin. 
         if (this.props.onSBChange) {
@@ -170,13 +166,13 @@ class SpinButton extends React.Component {
 
     render() {
 
-        console.log("render: " + this.props.value);
+        console.log("render: " + this.props.sbValue);
 
         return (
 
             <FSpinButton
                 {...this.props}
-
+                value={this.state._currentValue}
                 onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
                 onDecrement={(v) => { this._onIncDec(v, false); }}
@@ -203,7 +199,7 @@ SpinButton.propTypes = {
      * @uxpinbind onSBChange
      * @uxpinpropname * Value
      * */
-    value: PropTypes.number,
+    sbValue: PropTypes.number,
 
     /**
     * @uxpindescription The minimum value of the SpinButton
