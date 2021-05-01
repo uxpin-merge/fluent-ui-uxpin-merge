@@ -39,7 +39,8 @@ const dividerStyle = {
     borderLeft: '1px solid #CBD2D6',
 }
 
-const logoURL = 'https://uc.uxpin.com/files/135332/142253/FullColor_Horizontal_Logo_RGB-a8f6cc.png';
+const logoURL = 'https://randomuser.me/api/portraits/women/15.jpg';
+// const logoURL = 'https://uc.uxpin.com/files/135332/142253/FullColor_Horizontal_Logo_RGB-a8f6cc.png';
 const logoWidth = '102px';
 const logoHeight = '25px';
 const logoFit = ImageFit.contain;
