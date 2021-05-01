@@ -12,6 +12,7 @@ Bananas
 Pears`;
 
 
+
 class Dropdown extends React.Component {
 
   constructor(props) {
@@ -27,11 +28,15 @@ class Dropdown extends React.Component {
   }
 
   set() {
-    let selected = UxpNumberParser.parseInts(this.props.selected);
-    let index = undefined;
+    var index = undefined;
+    var list = [];
 
-    if (selected && selected.length > 0)
+    let selected = UxpNumberParser.parsparseIntsAdjustedeInts(this.props.selected, 1);
+
+    if (selected && selected.length > 0) {
       index = selected[0];
+      list = selected;
+    }
     // const selected = csv2arr(this.props.selected)
     //   .flat()
     //   .map(
@@ -40,7 +45,7 @@ class Dropdown extends React.Component {
 
     this.setState({
       _selectedIndex: index,
-      _selectedIndices: selected
+      _selectedIndices: list,
     })
   }
 
