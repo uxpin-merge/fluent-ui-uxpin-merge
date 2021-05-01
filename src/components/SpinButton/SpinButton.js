@@ -208,7 +208,7 @@ class SpinButton extends React.Component {
 
             <FSpinButton
                 {...this.props}
-                value={this.state._currentValue}
+                value={this.props.sbValue}
 
                 onValidate={(v) => { this._onValidate(v); }}
                 onIncrement={(v) => { this._onIncDec(v, true); }}
