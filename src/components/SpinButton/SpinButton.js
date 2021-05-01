@@ -37,23 +37,29 @@ class SpinButton extends React.Component {
 
         if (this.props.suffix) {
             let s = this.props.suffix.trim();
+            //Convert it in case it came through as a number
+            rawStr = String(rawStr);
             success = rawStr.includes(s);
         }
 
         return success;
     }
 
+
+    //We want the returned value to always be converted to a Float
     _removeSuffice(rawStr) {
 
         if (this._hasSuffix(rawStr)) {
             let s = this.props.suffix.trim();
+            rawStr = String(rawStr);
             let index = rawStr.indexOf(s);
+            let newValue = rawStr.substring(0, index);
 
-            return rawStr.substring(0, index);
+            return parseFloat(newValue);
         }
 
         //If we made it this far. we don't have a suffix. 
-        return rawStr;
+        return parseFloat(rawStr);
     }
 
     /* 
@@ -63,18 +69,25 @@ class SpinButton extends React.Component {
     *  Returns a validated and cleansed numeric value.
     */
     _getValidatedNumber(newValue) {
-
-        newValue = this._removeSuffice(newValue);
+        console.log("getValidated. newValue: " + newValue);
 
         if (!newValue
-            || parseFloat(newValue) > this.props.max
-            || parseFloat(newValue) > this.props.min
-            || newValue.trim().length === 0
+            || String(newValue).trim().length === 0
             || isNaN(+newValue)) {
 
             console.log("_getValidated. Nope. 0");
             return '0';
         }
+
+        newValue = this._removeSuffice(newValue);
+
+        if (parseFloat(newValue) > this.props.max)
+            return this.props.max;
+
+        if (parseFloat(newValue) < this.props.min)
+            return this.props.min;
+
+
 
         console.log("validating... " + String(newValue));
         return String(newValue);
