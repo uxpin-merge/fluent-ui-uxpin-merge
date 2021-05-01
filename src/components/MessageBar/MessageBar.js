@@ -46,11 +46,23 @@ class MessageBar extends React.Component {
     _getTokenizedText(text) {
 
         var tokens = getTokens(text).mixed.map((el, i) => {
+
+            console.log("get token. el " + el.toString());
+
+            if (el.type) {
+                console.log("   el type " + el.type);
+            }
+
             if (typeof (el) === 'string') {
+                console.log("get token. el string " + el.toString());
                 return (<span key={i}> {el} </span>);
             }
             else if (el.type === 'link') {
-                return el.suggestions[0];
+                console.log("get token. el link " + el.suggestions);
+                if (el.suggestions) {
+                    console.log("    el link " + el.suggestions[0]);
+                    return el.suggestions[0];
+                }
             }
             else if (el.suggestions[0]) {
                 // if there's a suggestion, call the function
