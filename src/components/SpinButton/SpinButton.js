@@ -168,7 +168,8 @@ class SpinButton extends React.Component {
         let displayValue = this.state._currentValue;
 
 
-        console.log("render props: " + this.props.sbValue);
+        console.log("render props.sbValue: " + this.props.sbValue);
+        console.log("render props.value: " + this.props.value);
         console.log("render state: " + displayValue);
 
         return (
