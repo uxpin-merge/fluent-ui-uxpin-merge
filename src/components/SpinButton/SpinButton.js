@@ -38,7 +38,7 @@ class SpinButton extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("comp did update. old: " + prevProps.sbValue + " new: " + this.props.sbValue);
+        console.log("comp did update. new: " + this.props.sbValue);
 
         if (prevProps.sbValue !== this.props.sbValue) {
             this.set();
@@ -113,7 +113,7 @@ class SpinButton extends React.Component {
         }
 
         console.log("on validate: " + n + s);
-        this.props.sbValue = n + s;
+        // this.props.sbValue = n + s;
 
         return n + s;
     }
@@ -143,7 +143,7 @@ class SpinButton extends React.Component {
             //Validate that we haven't gone outside the bounds...
             let m = this._getValidatedNumber(n + this.props.step);
             console.log("on increment: " + m + s);
-            this.props.sbValue = m + s;
+            // this.props.sbValue = m + s;
             return m + s;
         }
 
@@ -151,7 +151,7 @@ class SpinButton extends React.Component {
         //Validate that we haven't gone outside the bounds...
         let m = this._getValidatedNumber(n - this.props.step);
         console.log("on decrement: " + m + s);
-        this.props.sbValue = m + s;
+        // this.props.sbValue = m + s;
         return m + s;
     }
 
@@ -181,9 +181,9 @@ class SpinButton extends React.Component {
             <FSpinButton
                 {...this.props}
                 value={displayValue}
-                onValidate={(v) => { this._onValidate(v); }}
-                onIncrement={(v) => { this._onIncDec(v, true); }}
-                onDecrement={(v) => { this._onIncDec(v, false); }}
+                onValidate={(v) => { this._onValidate(v) }}
+                onIncrement={(v) => { this._onIncDec(v, true) }}
+                onDecrement={(v) => { this._onIncDec(v, false) }}
             />
         );
     }
