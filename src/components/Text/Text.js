@@ -153,7 +153,7 @@ Text.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Text.defaultProps = {
-  value: 'The quick brown fox jumped over the lazy dog.',
+  textValue: 'The quick brown fox jumped over the lazy dog.',
   size: 'medium',
   bold: false,
   italic: false,
