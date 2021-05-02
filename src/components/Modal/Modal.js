@@ -114,6 +114,7 @@ class Modal extends React.Component {
                     isDarkOverlay={this.props.darkOverlay}
                     isBlocking={this.props.blocking}
                     dragOptions={this.props.draggable ? _dragOptions : undefined}
+                    styles={topStackItemStyles}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
                     {/* Header Area */}
@@ -123,7 +124,6 @@ class Modal extends React.Component {
                             horizontal={true}
                             verticalAlign={'center'}
                             horizontalAlign={'start'}
-                            styles={topStackItemStyles}
                             tokens={{
                                 padding: 12,
                                 childrenGap: 12,
