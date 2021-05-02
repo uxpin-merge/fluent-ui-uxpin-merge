@@ -285,7 +285,8 @@ Pivot.propTypes = {
  */
 Pivot.defaultProps = {
   tabs: defaultTabs,
-  selectedIndex: 1
+  selectedIndex: 1,
+  gutterPadding: 24,
 };
 
 export { Pivot as default };
