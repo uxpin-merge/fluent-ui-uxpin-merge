@@ -4,6 +4,7 @@ import {
   Pivot as FPivot,
   PivotItem
 } from '@fluentui/react/lib/Pivot';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
@@ -14,6 +15,15 @@ const defaultTabs = `Tab One
 Tab Two
 Tab Three
 Tab Four`;
+
+
+//The smallest allowed box size
+const defaultBoxSize = '0';
+const verticalAlign = 'start';
+const stretchAlign = 'stretch';
+
+//In case we can't parse user-entered internal padding info or it's unspecified
+const defaultPadding = "12";
 
 
 
@@ -107,14 +117,69 @@ class Pivot extends React.Component {
     //The prop is 1-based. The tab keys are also 1-based.
     let key = this.state.selectedIndex;
 
-    return (
+    //With one number, the padding applies to both rows and columns.  
+    //Let's make sure we have a positive number. 
+    let pad = this.props.gutterPadding > -1 ? this.props.gutterPadding : 0;
 
-      <FPivot
+    const stackTokens = {
+      childrenGap: pad,
+      padding: 0,
+    };
+
+    let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
+
+    const topStackItemStyles = {
+      root: {
+        height: 'auto',
+        minHeight: mHeight + 'px',
+        width: 'auto',
+      },
+    };
+
+    //Set up the Tab Panel
+    var tabPanel = '';
+    if (this.props.children) {
+      //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+      let childList = React.Children.toArray(this.props.children);
+
+      //Now, we configure the StackItem
+      if (childList.length) {
+        //Minus 1 for the 0-based array
+        let child = childList[key - 1];
+
+        tabPanel = (
+          <StackItem
+            key={key}
+            align={stretchAlign}
+            grow={false}
+          >
+            {child}
+          </StackItem>
+        );
+      }
+    }
+
+    return (
+      <Stack
         {...this.props}
-        selectedKey={key}
-        onLinkClick={(pi) => { this._onLinkClick(pi); }} >
-        {tabList}
-      </FPivot>
+        horizontal={false}
+        tokens={stackTokens}
+        horizontalAlign={stretchAlign}
+        verticalAlign={verticalAlign}
+        wrap={false}
+      >
+        <StackItem>
+          <FPivot
+            {...this.props}
+            selectedKey={key}
+            onLinkClick={(pi) => { this._onLinkClick(pi); }} >
+            {tabList}
+          </FPivot>
+        </StackItem>
+
+        {tabPanel}
+
+      </Stack>
     )
   }
 }
@@ -124,6 +189,14 @@ class Pivot extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Pivot.propTypes = {
+
+  /**
+   * Don't show this prop in the UXPin Editor. 
+   * @uxpinignoreprop 
+   * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
+   * @uxpinpropname Right Contents
+   */
+  children: PropTypes.node,
 
   /**
   * @uxpindescription The 1-based index value of the tab to be shown as selected by default
@@ -137,6 +210,19 @@ Pivot.propTypes = {
   * @uxpincontroltype codeeditor
   */
   tabs: PropTypes.string.isRequired,
+
+  /**
+  * @uxpindescription The minimum height of the control   
+  * @uxpinpropname Min Height
+  */
+  boxHeight: PropTypes.number,
+
+  /**
+   * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
+   * @uxpindescription The vertical padding between the Pivot and the tab panel.
+   * @uxpinpropname Gutter
+   */
+  gutterPadding: PropTypes.number,
 
   /**
   * @uxpindescription Fires when Tab 1 is clicked
