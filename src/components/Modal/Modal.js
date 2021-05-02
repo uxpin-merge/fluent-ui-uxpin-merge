@@ -165,7 +165,7 @@ Modal.propTypes = {
  */
 Modal.defaultProps = {
     show: true,
-    maxWidth: large,
+    maxWidth: 'large',
     title: "Basic Modal",
     draggable: false,
     darkOverlay: true,
