@@ -116,10 +116,10 @@ class Modal extends React.Component {
                     dragOptions={this.props.draggable ? _dragOptions : undefined}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
+
                     {/* Modal Display Area */}
                     <Stack
-                        horizontalAlign={'stretch'}
-                        styles={modalStyles}>
+                        horizontalAlign={'stretch'}>
 
                         {/* Header and Close button */}
                         <Stack
