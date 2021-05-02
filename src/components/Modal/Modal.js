@@ -87,6 +87,14 @@ class Modal extends React.Component {
             );
         }
 
+        let mWidth = getWidthFromSize(this.props.maxWidth);
+
+        const topStackItemStyles = {
+            root: {
+                width: mWidth + 'px',
+                maxWidth: mWidth + 'px',
+            },
+        };
 
         return (
             <div>
@@ -102,7 +110,6 @@ class Modal extends React.Component {
                     }}><br /><em><strong>Modal:</strong></em><br />Move this marker offscreen</div>
 
                 <FModal
-                    maxWidth={getWidthFromSize(this.props.maxWidth)}
                     isOpen={this.state.open}
                     isDarkOverlay={this.props.darkOverlay}
                     isBlocking={this.props.blocking}
@@ -116,6 +123,7 @@ class Modal extends React.Component {
                             horizontal={true}
                             verticalAlign={'center'}
                             horizontalAlign={'start'}
+                            styles={topStackItemStyles}
                             tokens={{
                                 padding: 12,
                                 childrenGap: 12,
