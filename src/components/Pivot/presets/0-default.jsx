@@ -5,8 +5,8 @@ import Text from '../../Text/Text';
 
 
 
-const tab1text = "Tab 1 ";
-const tab2text = "Tab 2 ";
+const tab1text = "Tab 1";
+const tab2text = "Tab 2";
 const tab3text = "Tab 3";
 const tab4text = "Tab 4";
 
@@ -14,17 +14,17 @@ const size = "large";
 
 export default (
   <Pivot uxpId="pivot1" >
-    <PivotPanel>
-      <Text variant={size} value={tab1text} />
+    <PivotPanel uxpId="pp1">
+      <Text uxpId="t1" variant={size} value={tab1text} />
     </PivotPanel>
-    <PivotPanel>
-      <Text variant={size} value={tab2text} />
+    <PivotPanel uxpId="pp2">
+      <Text uxpId="t2" variant={size} value={tab2text} />
     </PivotPanel>
-    <PivotPanel>
-      <Text variant={size} value={tab3text} />
+    <PivotPanel uxpId="pp3">
+      <Text uxpId="t3" variant={size} value={tab3text} />
     </PivotPanel>
-    <PivotPanel>
-      <Text variant={size} value={tab4text} />
+    <PivotPanel uxpId="pp4">
+      <Text uxpId="t4" variant={size} value={tab4text} />
     </PivotPanel>
   </Pivot>
 );
