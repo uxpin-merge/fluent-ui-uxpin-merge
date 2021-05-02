@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Modal as FModal } from '@fluentui/react/lib/Modal';
-
+import { Stack } from '@fluentui/react/lib/Stack';
+import { Text } from '@fluentui/react/lib/Text';
+import ActionButton from '../ActionButton/ActionButton';
 
 
 const _dragOptions = {
@@ -9,6 +11,17 @@ const _dragOptions = {
     closeMenuItemText: 'Close',
 };
 
+const small = 'small';
+const medium = 'medium';
+const large = 'large';
+
+const getWidthFromSize = width => {
+    switch (width) {
+        case small: return 340;
+        case medium: return 680;
+        case large: return 1020;
+    }
+}
 
 
 class Modal extends React.Component {
@@ -83,10 +96,47 @@ class Modal extends React.Component {
                     dragOptions={this.props.draggable ? _dragOptions : undefined}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
+                    {/* Header Area */}
+                    <Stack>
+                        {/* Header and Close button */}
+                        <Stack
+                            horizontal={true}
+                            verticalAlign={'center'}
+                            horizontalAlign={'start'}
+                            tokens={{
+                                padding: 12,
+                                childrenGap: 12,
+                            }}>
+
+                            {/* Children Area */}
+                            <Stack
+                                tokens={{
+                                    padding: 0,
+                                    childrenGap: 6,
+                                }}
+                                horizontalAlign={'start'}
+                                verticalAlign={'start'}
+                                grow={1}
+                            >
+                                {headerTxt}
+                                {subheaderTxt}
+                            </Stack>
+
+                            <Stack.Item>
+                                <ActionButton
+                                    iconName="Close"
+                                    text="Close"
+                                    onClick={() => this._onDismissClicked()}
+                                />
+                            </Stack.Item>
+                        </Stack>
+                    </Stack>
+
                     {this.props.children &&
                         <Stack
                             tokens={{
-                                childrenGap: 12
+                                childrenGap: 12,
+                                padding 12,
                             }}
                             styles={{
                                 root: {
