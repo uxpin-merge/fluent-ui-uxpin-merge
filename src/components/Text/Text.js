@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Text as FText } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-
+import { getTokens } from '../_helpers/parser';
 
 
 const defaultTextColor = "#000000";
@@ -14,7 +14,48 @@ class Text extends React.Component {
     super(props);
 
     this.state = {
+      message: ""
     }
+  }
+
+  set() {
+    let message = this._getTokenizedText(this.props.textValue);
+
+    this.setState(
+      { message: message }
+    )
+  }
+
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.textValue !== this.props.textValue) {
+      this.set();
+    }
+  }
+
+  //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
+  _getTokenizedText(text) {
+
+    var tokens = getTokens(text).mixed.map((el, i) => {
+      if (typeof (el) === 'string') {
+        return (<span key={i}> {el} </span>);
+      }
+      else if (el.type == 'link') {
+        return el.suggestions[0];
+      }
+      else if (el.suggestions[0]) {
+        // if there's a suggestion, call the function
+        return el.suggestions[0];
+      } else {
+        // there's no suggestion, return the text
+        return (<span key={i}> {el.tokenString} </span>);
+      }
+    });
+
+    return tokens;
   }
 
   render() {
@@ -36,10 +77,12 @@ class Text extends React.Component {
       }
     }
 
+    let message = this.state.message;
 
     return (
       <FText
         {...this.props}
+        value={message}
         styles={fTextStyles}
         variant={this.props.size}
         nowrap={this.props.truncate}>
@@ -57,10 +100,10 @@ class Text extends React.Component {
 Text.propTypes = {
 
   /**
-   * @uxpindescription The text value to display
+   * @uxpindescription The text value to display. Supports the link(Click Me) feature.
    * @uxpincontroltype textfield(6)
    */
-  value: PropTypes.string,
+  textValue: PropTypes.string,
 
   /**
   * @uxpindescription To apply bold formatting
