@@ -11,17 +11,6 @@ const _dragOptions = {
     closeMenuItemText: 'Close',
 };
 
-const small = 'small';
-const medium = 'medium';
-const large = 'large';
-
-const getWidthFromSize = width => {
-    switch (width) {
-        case small: return 340;
-        case medium: return 680;
-        case large: return 1020;
-    }
-}
 
 
 class Modal extends React.Component {
@@ -87,13 +76,6 @@ class Modal extends React.Component {
             );
         }
 
-        let mWidth = getWidthFromSize(this.props.maxWidth);
-
-        const modalStyles = {
-            root: {
-                minWidth: mWidth + 'px',
-            },
-        };
 
         return (
 
@@ -198,12 +180,6 @@ Modal.propTypes = {
     title: PropTypes.string,
 
     /**
-     * @uxpindescription Minimum width for the control
-     * @uxpinpropname Min Width
-     */
-    boxWidth: PropTypes.oneOf([small, medium, large]),
-
-    /**
      * @uxpindescription Whether the user may drag around the dialog 
      */
     draggable: PropTypes.bool,
@@ -233,7 +209,6 @@ Modal.propTypes = {
  */
 Modal.defaultProps = {
     show: true,
-    boxWidth: 'medium',
     title: "Basic Modal",
     draggable: false,
     darkOverlay: true,
