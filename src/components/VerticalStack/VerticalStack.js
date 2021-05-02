@@ -185,7 +185,7 @@ VerticalStack.propTypes = {
     /**
      * Don't show this prop in the UXPin Editor. 
      * @uxpinignoreprop 
-     * @uxpindescription Contents for the right side. 1. Drag an object onto the canvas. 2. In the Layers Panel, drag the item onto this object. Now it should be indented, and contained as a 'child.'  
+     * @uxpindescription Contents for the body of the control. 
      * @uxpinpropname Right Contents
      */
     children: PropTypes.node,

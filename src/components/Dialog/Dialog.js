@@ -203,11 +203,6 @@ Dialog.propTypes = {
     show: PropTypes.bool,
 
     /**
-     * @uxpindescription Max width for the control
-     */
-    maxWidth: PropTypes.oneOf([small, medium, large]),
-
-    /**
      * @uxpindescription The control's title text
      * @uxpinpropname Headline
      */
@@ -218,6 +213,11 @@ Dialog.propTypes = {
      * @uxpincontroltype textfield(6)
      */
     text: PropTypes.string,
+
+    /**
+     * @uxpindescription Max width for the control
+     */
+    maxWidth: PropTypes.oneOf([small, medium, large]),
 
     /**
      * @uxpindescription Whether the user may drag around the dialog 
