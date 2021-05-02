@@ -5,10 +5,10 @@ import Text from '../../Text/Text';
 
 
 
-const tab1text = "Tab 1";
-const tab2text = "Tab 2";
-const tab3text = "Tab 3";
-const tab4text = "Tab 4";
+const tab1text = "Tab 1 Contents";
+const tab2text = "Tab 2 Contents";
+const tab3text = "Tab 3 Contents";
+const tab4text = "Tab 4 Contents";
 
 const size = "large";
 
