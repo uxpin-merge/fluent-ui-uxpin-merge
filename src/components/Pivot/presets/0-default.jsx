@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Pivot from '../Pivot';
-import Text from '../../PivotPanel/PivotPanel';
+import PivotPanel from '../../PivotPanel/PivotPanel';
 import Text from '../../Text/Text';
 
 
