@@ -6,6 +6,7 @@ import { getTokens } from '../_helpers/parser';
 
 
 const defaultTextColor = "#000000";
+const defaultTextValue = 'The quick brown fox jumped over the lazy dog.';
 
 
 class Text extends React.Component {
@@ -14,12 +15,14 @@ class Text extends React.Component {
     super(props);
 
     this.state = {
-      message: ""
+      message: defaultTextValue,
     }
   }
 
   set() {
     let message = this._getTokenizedText(this.props.textValue);
+
+    console("TOkenized string: " + message.toString());
 
     this.setState(
       { message: message }
@@ -82,11 +85,12 @@ class Text extends React.Component {
     return (
       <FText
         {...this.props}
-        value={message}
         styles={fTextStyles}
         variant={this.props.size}
         nowrap={this.props.truncate}>
-        { this.props.value}
+
+        { message}
+
       </FText>
     );
   }
@@ -153,7 +157,7 @@ Text.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Text.defaultProps = {
-  textValue: 'The quick brown fox jumped over the lazy dog.',
+  textValue: defaultTextValue,
   size: 'medium',
   bold: false,
   italic: false,
