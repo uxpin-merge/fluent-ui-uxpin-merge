@@ -136,7 +136,7 @@ class Modal extends React.Component {
                         <Stack
                             tokens={{
                                 childrenGap: 12,
-                                padding 12,
+                                padding: 12,
                             }}
                             styles={{
                                 root: {
