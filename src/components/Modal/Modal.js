@@ -75,6 +75,30 @@ class Modal extends React.Component {
 
     render() {
 
+        //if Header Text is defined
+        var headerTxt = '';
+        if (this.props.headerText) {
+            headerTxt = (
+                <Text
+                    variant='xLarge'
+                    block>
+                    {this.props.headerText.trim()}
+                </Text>
+            );
+        }
+
+        //if Sub-Header Text is defined
+        var subheaderTxt = '';
+        if (this.props.subheaderText) {
+            subheaderTxt = (
+                <Text
+                    variant='medium'
+                    block>
+                    {this.props.subheaderText.trim()}
+                </Text>
+            );
+        }
+
         return (
             <div>
                 <div  //A visual aid for the designer to see in UXPin
@@ -173,10 +197,16 @@ Modal.propTypes = {
     show: PropTypes.bool,
 
     /**
-     * @uxpindescription The control's title text
-     * @uxpinpropname Headline
+     * @uxpindescription The text to be displayed in the header of the control 
+     * @uxpinpropname Header Text
      */
-    title: PropTypes.string,
+    headerText: PropTypes.string,
+
+    /**
+     * @uxpindescription The text to be displayed in the header of the control, immediately under the Header Text
+     * @uxpinpropname Sub-Header Text
+     */
+    subheaderText: PropTypes.string,
 
     /**
      * @uxpindescription Max width for the control
