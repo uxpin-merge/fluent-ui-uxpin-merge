@@ -87,7 +87,16 @@ class Modal extends React.Component {
             );
         }
 
+        let mWidth = getWidthFromSize(this.props.maxWidth);
+
+        const modalStyles = {
+            root: {
+                minWidth: mWidth + 'px',
+            },
+        };
+
         return (
+
             <div>
                 <div  //A visual aid for the designer to see in UXPin
                     style={{
@@ -105,7 +114,7 @@ class Modal extends React.Component {
                     isDarkOverlay={this.props.darkOverlay}
                     isBlocking={this.props.blocking}
                     dragOptions={this.props.draggable ? _dragOptions : undefined}
-                    styles={topStackItemStyles}
+                    styles={modalStyles}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
                     {/* Header Area */}
@@ -190,6 +199,11 @@ Modal.propTypes = {
     title: PropTypes.string,
 
     /**
+     * @uxpindescription Minimum width for the control
+     */
+    boxWidth: PropTypes.oneOf([small, medium, large]),
+
+    /**
      * @uxpindescription Whether the user may drag around the dialog 
      */
     draggable: PropTypes.bool,
@@ -219,6 +233,7 @@ Modal.propTypes = {
  */
 Modal.defaultProps = {
     show: true,
+    boxWidth: 'large',
     title: "Basic Modal",
     draggable: false,
     darkOverlay: true,
