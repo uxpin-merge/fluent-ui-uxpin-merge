@@ -62,6 +62,7 @@ module.exports = {
           'src/components/Nav/Nav.js',
           'src/components/Persona/Persona.js',
           'src/components/Pivot/Pivot.js',
+          'src/components/PivotPanel/PivotPanel.js',
         ],
       },
       {
