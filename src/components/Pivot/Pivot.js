@@ -84,8 +84,7 @@ class Pivot extends React.Component {
       { selectedIndex: selectedIndex }
     )
 
-    //If the prop for an individual tab's click event exists, let's push it. 
-    //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
+    //If the prop for an individual tab's click event exists, let's push it.
     if (this.props[`onLink${selectedIndex}Click`]) {
       this.props[`onLink${selectedIndex}Click`](selectedIndex);
     }
@@ -126,14 +125,9 @@ class Pivot extends React.Component {
       padding: 0,
     };
 
-    let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
-
-    console.log(mHeight);
-
     const topStackItemStyles = {
       root: {
         height: 'auto',
-        minHeight: mHeight + 'px',
         width: 'auto',
       },
     };
@@ -211,13 +205,7 @@ Pivot.propTypes = {
   * @uxpinpropname Tabs
   * @uxpincontroltype codeeditor
   */
-  tabs: PropTypes.string.isRequired,
-
-  /**
-  * @uxpindescription The minimum height of the control   
-  * @uxpinpropname Min Height
-  */
-  boxHeight: PropTypes.number,
+  tabs: PropTypes.string,
 
   /**
    * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
