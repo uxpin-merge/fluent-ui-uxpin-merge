@@ -92,7 +92,6 @@ class Modal extends React.Component {
         const topStackItemStyles = {
             root: {
                 width: mWidth + 'px',
-                maxWidth: mWidth + 'px',
             },
         };
 
