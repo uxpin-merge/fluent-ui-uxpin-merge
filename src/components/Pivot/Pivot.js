@@ -128,6 +128,8 @@ class Pivot extends React.Component {
 
     let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
 
+    console.log(mHeight);
+
     const topStackItemStyles = {
       root: {
         height: 'auto',
@@ -287,6 +289,7 @@ Pivot.defaultProps = {
   tabs: defaultTabs,
   selectedIndex: 1,
   gutterPadding: 24,
+  minHeight: 0,
 };
 
 export { Pivot as default };
