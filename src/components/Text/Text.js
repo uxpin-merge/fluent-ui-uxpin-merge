@@ -22,8 +22,6 @@ class Text extends React.Component {
   set() {
     let message = this._getTokenizedText(this.props.textValue);
 
-    console.log("TOkenized string: " + message.toString());
-
     this.setState(
       { message: message }
     )
