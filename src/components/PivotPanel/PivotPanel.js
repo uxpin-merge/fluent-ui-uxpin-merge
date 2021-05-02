@@ -13,7 +13,7 @@ const centerAlign = 'center';
 const rightAlign = 'right';
 const stretchAlign = 'stretch';
 
-const instructionText = `Vertical Stack Instructions: 
+const instructionText = `PivotPanel Instructions: 
 1) Drag any Merge controls onto the canvas. 
 2) In the Layers Panel, drag and drop it onto this control.`;
 
@@ -241,8 +241,8 @@ PivotPanel.propTypes = {
  */
 PivotPanel.defaultProps = {
     internalPadding: 0,
-    gutterPadding: 12,
-    align: leftAlign,
+    gutterPadding: 24,
+    align: stretchAlign,
     addSpanner: false,
     spannerIndex: 1,
     spannerHeight: 48,

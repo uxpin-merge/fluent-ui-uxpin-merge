@@ -277,7 +277,6 @@ Pivot.defaultProps = {
   tabs: defaultTabs,
   selectedIndex: 1,
   gutterPadding: 24,
-  minHeight: 0,
 };
 
 export { Pivot as default };
