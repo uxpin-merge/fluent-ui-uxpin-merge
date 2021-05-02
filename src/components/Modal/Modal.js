@@ -87,14 +87,6 @@ class Modal extends React.Component {
             );
         }
 
-        let mWidth = getWidthFromSize(this.props.maxWidth);
-
-        const topStackItemStyles = {
-            root: {
-                width: mWidth + 'px',
-            },
-        };
-
         return (
             <div>
                 <div  //A visual aid for the designer to see in UXPin
@@ -198,11 +190,6 @@ Modal.propTypes = {
     title: PropTypes.string,
 
     /**
-     * @uxpindescription Max width for the control
-     */
-    maxWidth: PropTypes.oneOf([small, medium, large]),
-
-    /**
      * @uxpindescription Whether the user may drag around the dialog 
      */
     draggable: PropTypes.bool,
@@ -224,8 +211,6 @@ Modal.propTypes = {
      */
     dismiss: PropTypes.func,
 
-
-
 };
 
 
@@ -234,7 +219,6 @@ Modal.propTypes = {
  */
 Modal.defaultProps = {
     show: true,
-    maxWidth: 'large',
     title: "Basic Modal",
     draggable: false,
     darkOverlay: true,
