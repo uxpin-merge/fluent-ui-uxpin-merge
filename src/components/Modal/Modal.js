@@ -77,27 +77,16 @@ class Modal extends React.Component {
 
         //if Header Text is defined
         var headerTxt = '';
-        if (this.props.headerText) {
+        if (this.props.title) {
             headerTxt = (
                 <Text
                     variant='xLarge'
                     block>
-                    {this.props.headerText.trim()}
+                    {this.props.title.trim()}
                 </Text>
             );
         }
 
-        //if Sub-Header Text is defined
-        var subheaderTxt = '';
-        if (this.props.subheaderText) {
-            subheaderTxt = (
-                <Text
-                    variant='medium'
-                    block>
-                    {this.props.subheaderText.trim()}
-                </Text>
-            );
-        }
 
         return (
             <div>
@@ -113,7 +102,6 @@ class Modal extends React.Component {
                     }}><br /><em><strong>Modal:</strong></em><br />Move this marker offscreen</div>
 
                 <FModal
-                    maxWidth={getWidthFromSize(this.props.maxWidth)}
                     isOpen={this.state.open}
                     isDarkOverlay={this.props.darkOverlay}
                     isBlocking={this.props.blocking}
@@ -143,7 +131,6 @@ class Modal extends React.Component {
                                 grow={1}
                             >
                                 {headerTxt}
-                                {subheaderTxt}
                             </Stack>
 
                             <Stack.Item>
@@ -198,15 +185,9 @@ Modal.propTypes = {
 
     /**
      * @uxpindescription The text to be displayed in the header of the control 
-     * @uxpinpropname Header Text
+     * @uxpinpropname Title
      */
-    headerText: PropTypes.string,
-
-    /**
-     * @uxpindescription The text to be displayed in the header of the control, immediately under the Header Text
-     * @uxpinpropname Sub-Header Text
-     */
-    subheaderText: PropTypes.string,
+    title: PropTypes.string,
 
     /**
      * @uxpindescription Max width for the control
