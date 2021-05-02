@@ -114,11 +114,13 @@ class Modal extends React.Component {
                     isDarkOverlay={this.props.darkOverlay}
                     isBlocking={this.props.blocking}
                     dragOptions={this.props.draggable ? _dragOptions : undefined}
-                    styles={modalStyles}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
-                    {/* Header Area */}
-                    <Stack>
+                    {/* Modal Display Area */}
+                    <Stack
+                        horizontalAlign={'stretch'}
+                        styles={modalStyles}>
+
                         {/* Header and Close button */}
                         <Stack
                             horizontal={true}
@@ -129,7 +131,7 @@ class Modal extends React.Component {
                                 childrenGap: 12,
                             }}>
 
-                            {/* Children Area */}
+                            {/* Left Side Text */}
                             <Stack
                                 tokens={{
                                     padding: 0,
@@ -150,23 +152,21 @@ class Modal extends React.Component {
                                 />
                             </Stack.Item>
                         </Stack>
-                    </Stack>
 
-                    {this.props.children &&
-                        <Stack
-                            tokens={{
-                                childrenGap: 12,
-                                padding: 12,
-                            }}
-                            styles={{
-                                root: {
-                                    marginTop: 12
-                                }
-                            }}
-                        >
-                            {this.props.children}
-                        </Stack>
-                    }
+                        {/* Children Area */}
+                        {this.props.children &&
+                            <Stack
+                                tokens={{
+                                    childrenGap: 12,
+                                    padding: 12,
+                                }}
+                                horizontalAlign={'stretch'}
+                                verticalAlign={'start'}
+                            >
+                                {this.props.children}
+                            </Stack>
+                        }
+                    </Stack>
                 </FModal>
             </div>
         );
