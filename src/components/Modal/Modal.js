@@ -102,6 +102,7 @@ class Modal extends React.Component {
                     }}><br /><em><strong>Modal:</strong></em><br />Move this marker offscreen</div>
 
                 <FModal
+                    maxWidth={getWidthFromSize(this.props.maxWidth)}
                     isOpen={this.state.open}
                     isDarkOverlay={this.props.darkOverlay}
                     isBlocking={this.props.blocking}
