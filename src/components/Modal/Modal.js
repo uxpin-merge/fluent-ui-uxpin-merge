@@ -174,7 +174,6 @@ class Modal extends React.Component {
 }
 
 
-
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
@@ -200,6 +199,7 @@ Modal.propTypes = {
 
     /**
      * @uxpindescription Minimum width for the control
+     * @uxpinpropname Min Width
      */
     boxWidth: PropTypes.oneOf([small, medium, large]),
 
@@ -233,7 +233,7 @@ Modal.propTypes = {
  */
 Modal.defaultProps = {
     show: true,
-    boxWidth: 'large',
+    boxWidth: 'medium',
     title: "Basic Modal",
     draggable: false,
     darkOverlay: true,
