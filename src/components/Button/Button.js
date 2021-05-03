@@ -3,6 +3,8 @@ import * as PropTypes from 'prop-types';
 import { PrimaryButton as PrimaryButtonM, DefaultButton as DefaultButtonM } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
+
+
 class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -11,38 +13,39 @@ class Button extends React.Component {
   }
 
   render() {
-    let iconProps = { iconName: this.props.iconName }
+    const buttonID = _.uniqueId('button_');
 
-    let styles = {
-      root: {
-        borderRadius: this.props.rounded ? 100 : 0
-      }
-    }
+    let iconProps = { iconName: this.props.iconName }
 
     if (this.props.iconPosition === "end") styles.flexContainer = {
       flexDirection: 'row-reverse'
     }
 
     const tooltipId = _.uniqueId('tooltip_');
+    const ttProps = {
+      gapSpace: 2,
+      target: `#${buttonID}`,
+    };
 
     return (
       <div>
         <TooltipHost
           content={this.props.tooltip}
           id={tooltipId}
+          calloutProps={ttProps}
         >
           {this.props.primary ?
             <PrimaryButtonM
               {...this.props}
+              id={buttonID}
               iconProps={iconProps}
-              styles={styles}
               aria-describedby={tooltipId}
             />
             :
             <DefaultButtonM
               {...this.props}
+              id={buttonID}
               iconProps={iconProps}
-              styles={styles}
               aria-describedby={tooltipId}
             />
           }
@@ -63,7 +66,7 @@ Button.propTypes = {
    * @uxpindescription The displayed text on the button
    * @uxpinpropname Text
    * */
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 
   /**
    * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
@@ -72,16 +75,10 @@ Button.propTypes = {
   primary: PropTypes.bool,
 
   /**
-   * @uxpindescription The exact name from the PayPal icon library (Optional)
+   * @uxpindescription The exact name from the Fluent icon library (Optional)
    * @uxpinpropname Icon Name
    * */
   iconName: PropTypes.string,
-
-  /**
-   * @uxpindescription To disable the control
-   * @uxpinpropname Disabled
-   * */
-  disabled: PropTypes.bool,
 
   /**
    * @uxpindescription The location to display an icon, if one is set
@@ -90,22 +87,22 @@ Button.propTypes = {
   iconPosition: PropTypes.oneOf(['start', 'end']),
 
   /**
-   * @uxpindescription Sets whether to display the button in the rounded PayPal UI style.
-   * @uxpinpropname Rounded
-   * */
-  rounded: PropTypes.bool,
-
-  /**
    * @uxpindescription Tooltip for the control
    * @uxpinpropname Tooltip
    * */
   tooltip: PropTypes.string,
 
   /**
-   * @uxpindescription Fires when the button is clicked on.
-   * @uxpinpropname Click
-   * */
-  onClick: PropTypes.func
+  * @uxpindescription To disable the control
+  * @uxpinpropname Disabled
+  * */
+  disabled: PropTypes.bool,
+
+  /**
+ * @uxpindescription Fires when the button is clicked on.
+ * @uxpinpropname Click
+ * */
+  onClick: PropTypes.func,
 };
 
 
@@ -115,9 +112,10 @@ Button.propTypes = {
 Button.defaultProps = {
   primary: true,
   disabled: false,
-  rounded: true,
-  text: "Basic Button",
-  tooltip: ''
+  iconName: "",
+  iconPosition: "start",
+  text: "Button Text",
+  tooltip: '',
 };
 
 
