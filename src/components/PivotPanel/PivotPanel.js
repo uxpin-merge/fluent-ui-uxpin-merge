@@ -218,7 +218,7 @@ PivotPanel.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PivotPanel.defaultProps = {
-    internalPadding: 0,
+    internalPadding: 12,
     gutterPadding: 24,
     boxWidth: 0,
     boxHeight: 0,
