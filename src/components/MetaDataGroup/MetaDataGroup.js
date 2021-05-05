@@ -94,7 +94,7 @@ class MetaDataGroup extends React.Component {
         if (this.props.children) {
             //The user can enter either a percent or regular number
             let leftW = UxpNumberParser.parsePercentOrInt(this.props.leftWidth);
-            let leftWNum = UxpNumberParser.parseInts(leftW);
+            let leftWNum = UxpNumberParser.parseInts(this.props.leftWidth);
 
             console.log('leftW: ' + leftW);
             console.log('leftWNum: ' + leftWNum);
