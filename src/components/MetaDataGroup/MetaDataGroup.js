@@ -96,6 +96,9 @@ class MetaDataGroup extends React.Component {
             let leftW = UxpNumberParser.parsePercentOrInt(this.props.leftWidth);
             let leftWNum = UxpNumberParser.parseInts(leftW);
 
+            console.log('leftW: ' + leftW);
+            console.log('leftWNum: ' + leftWNum);
+
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
@@ -108,7 +111,7 @@ class MetaDataGroup extends React.Component {
                     //Attempt to influence the child's leftWidth prop if it has one.
                     //If it doesn't have one, this should be ignored. 
                     if (leftWNum && leftWNum > 0) {
-                        child.leftWidth = leftW;
+                        child.props.leftWidth = leftW;
                     }
 
                     let stack = (
