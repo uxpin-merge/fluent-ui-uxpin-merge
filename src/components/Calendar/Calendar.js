@@ -109,7 +109,7 @@ class Calendar extends React.Component {
                 {...this.props}
 
                 isMonthPickerVisible={true}
-                // dateRangeType={DateRangeType.Day}  //Typically, we're looking for a day rather than a month or week
+                dateRangeType={DateRangeType.Day}
                 autoNavigateOnSelection={true}
                 showGoToToday={true}
                 showNavigateButtons={true}
@@ -118,13 +118,12 @@ class Calendar extends React.Component {
                 isDayPickerVisible={true}
                 showMonthPickerAsOverlay={true}
                 showSixWeeksByDefault={true}
-                // firstDayOfWeek={DayOfWeek.Sunday}
-                // workWeekDays={workWeekDays}
-                // strings={dayPickerStrings}
+                firstDayOfWeek={DayOfWeek.Sunday}
+                workWeekDays={workWeekDays}
+                strings={dayPickerStrings}
 
                 // //From UXPin Props & State
                 // value={this.state.selectedDate}
-                // showWeekNumbers={this.props.showWeekNumbers}
 
                 onSelectDate={(d, sdr) => this._onChange(d)}
             />
