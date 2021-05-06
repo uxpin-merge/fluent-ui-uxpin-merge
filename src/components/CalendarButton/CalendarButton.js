@@ -13,7 +13,6 @@ const btnAction = 'Action';
 const btnPrimary = 'Primary';
 const btnSecondary = 'Secondary';
 
-
 const dayPickerStrings = {
     months: UxpDateTimeUtils.months,
     shortMonths: UxpDateTimeUtils.monthsShort,
@@ -105,11 +104,12 @@ class CalendarButton extends React.Component {
         return (
             <TooltipHost
                 content={this.props.tooltip}
+                directionalHint={DirectionalHint.topLeftEdge}
                 id={tooltipId}
             >
 
                 <div ref={this._calendarButtonElement}>
-                    {this.props.buttonType == btnAction ?
+                    {this.props.buttonType === btnAction ?
                         <ActionButton
                             {...this.props}
                             iconProps={buttonIconProps}
@@ -118,13 +118,12 @@ class CalendarButton extends React.Component {
                             onClick={() => { this._onButtonClick() }}
                             aria-describedby={tooltipId}
                         />
-                        : this.props.buttonType == btnPrimary ?
+                        : this.props.buttonType === btnPrimary ?
                             <PrimaryButton
                                 {...this.props}
                                 iconProps={buttonIconProps}
                                 text={buttonText}
                                 disabled={this.props.buttonDisabled}
-                                styles={buttonStyles}
                                 onClick={() => { this._onButtonClick() }}
                                 aria-describedby={tooltipId}
                             />
@@ -134,7 +133,6 @@ class CalendarButton extends React.Component {
                                 iconProps={buttonIconProps}
                                 text={buttonText}
                                 disabled={this.props.buttonDisabled}
-                                styles={buttonStyles}
                                 onClick={() => { this._onButtonClick() }}
                                 aria-describedby={tooltipId}
                             />
@@ -248,7 +246,6 @@ CalendarButton.propTypes = {
  */
 CalendarButton.defaultProps = {
     buttonType: btnAction,
-    rounded: true,
     buttonDisabled: false,
     buttonText: 'Show Calendar',
     buttonIcon: 'Calendar',
