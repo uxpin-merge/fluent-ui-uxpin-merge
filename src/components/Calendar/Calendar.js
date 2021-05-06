@@ -84,9 +84,9 @@ class Calendar extends React.Component {
 
         console.log("onChange. date: " + date);
 
-        this.setState(
-            { selectedDate: date }
-        )
+        // this.setState(
+        //     { selectedDate: date }
+        // )
 
         // this.props.uxpValue = date;
 
