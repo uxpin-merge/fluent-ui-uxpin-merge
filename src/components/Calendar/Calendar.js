@@ -64,7 +64,7 @@ class Calendar extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.uxpValue !== this.props.uxpValue) {
-            this.set();
+            // this.set();
         }
     }
 
@@ -84,9 +84,9 @@ class Calendar extends React.Component {
 
         console.log("onChange. date: " + date);
 
-        this.setState(
-            { selectedDate: date }
-        )
+        // this.setState(
+        //     { selectedDate: date }
+        // )
 
         this.props.uxpValue = date;
 
@@ -100,13 +100,14 @@ class Calendar extends React.Component {
 
     render() {
 
-        var dt = this.state.selectedDate;
+        // var dt = this.state.selectedDate;
+        var dt = this.props.uxpValue;
         console.log("render. original value in state: " + dt);
 
         if (!dt) {
             dt = new Date();
         }
-        console.log("render. after adjusting dt: " + dt);
+        console.log("      render. after adjusting dt: " + dt);
 
         return (
 
