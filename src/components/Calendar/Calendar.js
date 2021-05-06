@@ -41,8 +41,10 @@ class Calendar extends React.Component {
     constructor(props) {
         super(props);
 
+        let dt = new Date();
+
         this.state = {
-            selectedDate: null //null or a Date
+            selectedDate: dt,
         }
     }
 
@@ -74,29 +76,23 @@ class Calendar extends React.Component {
 
         console.log("parse date. dt: " + dt);
 
-        //If it doesn't come back as undefined, then we can use it. 
-        if (dt) {
-            return new Date(dt);
-        }
-        else {
-            //If it's undefined, then let's just return right now.
-            return new Date();
-        }
+        return dt ? dt : new Date();
     }
 
     //We'll immediately use the date. In the future, we may use the date range, too. 
     _onChange(date) {
 
+        console.log("onChange. date: " + date);
+
         this.setState(
             { selectedDate: date }
         )
 
+        this.props.uxpValue = date;
+
         if (this.props.onChange) {
             //Format this before surfacing with style: 'Feb 8, 2020' 
             let dt = UxpDateTimeUtils.getFormattedDate(date);
-
-            console.log("onChange. dt: " + dt);
-
             this.props.onChange(dt);
         }
     }
