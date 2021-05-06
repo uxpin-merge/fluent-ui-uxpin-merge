@@ -5,20 +5,6 @@ import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
 
 
 
-
-/**
- * UPDATED April 8, 2020 by Anthony Hand
- * - Rewrote the JSX and 0-default.jsx files to follow template for adding a control a the UXPin library.
- * - Converted object to a class.
- * - Added file to our TPX UX Experimental library on UXPin.
- * 
- * TODOs
- * - Apply the PayPal UI theme 
- * 
- * */
-
-
-
 const dayPickerStrings = {
     months: UxpDateTimeUtils.months,
     shortMonths: UxpDateTimeUtils.monthsShort,
@@ -49,7 +35,8 @@ class Calendar extends React.Component {
     }
 
     set() {
-        let dt = this._parseDate(this.props.uxpValue);
+        var dt = this._parseDate(this.props.uxpValue);
+        dt = dt ? dt : new Date();
 
         this.setState(
             { selectedDate: dt }
