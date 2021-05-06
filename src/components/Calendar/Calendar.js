@@ -105,7 +105,7 @@ class Calendar extends React.Component {
     render() {
 
         let dt = this.state.selectedDate;
-        console.log("render. dt: " = dt);
+        console.log("render. dt: " + dt);
 
         return (
 
