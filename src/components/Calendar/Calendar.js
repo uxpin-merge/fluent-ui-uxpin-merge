@@ -51,8 +51,6 @@ class Calendar extends React.Component {
     set() {
         let dt = this._parseDate(this.props.uxpValue);
 
-        console.log("set dt: " + dt);
-
         this.setState(
             { selectedDate: dt }
         )
@@ -71,24 +69,12 @@ class Calendar extends React.Component {
     //Based on the prop for the current date value, returns a valid Date object. 
     _parseDate(dateStr) {
 
-        //Let's see if we can parse a real date
         let dt = UxpDateTimeUtils.parseDate(dateStr);
-
-        console.log("parse date. dt: " + dt);
-
         return dt ? dt : new Date();
     }
 
-    //We'll immediately use the date. In the future, we may use the date range, too. 
+
     _onChange(date) {
-
-        console.log("onChange. date: " + date);
-
-        // this.setState(
-        //     { selectedDate: date }
-        // )
-
-        // this.props.uxpValue = date;
 
         if (this.props.onChange) {
             //Format this before surfacing with style: 'Feb 8, 2020' 
@@ -100,12 +86,10 @@ class Calendar extends React.Component {
 
     render() {
 
+        //The Calendar seems to be failing with a null value. 
         var dt = this.state.selectedDate;
-        console.log("render. original value in state: " + dt);
-
         if (!dt) {
             dt = new Date();
-            console.log("      render. after adjusting dt: " + dt);
         }
 
 
