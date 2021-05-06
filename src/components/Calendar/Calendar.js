@@ -48,6 +48,9 @@ class Calendar extends React.Component {
 
     set() {
         let dt = this._parseDate(this.props.uxpValue);
+
+        console.log("set dt: " + dt);
+
         this.setState(
             { selectedDate: dt }
         )
@@ -58,9 +61,7 @@ class Calendar extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (
-            prevProps.uxpValue !== this.props.uxpValue
-        ) {
+        if (prevProps.uxpValue !== this.props.uxpValue) {
             this.set();
         }
     }
@@ -103,11 +104,14 @@ class Calendar extends React.Component {
 
     render() {
 
+        let dt = this.state.selectedDate;
+        console.log("render. dt: " = dt);
+
         return (
 
             <FCalendar
                 {...this.props}
-
+                value={dt}
                 isMonthPickerVisible={true}
                 dateRangeType={DateRangeType.Day}
                 autoNavigateOnSelection={true}
@@ -121,10 +125,6 @@ class Calendar extends React.Component {
                 firstDayOfWeek={DayOfWeek.Sunday}
                 workWeekDays={workWeekDays}
                 strings={dayPickerStrings}
-
-                // //From UXPin Props & State
-                // value={this.state.selectedDate}
-
                 onSelectDate={(d, sdr) => this._onChange(d)}
             />
         );
