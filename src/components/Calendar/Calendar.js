@@ -100,14 +100,14 @@ class Calendar extends React.Component {
 
     render() {
 
-        // var dt = this.state.selectedDate;
-        var dt = this.props.uxpValue;
+        var dt = this.state.selectedDate;
         console.log("render. original value in state: " + dt);
 
         if (!dt) {
             dt = new Date();
+            console.log("      render. after adjusting dt: " + dt);
         }
-        console.log("      render. after adjusting dt: " + dt);
+
 
         return (
 
