@@ -44,6 +44,7 @@ module.exports = {
         name: 'Input',
         include: [
           'src/components/Calendar/Calendar.js',
+          'src/components/CalendarButton/CalendarButton.js',
           'src/components/Checkbox/Checkbox.js',
           'src/components/Choicegroup/Choicegroup.js',
           'src/components/Dropdown/Dropdown.js',
