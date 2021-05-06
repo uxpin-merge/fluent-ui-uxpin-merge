@@ -108,17 +108,16 @@ class Calendar extends React.Component {
             <FCalendar
                 {...this.props}
 
-                //Standard behaviors for this control
-                // isMonthPickerVisible={true}
+                isMonthPickerVisible={true}
                 // dateRangeType={DateRangeType.Day}  //Typically, we're looking for a day rather than a month or week
-                // autoNavigateOnSelection={true}
-                // showGoToToday={true}
-                // showNavigateButtons={true}
-                // highlightCurrentMonth={true}
-                // highlightSelectedMonth={true}
-                // isDayPickerVisible={true}
-                // showMonthPickerAsOverlay={true}
-                // showSixWeeksByDefault={true}
+                autoNavigateOnSelection={true}
+                showGoToToday={true}
+                showNavigateButtons={true}
+                highlightCurrentMonth={true}
+                highlightSelectedMonth={true}
+                isDayPickerVisible={true}
+                showMonthPickerAsOverlay={true}
+                showSixWeeksByDefault={true}
                 // firstDayOfWeek={DayOfWeek.Sunday}
                 // workWeekDays={workWeekDays}
                 // strings={dayPickerStrings}
