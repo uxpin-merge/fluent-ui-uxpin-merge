@@ -1,10 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { Text as Text } from '@fluentui/react/lib/Text';
+import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
+
+//The smallest allowed box size
+const defaultBoxSize = '1';
 
 const verticalAlign = 'start';
 
@@ -81,13 +84,18 @@ class PivotPanel extends React.Component {
             color = 'transparent';
 
         //For internal padding within the stack. 
-        let internalPadding = this.props.internalPadding > 0 ? this.props.internalPadding : defaultPadding;
+        let internalPadding = this.props.internalPadding > -1 ? this.props.internalPadding : defaultPadding;
+
+        let mWidth = this.props.boxWidth > defaultBoxSize ? this.props.boxWidth : defaultBoxSize;
+        let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
 
         const topStackItemStyles = {
             root: {
                 background: color,        //undefined is OK
                 height: 'auto',
                 width: 'auto',
+                minWidth: mWidth + 'px',
+                minHeight: mHeight + 'px',
             },
         };
 
@@ -127,30 +135,6 @@ class PivotPanel extends React.Component {
                     );
                     stackList.push(stack);
                 } //for loop
-
-                //Do we need to add a spanner?
-                if (this.props.addSpanner && this.props.spannerIndex > 0 && this.props.spannerIndex <= stackList.length) {
-                    let newIndex = this.props.spannerIndex - 1;
-
-                    //Let's make sure we have a positive number. 
-                    let spanHeight = this.props.spannerHeight > 0 ? this.props.spannerHeight : 0;
-
-                    let spanStyles = {
-                        root: {
-                            height: spanHeight + "px",
-                        }
-                    }
-
-                    //A StackItem that will spring to fill available space. 
-                    let spanner = (<StackItem
-                        grow={true}
-                        styles={spanStyles}>
-                        <span />
-                    </StackItem>);
-
-                    //Add the spanner at the specified index, deleting 0 other items.
-                    stackList.splice(newIndex, 0, spanner);
-                }
             } //if childList
         } //If props.children
 
@@ -191,6 +175,18 @@ PivotPanel.propTypes = {
     children: PropTypes.node,
 
     /**
+    * @uxpindescription A minimum width for the control. Most useful when inserting this into a Stack or Card.   
+    * @uxpinpropname Min Width
+    */
+    boxWidth: PropTypes.number,
+
+    /**
+    * @uxpindescription The minimum height of the control   
+    * @uxpinpropname Min Height
+    */
+    boxHeight: PropTypes.number,
+
+    /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding within the stack. Value must be 0 or more. 
      * @uxpinpropname Padding
@@ -211,24 +207,6 @@ PivotPanel.propTypes = {
     align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
     /**
-     * @uxpindescription To insert a spanner to fill empty space between two elements. 
-     * @uxpinpropname Add Spanner
-     */
-    addSpanner: PropTypes.bool,
-
-    /**
-     * @uxpindescription The 1-based index for where to insert a Spanner. The Spanner will be inserted above the item that is at this index value.
-     * @uxpinpropname Spanner Index
-     */
-    spannerIndex: PropTypes.number,
-
-    /**
-     * @uxpindescription The Spanner's height (pixels)
-     * @uxpinpropname Spanner Height
-     */
-    spannerHeight: PropTypes.number,
-
-    /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
      * */
@@ -240,12 +218,11 @@ PivotPanel.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PivotPanel.defaultProps = {
-    internalPadding: 0,
+    internalPadding: 12,
     gutterPadding: 24,
+    boxWidth: 0,
+    boxHeight: 0,
     align: stretchAlign,
-    addSpanner: false,
-    spannerIndex: 1,
-    spannerHeight: 48,
     bgColor: '',
 }
 

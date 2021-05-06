@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { UxpNumberParser } from '../_helpers/uxpnumberutils';
 
 
 
@@ -14,6 +15,7 @@ const instructionText = `MetaDataGroup: Data List`;
 
 //Use this color if the UXPin user doesn't enter a valid hex or color token.
 const defaultTextColor = "#000000";
+
 
 
 class MetaDataGroup extends React.Component {
@@ -90,6 +92,9 @@ class MetaDataGroup extends React.Component {
         //Set up the StackItems
         var stackList = [];
         if (this.props.children) {
+            //The user can enter either a percent or regular number
+            let leftW = UxpNumberParser.parsePercentOrInt(this.props.leftWidth);
+            let leftWNum = UxpNumberParser.parseInts(this.props.leftWidth);
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
@@ -99,6 +104,12 @@ class MetaDataGroup extends React.Component {
                 var i;
                 for (i = 0; i < childList.length; i++) {
                     let child = childList[i];
+
+                    //Attempt to influence the child's leftWidth prop if it has one.
+                    //If it doesn't have one, this should be ignored. 
+                    if (leftWNum && leftWNum > 0) {
+                        child.props.leftWidth = leftW;
+                    }
 
                     let stack = (
                         <StackItem
@@ -188,6 +199,12 @@ MetaDataGroup.propTypes = {
     color: PropTypes.string,
 
     /**
+     * @uxpindescription The default left width for any MetaDataPair controls added to this group. Enter a percent like '33%' or a whole number like '212'.
+     * @uxpinpropname Left Width
+     */
+    leftWidth: PropTypes.string,
+
+    /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Row padding between the items in the group. Value must be 0 or more.
      * @uxpinpropname Gutter
@@ -212,6 +229,7 @@ MetaDataGroup.defaultProps = {
     bold: false,
     italic: false,
     color: 'black',
+    leftWidth: '',
     gutterPadding: 12,
     stretch: true,
 }

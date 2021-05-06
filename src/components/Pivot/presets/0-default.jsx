@@ -12,19 +12,21 @@ const tab4text = "Tab 4 Contents";
 
 const size = "large";
 
+
+
 export default (
   <Pivot uxpId="pivot1" >
     <PivotPanel uxpId="pp1">
-      <Text uxpId="t1" variant={size} value={tab1text} />
+      <Text uxpId="t1" variant={size}>{tab1text}</Text>
     </PivotPanel>
     <PivotPanel uxpId="pp2">
-      <Text uxpId="t2" variant={size} value={tab2text} />
+      <Text uxpId="t2" variant={size}>{tab2text}</Text>
     </PivotPanel>
     <PivotPanel uxpId="pp3">
-      <Text uxpId="t3" variant={size} value={tab3text} />
+      <Text uxpId="t3" variant={size}>{tab3text}</Text>
     </PivotPanel>
     <PivotPanel uxpId="pp4">
-      <Text uxpId="t4" variant={size} value={tab4text} />
+      <Text uxpId="t4" variant={size}>{tab4text}</Text>
     </PivotPanel>
   </Pivot>
 );
