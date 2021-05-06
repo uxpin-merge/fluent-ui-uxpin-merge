@@ -4,6 +4,6 @@ import Calendar from '../Calendar';
 
 
 export default (
-  <Calendar uxpId="calendar1" style={{ width: '100%' }} />
+  <Calendar uxpId="calendar1" />
 );
 

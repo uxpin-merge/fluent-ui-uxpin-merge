@@ -4,6 +4,6 @@ import CalendarButton from '../CalendarButton';
 
 
 export default (
-  <CalendarButton uxpId="calendarButton1" />
+  <CalendarButton uxpId="calendarButton1" style={{ width: '100%' }} />
 );
 
