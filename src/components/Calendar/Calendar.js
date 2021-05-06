@@ -88,7 +88,7 @@ class Calendar extends React.Component {
             { selectedDate: date }
         )
 
-        this.props.uxpValue = date;
+        // this.props.uxpValue = date;
 
         if (this.props.onChange) {
             //Format this before surfacing with style: 'Feb 8, 2020' 
