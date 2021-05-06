@@ -102,24 +102,15 @@ class CalendarButton extends React.Component {
         const tooltipId = _.uniqueId('tooltip_');
 
         return (
-            <TooltipHost
-                content={this.props.tooltip}
-                directionalHint={DirectionalHint.topLeftEdge}
-                id={tooltipId}
-            >
-
-                <div ref={this._calendarButtonElement}>
-                    {this.props.buttonType === btnAction ?
-                        <ActionButton
-                            {...this.props}
-                            iconProps={buttonIconProps}
-                            text={buttonText}
-                            disabled={this.props.buttonDisabled}
-                            aria-describedby={tooltipId}
-                            onClick={() => { this._onButtonClick() }}
-                        />
-                        : this.props.buttonType === btnPrimary ?
-                            <PrimaryButton
+            <div>
+                <TooltipHost
+                    content={this.props.tooltip}
+                    directionalHint={DirectionalHint.topLeftEdge}
+                    id={tooltipId}
+                >
+                    <div ref={this._calendarButtonElement}>
+                        {this.props.buttonType === btnAction ?
+                            <ActionButton
                                 {...this.props}
                                 iconProps={buttonIconProps}
                                 text={buttonText}
@@ -127,51 +118,60 @@ class CalendarButton extends React.Component {
                                 aria-describedby={tooltipId}
                                 onClick={() => { this._onButtonClick() }}
                             />
-                            :
-                            <DefaultButton
-                                {...this.props}
-                                iconProps={buttonIconProps}
-                                text={buttonText}
-                                disabled={this.props.buttonDisabled}
-                                aria-describedby={tooltipId}
-                                onClick={() => { this._onButtonClick() }}
-                            />
-                    }
-                </div>
-                {this.state.showCalendar && (
-                    <Callout
-                        isBeakVisible={false}
-                        gapSpace={0}
-                        doNotLayer={false}
-                        target={this._calendarButtonElement}
-                        directionalHint={DirectionalHint.bottomLeftEdge}
-                        onDismiss={() => { this._onDismissCallout() }}
-                        setInitialFocus={true}
-                    >
-                        <FocusTrapZone isClickableOutsideFocusTrap={true}>
-                            <Calendar
-                                value={selectedDate}
-                                isMonthPickerVisible={true}
-                                dateRangeType={DateRangeType.Day}
-                                autoNavigateOnSelection={true}
-                                showGoToToday={true}
-                                showNavigateButtons={true}
-                                highlightCurrentMonth={true}
-                                highlightSelectedMonth={true}
-                                isDayPickerVisible={true}
-                                showMonthPickerAsOverlay={true}
-                                showSixWeeksByDefault={true}
-                                firstDayOfWeek={DayOfWeek.Sunday}
-                                workWeekDays={workWeekDays}
-                                strings={dayPickerStrings}
-                                showWeekNumbers={this.props.showWeekNumbers}
-                                onSelectDate={(d, sdr) => this._onChange(d)}
-                            />
-                        </FocusTrapZone>
-                    </Callout>
-                )}
-            </TooltipHost>
-
+                            : this.props.buttonType === btnPrimary ?
+                                <PrimaryButton
+                                    {...this.props}
+                                    iconProps={buttonIconProps}
+                                    text={buttonText}
+                                    disabled={this.props.buttonDisabled}
+                                    aria-describedby={tooltipId}
+                                    onClick={() => { this._onButtonClick() }}
+                                />
+                                :
+                                <DefaultButton
+                                    {...this.props}
+                                    iconProps={buttonIconProps}
+                                    text={buttonText}
+                                    disabled={this.props.buttonDisabled}
+                                    aria-describedby={tooltipId}
+                                    onClick={() => { this._onButtonClick() }}
+                                />
+                        }
+                    </div>
+                    {this.state.showCalendar && (
+                        <Callout
+                            isBeakVisible={false}
+                            gapSpace={0}
+                            doNotLayer={false}
+                            target={this._calendarButtonElement}
+                            directionalHint={DirectionalHint.bottomLeftEdge}
+                            onDismiss={() => { this._onDismissCallout() }}
+                            setInitialFocus={true}
+                        >
+                            <FocusTrapZone isClickableOutsideFocusTrap={true}>
+                                <Calendar
+                                    value={selectedDate}
+                                    isMonthPickerVisible={true}
+                                    dateRangeType={DateRangeType.Day}
+                                    autoNavigateOnSelection={true}
+                                    showGoToToday={true}
+                                    showNavigateButtons={true}
+                                    highlightCurrentMonth={true}
+                                    highlightSelectedMonth={true}
+                                    isDayPickerVisible={true}
+                                    showMonthPickerAsOverlay={true}
+                                    showSixWeeksByDefault={true}
+                                    firstDayOfWeek={DayOfWeek.Sunday}
+                                    workWeekDays={workWeekDays}
+                                    strings={dayPickerStrings}
+                                    showWeekNumbers={this.props.showWeekNumbers}
+                                    onSelectDate={(d, sdr) => this._onChange(d)}
+                                />
+                            </FocusTrapZone>
+                        </Callout>
+                    )}
+                </TooltipHost>
+            </div>
         );
     }
 
