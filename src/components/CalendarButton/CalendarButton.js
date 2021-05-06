@@ -115,8 +115,8 @@ class CalendarButton extends React.Component {
                             iconProps={buttonIconProps}
                             text={buttonText}
                             disabled={this.props.buttonDisabled}
-                            onClick={() => { this._onButtonClick() }}
                             aria-describedby={tooltipId}
+                            onClick={() => { this._onButtonClick() }}
                         />
                         : this.props.buttonType === btnPrimary ?
                             <PrimaryButton
@@ -124,8 +124,8 @@ class CalendarButton extends React.Component {
                                 iconProps={buttonIconProps}
                                 text={buttonText}
                                 disabled={this.props.buttonDisabled}
-                                onClick={() => { this._onButtonClick() }}
                                 aria-describedby={tooltipId}
+                                onClick={() => { this._onButtonClick() }}
                             />
                             :
                             <DefaultButton
@@ -133,8 +133,8 @@ class CalendarButton extends React.Component {
                                 iconProps={buttonIconProps}
                                 text={buttonText}
                                 disabled={this.props.buttonDisabled}
-                                onClick={() => { this._onButtonClick() }}
                                 aria-describedby={tooltipId}
+                                onClick={() => { this._onButtonClick() }}
                             />
                     }
                 </div>
