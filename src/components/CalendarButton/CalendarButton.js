@@ -108,36 +108,37 @@ class CalendarButton extends React.Component {
                     directionalHint={DirectionalHint.topLeftEdge}
                     id={tooltipId}
                 >
-                    <div ref={this._calendarButtonElement}>
-                        {this.props.buttonType === btnAction ?
-                            <ActionButton
+                    {this.props.buttonType === btnAction ?
+                        <ActionButton
+                            {...this.props}
+                            ref={this._calendarButtonElement}
+                            iconProps={buttonIconProps}
+                            text={buttonText}
+                            disabled={this.props.buttonDisabled}
+                            aria-describedby={tooltipId}
+                            onClick={() => { this._onButtonClick() }}
+                        />
+                        : this.props.buttonType === btnPrimary ?
+                            <PrimaryButton
                                 {...this.props}
+                                ref={this._calendarButtonElement}
                                 iconProps={buttonIconProps}
                                 text={buttonText}
                                 disabled={this.props.buttonDisabled}
                                 aria-describedby={tooltipId}
                                 onClick={() => { this._onButtonClick() }}
                             />
-                            : this.props.buttonType === btnPrimary ?
-                                <PrimaryButton
-                                    {...this.props}
-                                    iconProps={buttonIconProps}
-                                    text={buttonText}
-                                    disabled={this.props.buttonDisabled}
-                                    aria-describedby={tooltipId}
-                                    onClick={() => { this._onButtonClick() }}
-                                />
-                                :
-                                <DefaultButton
-                                    {...this.props}
-                                    iconProps={buttonIconProps}
-                                    text={buttonText}
-                                    disabled={this.props.buttonDisabled}
-                                    aria-describedby={tooltipId}
-                                    onClick={() => { this._onButtonClick() }}
-                                />
-                        }
-                    </div>
+                            :
+                            <DefaultButton
+                                {...this.props}
+                                ref={this._calendarButtonElement}
+                                iconProps={buttonIconProps}
+                                text={buttonText}
+                                disabled={this.props.buttonDisabled}
+                                aria-describedby={tooltipId}
+                                onClick={() => { this._onButtonClick() }}
+                            />
+                    }
                     {this.state.showCalendar && (
                         <Callout
                             isBeakVisible={false}
