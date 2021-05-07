@@ -92,6 +92,17 @@ module.exports = {
           'src/components/Spinner/Spinner.js',
         ],
       },
+      {
+        name: 'Charts',
+        include: [
+          'src/components/Charts/AreaChart/AreaChart.js',
+          'src/components/Charts/BarChart/BarChart.js',
+          'src/components/Charts/LineChart/LineChart.js',
+          'src/components/Charts/LineMarkChart/LineMarkChart.js',
+          'src/components/Charts/MarkChart/MarkChart.js',
+          'src/components/Charts/PieChart/PieChart.js',
+        ],
+      },
     ],
     wrapper: 'src/components/UXPinWrapper/UXPinWrapper.js',
     webpackConfig: 'uxpin.webpack.config.js',
