@@ -29,6 +29,7 @@ module.exports = {
           'src/components/Link/Link.js',
           'src/components/Separator/Separator.js',
           'src/components/Text/Text.js',
+          'src/components/Icon/Icon.js',
         ],
       },
       {
@@ -46,7 +47,7 @@ module.exports = {
           'src/components/Calendar/Calendar.js',
           'src/components/CalendarButton/CalendarButton.js',
           'src/components/Checkbox/Checkbox.js',
-          'src/components/Choicegroup/Choicegroup.js',
+          'src/components/ChoiceGroup/ChoiceGroup.js',
           'src/components/Dropdown/Dropdown.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
