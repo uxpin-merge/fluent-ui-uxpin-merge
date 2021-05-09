@@ -5,6 +5,14 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
+/**
+ * May 2021:
+ * This component is exhibiting weird errors. 
+ * Click on a color swatch, and it'll travel down the page. 
+ * Odd JavaScript errors also appear on the page. 
+ * So it's being pulled from the library for now. 
+ */
+
 
 
 const shapeCircle = 'circle';
