@@ -47,7 +47,9 @@ class ColorPicker extends React.Component {
 
         //Get the hex for the selected color and surface that
         let hex = "#" + color.hex;
-        let trans = color.t ? color.t : '';
+
+        //Alpha is recorded as percent opacity. Let's switch to percent transparent
+        var trans = color.t ? color.t : '';
 
         console.log("on change. Color: " + hex + " trans: " + trans);
 
@@ -66,6 +68,7 @@ class ColorPicker extends React.Component {
                 {...this.props}
                 showPreview={true}
                 color={this.state.selectedColorObj}
+                alphaType={'transparency'}
                 alphaSliderHidden={!this.props.showAlpha}
                 onChange={(evt, c) => this._onChanged(c)}
             />
