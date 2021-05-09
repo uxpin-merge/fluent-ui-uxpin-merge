@@ -38,10 +38,10 @@ class SwatchColorPicker extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            selectedID: null,
-            colorList: sampleColorList,
-        }
+        // this.state = {
+        //     selectedID: null,
+        //     colorList: sampleColorList,
+        // }
     }
 
     // set() {
