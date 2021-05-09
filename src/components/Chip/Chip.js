@@ -19,9 +19,9 @@ const borderSyle = '1px solid ';
 const borderRadius = '5';
 
 //Padding: left and right
-const padLR = 8;
+const padLR = '8px ';
 //Padding: top and bottom
-const padTB = 4;
+const padTB = '4px ';
 
 
 
@@ -138,10 +138,7 @@ class Chip extends React.Component {
         display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
         lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
         textAlign: alignCenter,
-        paddingTop: padTB,
-        paddingBottom: padTB,
-        paddingLeft: padLR,
-        paddingRight: padLR,
+        padding: padTB + padLR + padTB + padLR,
         background: chipStyles.background,
         border: bStyle,
         borderRadius: 10,
