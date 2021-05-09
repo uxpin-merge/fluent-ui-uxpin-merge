@@ -48,6 +48,7 @@ module.exports = {
           'src/components/Checkbox/Checkbox.js',
           'src/components/Choicegroup/Choicegroup.js',
           'src/components/ColorPicker/ColorPicker.js',
+          'src/components/ColorSwatchPicker/ColorSwatchPicker.js',
           'src/components/Dropdown/Dropdown.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',

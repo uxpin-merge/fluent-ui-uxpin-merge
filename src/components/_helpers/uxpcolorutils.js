@@ -72,12 +72,12 @@ export const UxpColors = {
 
 
     /**
-     * A convenience method for getting an set of params for a PayPalUI color token.
+     * A convenience method for getting an set of params for a color token.
      * This set of params is useful for creating Microsoft Fluent Color objects.
      * Each param has the following properties: 
      *      - id: The shorter version of the token name. The consumer may override this, if desired. Example, 'blue-700'. 
      *      - label: The shorter version of the token name. Example, 'blue-700'.
-     *      - ppuiToken: The actual longer PPUI token name. Example, '@color-blue-700'.
+     *      - colorToken: The actual longer token name. Example, '@color-blue-700'.
      *      - hex: The color's hex value. Example: '#2C2E2F'.
      *      - noPunctuation: The value of the short token name without spaces or dashes, and lower case. Great for doing matching on. Example, 'blue700'. 
      * @param {string}  colorLabel A short token name, such as 'grey-600' or 'blue-300'. 
@@ -89,24 +89,25 @@ export const UxpColors = {
     getColorParams: function (colorLabel, hex) {
         //Normalize the incoming color label string
         let label = colorLabel.trim().toLowerCase().replace("@color-", "");
-        let token = "@color-" + label.trim(); //PPUI token prefix
+        let token = "@color-" + label.trim(); //token prefix
         let noPunct = label.replace("-", "").replace(" ", "");
+        let h = hex.trim().toLowerCase()
 
         let params = ({
             id: label,
             label: label,
-            ppuiToken: token,
-            color: hex.trim().toLowerCase(),
-            noPunctuation: noPunct
+            colorToken: token,
+            color: h,
+            noPunctuation: noPunct,
         });
         return params;
     },
 
     /**
-     * A convenience method for getting an array of color params for the PayPalUI Blue palette.
-     * Each param has an id (the short token name), a token-like name, the actual PPUI token name, and a hex value of the color. 
+     * A convenience method for getting an array of color params for the  Blue palette.
+     * Each param has an id (the short token name), a token-like name, the actual token name, and a hex value of the color. 
      * This array is useful for creating Microsoft Fluent Color objects. 
-     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Blues palette. Attributes are: id, label, ppuiToken, and color (a Hex value).
+     * @returns {Array} Returns an array of Color Params objects with the  Blues palette. Attributes are: id, label, colorToken, and color (a Hex value).
      */
     getBlueColorList: function () {
         let b8 = this.getColorParams("blue-800", this.blue800);
@@ -123,10 +124,10 @@ export const UxpColors = {
     },
 
     /**
-     * A convenience method for getting an array of color params for the PayPalUI Grey palette.
-     * Each param has an id (the short token name), a token-like name, the actual PPUI token name, and a hex value of the color. 
+     * A convenience method for getting an array of color params for the  Grey palette.
+     * Each param has an id (the short token name), a token-like name, the actual token name, and a hex value of the color. 
      * This array is useful for creating Microsoft Fluent Color objects. 
-     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Greys palette. Attributes are: id, label, ppuiToken, and color (a Hex value).
+     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Greys palette. Attributes are: id, label, colorToken, and color (a Hex value).
      */
     getGreyColorList: function () {
         let b9 = this.getColorParams("black", this.black);
@@ -144,10 +145,10 @@ export const UxpColors = {
     },
 
     /**
-     * A convenience method for getting an array of color params for the PayPalUI Accent palette.
-     * Each param has an id (the short token name), a token-like name, the actual PPUI token name, and a hex value of the color. 
+     * A convenience method for getting an array of color params for the  Accent palette.
+     * Each param has an id (the short token name), a token-like name, the actual token name, and a hex value of the color. 
      * This array is useful for creating Microsoft Fluent Color objects. 
-     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Accents palette. Attributes are: id, label, ppuiToken, and color (a Hex value).
+     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Accents palette. Attributes are: id, label, colorToken, and color (a Hex value).
      */
     getAccentColorList: function () {
         let b12 = this.getColorParams("green-700", this.green700);
@@ -172,11 +173,11 @@ export const UxpColors = {
 
 
     /**
-     * Returns the hex value for a PayPal UI short Color token name string, such as 'grey-500' or 'blue-300'.
-     * @param {string} token A string representing the short token name for a PayPal UI color. 
+     * Returns the hex value for a short Color token name string, such as 'grey-500' or 'blue-300'.
+     * @param {string} token A string representing the short token name for a color. 
      * @example 'grey-500'
      * @example 'blue-300'
-     * @returns {string} For a valid PayPal UI color token name, such as 'blue-700', returns its Hex color value. Returns undefined if the value cannot be determined. 
+     * @returns {string} For a valid color token name, such as 'blue-700', returns its Hex color value. Returns undefined if the value cannot be determined. 
      */
     getHexFromColorToken: function (token) {
         //First, normalize our incoming color value
@@ -263,12 +264,8 @@ export const UxpColors = {
 
 
     /**
-     * December 2020: Added Linear and Radial Gradient for background Color.
-     *  
-     */
-    /**
      * Use this method if the input string is unknown, and could either be a Hex value (with or without the #) or
-     * a PayPal UI color token, such as 'blue-700'.
+     * a color token, such as 'blue-700'.
      * @example 'grey-500'
      * @example 'blue-300'
      * @example '#ffffff'
@@ -276,8 +273,8 @@ export const UxpColors = {
      * @example '#fff'
      * @example 'linear-gradient(120deg, #8D7749, #498D77)'
      * @example 'radial-gradient(#8D3749, #37EE77)'
-     * @param {string} colorStr Either a Hex color value (with or without a #), or a PayPal UI color token, such as 'blue-700'.
-     * @returns {string} For a valid hex color value or a PayPal UI color token name, such as 'blue-700', returns its Hex color value. 
+     * @param {string} colorStr Either a Hex color value (with or without a #), or a  color token, such as 'blue-700'.
+     * @returns {string} For a valid hex color value or a  color token name, such as 'blue-700', returns its Hex color value. 
      * For a gradient value, such as linear-gradient(#553749, #EE77), string will be returned as-is.
      */
     getHexFromHexOrToken: function (colorStr) {
@@ -289,11 +286,11 @@ export const UxpColors = {
             if (gradientTypes.some(type => colorStr.includes(type)))
                 return colorStr;
 
-            //Let's see if it's one of the PPUI tokens. It'll be undefined if it's not a match.
-            let ppTokenHex = this.getHexFromColorToken(colorStr);
+            //Let's see if it's one of the tokens. It'll be undefined if it's not a match.
+            let colorTokenHex = this.getHexFromColorToken(colorStr);
 
-            if (ppTokenHex)
-                return ppTokenHex;
+            if (colorTokenHex)
+                return colorTokenHex;
 
             //Else, let's see if it's already a valid hex value. 
             //First, remove the hash mark if it has one
