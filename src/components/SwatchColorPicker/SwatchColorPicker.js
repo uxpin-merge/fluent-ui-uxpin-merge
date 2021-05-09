@@ -13,18 +13,18 @@ const shapeCircle = 'circle';
 const shapeSquare = 'square';
 
 const colorCellsExample1 = [
-    { id: '1', label: 'red', color: '#a4262c' },
-    { id: '2', label: 'orange', color: '#ca5010' },
-    { id: '3', label: 'orangeYellow', color: '#986f0b' },
-    { id: '4', label: 'yellowGreen', color: '#8cbd18' },
-    { id: '5', label: 'green', color: '#0b6a0b' },
-    { id: '6', label: 'cyan', color: '#038387' },
-    { id: '7', label: 'cyanBlue', color: '#004e8c' },
-    { id: '8', label: 'magenta', color: '#881798' },
-    { id: '9', label: 'magentaPink', color: '#9b0062' },
-    { id: '10', label: 'black', color: '#000000' },
-    { id: '11', label: 'gray', color: '#7a7574' },
-    { id: '12', label: 'gray20', color: '#69797e' },
+    { id: 'a', label: 'red', color: '#a4262c' },
+    { id: 'b', label: 'orange', color: '#ca5010' },
+    { id: 'c', label: 'orangeYellow', color: '#986f0b' },
+    { id: 'd', label: 'yellowGreen', color: '#8cbd18' },
+    { id: 'e', label: 'green', color: '#0b6a0b' },
+    { id: 'f', label: 'cyan', color: '#038387' },
+    { id: 'g', label: 'cyanBlue', color: '#004e8c' },
+    { id: 'h', label: 'magenta', color: '#881798' },
+    { id: 'i', label: 'magentaPink', color: '#9b0062' },
+    { id: 'j', label: 'black', color: '#000000' },
+    { id: 'k', label: 'gray', color: '#7a7574' },
+    { id: 'l', label: 'gray20', color: '#69797e' },
 ];
 
 const paletteBlues = "Blues";
@@ -48,25 +48,26 @@ class SwatchColorPicker extends React.Component {
 
     set() {
         console.log("set for palette: " + this.props.palette);
-        let palette = this.props.palette;
 
-        //Populate the color array.
-        let colors = palette === paletteBlues ? UxpColors.getBlueColorList()
-            : palette === paletteGreys ? UxpColors.getGreyColorList()
-                : palette === paletteAccents ? UxpColors.getAccentColorList()
-                    : colorCellsExample1;
+        // let palette = this.props.palette;
 
-        //Normalize the size coming in from props.
-        let size = this.props.cellSize < cellMinSize ? cellMinSize
-            : this.props.cellSize > cellMaxSize ? cellMaxSize
-                : this.props.cellSize;
+        // //Populate the color array.
+        // let colors = palette === paletteBlues ? UxpColors.getBlueColorList()
+        //     : palette === paletteGreys ? UxpColors.getGreyColorList()
+        //         : palette === paletteAccents ? UxpColors.getAccentColorList()
+        //             : colorCellsExample1;
 
-        this.setState(
-            {
-                colors: colors,
-                cellSize: size,
-            }
-        )
+        // //Normalize the size coming in from props.
+        // let size = this.props.cellSize < cellMinSize ? cellMinSize
+        //     : this.props.cellSize > cellMaxSize ? cellMaxSize
+        //         : this.props.cellSize;
+
+        // this.setState(
+        //     {
+        //         colors: colors,
+        //         cellSize: size,
+        //     }
+        // )
     }
 
     componentDidMount() {
@@ -84,17 +85,19 @@ class SwatchColorPicker extends React.Component {
         //By default, if it's an empty string, the Microsoft control won't show anything as selected
         var selectedColorIndex = "";
 
-        //Since the default value is null, we know that if there's a value here, it's been set by the end user
-        if (this.state.selectedColorID) {
-            selectedColorID = this.state.selectedColorID;
-        }
-        else if (this.props.selectedColor) {
-            let index = this.props.selectedIndex;
-            if (index > 0 &&
-                index < cellCountMax) {
-                selectedColorIndex = index - 1; //State uses a 0 based index
-            }
-        }
+        // //Since the default value is null, we know that if there's a value here, it's been set by the end user
+        // if (this.state.selectedColorID) {
+        //     selectedColorIndex = this.state.selectedColorID;
+        // }
+        // else if (this.props.selectedColor) {
+        //     let index = this.props.selectedIndex;
+        //     if (index > 0 &&
+        //         index < cellCountMax) {
+        //         selectedColorIndex = index - 1; //State uses a 0 based index
+        //     }
+        // }
+
+        console.log("Returning selected color index: " + selectedColorIndex);
 
         return selectedColorIndex;
     }
@@ -120,10 +123,12 @@ class SwatchColorPicker extends React.Component {
 
     render() {
 
-        let selectedColorIndex = this._getSelectedColorIndex();
+        // let selectedColorIndex = this._getSelectedColorIndex();
+
 
         let cellSize = this.state.cellSize;
         let palette = this.state.colors;
+
 
         console.log("render. selected color ID: " + selectedColorID);
         console.log("      cell size: " + cellSize);
@@ -133,12 +138,12 @@ class SwatchColorPicker extends React.Component {
             <FSwatchColorPicker
                 {...this.props}
                 // isControlled={true}
-                colorCells={palette}
+                colorCells={colorCellsExample1}
                 // selectedID={selectedColorID}
-                cellShape={this.props.shape}
-                cellWidth={cellSize}
-                cellHeight={cellSize}
-                columnCount={this.state.columns}
+                cellShape={shapeCircle}
+                cellWidth={24}
+                cellHeight={24}
+                columnCount={5}
                 // disabled={this.disabled}
                 onColorChanged={(id, c) => this._onColorChanged(id, c)}
             />
@@ -153,6 +158,29 @@ class SwatchColorPicker extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 SwatchColorPicker.propTypes = {
+
+    /**
+     * @uxpindescription The 1-based index for the selected color. Leave blank or enter -1 for no selection.
+     * @uxpinbind onChange
+     * @uxpinpropname * Index
+     */
+    selectedIndex: PropTypes.number,
+
+    /**
+     * @uxpindescription Select one of the PayPal UI color palettes, or enter a custom set of your own with the Custom Colors property
+     * @uxpinpropname Palette
+     */
+    palette: PropTypes.oneOf([
+        paletteBlues,
+        paletteGreys,
+        paletteAccents,
+        paletteCustom]),
+
+    /**
+     * @uxpindescription Enter one color per line using this pattern: Color Name | Hex Value. Note the pipe! Example: Eggshell Blue | #0070BA
+     * @uxpinpropname Custom Colors
+     */
+    colors: PropTypes.string,
 
     /**
      * @uxpindescription Whether the cells should be circular or square
@@ -174,28 +202,6 @@ SwatchColorPicker.propTypes = {
      * @uxpindescription The padding to use between each color swatch
      */
     padding: PropTypes.number,
-
-    /**
-     * @uxpindescription Select one of the PayPal UI color palettes, or enter a custom set of your own with the Custom Colors property
-     * @uxpinpropname Palette
-     */
-    palette: PropTypes.oneOf([
-        paletteBlues,
-        paletteGreys,
-        paletteAccents,
-        paletteCustom]),
-
-    /**
-     * @uxpindescription Enter one color per line using this pattern: Color Name, Hex Value. Note the comma! Example: Eggshell Blue, #0070BA
-     * @uxpinpropname Custom Colors
-     */
-    colors: PropTypes.string,
-
-    /**
-     * @uxpindescription The 1-based index for the selected color. Leave blank or enter -1 for no selection.
-     * @uxpinpropname * Index
-     */
-    selectedIndex: PropTypes.number,
 
     /**
      * @uxpindescription To disable the control
