@@ -44,34 +44,34 @@ class SwatchColorPicker extends React.Component {
         }
     }
 
-    set() {
-        let id = this.props.selectedIndex;
-        console.log("set ID: " + id);
+    // set() {
+    //     let id = this.props.selectedIndex;
+    //     console.log("set ID: " + id);
 
-        //Setting ID to null is preferred as the default.
-    }
+    //     //Setting ID to null is preferred as the default.
+    // }
 
-    componentDidMount() {
-        this.set();
-    }
+    // componentDidMount() {
+    //     this.set();
+    // }
 
-    _getSelectedColorIDByIndex(index) {
-        if (this.state.colorList && index > -1) {
-            let l = this.state.colorList.length;
+    // _getSelectedColorIDByIndex(index) {
+    //     if (this.state.colorList && index > -1) {
+    //         let l = this.state.colorList.length;
 
-            if (index < l) {
-                let color = this.state.colorList[index];
+    //         if (index < l) {
+    //             let color = this.state.colorList[index];
 
-                if (color) {
-                    let id = color.id;
-                    if (id)
-                        return id;
-                }
-            }
-        }
+    //             if (color) {
+    //                 let id = color.id;
+    //                 if (id)
+    //                     return id;
+    //             }
+    //         }
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     // set() {
     //     console.log("set for palette: " + this.props.palette);
@@ -133,16 +133,16 @@ class SwatchColorPicker extends React.Component {
         console.log("Color selected. ID: " + id);
         console.log("    Color: " + color);
 
-        this.setState(
-            {
-                selectedColorID: id,
-                selectedColor: color
-            }
-        )
+        // this.setState(
+        //     {
+        //         selectedColorID: id,
+        //         selectedColor: color
+        //     }
+        // )
 
         //Return the index of the color 
         if (this.props.onChange) {
-            this.props.onChange();
+            this.props.onChange(id);
         }
     }
 
@@ -187,7 +187,7 @@ SwatchColorPicker.propTypes = {
      * @uxpinbind onChange
      * @uxpinpropname * Selected Index
      */
-    selectedIndex: PropTypes.string,
+    selectedIndex: PropTypes.number,
 
     /**
      * @uxpindescription Select one of the color palettes, or enter a custom set of your own with the Custom Colors property
