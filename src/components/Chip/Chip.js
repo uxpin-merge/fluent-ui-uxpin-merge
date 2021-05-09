@@ -15,6 +15,8 @@ const roleWarning = 'warning';
 const roleError = 'error';
 
 const alignCenter = 'center';
+const borderSyle = '1px solid ';
+const borderRadius = '5';
 
 
 
@@ -114,8 +116,8 @@ class Chip extends React.Component {
   render() {
     let chipStyles = this.state.chipStyles;
 
-    //Let's see if the user entered a valid color value. This method returns undefined if not. 
-    var textColor = chipStyles.text;
+    let textColor = chipStyles.text;
+    let bStyle = borderSyle + chipStyles.border;
 
     let fTextStyles = {
       root: {
@@ -130,6 +132,13 @@ class Chip extends React.Component {
         paddingLeft: 4,
         paddingRight: 4,
         background: chipStyles.background,
+        border: bStyle,
+        borderRadius: 10,
+        selectors: {
+          ':hover': {
+            background: chipStyles.hover,
+          },
+        },
       }
     }
 
@@ -193,11 +202,6 @@ Chip.defaultProps = {
   textValue: defaultTextValue,
   size: 'xSmall',
   role: roleDefault,
-  bold: false,
-  italic: false,
-  align: 'left',
-  truncate: false,
-  color: 'black',
 };
 
 
