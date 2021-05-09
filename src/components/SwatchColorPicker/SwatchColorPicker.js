@@ -139,14 +139,11 @@ class SwatchColorPicker extends React.Component {
 
             <FSwatchColorPicker
                 {...this.props}
-                // isControlled={true}
                 colorCells={colorCellsExample1}
-                // selectedID={selectedColorID}
-                cellShape={shapeCircle}
-                cellWidth={24}
-                cellHeight={24}
-                columnCount={5}
-                // disabled={this.disabled}
+                cellShape={this.props.shape}
+                cellWidth={this.props.cellSize}
+                cellHeight={this.props.cellSize}
+                columnCount={this.props.columns}
                 onColorChanged={(id, c) => this._onColorChanged(id, c)}
             />
 
