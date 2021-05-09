@@ -12,7 +12,7 @@ const cellCountMax = 300;
 const shapeCircle = 'circle';
 const shapeSquare = 'square';
 
-const colorCellsExample1 = [
+const sampleColorList = [
     { id: 'a', label: 'red', color: '#a4262c' },
     { id: 'b', label: 'orange', color: '#ca5010' },
     { id: 'c', label: 'orangeYellow', color: '#986f0b' },
@@ -39,11 +39,33 @@ class SwatchColorPicker extends React.Component {
         super(props);
 
         this.state = {
-            // cellSize: 20,
-            // selectedColorID: null, //Must be null for default
-            // selectedColor: null,   //Must be null for default
-            // colors: []
+            selectedID = null,
+            colorList = sampleColorList,
         }
+    }
+
+    set() {
+        var id = this.props.selectedIndex;
+
+        //Setting ID to null is preferred as the default.
+    }
+
+    _getSelectedColorIDByIndex(index) {
+        if (this.state.colorList && index > -1) {
+            let l = this.state.colorList.length;
+
+            if (index < l) {
+                let color = this.state.colorList[index];
+
+                if (color) {
+                    let id = color.id;
+                    if (id)
+                        return id;
+                }
+            }
+        }
+
+        return null;
     }
 
     // set() {
@@ -116,9 +138,9 @@ class SwatchColorPicker extends React.Component {
         // )
 
         //Return the index of the color 
-        if (this.props.onChange) {
-            this.props.onChange(id);
-        }
+        // if (this.props.onChange) {
+        //     this.props.onChange(id);
+        // }
     }
 
     render() {
@@ -160,9 +182,9 @@ SwatchColorPicker.propTypes = {
     /**
      * @uxpindescription In the designer, set a 1-based index for the selected color. Leave blank or enter -1 for no selection. In a running prototype, this prop returns a color hex value. 
      * @uxpinbind onChange
-     * @uxpinpropname * Selected Color
+     * @uxpinpropname * Selected Index
      */
-    selectedColor: PropTypes.string,
+    selectedIndex: PropTypes.string,
 
     /**
      * @uxpindescription Select one of the color palettes, or enter a custom set of your own with the Custom Colors property
@@ -219,7 +241,7 @@ SwatchColorPicker.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 SwatchColorPicker.defaultProps = {
-    selectedColor: '',
+    selectedIndex: 1,
     shape: shapeCircle,
     cellSize: 24,
     cellMargin: 10,
