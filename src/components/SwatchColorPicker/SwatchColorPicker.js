@@ -29,10 +29,6 @@ const paletteGreys = "Greys";
 const paletteAccents = "Accents";
 const paletteCustom = "Custom Color List";
 
-const pickerStyle = {
-    display: 'block'
-};
-
 
 
 class SwatchColorPicker extends React.Component {
@@ -72,7 +68,8 @@ class SwatchColorPicker extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.palette !== this.props.palette) {
+        if (prevProps.palette !== this.props.palette ||
+            prevProps.selectedIndex !== this.props.selectedIndex) {
             this.set();
         }
     }
@@ -110,7 +107,6 @@ class SwatchColorPicker extends React.Component {
                 cellWidth={this.props.cellSize}
                 cellHeight={this.props.cellSize}
                 columnCount={this.props.columns}
-                styles={pickerStyle}
                 onColorChanged={(id, c) => this._onColorChanged(id, c)}
             />
 
@@ -130,7 +126,7 @@ SwatchColorPicker.propTypes = {
      * @uxpinbind onChange
      * @uxpinpropname * Selected Index
      */
-    selectedIndex: PropTypes.number,
+    selectedIndex: PropTypes.string,
 
     /**
      * @uxpindescription Select one of the color palettes, or enter a custom set of your own with the Custom Colors property
