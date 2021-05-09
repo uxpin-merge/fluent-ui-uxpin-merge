@@ -163,7 +163,7 @@ SwatchColorPicker.propTypes = {
      * @uxpinbind onChange
      * @uxpinpropname * Selected Color
      */
-    selectedColor: PropTypes.number,
+    selectedColor: PropTypes.string,
 
     /**
      * @uxpindescription Select one of the color palettes, or enter a custom set of your own with the Custom Colors property
@@ -220,7 +220,7 @@ SwatchColorPicker.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 SwatchColorPicker.defaultProps = {
-    selectedColor: 0,
+    selectedColor: '',
     shape: shapeCircle,
     cellSize: 24,
     cellMargin: 10,
