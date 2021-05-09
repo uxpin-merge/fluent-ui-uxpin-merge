@@ -41,17 +41,15 @@ class ColorPicker extends React.Component {
 
     _onChanged(color) {
 
-        // this.setState(
-        //     { selectedColorObj: color }
-        // )
+        this.setState(
+            { selectedColorObj: color }
+        )
 
         //Get the hex for the selected color and surface that
         let hex = "#" + color.hex;
         let trans = color.t ? color.t : '';
 
         console.log("on change. Color: " + hex + " trans: " + trans);
-
-        this.props.selectedColor = hex + trans;
 
         //Return the index of the color
         if (this.props.onColorChange) {
