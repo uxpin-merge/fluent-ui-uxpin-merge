@@ -25,6 +25,7 @@ module.exports = {
       {
         name: 'Utilities',
         include: [
+          'src/components/Chip/Chip.js',
           'src/components/Image/Image.js',
           'src/components/Link/Link.js',
           'src/components/Separator/Separator.js',
