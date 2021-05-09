@@ -41,7 +41,7 @@ class SwatchColorPicker extends React.Component {
 
         //Return the index of the color 
         if (this.props.onChange) {
-            this.props.onChange(id);
+            this.props.onChange(color);
         }
     }
 
