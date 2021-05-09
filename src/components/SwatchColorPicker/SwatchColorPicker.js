@@ -77,20 +77,26 @@ class SwatchColorPicker extends React.Component {
         console.log("Color selected. ID: " + id);
         console.log("    Color: " + color);
 
+        this.setState({
+            _selectedID: id,
+        });
+
         //Return the index of the color 
         if (this.props.onChange) {
-            this.props.onChange();
+            this.props.onChange(id);
         }
     }
 
     render() {
         console.log("Entering render...");
         let palette = this.state._colorPalette;
+        let id = this.state._selectedID;
 
         return (
 
             <FSwatchColorPicker
                 {...this.props}
+                selectedId={id}
                 colorCells={palette}
                 cellShape={this.props.shape}
                 cellWidth={this.props.cellSize}
