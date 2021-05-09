@@ -36,6 +36,7 @@ class SwatchColorPicker extends React.Component {
         super(props);
 
         this.state = {
+            _selectedID: 1,
             _colorPalette: [],
         }
     }
@@ -53,6 +54,7 @@ class SwatchColorPicker extends React.Component {
             for (i = 0; i < palette.length; i++) {
                 let color = palette[i];
                 color.id = i + 1;
+                color.index = i;
             }
         }
 
@@ -77,7 +79,7 @@ class SwatchColorPicker extends React.Component {
 
         //Return the index of the color 
         if (this.props.onChange) {
-            this.props.onChange(id);
+            this.props.onChange();
         }
     }
 
