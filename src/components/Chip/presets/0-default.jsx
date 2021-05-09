@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Text from '../Chip';
+import Chip from '../Chip';
 
 
 

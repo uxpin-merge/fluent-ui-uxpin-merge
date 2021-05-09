@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { getTokens } from '../_helpers/parser';
-import uxpinConfig from '../../../uxpin.config';
 
 
 const defaultTextColor = "#000000";
