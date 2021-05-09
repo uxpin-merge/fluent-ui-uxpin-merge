@@ -31,7 +31,7 @@ class Chip extends React.Component {
     super(props);
 
     this.state = {
-      chipStyles: {},
+      chipStyles: '',
     }
   }
 
@@ -91,28 +91,6 @@ class Chip extends React.Component {
     };
   }
 
-  //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
-  _getTokenizedText(text) {
-
-    var tokens = getTokens(text).mixed.map((el, i) => {
-      if (typeof (el) === 'string') {
-        return (<span key={i}> {el} </span>);
-      }
-      else if (el.type == 'link') {
-        return el.suggestions[0];
-      }
-      else if (el.suggestions[0]) {
-        // if there's a suggestion, call the function
-        return el.suggestions[0];
-      } else {
-        // there's no suggestion, return the text
-        return (<span key={i}> {el.tokenString} </span>);
-      }
-    });
-
-    return tokens;
-  }
-
   _onClick() {
     if (this.props.onChipClick) {
       this.props.onChipClick();
@@ -146,7 +124,7 @@ class Chip extends React.Component {
       }
     }
 
-    let message = this.state.message;
+    let message = this.props.textValue;
 
     return (
       <Text
@@ -155,25 +133,25 @@ class Chip extends React.Component {
         variant={this.props.size}
         block={true}
         nowrap={true}
-        onClick={() => this.onClick() >
-          { this.props.textValue }
-      </ Text>
-        );
-        }
-        }
+        onClick={() => this.onClick()} >
+        { message}
+      </Text>
+    );
+  }
+}
 
 
-        /**
-        * Set up the properties to be available in the UXPin property inspector.
-        */
+/**
+* Set up the properties to be available in the UXPin property inspector.
+*/
 Chip.propTypes = {
 
-          /**
-           * @uxpindescription The text value to display. Supports the link(Click Me) feature.
-           * @uxpinpropname Text 
-           * @uxpincontroltype textfield(2)
-           */
-          textValue: PropTypes.string,
+  /**
+   * @uxpindescription The text value to display. Supports the link(Click Me) feature.
+   * @uxpinpropname Text 
+   * @uxpincontroltype textfield(2)
+   */
+  textValue: PropTypes.string,
 
   /**
   * @uxpindescription The visual style based on the role of the control
@@ -214,11 +192,11 @@ Chip.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Chip.defaultProps = {
-          textValue: defaultTextValue,
+  textValue: defaultTextValue,
   size: 'xSmall',
   role: roleDefault,
   hoverEffect: true,
 };
 
 
-export { Chip as default};
+export { Chip as default };
