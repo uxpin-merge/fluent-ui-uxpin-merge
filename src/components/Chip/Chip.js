@@ -133,7 +133,7 @@ class Chip extends React.Component {
         variant={this.props.size}
         block={true}
         nowrap={true}
-        onClick={() => this.onClick()} >
+        onClick={() => this._onClick()} >
         { message}
       </Text>
     );
