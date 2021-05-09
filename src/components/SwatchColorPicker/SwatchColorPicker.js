@@ -47,8 +47,18 @@ class SwatchColorPicker extends React.Component {
                 : pref === paletteAccents ? UxpColors.getAccentColorList()
                     : sampleColorList;
 
-        this.setState {
+        this.setState({
             _colorPalette: palette,
+        });
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.palette !== this.props.palette) {
+            this.set();
         }
     }
 
