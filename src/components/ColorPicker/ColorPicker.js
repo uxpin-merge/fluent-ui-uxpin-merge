@@ -45,13 +45,9 @@ class ColorPicker extends React.Component {
             { selectedColorObj: color }
         )
 
-        //Get the hex for the selected color and surface that
+        //Get the hex & optional transparency for the selected color and surface that
         let hex = "#" + color.hex;
-
-        //Alpha is recorded as percent opacity. Let's switch to percent transparent
         var trans = color.t ? color.t : '';
-
-        console.log("on change. Color: " + hex + " trans: " + trans);
 
         //Return the index of the color
         if (this.props.onColorChange) {
@@ -91,8 +87,8 @@ ColorPicker.propTypes = {
     selectedColor: PropTypes.string,
 
     /**
-     * @uxpindescription To show the Alpha transparency features
-     * @uxpinpropname Show Alpha
+     * @uxpindescription To show the transparency features
+     * @uxpinpropname Show Transparency
      * */
     showAlpha: PropTypes.bool,
 
