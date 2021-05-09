@@ -47,6 +47,15 @@ class SwatchColorPicker extends React.Component {
                 : pref === paletteAccents ? UxpColors.getAccentColorList()
                     : sampleColorList;
 
+        //Reset the IDs so we can use the selected index prop.
+        if (palette) {
+            var i;
+            for (i = 0; i < palette.length; i++) {
+                let color = palette[i];
+                color.id = i + 1;
+            }
+        }
+
         this.setState({
             _colorPalette: palette,
         });
