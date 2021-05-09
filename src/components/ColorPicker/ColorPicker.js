@@ -20,9 +20,6 @@ class ColorPicker extends React.Component {
 
     set() {
 
-        console.log("set. props: " + this.props.selectedColor);
-
-        //Let's see if the UXPin designer entered a default color value...
         let color = UxpColors.getHexFromHexOrToken(this.props.selectedColor);
 
         if (color) {
@@ -44,18 +41,21 @@ class ColorPicker extends React.Component {
 
     _onChanged(color) {
 
-        console.log("on change. color: " + color + " - Hex: " + color.hex);
-
-        this.setState(
-            { selectedColorObj: color }
-        )
+        // this.setState(
+        //     { selectedColorObj: color }
+        // )
 
         //Get the hex for the selected color and surface that
         let hex = "#" + color.hex;
+        let trans = color.t ? color.t : '';
+
+        console.log("on change. Color: " + hex + " trans: " + trans);
+
+        this.props.selectedColor = hex + trans;
 
         //Return the index of the color
         if (this.props.onColorChange) {
-            this.props.onColorChange(hex);
+            this.props.onColorChange(hex + trans);
         }
     }
 
