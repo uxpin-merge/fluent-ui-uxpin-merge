@@ -124,15 +124,11 @@ class Chip extends React.Component {
     let textColor = chipStyles.text;
     let bStyle = borderSyle + chipStyles.border;
 
-    let hoverStyle = {
-      selectors: {
-        ':hover': {
-          background: chipStyles.hover,
-        },
-      },
-    };
+    // let hoverStyle = {
+    //   background: chipStyles.hover,
+    // };
 
-    let hoverEffectStyle = this.props.hoverEffect ? hoverStyle : '';
+    // let hoverEffectStyle = this.props.hoverEffect ? hoverStyle : '';
 
     let fTextStyles = {
       root: {
@@ -149,7 +145,12 @@ class Chip extends React.Component {
         background: chipStyles.background,
         border: bStyle,
         borderRadius: 10,
-        hoverEffectStyle,
+        selectors: {
+          ':hover': {
+            background: this.props.hoverEffect ? chipStyles.hover : '',
+          },
+        },
+
       }
     }
 
