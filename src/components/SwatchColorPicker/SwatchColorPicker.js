@@ -57,7 +57,7 @@ class SwatchColorPicker extends React.Component {
             var i;
             for (i = 0; i < palette.length; i++) {
                 let color = palette[i];
-                color.id = i + 1;
+                color.id = (i + 1).toString();
                 color.index = i;
             }
         }
@@ -94,9 +94,11 @@ class SwatchColorPicker extends React.Component {
     }
 
     render() {
-        console.log("Entering render...");
+
         let palette = this.state._colorPalette;
-        let id = this.state._selectedID;
+        let id = this.state._selectedID.toString();
+
+        console.log("Entering render... id " + id);
 
         return (
 
