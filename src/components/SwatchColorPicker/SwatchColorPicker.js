@@ -39,15 +39,20 @@ class SwatchColorPicker extends React.Component {
         super(props);
 
         this.state = {
-            selectedID = null,
-            colorList = sampleColorList,
+            selectedID: null,
+            colorList: sampleColorList,
         }
     }
 
     set() {
-        var id = this.props.selectedIndex;
+        let id = this.props.selectedIndex;
+        console.log("set ID: " + id);
 
         //Setting ID to null is preferred as the default.
+    }
+
+    componentDidMount() {
+        this.set();
     }
 
     _getSelectedColorIDByIndex(index) {
@@ -92,9 +97,7 @@ class SwatchColorPicker extends React.Component {
     //     )
     // }
 
-    // componentDidMount() {
-    //     this.set();
-    // }
+
 
     // componentDidUpdate(prevProps) {
     //     if (prevProps.colors !== this.props.colors ||
@@ -130,17 +133,17 @@ class SwatchColorPicker extends React.Component {
         console.log("Color selected. ID: " + id);
         console.log("    Color: " + color);
 
-        // this.setState(
-        //     {
-        //         selectedColorID: id,
-        //         selectedColor: color
-        //     }
-        // )
+        this.setState(
+            {
+                selectedColorID: id,
+                selectedColor: color
+            }
+        )
 
         //Return the index of the color 
-        // if (this.props.onChange) {
-        //     this.props.onChange(id);
-        // }
+        if (this.props.onChange) {
+            this.props.onChange();
+        }
     }
 
     render() {
