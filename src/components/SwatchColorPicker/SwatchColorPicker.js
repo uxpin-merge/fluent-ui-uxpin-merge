@@ -39,80 +39,81 @@ class SwatchColorPicker extends React.Component {
         super(props);
 
         this.state = {
-            cellSize: 20,
-            selectedColorID: null, //Must be null for default
-            selectedColor: null,   //Must be null for default
-            colors: []
+            // cellSize: 20,
+            // selectedColorID: null, //Must be null for default
+            // selectedColor: null,   //Must be null for default
+            // colors: []
         }
     }
 
-    set() {
-        console.log("set for palette: " + this.props.palette);
+    // set() {
+    //     console.log("set for palette: " + this.props.palette);
 
-        // let palette = this.props.palette;
+    //     let palette = this.props.palette;
 
-        // //Populate the color array.
-        // let colors = palette === paletteBlues ? UxpColors.getBlueColorList()
-        //     : palette === paletteGreys ? UxpColors.getGreyColorList()
-        //         : palette === paletteAccents ? UxpColors.getAccentColorList()
-        //             : colorCellsExample1;
+    //     //Populate the color array.
+    //     let colors = palette === paletteBlues ? UxpColors.getBlueColorList()
+    //         : palette === paletteGreys ? UxpColors.getGreyColorList()
+    //             : palette === paletteAccents ? UxpColors.getAccentColorList()
+    //                 : colorCellsExample1;
 
-        // //Normalize the size coming in from props.
-        // let size = this.props.cellSize < cellMinSize ? cellMinSize
-        //     : this.props.cellSize > cellMaxSize ? cellMaxSize
-        //         : this.props.cellSize;
+    //     //Normalize the size coming in from props.
+    //     let size = this.props.cellSize < cellMinSize ? cellMinSize
+    //         : this.props.cellSize > cellMaxSize ? cellMaxSize
+    //             : this.props.cellSize;
 
-        // this.setState(
-        //     {
-        //         colors: colors,
-        //         cellSize: size,
-        //     }
-        // )
-    }
+    //     this.setState(
+    //         {
+    //             colors: colors,
+    //             cellSize: size,
+    //         }
+    //     )
+    // }
 
-    componentDidMount() {
-        this.set();
-    }
+    // componentDidMount() {
+    //     this.set();
+    // }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.colors !== this.props.colors ||
-            prevProps.cellSize !== this.props.cellSize) {
-            this.set();
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.colors !== this.props.colors ||
+    //         prevProps.cellSize !== this.props.cellSize ||
+    //         prevProps.palette !== this.props.palette) {
+    //         this.set();
+    //     }
+    // }
 
-    _getSelectedColorIndex() {
-        //By default, if it's an empty string, the Microsoft control won't show anything as selected
-        var selectedColorIndex = "";
+    // _getSelectedColorIndex() {
+    //     //By default, if it's an empty string, the Microsoft control won't show anything as selected
+    //     var selectedColorIndex = "";
 
-        // //Since the default value is null, we know that if there's a value here, it's been set by the end user
-        // if (this.state.selectedColorID) {
-        //     selectedColorIndex = this.state.selectedColorID;
-        // }
-        // else if (this.props.selectedColor) {
-        //     let index = this.props.selectedIndex;
-        //     if (index > 0 &&
-        //         index < cellCountMax) {
-        //         selectedColorIndex = index - 1; //State uses a 0 based index
-        //     }
-        // }
+    //     // //Since the default value is null, we know that if there's a value here, it's been set by the end user
+    //     // if (this.state.selectedColorID) {
+    //     //     selectedColorIndex = this.state.selectedColorID;
+    //     // }
+    //     // else if (this.props.selectedColor) {
+    //     //     let index = this.props.selectedIndex;
+    //     //     if (index > 0 &&
+    //     //         index < cellCountMax) {
+    //     //         selectedColorIndex = index - 1; //State uses a 0 based index
+    //     //     }
+    //     // }
 
-        console.log("Returning selected color index: " + selectedColorIndex);
+    //     console.log("Returning selected color index: " + selectedColorIndex);
 
-        return selectedColorIndex;
-    }
+    //     return selectedColorIndex;
+    // }
 
 
     _onColorChanged(id, color) {
         console.log("Color selected. ID: " + id);
         console.log("    Color: " + color);
 
-        this.setState(
-            {
-                selectedColorID: id,
-                selectedColor: color
-            }
-        )
+        // this.setState(
+        //     {
+        //         selectedColorID: id,
+        //         selectedColor: color
+        //     }
+        // )
 
         //Return the index of the color so UXPin can catch it
         if (this.props.onChange) {
@@ -122,16 +123,17 @@ class SwatchColorPicker extends React.Component {
 
 
     render() {
+        console.log("Entering render...");
 
         // let selectedColorIndex = this._getSelectedColorIndex();
 
 
-        let cellSize = this.state.cellSize;
-        let palette = this.state.colors;
+        // let cellSize = this.state.cellSize;
+        // let palette = this.state.colors;
 
 
-        console.log("render. selected color ID: " + selectedColorID);
-        console.log("      cell size: " + cellSize);
+        // console.log("render. selected color ID: " + selectedColorID);
+        // console.log("      cell size: " + cellSize);
 
         return (
 
@@ -167,7 +169,7 @@ SwatchColorPicker.propTypes = {
     selectedIndex: PropTypes.number,
 
     /**
-     * @uxpindescription Select one of the PayPal UI color palettes, or enter a custom set of your own with the Custom Colors property
+     * @uxpindescription Select one of the color palettes, or enter a custom set of your own with the Custom Colors property
      * @uxpinpropname Palette
      */
     palette: PropTypes.oneOf([
@@ -179,8 +181,9 @@ SwatchColorPicker.propTypes = {
     /**
      * @uxpindescription Enter one color per line using this pattern: Color Name | Hex Value. Note the pipe! Example: Eggshell Blue | #0070BA
      * @uxpinpropname Custom Colors
+     * @uxpincontroltype codeeditor
      */
-    colors: PropTypes.string,
+    customColors: PropTypes.string,
 
     /**
      * @uxpindescription Whether the cells should be circular or square
@@ -201,7 +204,7 @@ SwatchColorPicker.propTypes = {
     /**
      * @uxpindescription The padding to use between each color swatch
      */
-    padding: PropTypes.number,
+    cellMargin: PropTypes.number,
 
     /**
      * @uxpindescription To disable the control
@@ -222,9 +225,10 @@ SwatchColorPicker.propTypes = {
 SwatchColorPicker.defaultProps = {
     shape: shapeCircle,
     cellSize: 24,
-    padding: 10,
+    cellMargin: 10,
     columns: 5,
     palette: paletteBlues,
+    customColors: '',
     disabled: false,
 };
 
