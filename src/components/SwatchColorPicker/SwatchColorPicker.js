@@ -117,7 +117,7 @@ class SwatchColorPicker extends React.Component {
 
         //Return the index of the color so UXPin can catch it
         if (this.props.onChange) {
-            this.props.onChange(color);
+            this.props.onChange(id);
         }
     }
 
@@ -159,7 +159,7 @@ class SwatchColorPicker extends React.Component {
 SwatchColorPicker.propTypes = {
 
     /**
-     * @uxpindescription In the designer, set a 1-based index for the selected color. Leave blank or enter -1 for no selection. At runtime, this prop returns a color hex value. 
+     * @uxpindescription In the designer, set a 1-based index for the selected color. Leave blank or enter -1 for no selection. In a running prototype, this prop returns a color hex value. 
      * @uxpinbind onChange
      * @uxpinpropname * Selected Color
      */
