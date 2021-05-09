@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import { getTokens } from '../_helpers/parser';
 
 
 const defaultTextColor = "#000000";
@@ -102,6 +101,7 @@ class Chip extends React.Component {
 
     let textColor = chipStyles.text;
     let bStyle = borderSyle + chipStyles.border;
+    let curser = this.props.onChipClick ? 'pointer' : '';
 
     let fTextStyles = {
       root: {
@@ -115,7 +115,7 @@ class Chip extends React.Component {
         background: chipStyles.background,
         border: bStyle,
         borderRadius: 10,
-        cursor: this.props.onChipClick ? pointer : '',
+        cursor: cursor,
         selectors: {
           ':hover': {
             background: this.props.hoverEffect ? chipStyles.hover : '',
@@ -124,7 +124,7 @@ class Chip extends React.Component {
       }
     }
 
-    let message = this.props.textValue;
+    let message = this.props.textValue ? this.props.textValue.trim() : '';
 
     return (
       <Text
