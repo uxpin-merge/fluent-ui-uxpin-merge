@@ -31,19 +31,15 @@ class Chip extends React.Component {
     super(props);
 
     this.state = {
-      message: defaultTextValue,
       chipStyles: {},
     }
   }
 
   set() {
-    let message = this._getTokenizedText(this.props.textValue);
-
     let style = this._getStyles();
 
     this.setState(
       {
-        message: message,
         chipStyles: style,
       }
     )
@@ -54,8 +50,7 @@ class Chip extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.textValue !== this.props.textValue ||
-      prevProps.role !== this.props.role) {
+    if (prevProps.role !== this.props.role) {
       this.set();
     }
   }
@@ -124,12 +119,6 @@ class Chip extends React.Component {
     let textColor = chipStyles.text;
     let bStyle = borderSyle + chipStyles.border;
 
-    // let hoverStyle = {
-    //   background: chipStyles.hover,
-    // };
-
-    // let hoverEffectStyle = this.props.hoverEffect ? hoverStyle : '';
-
     let fTextStyles = {
       root: {
         color: textColor,
@@ -158,10 +147,9 @@ class Chip extends React.Component {
         {...this.props}
         styles={fTextStyles}
         variant={this.props.size}
-        nowrap={this.props.truncate}>
-
-        { message}
-
+        block={true}
+        nowrap={true}>
+        { this.props.textValue}
       </Text>
     );
   }
@@ -175,7 +163,8 @@ Chip.propTypes = {
 
   /**
    * @uxpindescription The text value to display. Supports the link(Click Me) feature.
-   * @uxpincontroltype textfield(6)
+   * @uxpinpropname Text 
+   * @uxpincontroltype textfield(2)
    */
   textValue: PropTypes.string,
 
