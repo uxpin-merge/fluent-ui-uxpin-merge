@@ -101,7 +101,7 @@ class Chip extends React.Component {
 
     let textColor = chipStyles.text;
     let bStyle = borderSyle + chipStyles.border;
-    let curser = this.props.onChipClick ? 'pointer' : '';
+    let curser = this.props.onChipClick ? 'pointer' : 'default';
 
     let fTextStyles = {
       root: {
