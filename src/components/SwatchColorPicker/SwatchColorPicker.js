@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { SwatchColorPicker as FSwatchColorPicker } from '@fluentui/react/lib/SwatchColorPicker';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import uxpinConfig from '../../../uxpin.config';
+
+
 
 
 
