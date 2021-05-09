@@ -5,10 +5,6 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-const cellMinSize = 10;
-const cellMaxSize = 100;
-const cellCountMax = 300;
-
 const shapeCircle = 'circle';
 const shapeSquare = 'square';
 
@@ -37,108 +33,11 @@ const paletteCustom = "Custom Color List";
 class SwatchColorPicker extends React.Component {
     constructor(props) {
         super(props);
-
-        // this.state = {
-        //     selectedID: null,
-        //     colorList: sampleColorList,
-        // }
     }
-
-    // set() {
-    //     let id = this.props.selectedIndex;
-    //     console.log("set ID: " + id);
-
-    //     //Setting ID to null is preferred as the default.
-    // }
-
-    // componentDidMount() {
-    //     this.set();
-    // }
-
-    // _getSelectedColorIDByIndex(index) {
-    //     if (this.state.colorList && index > -1) {
-    //         let l = this.state.colorList.length;
-
-    //         if (index < l) {
-    //             let color = this.state.colorList[index];
-
-    //             if (color) {
-    //                 let id = color.id;
-    //                 if (id)
-    //                     return id;
-    //             }
-    //         }
-    //     }
-
-    //     return null;
-    // }
-
-    // set() {
-    //     console.log("set for palette: " + this.props.palette);
-
-    //     let palette = this.props.palette;
-
-    //     //Populate the color array.
-    //     let colors = palette === paletteBlues ? UxpColors.getBlueColorList()
-    //         : palette === paletteGreys ? UxpColors.getGreyColorList()
-    //             : palette === paletteAccents ? UxpColors.getAccentColorList()
-    //                 : colorCellsExample1;
-
-    //     //Normalize the size coming in from props.
-    //     let size = this.props.cellSize < cellMinSize ? cellMinSize
-    //         : this.props.cellSize > cellMaxSize ? cellMaxSize
-    //             : this.props.cellSize;
-
-    //     this.setState(
-    //         {
-    //             colors: colors,
-    //             cellSize: size,
-    //         }
-    //     )
-    // }
-
-
-
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.colors !== this.props.colors ||
-    //         prevProps.cellSize !== this.props.cellSize ||
-    //         prevProps.palette !== this.props.palette) {
-    //         this.set();
-    //     }
-    // }
-
-    // _getSelectedColorIndex() {
-    //     //By default, if it's an empty string, the Microsoft control won't show anything as selected
-    //     var selectedColorIndex = "";
-
-    //     // //Since the default value is null, we know that if there's a value here, it's been set by the end user
-    //     // if (this.state.selectedColorID) {
-    //     //     selectedColorIndex = this.state.selectedColorID;
-    //     // }
-    //     // else if (this.props.selectedColor) {
-    //     //     let index = this.props.selectedIndex;
-    //     //     if (index > 0 &&
-    //     //         index < cellCountMax) {
-    //     //         selectedColorIndex = index - 1; //State uses a 0 based index
-    //     //     }
-    //     // }
-
-    //     console.log("Returning selected color index: " + selectedColorIndex);
-
-    //     return selectedColorIndex;
-    // }
-
 
     _onColorChanged(id, color) {
         console.log("Color selected. ID: " + id);
         console.log("    Color: " + color);
-
-        // this.setState(
-        //     {
-        //         selectedColorID: id,
-        //         selectedColor: color
-        //     }
-        // )
 
         //Return the index of the color 
         if (this.props.onChange) {
@@ -149,21 +48,11 @@ class SwatchColorPicker extends React.Component {
     render() {
         console.log("Entering render...");
 
-        // let selectedColorIndex = this._getSelectedColorIndex();
-
-
-        // let cellSize = this.state.cellSize;
-        // let palette = this.state.colors;
-
-
-        // console.log("render. selected color ID: " + selectedColorID);
-        // console.log("      cell size: " + cellSize);
-
         return (
 
             <FSwatchColorPicker
                 {...this.props}
-                colorCells={colorCellsExample1}
+                colorCells={sampleColorList}
                 cellShape={this.props.shape}
                 cellWidth={this.props.cellSize}
                 cellHeight={this.props.cellSize}
