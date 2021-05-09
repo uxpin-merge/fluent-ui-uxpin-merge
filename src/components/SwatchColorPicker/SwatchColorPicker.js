@@ -30,8 +30,7 @@ const paletteAccents = "Accents";
 const paletteCustom = "Custom Color List";
 
 const pickerStyle = {
-    display: 'block',
-    lineHeight: 'normal',
+    display: 'block'
 };
 
 
@@ -86,6 +85,8 @@ class SwatchColorPicker extends React.Component {
             _selectedID: id,
         });
 
+        // this.props.selectedIndex = id;
+
         //Return the index of the color 
         if (this.props.onChange) {
             this.props.onChange(id);
@@ -107,7 +108,7 @@ class SwatchColorPicker extends React.Component {
                 cellWidth={this.props.cellSize}
                 cellHeight={this.props.cellSize}
                 columnCount={this.props.columns}
-                styles={styles}
+                styles={pickerStyle}
                 onColorChanged={(id, c) => this._onColorChanged(id, c)}
             />
 
