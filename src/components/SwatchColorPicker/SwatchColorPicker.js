@@ -29,6 +29,11 @@ const paletteGreys = "Greys";
 const paletteAccents = "Accents";
 const paletteCustom = "Custom Color List";
 
+const pickerStyle = {
+    display: 'block',
+    lineHeight: 'normal',
+};
+
 
 
 class SwatchColorPicker extends React.Component {
@@ -102,6 +107,7 @@ class SwatchColorPicker extends React.Component {
                 cellWidth={this.props.cellSize}
                 cellHeight={this.props.cellSize}
                 columnCount={this.props.columns}
+                styles={styles}
                 onColorChanged={(id, c) => this._onColorChanged(id, c)}
             />
 
