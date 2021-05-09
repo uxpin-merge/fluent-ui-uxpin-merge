@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { SwatchColorPicker as FSwatchColorPicker } from '@fluentui/react/lib/SwatchColorPicker';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import uxpinConfig from '../../../uxpin.config';
 
 
 
@@ -33,6 +34,22 @@ const paletteCustom = "Custom Color List";
 class SwatchColorPicker extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            _colorPalette: [],
+        }
+    }
+
+    set() {
+        let pref = this.props.palette;
+        let palette = pref === paletteBlues ? UxpColors.getBlueColorList()
+            : pref === paletteGreys ? UxpColors.getGreyColorList()
+                : pref === paletteAccents ? UxpColors.getAccentColorList()
+                    : sampleColorList;
+
+        this.setState {
+            _colorPalette: palette,
+        }
     }
 
     _onColorChanged(id, color) {
@@ -41,18 +58,19 @@ class SwatchColorPicker extends React.Component {
 
         //Return the index of the color 
         if (this.props.onChange) {
-            this.props.onChange(color);
+            this.props.onChange(id);
         }
     }
 
     render() {
         console.log("Entering render...");
+        let palette = this.state._colorPalette;
 
         return (
 
             <FSwatchColorPicker
                 {...this.props}
-                colorCells={sampleColorList}
+                colorCells={palette}
                 cellShape={this.props.shape}
                 cellWidth={this.props.cellSize}
                 cellHeight={this.props.cellSize}
