@@ -78,18 +78,19 @@ class SwatchColorPicker extends React.Component {
     }
 
     _onColorChanged(id, color) {
-        console.log("Color selected. ID: " + id);
-        console.log("    Color: " + color);
+
+        let idNum = Number(id);
 
         this.setState({
-            _selectedID: id,
+            _selectedID: idNum,
         });
 
-        // this.props.selectedIndex = id;
+        console.log("Color selected. ID: " + idNum);
+        console.log("    Color: " + color);
 
         //Return the index of the color 
         if (this.props.onChange) {
-            this.props.onChange(id);
+            this.props.onChange(idNum);
         }
     }
 
