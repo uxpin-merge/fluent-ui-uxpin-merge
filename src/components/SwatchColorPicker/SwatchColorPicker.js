@@ -116,9 +116,9 @@ class SwatchColorPicker extends React.Component {
         // )
 
         //Return the index of the color so UXPin can catch it
-        if (this.props.onChange) {
-            this.props.onChange(id);
-        }
+        // if (this.props.onChange) {
+        //     this.props.onChange(id);
+        // }
     }
 
 
@@ -220,6 +220,7 @@ SwatchColorPicker.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 SwatchColorPicker.defaultProps = {
+    selectedColor: 0,
     shape: shapeCircle,
     cellSize: 24,
     cellMargin: 10,
