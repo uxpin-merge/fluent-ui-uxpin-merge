@@ -113,6 +113,12 @@ class Chip extends React.Component {
     return tokens;
   }
 
+  _onClick() {
+    if (this.props.onChipClick) {
+      this.props.onChipClick();
+    }
+  }
+
   render() {
     let chipStyles = this.state.chipStyles;
 
@@ -131,12 +137,12 @@ class Chip extends React.Component {
         background: chipStyles.background,
         border: bStyle,
         borderRadius: 10,
+        cursor: this.props.onChipClick ? pointer : '',
         selectors: {
           ':hover': {
             background: this.props.hoverEffect ? chipStyles.hover : '',
           },
         },
-
       }
     }
 
@@ -148,25 +154,26 @@ class Chip extends React.Component {
         styles={fTextStyles}
         variant={this.props.size}
         block={true}
-        nowrap={true}>
-        { this.props.textValue}
-      </Text>
-    );
-  }
-}
+        nowrap={true}
+        onClick={() => this.onClick() >
+          { this.props.textValue }
+      </ Text>
+        );
+        }
+        }
 
 
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
- */
+        /**
+        * Set up the properties to be available in the UXPin property inspector.
+        */
 Chip.propTypes = {
 
-  /**
-   * @uxpindescription The text value to display. Supports the link(Click Me) feature.
-   * @uxpinpropname Text 
-   * @uxpincontroltype textfield(2)
-   */
-  textValue: PropTypes.string,
+          /**
+           * @uxpindescription The text value to display. Supports the link(Click Me) feature.
+           * @uxpinpropname Text 
+           * @uxpincontroltype textfield(2)
+           */
+          textValue: PropTypes.string,
 
   /**
   * @uxpindescription The visual style based on the role of the control
@@ -190,11 +197,16 @@ Chip.propTypes = {
   ]),
 
   /**
-   * @uxpindescription Whether to show an effect on hover 
+   * @uxpindescription Whether to show an effect on hover
    * @uxpinpropname Hover Effect
    */
   hoverEffect: PropTypes.bool,
 
+  /**
+   * @uxpindescription Fires when the control is clicked on.
+   * @uxpinpropname Click
+   * */
+  onChipClick: PropTypes.func,
 };
 
 
@@ -202,11 +214,11 @@ Chip.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Chip.defaultProps = {
-  textValue: defaultTextValue,
+          textValue: defaultTextValue,
   size: 'xSmall',
   role: roleDefault,
   hoverEffect: true,
 };
 
 
-export { Chip as default };
+export { Chip as default};

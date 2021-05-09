@@ -85,11 +85,11 @@ class Text extends React.Component {
         {...this.props}
         styles={fTextStyles}
         variant={this.props.size}
-        nowrap={this.props.truncate}>
+        nowrap={this.props.truncate}}>
 
-        { message}
+          { message }
 
-      </FText>
+      </FText >
     );
   }
 }
