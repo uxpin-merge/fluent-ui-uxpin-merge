@@ -18,6 +18,11 @@ const alignCenter = 'center';
 const borderSyle = '1px solid ';
 const borderRadius = '5';
 
+//Padding: left and right
+const padLR = 8;
+//Padding: top and bottom
+const padTB = 4;
+
 
 
 class Chip extends React.Component {
@@ -119,6 +124,16 @@ class Chip extends React.Component {
     let textColor = chipStyles.text;
     let bStyle = borderSyle + chipStyles.border;
 
+    let hoverStyle = {
+      selectors: {
+        ':hover': {
+          background: chipStyles.hover,
+        },
+      },
+    };
+
+    let hoverEffectStyle = this.props.hoverEffect ? hoverStyle : '';
+
     let fTextStyles = {
       root: {
         color: textColor,
@@ -127,18 +142,14 @@ class Chip extends React.Component {
         display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
         lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
         textAlign: alignCenter,
-        paddingTop: 2,
-        paddingBottom: 2,
-        paddingLeft: 4,
-        paddingRight: 4,
+        paddingTop: padTB,
+        paddingBottom: padTB,
+        paddingLeft: padLR,
+        paddingRight: padLR,
         background: chipStyles.background,
         border: bStyle,
         borderRadius: 10,
-        selectors: {
-          ':hover': {
-            background: chipStyles.hover,
-          },
-        },
+        hoverEffectStyle,
       }
     }
 
@@ -157,7 +168,6 @@ class Chip extends React.Component {
     );
   }
 }
-
 
 
 /** 
@@ -192,6 +202,12 @@ Chip.propTypes = {
     'mega',
   ]),
 
+  /**
+   * @uxpindescription Whether to show an effect on hover 
+   * @uxpinpropname Hover Effect
+   */
+  hoverEffect: PropTypes.bool,
+
 };
 
 
@@ -202,8 +218,8 @@ Chip.defaultProps = {
   textValue: defaultTextValue,
   size: 'xSmall',
   role: roleDefault,
+  hoverEffect: true,
 };
-
 
 
 export { Chip as default };
