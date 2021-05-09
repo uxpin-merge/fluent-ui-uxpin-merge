@@ -5,6 +5,10 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
+const defaultColor = "#ffffff";
+
+
+
 class ColorPicker extends React.Component {
     constructor(props) {
         super(props);
@@ -79,7 +83,7 @@ class ColorPicker extends React.Component {
 ColorPicker.propTypes = {
 
     /**
-     * @uxpindescription A PayPal UI or Hex color value to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional). This prop's live value is available for scripting.
+     * @uxpindescription A Hex color value or color token to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional). This prop's live value is available for scripting.
      * @uxpinpropname * Color
      * @uxpinbind onColorChange
      */
@@ -103,7 +107,7 @@ ColorPicker.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 ColorPicker.defaultProps = {
-    selectedColor: "",
+    selectedColor: defaultColor,
     showAlpha: true,
 };
 
