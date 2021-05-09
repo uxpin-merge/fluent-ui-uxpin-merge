@@ -58,8 +58,11 @@ class SwatchColorPicker extends React.Component {
             }
         }
 
+        let id = this.props.selectedIndex;
+
         this.setState({
             _colorPalette: palette,
+            _selectedID: id,
         });
     }
 
@@ -126,7 +129,7 @@ SwatchColorPicker.propTypes = {
      * @uxpinbind onChange
      * @uxpinpropname * Selected Index
      */
-    selectedIndex: PropTypes.string,
+    selectedIndex: PropTypes.number,
 
     /**
      * @uxpindescription Select one of the color palettes, or enter a custom set of your own with the Custom Colors property
