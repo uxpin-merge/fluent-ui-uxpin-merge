@@ -1,3 +1,5 @@
+import { DefaultPalette } from '@fluentui/react/lib/Theme';
+
 
 
 export const UxpColors = {
@@ -311,6 +313,24 @@ export const UxpColors = {
 
         //If we made it this far, it's not a hex value, or we can't easily figure it out. 
         return undefined;
-    }
+    },
+
+    getHexFromFluentToken: function (token) {
+
+
+        return undefined;
+    },
+
+    getHexFromFluentDefaultPalette: function (token) {
+
+        let palette = DefaultPalette;
+        if (palette && token) {
+            if (palette.hasOwnProperty(token)) {
+                return palette.token;
+            }
+        }
+
+        return undefined;
+    },
 
 };
