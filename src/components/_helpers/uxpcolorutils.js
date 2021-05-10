@@ -326,8 +326,14 @@ export const UxpColors = {
         let palette = DefaultPalette;
         if (palette && token) {
             if (palette.hasOwnProperty(token)) {
+                console.log("Found value for token " + token);
+
+                console.log("    Let's try it this way: " + palette[token]);
+
                 return palette.token;
             }
+
+
         }
 
         return undefined;
