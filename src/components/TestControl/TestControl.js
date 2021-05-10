@@ -51,17 +51,17 @@ class TestControl extends React.Component {
             };
         }
 
-        let themeDark = UxpColors.getHexFromFluentToken("themeDark");
-        console.log("**** themeDark: " + themeDark);
+        // let themeDark = UxpColors.getHexFromFluentToken("themeDark");
+        // console.log("**** themeDark: " + themeDark);
 
-        let gray220 = UxpColors.getHexFromFluentToken("gray220");
-        console.log("**** Neutral gray220: " + gray220);
+        // let gray220 = UxpColors.getHexFromFluentToken("gray220");
+        // console.log("**** Neutral gray220: " + gray220);
 
-        let redOrange20 = UxpColors.getHexFromFluentToken("redOrange20");
-        console.log("**** Shared redOrange20: " + redOrange20);
+        // let redOrange20 = UxpColors.getHexFromFluentToken("redOrange20");
+        // console.log("**** Shared redOrange20: " + redOrange20);
 
-        let primary = UxpColors.getHexFromFluentToken("primary");
-        console.log("**** Comms primary: " + primary);
+        // let primary = UxpColors.getHexFromFluentToken("primary");
+        // console.log("**** Comms primary: " + primary);
 
         this.state = {
         }
