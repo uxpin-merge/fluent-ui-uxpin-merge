@@ -4,7 +4,6 @@ module.exports = {
       {
         name: 'Containers',
         include: [
-          'src/components/TestControl/TestControl.js',
           'src/components/HorizontalStack/HorizontalStack.js',
           'src/components/MetaDataGroup/MetaDataGroup.js',
           'src/components/MetaDataPair/MetaDataPair.js',
