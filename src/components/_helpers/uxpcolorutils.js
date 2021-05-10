@@ -1,4 +1,4 @@
-import { DefaultPalette } from '@fluentui/react/lib/Theme';
+import { DefaultPalette, CommunicationColors, NeutralColors, SharedColors } from '@fluentui/react/lib/Theme';
 
 
 
@@ -317,35 +317,77 @@ export const UxpColors = {
 
     getHexFromFluentToken: function (token) {
 
+        //Let's cycle thru the palettes from MS
+        var color = this.getHexFromFluentDefaultPalette(token);
+        if (color)
+            return color;
+
+        color = this.getHexFromFluentSharedColors(token);
+        if (color)
+            return color;
+
+        color = this.getHexFromFluentNeutralColors(token);
+        if (color)
+            return color;
+
+        color = this.getHexFromFluentCommunicationColors(token);
+        if (color)
+            return color;
 
         return undefined;
     },
 
     getHexFromFluentDefaultPalette: function (token) {
-        console.log("Looking for a value for " + token);
-
-        // let df = DefaultPalette;
-        // if (df) {
-        //     for (var key in df) {
-        //         if (df.hasOwnProperty(key)) {
-        //             console.log(">>UXPColor   " + key + ": " + df[key]);
-        //         }
-        //     };
-        // }
-
         let palette = DefaultPalette;
         if (palette && token) {
             if (palette.hasOwnProperty(token)) {
-                console.log("     Found value for token " + token);
-
-                console.log("    Let's try it this way: " + palette[token]);
 
                 let color = palette[token];
                 if (color)
                     return color;
             }
+        }
 
+        return undefined;
+    },
 
+    getHexFromFluentSharedColors: function (token) {
+        let palette = SharedColors;
+        if (palette && token) {
+            if (palette.hasOwnProperty(token)) {
+
+                let color = palette[token];
+                if (color)
+                    return color;
+            }
+        }
+
+        return undefined;
+    },
+
+    getHexFromFluentNeutralColors: function (token) {
+        let palette = NeutralColors;
+        if (palette && token) {
+            if (palette.hasOwnProperty(token)) {
+
+                let color = palette[token];
+                if (color)
+                    return color;
+            }
+        }
+
+        return undefined;
+    },
+
+    getHexFromFluentCommunicationColors: function (token) {
+        let palette = CommunicationColors;
+        if (palette && token) {
+            if (palette.hasOwnProperty(token)) {
+
+                let color = palette[token];
+                if (color)
+                    return color;
+            }
         }
 
         return undefined;
