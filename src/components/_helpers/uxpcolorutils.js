@@ -1,4 +1,5 @@
 import { DefaultPalette, CommunicationColors, NeutralColors, SharedColors } from '@fluentui/react/lib/Theme';
+import { SemanticColors } from '@fluentui/react/lib/Styling';
 
 
 
