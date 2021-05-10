@@ -30,6 +30,7 @@ module.exports = {
           'src/components/Link/Link.js',
           'src/components/Separator/Separator.js',
           'src/components/Text/Text.js',
+          'src/components/Icon/Icon.js',
         ],
       },
       {
@@ -91,6 +92,17 @@ module.exports = {
         include: [
           'src/components/ProgressIndicator/ProgressIndicator.js',
           'src/components/Spinner/Spinner.js',
+        ],
+      },
+      {
+        name: 'Charts',
+        include: [
+          'src/components/Charts/AreaChart/AreaChart.js',
+          'src/components/Charts/BarChart/BarChart.js',
+          'src/components/Charts/LineChart/LineChart.js',
+          'src/components/Charts/LineMarkChart/LineMarkChart.js',
+          'src/components/Charts/MarkChart/MarkChart.js',
+          'src/components/Charts/PieChart/PieChart.js',
         ],
       },
     ],

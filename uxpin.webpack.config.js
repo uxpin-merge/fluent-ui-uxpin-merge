@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         loader: require.resolve('babel-loader', { paths: ['./node_modules/@uxpin/merge-cli'] }),
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         options: {
           presets: [
