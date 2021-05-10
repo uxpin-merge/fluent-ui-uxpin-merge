@@ -289,8 +289,13 @@ export const UxpColors = {
             if (gradientTypes.some(type => colorStr.includes(type)))
                 return colorStr;
 
-            //Let's see if it's one of the tokens. It'll be undefined if it's not a match.
-            let colorTokenHex = this.getHexFromColorToken(colorStr);
+            //Let's try matching against Fluent tokens first
+            var color = this.getHexFromFluentToken(colorStr);
+            if (color)
+                return color;
+
+            //Let's see if it's one of the other tokens. 
+            color = this.getHexFromColorToken(colorStr);
 
             if (colorTokenHex)
                 return colorTokenHex;
