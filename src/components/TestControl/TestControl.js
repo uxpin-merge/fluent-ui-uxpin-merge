@@ -51,7 +51,7 @@ class TestControl extends React.Component {
         // }
 
         let themeDark = UxpColors.getHexFromFluentDefaultPalette("themeDark");
-        console.log("themeDark: " + themeDark);
+        console.log("**** themeDark: " + themeDark);
 
         this.state = {
         }
