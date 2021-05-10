@@ -324,14 +324,14 @@ export const UxpColors = {
     getHexFromFluentDefaultPalette: function (token) {
         console.log("Looking for a value for " + token);
 
-        let df = DefaultPalette;
-        if (df) {
-            for (var key in df) {
-                if (df.hasOwnProperty(key)) {
-                    console.log(">>UXPColor   " + key + ": " + df[key]);
-                }
-            };
-        }
+        // let df = DefaultPalette;
+        // if (df) {
+        //     for (var key in df) {
+        //         if (df.hasOwnProperty(key)) {
+        //             console.log(">>UXPColor   " + key + ": " + df[key]);
+        //         }
+        //     };
+        // }
 
         let palette = DefaultPalette;
         if (palette && token) {
@@ -340,7 +340,9 @@ export const UxpColors = {
 
                 console.log("    Let's try it this way: " + palette[token]);
 
-                return palette.token;
+                let color = palette[token];
+                if (color)
+                    return color;
             }
 
 
