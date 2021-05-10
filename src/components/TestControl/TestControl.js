@@ -41,14 +41,14 @@ class TestControl extends React.Component {
     constructor(props) {
         super(props);
 
-        let df = DefaultPalette;
-        if (df) {
-            for (var key in df) {
-                if (df.hasOwnProperty(key)) {
-                    console.log(key + ": " + df[key]);
-                }
-            };
-        }
+        // let df = DefaultPalette;
+        // if (df) {
+        //     for (var key in df) {
+        //         if (df.hasOwnProperty(key)) {
+        //             console.log(key + ": " + df[key]);
+        //         }
+        //     };
+        // }
 
         let themeDark = UxpColors.getHexFromFluentDefaultPalette(themeDark);
         console.log("themeDark: " + themeDark);
