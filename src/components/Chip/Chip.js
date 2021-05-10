@@ -102,12 +102,6 @@ class Chip extends React.Component {
     let textColor = chipStyles.text;
     let bStyle = borderSyle + chipStyles.border;
 
-    var cursor = 'default';
-    if (this.props.onChipClick) {
-      cursor = 'pointer';
-    }
-    console.log("setting cursor to: " + cursor + " -- " + this.props.textValue);
-
     let fTextStyles = {
       root: {
         color: textColor,
@@ -120,7 +114,6 @@ class Chip extends React.Component {
         background: chipStyles.background,
         border: bStyle,
         borderRadius: 10,
-        cursor: cursor,
         selectors: {
           ':hover': {
             background: this.props.hoverEffect ? chipStyles.hover : '',
