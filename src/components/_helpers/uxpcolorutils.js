@@ -290,15 +290,14 @@ export const UxpColors = {
                 return colorStr;
 
             //Let's try matching against Fluent tokens first
-            var color = this.getHexFromFluentToken(colorStr);
-            if (color)
-                return color;
+            var colorHex = this.getHexFromFluentToken(colorStr);
+            if (colorHex)
+                return colorHex;
 
             //Let's see if it's one of the other tokens. 
-            color = this.getHexFromColorToken(colorStr);
-
-            if (colorTokenHex)
-                return colorTokenHex;
+            colorHex = this.getHexFromColorToken(colorStr);
+            if (colorHex)
+                return colorHex;
 
             //Else, let's see if it's already a valid hex value. 
             //First, remove the hash mark if it has one
