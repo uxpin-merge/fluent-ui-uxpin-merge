@@ -4,7 +4,7 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 import { DefaultPalette } from '@fluentui/react/lib/Theme';
-import { SemanticColors } from '@fluentui/react/lib/Styles';
+import { SemanticColors } from '@fluentui/react/lib/Theme';
 
 
 //The smallest allowed box size
