@@ -4,7 +4,7 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 import { DefaultPalette } from '@fluentui/react/lib/Theme';
-import { SemanticColors } from '@fluentui/react/lib/Styling';
+import { SemanticColors } from '@fluentui/react/lib/Styles';
 
 
 //The smallest allowed box size
@@ -51,8 +51,8 @@ class TestControl extends React.Component {
             };
         }
 
-        // let themeDark = UxpColors.getHexFromFluentToken("themeDark");
-        // console.log("**** themeDark: " + themeDark);
+        let themeDark = UxpColors.getHexFromFluentToken("themeDark");
+        console.log("**** themeDark: " + themeDark);
 
         // let gray220 = UxpColors.getHexFromFluentToken("gray220");
         // console.log("**** Neutral gray220: " + gray220);
