@@ -25,6 +25,7 @@ module.exports = {
       {
         name: 'Utilities',
         include: [
+          'src/components/Chip/Chip.js',
           'src/components/Image/Image.js',
           'src/components/Link/Link.js',
           'src/components/Separator/Separator.js',
@@ -47,7 +48,8 @@ module.exports = {
           'src/components/Calendar/Calendar.js',
           'src/components/CalendarButton/CalendarButton.js',
           'src/components/Checkbox/Checkbox.js',
-          'src/components/ChoiceGroup/ChoiceGroup.js',
+          'src/components/Choicegroup/Choicegroup.js',
+          'src/components/ColorPicker/ColorPicker.js',
           'src/components/Dropdown/Dropdown.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',

@@ -4,6 +4,10 @@ import { TextField } from '@fluentui/react/lib/TextField';
 
 
 
+const autocompleteHintNone = "off";
+
+
+
 class TextArea extends React.Component {
 
   constructor(props) {
@@ -73,7 +77,7 @@ class TextArea extends React.Component {
         {...this.props}
         value={textVal}
         multiline={true}
-        autoComplete={false}
+        autoComplete={autocompleteHintNone}
         onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
         onFocus={() => { this._onFocus() }}
         onBlur={() => { this._onBlur() }}

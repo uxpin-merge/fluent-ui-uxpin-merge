@@ -89,7 +89,7 @@ class Text extends React.Component {
 
         { message}
 
-      </FText>
+      </FText >
     );
   }
 }
@@ -103,6 +103,7 @@ Text.propTypes = {
 
   /**
    * @uxpindescription The text value to display. Supports the link(Click Me) feature.
+   * @uxpinpropname Text 
    * @uxpincontroltype textfield(6)
    */
   textValue: PropTypes.string,

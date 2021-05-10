@@ -8,6 +8,9 @@ const borderFramed = "framed";
 const borderUnderlined = "underlined";
 const borderBorderless = "borderless";
 
+const autocompleteHintNone = "off";
+const autocompleteHintPwd = "new-password";
+
 
 class TextField extends React.Component {
 
@@ -96,7 +99,8 @@ class TextField extends React.Component {
     }
 
     //We're going to keep this off for UXPin
-    let showAutoComplete = false;
+    let showAutoComplete = this.props.isPassword ? autocompleteHintPwd :
+      autocompleteHintNone;
 
     return (
       <FTextField
