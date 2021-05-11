@@ -48,7 +48,7 @@ module.exports = {
           'src/components/Calendar/Calendar.js',
           'src/components/CalendarButton/CalendarButton.js',
           'src/components/Checkbox/Checkbox.js',
-          'src/components/Choicegroup/Choicegroup.js',
+          'src/components/ChoiceGroup/ChoiceGroup.js',
           'src/components/ColorPicker/ColorPicker.js',
           'src/components/Dropdown/Dropdown.js',
           'src/components/SearchBox/SearchBox.js',

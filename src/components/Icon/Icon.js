@@ -1,14 +1,8 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import * as IconM from '@fluentui/react-icons-mdl2';
+import { Icon as IconM } from '@fluentui/react/lib/Icon';
 import { mergeStyles } from '@fluentui/merge-styles';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-
-const AvailableIcons = {
-  accept: IconM.AcceptIcon,
-  clear: IconM.ClearIcon,
-  contact: IconM.ContactIcon,
-};
 
 class Icon extends React.Component {
   constructor(props) {
@@ -20,6 +14,8 @@ class Icon extends React.Component {
 
   render() {
 
+    let size = this.props.size;
+
     let color = UxpColors.getHexFromHexOrToken(this.props.color);
     if (!color) {
       color = defaultColor;
@@ -27,37 +23,35 @@ class Icon extends React.Component {
 
     const iconDisplayClass = mergeStyles({
       color: color,
-      fontSize: this.props.size,
-      height: this.props.size,
-      width: this.props.size,
+      fontSize: size,
+      height: size,
+      width: size,
       display: 'block',
       lineHeight: 'normal',
     });
 
-    let SpecificIcon = AvailableIcons[this.props.iconName];
     return (
-      <SpecificIcon
+
+      <IconM
         {...this.props}
+        iconName = { this.props.iconName.trim() }
         className = { iconDisplayClass }
       />
+
     );
   }
 }
 
 Icon.propTypes = {
-  iconName: PropTypes.oneOf([
-    'accept',
-    'clear',
-    'contact'
-  ]),
+  iconName: PropTypes.string,
   size: PropTypes.number,
   color: PropTypes.string,
 };
 
 Icon.defaultProps = {
-    iconName: "accept",
-    size: 100,
-    color: "grey-700"
+  iconName: "Home",
+  size: 50,
+  color: "grey-700"
 };
 
 export { Icon as default}
