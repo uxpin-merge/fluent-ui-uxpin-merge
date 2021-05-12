@@ -1,8 +1,8 @@
 import * as React from 'react';
-import VerticalStack from '../VerticalStack';
+import ZStack from '../ZStack';
 
 
 
 export default (
-    <VerticalStack uxpId="verticalstack1" />
+    <ZStack uxpId="zstack1" />
 );
