@@ -84,8 +84,11 @@ class CardHeader extends React.Component {
 
             console.log("     Setting it as: " + iColor);
 
-            const iconDisplayClass = {
+            let colorClass = {
                 color: iColor,
+            }
+
+            let iconClass = {
                 fontSize: iSize,
                 height: iSize,
                 width: iSize,
@@ -97,7 +100,7 @@ class CardHeader extends React.Component {
                 <StackItem>
                     <FontIcon
                         iconName={iName}
-                        className={iconDisplayClass}
+                        className={[iconClass, colorClass]}
                     />
                 </StackItem>
             );
