@@ -124,7 +124,7 @@ class MessageBar extends React.Component {
         // actions={btnActions}
 
         var dismissProps = '';
-        if (this.props.showDismissButton || this.props.onDionDismissClickedsmiss) {
+        if (this.props.showDismissButton || this.props.onDismissClicked) {
             dismissProps = {
                 onDismiss: this._onDismiss
             }
