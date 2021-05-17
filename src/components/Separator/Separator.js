@@ -38,6 +38,7 @@ class Separator extends React.Component {
             content: {
                 background: bgColor,
                 borderRadius: 100,
+                verticalAlign: 'middle',
             }
         }
 
