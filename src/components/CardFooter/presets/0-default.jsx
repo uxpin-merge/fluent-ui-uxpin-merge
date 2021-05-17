@@ -7,7 +7,7 @@ import ActionButton from '../../ActionButton/ActionButton';
 
 
 const text = "View";
-const iconName = "Eye";
+const iconName = "RedEye";
 
 
 export default (
