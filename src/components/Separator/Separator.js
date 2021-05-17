@@ -47,7 +47,6 @@ class Separator extends React.Component {
                 color: txColor,
                 paddingTop: '2px',
                 paddingBottom: '2px',
-                verticalAlign: 'middle',
             }
         }
 
@@ -70,7 +69,6 @@ class Separator extends React.Component {
                 paddingTop: '2px',
                 paddingBottom: '2px',
                 marginRight: '6px',
-                verticalAlign: 'middle',
             },
         };
 
