@@ -134,7 +134,7 @@ class MessageBar extends React.Component {
                 {...this.props}
                 truncated={truncated}
                 messageBarType={MessageBarType[this.props.messageBarType]}
-                onDismiss={() => this.props.showDismissButton ? dismissHandler : null}
+            // onDismiss={() => this.props.showDismissButton ? dismissHandler : null}
             >
                 {message}
             </FMessageBar>
