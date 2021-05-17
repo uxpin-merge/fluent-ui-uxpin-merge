@@ -132,7 +132,7 @@ ActivityItem.propTypes = {
  */
 ActivityItem.defaultProps = {
 
-    icon: 'Beaker',
+    icon: 'InfoSolid',
     description: 'link(Tahlia) ran a new system test',
     bodyCopy: 'link(System Test #420) contains 3 components. You have been given access privileges.',
     timeStamp: 'Just now',
