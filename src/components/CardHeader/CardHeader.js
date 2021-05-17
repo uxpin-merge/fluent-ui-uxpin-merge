@@ -74,9 +74,15 @@ class CardHeader extends React.Component {
 
             //Let's see if the user entered a valid color value. This method returns undefined if not. 
             var iColor = UxpColors.getHexFromHexOrToken(this.props.iconColor);
+
+            console.log("color prop: " + this.props.iconColor);
+            console.log("     Returned value: " + iColor);
+
             if (!iColor) {
                 iColor = defaultTextColor;
             }
+
+            console.log("     Setting it as: " + iColor);
 
             const iconDisplayClass = {
                 color: iColor,
