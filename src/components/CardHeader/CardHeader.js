@@ -69,8 +69,8 @@ class CardHeader extends React.Component {
 
         var iconStackItem = '';
         if (this.props.iconName) {
-            let iName = this.props.iconName.trim();
-            let iSize = this.props.iconSize + 'px';
+            let iName = this.props.iconName;
+            let iSize = this.props.iconSize;
 
             //Let's see if the user entered a valid color value. This method returns undefined if not. 
             var iColor = UxpColors.getHexFromHexOrToken(this.props.iconColor);
