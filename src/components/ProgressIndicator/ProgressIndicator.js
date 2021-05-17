@@ -152,7 +152,7 @@ ProgressIndicator.propTypes = {
  * 
  */
 ProgressIndicator.defaultProps = {
-  label: '',
+  label: 'Progress',
   roleType: roleDefault,
   percent: "0.5",
   description: '',
