@@ -14,8 +14,7 @@ const defaultTextColor = "#000000";
 
 const defaultIconSize = 24;
 
-//TODO: Choose good default icon name
-const defaultIconName = '';
+const defaultIconName = 'InfoSolid';
 
 //****** OTHER */
 
