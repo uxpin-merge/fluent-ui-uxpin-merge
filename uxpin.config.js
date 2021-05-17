@@ -11,7 +11,6 @@ module.exports = {
           'src/components/PageFooter/PageFooter.js',
           'src/components/Shape/Shape.js',
           'src/components/VerticalStack/VerticalStack.js',
-          'src/components/ZStack/ZStack.js',
         ],
       },
       {
