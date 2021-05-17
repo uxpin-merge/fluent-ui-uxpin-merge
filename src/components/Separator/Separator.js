@@ -4,6 +4,7 @@ import { Separator as FSeparator } from '@fluentui/react/lib/Separator';
 import { Text } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { TextAlignMiddleIcon } from '@fluentui/react-icons-mdl2';
 
 
 
@@ -38,13 +39,15 @@ class Separator extends React.Component {
             content: {
                 background: bgColor,
                 borderRadius: 100,
-                verticalAlign: 'middle',
             }
         }
 
         let fTextStyles = {
             root: {
                 color: txColor,
+                paddingTop: '2px',
+                paddingBottom: '2px',
+                verticalAlign: 'middle',
             }
         }
 
@@ -67,6 +70,7 @@ class Separator extends React.Component {
                 paddingTop: '2px',
                 paddingBottom: '2px',
                 marginRight: '6px',
+                verticalAlign: 'middle',
             },
         };
 
