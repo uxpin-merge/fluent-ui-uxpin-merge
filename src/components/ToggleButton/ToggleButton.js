@@ -6,10 +6,10 @@ import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
 const defaultCheckedIcon = 'FavoriteStarFill';
-const defaultCheckedText = 'Favorite';
+const defaultCheckedText = 'Favorited';
 
 const defaultUncheckedIcon = 'FavoriteStar';
-const defaultUncheckedText = 'Click to Favorite';
+const defaultUncheckedText = 'Favorite';
 
 
 
