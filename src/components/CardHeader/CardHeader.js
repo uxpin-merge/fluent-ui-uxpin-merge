@@ -69,7 +69,7 @@ class CardHeader extends React.Component {
 
         var iconStackItem = '';
         if (this.props.iconName) {
-            let iName = this.props.iconName;
+            let iName = this.props.iconName.trim();
             let iSize = this.props.iconSize;
 
             //Let's see if the user entered a valid color value. This method returns undefined if not. 
@@ -78,14 +78,14 @@ class CardHeader extends React.Component {
                 iColor = defaultTextColor;
             }
 
-            const iconDisplayClass = mergeStyles({
+            const iconDisplayClass = {
                 color: iColor,
                 fontSize: iSize,
                 height: iSize,
                 width: iSize,
                 display: 'block',           //Required
                 lineHeight: 'normal',       //Required
-            });
+            };
 
             iconStackItem = (
                 <StackItem>
