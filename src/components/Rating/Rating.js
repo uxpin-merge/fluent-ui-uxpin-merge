@@ -33,16 +33,10 @@ class Rating extends React.Component {
             : this.props.value > sCount ? sCount
                 : this.props.value;
 
-        //Similarly, make sure that the user entered a number between 1 - max.
-        var index = this.props.value;
-        if (isNaN(this.props.value)) {
-            index = minNumberOfStars;
-        }
-
         this.setState(
             {
                 selectedIndex: index,
-                maxNumberOfStars: sCount
+                maxNumberOfStars: sCount,
             }
         )
     }
