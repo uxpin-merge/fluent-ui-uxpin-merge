@@ -1,7 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Icon as IconM } from '@fluentui/react/lib/Icon';
-import { mergeStyles } from '@fluentui/merge-styles';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 class Icon extends React.Component {
@@ -17,25 +16,26 @@ class Icon extends React.Component {
     let size = this.props.size;
 
     let color = UxpColors.getHexFromHexOrToken(this.props.color);
+
     if (!color) {
       color = defaultColor;
     }
 
-    const iconDisplayClass = mergeStyles({
+    const iconDisplayClass = {
       color: color,
       fontSize: size,
       height: size,
       width: size,
       display: 'block',
       lineHeight: 'normal',
-    });
+    };
 
     return (
 
       <IconM
         {...this.props}
-        iconName = { this.props.iconName.trim() }
-        className = { iconDisplayClass }
+        iconName={this.props.iconName.trim()}
+        className={iconDisplayClass}
       />
 
     );
@@ -54,4 +54,4 @@ Icon.defaultProps = {
   color: "grey-700"
 };
 
-export { Icon as default}
+export { Icon as default }
