@@ -226,15 +226,15 @@ class DetailsList extends React.Component {
           columnParams.isMultiline = true;
 
           if (this.state.alignRight.includes(colIndex + 1)) {
-            columnParams.className = mergeStyles({
+            columnParams.className = {
               textAlign: 'right',
-            })
+            }
           }
 
           if (this.state.alignCenter.includes(colIndex + 1)) {
-            columnParams.className = mergeStyles({
+            columnParams.className = {
               textAlign: 'center',
-            })
+            }
           }
 
           return columnParams
@@ -304,13 +304,13 @@ class DetailsList extends React.Component {
         <StackItem>
 
           <div style={{ display: 'block' }} className={
-            mergeStyles({
+            {
               selectors: {
                 '& .ms-DetailsHeader': {
                   paddingTop: 0,
                 },
               }
-            })
+            }
           }>
             <FDetailsList
               enableShimmer={this.state.shimmer}
