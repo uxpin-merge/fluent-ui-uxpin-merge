@@ -15,16 +15,12 @@ const searchFieldMarginBottom = '24px';
 
 
 //Use this in the default props below.
-const defaultColumnValues = `Column A,  
-Column B, 
-Column C, 
-Column D, 
-Actions`;
+const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
 
 const defaultRowValues =
-  `link(Component_Name_A), icon(CircleCheckSolid|color-green-600) Ready, C-1, D-1, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
-link(Component_Name_B), icon(CircleWarningSolid|color-orange-500) Restarting..., C-2, D-2, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)
-link(Component_Name_C), icon(CircleClearSolid|color-red-500) Unavailable, C-3, D-3, icon(Document|color-blue-600) icon(MoreVertical|color-blue-600)`;
+  `link(Component_Name_A), icon(SkypeCircleCheck|color-green-600) Ready, C-1, D-1, icon(MoreVertical|color-blue-600)
+link(Component_Name_B), icon(WarningSolid|color-orange-500) Restarting..., C-2, D-2, icon(MoreVertical|color-blue-600)
+link(Component_Name_C), icon(StatusErrorFull|color-red-500) Unavailable, C-3, D-3, icon(MoreVertical|color-blue-600)`;
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
