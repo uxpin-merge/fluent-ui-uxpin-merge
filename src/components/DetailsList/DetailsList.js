@@ -336,7 +336,7 @@ class DetailsList extends React.Component {
               }
             }
           }>
-            <FDetailsList
+            <ShimmeredDetailsList
               enableShimmer={this.state.shimmer}
               {...this.props}
               columns={this.state.columns}
