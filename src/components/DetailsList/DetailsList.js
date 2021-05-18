@@ -207,7 +207,7 @@ class DetailsList extends React.Component {
           let name = getTokens(columnName).mixed
             .map((el, i) => typeof el === 'string' ?
               <span key={i}> {el} </span> :
-              el.suggestions[0]())
+              el.suggestions[0])
 
           const columnParams = {
             key: columnName,
@@ -255,7 +255,7 @@ class DetailsList extends React.Component {
           let name = getTokens(value).mixed ? getTokens(value).mixed
             .map((el, i) => typeof el === 'string' ?
               <span key={i}> {el} </span> :
-              el.suggestions[0]())
+              el.suggestions[0])
             :
             getTokens(value).text
 
