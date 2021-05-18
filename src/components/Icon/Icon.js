@@ -3,6 +3,12 @@ import * as PropTypes from 'prop-types';
 import { Icon as IconM } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
+
+
+const defaultColor = '#000000';
+
+
+
 class Icon extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +26,7 @@ class Icon extends React.Component {
     if (!color) {
       color = defaultColor;
     }
+    console.log("     going to set it to color: " + color);
 
     const iconDisplayClass = {
       color: color,
