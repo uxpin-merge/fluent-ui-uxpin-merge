@@ -16,7 +16,7 @@ class Icon extends React.Component {
     let size = this.props.size;
 
     let color = UxpColors.getHexFromHexOrToken(this.props.color);
-
+    console.log("returned color: " + color);
     if (!color) {
       color = defaultColor;
     }
