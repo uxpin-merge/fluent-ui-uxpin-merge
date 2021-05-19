@@ -149,9 +149,14 @@ export default class PieChart extends React.Component {
     if (animationOption === animationOff)
       animationOption = false;
 
+    console.log("Setting animation: " + animationOption);
+
     return (
       <RadialChart
         {...this.props}
+        width={this.state._width}
+        height={this.state._height}
+        data={this.state.data}
         getAngle={(d) => d.theta}
         css={ChartStyles}
         radius={this.props.radius}
@@ -160,9 +165,6 @@ export default class PieChart extends React.Component {
         showLabels={this.props.showLabels}
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
-        data={this.state.data}
-        width={this.state._width}
-        height={this.state._height}
         colorRange={this.state.colorList}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
