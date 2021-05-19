@@ -81,10 +81,7 @@ class MessageBar extends React.Component {
 
     render() {
 
-        let dismissHandler = this.showDismissButton ? this._onDismiss() : undefined;
-
         let truncated = !this.isMultiline;
-
         let message = this.state.message;
 
         //Adding ANY buttons to the control appears to cause fatal errors. 
@@ -126,13 +123,21 @@ class MessageBar extends React.Component {
 
         // actions={btnActions}
 
+        var dismissProps = '';
+        if (this.props.showDismissButton) {
+            dismissProps = {
+                onDismiss: this._onDismiss
+            }
+        }
+
+
         return (
 
             <FMessageBar
                 {...this.props}
                 truncated={truncated}
                 messageBarType={MessageBarType[this.props.messageBarType]}
-                onDismiss={() => dismissHandler}
+                {...dismissProps}
             >
                 {message}
             </FMessageBar>

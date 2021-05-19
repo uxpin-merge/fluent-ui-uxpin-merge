@@ -11,7 +11,6 @@ module.exports = {
           'src/components/PageFooter/PageFooter.js',
           'src/components/Shape/Shape.js',
           'src/components/VerticalStack/VerticalStack.js',
-          'src/components/ZStack/ZStack.js',
         ],
       },
       {
@@ -52,6 +51,7 @@ module.exports = {
           'src/components/ChoiceGroup/ChoiceGroup.js',
           'src/components/ColorPicker/ColorPicker.js',
           'src/components/Dropdown/Dropdown.js',
+          'src/components/Rating/Rating.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
           'src/components/SpinButton/SpinButton.js',
@@ -64,6 +64,7 @@ module.exports = {
         name: 'Items & Lists',
         include: [
           'src/components/ActivityItem/ActivityItem.js',
+          'src/components/DetailsList/DetailsList.js',
           'src/components/Facepile/Facepile.js',
           'src/components/Nav/Nav.js',
           'src/components/Persona/Persona.js',

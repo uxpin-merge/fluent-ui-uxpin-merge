@@ -17,7 +17,7 @@ const rightAlign = 'right';
 const stretchAlign = 'stretch';
 
 const instructionText = `PivotPanel Instructions: 
-1) Drag any Merge controls onto the canvas. 
+1) Drag any Merge control onto the canvas. 
 2) In the Layers Panel, drag and drop it onto this control.`;
 
 

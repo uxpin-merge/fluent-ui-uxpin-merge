@@ -1,5 +1,12 @@
 import { DefaultPalette, CommunicationColors, NeutralColors, SharedColors } from '@fluentui/react/lib/Theme';
-import { SemanticColors } from '@fluentui/react/lib/Styling';
+
+
+
+
+//TODO: Leverage this technique
+// import { getTheme } from '@fluentui/react/lib/Styling';
+// const theme = getTheme();
+//console.log("Theme info: theme.palette.themeLighterAlt - " + theme.palette.themeLighterAlt);
 
 
 
@@ -130,7 +137,7 @@ export const UxpColors = {
      * A convenience method for getting an array of color params for the  Grey palette.
      * Each param has an id (the short token name), a token-like name, the actual token name, and a hex value of the color. 
      * This array is useful for creating Microsoft Fluent Color objects. 
-     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Greys palette. Attributes are: id, label, colorToken, and color (a Hex value).
+     * @returns {Array} Returns an array of Color Params objects with the Greys palette. Attributes are: id, label, colorToken, and color (a Hex value).
      */
     getGreyColorList: function () {
         let b9 = this.getColorParams("black", this.black);
@@ -151,7 +158,7 @@ export const UxpColors = {
      * A convenience method for getting an array of color params for the  Accent palette.
      * Each param has an id (the short token name), a token-like name, the actual token name, and a hex value of the color. 
      * This array is useful for creating Microsoft Fluent Color objects. 
-     * @returns {Array} Returns an array of Color Params objects with the PayPal UI Accents palette. Attributes are: id, label, colorToken, and color (a Hex value).
+     * @returns {Array} Returns an array of Color Params objects with the Accents palette. Attributes are: id, label, colorToken, and color (a Hex value).
      */
     getAccentColorList: function () {
         let b12 = this.getColorParams("green-700", this.green700);
@@ -256,6 +263,43 @@ export const UxpColors = {
                 return this.purple500;
             case "pink500":
                 return this.pink500;
+
+            //Role-specific colors
+            case "info":
+                return this.info;
+            case "infotext":
+                return this.infoText;
+            case "infobackground":
+                return this.infoBackground;
+            case "infobackgroundhover":
+                return this.infoBackgroundHover;
+
+            case "success":
+                return this.success;
+            case "successtext":
+                return this.successText;
+            case "successbackground":
+                return this.successBackground;
+            case "successbackgroundhover":
+                return this.successBackgroundHover;
+
+            case "warning":
+                return this.warning;
+            case "warningtext":
+                return this.warningText;
+            case "warningbackground":
+                return this.warningBackground;
+            case "warningbackgroundhover":
+                return this.warningBackgroundHover;
+
+            case "error":
+                return this.error;
+            case "errortext":
+                return this.errorText;
+            case "errorbackground":
+                return this.errorBackground;
+            case "errorbackgroundhover":
+                return this.errorBackgroundHover;
 
             case 'transparent':
                 return 'transparent';

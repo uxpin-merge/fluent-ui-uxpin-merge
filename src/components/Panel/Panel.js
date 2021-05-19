@@ -9,6 +9,7 @@ import ActionButton from '../ActionButton/ActionButton';
 
 const defaultHeight = 900;
 const defaultWidth = 1440;
+const defaultContentMargin = 24;
 const defaultContentPadding = 24;
 
 const overlayDark = 'rgba(0, 0, 0, 0.4)';
@@ -154,8 +155,9 @@ class Panel extends React.Component {
 
                                     <Stack.Item>
                                         <ActionButton
-                                            iconName="Close"
-                                            text="Close"
+                                            iconName="ChromeClose"
+                                            tooltip="Close"
+                                            text=""
                                             onClick={() => this._onDismissClicked()}
                                         />
                                     </Stack.Item>
@@ -165,8 +167,8 @@ class Panel extends React.Component {
                             {/* Children Area */}
                             <Stack
                                 tokens={{
-                                    padding: 24,
-                                    childrenGap: 24
+                                    padding: defaultContentMargin,
+                                    childrenGap: defaultContentPadding,
                                 }}
                                 horizontalAlign={'stretch'}
                                 verticalAlign={'start'}

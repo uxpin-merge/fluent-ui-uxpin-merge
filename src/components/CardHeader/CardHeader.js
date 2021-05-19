@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { FontIcon } from '@fluentui/react/lib/Icon';
+// import { Icon } from '@fluentui/react/lib/Icon';
+import Icon from '../Icon/Icon';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
@@ -11,11 +12,9 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
 const defaultTextColor = "#000000";
-
-const defaultIconSize = 24;
-
-//TODO: Choose good default icon name
-const defaultIconName = '';
+const defaultIconColor = '#0070BA';
+const defaultIconSize = 18;
+const defaultIconName = 'InfoSolid';
 
 //****** OTHER */
 
@@ -70,28 +69,39 @@ class CardHeader extends React.Component {
         var iconStackItem = '';
         if (this.props.iconName) {
             let iName = this.props.iconName.trim();
-            let iSize = this.props.iconSize + 'px';
+            let iSize = this.props.iconSize;
 
             //Let's see if the user entered a valid color value. This method returns undefined if not. 
             var iColor = UxpColors.getHexFromHexOrToken(this.props.iconColor);
+
+            console.log("color prop: " + this.props.iconColor);
+            console.log("     Returned value: " + iColor);
+
             if (!iColor) {
                 iColor = defaultTextColor;
             }
 
-            const iconDisplayClass = mergeStyles({
+            console.log("     Setting it as: " + iColor);
+
+            let colorClass = {
                 color: iColor,
+            }
+
+            let iconClass = {
                 fontSize: iSize,
                 height: iSize,
                 width: iSize,
                 display: 'block',           //Required
                 lineHeight: 'normal',       //Required
-            });
+            };
 
             iconStackItem = (
                 <StackItem>
-                    <FontIcon
+                    <Icon
                         iconName={iName}
-                        className={iconDisplayClass}
+                        color={iColor}
+                        size={iSize}
+                    // className={[iconClass, colorClass]}
                     />
                 </StackItem>
             );
@@ -239,7 +249,7 @@ CardHeader.defaultProps = {
     italic: false,
     iconName: defaultIconName,
     iconSize: defaultIconSize,
-    iconColor: defaultTextColor,
+    iconColor: defaultIconColor,
     cardPadding: 12,
 }
 

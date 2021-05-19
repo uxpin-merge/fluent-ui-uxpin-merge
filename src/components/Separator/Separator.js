@@ -4,6 +4,7 @@ import { Separator as FSeparator } from '@fluentui/react/lib/Separator';
 import { Text } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { TextAlignMiddleIcon } from '@fluentui/react-icons-mdl2';
 
 
 
@@ -21,15 +22,6 @@ class Separator extends React.Component {
 
 
     render() {
-
-        const iconStyles = {
-            root: {
-                fontSize: '16px',
-                height: '16px',
-                width: '16px',
-                marginRight: '6px'
-            },
-        };
 
         //Let's see if the user entered a valid background color value. This method returns undefined if not. 
         var bgColor = UxpColors.getHexFromHexOrToken(this.props.bgColor);
@@ -53,6 +45,8 @@ class Separator extends React.Component {
         let fTextStyles = {
             root: {
                 color: txColor,
+                paddingTop: '2px',
+                paddingBottom: '2px',
             }
         }
 
@@ -65,6 +59,18 @@ class Separator extends React.Component {
         if (this.props.text && this.props.text.trim().length > 0) {
             showText = true;
         }
+
+        const iconStyles = {
+            root: {
+                color: txColor,
+                fontSize: '16px',
+                height: '16px',
+                width: '16px',
+                paddingTop: '2px',
+                paddingBottom: '2px',
+                marginRight: '6px',
+            },
+        };
 
         return (
             <FSeparator

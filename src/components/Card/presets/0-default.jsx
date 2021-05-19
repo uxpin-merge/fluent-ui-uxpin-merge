@@ -13,7 +13,7 @@ const instructions = 'Add any Merge control to the CardBody';
 
 //Footer
 const text = "View";
-const iconName = "Eye";
+const iconName = "RedEye";
 
 
 export default (
