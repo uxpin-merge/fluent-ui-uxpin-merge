@@ -176,6 +176,11 @@ class DetailsList extends React.Component {
     this.setState({
       rows: filteredRows
     });
+
+    //Raise this event to UXPin.
+    if (this.props.onSBChange) {
+      this.props.onSBChange(inputValue);
+    }
   }
 
   onSearchClear() {
@@ -365,6 +370,14 @@ DetailsList.propTypes = {
   icon: PropTypes.string,
 
   /**
+   * @uxpindescription Current value of the Search field. This prop's live value is available for scripting.
+   * @uxpinpropname * Search Value
+   * @uxpinbind onSBChange
+   * @uxpincontroltype textfield(2)
+   * */
+  searchValue: PropTypes.string,
+
+  /**
    * @uxpindescription Placeholder text to show in the text field when it's empty
    * @uxpinpropname Search Placeholder
    * */
@@ -400,14 +413,14 @@ DetailsList.propTypes = {
   * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
   * @uxpinpropname Align Right
   */
-  alignRight: PropTypes.string,
+  // alignRight: PropTypes.string,
 
   /**
   * Example: 2, 3
   * @uxpindescription Enter a comma-separated list of column numbers for center aligning their contents (Optional)
   * @uxpinpropname Align Center
   */
-  alignCenter: PropTypes.string,
+  // alignCenter: PropTypes.string,
 
   /**
   * @uxpindescription Minimum column width width 
@@ -439,6 +452,11 @@ DetailsList.propTypes = {
   */
   shimmerLines: PropTypes.number,
 
+  /**
+   * @uxpindescription Fires when the SearchBox's Value property changes.
+   * @uxpinpropname * Search Value Changed
+   * */
+  onSBChange: PropTypes.func,
 };
 
 
@@ -451,8 +469,8 @@ DetailsList.defaultProps = {
   minWidth: 125,
   maxWidth: 350,
   header: true,
-  alignRight: "5",
-  alignCenter: "3, 4",
+  // alignRight: "5",
+  // alignCenter: "3, 4",
   isSearchEnabled: true,
   icon: searchFieldIconName,
   placeholder: searchFieldPlaceholder,
