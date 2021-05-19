@@ -79,7 +79,7 @@ export default class PieChart extends React.Component {
   componentDidUpdate(prevProps) {
     if ((prevProps.colorRange !== this.props.colorRange) ||
       (prevProps.chartWidth !== this.props.chartWidth) ||
-      (prevProps.chartHeight !== this.props.hechartHeightight)) {
+      (prevProps.chartHeight !== this.props.chartHeight)) {
       this.set();
     }
   }
