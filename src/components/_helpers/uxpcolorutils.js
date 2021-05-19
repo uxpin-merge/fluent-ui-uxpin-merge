@@ -1,7 +1,10 @@
 import { DefaultPalette, CommunicationColors, NeutralColors, SharedColors } from '@fluentui/react/lib/Theme';
 import { SemanticColors } from '@fluentui/react/lib/Styling';
+import { getTheme } from '@fluentui/react/lib/Styling';
 
 
+
+const theme = getTheme();
 
 export const UxpColors = {
 

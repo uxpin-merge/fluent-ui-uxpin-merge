@@ -5,11 +5,8 @@ import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { getTokens, csv2arr } from '../_helpers/parser';
-import { getTheme } from '@fluentui/react/lib/Styling';
 
 
-
-const theme = getTheme();
 
 const searchFieldWidth = 400;
 const searchFieldIconName = "Filter";
@@ -38,8 +35,6 @@ class DetailsList extends React.Component {
 
     this.searchTable = this.searchTable.bind(this);
     this.onSearchClear = this.onSearchClear.bind(this);
-
-    console.log("Theme info: theme.palette.themeLighterAlt - " + theme.palette.themeLighterAlt);
 
     this.state = {
       shimmer: true,
