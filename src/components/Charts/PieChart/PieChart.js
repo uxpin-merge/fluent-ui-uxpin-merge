@@ -86,8 +86,10 @@ export default class PieChart extends React.Component {
           if (sliceInfo)
             sliceList.push(sliceInfo);
 
-          let startInfo = this._parseSliceItem(item);
-          startInfo.theta = 0;
+          let startInfo = {
+            label: sliceInfo.label,
+            theta: 0,
+          };
           startList.push(startInfo);
         }
       }
