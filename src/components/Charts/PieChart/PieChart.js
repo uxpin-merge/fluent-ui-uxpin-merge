@@ -12,9 +12,9 @@ import { UxpColors } from '../../_helpers/uxpcolorutils';
 
 
 
-const defaultColorRange = `teal
-red
-blue`;
+const defaultColorRange = `blue 300
+blue 700
+purple 500`;
 
 const defaultWidth = 300;
 const defaultHeight = 300;
@@ -26,9 +26,9 @@ const defaultPadAngle = "0.02";
 const animationOff = "no animation";
 const animationOptions = [animationOff, 'gentle', 'noWobble', 'wobbly', 'stiff'];
 
-const defaultChartData = `Apples|20
-Bananas|40
-Pears|60`;
+const defaultChartData = `Apples | 20
+Bananas | 40
+Pears | 60`;
 
 
 
@@ -161,8 +161,8 @@ export default class PieChart extends React.Component {
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
         data={this.state.data}
-        width={this.state._width}
-        height={this.state._height}
+        // width={this.state._width}
+        // height={this.state._height}
         colorRange={this.state.colorList}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
@@ -219,7 +219,7 @@ PieChart.propTypes = {
 
   /** Data Array. Structure:  [{ "theta": 1, "label": "apples" }, {"theta": 4, "label": "oranges"}, {"theta": 6, "label": "cherries"}]  */
   /**
-   * @uxpindescription The list of pie slices. Put each slice on a separate line using this format: Label Value | Slice Relative Width. For example: Apple | 4 or Bananas | 33% (Optional)
+   * @uxpindescription The list of pie slices. Values are relative and don't have to equal 100(%). Put each slice on a separate line using this format: Label Value | Slice Relative Width. For example: Apple | 4 or Bananas | 33% (Optional)
    * @uxpinpropname Data
    * @uxpincontroltype codeeditor
    */
