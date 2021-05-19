@@ -216,16 +216,21 @@ class DetailsList extends React.Component {
 
     console.log("Entering Set Columns...");
 
-    this.setState({
-      columns: csv2arr(this.props.columns)
+    var columnList = [];
+    if (this.props.columns) {
+      columnList = csv2arr(this.props.columns)
         .flat()
         .map((columnName, colIndex) => {
-          columnName = columnName.trim()
+          columnName = columnName.trim();
+
+          console.log("    Column: " + columnName + " colIndex: " + colIndex);
 
           let name = getTokens(columnName).mixed
             .map((el, i) => typeof el === 'string' ?
-              <span key={i}> {el} </span> :
-              el.suggestions[0])
+              <span key={i}> {el} </span>
+              : el.suggestions[0]);
+
+          console.log("    Found a Column name: " + name);
 
           const columnParams = {
             key: columnName,
@@ -236,27 +241,28 @@ class DetailsList extends React.Component {
             maxWidth: this.props.maxWidth,
             isSorted: false,
             isSortedDescending: false,
+            isMultiline: true,
             onColumnClick: () => this.onColumnClick(columnName),
-            headerClassName: this.getColumnClasses(colIndex)
-          }
-
-          //This param allows each cell to support multi-line text. 
-          columnParams.isMultiline = true;
+            headerClassName: this.getColumnClasses(colIndex),
+          };
 
           if (this.state.alignRight.includes(colIndex + 1)) {
             columnParams.className = {
               textAlign: 'right',
-            }
+            };
           }
-
-          if (this.state.alignCenter.includes(colIndex + 1)) {
+          else if (this.state.alignCenter.includes(colIndex + 1)) {
             columnParams.className = {
               textAlign: 'center',
-            }
+            };
           }
 
           return columnParams
-        })
+        });
+    }
+
+    this.setState({
+      columns: columnList,
     }, callback)
   }
 
