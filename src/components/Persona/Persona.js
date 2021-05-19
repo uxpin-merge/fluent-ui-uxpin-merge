@@ -42,7 +42,7 @@ class Persona extends React.Component {
 
     render() {
 
-        let presenceCode = UxpPersonaData.presenceCode[this.props.ppPresence];
+        let presenceCode = UxpPersonaData.presenceCode.this.props.ppPresence;
         console.log("presence code: " + presenceCode);
 
         return (
