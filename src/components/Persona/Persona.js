@@ -26,9 +26,6 @@ class Persona extends React.Component {
     constructor(props) {
         super(props);
 
-        //State currently unused. 
-        this.state = {
-        }
     }
 
     _onClick() {
@@ -45,13 +42,17 @@ class Persona extends React.Component {
 
     render() {
 
+        let presenceCode = UxpPersonaData.presenceCode[this.props.ppPresence];
+        console.log("presence code: " + presenceCode);
+
         return (
             <FPersona
                 {...this.props}
 
                 //These props require their respective enum keys
                 size={PersonaSize[this.props.ppSize]}
-                presence={PersonaPresence[this.props.ppPresence]}
+                presence={presenceCode}
+                // presence={PersonaPresence[this.props.ppPresence]}
                 initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
 
                 //We can set these props as-is
