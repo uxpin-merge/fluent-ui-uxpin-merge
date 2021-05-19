@@ -281,10 +281,10 @@ class DetailsList extends React.Component {
   onSearchClear(event) {
     //This means that the user has hit the clear button, so we need to clear the text out. 
 
-    event.target.value = "";
+    // event.target.value = "";
 
     //Propagate the change to the SearchTable event
-    this.searchTable(event);
+    this.searchTable('');
   }
 
 
