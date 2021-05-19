@@ -36,16 +36,6 @@ export default class PieChart extends React.Component {
   constructor(props) {
     super(props);
 
-    const getStartData = () => {
-      if (Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
-        return this.props.startData;
-      } if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
-        return this.props.startData;
-      }
-
-      return this.props.data;
-    };
-
     this.state = {
       data: [],
       startData: [],
@@ -177,6 +167,7 @@ export default class PieChart extends React.Component {
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
         colorRange={this.state.colorList}
+        colorType={'literal'}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
         onNearestXY={this.props.onNearestXY}
