@@ -5,8 +5,8 @@ import {
     PersonaSize,
     PersonaInitialsColor
 } from '@fluentui/react/lib/Persona';
-import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
+
 
 
 //This is the default URL to use for a generic female user
@@ -43,7 +43,6 @@ class Persona extends React.Component {
     render() {
 
         let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
-        console.log("presence code: " + presenceCode);
 
         return (
             <FPersona
@@ -52,7 +51,6 @@ class Persona extends React.Component {
                 //These props require their respective enum keys
                 size={PersonaSize[this.props.ppSize]}
                 presence={presenceCode}
-                // presence={PersonaPresence[this.props.ppPresence]}
                 initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
 
                 //We can set these props as-is
