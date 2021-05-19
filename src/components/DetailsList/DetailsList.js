@@ -18,9 +18,9 @@ const searchFieldMarginBottom = '24px';
 const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
 
 const defaultRowValues =
-  `link(Component_Name_A), icon(SkypeCircleCheck|color-green-600) Ready, C-1, D-1, icon(MoreVertical|color-blue-600)
-link(Component_Name_B), icon(WarningSolid|color-orange-500) Restarting..., C-2, D-2, icon(MoreVertical|color-blue-600)
-link(Component_Name_C), icon(StatusErrorFull|color-red-500) Unavailable, C-3, D-3, icon(MoreVertical|color-blue-600)`;
+  `link(Component_Name_A), icon(SkypeCircleCheck|green-600) Ready, C-1, D-1, icon(MoreVertical|color-blue-600)
+link(Component_Name_B), icon(WarningSolid|orange-500) Restarting..., C-2, D-2, icon(MoreVertical|color-blue-600)
+link(Component_Name_C), icon(StatusErrorFull|red-500) Unavailable, C-3, D-3, icon(MoreVertical|color-blue-600)`;
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
@@ -169,6 +169,10 @@ class DetailsList extends React.Component {
   searchTable(event) {
 
     let inputValue = event.target.value;
+
+    console.log("Searching the table for: " + inputValue);
+
+
     let filteredRows = this.searchText(inputValue);
     this.setState({
       rows: filteredRows
@@ -204,12 +208,12 @@ class DetailsList extends React.Component {
       columnList = csv2arr(this.props.columns)
         .flat()
         .map((columnName, colIndex) => {
-          columnName = columnName.trim();
+          columnName = columnName.trim()
 
           let name = getTokens(columnName).mixed
             .map((el, i) => typeof el === 'string' ?
               <span key={i}> {el} </span>
-              : el.suggestions[0]);
+              : el.suggestions[0])
 
           const columnParams = {
             key: columnName,
@@ -223,7 +227,7 @@ class DetailsList extends React.Component {
             isMultiline: true,
             onColumnClick: () => this.onColumnClick(columnName),
             headerClassName: this.getColumnClasses(colIndex),
-          };
+          }
 
           if (this.state.alignRight.includes(colIndex + 1)) {
             columnParams.className = {
@@ -274,7 +278,6 @@ class DetailsList extends React.Component {
     this.setState({ allItems: rows });
   }
 
-
   onSearchClear(event) {
     //This means that the user has hit the clear button, so we need to clear the text out. 
 
@@ -297,7 +300,7 @@ class DetailsList extends React.Component {
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
             <SearchBox
-              iconProps={{ iconName: this.props.icon }}
+              iconProps={{ iconName: this.props.icon.trim() }}
               placeholder={this.props.placeholder}
               onChange={this.searchTable}
               onClear={this.onSearchClear}
