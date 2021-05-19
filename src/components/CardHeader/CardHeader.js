@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { FontIcon } from '@fluentui/react/lib/Icon';
+// import { Icon } from '@fluentui/react/lib/Icon';
+import Icon from '../Icon';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
@@ -97,9 +98,11 @@ class CardHeader extends React.Component {
 
             iconStackItem = (
                 <StackItem>
-                    <FontIcon
+                    <Icon
                         iconName={iName}
-                        className={[iconClass, colorClass]}
+                        color={iColor}
+                        size={iSize}
+                    // className={[iconClass, colorClass]}
                     />
                 </StackItem>
             );
