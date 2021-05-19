@@ -74,6 +74,14 @@ export const getTokens = inputStr => {
   const getSuggestions = token => {
     let mutatorsArray = getMutators(token.tokenString);
     var colorMutator = null;
+
+    var i;
+    for (i = 0; i < mutatorsArray.length; i++) {
+      console.log("mutator: " + mutatorsArray[i]);
+    }
+
+
+
     if (mutatorsArray && mutatorsArray.filter(m => m.indexOf('color') !== -1)) {
       let colorArr = mutatorsArray.filter(m => m.indexOf('color') !== -1);
       if (colorArr && colorArr.length > 0) {
