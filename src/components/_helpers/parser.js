@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ActionButton } from '@fluentui/react/lib/Button';
 import { Link } from '@fluentui/react/lib/Link';
-
+import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 export const csv2arr = text => {
@@ -68,6 +68,15 @@ export const getTokens = inputStr => {
   }
 
   const getSuggestions = token => {
+    let mutatorsArray = getMutators(token.tokenString);
+    var colorMutator = null;
+    if (mutatorsArray && mutatorsArray.filter(m => m.indexOf('color') !== -1)) {
+      let colorArr = mutatorsArray.filter(m => m.indexOf('color') !== -1);
+      if (colorArr && colorArr.length > 0) {
+        colorMutator = UxpColors.getHexFromHexOrToken(colorArr[0]);
+        console.log("parser. Color mutator: " + colorMutator + " for " + colorArr[0]);
+      }
+    }
 
     let suggestions = []
 
@@ -86,6 +95,8 @@ export const getTokens = inputStr => {
         padding: 0,
         margin: 0,
       }
+
+
 
       suggestions.push(
         <ActionButton
