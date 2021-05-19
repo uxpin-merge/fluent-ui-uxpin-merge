@@ -91,6 +91,8 @@ export default class PieChart extends React.Component {
             theta: 0,
           };
           startList.push(startInfo);
+
+          console.log("start info label " + startInfo.label + " & theta: " + startInfo.theta);
         }
       }
     }
