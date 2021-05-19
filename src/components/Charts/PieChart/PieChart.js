@@ -43,6 +43,8 @@ export default class PieChart extends React.Component {
       hintValue: '',
       showHint: false,
       colorList: [],
+      _width: defaultWidth,
+      _height: defaultHeight,
     };
   }
 
@@ -65,6 +67,8 @@ export default class PieChart extends React.Component {
     this.setState({
       data: this.props.data,
       colorList: colorList,
+      _width: this.props.chartWidth,
+      _height: this.props.chartHeight,
     });
   }
 
@@ -74,8 +78,8 @@ export default class PieChart extends React.Component {
 
   componentDidUpdate(prevProps) {
     if ((prevProps.colorRange !== this.props.colorRange) ||
-      (prevProps.width !== this.props.width) ||
-      (prevProps.height !== this.props.height)) {
+      (prevProps.chartWidth !== this.props.chartWidth) ||
+      (prevProps.chartHeight !== this.props.hechartHeightight)) {
       this.set();
     }
   }
@@ -107,8 +111,8 @@ export default class PieChart extends React.Component {
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
         data={this.state.data}
-        width={this.props.width}
-        height={this.props.height}
+        width={this.state._width}
+        height={this.state._height}
         colorRange={this.state.colorList}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
@@ -133,13 +137,15 @@ PieChart.propTypes = {
 
   /**
    * @uxpindescription Chart width in pixels
+   * @uxpinpropname Width
    * */
-  width: PropTypes.number,
+  chartWidth: PropTypes.number,
 
   /**
    * @uxpindescription Chart height in pixels
+   * @uxpinpropname Height
    * */
-  height: PropTypes.number,
+  chartHeight: PropTypes.number,
 
 
   /** Turns, on/off animation and allows for selection of different types of animations. */
