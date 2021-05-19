@@ -48,6 +48,7 @@ export default class PieChart extends React.Component {
 
     this.state = {
       data: [],
+      startData: [],
       hintValue: '',
       showHint: false,
       colorList: [],
@@ -71,6 +72,7 @@ export default class PieChart extends React.Component {
     }
 
     var sliceList = [];
+    var startList = [];
 
     if (this.props.pieSlices) {
       let slices = this.props.pieSlices.match(/[^\r\n]+/g);
@@ -83,12 +85,17 @@ export default class PieChart extends React.Component {
 
           if (sliceInfo)
             sliceList.push(sliceInfo);
+
+          let startInfo = sliceInfo;
+          startInfo.theta = 0;
+          startList.push(sliceInfo);
         }
       }
     }
 
     this.setState({
       data: sliceList,
+      startData: startList,
       colorList: colorList,
       _width: this.props.chartWidth,
       _height: this.props.chartHeight,
@@ -157,6 +164,7 @@ export default class PieChart extends React.Component {
         width={this.state._width}
         height={this.state._height}
         data={this.state.data}
+        startData={this.state.startData}
         getAngle={(d) => d.theta}
         css={ChartStyles}
         radius={this.props.radius}
@@ -173,13 +181,15 @@ export default class PieChart extends React.Component {
         onSeriesRightClick={this.props.onSeriesRightClick}
         onSeriesMouseOver={this.props.onSeriesMouseOver}
         onSeriesMouseOut={this.props.onSeriesMouseOver}
-        animation={animationOption}>
-        {this.props.hint && this.state.showHint ? (
-          <Hint value={this.state.hintValue} />
-        ) : (
-          undefined
-        )}
-      </RadialChart>
+        animation={animationOption} >
+        {
+          this.props.hint && this.state.showHint ? (
+            <Hint value={this.state.hintValue} />
+          ) : (
+            undefined
+          )
+        }
+      </RadialChart >
     );
   }
 }
