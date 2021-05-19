@@ -49,8 +49,22 @@ class Icon extends React.Component {
 }
 
 Icon.propTypes = {
+  /**
+   * @uxpindescription The exact name from the icon library (Optional)
+   * @uxpinpropname Icon Name
+   * */
   iconName: PropTypes.string,
+
+  /**
+   * @uxpindescription The size to use for the icon's width and height
+   * @uxpinpropname Icon Size
+   * */
   size: PropTypes.number,
+
+  /**
+   * @uxpindescription Use a color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
+   * @uxpinpropname Icon Color
+   * */
   color: PropTypes.string,
 };
 
