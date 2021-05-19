@@ -4,6 +4,10 @@ import { Link } from '@fluentui/react/lib/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
+
+const defaultIconColor = '#005EA6';
+
+
 export const csv2arr = text => {
   if (text.trim() === '') {
     return [];
@@ -96,12 +100,19 @@ export const getTokens = inputStr => {
         margin: 0,
       }
 
-
+      let btnClass = {
+        selectors: {
+          '& i': {
+            color: colorMutator ? colorMutator : defaultIconColor
+          }
+        }
+      }
 
       suggestions.push(
         <ActionButton
           key={unique}
           style={btnStyle}
+          className={btnClass}
           iconProps={{ iconName: token.target }} />
       )
     }
