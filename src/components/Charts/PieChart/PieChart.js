@@ -158,8 +158,6 @@ export default class PieChart extends React.Component {
     if (animationOption === animationOff)
       animationOption = false;
 
-    console.log("Setting animation: " + animationOption);
-
     return (
       <RadialChart
         {...this.props}
