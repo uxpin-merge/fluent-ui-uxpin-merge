@@ -18,7 +18,7 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
 
-        initializeIcons();
+        initializeIcons()
 
         this.state = {
             open: false
