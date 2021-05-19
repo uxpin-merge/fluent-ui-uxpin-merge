@@ -101,36 +101,34 @@ export default class PieChart extends React.Component {
       animationOption = false;
 
     return (
-      <div style="display: flex; width: 100%; height: 100%;">
-        <RadialChart
-          {...this.props}
-          getAngle={(d) => d.theta}
-          css={ChartStyles}
-          radius={this.props.radius}
-          innerRadius={this.props.innerRadius}
-          padAngle={parseFloat(this.props.padAngle)}
-          showLabels={this.props.showLabels}
-          labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
-          labelsStyle={this.props.labelsStyle}
-          data={this.state.data}
-          width={this.state._width}
-          height={this.state._height}
-          colorRange={this.state.colorList}
-          opacity={parseFloat(this.props.opacity)}
-          onValueClick={(value) => this.getHint(value)}
-          onNearestXY={this.props.onNearestXY}
-          onSeriesClick={this.props.onSeriesClick}
-          onSeriesRightClick={this.props.onSeriesRightClick}
-          onSeriesMouseOver={this.props.onSeriesMouseOver}
-          onSeriesMouseOut={this.props.onSeriesMouseOver}
-          animation={animationOption}>
-          {this.props.hint && this.state.showHint ? (
-            <Hint value={this.state.hintValue} />
-          ) : (
-            undefined
-          )}
-        </RadialChart>
-      </div>
+      <RadialChart
+        {...this.props}
+        getAngle={(d) => d.theta}
+        css={ChartStyles}
+        radius={this.props.radius}
+        innerRadius={this.props.innerRadius}
+        padAngle={parseFloat(this.props.padAngle)}
+        showLabels={this.props.showLabels}
+        labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
+        labelsStyle={this.props.labelsStyle}
+        data={this.state.data}
+        width={this.state._width}
+        height={this.state._height}
+        colorRange={this.state.colorList}
+        opacity={parseFloat(this.props.opacity)}
+        onValueClick={(value) => this.getHint(value)}
+        onNearestXY={this.props.onNearestXY}
+        onSeriesClick={this.props.onSeriesClick}
+        onSeriesRightClick={this.props.onSeriesRightClick}
+        onSeriesMouseOver={this.props.onSeriesMouseOver}
+        onSeriesMouseOut={this.props.onSeriesMouseOver}
+        animation={animationOption}>
+        {this.props.hint && this.state.showHint ? (
+          <Hint value={this.state.hintValue} />
+        ) : (
+          undefined
+        )}
+      </RadialChart>
     );
   }
 }
