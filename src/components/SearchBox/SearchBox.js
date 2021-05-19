@@ -11,7 +11,7 @@ class SearchBox extends React.Component {
 
     //Track the control's text value internally
     this.state = {
-      _textValue: this.props.textValue,
+      _textValue: '',
     }
   }
 

@@ -43,6 +43,7 @@ class DetailsList extends React.Component {
       allItems: [],
       alignRight: [],
       alignCenter: [],
+      searchBoxValue: '',
     };
   }
 
@@ -50,6 +51,7 @@ class DetailsList extends React.Component {
 
     this.setState(
       {
+        searchBoxValue: this.props.searchValue.trim(),
         alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
         alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
         shimmer: this.props.shimmer
@@ -76,6 +78,7 @@ class DetailsList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
+      prevProps.searchValue !== this.props.searchValue ||
       prevProps.alignRight !== this.props.alignRight ||
       prevProps.alignCenter !== this.props.alignCenter ||
       prevProps.columns !== this.props.columns ||
@@ -86,7 +89,6 @@ class DetailsList extends React.Component {
       prevProps.shimmerDuration !== this.props.shimmerDuration ||
       prevProps.shimmerLines !== this.props.shimmerLines
     ) {
-
       this.set();
     }
   }
@@ -174,7 +176,8 @@ class DetailsList extends React.Component {
 
     let filteredRows = this.searchText(inputValue);
     this.setState({
-      rows: filteredRows
+      rows: filteredRows,
+      searchBoxValue: inputValue,
     });
 
     //Raise this event to UXPin.
@@ -299,11 +302,6 @@ class DetailsList extends React.Component {
 
   render() {
 
-    var searchVal = '';
-    if (this.props.searchValue) {
-      searchVal = this.props.searchValue.trim();
-    }
-
     return (
 
       <Stack>
@@ -314,7 +312,7 @@ class DetailsList extends React.Component {
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
             <SearchBox
-              value={searchVal}
+              value={this.state.searchBoxValue}
               iconProps={{ iconName: this.props.icon.trim() }}
               placeholder={this.props.placeholder}
               onChange={(e, v) => { this.searchTable(v) }}
