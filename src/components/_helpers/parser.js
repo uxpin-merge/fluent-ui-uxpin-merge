@@ -76,21 +76,16 @@ export const getTokens = inputStr => {
     var colorMutator = null;
 
     if (mutatorsArray) {
-      var i;
-      for (i = 0; i < mutatorsArray.length; i++) {
-        console.log("mutator: " + mutatorsArray[i]);
-      }
+      colorMutator = UxpColors.getHexFromHexOrToken(mutatorsArray[0]);
     }
 
-
-
-    if (mutatorsArray && mutatorsArray.filter(m => m.indexOf('color') !== -1)) {
-      let colorArr = mutatorsArray.filter(m => m.indexOf('color') !== -1);
-      if (colorArr && colorArr.length > 0) {
-        colorMutator = UxpColors.getHexFromHexOrToken(colorArr[0]);
-        console.log("parser. Color mutator: " + colorMutator + " for " + colorArr[0]);
-      }
-    }
+    // if (mutatorsArray && mutatorsArray.filter(m => m.indexOf('color') !== -1)) {
+    //   let colorArr = mutatorsArray.filter(m => m.indexOf('color') !== -1);
+    //   if (colorArr && colorArr.length > 0) {
+    //     colorMutator = UxpColors.getHexFromHexOrToken(colorArr[0]);
+    //     console.log("parser. Color mutator: " + colorMutator + " for " + colorArr[0]);
+    //   }
+    // }
 
     let suggestions = []
 
@@ -110,10 +105,13 @@ export const getTokens = inputStr => {
         margin: 0,
       }
 
-      let btnClass = {
-        selectors: {
-          '& i': {
-            color: colorMutator ? colorMutator : defaultIconColor
+      var btnClass = '';
+      if (colorMutator) {
+        btnClass = {
+          selectors: {
+            '& i': {
+              color: colorMutator
+            }
           }
         }
       }
