@@ -19,8 +19,16 @@ blue`;
 const defaultWidth = 300;
 const defaultHeight = 300;
 
+const defaultRadius = 140;
+const defaultInnerRadius = 120;
+const defaultPadAngle = "0.02";
+
 const animationOff = "no animation";
 const animationOptions = [animationOff, 'gentle', 'noWobble', 'wobbly', 'stiff'];
+
+const defaultChartData = `Apples|20
+Bananas|40
+Pears|60`;
 
 
 
@@ -60,9 +68,24 @@ export default class PieChart extends React.Component {
             UxpColors.getHexFromHexOrToken(text)
           )
         );
-      console.log("Color list: " + colorList);
     }
 
+    var sliceList = [];
+
+    if (this.props.pieSlices) {
+      let slices = this.props.pieSlices.match(/[^\r\n]+/g);
+
+      if (slices && slices.length) {
+        for (var i = 0; i < slices.length; i++) {
+          let item = slices[i];
+
+          let sliceInfo = this._parseSliceItem(item);
+
+          if (sliceInfo)
+            sliceList.push(sliceInfo);
+        }
+      }
+    }
 
     this.setState({
       data: this.props.data,
@@ -84,6 +107,31 @@ export default class PieChart extends React.Component {
     }
   }
 
+  _parseSliceItem(rawStr) {
+    if (rawStr && rawStr.length) {
+      let items = rawStr.split("|");
+
+      //First display side
+      if (items && items.length) {
+        let left = items[0].trim();     //This is the label value
+        var right = '';                 //This is the theta value
+
+        if (items[1]) {
+          right = items[1].trim().replace("%", "");
+        }
+
+        let dataParams = {
+          label: left,
+          theta: right,
+        }
+
+        return dataParams;
+      }
+    }
+
+    //If we made it this far, it didn't work out
+    return undefined;
+  }
 
   getHint(value) {
     if (!this.state.showHint) {
@@ -133,6 +181,7 @@ export default class PieChart extends React.Component {
   }
 }
 
+
 /* eslint-disable sort-keys */
 PieChart.propTypes = {
 
@@ -168,7 +217,12 @@ PieChart.propTypes = {
   colorRange: PropTypes.string,
 
   /** Data Array. Structure:  [{ "theta": 1, "label": "apples" }, {"theta": 4, "label": "oranges"}, {"theta": 6, "label": "cherries"}]  */
-  data: PropTypes.array,
+  /**
+   * @uxpindescription The list of pie slices. Put each slice on a separate line using this format: Label Value | Slice Relative Width. For example: Apple | 4 or Bananas | 33% (Optional)
+   * @uxpinpropname Data
+   * @uxpincontroltype codeeditor
+   */
+  pieSlices: PropTypes.string,
 
   /** Shows hint on click into every part of the pie chart */
   hint: PropTypes.bool,
@@ -221,16 +275,27 @@ PieChart.propTypes = {
   showLabels: PropTypes.bool,
 
   /** Starting point for data set. Used for triggering animation. Same data structure as data property. Place "0" in theta to animate. */
+  /**
+   * @uxpinignoreprop
+   */
   startData: PropTypes.array,
 };
 /* eslint-enable sort-keys */
 
+
 PieChart.defaultProps = {
+  pieSlices: defaultChartData,
   chartWidth: defaultHeight,
   chartHeight: defaultWidth,
   animation: 'gentle',
   hint: true,
   labelsRadiusMultiplier: '1.1',
   opacity: '1',
+  radius: defaultRadius,
+  padAngle: defaultPadAngle,
+  innerRadius: defaultInnerRadius,
   colorRange: defaultColorRange,
 };
+
+
+export { PieChart as default }
