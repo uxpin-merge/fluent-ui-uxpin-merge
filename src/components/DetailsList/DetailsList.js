@@ -230,8 +230,6 @@ class DetailsList extends React.Component {
               <span key={i}> {el} </span>
               : el.suggestions[0]);
 
-          console.log("    Found a Column name: " + name);
-
           const columnParams = {
             key: columnName,
             name,
@@ -267,32 +265,32 @@ class DetailsList extends React.Component {
   }
 
   setRows(callback) {
-    let rows = []
+    let rows = [];
 
     console.log("Entering Set Rows...");
 
-    csv2arr(this.props.items).forEach((row, rowIndex) => {
-      let r = {
-        key: rowIndex,
-      }
-      this.state.columns.forEach((column, colInd) => {
-        if (row[colInd]) {
-          const value = row[colInd].trim()
-          let name = getTokens(value).mixed ? getTokens(value).mixed
-            .map((el, i) => typeof el === 'string' ?
-              <span key={i}> {el} </span> :
-              el.suggestions[0])
-            :
-            getTokens(value).text
+    // csv2arr(this.props.items).forEach((row, rowIndex) => {
+    //   let r = {
+    //     key: rowIndex,
+    //   }
+    //   this.state.columns.forEach((column, colInd) => {
+    //     if (row[colInd]) {
+    //       const value = row[colInd].trim()
+    //       let name = getTokens(value).mixed ? getTokens(value).mixed
+    //         .map((el, i) => typeof el === 'string' ?
+    //           <span key={i}> {el} </span> :
+    //           el.suggestions[0])
+    //         :
+    //         getTokens(value).text
 
-          r[column.fieldName] = name
-        }
+    //       r[column.fieldName] = name
+    //     }
 
-      })
-      rows.push(r)
-    })
+    //   })
+    //   rows.push(r)
+    // })
 
-    console.log("    Exiting set row...");
+    console.log("    Exiting set rows...");
 
     this.setState({ rows }, callback)
     this.setState({ allItems: rows });
