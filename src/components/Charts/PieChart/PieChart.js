@@ -78,6 +78,8 @@ export default class PieChart extends React.Component {
             let cIndex = i % colorList.length;
             let color = colorList[cIndex];
             sliceInfo.color = color;
+
+            console.log(sliceInfo.label + " color: " + sliceInfo.color);
           }
 
           if (sliceInfo)
