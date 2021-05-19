@@ -73,6 +73,13 @@ export default class PieChart extends React.Component {
 
           let sliceInfo = this._parseSliceItem(item);
 
+          //Apply color in order
+          if (colorList && colorList.length > 0) {
+            let cIndex = i % colorList.length;
+            let color = colorList[cIndex];
+            sliceInfo.color = color;
+          }
+
           if (sliceInfo)
             sliceList.push(sliceInfo);
 
@@ -167,7 +174,6 @@ export default class PieChart extends React.Component {
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
         colorRange={this.state.colorList}
-        colorType={'literal'}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
         onNearestXY={this.props.onNearestXY}
