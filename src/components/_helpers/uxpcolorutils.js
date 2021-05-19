@@ -1,9 +1,10 @@
 import { DefaultPalette, CommunicationColors, NeutralColors, SharedColors } from '@fluentui/react/lib/Theme';
-import { getTheme } from '@fluentui/react/lib/Styling';
+
 
 
 
 //TODO: Leverage this technique
+// import { getTheme } from '@fluentui/react/lib/Styling';
 // const theme = getTheme();
 //console.log("Theme info: theme.palette.themeLighterAlt - " + theme.palette.themeLighterAlt);
 
