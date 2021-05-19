@@ -16,6 +16,8 @@ const searchFieldIconName = "Filter";
 const searchFieldPlaceholder = "Filter";
 const searchFieldMarginBottom = '24px';
 
+const headerBackgroundColor = '#F5F7FA';
+
 
 //Use this in the default props below.
 const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
@@ -105,7 +107,7 @@ class DetailsList extends React.Component {
       alignHeaderLabels = { margin: '0 0 0 auto' };
 
     return {
-      background: 'var(--color-grey-100)',
+      background: headerBackgroundColor,
       selectors: {
         '& .ms-DetailsHeader-cellName': alignHeaderLabels,
       }
