@@ -8,7 +8,7 @@ import {
 } from 'react-vis';
 import ChartStyles from '../chartStyles/chart.styles';
 import { csv2arr } from '../_helpers/parser';
-import { UxpColors } from '../_helpers/uxpcolorutils';
+import { UxpColors } from '../../_helpers/uxpcolorutils';
 
 
 
