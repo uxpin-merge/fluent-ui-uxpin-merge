@@ -43,7 +43,7 @@ class DetailsList extends React.Component {
       allItems: [],
       alignRight: [],
       alignCenter: [],
-      searchBoxValue: '',
+      // searchBoxValue: '',
     };
   }
 
@@ -51,7 +51,6 @@ class DetailsList extends React.Component {
 
     this.setState(
       {
-        searchBoxValue: this.props.searchValue.trim(),
         alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
         alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
         shimmer: this.props.shimmer
@@ -78,7 +77,6 @@ class DetailsList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
-      prevProps.searchValue !== this.props.searchValue ||
       prevProps.alignRight !== this.props.alignRight ||
       prevProps.alignCenter !== this.props.alignCenter ||
       prevProps.columns !== this.props.columns ||
@@ -177,13 +175,12 @@ class DetailsList extends React.Component {
     let filteredRows = this.searchText(inputValue);
     this.setState({
       rows: filteredRows,
-      searchBoxValue: inputValue,
     });
 
-    //Raise this event to UXPin.
-    if (this.props.onSBChange) {
-      this.props.onSBChange(inputValue);
-    }
+    // //Raise this event to UXPin.
+    // if (this.props.onSBChange) {
+    //   this.props.onSBChange(inputValue);
+    // }
   }
 
   onSearchClear() {
@@ -312,7 +309,6 @@ class DetailsList extends React.Component {
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
             <SearchBox
-              value={this.state.searchBoxValue}
               iconProps={{ iconName: this.props.icon.trim() }}
               placeholder={this.props.placeholder}
               onChange={(e, v) => { this.searchTable(v) }}
@@ -379,7 +375,7 @@ DetailsList.propTypes = {
    * @uxpinbind onSBChange
    * @uxpincontroltype textfield(2)
    * */
-  searchValue: PropTypes.string,
+  // searchValue: PropTypes.string,
 
   /**
    * @uxpindescription Placeholder text to show in the text field when it's empty
@@ -460,7 +456,7 @@ DetailsList.propTypes = {
    * @uxpindescription Fires when the SearchBox's Value property changes.
    * @uxpinpropname * Search Value Changed
    * */
-  onSBChange: PropTypes.func,
+  // onSBChange: PropTypes.func,
 };
 
 
