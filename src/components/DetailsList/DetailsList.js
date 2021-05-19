@@ -166,9 +166,9 @@ class DetailsList extends React.Component {
     return this.state.allItems.filter(i => this.includesText(i, text));
   }
 
-  searchTable(event) {
+  searchTable(queryStr) {
 
-    let inputValue = event.target.value;
+    let inputValue = queryStr.trim();
 
     console.log("Searching the table for: " + inputValue);
 
@@ -302,7 +302,7 @@ class DetailsList extends React.Component {
             <SearchBox
               iconProps={{ iconName: this.props.icon.trim() }}
               placeholder={this.props.placeholder}
-              onChange={this.searchTable}
+              onChange={(e, v) => { this.searchTable(v) }}
               onClear={this.onSearchClear}
               styles={{ root: { width: searchFieldWidth } }}
             />
