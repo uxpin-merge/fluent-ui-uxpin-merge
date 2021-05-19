@@ -127,12 +127,13 @@ export default class PieChart extends React.Component {
         var right = '';                 //This is the theta value
 
         if (items[1]) {
-          right = items[1].trim().replace("%", "");
+          right = items[1].trim();
         }
 
         let dataParams = {
           label: left,
-          theta: right,
+          theta: right.replace("%", ""),
+          originalTheta: right,
         }
 
         return dataParams;
@@ -145,7 +146,7 @@ export default class PieChart extends React.Component {
 
   getHint(value) {
     if (!this.state.showHint) {
-      const hintContent = value.label ? { Data: value.label, Value: `${value.theta * 10}%` } : { Value: `${value.theta * 10}%` };
+      const hintContent = value.label ? { Data: value.label, Value: `${value.originalTheta}` } : { Value: `${value.originalTheta}` };
       this.setState({ hintValue: hintContent, showHint: true });
     } else {
       this.setState({ hintValue: '', showHint: false });
