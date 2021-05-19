@@ -1,10 +1,13 @@
 import { DefaultPalette, CommunicationColors, NeutralColors, SharedColors } from '@fluentui/react/lib/Theme';
-import { SemanticColors } from '@fluentui/react/lib/Styling';
 import { getTheme } from '@fluentui/react/lib/Styling';
 
 
 
+//TODO: Leverage this technique
 const theme = getTheme();
+//console.log("Theme info: theme.palette.themeLighterAlt - " + theme.palette.themeLighterAlt);
+
+
 
 export const UxpColors = {
 
@@ -346,7 +349,7 @@ export const UxpColors = {
     },
 
     getHexFromFluentDefaultPalette: function (token) {
-        let palette = DefaultPalette;
+        let palette = theme; // DefaultPalette;
         if (palette && token) {
             if (palette.hasOwnProperty(token)) {
 
@@ -360,7 +363,7 @@ export const UxpColors = {
     },
 
     getHexFromFluentSharedColors: function (token) {
-        let palette = SharedColors;
+        let palette = null; // SharedColors;
         if (palette && token) {
             if (palette.hasOwnProperty(token)) {
 
@@ -374,7 +377,7 @@ export const UxpColors = {
     },
 
     getHexFromFluentNeutralColors: function (token) {
-        let palette = NeutralColors;
+        let palette = null; // NeutralColors;
         if (palette && token) {
             if (palette.hasOwnProperty(token)) {
 
@@ -388,7 +391,7 @@ export const UxpColors = {
     },
 
     getHexFromFluentCommunicationColors: function (token) {
-        let palette = CommunicationColors;
+        let palette = null; // CommunicationColors;
         if (palette && token) {
             if (palette.hasOwnProperty(token)) {
 
