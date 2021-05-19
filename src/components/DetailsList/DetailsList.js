@@ -230,7 +230,8 @@ class DetailsList extends React.Component {
               textAlign: 'right',
             };
           }
-          else if (this.state.alignCenter.includes(colIndex + 1)) {
+
+          if (this.state.alignCenter.includes(colIndex + 1)) {
             columnParams.className = {
               textAlign: 'center',
             };
