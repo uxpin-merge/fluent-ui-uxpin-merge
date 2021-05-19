@@ -237,7 +237,7 @@ class DetailsList extends React.Component {
 
             console.log("Yes, right align it: " + adjustedIndex);
 
-            columnParams.className = {
+            columnParams.styles = {
               textAlign: 'right',
               background: 'purple',
             };
@@ -246,7 +246,7 @@ class DetailsList extends React.Component {
           if (this.state.alignCenter.includes(adjustedIndex)) {
             console.log("Yes, center align it: " + adjustedIndex);
 
-            columnParams.className = {
+            columnParams.styles = {
               textAlign: 'center',
               background: 'red',
             };
