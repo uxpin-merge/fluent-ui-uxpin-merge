@@ -16,6 +16,13 @@ const defaultColorRange = `teal
 red
 blue`;
 
+const defaultWidth = 300;
+const defaultHeight = 300;
+
+const animationOff = "no animation";
+const animationOptions = [animationOff, 'gentle', 'noWobble', 'wobbly', 'stiff'];
+
+
 
 export default class PieChart extends React.Component {
   constructor(props) {
@@ -66,7 +73,9 @@ export default class PieChart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.colorRange !== this.props.colorRange) {
+    if ((prevProps.colorRange !== this.props.colorRange) ||
+      (prevProps.width !== this.props.width) ||
+      (prevProps.height !== this.props.height)) {
       this.set();
     }
   }
@@ -82,6 +91,10 @@ export default class PieChart extends React.Component {
   }
 
   render() {
+
+    var animationOption = this.props.animation;
+    if (animationOption === animationOff)
+      animationOption = false;
 
     return (
       <RadialChart
@@ -104,7 +117,7 @@ export default class PieChart extends React.Component {
         onSeriesRightClick={this.props.onSeriesRightClick}
         onSeriesMouseOver={this.props.onSeriesMouseOver}
         onSeriesMouseOut={this.props.onSeriesMouseOver}
-        animation={this.props.animation}>
+        animation={animationOption}>
         {this.props.hint && this.state.showHint ? (
           <Hint value={this.state.hintValue} />
         ) : (
@@ -117,11 +130,17 @@ export default class PieChart extends React.Component {
 
 /* eslint-disable sort-keys */
 PieChart.propTypes = {
-  /** Height of the Chart in px. Accepts only numbers. */
+
+  /**
+   * @uxpindescription Chart width in pixels
+   * */
+  width: PropTypes.number,
+
+  /**
+   * @uxpindescription Chart height in pixels
+   * */
   height: PropTypes.number,
 
-  /** Width of the Chart in px. Accepts only numbers. */
-  width: PropTypes.number,
 
   /** Turns, on/off animation and allows for selection of different types of animations. */
   animation: PropTypes.oneOf([false, 'noWobble', 'gentle', 'wobbly', 'stiff']),
@@ -133,7 +152,6 @@ PieChart.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   color: PropTypes.string,
 
-  /** Array with colors to be used across all chart lines. If array doesn't specify color for all the chart lines, color property is used. */
   /**
    * @uxpindescription The list of colors to use for the chart. Put each color on a separate line. Use a color token or hex. 
    * @uxpincontroltype codeeditor
@@ -199,10 +217,10 @@ PieChart.propTypes = {
 /* eslint-enable sort-keys */
 
 PieChart.defaultProps = {
-  height: 300,
-  hint: false,
+  height: defaultHeight,
+  width: defaultWidth,
+  hint: true,
   labelsRadiusMultiplier: '1.1',
   opacity: '1',
-  width: 300,
   colorRange: defaultColorRange,
 };

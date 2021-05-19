@@ -17,13 +17,11 @@ export default (
   <PieChart
     animation="gentle"
     data={chartData}
-    height={300}
     hint
     innerRadius={120}
     padAngle="0.02"
     radius={140}
     startData={chartStartData}
     uxpId="pieChart1"
-    width={300}
   />
 );
