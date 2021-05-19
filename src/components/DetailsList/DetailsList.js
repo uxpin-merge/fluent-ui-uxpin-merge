@@ -46,8 +46,6 @@ class DetailsList extends React.Component {
 
   set() {
 
-    console.log("Entering Set...");
-
     this.setState(
       {
         alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
@@ -56,8 +54,6 @@ class DetailsList extends React.Component {
       },
       () => this.setColumns(this.setRows)
     );
-
-    console.log("    Shimmer next...");
 
     if (this.props.shimmer) {
       setTimeout(
@@ -89,16 +85,12 @@ class DetailsList extends React.Component {
       prevProps.shimmerLines !== this.props.shimmerLines
     ) {
 
-      console.log("Comp did update...");
-
       this.set();
     }
   }
 
 
   getColumnClasses(colIndex) {
-    console.log("getColumnClasses ..." + colIndex);
-
 
     let alignHeaderLabels = {};
     if (this.state.alignCenter.includes(colIndex + 1))
@@ -123,9 +115,6 @@ class DetailsList extends React.Component {
    * @returns the sorted rows based on the text content of the column values
    */
   sortColumns(rows, columnKey, isSortedDescending) {
-
-    console.log("Entering sort columns..." + columnKey + " " + isSortedDescending);
-
     return rows.slice(0).sort((a, b) => {
       let aVal = this.getTextContent(a[columnKey]).toLowerCase();
       let bVal = this.getTextContent(b[columnKey]).toLowerCase();
@@ -140,8 +129,6 @@ class DetailsList extends React.Component {
    * 
    */
   getTextContent(elem) {
-
-    console.log("get text element ...");
 
     return elem.reduce((_text, part) => {
       const children = part.props.children;
@@ -165,7 +152,6 @@ class DetailsList extends React.Component {
    * 
    */
   includesText(i, search) {
-    console.log("includes text for ..." + search);
 
     return Object.values(i).some(elem => {
       if (Array.isArray(elem)) {
@@ -190,7 +176,6 @@ class DetailsList extends React.Component {
   }
 
   onColumnClick(columnKey) {
-    console.log("Entering on column click..." + columnKey);
 
     const { columns, rows } = this.state;
     const newColumns = columns.slice();
@@ -214,16 +199,12 @@ class DetailsList extends React.Component {
 
   setColumns(callback) {
 
-    console.log("Entering Set Columns...");
-
     var columnList = [];
     if (this.props.columns) {
       columnList = csv2arr(this.props.columns)
         .flat()
         .map((columnName, colIndex) => {
           columnName = columnName.trim();
-
-          console.log("    Column: " + columnName + " colIndex: " + colIndex);
 
           let name = getTokens(columnName).mixed
             .map((el, i) => typeof el === 'string' ?
@@ -267,32 +248,28 @@ class DetailsList extends React.Component {
   setRows(callback) {
     let rows = [];
 
-    console.log("Entering Set Rows...");
+    csv2arr(this.props.items).forEach((row, rowIndex) => {
+      let r = {
+        key: rowIndex,
+      }
+      this.state.columns.forEach((column, colInd) => {
+        if (row[colInd]) {
+          const value = row[colInd].trim()
+          let name = getTokens(value).mixed ? getTokens(value).mixed
+            .map((el, i) => typeof el === 'string' ?
+              <span key={i}> {el} </span> :
+              el.suggestions[0])
+            :
+            getTokens(value).text
 
-    // csv2arr(this.props.items).forEach((row, rowIndex) => {
-    //   let r = {
-    //     key: rowIndex,
-    //   }
-    //   this.state.columns.forEach((column, colInd) => {
-    //     if (row[colInd]) {
-    //       const value = row[colInd].trim()
-    //       let name = getTokens(value).mixed ? getTokens(value).mixed
-    //         .map((el, i) => typeof el === 'string' ?
-    //           <span key={i}> {el} </span> :
-    //           el.suggestions[0])
-    //         :
-    //         getTokens(value).text
+          r[column.fieldName] = name
+        }
 
-    //       r[column.fieldName] = name
-    //     }
+      })
+      rows.push(r)
+    });
 
-    //   })
-    //   rows.push(r)
-    // })
-
-    console.log("    Exiting set rows...");
-
-    this.setState({ rows }, callback)
+    this.setState({ rows }, callback);
     this.setState({ allItems: rows });
   }
 
@@ -308,8 +285,6 @@ class DetailsList extends React.Component {
 
 
   render() {
-
-    console.log(">>>> Render...");
 
     return (
 
@@ -345,7 +320,7 @@ class DetailsList extends React.Component {
               {...this.props}
               columns={this.state.columns}
               items={this.state.rows}
-              selectionMode={SelectionMode.none} //Hard coding this to off for the time being. 
+              selectionMode={SelectionMode.none}
               constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
               onRenderRow={(props, defaultRender) => (
                 <>
