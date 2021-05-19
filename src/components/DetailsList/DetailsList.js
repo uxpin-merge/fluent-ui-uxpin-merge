@@ -299,6 +299,11 @@ class DetailsList extends React.Component {
 
   render() {
 
+    var searchVal = '';
+    if (this.props.searchValue) {
+      searchVal = this.props.searchValue.trim();
+    }
+
     return (
 
       <Stack>
@@ -309,6 +314,7 @@ class DetailsList extends React.Component {
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
             <SearchBox
+              value={searchVal}
               iconProps={{ iconName: this.props.icon.trim() }}
               placeholder={this.props.placeholder}
               onChange={(e, v) => { this.searchTable(v) }}
