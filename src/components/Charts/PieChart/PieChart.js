@@ -163,6 +163,7 @@ export default class PieChart extends React.Component {
     return (
       <RadialChart
         {...this.props}
+        // animation={animationOption}    //Not working with update. 
         width={this.state._width}
         height={this.state._height}
         data={this.state.data}
@@ -183,7 +184,7 @@ export default class PieChart extends React.Component {
         onSeriesRightClick={this.props.onSeriesRightClick}
         onSeriesMouseOver={this.props.onSeriesMouseOver}
         onSeriesMouseOut={this.props.onSeriesMouseOver}
-        animation={animationOption} >
+      >
         {
           this.props.hint && this.state.showHint ? (
             <Hint value={this.state.hintValue} />
@@ -216,7 +217,7 @@ PieChart.propTypes = {
    * @uxpindescription A variety of chart animation options
    * @uxpinpropname Animation
    * */
-  animation: PropTypes.oneOf(animationOptions),
+  // animation: PropTypes.oneOf(animationOptions),
 
   /**
    * Color to be used on all chart lines, unless colorRange is provided
@@ -297,7 +298,7 @@ PieChart.defaultProps = {
   pieSlices: defaultChartData,
   chartWidth: defaultHeight,
   chartHeight: defaultWidth,
-  animation: 'gentle',
+  // animation: 'gentle',
   hint: true,
   labelsRadiusMultiplier: '1.1',
   opacity: '1',
