@@ -231,20 +231,24 @@ class DetailsList extends React.Component {
             headerClassName: this.getColumnClasses(colIndex),
           }
 
-          if (this.state.alignRight.includes(colIndex + 1)) {
+          let adjustedIndex = colIndex + 1;
 
-            console.log("Yes, right align it: " + colIndex + 1);
+          if (this.state.alignRight.includes(adjustedIndex)) {
+
+            console.log("Yes, right align it: " + adjustedIndex);
 
             columnParams.className = {
               textAlign: 'right',
+              background: 'purple',
             };
           }
 
-          if (this.state.alignCenter.includes(colIndex + 1)) {
-            console.log("Yes, center align it: " + colIndex + 1);
+          if (this.state.alignCenter.includes(adjustedIndex)) {
+            console.log("Yes, center align it: " + adjustedIndex);
 
             columnParams.className = {
               textAlign: 'center',
+              background: 'red',
             };
           }
 
