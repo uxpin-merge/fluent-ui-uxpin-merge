@@ -170,13 +170,15 @@ class DetailsList extends React.Component {
 
     let inputValue = queryStr.trim();
 
-    console.log("Searching the table for: " + inputValue);
-
-
     let filteredRows = this.searchText(inputValue);
     this.setState({
       rows: filteredRows
     });
+  }
+
+  onSearchClear() {
+    //Propagate the change to the SearchTable event
+    this.searchTable('');
   }
 
   onColumnClick(columnKey) {
@@ -230,12 +232,17 @@ class DetailsList extends React.Component {
           }
 
           if (this.state.alignRight.includes(colIndex + 1)) {
+
+            console.log("Yes, right align it: " + colIndex + 1);
+
             columnParams.className = {
               textAlign: 'right',
             };
           }
 
           if (this.state.alignCenter.includes(colIndex + 1)) {
+            console.log("Yes, center align it: " + colIndex + 1);
+
             columnParams.className = {
               textAlign: 'center',
             };
@@ -276,15 +283,6 @@ class DetailsList extends React.Component {
 
     this.setState({ rows }, callback);
     this.setState({ allItems: rows });
-  }
-
-  onSearchClear(event) {
-    //This means that the user has hit the clear button, so we need to clear the text out. 
-
-    // event.target.value = "";
-
-    //Propagate the change to the SearchTable event
-    this.searchTable('');
   }
 
 
