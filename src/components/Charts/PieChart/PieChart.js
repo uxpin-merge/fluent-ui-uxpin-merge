@@ -147,9 +147,11 @@ PieChart.propTypes = {
    * */
   chartHeight: PropTypes.number,
 
-
-  /** Turns, on/off animation and allows for selection of different types of animations. */
-  animation: PropTypes.oneOf([false, 'noWobble', 'gentle', 'wobbly', 'stiff']),
+  /**
+   * @uxpindescription A variety of chart animation options
+   * @uxpinpropname Animation
+   * */
+  animation: PropTypes.oneOf(animationOptions),
 
   /**
    * Color to be used on all chart lines, unless colorRange is provided
@@ -223,8 +225,9 @@ PieChart.propTypes = {
 /* eslint-enable sort-keys */
 
 PieChart.defaultProps = {
-  height: defaultHeight,
-  width: defaultWidth,
+  chartWidth: defaultHeight,
+  chartHeight: defaultWidth,
+  animation: 'gentle',
   hint: true,
   labelsRadiusMultiplier: '1.1',
   opacity: '1',
