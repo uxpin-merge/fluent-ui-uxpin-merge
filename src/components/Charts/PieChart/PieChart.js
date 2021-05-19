@@ -134,7 +134,11 @@ PieChart.propTypes = {
   color: PropTypes.string,
 
   /** Array with colors to be used across all chart lines. If array doesn't specify color for all the chart lines, color property is used. */
-  colorRange: PropTypes.arrayOf(PropTypes.string),
+  /**
+   * @uxpindescription The list of colors to use for the chart. Put each color on a separate line. Use a color token or hex. 
+   * @uxpincontroltype codeeditor
+   * */
+  colorRange: PropTypes.string,
 
   /** Data Array. Structure:  [{ "theta": 1, "label": "apples" }, {"theta": 4, "label": "oranges"}, {"theta": 6, "label": "cherries"}]  */
   data: PropTypes.array,
