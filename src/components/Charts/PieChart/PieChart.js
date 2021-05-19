@@ -47,7 +47,7 @@ export default class PieChart extends React.Component {
     };
 
     this.state = {
-      data: this.props.startData ? getStartData() : this.props.data,
+      data: [],
       hintValue: '',
       showHint: false,
       colorList: [],
@@ -88,7 +88,7 @@ export default class PieChart extends React.Component {
     }
 
     this.setState({
-      data: this.props.data,
+      data: sliceList,
       colorList: colorList,
       _width: this.props.chartWidth,
       _height: this.props.chartHeight,
@@ -101,6 +101,7 @@ export default class PieChart extends React.Component {
 
   componentDidUpdate(prevProps) {
     if ((prevProps.colorRange !== this.props.colorRange) ||
+      (prevProps.pieSlices !== this.props.pieSlices) ||
       (prevProps.chartWidth !== this.props.chartWidth) ||
       (prevProps.chartHeight !== this.props.chartHeight)) {
       this.set();
@@ -296,6 +297,3 @@ PieChart.defaultProps = {
   innerRadius: defaultInnerRadius,
   colorRange: defaultColorRange,
 };
-
-
-export { PieChart as default }
