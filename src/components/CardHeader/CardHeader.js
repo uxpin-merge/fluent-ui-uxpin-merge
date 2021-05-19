@@ -12,9 +12,8 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
 const defaultTextColor = "#000000";
-
-const defaultIconSize = 24;
-
+const defaultIconColor = '#299976';
+const defaultIconSize = 18;
 const defaultIconName = 'InfoSolid';
 
 //****** OTHER */
@@ -250,7 +249,7 @@ CardHeader.defaultProps = {
     italic: false,
     iconName: defaultIconName,
     iconSize: defaultIconSize,
-    iconColor: defaultTextColor,
+    iconColor: defaultIconColor,
     cardPadding: 12,
 }
 
