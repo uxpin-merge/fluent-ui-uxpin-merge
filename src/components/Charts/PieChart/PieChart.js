@@ -287,11 +287,6 @@ PieChart.propTypes = {
   /** Shows labels one the chart. Set up labels in the data object. Example: {"theta": 1, "label": "Apples"} */
   showLabels: PropTypes.bool,
 
-  /** Starting point for data set. Used for triggering animation. Same data structure as data property. Place "0" in theta to animate. */
-  /**
-   * @uxpinignoreprop
-   */
-  // startData: PropTypes.array,
 };
 /* eslint-enable sort-keys */
 
