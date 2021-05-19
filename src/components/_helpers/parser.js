@@ -75,9 +75,11 @@ export const getTokens = inputStr => {
     let mutatorsArray = getMutators(token.tokenString);
     var colorMutator = null;
 
-    var i;
-    for (i = 0; i < mutatorsArray.length; i++) {
-      console.log("mutator: " + mutatorsArray[i]);
+    if (mutatorsArray) {
+      var i;
+      for (i = 0; i < mutatorsArray.length; i++) {
+        console.log("mutator: " + mutatorsArray[i]);
+      }
     }
 
 
