@@ -12,7 +12,9 @@ import { UxpColors } from '../../_helpers/uxpcolorutils';
 
 
 
-const defaultColorRange = ['teal', 'red', 'blue'];
+const defaultColorRange = `teal
+red
+blue`;
 
 
 export default class PieChart extends React.Component {
@@ -69,6 +71,7 @@ export default class PieChart extends React.Component {
           UxpColors.getHexFromHexOrToken(text)
         )
       );
+    console.log("Color list: " + colorList);
 
 
     return (
