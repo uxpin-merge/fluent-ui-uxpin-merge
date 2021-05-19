@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { initializeIcons } from "@fluentui/react/lib/Icons";
 import { Modal as FModal } from '@fluentui/react/lib/Modal';
 import { Stack } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
@@ -17,8 +16,6 @@ const _dragOptions = {
 class Modal extends React.Component {
     constructor(props) {
         super(props);
-
-        initializeIcons();
 
         this.state = {
             open: false
@@ -132,7 +129,7 @@ class Modal extends React.Component {
                             <Stack.Item>
                                 <ActionButton
                                     iconName="ChromeClose"
-                                    text="Close"
+                                    tooltip="Close"
                                     onClick={() => this._onDismissClicked()}
                                 />
                             </Stack.Item>
