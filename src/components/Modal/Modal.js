@@ -131,7 +131,7 @@ class Modal extends React.Component {
 
                             <Stack.Item>
                                 <ActionButton
-                                    iconName="Close"
+                                    iconName="ChromeClose"
                                     text="Close"
                                     onClick={() => this._onDismissClicked()}
                                 />
