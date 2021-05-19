@@ -35,14 +35,29 @@ export default class PieChart extends React.Component {
       data: this.props.startData ? getStartData() : this.props.data,
       hintValue: '',
       showHint: false,
+      colorList: [],
     };
   }
 
   set() {
 
+    let colorList = [];
+
+    if (this.props.colorRange) {
+      colorList = csv2arr(this.props.colorRange)
+        .flat()
+        .map(
+          (text, index) => (
+            UxpColors.getHexFromHexOrToken(text)
+          )
+        );
+      console.log("Color list: " + colorList);
+    }
+
 
     this.setState({
       data: this.props.data,
+      colorList: colorList,
     });
   }
 
@@ -50,7 +65,11 @@ export default class PieChart extends React.Component {
     this.set();
   }
 
-
+  componentDidUpdate(prevProps) {
+    if (prevProps.colorRange !== this.props.colorRange) {
+      this.set();
+    }
+  }
 
 
   getHint(value) {
@@ -63,16 +82,6 @@ export default class PieChart extends React.Component {
   }
 
   render() {
-
-    let colorList = csv2arr(this.props.colorRange)
-      .flat()
-      .map(
-        (text, index) => (
-          UxpColors.getHexFromHexOrToken(text)
-        )
-      );
-    console.log("Color list: " + colorList);
-
 
     return (
       <RadialChart
@@ -87,7 +96,7 @@ export default class PieChart extends React.Component {
         data={this.state.data}
         width={this.props.width}
         height={this.props.height}
-        colorRange={colorList}
+        colorRange={this.state.colorList}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
         onNearestXY={this.props.onNearestXY}
