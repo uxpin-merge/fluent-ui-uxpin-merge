@@ -291,7 +291,7 @@ PieChart.propTypes = {
   /**
    * @uxpinignoreprop
    */
-  startData: PropTypes.array,
+  // startData: PropTypes.array,
 };
 /* eslint-enable sort-keys */
 
