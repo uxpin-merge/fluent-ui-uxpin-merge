@@ -161,8 +161,8 @@ export default class PieChart extends React.Component {
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
         data={this.state.data}
-        // width={this.state._width}
-        // height={this.state._height}
+        width={this.state._width}
+        height={this.state._height}
         colorRange={this.state.colorList}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
