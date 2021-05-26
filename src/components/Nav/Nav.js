@@ -8,11 +8,11 @@ import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultNavItems = `icon(Dashboard) Overview
-icon(FavoriteStarFill) Favorites
-icon(Upload) Upload
-icon(BIDashboard) Metrics
-icon(Admin) Admin`;
+const defaultNavItems = `icon(ViewDashboard) Overview
+icon(Build) Builds
+icon(PlugConnected) Pipelines
+icon(Processing) Production
+icon(StackedColumnChart2Fill) Metrics`;
 
 const defaultTopPadding = 24;
 
