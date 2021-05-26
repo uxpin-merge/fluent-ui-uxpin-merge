@@ -7,14 +7,8 @@ import { UxpNumberParser } from '../_helpers/uxpnumberutils';
 
 
 
-const innerStackItemStyles = {
-    root: {
-        alignItems: 'center',
-    },
-};
-
 const innerStackTokens = {
-    childrenGap: '12',
+    childrenGap: '6',
     padding: 0,
 };
 
@@ -65,12 +59,10 @@ class MetaDataPair extends React.Component {
             },
         };
 
-        //The left number is the vertical gap between rows. Right number is the column gap. 
-        //Let's make sure we have a positive number. 
+        //The padding (or gutter) betten the left and right columns.
         let pad = this.props.gutterPadding < 0 ? 0 : this.props.gutterPadding;
-        let gap = '12 ' + pad;
         const stackTokens = {
-            childrenGap: gap,
+            childrenGap: pad,
             padding: 0,
         };
 
@@ -114,9 +106,9 @@ class MetaDataPair extends React.Component {
                     let child = childList[i];
                     let stack = (
                         <StackItem
-                            styles={innerStackItemStyles}
-                            grow={this.props.stretch ? true : ''}
-                            align={this.props.stretch ? "stretch" : ''}   >
+                            grow={false}
+                            horizontalAlign={horizontalAlign}
+                            verticalAlign={verticalAlign}   >
                             {child}
                         </StackItem>
                     );
@@ -154,7 +146,7 @@ class MetaDataPair extends React.Component {
 
                             <Stack
                                 tokens={innerStackTokens}
-                                horizontal={false}
+                                horizontal={true}
                                 horizontalAlign={horizontalAlign}
                                 verticalAlign={innerVerticalAlign}
                                 wrap={false} >

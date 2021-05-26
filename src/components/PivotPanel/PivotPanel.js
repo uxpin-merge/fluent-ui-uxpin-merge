@@ -6,9 +6,6 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-//The smallest allowed box size
-const defaultBoxSize = '1';
-
 const verticalAlign = 'start';
 
 const leftAlign = 'left';
@@ -86,16 +83,11 @@ class PivotPanel extends React.Component {
         //For internal padding within the stack. 
         let internalPadding = this.props.internalPadding > -1 ? this.props.internalPadding : defaultPadding;
 
-        let mWidth = this.props.boxWidth > defaultBoxSize ? this.props.boxWidth : defaultBoxSize;
-        let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
-
         const topStackItemStyles = {
             root: {
                 background: color,        //undefined is OK
                 height: 'auto',
                 width: 'auto',
-                minWidth: mWidth + 'px',
-                minHeight: mHeight + 'px',
             },
         };
 
@@ -145,10 +137,10 @@ class PivotPanel extends React.Component {
                 {...this.props}
                 tokens={stackTokens}
                 padding={internalPadding + 'px'}
-                horizontal={false}
+                horizontal={this.props.horizontal}
                 horizontalAlign={hAlign}
                 verticalAlign={verticalAlign}
-                wrap={false}
+                wrap={true}
                 styles={topStackItemStyles}>
 
                 {_.isEmpty(this.props.children) && instructions}
@@ -175,16 +167,9 @@ PivotPanel.propTypes = {
     children: PropTypes.node,
 
     /**
-    * @uxpindescription A minimum width for the control. Most useful when inserting this into a Stack or Card.   
-    * @uxpinpropname Min Width
-    */
-    boxWidth: PropTypes.number,
-
-    /**
-    * @uxpindescription The minimum height of the control   
-    * @uxpinpropname Min Height
-    */
-    boxHeight: PropTypes.number,
+     * @uxpindescription Whether to use a Horizontal or Vertical layout. Check for Horizontal layout. Uncheck for Vertical layout.  
+     */
+    horizontal: PropTypes.bool,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
@@ -218,10 +203,9 @@ PivotPanel.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 PivotPanel.defaultProps = {
-    internalPadding: 12,
-    gutterPadding: 24,
-    boxWidth: 0,
-    boxHeight: 0,
+    internalPadding: 0,
+    gutterPadding: 12,
+    horizontal: true,
     align: stretchAlign,
     bgColor: '',
 }
