@@ -115,7 +115,7 @@ class MetaDataPair extends React.Component {
                         <StackItem
                             // styles={innerStackItemStyles}
                             grow={false}
-                            align={horizontalAlign}
+                            horizontalAlign={horizontalAlign}
                             verticalAlign={verticalAlign}   >
                             {child}
                         </StackItem>
