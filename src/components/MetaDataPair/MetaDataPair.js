@@ -14,7 +14,7 @@ const innerStackItemStyles = {
 };
 
 const innerStackTokens = {
-    childrenGap: '12',
+    childrenGap: '6',
     padding: 0,
 };
 
@@ -65,12 +65,10 @@ class MetaDataPair extends React.Component {
             },
         };
 
-        //The left number is the vertical gap between rows. Right number is the column gap. 
-        //Let's make sure we have a positive number. 
+        //The padding (or gutter) betten the left and right columns.
         let pad = this.props.gutterPadding < 0 ? 0 : this.props.gutterPadding;
-        let gap = '6 ' + pad;
         const stackTokens = {
-            childrenGap: gap,
+            childrenGap: pad,
             padding: 0,
         };
 
@@ -115,8 +113,9 @@ class MetaDataPair extends React.Component {
                     let stack = (
                         <StackItem
                             styles={innerStackItemStyles}
-                            grow={this.props.stretch ? true : ''}
-                            align={this.props.stretch ? "stretch" : ''}   >
+                            grow={false}
+                            align={horizontalAlign}
+                            verticalAlign={verticalAlign}   >
                             {child}
                         </StackItem>
                     );
