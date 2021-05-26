@@ -10,6 +10,7 @@ import { UxpNumberParser } from '../_helpers/uxpnumberutils';
 const innerStackItemStyles = {
     root: {
         alignItems: 'center',
+        alignItems: 'center',
     },
 };
 
@@ -112,7 +113,7 @@ class MetaDataPair extends React.Component {
                     let child = childList[i];
                     let stack = (
                         <StackItem
-                            styles={innerStackItemStyles}
+                            // styles={innerStackItemStyles}
                             grow={false}
                             align={horizontalAlign}
                             verticalAlign={verticalAlign}   >
@@ -155,7 +156,7 @@ class MetaDataPair extends React.Component {
                                 tokens={innerStackTokens}
                                 horizontal={true}
                                 horizontalAlign={horizontalAlign}
-                                verticalAlign={innerVerticalAlign}
+                                verticalAlign={verticalAlign}
                                 wrap={false} >
 
                                 {stackList}
