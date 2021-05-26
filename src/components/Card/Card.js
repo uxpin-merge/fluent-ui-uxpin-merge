@@ -20,8 +20,6 @@ const borderRadius = '4px';
 const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
-const defaultShimmerDuration = 1;
-
 const minHeight = '10px';
 
 
@@ -225,7 +223,7 @@ Card.propTypes = {
 Card.defaultProps = {
     margin: 6,
     cardPadding: 0,
-    gutterPadding: 24,
+    gutterPadding: 12,
     align: leftAlign,
     bgColor: '#ffffff',
     borderColor: '#F5F7FA',
