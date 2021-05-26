@@ -227,6 +227,13 @@ class HorizontalStack extends React.Component {
                     let child = childList[i];
                     let stackItemWidth = this._getColumnWidth(i);
 
+                    let childStretch = doStretch ? stretchAlign :
+                        stackItemWidth > 0 ? stretchAlign :
+                            hAlign;
+
+                    console.log("child stretch for " + i + " : " + childStretch);
+
+
                     //Now we put it all together!
                     let stack = (
                         <Stack
@@ -236,7 +243,7 @@ class HorizontalStack extends React.Component {
                                     width: stackItemWidth,
                                 }
                             }}
-                            horizontalAlign={doStretch ? stretchAlign : hAlign}
+                            horizontalAlign={childStretch}
                         >
                             {child}
                         </Stack>
