@@ -114,10 +114,13 @@ class Card extends React.Component {
                     if (childList[i]) {
                         let child = childList[i];
 
+                        let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
+
                         let stack = (
                             <StackItem
                                 align={'stretch'}
                                 key={i}
+                                grow={childGrow}
                             >
                                 {child}
                             </StackItem>
