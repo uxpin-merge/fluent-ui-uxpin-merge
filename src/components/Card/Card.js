@@ -50,6 +50,13 @@ class Card extends React.Component {
         }
     }
 
+    _onClick() {
+        //Raise this event to UXPin. 
+        if (this.props.onCardClick) {
+            this.props.onCardClick();
+        }
+    }
+
     render() {
 
         let hAlign = this._getHorizontalAlignmentToken();
@@ -129,8 +136,7 @@ class Card extends React.Component {
                     }
                 }
             }
-        } //If props.children
-
+        }
 
         return (
             <div
@@ -145,6 +151,7 @@ class Card extends React.Component {
                     verticalAlign={verticalAlign}
                     wrap={false}
                     styles={topStackItemStyles}
+                    onClick={() => this._onClick()}
                 >
 
                     {stackList}
@@ -231,6 +238,11 @@ Card.propTypes = {
      */
     showShadow: PropTypes.bool,
 
+    /**
+     * @uxpindescription Fires when the Card is clicked on.
+     * @uxpinpropname Click
+     * */
+    onCardClick: PropTypes.func,
 }
 
 
