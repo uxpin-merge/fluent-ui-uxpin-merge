@@ -227,8 +227,6 @@ class HorizontalStack extends React.Component {
                     let child = childList[i];
                     let stackItemWidth = this._getColumnWidth(i);
 
-                    console.log("Column " + i + " width: " + stackItemWidth);
-
                     //Now we put it all together!
                     let stack = (
                         <Stack
