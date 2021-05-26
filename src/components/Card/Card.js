@@ -63,6 +63,8 @@ class Card extends React.Component {
             root: {
                 display: 'flex',
                 overflow: 'hidden',
+                minHeight: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
+                minWidth: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
             },
         };
 
@@ -167,6 +169,18 @@ Card.propTypes = {
     children: PropTypes.node,
 
     /**
+    * @uxpindescription A minimum width for the whole card   
+    * @uxpinpropname Min Width
+    */
+    boxWidth: PropTypes.number,
+
+    /**
+    * @uxpindescription A minimum height for the whole card
+    * @uxpinpropname Min Height
+    */
+    boxHeight: PropTypes.number,
+
+    /**
      * Don't show this prop in the UXPin Editor. 
      * @uxpinignoreprop 
      * @uxpindescription The margin around the card. Value must be 0 or more.  
@@ -222,6 +236,8 @@ Card.propTypes = {
  */
 Card.defaultProps = {
     margin: 6,
+    boxWidth: 0,
+    boxHeight: 0,
     cardPadding: 0,
     gutterPadding: 12,
     align: leftAlign,

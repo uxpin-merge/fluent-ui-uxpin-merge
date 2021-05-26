@@ -6,9 +6,6 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-//The smallest allowed box size
-const defaultBoxSize = '1';
-
 const verticalAlign = 'start';
 
 const leftAlign = 'left';
@@ -86,16 +83,11 @@ class PivotPanel extends React.Component {
         //For internal padding within the stack. 
         let internalPadding = this.props.internalPadding > -1 ? this.props.internalPadding : defaultPadding;
 
-        let mWidth = this.props.boxWidth > defaultBoxSize ? this.props.boxWidth : defaultBoxSize;
-        let mHeight = this.props.boxHeight > defaultBoxSize ? this.props.boxHeight : defaultBoxSize;
-
         const topStackItemStyles = {
             root: {
                 background: color,        //undefined is OK
                 height: 'auto',
                 width: 'auto',
-                minWidth: mWidth + 'px',
-                minHeight: mHeight + 'px',
             },
         };
 
@@ -115,15 +107,6 @@ class PivotPanel extends React.Component {
         var stackList = [];
         if (this.props.children) {
 
-            const childStackItemStyles = {
-                root: {
-                    height: 'auto',
-                    width: 'auto',
-                    minWidth: mWidth + 'px',
-                    minHeight: mHeight + 'px',
-                },
-            };
-
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
@@ -138,7 +121,6 @@ class PivotPanel extends React.Component {
                             key={i}
                             align={doStretch ? stretchAlign : hAlign}
                             grow={false}
-                            styles={childStackItemStyles}
                         >
                             {child}
                         </StackItem>
@@ -190,18 +172,6 @@ PivotPanel.propTypes = {
     horizontal: PropTypes.bool,
 
     /**
-    * @uxpindescription A minimum width for each child object in the panel. Most useful in grid layouts.   
-    * @uxpinpropname Item Min Width
-    */
-    boxWidth: PropTypes.number,
-
-    /**
-    * @uxpindescription A minimum width for each child object in the panel. Most useful in grid layouts. 
-    * @uxpinpropname Item Min Height
-    */
-    boxHeight: PropTypes.number,
-
-    /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding within the stack. Value must be 0 or more. 
      * @uxpinpropname Padding
@@ -235,8 +205,6 @@ PivotPanel.propTypes = {
 PivotPanel.defaultProps = {
     internalPadding: 0,
     gutterPadding: 12,
-    boxWidth: 0,
-    boxHeight: 0,
     horizontal: true,
     align: stretchAlign,
     bgColor: '',
