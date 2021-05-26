@@ -231,9 +231,6 @@ class HorizontalStack extends React.Component {
                         stackItemWidth > 0 ? stretchAlign :
                             hAlign;
 
-                    console.log("child stretch for " + i + " : " + childStretch);
-
-
                     //Now we put it all together!
                     let stack = (
                         <Stack
