@@ -63,8 +63,8 @@ class Card extends React.Component {
             root: {
                 display: 'flex',
                 overflow: 'hidden',
-                minHeight: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
-                minWidth: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
+                minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
+                minHeight: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
             },
         };
 
