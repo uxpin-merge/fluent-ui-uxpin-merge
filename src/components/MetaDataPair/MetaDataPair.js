@@ -68,7 +68,7 @@ class MetaDataPair extends React.Component {
         //The left number is the vertical gap between rows. Right number is the column gap. 
         //Let's make sure we have a positive number. 
         let pad = this.props.gutterPadding < 0 ? 0 : this.props.gutterPadding;
-        let gap = '12 ' + pad;
+        let gap = '6 ' + pad;
         const stackTokens = {
             childrenGap: gap,
             padding: 0,
@@ -154,7 +154,7 @@ class MetaDataPair extends React.Component {
 
                             <Stack
                                 tokens={innerStackTokens}
-                                horizontal={false}
+                                horizontal={true}
                                 horizontalAlign={horizontalAlign}
                                 verticalAlign={innerVerticalAlign}
                                 wrap={false} >
