@@ -8,7 +8,7 @@ import {
 
 
 //This is the default URL to use for a generic female user
-let personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png"
+let personaFemaleUrl = "https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
 
 const fitCenter = 'center';
 const fitCenterCover = 'center cover';
