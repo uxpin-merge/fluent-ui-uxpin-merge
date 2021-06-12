@@ -119,6 +119,14 @@ class Card extends React.Component {
             if (childList.length) {
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
+                        //Add a spanner if we're 2nd from last
+                        let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
+
+                        if (childGrow) {
+                            stackList.push(spanner);
+                        }
+
+                        //Add the child object
                         let child = childList[i];
 
                         let stack = (
@@ -130,12 +138,6 @@ class Card extends React.Component {
                             </StackItem>
                         );
                         stackList.push(stack);
-
-                        let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
-
-                        if (childGrow) {
-                            stackList.push(spanner);
-                        }
                     }
                 }
             }
