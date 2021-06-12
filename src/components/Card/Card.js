@@ -123,6 +123,8 @@ class Card extends React.Component {
                         let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
 
                         if (childGrow) {
+                            console.log("Adding the spanner at index: " + i);
+
                             stackList.push(spanner);
                         }
 
