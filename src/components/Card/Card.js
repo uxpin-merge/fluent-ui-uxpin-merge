@@ -20,8 +20,6 @@ const borderRadius = '4px';
 const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
-const minHeight = '10px';
-
 
 
 class Card extends React.Component {
@@ -70,8 +68,6 @@ class Card extends React.Component {
             root: {
                 display: 'flex',
                 overflow: 'hidden',
-                minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
-                minHeight: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
             },
         };
 
@@ -93,7 +89,8 @@ class Card extends React.Component {
             boxShadow: this.props.showShadow ? cardShadow : '',
             padding: cardPad + 'px',
             margin: this.props.margin,
-            minHeight: minHeight,
+            minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
+            minHeight: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
         };
 
         //With one number, the padding applies to both rows and columns.  
