@@ -20,9 +20,6 @@ const borderRadius = '4px';
 const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
-//A StackItem that will spring to fill available space. 
-const spanner = (<StackItem grow={1}><span /></StackItem>);
-
 
 
 class Card extends React.Component {
@@ -93,7 +90,6 @@ class Card extends React.Component {
             padding: cardPad + 'px',
             margin: this.props.margin,
             minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
-            minHeight: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
         };
 
         //With one number, the padding applies to both rows and columns.  
@@ -117,19 +113,9 @@ class Card extends React.Component {
 
             //Now, we configure the StackItems
             if (childList.length) {
-
-                let spannerIndex = childList.length > 1 ? childList.length - 1 : -1;
-
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
-                        //Add a spanner if we're 2nd from last
-                        if (i === spannerIndex) {
-                            console.log("Adding the spanner at index: " + i);
 
-                            stackList.push(spanner);
-                        }
-
-                        //Add the child object
                         let child = childList[i];
 
                         let stack = (
@@ -157,7 +143,6 @@ class Card extends React.Component {
                     horizontal={false}
                     horizontalAlign={hAlign}
                     verticalAlign={verticalAlign}
-                    verticalFill={true}
                     wrap={false}
                     styles={topStackItemStyles}
                     onClick={() => this._onClick()}
@@ -192,12 +177,6 @@ Card.propTypes = {
     * @uxpinpropname Min Width
     */
     boxWidth: PropTypes.number,
-
-    /**
-    * @uxpindescription A minimum height for the whole card
-    * @uxpinpropname Min Height
-    */
-    boxHeight: PropTypes.number,
 
     /**
      * Don't show this prop in the UXPin Editor. 
@@ -261,7 +240,6 @@ Card.propTypes = {
 Card.defaultProps = {
     margin: 6,
     boxWidth: 0,
-    boxHeight: 0,
     cardPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
