@@ -75,22 +75,18 @@ class Pivot extends React.Component {
   _onLinkClick(selectedItem) {
 
     //The index comes in 1-based. 1 is also our value floor.
-    var selectedIndex = 1;
+    let newIndex = selectedItem.props.itemKey > 0 ? selectedItem.props.itemKey : 1;
 
-    //We use a 1-based index for the key value. 
-    if (selectedItem.props.itemKey > 1)
-      selectedIndex = selectedItem.props.itemKey;
+    console.log("new index: " + newIndex);
 
-    let valueChanged = (selectedIndex !== this.state.selectedIndex);
-
-    if (valueChanged) {
+    if (newIndex !== this.state.selectedIndex) {
       this.setState(
-        { selectedIndex: selectedIndex }
+        { selectedIndex: newIndex }
       )
 
       //If the index changed, let's push the new index value
       if (this.props.onIndexChanged) {
-        this.props.onIndexChanged(selectedIndex);
+        this.props.onIndexChanged(newIndex);
       }
     }
   }
