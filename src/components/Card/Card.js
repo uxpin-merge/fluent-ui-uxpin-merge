@@ -21,7 +21,7 @@ const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
 //A StackItem that will spring to fill available space. 
-const spanner = (<StackItem grow={1}><span /></StackItem>);
+const spanner = (<StackItem grow={3}><span /></StackItem>);
 
 
 
@@ -117,12 +117,13 @@ class Card extends React.Component {
 
             //Now, we configure the StackItems
             if (childList.length) {
+
+                let spannerIndex = childList.length > 1 ? childList.length - 1 : -1;
+
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
                         //Add a spanner if we're 2nd from last
-                        let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
-
-                        if (childGrow) {
+                        if (i === spannerIndex) {
                             console.log("Adding the spanner at index: " + i);
 
                             stackList.push(spanner);
