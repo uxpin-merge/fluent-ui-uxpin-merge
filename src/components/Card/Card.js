@@ -20,6 +20,9 @@ const borderRadius = '4px';
 const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
+//A StackItem that will spring to fill available space. 
+const spanner = (<StackItem grow={1}><span /></StackItem>);
+
 
 
 class Card extends React.Component {
@@ -118,18 +121,21 @@ class Card extends React.Component {
                     if (childList[i]) {
                         let child = childList[i];
 
-                        let childGrow = i > 0 && i < (childList.length - 1) ? "10" : false;
-
                         let stack = (
                             <StackItem
                                 align={'stretch'}
                                 key={i}
-                                grow={childGrow}
                             >
                                 {child}
                             </StackItem>
                         );
                         stackList.push(stack);
+
+                        let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
+
+                        if (childGrow) {
+                            stackList.push(spanner);
+                        }
                     }
                 }
             }
