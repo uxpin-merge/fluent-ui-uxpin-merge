@@ -77,8 +77,6 @@ class Pivot extends React.Component {
     //The index comes in 1-based. 1 is also our value floor.
     let newIndex = selectedItem.props.itemKey > 0 ? selectedItem.props.itemKey : 1;
 
-    console.log("new index: " + newIndex);
-
     if (newIndex !== this.state.selectedIndex) {
       this.setState(
         { selectedIndex: newIndex }
