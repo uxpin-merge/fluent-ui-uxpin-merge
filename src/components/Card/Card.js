@@ -157,6 +157,7 @@ class Card extends React.Component {
                     horizontal={false}
                     horizontalAlign={hAlign}
                     verticalAlign={verticalAlign}
+                    verticalFill={true}
                     wrap={false}
                     styles={topStackItemStyles}
                     onClick={() => this._onClick()}
