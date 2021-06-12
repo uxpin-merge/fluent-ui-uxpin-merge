@@ -81,7 +81,7 @@ class Pivot extends React.Component {
     if (selectedItem.props.itemKey > 1)
       selectedIndex = selectedItem.props.itemKey;
 
-    let valueChanged = (selectedIndex === this.state.selectedIndex);
+    let valueChanged = (selectedIndex !== this.state.selectedIndex);
 
     if (valueChanged) {
       this.setState(
