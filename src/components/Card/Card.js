@@ -21,7 +21,7 @@ const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
 //A StackItem that will spring to fill available space. 
-const spanner = (<StackItem grow={3}><span /></StackItem>);
+const spanner = (<StackItem grow={true}><span /></StackItem>);
 
 
 
