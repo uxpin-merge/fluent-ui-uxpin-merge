@@ -393,6 +393,7 @@ class PageFooter extends React.Component {
         //Set up the StackItems
         //The right side is a vertical stack, as well. 
         var linkList = [];
+        var linkElem = '';
         if (this.state.links && this.state.links.length) {
 
             for (var i = 0; i < this.state.links.length; i++) {
@@ -409,15 +410,39 @@ class PageFooter extends React.Component {
                 }
             } //for loop
 
+            if (linkList.length > 0) {
+                linkElem = (
+                    <StackItem>
+                        <div>{linkList}</div>
+                    </StackItem>
+                );
+            }
+
         } //If state.links
 
 
         //setup copyright and confidentiality
         let copyrightInfo = this._parseTextAndLink(this.props.copyright);
-        let copyrightElem = this._configTextOrLink(copyrightInfo, corpInfoTextSize, false);
+        var copyrightElem = '';
+        if (copyrightInfo) {
+            let contents = this._configTextOrLink(copyrightInfo, corpInfoTextSize, false);
+            copyrightElem = (
+                <StackItem>
+                    {contents}
+                </StackItem>
+            );
+        }
 
         let confidentialityInfo = this._parseTextAndLink(this.props.confidentiality);
-        let confidentialityElem = this._configTextOrLink(confidentialityInfo, corpInfoTextSize, false);
+        var confidentialityElem = '';
+        if (confidentialityInfo) {
+            let contents = this._configTextOrLink(confidentialityInfo, corpInfoTextSize, false);
+            confidentialityElem = (
+                <StackItem>
+                    {contents}
+                </StackItem>
+            );
+        }
 
 
         return (
@@ -463,17 +488,12 @@ class PageFooter extends React.Component {
                         wrap={false}
                         styles={corpInfoStackStyles}>
 
-                        <StackItem>
-                            <div>{linkList}</div>
-                        </StackItem>
+                        {linkElem}
 
-                        <StackItem>
-                            {copyrightElem}
-                        </StackItem>
+                        {copyrightElem}
 
-                        <StackItem>
-                            {confidentialityElem}
-                        </StackItem>
+                        {confidentialityElem}
+
                     </Stack>
                 </StackItem>
 
