@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
 import { getTokens, csv2arr } from '../_helpers/parser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -76,14 +77,7 @@ class ChoiceGroup extends React.Component {
 
   //Parse the choice items
   setItems() {
-    let items = csv2arr(this.props.items)
-      .flat()
-      .map((val, index) => ({
-        text: getTokens(val).text,
-        key: index,
-        disabled: this.props.disabled,
-        iconProps: this.getIconProps(val)
-      }));
+    let items = UXPinParser.parse(this.props.items);
 
     this.setState({
       items: items
