@@ -15,7 +15,7 @@ const roleError = 'error';
 
 const alignCenter = 'center';
 const borderSyle = '1px solid ';
-const borderRadius = '5';
+const borderRadius = '25';
 
 //MS Fluent Color Tokens
 const defaultBg = "neutralLighter";
