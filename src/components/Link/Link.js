@@ -30,7 +30,7 @@ class Link extends React.Component {
         const linkTarget = "_UXPin Mockup";
 
         let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
-        let vColor
+        let vColor = UxpColors.getHexFromHexOrToken(this.props.visitedColor);
         let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
         let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
 
@@ -49,7 +49,7 @@ class Link extends React.Component {
                         color: hColor ? hColor : '',
                     },
                     '&:visited': {
-                        color: hColor ? hColor : '',
+                        color: vColor ? vColor : '',
                     },
                     ':disabled': {
                         color: dColor ? dColor : '',
