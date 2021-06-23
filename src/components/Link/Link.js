@@ -35,13 +35,13 @@ class Link extends React.Component {
 
         let linkStyles = {
             root: {
-                color: aColor ? aColor : '',
+                color: aColor ? aColor : undefined,
                 selectors: {
                     ':hover': {
-                        color: hColor ? hColor : '',
+                        color: hColor ? hColor : undefined,
                     },
                     ':disabled': {
-                        color: dColor ? dColor : '',
+                        color: dColor ? dColor : undefined,
                     },
                 },
             },
