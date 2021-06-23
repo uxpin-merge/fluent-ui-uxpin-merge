@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
+import { link } from 'node:fs';
 
 
 
@@ -29,14 +30,14 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
-        let linkClass = {
-            theme: {
-                semanticColors:
-                {
-                    link: "#881798",
-                    linkHovered: "#0b6a0b",
-                    disabledText: "#750b1c",
-                }
+        let linkStyles = {
+            root: {
+                color: "#881798",
+                selectors: {
+                    ':hover': {
+                        color: "#0b6a0b",
+                    },
+                },
             }
         };
 
@@ -62,7 +63,7 @@ class Link extends React.Component {
                     {...this.props}
                     disabled={this.props.disabled}
                     href={this.props.linkHref}
-                    theme={linkClass}
+                    styles={linkStyles}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
                 >
