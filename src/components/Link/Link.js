@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
-import { link } from 'node:fs';
 
 
 
@@ -38,7 +37,7 @@ class Link extends React.Component {
                         color: "#0b6a0b",
                     },
                 },
-            }
+            },
         };
 
         //We assemble the Link Text style next
