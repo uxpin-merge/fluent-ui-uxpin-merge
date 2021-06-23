@@ -10,6 +10,8 @@ const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
 
+cosnt defaultColor = "themePrimary";
+
 
 
 class ProgressIndicator extends React.Component {
@@ -41,7 +43,7 @@ class ProgressIndicator extends React.Component {
     var bgColor = this.props.roleType === roleSuccess ? UxpColors.success
       : this.props.roleType === roleWarning ? UxpColors.warning
         : this.props.roleType === roleError ? UxpColors.error
-          : UxpColors.getHexFromColorToken(themePrimary);
+          : UxpColors.getHexFromColorToken(defaultColor);
 
     return {
       selectors: {
