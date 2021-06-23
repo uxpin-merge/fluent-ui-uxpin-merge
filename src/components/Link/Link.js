@@ -36,27 +36,29 @@ class Link extends React.Component {
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Required - prevents a bug
                 lineHeight: 'normal',     //Required - prevents a bug,
-                textAlign: this.props.align
+                textAlign: this.props.align,
             }
         }
 
 
         return (
-
-            <FLink
+            <Text
                 {...this.props}
-                disabled={this.props.disabled}
-                href={this.props.linkHref}
-                target={linkTarget} //Force open in a new window
-                onClick={() => { this._onLinkClick() }}
-            >
-                <Text
+                styles={linkTextStyles}
+                variant={this.props.size}>
+
+                <FLink
                     {...this.props}
-                    styles={linkTextStyles}
-                    variant={this.props.size}>
+                    disabled={this.props.disabled}
+                    href={this.props.linkHref}
+                    target={linkTarget} //Force open in a new window
+                    onClick={() => { this._onLinkClick() }}
+                >
+
                     {this.props.value}
-                </Text>
-            </FLink>
+
+                </FLink>
+            </Text >
 
         );
     }
