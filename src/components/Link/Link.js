@@ -30,6 +30,7 @@ class Link extends React.Component {
         const linkTarget = "_UXPin Mockup";
 
         let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
+        let vColor
         let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
         let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
 
@@ -40,6 +41,9 @@ class Link extends React.Component {
                 selectors: {
                     ':hover': {
                         color: hColor ? hColor : '',
+                    },
+                    ':visited': {
+
                     },
                     ':disabled': {
                         color: dColor ? dColor : '',
@@ -149,6 +153,12 @@ Link.propTypes = {
      * @uxpinpropname Hover Color
     */
     hoverColor: PropTypes.string,
+
+    /**
+     * @uxpindescription Specify a visited color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
+     * @uxpinpropname Visited Color
+    */
+    visitedColor: PropTypes.string,
 
     /**
      * @uxpindescription Specify a disabled link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
