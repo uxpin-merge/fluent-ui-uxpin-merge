@@ -37,6 +37,9 @@ class Link extends React.Component {
             root: {
                 color: aColor ? aColor : undefined,
                 selectors: {
+                    ':active': {
+                        color: aColor ? aColor : undefined,
+                    },
                     ':hover': {
                         color: hColor ? hColor : undefined,
                     },
