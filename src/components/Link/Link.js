@@ -30,9 +30,14 @@ class Link extends React.Component {
         const linkTarget = "_UXPin Mockup";
 
         let linkClass = {
-            linkColor: "#881798",
-            linkInteractedColor: "#0b6a0b",
-            linkDisabledColor: "#750b1c",
+            theme: {
+                semanticColors:
+                {
+                    link: "#881798",
+                    linkHovered: "#0b6a0b",
+                    disabledText: "#750b1c",
+                }
+            }
         };
 
         //We assemble the Link Text style next
@@ -57,7 +62,7 @@ class Link extends React.Component {
                     {...this.props}
                     disabled={this.props.disabled}
                     href={this.props.linkHref}
-                    className={linkClass}
+                    thme={linkClass}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
                 >
