@@ -278,11 +278,13 @@ class PageFooter extends React.Component {
             }
 
             line1 = (
-                <Text
-                    styles={l1Styles}
-                    variant={defaultLine1TextSize}>
-                    {this.props.line1Value}
-                </Text>
+                <StackItem>
+                    <Text
+                        styles={l1Styles}
+                        variant={defaultLine1TextSize}>
+                        {this.props.line1Value}
+                    </Text>
+                </StackItem>
             );
 
             showDivider = true;
@@ -293,7 +295,14 @@ class PageFooter extends React.Component {
         var line2 = '';
         var l2Info = this._parseTextAndLink(this.props.line2Value);
         if (l2Info) {
-            line2 = this._configTextOrLink(l2Info, defaultTextSize, false);
+            let contents = this._configTextOrLink(l2Info, defaultTextSize, false);
+
+            line2 = (
+                <StackItem>
+                    {contents}
+                </StackItem>
+            );
+
             showDivider = true;
         }
 
@@ -303,7 +312,13 @@ class PageFooter extends React.Component {
         var line3 = '';
         var l3Info = this._parseTextAndLink(this.props.line3Value);
         if (l3Info) {
-            line3 = this._configTextOrLink(l3Info, defaultTextSize, false);
+            let contents = this._configTextOrLink(l3Info, defaultTextSize, false);
+
+            line3 = (
+                <StackItem>
+                    {contents}
+                </StackItem>
+            );
             showDivider = true;
         }
 
@@ -378,6 +393,7 @@ class PageFooter extends React.Component {
         //Set up the StackItems
         //The right side is a vertical stack, as well. 
         var linkList = [];
+        var linkElem = '';
         if (this.state.links && this.state.links.length) {
 
             for (var i = 0; i < this.state.links.length; i++) {
@@ -394,15 +410,39 @@ class PageFooter extends React.Component {
                 }
             } //for loop
 
+            if (linkList.length > 0) {
+                linkElem = (
+                    <StackItem>
+                        <div>{linkList}</div>
+                    </StackItem>
+                );
+            }
+
         } //If state.links
 
 
         //setup copyright and confidentiality
         let copyrightInfo = this._parseTextAndLink(this.props.copyright);
-        let copyrightElem = this._configTextOrLink(copyrightInfo, corpInfoTextSize, false);
+        var copyrightElem = '';
+        if (copyrightInfo) {
+            let contents = this._configTextOrLink(copyrightInfo, corpInfoTextSize, false);
+            copyrightElem = (
+                <StackItem>
+                    {contents}
+                </StackItem>
+            );
+        }
 
         let confidentialityInfo = this._parseTextAndLink(this.props.confidentiality);
-        let confidentialityElem = this._configTextOrLink(confidentialityInfo, corpInfoTextSize, false);
+        var confidentialityElem = '';
+        if (confidentialityInfo) {
+            let contents = this._configTextOrLink(confidentialityInfo, corpInfoTextSize, false);
+            confidentialityElem = (
+                <StackItem>
+                    {contents}
+                </StackItem>
+            );
+        }
 
 
         return (
@@ -425,15 +465,11 @@ class PageFooter extends React.Component {
                         verticalAlign={'center'}
                         wrap={false}
                         styles={textStackStyles}>
-                        <StackItem>
-                            {line1}
-                        </StackItem>
-                        <StackItem>
-                            {line2}
-                        </StackItem>
-                        <StackItem>
-                            {line3}
-                        </StackItem>
+
+                        {line1}
+                        {line2}
+                        {line3}
+
                     </Stack>
                 </StackItem>
 
@@ -452,17 +488,12 @@ class PageFooter extends React.Component {
                         wrap={false}
                         styles={corpInfoStackStyles}>
 
-                        <StackItem>
-                            <div>{linkList}</div>
-                        </StackItem>
+                        {linkElem}
 
-                        <StackItem>
-                            {copyrightElem}
-                        </StackItem>
+                        {copyrightElem}
 
-                        <StackItem>
-                            {confidentialityElem}
-                        </StackItem>
+                        {confidentialityElem}
+
                     </Stack>
                 </StackItem>
 

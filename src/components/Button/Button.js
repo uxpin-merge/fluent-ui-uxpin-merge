@@ -17,8 +17,12 @@ class Button extends React.Component {
 
     let iconProps = { iconName: this.props.iconName }
 
-    if (this.props.iconPosition === "end") styles.flexContainer = {
-      flexDirection: 'row-reverse'
+    let styles = {};
+
+    if (this.props.iconPosition === "end") {
+      styles.flexContainer = {
+        flexDirection: 'row-reverse'
+      }
     }
 
     const tooltipId = _.uniqueId('tooltip_');
@@ -39,6 +43,7 @@ class Button extends React.Component {
               {...this.props}
               id={buttonID}
               iconProps={iconProps}
+              styles={styles}
               aria-describedby={tooltipId}
             />
             :

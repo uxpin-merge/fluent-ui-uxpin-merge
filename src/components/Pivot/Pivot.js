@@ -75,18 +75,17 @@ class Pivot extends React.Component {
   _onLinkClick(selectedItem) {
 
     //The index comes in 1-based. 1 is also our value floor.
-    var selectedIndex = 1;
+    let newIndex = selectedItem.props.itemKey > 0 ? selectedItem.props.itemKey : 1;
 
-    if (selectedItem.props.itemKey > 1)
-      selectedIndex = selectedItem.props.itemKey;
+    if (newIndex !== this.state.selectedIndex) {
+      this.setState(
+        { selectedIndex: newIndex }
+      )
 
-    this.setState(
-      { selectedIndex: selectedIndex }
-    )
-
-    //If the prop for an individual tab's click event exists, let's push it.
-    if (this.props[`onLink${selectedIndex}Click`]) {
-      this.props[`onLink${selectedIndex}Click`](selectedIndex);
+      //If the index changed, let's push the new index value
+      if (this.props.onIndexChanged) {
+        this.props.onIndexChanged(newIndex);
+      }
     }
   }
 
@@ -195,8 +194,8 @@ Pivot.propTypes = {
   children: PropTypes.node,
 
   /**
-  * @uxpindescription The 1-based index value of the tab to be shown as selected by default
-  * @uxpinpropname Selected Index
+  * @uxpindescription The 1-based index value of the tab to be shown as selected by default. This prop's live value is available for scripting.
+  * @uxpinpropname * Selected Index
   */
   selectedIndex: PropTypes.number,
 
@@ -215,58 +214,11 @@ Pivot.propTypes = {
   gutterPadding: PropTypes.number,
 
   /**
-  * @uxpindescription Fires when Tab 1 is clicked
-  * @uxpinpropname Tab 1 Click
-  */
-  onLink1Click: PropTypes.func,
+   * @uxpindescription Fires when the selected index changes.
+   * @uxpinpropname * Index Changed
+   * */
+  onIndexChanged: PropTypes.func,
 
-  /**
-  * @uxpindescription Fires when Tab 2 is clicked
-  * @uxpinpropname Tab 2 Click
-  */
-  onLink2Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 3 is clicked
-  * @uxpinpropname Tab 3 Click
-  */
-  onLink3Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 4 is clicked
-  * @uxpinpropname Tab 4 Click
-  */
-  onLink4Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 5 is clicked
-  * @uxpinpropname Tab 5 Click
-  */
-  onLink5Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 6 is clicked
-  * @uxpinpropname Tab 6 Click
-  */
-  onLink6Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 7 is clicked
-  * @uxpinpropname Tab 7 Click
-  */
-  onLink7Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 8 is clicked
-  * @uxpinpropname Tab 8 Click
-  */
-  onLink8Click: PropTypes.func,
-
-  /**
-  * @uxpindescription Fires when Tab 9 is clicked
-  * @uxpinpropname Tab 9 Click
-  */
-  onLink9Click: PropTypes.func
 };
 
 
