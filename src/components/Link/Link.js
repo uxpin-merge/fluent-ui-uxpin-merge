@@ -41,12 +41,15 @@ class Link extends React.Component {
                 selectors: {
                     ':active': {
                         color: hColor ? hColor : '',
+                        ':hover': {
+                            color: hColor ? hColor : '',
+                        },
                     },
                     ':hover': {
                         color: hColor ? hColor : '',
                     },
-                    ':visited': {
-
+                    '&:visited': {
+                        color: hColor ? hColor : '',
                     },
                     ':disabled': {
                         color: dColor ? dColor : '',
