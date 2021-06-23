@@ -39,6 +39,9 @@ class Link extends React.Component {
             root: {
                 color: aColor ? aColor : '',
                 selectors: {
+                    ':active': {
+                        color: hColor ? hColor : '',
+                    },
                     ':hover': {
                         color: hColor ? hColor : '',
                     },
