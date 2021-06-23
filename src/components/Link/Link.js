@@ -29,6 +29,12 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
+        let linkClass = {
+            linkColor: "#881798",
+            linkInteractedColor: "#0b6a0b",
+            linkDisabledColor: "#750b1c",
+        };
+
         //We assemble the Link Text style next
         let linkTextStyles = {
             root: {
@@ -38,7 +44,7 @@ class Link extends React.Component {
                 lineHeight: 'normal',     //Required - prevents a bug,
                 textAlign: this.props.align,
             }
-        }
+        };
 
 
         return (
@@ -51,6 +57,7 @@ class Link extends React.Component {
                     {...this.props}
                     disabled={this.props.disabled}
                     href={this.props.linkHref}
+                    className={linkClass}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
                 >
