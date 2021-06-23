@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ProgressIndicator as FProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
+import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
@@ -9,10 +10,6 @@ const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
 
-const defaultBlue = '#0070BA';
-const successGreen = '#299976';
-const warningYellow = '#FF9600';
-const errorRed = '#D20000';
 
 
 class ProgressIndicator extends React.Component {
@@ -41,10 +38,10 @@ class ProgressIndicator extends React.Component {
 
   getProgressIndicatorClasses() {
 
-    var bgColor = this.props.roleType === roleSuccess ? successGreen
-      : this.props.roleType === roleWarning ? warningYellow
-        : this.props.roleType === roleError ? errorRed
-          : defaultBlue;
+    var bgColor = this.props.roleType === roleSuccess ? UxpColors.success
+      : this.props.roleType === roleWarning ? UxpColors.warning
+        : this.props.roleType === roleError ? UxpColors.error
+          : UxpColors.getHexFromColorToken(themePrimary);
 
     return {
       selectors: {

@@ -15,7 +15,13 @@ const roleError = 'error';
 
 const alignCenter = 'center';
 const borderSyle = '1px solid ';
-const borderRadius = '10';
+const borderRadius = '5';
+
+//MS Fluent Color Tokens
+const defaultBg = "neutralLighter";
+const defaultText = "black";
+const defaultBorder = "neutralQuaternaryAlt";
+const defaultHover = "neutralLight";
 
 //Padding: left and right
 const padLR = '8px ';
@@ -62,25 +68,29 @@ class Chip extends React.Component {
       : role === roleSuccess ? UxpColors.success
         : role === roleWarning ? UxpColors.warning
           : role === roleError ? UxpColors.error
-            : UxpColors.getHexFromColorToken(neutralQuaternaryAlt);
+            : UxpColors.getHexFromColorToken(defaultBorder);
 
     let bg = role === roleInfo ? UxpColors.infoBackground
       : role === roleSuccess ? UxpColors.successBackground
         : role === roleWarning ? UxpColors.warningBackground
           : role === roleError ? UxpColors.errorBackground
-            : UxpColors.getHexFromColorToken(neutralLighter);
+            : UxpColors.getHexFromColorToken(defaultBg);
 
     let textColor = role === roleInfo ? UxpColors.infoText
       : role === roleSuccess ? UxpColors.successText
         : role === roleWarning ? UxpColors.warningText
           : role === roleError ? UxpColors.errorText
-            : UxpColors.getHexFromColorToken(black);
+            : UxpColors.getHexFromColorToken(defaultText);
 
     let hover = role === roleInfo ? UxpColors.infoBackgroundHover
       : role === roleSuccess ? UxpColors.successBackgroundHover
         : role === roleWarning ? UxpColors.warningBackgroundHover
           : role === roleError ? UxpColors.errorBackgroundHover
-            : UxpColors.getHexFromColorToken(neutralLight);
+            : UxpColors.getHexFromColorToken(defaultHover);
+
+
+    console.log("For role (" + role + "): text " + textColor + ", bg " + bg + ", border: " + border + ", hover: " + hover);
+
 
     return {
       text: textColor,
