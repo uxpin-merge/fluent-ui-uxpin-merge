@@ -4,8 +4,8 @@ import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
-const defaultTextColor = "#000000";
-const defaultTextValue = 'hello';
+
+const defaultTextValue = 'chip';
 
 const roleDefault = 'default';
 const roleInfo = 'info';
@@ -15,7 +15,7 @@ const roleError = 'error';
 
 const alignCenter = 'center';
 const borderSyle = '1px solid ';
-const borderRadius = '5';
+const borderRadius = '10';
 
 //Padding: left and right
 const padLR = '8px ';
@@ -62,25 +62,25 @@ class Chip extends React.Component {
       : role === roleSuccess ? UxpColors.success
         : role === roleWarning ? UxpColors.warning
           : role === roleError ? UxpColors.error
-            : UxpColors.grey300;
+            : UxpColors.getHexFromColorToken(neutralQuaternaryAlt);
 
     let bg = role === roleInfo ? UxpColors.infoBackground
       : role === roleSuccess ? UxpColors.successBackground
         : role === roleWarning ? UxpColors.warningBackground
           : role === roleError ? UxpColors.errorBackground
-            : UxpColors.grey100;
+            : UxpColors.getHexFromColorToken(neutralLighter);
 
     let textColor = role === roleInfo ? UxpColors.infoText
       : role === roleSuccess ? UxpColors.successText
         : role === roleWarning ? UxpColors.warningText
           : role === roleError ? UxpColors.errorText
-            : UxpColors.black;
+            : UxpColors.getHexFromColorToken(black);
 
     let hover = role === roleInfo ? UxpColors.infoBackgroundHover
       : role === roleSuccess ? UxpColors.successBackgroundHover
         : role === roleWarning ? UxpColors.warningBackgroundHover
           : role === roleError ? UxpColors.errorBackgroundHover
-            : UxpColors.grey400;
+            : UxpColors.getHexFromColorToken(neutralLight);
 
     return {
       text: textColor,
@@ -113,7 +113,7 @@ class Chip extends React.Component {
         padding: padTB + padLR + padTB + padLR,
         background: chipStyles.background,
         border: bStyle,
-        borderRadius: 10,
+        borderRadius: borderRadius,
         selectors: {
           ':hover': {
             background: this.props.hoverEffect ? chipStyles.hover : '',
@@ -132,7 +132,7 @@ class Chip extends React.Component {
         block={true}
         nowrap={true}
         onClick={() => this._onClick()} >
-        { message}
+        {message}
       </Text>
     );
   }

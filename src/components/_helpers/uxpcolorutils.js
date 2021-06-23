@@ -18,7 +18,7 @@ export const UxpColors = {
     success: '#107c10',             //MS green
     successText: '#000000',           //White
     successBackground: '#dff6dd',   //MS Messaging success
-    successBackgroundHover: '#c8e6bb7006c9',   //MS Presence online
+    successBackgroundHover: '#6bb700',   //MS Presence online
 
     warning: '#d83b01',             //MS orange
     warningText: '#000000',           //Black
