@@ -15,13 +15,13 @@ const roleError = 'error';
 
 const alignCenter = 'center';
 const borderSyle = '1px solid ';
-const borderRadius = 25;
+const borderRadius = 10;
 
 //MS Fluent Color Tokens
 const defaultBg = "neutralLighter";
 const defaultText = "black";
-const defaultBorder = "neutralQuaternaryAlt";
-const defaultHover = "neutralLight";
+const defaultBorder = "neutralQuaternary";
+const defaultHover = "neutralQuaternaryAlt";
 
 //Padding: left and right
 const padLR = '8px ';
@@ -123,7 +123,7 @@ class Chip extends React.Component {
         padding: padTB + padLR + padTB + padLR,
         background: chipStyles.background,
         border: bStyle,
-        borderRadius: 10,
+        borderRadius: borderRadius,
         selectors: {
           ':hover': {
             background: this.props.hoverEffect ? chipStyles.hover : '',
