@@ -10,7 +10,7 @@ const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
 
-cosnt defaultColor = "themePrimary";
+const defaultColor = "themePrimary";
 
 
 
