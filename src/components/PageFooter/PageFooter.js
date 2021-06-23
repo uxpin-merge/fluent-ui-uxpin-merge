@@ -34,7 +34,7 @@ const defaultTextStackMinWidth = '300px';
 const dividerStyle = {
     width: 1,
     height: 60,
-    borderLeft: '1px solid #edebe9',
+    borderLeft: '1px solid #c8c6c4',
 }
 
 const logoURL = 'https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/fpfv4zlqg5cyaek0q4ln';
