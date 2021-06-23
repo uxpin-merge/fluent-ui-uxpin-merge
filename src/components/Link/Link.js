@@ -62,7 +62,7 @@ class Link extends React.Component {
                     {...this.props}
                     disabled={this.props.disabled}
                     href={this.props.linkHref}
-                    thme={linkClass}
+                    theme={linkClass}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
                 >
