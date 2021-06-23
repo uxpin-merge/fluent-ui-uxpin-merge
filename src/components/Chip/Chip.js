@@ -18,7 +18,7 @@ const borderSyle = '1px solid ';
 const borderRadius = 10;
 
 //MS Fluent Color Tokens
-const defaultBg = "neutralLighter";
+const defaultBg = "neutralLighterAlt";
 const defaultText = "black";
 const defaultBorder = "neutralQuaternary";
 const defaultHover = "neutralQuaternaryAlt";
