@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
-
+import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 class Link extends React.Component {
@@ -29,12 +29,20 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
+        let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
+        let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
+        let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
+
+
         let linkStyles = {
             root: {
-                color: "#881798",
+                color: aColor ? aColor : '',
                 selectors: {
                     ':hover': {
-                        color: "#0b6a0b",
+                        color: hColor ? hColor : '',
+                    },
+                    ':disabled': {
+                        color: dColor ? dColor : '',
                     },
                 },
             },
@@ -131,6 +139,24 @@ Link.propTypes = {
     ]),
 
     /**
+     * @uxpindescription Specify an active link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
+     * @uxpinpropname Active Color
+    */
+    color: PropTypes.string,
+
+    /**
+     * @uxpindescription Specify a hover color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
+     * @uxpinpropname Hover Color
+    */
+    hoverColor: PropTypes.string,
+
+    /**
+     * @uxpindescription Specify a disabled link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
+     * @uxpinpropname Disabled Color
+    */
+    disabledColor: PropTypes.string,
+
+    /**
      * @uxpindescription To disable the control
      * */
     disabled: PropTypes.bool,
@@ -153,7 +179,10 @@ Link.defaultProps = {
     size: 'medium',
     bold: false,
     italic: false,
-    align: 'left'
+    align: 'left',
+    color: '',
+    hoverColor: '',
+    disabledColor: '',
 }
 
 
