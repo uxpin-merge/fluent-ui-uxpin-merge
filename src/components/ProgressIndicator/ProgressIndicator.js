@@ -64,16 +64,21 @@ class ProgressIndicator extends React.Component {
     //If it's not indeterminate mode, let's find out what this value should be. 
     //This will set the value to an int between 0 - 100
     if (!this.props.indeterminate) {
-      let p = this.state._percent;
+      var p = this.state._percent;
+      if (p) {
+        p = Number(p);
+      }
 
       percent = (!p || p < minVal) ? minVal :
         (p > maxVal) ? maxVal :
           p;
 
+      console.log("p: " + p + ". Value as %: " + percent);
+
       //Now, convert the value to a float between 0 - 1
       percent = (p > 0) ? p / 100 : 0;
 
-      console.log("New value: " + percent);
+      console.log("    Adjusted: " + percent);
     }
 
     //Return the final value
