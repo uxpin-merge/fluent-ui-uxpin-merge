@@ -7,42 +7,7 @@ import { SpinButton as FSpinButton } from '@fluentui/react/lib/SpinButton';
 class SpinButton extends React.Component {
     constructor(props) {
         super(props);
-
-        // //Track the checked state within the control
-        // this.state = {
-        //     _currentValue: '0',
-        // }
     }
-
-    // set() {
-    //     var s = '';
-    //     if (this.props.suffix) {
-    //         s = ' ' + this.props.suffix.trim();
-    //     }
-    //     let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
-
-    //     console.log("    set: " + displayValue);
-
-    //     //Track the current numerical value within the control
-    //     this.setState(
-    //         { _currentValue: displayValue, }
-    //     );
-
-    //     //Sometimes the props aren't in sync with this display value. 
-    //     if (this.props.sbValue !== displayValue)
-    //         this.props.sbValue = displayValue;
-    // }
-
-    // componentDidMount() {
-    //     this.set();
-    // }
-
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.sbValue !== this.props.sbValue) {
-    //         this.set();
-    //     }
-    // }
-
 
     /* 
     *  Notify UXPin that the value has changed. 
@@ -56,11 +21,14 @@ class SpinButton extends React.Component {
 
     render() {
 
+        let iconProps = { iconName: this.props.iconName }
+
         return (
 
             <FSpinButton
                 {...this.props}
                 defaultValue={this.props.value}
+                iconProps={iconProps}
                 onChange={(evt, v) => { this._valueChanged(v) }}
             />
         );
@@ -106,6 +74,12 @@ SpinButton.propTypes = {
     step: PropTypes.number,
 
     /**
+     * @uxpindescription The exact name from the Fluent icon library (Optional)
+     * @uxpinpropname Icon Name
+     * */
+    iconName: PropTypes.string,
+
+    /**
      * @uxpindescription A little tooltip that will display on hover
      * @uxpinpropname Tooltip
      * @uxpincontroltype textfield(2)
@@ -136,6 +110,7 @@ SpinButton.defaultProps = {
     max: 10,
     step: 1,
     title: '',
+    iconName: '',
     disabled: false,
 };
 
