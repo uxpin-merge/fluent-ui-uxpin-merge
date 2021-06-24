@@ -189,6 +189,14 @@ CalendarButton.propTypes = {
     buttonType: PropTypes.oneOf([btnAction, btnPrimary, btnSecondary]),
 
     /**
+     * A unique name for this property. Got some weird behavior with the same name as the control's prop. 
+     * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020. This prop's live value is available for scripting.
+     * @uxpinpropname * Date
+     * @uxpinbind onChange
+     */
+    calDate: PropTypes.string,
+
+    /**
      * @uxpindescription The displayed text on the button (Optional)
      * @uxpinpropname Button Text
      * */
@@ -199,14 +207,6 @@ CalendarButton.propTypes = {
      * @uxpinpropname Button Icon Name
      * */
     buttonIcon: PropTypes.string,
-
-    /**
-     * A unique name for this property. Got some weird behavior with the same name as the control's prop. 
-     * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020. This prop's live value is available for scripting.
-     * @uxpinpropname * Date
-     * @uxpinbind onChange
-     */
-    calDate: PropTypes.string,
 
     /**
      * @uxpindescription To replace the default string on the button with the selected date  
