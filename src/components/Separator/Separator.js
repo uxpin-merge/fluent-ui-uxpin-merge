@@ -8,8 +8,8 @@ import { TextAlignMiddleIcon } from '@fluentui/react-icons-mdl2';
 
 
 
-const defaultTextColor = "#000000";
-const defaultBgColor = "#ffffff";
+const defaultTextColor = "black";
+const defaultBgColor = "white";
 
 
 class Separator extends React.Component {
@@ -79,7 +79,7 @@ class Separator extends React.Component {
                 alignContent={this.props.alignment}
                 styles={contentStyles}
             >
-                { showIcon ?
+                {showIcon ?
                     <Icon
                         {...this.props}
                         iconName={this.props.iconName.trim()}
@@ -87,7 +87,7 @@ class Separator extends React.Component {
                     />
                     : ''
                 }
-                { showText ?
+                {showText ?
                     <Text
                         {...this.props}
                         styles={fTextStyles}
