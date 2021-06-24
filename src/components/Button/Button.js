@@ -5,6 +5,13 @@ import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
 
+const defaultText = 'Button';
+const defaultIcon = '';
+const posStart = 'start';
+const posEnd = 'end';
+
+
+
 class Button extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +26,7 @@ class Button extends React.Component {
 
     let styles = {};
 
-    if (this.props.iconPosition === "end") {
+    if (this.props.iconPosition === posEnd) {
       styles.flexContainer = {
         flexDirection: 'row-reverse'
       }
@@ -68,16 +75,16 @@ class Button extends React.Component {
 Button.propTypes = {
 
   /**
-   * @uxpindescription The displayed text on the button
-   * @uxpinpropname Text
-   * */
-  text: PropTypes.string,
-
-  /**
    * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
    * @uxpinpropname Primary Style
    * */
   primary: PropTypes.bool,
+
+  /**
+  * @uxpindescription The displayed text on the button
+  * @uxpinpropname Text
+  * */
+  text: PropTypes.string,
 
   /**
    * @uxpindescription The exact name from the Fluent icon library (Optional)
@@ -89,7 +96,7 @@ Button.propTypes = {
    * @uxpindescription The location to display an icon, if one is set
    * @uxpinpropname Icon Position
    * */
-  iconPosition: PropTypes.oneOf(['start', 'end']),
+  iconPosition: PropTypes.oneOf([posStart, posEnd]),
 
   /**
    * @uxpindescription Tooltip for the control
@@ -117,9 +124,9 @@ Button.propTypes = {
 Button.defaultProps = {
   primary: true,
   disabled: false,
-  iconName: "",
-  iconPosition: "start",
-  text: "Button Text",
+  iconName: defaultIcon,
+  iconPosition: posStart,
+  text: defaultText,
   tooltip: '',
 };
 
