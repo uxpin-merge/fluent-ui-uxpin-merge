@@ -13,6 +13,7 @@ class Link extends React.Component {
             linkColor: undefined,
             hoverColor: undefined,
             disabledColor: undefined,
+            isDisabled: false,
         }
     }
 
@@ -25,6 +26,7 @@ class Link extends React.Component {
             linkColor: aColor,
             hoverColor: hColor,
             disabledColor: dColor,
+            isDisabled: this.props.isDisabled,
         })
     }
 
@@ -36,13 +38,12 @@ class Link extends React.Component {
         if (
             prevProps.color !== this.props.color ||
             prevProps.hoverColor !== this.props.hoverColor ||
-            prevProps.disabledColor !== this.props.disabledColor
+            prevProps.disabledColor !== this.props.disabledColor ||
+            prevProps.disabled !== this.props.disabled
         ) {
             this.set();
         }
     }
-
-
 
     _onLinkClick() {
 
@@ -93,7 +94,7 @@ class Link extends React.Component {
 
                 <FLink
                     {...this.props}
-                    disabled={this.props.disabled}
+                    disabled={this.state.isDisabled}
                     href={this.props.linkHref}
                     styles={linkStyles}
                     target={linkTarget} //Force open in a new window
@@ -183,8 +184,9 @@ Link.propTypes = {
 
     /**
      * @uxpindescription To disable the control
+     * @uxpinpropname Disabled
      * */
-    disabled: PropTypes.bool,
+    isDisabled: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the control is clicked on
@@ -200,7 +202,7 @@ Link.propTypes = {
 Link.defaultProps = {
     value: 'UXPin.com',
     linkHref: 'https://www.uxpin.com',
-    disabled: false,
+    isDisabled: false,
     size: 'medium',
     bold: false,
     italic: false,
