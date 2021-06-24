@@ -9,9 +9,9 @@ const roleDefault = 'default';
 const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
-
 const defaultColor = "themePrimary";
-
+const minVal = 0;
+const maxVal = 100;
 
 
 class ProgressIndicator extends React.Component {
@@ -62,23 +62,18 @@ class ProgressIndicator extends React.Component {
     var percent = undefined;
 
     //If it's not indeterminate mode, let's find out what this value should be. 
+    //This will set the value to an int between 0 - 100
     if (!this.props.indeterminate) {
-      percent = parseFloat(this.state._percent);
+      let p = this.state._percent;
 
-      //If it's not a number, set it to 0
-      if (isNaN(percent)) {
-        percent = 0;
-      }
+      percent = (!p || p < minVal) ? minVal :
+        (p > maxVal) ? maxVal :
+          p;
 
-      //Check for min
-      if (percent < 0) {
-        percent = 0;
-      }
+      //Now, convert the value to a float between 0 - 1
+      percent = (p > 0) ? p / 100 : 0;
 
-      //Check for max
-      if (percent > 1) {
-        percent = 1.0;
-      }
+      console.log("New value: " + percent);
     }
 
     //Return the final value
@@ -115,10 +110,10 @@ ProgressIndicator.propTypes = {
   label: PropTypes.string,
 
   /**
-   * @uxpindescription Use a value between 0 - 1.0
+   * @uxpindescription Use an integer between 0 - 100
    * @uxpinpropname Percent
    * */
-  percent: PropTypes.string,
+  percent: PropTypes.number,
 
   /**
    * @uxpindescription The description text to reflect the percent complete.
