@@ -53,9 +53,7 @@ class Checkbox extends React.Component {
         {...this.props}
         checked={this.state.isChecked}
         onChange={(e, v) => { this._onSelectionChange(v); }}  //We only catch the new value
-      >
-        "Hello!"
-      </FCheckbox>
+      />
     );
   }
 }
