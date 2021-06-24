@@ -6,7 +6,8 @@ import { Position } from '@fluentui/react/lib/utilities/positioning';
 
 
 const posTop = "top";
-const posLeft = "left";
+const posStart = "start";
+const posEnd = "end";
 
 
 class SpinButton extends React.Component {
@@ -27,7 +28,9 @@ class SpinButton extends React.Component {
     render() {
 
         let iconProps = { iconName: this.props.iconName }
-        let position = this.props.labelDisplay === posTop ? Position.top : Position.start;
+        let position = this.props.labelDisplay === posEnd ? Position.end :
+            this.props.labelDisplay === posTop ? Position.top :
+                Position.start;
 
         return (
 
@@ -59,7 +62,7 @@ SpinButton.propTypes = {
      * @uxpindescription Whether the label appears on the left or on top
      * @uxpinpropname Position
      * */
-    labelDisplay: PropTypes.oneOf([posLeft, posTop]),
+    labelDisplay: PropTypes.oneOf([posStart, posTop, posEnd]),
 
     /**
      * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
@@ -118,7 +121,7 @@ SpinButton.propTypes = {
  */
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
-    labelDisplay: posLeft,
+    labelDisplay: posStart,
     value: '1',
     min: 0,
     max: 10,
