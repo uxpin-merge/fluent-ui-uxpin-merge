@@ -73,12 +73,8 @@ class ProgressIndicator extends React.Component {
         (p > maxVal) ? maxVal :
           p;
 
-      console.log("p: " + p + ". Value as %: " + percent);
-
       //Now, convert the value to a float between 0 - 1
-      percent = (percent > 0) ? percent / 100 : 0;
-
-      console.log("    Adjusted: " + percent);
+      percent = (percent > 0) ? (percent / 100) : 0;
     }
 
     //Return the final value
