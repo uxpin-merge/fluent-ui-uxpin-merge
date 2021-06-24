@@ -20,12 +20,12 @@ class Link extends React.Component {
     set() {
         let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
         let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
-        // let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
+        let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
 
         this.setState({
             linkColor: aColor,
             hoverColor: hColor,
-            // disabledColor: dColor,
+            disabledColor: dColor,
             isDisabled: this.props.isDisabled,
         })
     }
@@ -60,19 +60,36 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
-        let linkStyles = {
-            root: {
-                color: this.state.linkColor ? this.state.linkColor : undefined,
-                selectors: {
-                    ':hover': {
-                        color: this.state.hoverColor ? this.state.hoverColor : undefined,
-                    },
-                    // ':disabled': {
-                    //     color: this.state.disabledColor ? this.state.disabledColor : undefined,
+        var linkStyles = {};
+
+        if (this.state.isDisabled) {
+            linkStyles = {
+                root: {
+                    color: this.state.disabledColor ? this.state.disabledColor : undefined,
+                    // selectors: {
+                    //     ':hover': {
+                    //         color: this.state.hoverColor ? this.state.hoverColor : undefined,
+                    //     },
+                    //     // ':disabled': {
+                    //     //     color: this.state.disabledColor ? this.state.disabledColor : undefined,
+                    //     // },
                     // },
                 },
-            },
-        };
+            };
+        }
+        else {
+            linkStyles = {
+                root: {
+                    color: this.state.linkColor ? this.state.linkColor : undefined,
+                    selectors: {
+                        ':hover': {
+                            color: this.state.hoverColor ? this.state.hoverColor : undefined,
+                        },
+                    },
+                },
+            };
+        }
+
 
         //We assemble the Link Text style next
         let linkTextStyles = {
@@ -180,7 +197,7 @@ Link.propTypes = {
      * @uxpindescription Specify a disabled link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
      * @uxpinpropname Disabled Color
     */
-    // disabledColor: PropTypes.string,
+    disabledColor: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
@@ -209,7 +226,7 @@ Link.defaultProps = {
     align: 'left',
     color: '',
     hoverColor: '',
-    // disabledColor: '',
+    disabledColor: '',
 }
 
 
