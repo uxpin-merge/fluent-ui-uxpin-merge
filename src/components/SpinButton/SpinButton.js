@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { SpinButton as FSpinButton } from '@fluentui/react/lib/SpinButton';
+import { Position } from '@fluentui/react/lib/utilities/positioning';
 
 
 
@@ -28,6 +29,7 @@ class SpinButton extends React.Component {
             <FSpinButton
                 {...this.props}
                 defaultValue={this.props.value}
+                labelPosition={Position.left}
                 iconProps={iconProps}
                 onChange={(evt, v) => { this._valueChanged(v) }}
             />
