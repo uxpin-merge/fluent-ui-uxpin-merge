@@ -4,6 +4,11 @@ import { CompoundButton as FCompoundButton } from '@fluentui/react/lib/Button';
 
 
 
+const posStart = 'start';
+const posEnd = 'end';
+
+
+
 class CompoundButton extends React.Component {
 
   constructor(props) {
@@ -27,7 +32,7 @@ class CompoundButton extends React.Component {
 
     let iconProps = { iconName: this.props.iconName }
 
-    if (this.props.iconPosition === "end") styles.flexContainer = {
+    if (this.props.iconPosition === posEnd) styles.flexContainer = {
       flexDirection: 'row-reverse'
     }
 
@@ -52,6 +57,12 @@ class CompoundButton extends React.Component {
 CompoundButton.propTypes = {
 
   /**
+   * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
+   * @uxpinpropname Primary Style
+   * */
+  primary: PropTypes.bool,
+
+  /**
    * @uxpindescription The exact name from the icon library (Optional)
    * @uxpinpropname Icon Name
    * */
@@ -61,7 +72,7 @@ CompoundButton.propTypes = {
    * @uxpindescription The location to display an icon, if one is set
    * @uxpinpropname Icon Position
    * */
-  iconPosition: PropTypes.oneOf(['start', 'end']),
+  iconPosition: PropTypes.oneOf([posStart, posEnd]),
 
   /**
    * @uxpindescription The larger primary displayed on the button
@@ -79,12 +90,6 @@ CompoundButton.propTypes = {
    * @uxpindescription Text alignment
    */
   align: PropTypes.oneOf(['left', 'center', 'right']),
-
-  /**
-   * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
-   * @uxpinpropname Primary Style
-   * */
-  primary: PropTypes.bool,
 
   /**
    * @uxpindescription To disable the control
@@ -110,6 +115,7 @@ CompoundButton.defaultProps = {
   secondaryText: "Secondary text",
   align: 'left',
   iconName: "",
+  iconPosition: posStart,
 };
 
 
