@@ -44,7 +44,6 @@ class Link extends React.Component {
 
                 <FLink
                     {...this.props}
-                    disabled={this.state.isDisabled}
                     href={this.props.linkHref}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
@@ -117,7 +116,7 @@ Link.propTypes = {
      * @uxpindescription To disable the control
      * @uxpinpropname Disabled
      * */
-    isDisabled: PropTypes.bool,
+    disabled: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the control is clicked on
@@ -133,11 +132,11 @@ Link.propTypes = {
 Link.defaultProps = {
     value: 'UXPin.com',
     linkHref: 'https://www.uxpin.com',
-    isDisabled: false,
     size: 'medium',
     bold: false,
     italic: false,
     align: 'left',
+    disabled: false,
 }
 
 
