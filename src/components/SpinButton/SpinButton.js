@@ -23,13 +23,14 @@ class SpinButton extends React.Component {
     render() {
 
         let iconProps = { iconName: this.props.iconName }
+        let position = this.props.labelDisplay === "left" ? "left" : "top";
 
         return (
 
             <FSpinButton
                 {...this.props}
                 defaultValue={this.props.value}
-                labelPosition={Position.left}
+                labelPosition={position}
                 iconProps={iconProps}
                 onChange={(evt, v) => { this._valueChanged(v) }}
             />
@@ -49,6 +50,8 @@ SpinButton.propTypes = {
      * @uxpincontroltype textfield(2)
      * */
     label: PropTypes.string,
+
+    labelDisplay: PropTypes.array["left", "top"];
 
     /**
      * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
