@@ -51,7 +51,7 @@ SpinButton.propTypes = {
      * */
     label: PropTypes.string,
 
-    labelDisplay: PropTypes.array["left", "top"];
+    labelDisplay: PropTypes.oneOf(["left", "top"]),
 
     /**
      * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
