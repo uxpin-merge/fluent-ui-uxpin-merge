@@ -10,8 +10,38 @@ class Link extends React.Component {
         super(props);
 
         this.state = {
+            linkColor: undefined,
+            hoverColor: undefined,
+            disabledColor: undefined,
         }
     }
+
+    set() {
+        let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
+        let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
+        let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
+
+        this.setState({
+            linkColor: aColor,
+            hoverColor: hColor,
+            disabledColor: dColor,
+        })
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.color !== this.props.color ||
+            prevProps.hoverColor !== this.props.hoverColor ||
+            prevProps.disabledColor !== this.props.disabledColor
+        ) {
+            this.set();
+        }
+    }
+
 
 
     _onLinkClick() {
@@ -29,22 +59,15 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
-        let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
-        let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
-        let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
-
         let linkStyles = {
             root: {
-                color: aColor ? aColor : undefined,
+                color: this.state.linkColor ? this.state.linkColor : undefined,
                 selectors: {
-                    ':active': {
-                        color: aColor ? aColor : undefined,
-                    },
                     ':hover': {
-                        color: hColor ? hColor : undefined,
+                        color: this.state.hoverColor ? this.state.hoverColor : undefined,
                     },
                     ':disabled': {
-                        color: dColor ? dColor : undefined,
+                        color: this.state.disabledColor ? this.state.disabledColor : undefined,
                     },
                 },
             },
@@ -141,7 +164,7 @@ Link.propTypes = {
     ]),
 
     /**
-     * @uxpindescription Specify an active link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
+     * @uxpindescription Specify a link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
      * @uxpinpropname Active Color
     */
     color: PropTypes.string,
