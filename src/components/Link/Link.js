@@ -62,33 +62,39 @@ class Link extends React.Component {
 
         var linkStyles = {};
 
-        if (this.state.isDisabled) {
+
+
+
+
+        if (this.state.isDisabled && this.state.disabledColor) {
             linkStyles = {
                 root: {
-                    color: this.state.disabledColor ? this.state.disabledColor : undefined,
-                    // selectors: {
-                    //     ':hover': {
-                    //         color: this.state.hoverColor ? this.state.hoverColor : undefined,
-                    //     },
-                    //     // ':disabled': {
-                    //     //     color: this.state.disabledColor ? this.state.disabledColor : undefined,
-                    //     // },
-                    // },
-                },
-            };
-        }
-        else {
-            linkStyles = {
-                root: {
-                    color: this.state.linkColor ? this.state.linkColor : undefined,
                     selectors: {
-                        ':hover': {
-                            color: this.state.hoverColor ? this.state.hoverColor : undefined,
+                        ':disabled': {
+                            color: this.state.disabledColor ? this.state.disabledColor : undefined,
                         },
                     },
                 },
             };
         }
+        else {
+            if (this.state.linkColor) {
+                linkStyles.root = {
+                    color: this.state.linkColor ? this.state.linkColor : undefined,
+                };
+            }
+            if (this.state.hoverColor) {
+                linkStyles.root = {
+                    root: {
+                        selectors: {
+                            ':hover': {
+                                color: this.state.hoverColor ? this.state.hoverColor : undefined,
+                            },
+                        },
+                    },
+                }
+            }
+        };
 
 
         //We assemble the Link Text style next
