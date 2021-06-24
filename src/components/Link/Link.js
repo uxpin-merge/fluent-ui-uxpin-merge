@@ -60,42 +60,17 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
-        var linkStyles = {};
-
-
-
-
-
-        if (this.state.isDisabled && this.state.disabledColor) {
-            linkStyles = {
-                root: {
-                    selectors: {
-                        ':disabled': {
-                            color: this.state.disabledColor ? this.state.disabledColor : undefined,
-                        },
-                    },
+        var linkStyles = {
+            color: !this.state.isDisabled && this.state.linkColor ? this.state.linkColor : undefined,
+            selectors: {
+                ':hover': {
+                    color: !this.state.isDisabled && this.state.hoverColor ? this.state.hoverColor : undefined,
                 },
-            };
-        }
-        else {
-            if (this.state.linkColor) {
-                linkStyles.root = {
-                    color: this.state.linkColor ? this.state.linkColor : undefined,
-                };
-            }
-            if (this.state.hoverColor) {
-                linkStyles.root = {
-                    root: {
-                        selectors: {
-                            ':hover': {
-                                color: this.state.hoverColor ? this.state.hoverColor : undefined,
-                            },
-                        },
-                    },
-                }
-            }
+                ':disabled': {
+                    color: this.state.disabledColor ? this.state.disabledColor : undefined,
+                },
+            },
         };
-
 
         //We assemble the Link Text style next
         let linkTextStyles = {
