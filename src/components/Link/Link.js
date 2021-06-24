@@ -62,8 +62,11 @@ class Link extends React.Component {
 
         let linkStyles = {
             root: {
-                color: this.state.linkColor ? this.state.linkColor : undefined,
+                //color: this.state.linkColor ? this.state.linkColor : undefined,
                 selectors: {
+                    ':link': {
+                        color: this.state.linkColor ? this.state.linkColor : undefined,
+                    },
                     ':hover': {
                         color: this.state.hoverColor ? this.state.hoverColor : undefined,
                     },
