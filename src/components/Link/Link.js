@@ -2,47 +2,11 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
-import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 class Link extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            linkColor: undefined,
-            hoverColor: undefined,
-            disabledColor: undefined,
-            isDisabled: false,
-        }
-    }
-
-    set() {
-        let aColor = UxpColors.getHexFromHexOrToken(this.props.color);
-        let hColor = UxpColors.getHexFromHexOrToken(this.props.hoverColor);
-        let dColor = UxpColors.getHexFromHexOrToken(this.props.disabledColor);
-
-        this.setState({
-            linkColor: aColor,
-            hoverColor: hColor,
-            disabledColor: dColor,
-            isDisabled: this.props.isDisabled,
-        })
-    }
-
-    componentDidMount() {
-        this.set();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.color !== this.props.color ||
-            prevProps.hoverColor !== this.props.hoverColor ||
-            prevProps.disabledColor !== this.props.disabledColor ||
-            prevProps.disabled !== this.props.disabled
-        ) {
-            this.set();
-        }
     }
 
     _onLinkClick() {
@@ -59,18 +23,6 @@ class Link extends React.Component {
 
     render() {
         const linkTarget = "_UXPin Mockup";
-
-        var linkStyles = {
-            color: !this.state.isDisabled && this.state.linkColor ? this.state.linkColor : undefined,
-            selectors: {
-                ':hover': {
-                    color: !this.state.isDisabled && this.state.hoverColor ? this.state.hoverColor : undefined,
-                },
-                ':disabled': {
-                    color: this.state.disabledColor ? this.state.disabledColor : undefined,
-                },
-            },
-        };
 
         //We assemble the Link Text style next
         let linkTextStyles = {
@@ -94,7 +46,6 @@ class Link extends React.Component {
                     {...this.props}
                     disabled={this.state.isDisabled}
                     href={this.props.linkHref}
-                    styles={linkStyles}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
                 >
@@ -163,24 +114,6 @@ Link.propTypes = {
     ]),
 
     /**
-     * @uxpindescription Specify a link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
-     * @uxpinpropname Active Color
-    */
-    color: PropTypes.string,
-
-    /**
-     * @uxpindescription Specify a hover color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
-     * @uxpinpropname Hover Color
-    */
-    hoverColor: PropTypes.string,
-
-    /**
-     * @uxpindescription Specify a disabled link color with a Hex or color token, such as '#ffffff'. Leave empty to allow the current theme's default value.
-     * @uxpinpropname Disabled Color
-    */
-    disabledColor: PropTypes.string,
-
-    /**
      * @uxpindescription To disable the control
      * @uxpinpropname Disabled
      * */
@@ -205,9 +138,6 @@ Link.defaultProps = {
     bold: false,
     italic: false,
     align: 'left',
-    color: '',
-    hoverColor: '',
-    disabledColor: '',
 }
 
 
