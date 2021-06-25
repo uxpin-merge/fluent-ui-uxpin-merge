@@ -75,7 +75,6 @@ class ActivityItem extends React.Component {
         return tokens;
     }
 
-
     render() {
 
         var icon = '';
@@ -84,8 +83,6 @@ class ActivityItem extends React.Component {
 
             let cHex = UxpColors.getHexFromHexOrToken(c);
             let cStyle = { color: cHex };
-
-
 
             icon = (
                 <Icon
