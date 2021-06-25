@@ -69,7 +69,7 @@ class ActivityItem extends React.Component {
                     );
                 }
                 if (item.type === "text") {
-                    return item.text;
+                    return (<span key={index}>item.text</span>);
                 }
             }
         );
