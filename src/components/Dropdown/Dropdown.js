@@ -128,7 +128,6 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    const dropdownID = _.uniqueId('dropdown_');
 
     //We set both props in the Return.
     // One of these must be set to undefined, depending on whether this is single or multi select.
@@ -149,26 +148,27 @@ class Dropdown extends React.Component {
       })
     );
 
-    const tooltipId = _.uniqueId('tooltip_');
+    const ttTargetID = _.uniqueId('ttTarget_');
+    const tooltipID = _.uniqueId('tooltip_');
     const ttProps = {
       gapSpace: 0,
-      target: `#${buttonID}`,
+      target: `#${ttTargetID}`,
     };
 
     return (
       <div>
         <TooltipHost
           content={this.props.tooltip}
-          id={tooltipId}
+          id={tooltipID}
           calloutProps={ttProps}
         >
           <FDropdown
             {...this.props}
-            id={dropdownID}
             options={items}
             selectedKey={sIndex}
             selectedKeys={mIndices}
-            aria-describedby={tooltipId}
+            id={ttTargetID}
+            aria-describedby={tooltipID}
             onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
           />
 
