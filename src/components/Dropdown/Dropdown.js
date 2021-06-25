@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Dropdown as FDropdown } from '@fluentui/react/lib/Dropdown';
 import { csv2arr } from '../_helpers/parser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 const defaultItems = `Apples
@@ -141,11 +141,23 @@ class Dropdown extends React.Component {
       sIndex = this.state._selectedIndex;
     }
 
-    let items = csv2arr(this.props.items)
-      .flat()
-      .map(
-        (text, index) => ({ text: text, key: index })
-      );
+    // let items = csv2arr(this.props.items)
+    //   .flat()
+    //   .map(
+    //     (text, index) => ({ text: text, key: index })
+    // );
+
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index)({
+        text: item.text,
+        key: index,
+      })
+    );
+
+    console.log("First item " + items[0].text);
+
+
+
 
     return (
 
