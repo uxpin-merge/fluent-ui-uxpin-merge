@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ActivityItem as FActivityItem } from '@fluentui/react/lib/ActivityItem';
 import { Icon } from '@fluentui/react/lib/Icon';
+import Link from '../Link/Link';
+import Text from '../Text/Text';
 import { getTokens } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
@@ -56,21 +58,39 @@ class ActivityItem extends React.Component {
     //    to support the link(Link Text) feature.
     _getTokenizedText(text) {
 
-        var tokens = getTokens(text).mixed.map((el, i) => {
-            if (typeof (el) === 'string') {
-                return (<span key={i}> {el} </span>);
+        var tokens = UXPinParser.parse(text).map(
+            (item, index) => {
+                if (item.type === "link") {
+                    return (
+                        <Link
+                            value={item.text}
+                            linkHref={item.href}
+                        />
+                    );
+                }
+                if (item.type === "text") {
+                    return item.text;
+                }
             }
-            else if (el.type == 'link') {
-                return el.suggestions[0];
-            }
-            else if (el.suggestions[0]) {
-                // if there's a suggestion, call the function
-                return el.suggestions[0];
-            } else {
-                // there's no suggestion, return the text
-                return (<span key={i}> {el.tokenString} </span>);
-            }
-        });
+        );
+
+
+
+        // var tokens = getTokens(text).mixed.map((el, i) => {
+        //     if (typeof (el) === 'string') {
+        //         return (<span key={i}> {el} </span>);
+        //     }
+        //     else if (el.type == 'link') {
+        //         return el.suggestions[0];
+        //     }
+        //     else if (el.suggestions[0]) {
+        //         // if there's a suggestion, call the function
+        //         return el.suggestions[0];
+        //     } else {
+        //         // there's no suggestion, return the text
+        //         return (<span key={i}> {el.tokenString} </span>);
+        //     }
+        // });
 
         return tokens;
     }
