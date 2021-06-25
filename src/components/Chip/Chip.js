@@ -88,10 +88,6 @@ class Chip extends React.Component {
           : role === roleError ? UxpColors.errorBackgroundHover
             : UxpColors.getHexFromColorToken(defaultHover);
 
-
-    console.log("For role (" + role + "): text " + textColor + ", bg " + bg + ", border: " + border + ", hover: " + hover);
-
-
     return {
       text: textColor,
       background: bg,

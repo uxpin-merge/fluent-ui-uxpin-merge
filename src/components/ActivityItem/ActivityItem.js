@@ -2,9 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ActivityItem as FActivityItem } from '@fluentui/react/lib/ActivityItem';
 import { Icon } from '@fluentui/react/lib/Icon';
+import Link from '../Link/Link';
 import { getTokens } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 const defaultIcon = "Info";
@@ -56,21 +57,41 @@ class ActivityItem extends React.Component {
     //    to support the link(Link Text) feature.
     _getTokenizedText(text) {
 
-        var tokens = getTokens(text).mixed.map((el, i) => {
-            if (typeof (el) === 'string') {
-                return (<span key={i}> {el} </span>);
+        var tokens = UXPinParser.parseRow(text).map(
+            (item, index) => {
+                if (item.type === "link") {
+                    console.log("Found a link: (" + item.text + ") href= " + item.href);
+                    return (
+                        <span>{item.text}</span>
+                        // <Link
+                        //     value={item.text}
+                        //     linkHref={item.href}
+                        // />
+                    );
+                }
+                if (item.type === "text") {
+                    return (<span key={index}>{item.text}</span>);
+                }
             }
-            else if (el.type == 'link') {
-                return el.suggestions[0];
-            }
-            else if (el.suggestions[0]) {
-                // if there's a suggestion, call the function
-                return el.suggestions[0];
-            } else {
-                // there's no suggestion, return the text
-                return (<span key={i}> {el.tokenString} </span>);
-            }
-        });
+        );
+
+
+
+        // var tokens = getTokens(text).mixed.map((el, i) => {
+        //     if (typeof (el) === 'string') {
+        //         return (<span key={i}> {el} </span>);
+        //     }
+        //     else if (el.type == 'link') {
+        //         return el.suggestions[0];
+        //     }
+        //     else if (el.suggestions[0]) {
+        //         // if there's a suggestion, call the function
+        //         return el.suggestions[0];
+        //     } else {
+        //         // there's no suggestion, return the text
+        //         return (<span key={i}> {el.tokenString} </span>);
+        //     }
+        // });
 
         return tokens;
     }
