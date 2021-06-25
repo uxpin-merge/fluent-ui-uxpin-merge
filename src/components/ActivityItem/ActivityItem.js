@@ -85,10 +85,12 @@ class ActivityItem extends React.Component {
             let cHex = UxpColors.getHexFromHexOrToken(c);
             let cStyle = { color: cHex };
 
+
+
             icon = (
                 <Icon
                     iconName={this.props.icon.trim()}
-                    styles={cStyle} />
+                    className={cStyle} />
             );
         }
 
