@@ -60,7 +60,6 @@ class Persona extends React.Component {
                 secondaryText={this.props.role}
                 tertiaryText={this.props.status}
                 optionalText={this.props.optional}
-                showUnknownPersonaCoin={this.props.showUnknownPersonaCoin}
                 hidePersonaDetails={this.props.hidePersonaDetails}
 
                 styles={personaStyles}
@@ -140,12 +139,6 @@ Persona.propTypes = {
     optional: PropTypes.string,
 
     /** 
-    * @uxpindescription Whether to display coin using the 'Unknown Person' style
-    * @uxpinpropname Unknown Person
-    */
-    showUnknownPersonaCoin: PropTypes.bool,
-
-    /** 
     * @uxpindescription Whether to display the persona's details or only the 'coin'
     * @uxpinpropname Hide Details
     */
@@ -171,7 +164,6 @@ Persona.defaultProps = {
     optional: 'Available at 4:00 PM PST',
     ppSize: "size100",
     ppPresence: 'online',
-    showUnknownPersonaCoin: false,
     hidePersonaDetails: false,
     ppInitialsColor: 'blue'
 };
