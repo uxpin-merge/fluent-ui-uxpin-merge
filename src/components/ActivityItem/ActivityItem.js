@@ -57,7 +57,7 @@ class ActivityItem extends React.Component {
     //    to support the link(Link Text) feature.
     _getTokenizedText(text) {
 
-        var tokens = UXPinParser.parse(text).map(
+        var tokens = UXPinParser.parseRow(text).map(
             (item, index) => {
                 if (item.type === "link") {
                     console.log("Found a link: (" + item.text + ") href= " + item.href);
