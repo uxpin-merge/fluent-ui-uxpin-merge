@@ -5,7 +5,7 @@ import { Icon } from '@fluentui/react/lib/Icon';
 import Link from '../Link/Link';
 import { getTokens } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 const defaultIcon = "Info";
