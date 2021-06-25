@@ -18,12 +18,12 @@ const headerBackgroundColor = 'neutralLighterAlt';
 
 
 //Use this in the default props below.
-const defaultColumnValues = `Column A, Column B, Column C, Column D, Tokens, Actions`;
+const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
 
 const defaultRowValues =
-  `link(Component_Name_A), icon(SkypeCircleCheck|success) Ready, C-1, D-1, Learn More link(Visit|http://uxpin.com) icon(Globe|themePrimary), icon(MoreVertical|themePrimary)
-link(Component_Name_B), icon(WarningSolid|warning) Restarting..., C-2, D-2, Learn More link(Visit|http://uxpin.com) icon(Globe|themePrimary), icon(MoreVertical|themePrimary)
-link(Component_Name_C), icon(StatusErrorFull|error) Unavailable, C-3, D-3, Learn More link(Visit|http://uxpin.com) icon(Globe|themePrimary), icon(MoreVertical|themePrimary)`;
+  `link(Component_Name_A), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
+link(Component_Name_B), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
+link(Component_Name_C), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
