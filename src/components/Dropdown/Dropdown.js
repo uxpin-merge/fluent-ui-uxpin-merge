@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Dropdown as FDropdown } from '@fluentui/react/lib/Dropdown';
-import { csv2arr } from '../_helpers/parser';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -128,6 +128,7 @@ class Dropdown extends React.Component {
   }
 
   render() {
+    const dropdownID = _.uniqueId('dropdown_');
 
     //We set both props in the Return.
     // One of these must be set to undefined, depending on whether this is single or multi select.
@@ -148,16 +149,31 @@ class Dropdown extends React.Component {
       })
     );
 
+    const tooltipId = _.uniqueId('tooltip_');
+    const ttProps = {
+      gapSpace: 0,
+      target: `#${buttonID}`,
+    };
+
     return (
+      <div>
+        <TooltipHost
+          content={this.props.tooltip}
+          id={tooltipId}
+          calloutProps={ttProps}
+        >
+          <FDropdown
+            {...this.props}
+            id={dropdownID}
+            options={items}
+            selectedKey={sIndex}
+            selectedKeys={mIndices}
+            aria-describedby={tooltipId}
+            onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
+          />
 
-      <FDropdown
-        {...this.props}
-        options={items}
-        selectedKey={sIndex}
-        selectedKeys={mIndices}
-        onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
-      />
-
+        </TooltipHost>
+      </div>
     );
   }
 }
@@ -214,6 +230,12 @@ Dropdown.propTypes = {
   required: PropTypes.bool,
 
   /**
+   * @uxpindescription Tooltip for the control
+   * @uxpinpropname Tooltip
+   * */
+  tooltip: PropTypes.string,
+
+  /**
    * @uxpindescription To disable the control
    * @uxpinpropname Disabled
    * */
@@ -237,6 +259,7 @@ Dropdown.defaultProps = {
   placeholder: "- Select -",
   disabled: false,
   required: false,
+  tooltip: '',
 };
 
 
