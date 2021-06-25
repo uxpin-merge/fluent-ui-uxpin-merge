@@ -1,7 +1,11 @@
 # Fluent UI React + UXPin Merge
 Integration of [Fluent UI](https://github.com/microsoft/fluentui) with UXPin Merge Technology.
 
+![fluent](https://github.com/uxpin-merge/fluent-ui-uxpin-merge/blob/master/img/fluent.png "Fluent UI in UXPin")
+
 ## About Fluent UI React
+
+[Fluent UI React](https://github.com/microsoft/fluentui/tree/master/packages/react) is Microsoft's React-based implementation of their Fluent UI Design System; a collection of robust components that were designed to make it simple to create consistent web experiences using the Fluent Design Language.
 
 ## About UXPin Merge
 
@@ -16,12 +20,10 @@ It means that components are going to look and, function (interactions, data) id
 Merge is currently only available to Merge-enabled users.
 
 1. Fork this repository and clone it to your computer.
-2. Install dependencies with `yarn install`
-3. Log in to your UXPin account
-4. Start Merge dev environment with `npx uxpin-merge --disable-tunneling`
+2. Install dependencies with `yarn install`.
+3. Log in to your UXPin account.
+4. Start Merge dev environment with `yarn uxpin`.
 
-## Supported components
+## Charting
 
-| Component     | Fluent UI url      | Status|
-| ------------- |:-------------:| :-----|
-| PrimaryButton        | [PrimaryButton](https://developer.microsoft.com/en-us/fluentui#/controls/web/button) | ✅ Basic Support |
+To augment the usefulness of this design system, we have also added five animated chart components, implemented using Uber's [react-vis](https://github.com/uber/react-vis) library.

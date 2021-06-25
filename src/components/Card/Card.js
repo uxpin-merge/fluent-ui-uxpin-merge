@@ -20,8 +20,6 @@ const borderRadius = '4px';
 const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
 const elevationShadow1 = '0 3px 10px rgba(0, 0, 0, 0.16)';
 
-const minHeight = '10px';
-
 
 
 class Card extends React.Component {
@@ -70,8 +68,6 @@ class Card extends React.Component {
             root: {
                 display: 'flex',
                 overflow: 'hidden',
-                minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
-                minHeight: this.props.boxHeight > 1 ? this.props.boxHeight : 1,
             },
         };
 
@@ -93,7 +89,7 @@ class Card extends React.Component {
             boxShadow: this.props.showShadow ? cardShadow : '',
             padding: cardPad + 'px',
             margin: this.props.margin,
-            minHeight: minHeight,
+            minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
         };
 
         //With one number, the padding applies to both rows and columns.  
@@ -119,15 +115,13 @@ class Card extends React.Component {
             if (childList.length) {
                 for (var i = 0; i < childList.length; i++) {
                     if (childList[i]) {
-                        let child = childList[i];
 
-                        let childGrow = i > 0 && i < (childList.length - 1) ? true : false;
+                        let child = childList[i];
 
                         let stack = (
                             <StackItem
                                 align={'stretch'}
                                 key={i}
-                                grow={childGrow}
                             >
                                 {child}
                             </StackItem>
@@ -183,12 +177,6 @@ Card.propTypes = {
     * @uxpinpropname Min Width
     */
     boxWidth: PropTypes.number,
-
-    /**
-    * @uxpindescription A minimum height for the whole card
-    * @uxpinpropname Min Height
-    */
-    boxHeight: PropTypes.number,
 
     /**
      * Don't show this prop in the UXPin Editor. 
@@ -252,7 +240,6 @@ Card.propTypes = {
 Card.defaultProps = {
     margin: 6,
     boxWidth: 0,
-    boxHeight: 0,
     cardPadding: 0,
     gutterPadding: 12,
     align: leftAlign,

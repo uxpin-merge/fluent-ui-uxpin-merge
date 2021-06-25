@@ -23,10 +23,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "uxpin": "npx uxpin-merge --disable-tunneling"
   },
   "eslintConfig": {
     "extends": [
@@ -47,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "@uxpin/merge-cli": "^2.7.5",
+    "@uxpin/merge-cli": "^2.7.7",
     "prettier": "2.2.1"
   }
 }
