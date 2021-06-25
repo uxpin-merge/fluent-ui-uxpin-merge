@@ -2,8 +2,16 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ActivityItem as FActivityItem } from '@fluentui/react/lib/ActivityItem';
 import { Icon } from '@fluentui/react/lib/Icon';
-import { Link } from '@fluentui/react/lib/Link';
 import { getTokens } from '../_helpers/parser';
+import { UxpColors } from '../_helpers/uxpcolorutils';
+
+
+
+const defaultIcon = "Info";
+const defaultIconColor = "black";
+const defaultDescription = 'link(Tahlia) ran a new system test';
+const defaultBody = 'link(System Test #420) contains 3 components. You have been given access privileges.';
+const defaultTimeStamp = 'Just now';
 
 
 
@@ -70,8 +78,19 @@ class ActivityItem extends React.Component {
 
     render() {
 
-        let icon = this.props.icon ?
-            (<Icon iconName={this.props.icon} />) : '';
+        var icon = '';
+        if (this.props.icon) {
+            let c = this.props.iconColor ? this.props.iconColor : defaultIconColor;
+
+            let cHex = UxpColors.getHexFromHexOrToken(c);
+            let cStyle = { color: cHex };
+
+            icon = (
+                <Icon
+                    iconName={this.props.icon.trim()}
+                    styles={cStyle} />
+            );
+        }
 
         return (
             <FActivityItem
@@ -96,6 +115,12 @@ ActivityItem.propTypes = {
      * @uxpinpropname Icon Name
      */
     icon: PropTypes.string,
+
+    /**
+     * @uxpindescription Use a color token, such as 'themePrimary' or 'black', or a standard Hex Color, such as '#0070BA'
+     * @uxpinpropname Icon Color
+     * */
+    iconColor: PropTypes.string,
 
     /**
      * @uxpindescription The top line of text summarizing what the activity was. Supports the link(Click Me) feature. 
@@ -132,10 +157,11 @@ ActivityItem.propTypes = {
  */
 ActivityItem.defaultProps = {
 
-    icon: 'InfoSolid',
-    description: 'link(Tahlia) ran a new system test',
-    bodyCopy: 'link(System Test #420) contains 3 components. You have been given access privileges.',
-    timeStamp: 'Just now',
+    icon: defaultIcon,
+    iconColor: defaultIconColor,
+    description: defaultDescription,
+    bodyCopy: defaultBody,
+    timeStamp: defaultTimeStamp,
     isCompact: false
 }
 
