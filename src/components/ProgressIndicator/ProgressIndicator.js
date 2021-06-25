@@ -6,7 +6,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-const defaultLabel = "ProgressIndicator";
+const defaultLabel = "Progress";
 const defaultVal = 50;
 
 const roleDefault = 'default';
