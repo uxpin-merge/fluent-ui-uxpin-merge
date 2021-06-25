@@ -1,18 +1,24 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ProgressIndicator as FProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
+import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
+
+
+const defaultLabel = "Progress";
+const defaultVal = 50;
 
 const roleDefault = 'default';
 const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
 
-const defaultBlue = '#0070BA';
-const successGreen = '#299976';
-const warningYellow = '#FF9600';
-const errorRed = '#D20000';
+const defaultColor = "themePrimary";
+const minVal = 0;
+const maxVal = 100;
+const defaultHeight = 10;
+
 
 
 class ProgressIndicator extends React.Component {
@@ -41,10 +47,10 @@ class ProgressIndicator extends React.Component {
 
   getProgressIndicatorClasses() {
 
-    var bgColor = this.props.roleType === roleSuccess ? successGreen
-      : this.props.roleType === roleWarning ? warningYellow
-        : this.props.roleType === roleError ? errorRed
-          : defaultBlue;
+    var bgColor = this.props.roleType === roleSuccess ? UxpColors.success
+      : this.props.roleType === roleWarning ? UxpColors.warning
+        : this.props.roleType === roleError ? UxpColors.error
+          : UxpColors.getHexFromColorToken(defaultColor);
 
     return {
       selectors: {
@@ -63,23 +69,19 @@ class ProgressIndicator extends React.Component {
     var percent = undefined;
 
     //If it's not indeterminate mode, let's find out what this value should be. 
+    //This will set the value to an int between 0 - 100
     if (!this.props.indeterminate) {
-      percent = parseFloat(this.state._percent);
-
-      //If it's not a number, set it to 0
-      if (isNaN(percent)) {
-        percent = 0;
+      var p = this.state._percent;
+      if (p) {
+        p = Number(p);
       }
 
-      //Check for min
-      if (percent < 0) {
-        percent = 0;
-      }
+      percent = (!p || p < minVal) ? minVal :
+        (p > maxVal) ? maxVal :
+          p;
 
-      //Check for max
-      if (percent > 1) {
-        percent = 1.0;
-      }
+      //Now, convert the value to a float between 0 - 1
+      percent = (percent > 0) ? (percent / 100) : 0;
     }
 
     //Return the final value
@@ -116,10 +118,10 @@ ProgressIndicator.propTypes = {
   label: PropTypes.string,
 
   /**
-   * @uxpindescription Use a value between 0 - 1.0
+   * @uxpindescription Use an integer between 0 - 100
    * @uxpinpropname Percent
    * */
-  percent: PropTypes.string,
+  percent: PropTypes.number,
 
   /**
    * @uxpindescription The description text to reflect the percent complete.
@@ -152,11 +154,11 @@ ProgressIndicator.propTypes = {
  * 
  */
 ProgressIndicator.defaultProps = {
-  label: 'Progress',
+  label: defaultLabel,
   roleType: roleDefault,
-  percent: "0.5",
+  percent: defaultVal,
   description: '',
-  barHeight: 10,
+  barHeight: defaultHeight,
   indeterminate: false,
 }
 

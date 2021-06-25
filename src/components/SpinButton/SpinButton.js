@@ -1,48 +1,19 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { SpinButton as FSpinButton } from '@fluentui/react/lib/SpinButton';
+import { Position } from '@fluentui/react/lib/utilities/positioning';
 
+
+
+const posTop = "top";
+const posStart = "start";
+const posEnd = "end";
 
 
 class SpinButton extends React.Component {
     constructor(props) {
         super(props);
-
-        // //Track the checked state within the control
-        // this.state = {
-        //     _currentValue: '0',
-        // }
     }
-
-    // set() {
-    //     var s = '';
-    //     if (this.props.suffix) {
-    //         s = ' ' + this.props.suffix.trim();
-    //     }
-    //     let displayValue = this._getValidatedNumber(this.props.sbValue) + s;
-
-    //     console.log("    set: " + displayValue);
-
-    //     //Track the current numerical value within the control
-    //     this.setState(
-    //         { _currentValue: displayValue, }
-    //     );
-
-    //     //Sometimes the props aren't in sync with this display value. 
-    //     if (this.props.sbValue !== displayValue)
-    //         this.props.sbValue = displayValue;
-    // }
-
-    // componentDidMount() {
-    //     this.set();
-    // }
-
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.sbValue !== this.props.sbValue) {
-    //         this.set();
-    //     }
-    // }
-
 
     /* 
     *  Notify UXPin that the value has changed. 
@@ -56,11 +27,18 @@ class SpinButton extends React.Component {
 
     render() {
 
+        let iconProps = { iconName: this.props.iconName }
+        let position = this.props.labelDisplay === posEnd ? Position.end :
+            this.props.labelDisplay === posTop ? Position.top :
+                Position.start;
+
         return (
 
             <FSpinButton
                 {...this.props}
                 defaultValue={this.props.value}
+                labelPosition={position}
+                iconProps={iconProps}
                 onChange={(evt, v) => { this._valueChanged(v) }}
             />
         );
@@ -79,6 +57,12 @@ SpinButton.propTypes = {
      * @uxpincontroltype textfield(2)
      * */
     label: PropTypes.string,
+
+    /**
+     * @uxpindescription Whether the label appears on the left or on top
+     * @uxpinpropname Position
+     * */
+    labelDisplay: PropTypes.oneOf([posStart, posTop, posEnd]),
 
     /**
      * @uxpindescription The numeric value of the SpinButton. This prop's live value is available for scripting.
@@ -106,6 +90,12 @@ SpinButton.propTypes = {
     step: PropTypes.number,
 
     /**
+     * @uxpindescription The exact name from the Fluent icon library (Optional)
+     * @uxpinpropname Icon Name
+     * */
+    iconName: PropTypes.string,
+
+    /**
      * @uxpindescription A little tooltip that will display on hover
      * @uxpinpropname Tooltip
      * @uxpincontroltype textfield(2)
@@ -131,11 +121,13 @@ SpinButton.propTypes = {
  */
 SpinButton.defaultProps = {
     label: 'Basic SpinButton',
+    labelDisplay: posStart,
     value: '1',
     min: 0,
     max: 10,
     step: 1,
     title: '',
+    iconName: '',
     disabled: false,
 };
 

@@ -31,7 +31,7 @@ const borderSolid = 'solid';
 const borderDotted = 'dotted';
 
 const defaultBorderThickness = '1';
-const defaultBorderColor = 'grey-300';
+const defaultBorderColor = 'neutralTertiaryAlt';
 const defaultBorderRadius = '0';
 
 

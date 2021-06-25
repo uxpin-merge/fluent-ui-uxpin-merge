@@ -15,9 +15,9 @@ const defaultPageHeadingSize = 'xxLarge';
 const defaultSubText = "TIP: Add Action, Icon and/or Command Buttons to make a Toolbar on the right";
 const defaultSubTextSize = 'medium';
 
-const defaultTextColor = '#000000';
-const defaultBgColor = '#F5FBFE';
-const defaultBorderColor = '#BFDBEE';
+const defaultTextColor = 'black';
+const defaultBgColor = 'themeLighterAlt';
+const defaultBorderColor = 'themeSecondary';
 const defaultBorderThickness = 1;
 const borderSolid = 'solid';
 
@@ -138,7 +138,7 @@ class PageHeader extends React.Component {
                 <Text
                     styles={mhtStyles}
                     variant={this.props.pageHeadingSize}>
-                    { this.props.pageHeadingText.trim()}
+                    {this.props.pageHeadingText.trim()}
                 </Text>
             );
         }
@@ -186,7 +186,7 @@ class PageHeader extends React.Component {
                     //Now we put it all together!
                     let stack = (
                         <StackItem>
-                            { child}
+                            {child}
                         </StackItem>
                     );
                     stackList.push(stack);

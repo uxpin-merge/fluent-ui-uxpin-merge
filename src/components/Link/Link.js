@@ -4,15 +4,10 @@ import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
 
 
-
 class Link extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-        }
     }
-
 
     _onLinkClick() {
 
@@ -36,27 +31,28 @@ class Link extends React.Component {
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Required - prevents a bug
                 lineHeight: 'normal',     //Required - prevents a bug,
-                textAlign: this.props.align
+                textAlign: this.props.align,
             }
-        }
+        };
 
 
         return (
-
-            <FLink
+            <Text
                 {...this.props}
-                disabled={this.props.disabled}
-                href={this.props.linkHref}
-                target={linkTarget} //Force open in a new window
-                onClick={() => { this._onLinkClick() }}
-            >
-                <Text
+                styles={linkTextStyles}
+                variant={this.props.size}>
+
+                <FLink
                     {...this.props}
-                    styles={linkTextStyles}
-                    variant={this.props.size}>
+                    href={this.props.linkHref}
+                    target={linkTarget} //Force open in a new window
+                    onClick={() => { this._onLinkClick() }}
+                >
+
                     {this.props.value}
-                </Text>
-            </FLink>
+
+                </FLink>
+            </Text >
 
         );
     }
@@ -118,6 +114,7 @@ Link.propTypes = {
 
     /**
      * @uxpindescription To disable the control
+     * @uxpinpropname Disabled
      * */
     disabled: PropTypes.bool,
 
@@ -135,11 +132,11 @@ Link.propTypes = {
 Link.defaultProps = {
     value: 'UXPin.com',
     linkHref: 'https://www.uxpin.com',
-    disabled: false,
     size: 'medium',
     bold: false,
     italic: false,
-    align: 'left'
+    align: 'left',
+    disabled: false,
 }
 
 

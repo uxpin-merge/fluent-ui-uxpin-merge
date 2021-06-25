@@ -47,7 +47,7 @@ class ColorPicker extends React.Component {
 
         //Get the hex & optional transparency for the selected color and surface that
         let hex = "#" + color.hex;
-        var trans = color.t ? color.t : '';
+        let trans = color.t ? color.t : '';
 
         //Return the index of the color
         if (this.props.onColorChange) {
@@ -80,7 +80,7 @@ class ColorPicker extends React.Component {
 ColorPicker.propTypes = {
 
     /**
-     * @uxpindescription A Hex color value or color token to provide as the default color, such as: 'blue-600' or '#0070BA' (Optional). This prop's live value is available for scripting.
+     * @uxpindescription A Hex color value or color token to provide as the default color, such as: 'themePrimary' or '#0070BA'. This prop's live value is available for scripting.
      * @uxpinpropname * Color
      * @uxpinbind onColorChange
      */

@@ -9,7 +9,7 @@ const topAlign = 'top';
 const middleAlign = 'middle';
 const bottomAlign = 'bottom';
 
-const defaultBorderColor = '#CBD2D6';
+const defaultBorderColor = 'neutralTertiaryAlt';
 
 const borderNone = 'none';
 const borderDashed = 'dashed';
