@@ -5,13 +5,20 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
+
+const defaultLabel = "ProgressIndicator";
+const defaultVal = 50;
+
 const roleDefault = 'default';
 const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
+
 const defaultColor = "themePrimary";
 const minVal = 0;
 const maxVal = 100;
+const defaultHeight = 10;
+
 
 
 class ProgressIndicator extends React.Component {
@@ -147,11 +154,11 @@ ProgressIndicator.propTypes = {
  * 
  */
 ProgressIndicator.defaultProps = {
-  label: 'Progress',
+  label: defaultLabel,
   roleType: roleDefault,
-  percent: "0.5",
+  percent: defaultVal,
   description: '',
-  barHeight: 10,
+  barHeight: defaultHeight,
   indeterminate: false,
 }
 
