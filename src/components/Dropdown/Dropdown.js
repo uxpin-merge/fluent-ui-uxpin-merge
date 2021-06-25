@@ -141,23 +141,12 @@ class Dropdown extends React.Component {
       sIndex = this.state._selectedIndex;
     }
 
-    // let items = csv2arr(this.props.items)
-    //   .flat()
-    //   .map(
-    //     (text, index) => ({ text: text, key: index })
-    //   );
-
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => ({
         text: item.text,
         key: index,
       })
     );
-
-    console.log("First item " + items[0].text);
-
-
-
 
     return (
 
