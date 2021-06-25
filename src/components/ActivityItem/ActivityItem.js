@@ -60,11 +60,13 @@ class ActivityItem extends React.Component {
         var tokens = UXPinParser.parse(text).map(
             (item, index) => {
                 if (item.type === "link") {
+                    console.log("Found a link: (" + item.text + ") href= " + item.href);
                     return (
-                        <Link
-                            value={item.text}
-                            linkHref={item.href}
-                        />
+                        <span>{item.text}</span>
+                        // <Link
+                        //     value={item.text}
+                        //     linkHref={item.href}
+                        // />
                     );
                 }
                 if (item.type === "text") {
