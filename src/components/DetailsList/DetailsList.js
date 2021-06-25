@@ -5,6 +5,7 @@ import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { getTokens, csv2arr } from '../_helpers/parser';
+import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
@@ -13,16 +14,16 @@ const searchFieldIconName = "Filter";
 const searchFieldPlaceholder = "Filter";
 const searchFieldMarginBottom = '24px';
 
-const headerBackgroundColor = '#F5F7FA';
+const headerBackgroundColor = 'neutralLighterAlt';
 
 
 //Use this in the default props below.
 const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
 
 const defaultRowValues =
-  `link(Component_Name_A), icon(SkypeCircleCheck|green-600) Ready, C-1, D-1, icon(MoreVertical|color-blue-600)
-link(Component_Name_B), icon(WarningSolid|orange-500) Restarting..., C-2, D-2, icon(MoreVertical|color-blue-600)
-link(Component_Name_C), icon(StatusErrorFull|red-500) Unavailable, C-3, D-3, icon(MoreVertical|color-blue-600)`;
+  `link(Component_Name_A), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
+link(Component_Name_B), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
+link(Component_Name_C), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
@@ -101,8 +102,10 @@ class DetailsList extends React.Component {
     if (this.state.alignRight.includes(colIndex + 1))
       alignHeaderLabels = { margin: '0 0 0 auto' };
 
+    const headerBg = UxpColors.getHexFromHexOrToken(headerBackgroundColor);
+
     return {
-      background: headerBackgroundColor,
+      background: headerBg,
       selectors: {
         '& .ms-DetailsHeader-cellName': alignHeaderLabels,
       }
@@ -241,21 +244,14 @@ class DetailsList extends React.Component {
           let adjustedIndex = colIndex + 1;
 
           if (this.state.alignRight.includes(adjustedIndex)) {
-
-            console.log("Yes, right align it: " + adjustedIndex);
-
             columnParams.styles = {
               textAlign: 'right',
-              background: 'purple',
             };
           }
 
           if (this.state.alignCenter.includes(adjustedIndex)) {
-            console.log("Yes, center align it: " + adjustedIndex);
-
             columnParams.styles = {
               textAlign: 'center',
-              background: 'red',
             };
           }
 
