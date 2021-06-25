@@ -151,7 +151,7 @@ class Dropdown extends React.Component {
     const ttTargetID = _.uniqueId('ttTarget_');
     const tooltipID = _.uniqueId('tooltip_');
     const ttProps = {
-      gapSpace: 0,
+      gapSpace: 4,
       target: `#${ttTargetID}`,
     };
 
