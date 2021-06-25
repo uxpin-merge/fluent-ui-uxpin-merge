@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { ActivityItem as FActivityItem } from '@fluentui/react/lib/ActivityItem';
 import { Icon } from '@fluentui/react/lib/Icon';
 import Link from '../Link/Link';
-import Text from '../Text/Text';
 import { getTokens } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
@@ -69,7 +68,7 @@ class ActivityItem extends React.Component {
                     );
                 }
                 if (item.type === "text") {
-                    return (<span key={index}>item.text</span>);
+                    return (<span key={index}>{item.text}</span>);
                 }
             }
         );
