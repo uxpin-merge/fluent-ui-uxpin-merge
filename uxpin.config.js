@@ -29,6 +29,7 @@ module.exports = {
           'src/components/Icon/Icon.js',
           'src/components/Image/Image.js',
           'src/components/Link/Link.js',
+          'src/components/Overlay/Overlay.js',
           'src/components/Separator/Separator.js',
           'src/components/Text/Text.js',
           'src/components/Timestamp/Timestamp.js',
