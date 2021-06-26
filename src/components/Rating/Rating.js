@@ -74,7 +74,7 @@ class Rating extends React.Component {
         let stars = this.state.maxNumberOfStars;
 
         const ttTargetID = _.uniqueId('ttTarget_');
-        const tooltipId = _.uniqueId('tooltip_');
+        const tooltipID = _.uniqueId('tooltip_');
         const ttProps = {
             gapSpace: 2,
             target: `#${ttTargetID}`,
