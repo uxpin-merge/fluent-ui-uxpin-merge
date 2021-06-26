@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Toggle as FToggle } from '@fluentui/react/lib/Toggle';
 import { check } from 'prettier';
-import { TooltipHost } from '@fluentui/react/lib/Tooltip';
-import { DirectionalHint } from '@fluentui/react/lib/Callout';
 
 
 
@@ -55,32 +53,14 @@ class Toggle extends React.Component {
   render() {
     let checked = this.state._isChecked;
 
-    const ttTargetID = _.uniqueId('ttTarget_');
-    const tooltipID = _.uniqueId('tooltip_');
-    const ttProps = {
-      gapSpace: 2,
-      target: `#${ttTargetID}`,
-    };
-
     return (
-      <div>
-        <TooltipHost
-          content={this.props.tooltip}
-          id={tooltipID}
-          directionalHint={DirectionalHint.topLeftEdge}
-          calloutProps={ttProps}
-        >
 
-          <FToggle
-            {...this.props}
-            checked={checked}
-            id={ttTargetID}
-            aria-describedby={tooltipID}
-            onChange={(e, v) => { this._onSelectionChange(v); }}
-          />
+      <FToggle
+        {...this.props}
+        checked={checked}
+        onChange={(e, v) => { this._onSelectionChange(v); }}
+      />
 
-        </TooltipHost>
-      </div>
     );
   }
 }
@@ -130,12 +110,6 @@ Toggle.propTypes = {
   tooltip: PropTypes.string,
 
   /**
-   * @uxpindescription To disable the control
-   * @uxpinpropname Disabled
-   * */
-  disabled: PropTypes.bool,
-
-  /**
    * @uxpindescription Fires when the control's Checked value changes
    * @uxpinpropname * Checked Changed
    * */
@@ -153,7 +127,6 @@ Toggle.defaultProps = {
   offText: "Off",
   inlineLabel: true,
   disabled: false,
-  tooltip: '',
 };
 
 
