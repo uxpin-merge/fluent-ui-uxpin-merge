@@ -63,7 +63,7 @@ class Toggle extends React.Component {
     };
 
     return (
-      <>
+      <div>
         <TooltipHost
           content={this.props.tooltip}
           id={tooltipID}
@@ -80,7 +80,7 @@ class Toggle extends React.Component {
           />
 
         </TooltipHost>
-      </>
+      </div>
     );
   }
 }
