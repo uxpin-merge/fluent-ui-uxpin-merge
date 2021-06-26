@@ -70,11 +70,27 @@ class Timestamp extends React.Component {
          </div>
       );
 
-      let linkText = (showDate && !showTime) ? UxpDateTimeUtils.getFormattedDate(this.state.displayDate) :
-         (!showDate && showTime) ? UxpDateTimeUtils.getFormattedTime(this.state.displayDate) :
-            UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
+      var linkText = "";
+      if (showDate && !showTime) {
+         linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
+         console.log("showDate && !showTime >> " + linkText);
+      }
+      elseif(!showDate && showTime) {
+         linkText = UxpDateTimeUtils.getFormattedTime(this.state.displayDate);
+         console.log("!showDate && showTime >> " + linkText);
+      }
+      elseif(showDate && !showTime) {
+         linkText = UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
+         console.log("showDate && showTime >> " + linkText);
+      }
 
-      console.log("Link text: " + linkText);
+
+
+      // let linkText = (showDate && !showTime) ? UxpDateTimeUtils.getFormattedDate(this.state.displayDate) :
+      //    (!showDate && showTime) ? UxpDateTimeUtils.getFormattedTime(this.state.displayDate) :
+      //       UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
+
+      // console.log("Link text: " + linkText);
 
       const ttTargetID = _.uniqueId('ttTarget_');
       const tooltipID = _.uniqueId('tooltip_');
