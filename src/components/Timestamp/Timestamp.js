@@ -61,7 +61,7 @@ class Timestamp extends React.Component {
 
       let ttContents = (
          <div>
-            <p>{utc}</p>
+            <p>{fullDT}</p>
             <p>&nbsp;</p>
             <p>{utc}</p>
             <p>&nbsp;</p>
@@ -80,6 +80,10 @@ class Timestamp extends React.Component {
       else {
          linkText = UxpDateTimeUtils.getFormattedDateTimeAdvanced(this.state.displayDate, !this.props.is24, this.props.showSeconds);
       }
+
+
+      console.log("show date: " + this.props.showDate + ", show time: " + this.props.showTime);
+
 
       const ttTargetID = _.uniqueId('ttTarget_');
       const tooltipID = _.uniqueId('tooltip_');
@@ -117,7 +121,7 @@ class Timestamp extends React.Component {
 Timestamp.propTypes = {
 
    /**
-    * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020.
+    * @uxpindescription Enter the date and time. Dates: Feb 8, 2020 or 2/6/2020. Times: 4:20 pm or 16:20. 
     * @uxpinpropname Date
     */
    calDate: PropTypes.string,
