@@ -1,6 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Rating as FRating, RatingSize } from '@fluentui/react/lib/Rating';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
 
@@ -72,17 +73,34 @@ class Rating extends React.Component {
         let index = this.state.selectedIndex;
         let stars = this.state.maxNumberOfStars;
 
+        const ttTargetID = _.uniqueId('ttTarget_');
+        const tooltipId = _.uniqueId('tooltip_');
+        const ttProps = {
+            gapSpace: 2,
+            target: `#${ttTargetID}`,
+        };
+
         return (
-            <FRating
-                {...this.props}
-                rating={index}
-                max={stars}
-                allowZeroStars={true}
-                unselectedIcon={this.props.unselectedIcon.trim()}
-                icon={this.props.selectedIcon.trim()}
-                size={RatingSize[this.props.size]}
-                onChange={(e, v) => { this._onChange(v); }}
-            />
+            <>
+                <TooltipHost
+                    content={this.props.tooltip}
+                    id={tooltipID}
+                    calloutProps={ttProps}
+                >
+                    <FRating
+                        {...this.props}
+                        rating={index}
+                        max={stars}
+                        allowZeroStars={true}
+                        unselectedIcon={this.props.unselectedIcon.trim()}
+                        icon={this.props.selectedIcon.trim()}
+                        size={RatingSize[this.props.size]}
+                        id={ttTargetID}
+                        aria-describedby={tooltipID}
+                        onChange={(e, v) => { this._onChange(v); }}
+                    />
+                </TooltipHost>
+            </>
         )
     }
 }
@@ -122,6 +140,12 @@ Rating.propTypes = {
         'Small',
         'Large',
     ]),
+
+    /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Tooltip
+     * */
+    tooltip: PropTypes.string,
 
     /**
      * @uxpindescription To disable the control
