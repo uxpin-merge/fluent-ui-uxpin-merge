@@ -24,7 +24,6 @@ class Link extends React.Component {
     render() {
         const linkTarget = "_UXPin Mockup";
 
-        //We assemble the Link Text style next
         let linkTextStyles = {
             root: {
                 fontWeight: this.props.bold ? 'bold' : 'normal',
@@ -45,6 +44,7 @@ class Link extends React.Component {
                 <FLink
                     {...this.props}
                     href={this.props.linkHref}
+                    styles={linkTextStyles}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
                 >
