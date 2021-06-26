@@ -104,10 +104,9 @@ Toggle.propTypes = {
   inlineLabel: PropTypes.bool,
 
   /**
-   * @uxpindescription Tooltip for the control
-   * @uxpinpropname Tooltip
+   * @uxpindescription To disable the control
    * */
-  tooltip: PropTypes.string,
+  disabled: PropTypes.bool,
 
   /**
    * @uxpindescription Fires when the control's Checked value changes
