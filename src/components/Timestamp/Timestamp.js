@@ -56,12 +56,14 @@ class Timestamp extends React.Component {
    render() {
 
       let fullDT = UxpDateTimeUtils.getFullDateTime(this.state.displayDate);
+      let fullDTa = UxpDateTimeUtils.getFullDateTimeAdvanced(this.state.displayDate, true, this.props.showSeconds);
       let utc = "UTC: " + UxpDateTimeUtils.getUtcString(this.state.displayDate);
       let epoch = "Epoch: " + UxpDateTimeUtils.getEpochSeconds(this.state.displayDate);
 
       let ttContents = (
          <div>
             <p>{fullDT}</p>
+            <p>{fullDTa}</p>
             <p>&nbsp;</p>
             <p>{utc}</p>
             <p>&nbsp;</p>
