@@ -56,7 +56,12 @@ class Timestamp extends React.Component {
    render() {
 
       let utc = "UTC: " + UxpDateTimeUtils.getUtcString(this.state.displayDate);
+
+      console.log(utc);
+
       let epoch = "Epoch: " + UxpDateTimeUtils.getEpochSeconds(this.state.displayDate);
+
+      console.log(epoch);
 
       let ttContents = (
          <div>
@@ -68,6 +73,8 @@ class Timestamp extends React.Component {
       let linkText = (showDate && !showTime) ? UxpDateTimeUtils.getFormattedDate(this.state.displayDate) :
          (!showDate && showTime) ? UxpDateTimeUtils.getFormattedTime(this.state.displayDate) :
             UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
+
+      console.log("Link text: " + linkText);
 
       const ttTargetID = _.uniqueId('ttTarget_');
       const tooltipID = _.uniqueId('tooltip_');
