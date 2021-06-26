@@ -52,7 +52,12 @@ class Timestamp extends React.Component {
    }
 
    render() {
-      let ttContents = "Hello<br /> How are you?";
+      let ttContents = (
+         <div>
+            <p>Hello</p>
+            <p>How are you?</p>
+         </div>
+      );
 
       let linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
 
