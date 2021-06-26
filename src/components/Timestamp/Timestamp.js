@@ -34,6 +34,12 @@ class Timestamp extends React.Component {
       this.set();
    }
 
+   componentDidUpdate(prevProps) {
+      if (prevProps.calDate !== this.props.calDate) {
+         this.set();
+      }
+   }
+
    _onLinkClick() {
 
       // if (this.props.disabled)
@@ -46,7 +52,7 @@ class Timestamp extends React.Component {
    }
 
    render() {
-      let ttContents = "Hello";
+      let ttContents = "Hello<br /> How are you?";
 
       let linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
 
@@ -69,6 +75,7 @@ class Timestamp extends React.Component {
                   {...this.props}
                   value={linkText}
                   linkHref={''}
+                  italic={this.props.italic}
                   id={ttTargetID}
                   aria-describedby={tooltipID}
                />
