@@ -172,6 +172,7 @@ Rating.defaultProps = {
     unselectedIcon: "FavoriteStar",
     selectedIcon: "FavoriteStarFill",
     size: 'Small',
+    tooltip: '',
     disabled: false
 };
 
