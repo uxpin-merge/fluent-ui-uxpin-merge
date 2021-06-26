@@ -60,11 +60,9 @@ class Timestamp extends React.Component {
       let epoch = "Epoch: " + UxpDateTimeUtils.getEpochSeconds(this.state.displayDate);
 
       let ttContents = (
-         <div>
+         <div style={lineHeight = "1.5"}>
             <p>{fullDT}</p>
-            <p>&nbsp;</p>
             <p>{utc}</p>
-            <p>&nbsp;</p>
             <p>{epoch}</p>
          </div>
       );
