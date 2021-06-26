@@ -55,42 +55,31 @@ class Timestamp extends React.Component {
 
    render() {
 
+      let fullDT = UxpDateTimeUtils.getFullDateTime(this.state.displayDate);
       let utc = "UTC: " + UxpDateTimeUtils.getUtcString(this.state.displayDate);
-
-      console.log(utc);
-
       let epoch = "Epoch: " + UxpDateTimeUtils.getEpochSeconds(this.state.displayDate);
-
-      console.log(epoch);
 
       let ttContents = (
          <div>
             <p>{utc}</p>
+            <p>&nbsp;</p>
+            <p>{utc}</p>
+            <p>&nbsp;</p>
             <p>{epoch}</p>
          </div>
       );
 
+      //Get the formatted string for the control
       var linkText = "";
       if (this.props.showDate && !this.props.showTime) {
          linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
-         console.log("showDate && !showTime >> " + linkText);
       }
       else if (!this.props.showDate && this.props.showTime) {
-         linkText = UxpDateTimeUtils.getFormattedTime(this.state.displayDate);
-         console.log("!showDate && showTime >> " + linkText);
+         linkText = UxpDateTimeUtils.getFormattedTimeAdvanced(this.state.displayDate, !this.props.is24, this.props.showSeconds);
       }
       else {
-         linkText = UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
-         console.log("show both >> " + linkText);
+         linkText = UxpDateTimeUtils.getFormattedDateTimeAdvanced(this.state.displayDate, !this.props.is24, this.props.showSeconds);
       }
-
-
-
-      // let linkText = (showDate && !showTime) ? UxpDateTimeUtils.getFormattedDate(this.state.displayDate) :
-      //    (!showDate && showTime) ? UxpDateTimeUtils.getFormattedTime(this.state.displayDate) :
-      //       UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
-
-      // console.log("Link text: " + linkText);
 
       const ttTargetID = _.uniqueId('ttTarget_');
       const tooltipID = _.uniqueId('tooltip_');
@@ -146,6 +135,18 @@ Timestamp.propTypes = {
    showTime: PropTypes.bool,
 
    /**
+    * @uxpindescription Whether to display the time component with seconds
+    * @uxpinpropname Show Seconds
+    */
+   showSeconds: PropTypes.bool,
+
+   /**
+    * @uxpindescription Whether to display the time using 24-hour rather than 12 hour with am/pm
+    * @uxpinpropname 24-hr Time
+    */
+   is24: PropTypes.bool,
+
+   /**
    * @uxpindescription To apply bold formatting
    */
    bold: PropTypes.bool,
@@ -186,6 +187,8 @@ Timestamp.defaultProps = {
    calDate: "Jul 1, 2021",
    showDate: true,
    showTime: true,
+   showSeconds: false,
+   is24: false,
    align: 'left',
    size: 'medium',
    bold: false,
