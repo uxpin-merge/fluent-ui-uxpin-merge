@@ -140,7 +140,6 @@ Timestamp.defaultProps = {
    size: 'medium',
    bold: false,
    italic: false,
-   tooltip: '',
 };
 
 
