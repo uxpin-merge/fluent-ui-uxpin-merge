@@ -72,20 +72,14 @@ class Timestamp extends React.Component {
       //Get the formatted string for the control
       var linkText = "";
       if (this.props.showDate && !this.props.showTime) {
-         console.log("this.props.showDate && !this.props.showTime");
          linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
       }
       else if (!this.props.showDate && this.props.showTime) {
-         console.log("!this.props.showDate && this.props.showTime");
          linkText = UxpDateTimeUtils.getFormattedTimeAdvanced(this.state.displayDate, !this.props.is24, this.props.showSeconds);
       }
       else {
          linkText = UxpDateTimeUtils.getFormattedDateTimeAdvanced(this.state.displayDate, !this.props.is24, this.props.showSeconds);
       }
-
-
-      console.log("show date: " + this.props.showDate + ", show time: " + this.props.showTime);
-
 
       const ttTargetID = _.uniqueId('ttTarget_');
       const tooltipID = _.uniqueId('tooltip_');
@@ -190,7 +184,7 @@ Timestamp.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Timestamp.defaultProps = {
-   calDate: "Jul 1, 2021",
+   calDate: "Jul 1, 2021, 4:20 pm",
    showDate: true,
    showTime: true,
    showSeconds: false,
