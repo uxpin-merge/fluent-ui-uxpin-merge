@@ -40,8 +40,6 @@ export const UxpDateTimeUtils = {
 		return false;
 	},
 
-
-
 	parseDate: function (dateStr) {
 		if (this.isValidDate(dateStr)) {
 			return new Date(dateStr);

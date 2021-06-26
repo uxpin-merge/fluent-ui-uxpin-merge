@@ -35,7 +35,9 @@ class Timestamp extends React.Component {
    }
 
    componentDidUpdate(prevProps) {
-      if (prevProps.calDate !== this.props.calDate) {
+      if ((prevProps.calDate !== this.props.calDate) ||
+         (prevProps.showDate !== this.props.showDate) ||
+         (prevProps.showTime !== this.props.showTime)) {
          this.set();
       }
    }
@@ -52,14 +54,20 @@ class Timestamp extends React.Component {
    }
 
    render() {
+
+      let utc = "UTC: " + UxpDateTimeUtils.getUtcString(this.state.displayDate);
+      let epoch = "Epoch: " + UxpDateTimeUtils.getEpochSeconds(this.state.displayDate);
+
       let ttContents = (
          <div>
-            <p>Hello</p>
-            <p>How are you?</p>
+            <p>{utc}</p>
+            <p>{epoch}</p>
          </div>
       );
 
-      let linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
+      let linkText = (showDate && !showTime) ? UxpDateTimeUtils.getFormattedDate(this.state.displayDate) :
+         (!showDate && showTime) ? UxpDateTimeUtils.getFormattedTime(this.state.displayDate) :
+            UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
 
       const ttTargetID = _.uniqueId('ttTarget_');
       const tooltipID = _.uniqueId('tooltip_');
@@ -103,6 +111,18 @@ Timestamp.propTypes = {
    calDate: PropTypes.string,
 
    /**
+    * @uxpindescription Whether to display the date component
+    * @uxpinpropname Show Date
+    */
+   showDate: PropTypes.bool,
+
+   /**
+    * @uxpindescription Whether to display the time component
+    * @uxpinpropname Show Time
+    */
+   showTime: PropTypes.bool,
+
+   /**
    * @uxpindescription To apply bold formatting
    */
    bold: PropTypes.bool,
@@ -141,6 +161,8 @@ Timestamp.propTypes = {
  */
 Timestamp.defaultProps = {
    calDate: "Jul 1, 2021",
+   showDate: true,
+   showTime: true,
    align: 'left',
    size: 'medium',
    bold: false,
