@@ -92,6 +92,7 @@ class Timestamp extends React.Component {
                content={ttContents}
                id={tooltipID}
                directionalHint={DirectionalHint.topLeftEdge}
+               closeDelay={500}
                calloutProps={ttProps}
             >
                <Link
