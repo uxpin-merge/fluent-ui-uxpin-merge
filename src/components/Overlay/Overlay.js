@@ -5,7 +5,7 @@ import { Overlay as FOverlay } from '@fluentui/react/lib/Overlay';
 
 
 
-class Overlday extends React.Component {
+class Overlay extends React.Component {
    constructor(props) {
       super(props);
 
@@ -93,7 +93,7 @@ class Overlday extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-Coachmark.propTypes = {
+Overlay.propTypes = {
 
    /**
     * @uxpindescription Whether to display the Overlay 
@@ -125,11 +125,11 @@ Coachmark.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-Overlday.defaultProps = {
+Overlay.defaultProps = {
    show: true,
    isDark: false,
    isBlocking: false,
 };
 
 
-export { Overlday as default };
+export { Overlay as default };
