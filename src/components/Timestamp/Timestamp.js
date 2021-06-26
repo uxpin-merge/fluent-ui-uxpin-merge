@@ -71,17 +71,17 @@ class Timestamp extends React.Component {
       );
 
       var linkText = "";
-      if (showDate && !showTime) {
+      if (this.props.showDate && !this.props.showTime) {
          linkText = UxpDateTimeUtils.getFormattedDate(this.state.displayDate);
          console.log("showDate && !showTime >> " + linkText);
       }
-      elseif(!showDate && showTime) {
+      else if (!this.props.showDate && this.props.showTime) {
          linkText = UxpDateTimeUtils.getFormattedTime(this.state.displayDate);
          console.log("!showDate && showTime >> " + linkText);
       }
-      elseif(showDate && !showTime) {
+      else {
          linkText = UxpDateTimeUtils.getFormattedDateTime(this.state.displayDate);
-         console.log("showDate && showTime >> " + linkText);
+         console.log("show both >> " + linkText);
       }
 
 
