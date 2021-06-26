@@ -2,6 +2,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Rating as FRating, RatingSize } from '@fluentui/react/lib/Rating';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
+import { DirectionalHint } from '@fluentui/react/lib/Callout';
 
 
 
@@ -85,6 +86,7 @@ class Rating extends React.Component {
                 <TooltipHost
                     content={this.props.tooltip}
                     id={tooltipID}
+                    directionalHint={DirectionalHint.topLeftEdge}
                     calloutProps={ttProps}
                 >
                     <FRating
