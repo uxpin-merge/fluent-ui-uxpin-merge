@@ -1,8 +1,8 @@
 import * as React from 'react';
-import VerticalStack from '../VerticalStack';
+import HideableLayer from '../HideableLayer';
 
 
 
 export default (
-    <VerticalStack uxpId="verticalstack1" />
+    <HideableLayer uxpId="hideablelayer1" />
 );
