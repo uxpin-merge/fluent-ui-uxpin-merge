@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Layer, LayerHost } from '@fluentui/react/lib/Layer';
+import { LayerHost } from '@fluentui/react/lib/Layer';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { Text as Text } from '@fluentui/react/lib/Text';
+import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
@@ -27,7 +27,7 @@ const defaultPadding = "0";
 
 
 
-class HideableLayer extends React.Component {
+class HideablePanel extends React.Component {
     constructor(props) {
         super(props);
 
@@ -196,7 +196,7 @@ class HideableLayer extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-HideableLayer.propTypes = {
+HideablePanel.propTypes = {
 
     /**
      * Don't show this prop in the UXPin Editor. 
@@ -242,7 +242,7 @@ HideableLayer.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-HideableLayer.defaultProps = {
+HideablePanel.defaultProps = {
     show: true,
     internalPadding: 0,
     gutterPadding: 12,
@@ -251,4 +251,4 @@ HideableLayer.defaultProps = {
 }
 
 
-export { HideableLayer as default };
+export { HideablePanel as default };

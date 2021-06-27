@@ -4,7 +4,7 @@ module.exports = {
       {
         name: 'Containers',
         include: [
-          'src/components/HideableLayer/HideableLayer.js',
+          'src/components/HideablePanel/HideablePanel.js',
           'src/components/HorizontalStack/HorizontalStack.js',
           'src/components/MetaDataGroup/MetaDataGroup.js',
           'src/components/MetaDataPair/MetaDataPair.js',
