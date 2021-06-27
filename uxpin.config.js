@@ -11,7 +11,6 @@ module.exports = {
           'src/components/PageHeader/PageHeader.js',
           'src/components/PageFooter/PageFooter.js',
           'src/components/Shape/Shape.js',
-          'src/components/Toast/Toast.js',
           'src/components/VerticalStack/VerticalStack.js',
         ],
       },
