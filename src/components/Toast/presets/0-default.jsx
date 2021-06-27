@@ -1,8 +1,8 @@
 import * as React from 'react';
-import HideablePanel from '../HideablePanel';
+import Toast from '../Toast';
 
 
 
 export default (
-    <HideablePanel uxpId="hideablepanel1" />
+    <Toast uxpId="toast1" />
 );
