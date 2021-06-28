@@ -1,8 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {
-    Coachmark as FCoachmark
-} from '@fluentui/react/lib/Coachmark';
 import { Tooltip as FTooltip, TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 
@@ -41,30 +38,55 @@ class Tooltip extends React.Component {
 
     render() {
 
+        const ttTargetID = _.uniqueId('ttTarget_');
+        const tooltipID = _.uniqueId('tooltip_');
+
+        var ttChild = undefined;
+        if (this.props.children) {
+
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            if (childList.length) {
+                //We only use the first child. All other children are ignored.
+                ttChild = childList[0];
+                ttChild.id = ttTargetID;
+                ttChild.ariaDescribedby = tooltipID;
+            }
+        }
+
+        const ttProps = {
+            gapSpace: 2,
+            target: `#${ttTargetID}`,
+            isBeakVisible: this.props.showBeak,
+        };
+
+        let divStyle = ttChild ? undefined : {
+            display: 'inline-block', //required for tooltip host
+            width: 20,
+            height: 20,
+            borderRadius: 4,
+            background: this.props.showMarker ? '#640487' : 'transparent',
+        };
+
+        //If we have any children, we use the TooltipHost instead of the Tooltip.
+
         return (
             <div>
-                <div //The control actually acting as the tooltip target. 
-                    className="trigger"
-                    ref={this._targetElm}
-                    style={{
-                        display: 'inline-block', //required for tooltip host
-                        width: 20,
-                        height: 20,
-                        borderRadius: 4,
-                        background: this.props.showMarker ? '#640487' : 'transparent',
-                    }} />
-                <FTooltip
-                    {...this.props}
-                    targetElement={this._targetElm}
-                    calloutProps={{
-                        hidden: !this.props.show,
-                        isBeakVisible: this.props.showBeak,
-                        gapSpace: 2,
-                    }}
+                <TooltipHost
                     content={this.props.text}
                     directionalHint={DirectionalHint[this.state.ttDirection]}
-                />
+                    closeDelay={500}
+                    id={tooltipID}
+                    calloutProps={ttProps}
+                    targetElement={this._targetElm}
+                >
+                    <div ref={this._targetElm} style={divStyle}>
+                        {ttChild}
+                    </div>
+                </TooltipHost>
             </div>
+
         );
     }
 }
@@ -74,6 +96,14 @@ class Tooltip extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Tooltip.propTypes = {
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
+     */
+    children: PropTypes.node,
 
     /**
      * @uxpindescription Whether to display the Tooltlip 
@@ -94,7 +124,7 @@ Tooltip.propTypes = {
 
     /**
      * @uxpindescription The main message text
-     * @uxpincontroltype textfield(3)
+     * @uxpincontroltype textfield(4)
      */
     text: PropTypes.string,
 
