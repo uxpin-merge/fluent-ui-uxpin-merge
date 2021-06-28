@@ -42,17 +42,6 @@ class Timestamp extends React.Component {
       }
    }
 
-   _onLinkClick() {
-
-      // if (this.props.disabled)
-      //     return;
-
-      // //Raise this event to UXPin. We'll send them the HREF value in case they can catch it.
-      // if (this.props.onLinkClick) {
-      //     this.props.onLinkClick(this.props.linkHref);
-      // }
-   }
-
    render() {
 
       let fullDT = UxpDateTimeUtils.getFullDateTimeAdvanced(this.state.displayDate, false, this.props.showSeconds);
