@@ -13,6 +13,29 @@ class Tooltip extends React.Component {
         super(props);
 
         this._targetElm = React.createRef();
+
+        this.state = {
+            ttDirection: "topCenter",
+        }
+    }
+
+    set() {
+        //Let's see if we can parse a real date
+        let direction = this.props.direction;
+
+        this.setState(
+            { ttDirection: direction }
+        )
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.direction !== this.props.direction) {
+            this.set();
+        }
     }
 
 
@@ -39,8 +62,7 @@ class Tooltip extends React.Component {
                         gapSpace: 2,
                     }}
                     content={this.props.text}
-                    // directionalHint={this.props.direction}
-                    directionalHint={DirectionalHint[this.props.direction]}
+                    directionalHint={DirectionalHint[this.state.ttDirection]}
                 />
             </div>
         );
