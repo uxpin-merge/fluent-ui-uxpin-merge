@@ -39,8 +39,8 @@ class Tooltip extends React.Component {
                         gapSpace: 2,
                     }}
                     content={this.props.text}
-                    directionalHint={this.props.direction}
-                // directionalHint={DirectionalHint[this.props.direction]}
+                    // directionalHint={this.props.direction}
+                    directionalHint={DirectionalHint[this.props.direction]}
                 />
             </div>
         );
