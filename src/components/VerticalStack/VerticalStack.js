@@ -186,7 +186,7 @@ VerticalStack.propTypes = {
      * Don't show this prop in the UXPin Editor. 
      * @uxpinignoreprop 
      * @uxpindescription Contents for the body of the control. 
-     * @uxpinpropname Right Contents
+     * @uxpinpropname Children
      */
     children: PropTypes.node,
 
