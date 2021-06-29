@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Tooltip as FTooltip, TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
+import { Stack } from '@fluentui/react/lib/Stack';
 
 
 
@@ -79,11 +80,15 @@ class Tooltip extends React.Component {
                     closeDelay={500}
                     id={tooltipID}
                     calloutProps={ttProps}
-                    targetElement={this._targetElm}
                 >
-                    <div ref={this._targetElm} style={divStyle}>
+                    <Stack
+                        style={divStyle}
+                        id={ttTargetID}
+                        ariaDescribedby={tooltipID}>
+
                         {ttChild}
-                    </div>
+
+                    </Stack>
                 </TooltipHost>
             </div>
 
