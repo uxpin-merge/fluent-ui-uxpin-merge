@@ -41,12 +41,21 @@ class Tooltip extends React.Component {
         const tooltipID = _.uniqueId('tooltip_');
 
         const ttProps = {
-            gapSpace: 2,
+            gapSpace: 4,
             target: `#${ttTargetID}`,
         };
 
-        var ttChild = '';
-        var hasChildren = false;
+        var ttChild = (
+            <div
+                style={{
+                    display: 'inline-block',
+                    width: 10,
+                    height: 10,
+                    borderRadius: 10,
+                    background: this.props.showMarker ? '#640487' : 'transparent',
+                }} />
+        );
+
         if (this.props.children) {
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -58,14 +67,6 @@ class Tooltip extends React.Component {
                 hasChildren = true;
             }
         }
-
-        let divStyle = hasChildren ? '' : {
-            //display: 'inline-block', //required for tooltip host
-            width: 20,
-            height: 20,
-            borderRadius: 4,
-            background: this.props.showMarker ? '#640487' : 'transparent',
-        };
 
         return (
             <>
@@ -80,7 +81,6 @@ class Tooltip extends React.Component {
                         {...this.props}
                         id={ttTargetID}
                         aria-describedby={tooltipID}
-                        styles={divStyle}
                     >
                         {ttChild}
                     </Stack>
