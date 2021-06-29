@@ -37,17 +37,10 @@ class Tooltip extends React.Component {
 
     render() {
 
-        console.log('tt: entering render');
-
         const ttTargetID = _.uniqueId('ttTarget_');
         const tooltipID = _.uniqueId('tooltip_');
 
-        const ttProps = {
-            gapSpace: 4,
-            target: `#${ttTargetID}`,
-        };
-
-        console.log('    tt: create div child');
+        var hasChildren = false;
 
         var ttChild = (
             <div
@@ -60,8 +53,6 @@ class Tooltip extends React.Component {
                 }} />
         );
 
-        console.log('    tt: assign child');
-
         if (this.props.children) {
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -70,17 +61,23 @@ class Tooltip extends React.Component {
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
                 ttChild = childList[0];
+                hasChildren = true;
             }
         }
 
-        console.log('    tt: return next');
+        const ttProps = {
+            gapSpace: 4,
+            target: `#${ttTargetID}`,
+            hidden: hasChildren ? '' : !this.props.open,
+        };
 
         return (
             <>
                 <TooltipHost
                     content={this.props.text}
                     directionalHint={DirectionalHint[this.props.direction]}
-                    closeDelay={500}
+                    closeDelay={300}
+                    showBeak={this.props.showBeak}
                     id={tooltipID}
                     calloutProps={ttProps}
                 >
@@ -113,13 +110,13 @@ Tooltip.propTypes = {
     children: PropTypes.node,
 
     /**
-     * @uxpindescription Whether to display the Tooltlip 
+     * @uxpindescription If there are no children, to show the tooltip on demand
      * @uxpinpropname Show
      */
-    show: PropTypes.bool,
+    open: PropTypes.bool,
 
     /**
-     * @uxpindescription Whether to show the purple target marker on the canvas 
+     * @uxpindescription In the standalone use case, whether to show the purple target marker on the canvas 
      * @uxpinpropname Show Marker
      */
     showMarker: PropTypes.bool,
