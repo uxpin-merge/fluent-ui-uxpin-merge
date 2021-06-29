@@ -62,7 +62,7 @@ class Tooltip extends React.Component {
             isBeakVisible: this.props.showBeak,
         };
 
-        let divStyle = ttChild ? undefined : {
+        let divStyle = ttChild ? '' : {
             display: 'inline-block', //required for tooltip host
             width: 20,
             height: 20,
