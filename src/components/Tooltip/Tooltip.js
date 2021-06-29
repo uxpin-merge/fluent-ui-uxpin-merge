@@ -42,6 +42,11 @@ class Tooltip extends React.Component {
         const ttTargetID = _.uniqueId('ttTarget_');
         const tooltipID = _.uniqueId('tooltip_');
 
+        const ttProps = {
+            gapSpace: 2,
+            target: `#${ttTargetID}`,
+        };
+
         var ttChild = undefined;
         if (this.props.children) {
 
@@ -51,29 +56,19 @@ class Tooltip extends React.Component {
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
                 ttChild = childList[0];
-                ttChild.id = ttTargetID;
-                ttChild.ariaDescribedby = tooltipID;
             }
         }
 
-        const ttProps = {
-            gapSpace: 2,
-            target: `#${ttTargetID}`,
-            isBeakVisible: this.props.showBeak,
-        };
-
         let divStyle = ttChild ? '' : {
-            display: 'inline-block', //required for tooltip host
+            //display: 'inline-block', //required for tooltip host
             width: 20,
             height: 20,
             borderRadius: 4,
             background: this.props.showMarker ? '#640487' : 'transparent',
         };
 
-        //If we have any children, we use the TooltipHost instead of the Tooltip.
-
         return (
-            <div>
+            <>
                 <TooltipHost
                     content={this.props.text}
                     directionalHint={DirectionalHint[this.state.ttDirection]}
@@ -90,7 +85,7 @@ class Tooltip extends React.Component {
 
                     </Stack>
                 </TooltipHost>
-            </div>
+            </>
 
         );
     }
