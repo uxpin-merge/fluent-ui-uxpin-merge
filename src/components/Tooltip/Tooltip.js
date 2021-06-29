@@ -68,6 +68,7 @@ class Tooltip extends React.Component {
         const ttProps = {
             gapSpace: 4,
             target: `#${ttTargetID}`,
+            isBeakVisible: this.props.showBeak,
             hidden: hasChildren ? '' : !this.props.open,
         };
 
@@ -77,7 +78,6 @@ class Tooltip extends React.Component {
                     content={this.props.text}
                     directionalHint={DirectionalHint[this.props.direction]}
                     closeDelay={300}
-                    showBeak={this.props.showBeak}
                     id={tooltipID}
                     calloutProps={ttProps}
                 >
@@ -160,7 +160,7 @@ Tooltip.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Tooltip.defaultProps = {
-    show: true,
+    open: true,
     showBeak: true,
     text: "I'm a basic tooltip",
     direction: "topCenter",
