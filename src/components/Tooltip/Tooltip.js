@@ -46,12 +46,11 @@ class Tooltip extends React.Component {
             <div
                 style={{
                     display: 'inline-block',
-                    // width: 20,
+                    width: 20,
                     height: 20,
                     borderRadius: 10,
                     background: this.props.showMarker ? '#640487' : 'transparent',
                 }} >
-                "Tooltip: Add any object as a chile"
             </div>
         );
 
