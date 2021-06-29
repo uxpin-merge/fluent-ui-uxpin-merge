@@ -70,7 +70,6 @@ class Tooltip extends React.Component {
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
                 ttChild = childList[0];
-                hasChildren = true;
             }
         }
 
