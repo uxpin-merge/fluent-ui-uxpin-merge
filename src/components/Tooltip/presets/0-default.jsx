@@ -5,7 +5,7 @@ import Text from '../../Text/Text';
 
 
 
-const instructions = 'Add any Merge control to the CardBody';
+const instructions = 'Add any Merge control to the Tooltip';
 
 export default (
   <Tooltip uxpId="tooltip1" >
