@@ -70,7 +70,6 @@ class Tooltip extends React.Component {
             gapSpace: 4,
             target: `#${ttTargetID}`,
             isBeakVisible: this.props.showBeak,
-            hidden: hasChildren ? '' : !this.props.open,
         };
 
         return (
@@ -111,10 +110,10 @@ Tooltip.propTypes = {
     children: PropTypes.node,
 
     /**
-     * @uxpindescription If there are no children, to show the tooltip on demand
-     * @uxpinpropname Show
+     * @uxpindescription The main message text
+     * @uxpincontroltype textfield(4)
      */
-    open: PropTypes.bool,
+    text: PropTypes.string,
 
     /**
      * @uxpindescription In the standalone use case, whether to show the purple target marker on the canvas 
@@ -126,12 +125,6 @@ Tooltip.propTypes = {
      * @uxpindescription Whether to show the 'beak' (or tip) of the Tooltlip 
      */
     showBeak: PropTypes.bool,
-
-    /**
-     * @uxpindescription The main message text
-     * @uxpincontroltype textfield(4)
-     */
-    text: PropTypes.string,
 
     /**
      * @uxpindescription The control's display direction
@@ -161,7 +154,6 @@ Tooltip.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Tooltip.defaultProps = {
-    open: true,
     showBeak: true,
     text: "I'm a basic tooltip",
     direction: "topCenter",
