@@ -9,6 +9,6 @@ const instructions = 'Add any Merge control to the Tooltip';
 
 export default (
   <Tooltip uxpId="tooltip1" >
-    <Text uxpId="text2" textValue={instructions} />
+    <Text uxpId="text1" textValue={instructions} />
   </Tooltip>
 );
