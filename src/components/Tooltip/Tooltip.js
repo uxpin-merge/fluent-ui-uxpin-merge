@@ -37,6 +37,8 @@ class Tooltip extends React.Component {
 
     render() {
 
+        console.log('tt: entering render');
+
         const ttTargetID = _.uniqueId('ttTarget_');
         const tooltipID = _.uniqueId('tooltip_');
 
@@ -45,16 +47,20 @@ class Tooltip extends React.Component {
             target: `#${ttTargetID}`,
         };
 
+        console.log('    tt: create div child');
+
         var ttChild = (
             <div
                 style={{
                     display: 'inline-block',
-                    width: 10,
-                    height: 10,
+                    width: 20,
+                    height: 20,
                     borderRadius: 10,
                     background: this.props.showMarker ? '#640487' : 'transparent',
                 }} />
         );
+
+        console.log('    tt: assign child');
 
         if (this.props.children) {
 
@@ -67,6 +73,8 @@ class Tooltip extends React.Component {
                 hasChildren = true;
             }
         }
+
+        console.log('    tt: return next');
 
         return (
             <>
