@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Tooltip as FTooltip, TooltipHost, } from '@fluentui/react/lib/Tooltip';
+import { Tooltip, TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import { Stack } from '@fluentui/react/lib/Stack';
 
@@ -9,8 +9,6 @@ import { Stack } from '@fluentui/react/lib/Stack';
 class Tooltip extends React.Component {
     constructor(props) {
         super(props);
-
-        this._targetElm = React.createRef();
 
         this.state = {
             ttDirection: "topCenter",
@@ -47,7 +45,8 @@ class Tooltip extends React.Component {
             target: `#${ttTargetID}`,
         };
 
-        var ttChild = undefined;
+        var ttChild = '';
+        var hasChildren = false;
         if (this.props.children) {
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -56,10 +55,11 @@ class Tooltip extends React.Component {
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
                 ttChild = childList[0];
+                hasChildren = true;
             }
         }
 
-        let divStyle = ttChild ? '' : {
+        let divStyle = hasChildren ? '' : {
             //display: 'inline-block', //required for tooltip host
             width: 20,
             height: 20,
@@ -71,18 +71,18 @@ class Tooltip extends React.Component {
             <>
                 <TooltipHost
                     content={this.props.text}
-                    directionalHint={DirectionalHint[this.state.ttDirection]}
+                    directionalHint={DirectionalHint[this.props.direction]}
                     closeDelay={500}
                     id={tooltipID}
                     calloutProps={ttProps}
                 >
                     <Stack
-                        style={divStyle}
+                        {...this.props}
                         id={ttTargetID}
-                        ariaDescribedby={tooltipID}>
-
+                        aria-describedby={tooltipID}
+                        styles={divStyle}
+                    >
                         {ttChild}
-
                     </Stack>
                 </TooltipHost>
             </>
