@@ -114,20 +114,18 @@ class GroupButton extends React.Component {
          widthList.push(widthPct);
       }
 
-
       return (
 
          <HorizontalStack
             {...this.props}
-            widths={widthList}
+            widths={widthList.toString()}
             internalPadding={0}
             gutterPadding={0}
             align={'stretch'}
             vAlign={'start'}
             addSpanner={false}
             wrap={false}
-            bgColor={''}
-         >
+            bgColor={''} >
 
             {buttonList}
 
