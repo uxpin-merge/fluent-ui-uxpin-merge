@@ -4,5 +4,5 @@ import SplitButton from '../SplitButton';
 
 
 export default (
-  <SplitButton uxpId="splitbutton1" />
+  <SplitButton uxpId="splitbutton1" style={{ width: '100%' }} />
 );
