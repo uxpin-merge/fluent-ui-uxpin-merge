@@ -104,6 +104,13 @@ class SplitButton extends React.Component {
       };
     }
 
+    let btnStyles = {
+      root: {
+        //Fixes the 'nudge up/down' issue
+        display: 'block',
+      }
+    }
+
     return (
       <>
         <TooltipHost
@@ -120,6 +127,7 @@ class SplitButton extends React.Component {
             primary={this.props.primary}
             iconProps={iconProps}
             menuProps={menuProps}
+            styles={btnStyles}
             //Always send 0 for the main button part
             onClick={() => { this._onClick(0) }}
           />
