@@ -38,10 +38,15 @@ class GroupButton extends React.Component {
             }));
       }
 
+      //Adjust against the floor (1) and ceiling (number of items)
+      let index = this.props.selectedIndex < 1 ? 1 :
+         this.props.selectedIndex > items.length ? items.length :
+            this.props.selectedIndex;
+
       //Store the selected index as 1 based, same as user input
       this.setState({
          items: items,
-         selectedIndex: this.props.selectedIndex
+         selectedIndex: index
       });
    }
 
