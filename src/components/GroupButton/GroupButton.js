@@ -82,19 +82,17 @@ class GroupButton extends React.Component {
    }
 
    render() {
-      console.log("Entering render");
 
       //Set up the Buttons individually
       let items = this.state.items;
       var i;
       var buttonList = [];
 
-      var widthList = [];
-      var widthPct = "100%";
-      if (items.length) {
-         widthPct = parseInt(100 / items.length) + "%";
+      let btnStyles = {
+         root: {
+            borderRadius: 0,
+         }
       }
-      console.log("widthPct " + widthPct);
 
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
@@ -109,14 +107,12 @@ class GroupButton extends React.Component {
                text={btn.text}
                iconName={btn.icon}
                disabled={this.props.disabled}
+               styles={btnStyles}
                onClick={() => { this._onButtonClick(btn.key) }}
             />
          );
          buttonList.push(button);
-         widthList.push(widthPct);
       }
-
-      console.log("widthList.toString() " + widthList.toString());
 
       return (
 
@@ -125,8 +121,7 @@ class GroupButton extends React.Component {
             widths={""}
             internalPadding={0}
             gutterPadding={0}
-            horizontalAlign={'stretch'} //native
-            align={'stretch'} //wrapped
+            align={'stretch'}
             vAlign={'middle'}
             addSpanner={false}
             spannerIndex={1000}
