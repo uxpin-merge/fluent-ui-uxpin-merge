@@ -82,18 +82,18 @@ class Slider extends React.Component {
 Slider.propTypes = {
 
   /**
-   * @uxpindescription The value of the Slider. This prop's live value is available for scripting.
-   * @uxpinbind onValueChange
-   * @uxpinpropname * Value
-   * */
-  sliderValue: PropTypes.number,
-
-  /**
    * @uxpindescription Description label of the Slider
    * @uxpinpropname Label
    * @uxpincontroltype textfield(3)
    * */
   label: PropTypes.string,
+
+  /**
+   * @uxpindescription The value of the Slider. This prop's live value is available for scripting.
+   * @uxpinbind onValueChange
+   * @uxpinpropname * Value
+   * */
+  sliderValue: PropTypes.number,
 
   /**
    * @uxpindescription The minimum value of the Slider
