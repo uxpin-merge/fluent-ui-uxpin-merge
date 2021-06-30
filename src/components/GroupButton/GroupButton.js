@@ -113,7 +113,7 @@ class GroupButton extends React.Component {
             vAlign={'start'}
             addSpanner={false}
             wrap={false}
-            bgColor={undefined}
+            bgColor={''}
          >
 
             {buttonList}
