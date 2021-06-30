@@ -96,6 +96,12 @@ Slider.propTypes = {
   sliderValue: PropTypes.number,
 
   /**
+   * @uxpindescription Optional flag whether to display the current Slider value
+   * @uxpinpropname Show Value
+   * */
+  showValue: PropTypes.bool,
+
+  /**
    * @uxpindescription The minimum value of the Slider
    * @uxpinpropname Min
    * */
@@ -124,12 +130,6 @@ Slider.propTypes = {
   //  * @uxpinpropname Vertical Height
   //  * */
   verticalHeight: PropTypes.number,
-
-  /**
-   * @uxpindescription Optional flag whether to display the current Slider value
-   * @uxpinpropname Show Value
-   * */
-  showValue: PropTypes.bool,
 
   /**
    * Providing a different event name to avoid uncontrolled collision with built in onChange event. 
