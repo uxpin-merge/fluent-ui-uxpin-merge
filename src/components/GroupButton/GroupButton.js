@@ -89,6 +89,9 @@ class GroupButton extends React.Component {
       var i;
       var buttonList = [];
 
+      var widthList = [];
+      var widthPct = 100 / items.length;
+
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
 
@@ -102,12 +105,13 @@ class GroupButton extends React.Component {
                {...this.props}
                primary={isPrimary}
                text={btn.text}
-               icon={btn.icon}
+               iconName={btn.icon}
                disabled={this.props.disabled}
                onClick={() => { this._onButtonClick(btn.key) }}
             />
          );
          buttonList.push(button);
+         widthList.push(widthPct);
       }
 
 
@@ -115,6 +119,7 @@ class GroupButton extends React.Component {
 
          <HorizontalStack
             {...this.props}
+            widths={widthList}
             internalPadding={0}
             gutterPadding={0}
             align={'stretch'}
