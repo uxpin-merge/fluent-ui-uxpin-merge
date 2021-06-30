@@ -122,7 +122,7 @@ class GroupButton extends React.Component {
 
          <HorizontalStack
             {...this.props}
-            widths={widthList.toString()}
+            widths={""}
             internalPadding={0}
             gutterPadding={0}
             horizontalAlign={'stretch'} //native
