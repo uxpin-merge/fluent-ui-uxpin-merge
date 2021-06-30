@@ -90,7 +90,10 @@ class GroupButton extends React.Component {
       var buttonList = [];
 
       var widthList = [];
-      let widthPct = (100 / items.length) + "%";
+      var widthPct = "100%";
+      if (items.length) {
+         widthPct = parseInt(100 / items.length) + "%";
+      }
       console.log("widthPct " + widthPct);
 
       for (i = 0; i < items.length; i++) {
@@ -123,7 +126,7 @@ class GroupButton extends React.Component {
             internalPadding={0}
             gutterPadding={0}
             align={'stretch'}
-            vAlign={'start'}
+            vAlign={'middle'}
             addSpanner={false}
             wrap={false}
             bgColor={''} >
