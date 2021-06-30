@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Button } from '../Button/Button';
-import { HorizontalStack } from '../HorizontalStack/HorizontalStack';
+import Button from '../Button/Button';
+import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
