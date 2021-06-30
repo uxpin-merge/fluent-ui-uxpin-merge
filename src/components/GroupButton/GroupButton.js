@@ -90,12 +90,11 @@ class GroupButton extends React.Component {
       var buttonList = [];
 
       var widthList = [];
-      var widthPct = (100 / items.length) + "%";
+      let widthPct = (100 / items.length) + "%";
+      console.log("widthPct " + widthPct);
 
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
-
-         console.log("Setting up " + btn.text);
 
          let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
 
@@ -113,6 +112,8 @@ class GroupButton extends React.Component {
          buttonList.push(button);
          widthList.push(widthPct);
       }
+
+      console.log("widthList.toString() " + widthList.toString());
 
       return (
 
