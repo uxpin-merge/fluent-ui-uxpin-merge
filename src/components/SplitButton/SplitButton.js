@@ -109,6 +109,7 @@ class SplitButton extends React.Component {
       root: {
         //Fixes the 'nudge up/down' issue
         display: 'block',
+        lineHeight: 'normal',
       }
     }
 
