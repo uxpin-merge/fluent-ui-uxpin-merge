@@ -185,7 +185,7 @@ GroupButton.propTypes = {
 GroupButton.defaultProps = {
    disabled: false,
    items: defaultItems,
-   selectedIndex: 1,
+   selectedIndex: 0,
 };
 
 
