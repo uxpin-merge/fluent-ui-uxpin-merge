@@ -8,9 +8,9 @@ import { getTokens, csv2arr } from '../_helpers/parser';
 
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultItems = `icon(LineChart) Graph
-icon(BulletedList) List
-"Bananas (1,001)"`;
+const defaultItems = `icon(EmojiDisappointed) Poor
+icon(EmojiNeutral) Neutral
+icon(Emoji2) Good`;
 
 
 class GroupButton extends React.Component {
@@ -38,8 +38,9 @@ class GroupButton extends React.Component {
             }));
       }
 
-      //Adjust against the floor (1) and ceiling (number of items)
-      let index = this.props.selectedIndex < 1 ? 1 :
+      //Adjust against the floor (0) and ceiling (number of items)
+      //If it's 0 then nothing is selected, which is OK for some use cases.
+      let index = this.props.selectedIndex < 0 ? 0 :
          this.props.selectedIndex > items.length ? items.length :
             this.props.selectedIndex;
 
@@ -129,7 +130,6 @@ class GroupButton extends React.Component {
             align={'stretch'}
             vAlign={'middle'}
             addSpanner={false}
-            spannerIndex={1000}
             wrap={false}
             bgColor={''} >
 
