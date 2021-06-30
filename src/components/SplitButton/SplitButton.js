@@ -175,7 +175,7 @@ SplitButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-  * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting.
+  * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting. (Used at runtime only.)
   * @uxpinpropname * Selected Index
   * @uxpinbind onButtonClick
   */
