@@ -25,13 +25,18 @@ class GroupButton extends React.Component {
    }
 
    set() {
-      let items = csv2arr(this.props.tabs)
-         .flat()
-         .map((val, index) => ({
-            text: getTokens(val).text,
-            key: index + 1,
-            icon: this.getLeftIcon(val)
-         }));
+
+      var items = [];
+
+      if (this.props.items) {
+         items = csv2arr(this.props.items)
+            .flat()
+            .map((val, index) => ({
+               text: getTokens(val).text,
+               key: index + 1,
+               icon: this.getLeftIcon(val)
+            }));
+      }
 
       //Store the selected index as 1 based, same as user input
       this.setState({
@@ -77,6 +82,7 @@ class GroupButton extends React.Component {
    }
 
    render() {
+      console.log("Entering render");
 
       //Set up the Buttons individually
       let items = this.state.items;
@@ -85,6 +91,8 @@ class GroupButton extends React.Component {
 
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
+
+         console.log("Setting up " + btn.text);
 
          let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
 
