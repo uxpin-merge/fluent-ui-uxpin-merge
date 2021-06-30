@@ -11,9 +11,9 @@ const defaultIcon = '';
 
 //Default items list to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultItems = `icon(Document) Add Document
-icon(FileCode) Add Code File
-icon(Picture) Add Picture`;
+const defaultItems = `icon(PageAdd) Add Document
+icon(Photo2Add) Add Picture
+icon(AddFriend) Add User`;
 
 
 
@@ -175,8 +175,15 @@ SplitButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+  * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting.
+  * @uxpinpropname * Selected Index
+  * @uxpinbind onButtonClick
+  */
+  index: PropTypes.number,
+
+  /**
  * @uxpindescription Fires when the button is clicked on.
- * @uxpinpropname Click
+ * @uxpinpropname * Click
  * */
   onButtonClick: PropTypes.func,
 };
