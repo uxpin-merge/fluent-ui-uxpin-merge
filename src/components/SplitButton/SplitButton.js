@@ -74,11 +74,12 @@ class SplitButton extends React.Component {
     }
   }
 
-  //The main Icon Button always passes 0.
-  //Any sub-menu buttons pass their 1-based index value.
   _onClick(index) {
 
-    //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
+    //The main Button always passes 0.
+    //Any sub-menu buttons pass their 1-based index value.
+
+    //Raise this event to UXPin.
     if (this.props.onButtonClick) {
       this.props.onButtonClick(index);
     }
