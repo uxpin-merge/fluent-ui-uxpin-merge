@@ -125,10 +125,11 @@ class GroupButton extends React.Component {
             widths={widthList.toString()}
             internalPadding={0}
             gutterPadding={0}
-            horizontalAlign={'stretch'}//native
+            horizontalAlign={'stretch'} //native
             align={'stretch'} //wrapped
             vAlign={'middle'}
             addSpanner={false}
+            spannerIndex={1000}
             wrap={false}
             bgColor={''} >
 
