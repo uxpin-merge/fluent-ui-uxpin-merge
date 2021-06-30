@@ -114,7 +114,7 @@ class SplitButton extends React.Component {
     }
 
     return (
-      <>
+      <div>
         <TooltipHost
           content={this.props.tooltip}
           id={tooltipID}
@@ -135,7 +135,7 @@ class SplitButton extends React.Component {
           />
 
         </TooltipHost>
-      </>
+      </div>
     );
   }
 
