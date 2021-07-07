@@ -39,7 +39,7 @@ class Breadcrumb extends React.Component {
             //Prepare for use by Breadcrumb. Must be 0 based.
             let adjustedCurrentItem = currentItem - 1;
 
-            console("Set. Item count: " + itemList.length);
+            console.log("Set. Item count: " + itemList.length);
 
             for (var i = 0; i < itemList.length; i++) {
                let item = itemList[i];
