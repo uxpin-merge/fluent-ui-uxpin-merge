@@ -155,7 +155,7 @@ class StatusSet extends React.Component {
             />
          );
 
-         this.props.iconPosition === posStart ? itemList.unshift(textUI) : itemList.push(textUI);
+         this.props.iconPosition === posStart ? itemList.push(textUI) : itemList.unshift(textUI);
       }
 
       return (
@@ -205,18 +205,6 @@ StatusSet.propTypes = {
    iconPosition: PropTypes.oneOf([posStart, posEnd]),
 
    /**
-    * @uxpindescription Custom icon to display. Note: Type must be set to 'Custom'.
-    * @uxpinpropname Cust Icon Name
-    * */
-   iconName: PropTypes.string,
-
-   /**
-    * @uxpindescription Custom color for a custom icon. Use a color token or a standard Hex Color, such as '#0070BA', Note: Type must be set to 'Custom'.
-    * @uxpinpropname Cust Icon Color
-    * */
-   iconColor: PropTypes.string,
-
-   /**
    * @uxpindescription Custom text displayed in the control. Note: Type must be set to 'Custom'.
    * @uxpinpropname Cust Text
    * */
@@ -231,6 +219,18 @@ StatusSet.propTypes = {
     * @uxpindescription To apply italic formatting
     */
    italic: PropTypes.bool,
+
+   /**
+    * @uxpindescription Custom icon to display. Note: Type must be set to 'Custom'.
+    * @uxpinpropname Icon Name
+    * */
+   iconName: PropTypes.string,
+
+   /**
+    * @uxpindescription Custom color for a custom icon. Use a color token or a standard Hex Color, such as '#0070BA', Note: Type must be set to 'Custom'.
+    * @uxpinpropname Icon Color
+    * */
+   iconColor: PropTypes.string,
 
    /**
     * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
@@ -257,7 +257,7 @@ StatusSet.propTypes = {
 StatusSet.defaultProps = {
    roleType: statusDefault,
    gutterPadding: defaultGutter,
-   iconPosition: posEnd,
+   iconPosition: posStart,
    size: defaultSize,
    text: '',
    iconName: '',
