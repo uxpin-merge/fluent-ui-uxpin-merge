@@ -69,7 +69,7 @@ export const UxpStatus = {
       role: 'inProgress',
       text: 'In Progress',
       color: 'neutralPrimary',
-      iconName: 'SkypeCircleCheck',
+      iconName: 'SyncStatus',
    },
 
    queued: {
@@ -96,7 +96,7 @@ export const UxpStatus = {
    futureStep: {
       role: 'futureStep',
       text: 'Future Step',
-      color: 'neutralLight',
+      color: 'neutralSecondary',
       iconName: 'Blocked2',
    },
 
