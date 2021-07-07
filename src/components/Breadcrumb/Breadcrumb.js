@@ -5,6 +5,7 @@ import { getTokens } from '../_helpers/parser';
 
 
 
+const defaultMaxDisplayedItems = 5;
 const defaultItems = `Home | http://www.uxpin.com
 Examples | https://www.uxpin.com/examples/
 Accordian | https://www.uxpin.com/examples/accordion`;
@@ -39,13 +40,13 @@ class Breadcrumb extends React.Component {
             //Prepare for use by Breadcrumb. Must be 0 based.
             let adjustedCurrentItem = currentItem - 1;
 
-            console.log("Set. Item count: " + itemList.length);
-
             for (var i = 0; i < itemList.length; i++) {
                let item = itemList[i];
 
-               let isCurrent = adjustedCurrentItem === i;
+               let isCurrent = adjustedCurrentItem == i;
                let token = this._parseTextAndLink(item, i, isCurrent);
+
+               console.log("adjusted current index: " + adjustedCurrentItem + ". isCurrent: " + isCurrent);
 
                if (token)
                   list.push(token);
@@ -86,8 +87,6 @@ class Breadcrumb extends React.Component {
                }
             }
 
-            console.log("Left: " + left + " ; right: " + right);
-
             //Parse into a params object that Breadcrumb uses
             let token = {
                key: order,
@@ -119,6 +118,8 @@ class Breadcrumb extends React.Component {
 
    _onLinkClick(index) {
       //The index comes in 1-based.
+
+      console.log("Clicked on " + index);
 
       //If the index changed, let's push the new index value
       // if (this.props.onIndexChanged) {
@@ -157,6 +158,7 @@ class Breadcrumb extends React.Component {
             {...this.props}
             overflowIndex={1}
             items={this.state._items}
+            maxDisplayedItems={this.props.maxDisplayedItems}
             styles={bStyles}
          />
       );
@@ -181,6 +183,12 @@ Breadcrumb.propTypes = {
     * */
    currentItem: PropTypes.number,
 
+   /**
+    * @uxpindescription The maximum number of items to display before forcing extras into the overflow.
+    * @uxpinpropname Max Displayed Items
+    * */
+   maxDisplayedItems: PropTypes.number,
+
 };
 
 /**
@@ -189,6 +197,7 @@ Breadcrumb.propTypes = {
 Breadcrumb.defaultProps = {
    items: defaultItems,
    currentItem: 0,
+   maxDisplayedItems: defaultMaxDisplayedItems,
 };
 
 
