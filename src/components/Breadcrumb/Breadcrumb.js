@@ -27,7 +27,7 @@ class Breadcrumb extends React.Component {
       var currentItem = 0;
 
       if (this.props.items) {
-         let itemList = this.props.links.match(/[^\r\n]+/g);
+         let itemList = this.props.items.match(/[^\r\n]+/g);
 
          if (itemList && itemList.length) {
 
@@ -38,6 +38,8 @@ class Breadcrumb extends React.Component {
 
             //Prepare for use by Breadcrumb. Must be 0 based.
             let adjustedCurrentItem = currentItem - 1;
+
+            console("Set. Item count: " + itemList.length);
 
             for (var i = 0; i < itemList.length; i++) {
                let item = itemList[i];
@@ -73,7 +75,7 @@ class Breadcrumb extends React.Component {
 
          //First display side
          if (links && links.length) {
-            let left = links[0].trim();     //This is the display text
+            let left = links[0]?.trim();     //This is the display text
             var right = '';          //This is the optional link
 
             if (links[1]) {
@@ -83,6 +85,8 @@ class Breadcrumb extends React.Component {
                   right = href;
                }
             }
+
+            console.log("Left: " + left + " ; right: " + right);
 
             //Parse into a params object that Breadcrumb uses
             let token = {
