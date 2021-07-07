@@ -46,8 +46,6 @@ class Breadcrumb extends React.Component {
                let isCurrent = adjustedCurrentItem == i;
                let token = this._parseTextAndLink(item, i, isCurrent);
 
-               console.log("adjusted current index: " + adjustedCurrentItem + ". isCurrent: " + isCurrent);
-
                if (token)
                   list.push(token);
             } //for loop
@@ -93,8 +91,10 @@ class Breadcrumb extends React.Component {
                text: left,
                href: right,
                isCurrentItem: isCurrent,
-               onClick: () => { this._onLinkClick(order + 1) }
+               onClick: () => { this._onLinkClick(order + 1) },
             };
+
+            console.log(left + ". isCurrent: " + isCurrent);
 
             return token;
          }
@@ -119,23 +119,14 @@ class Breadcrumb extends React.Component {
    _onLinkClick(index) {
       //The index comes in 1-based.
 
-      console.log("Clicked on " + index);
-
-      //If the index changed, let's push the new index value
-      // if (this.props.onIndexChanged) {
-      //    this.props.onIndexChanged(newIndex);
-      // }
-
+      //If the prop for an individual nav item's click event exists, let's push it. 
+      //Raise this event to UXPin. We'll send them info about which item was clicked on.
+      if (this.props[`onLink${index}Click`]) {
+         this.props[`onLink${index}Click`](index);
+      }
    }
 
    render() {
-
-      // let bStyles = {
-      //    root: {
-      //       display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
-      //       lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
-      //    }
-      // };
 
       let bStyles = {
          root: {
@@ -189,6 +180,71 @@ Breadcrumb.propTypes = {
     * */
    maxDisplayedItems: PropTypes.number,
 
+   /**
+     * @uxpindescription The list of nav items to show as disabled, separated with commas. (1-based index)
+     * @uxpinpropname Disabled Items
+     * */
+   disabled: PropTypes.string,
+
+   /**
+   * @uxpindescription Fires when Item 1 is clicked
+   * @uxpinpropname Item 1 Click
+   */
+   onLink1Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 2 is clicked
+   * @uxpinpropname Item 2 Click
+   */
+   onLink2Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 3 is clicked
+   * @uxpinpropname Item 3 Click
+   */
+   onLink3Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 4 is clicked
+   * @uxpinpropname Item 4 Click
+   */
+   onLink4Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 5 is clicked
+   * @uxpinpropname Item 5 Click
+   */
+   onLink5Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 6 is clicked
+   * @uxpinpropname Item 6 Click
+   */
+   onLink6Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 7 is clicked
+   * @uxpinpropname Item 7 Click
+   */
+   onLink7Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 8 is clicked
+   * @uxpinpropname Item 8 Click
+   */
+   onLink8Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 9 is clicked
+   * @uxpinpropname Item 9 Click
+   */
+   onLink9Click: PropTypes.func,
+
+   /**
+   * @uxpindescription Fires when Item 10 is clicked
+   * @uxpinpropname Item 10 Click
+   */
+   onLink10Click: PropTypes.func,
 };
 
 /**
