@@ -288,6 +288,7 @@ StatusSet.defaultProps = {
    iconColor: '',
    bold: false,
    italic: false,
+   tooltip: '',
 };
 
 
