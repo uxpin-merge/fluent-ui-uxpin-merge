@@ -20,12 +20,12 @@ export const UxpColors = {
     successBackground: '#dff6dd',   //MS Messaging success
     successBackgroundHover: '#8cbd18',   //MS yellowGreen10
 
-    warning: '#d83b01',             //MS orange
+    warning: '#ea4300',             //MS orangeLight
     warningText: '#000000',           //Black
     warningBackground: '#fed9cc',   //MS severe warning
     warningBackgroundHover: '#ffaa44',   //MS orange10
 
-    error: '#a80000',               //MS error block icon
+    error: '#d13438',               //MS red
     errorText: '#000000',           //Black,
     errorBackground: '#fde7e9',     //MS error block
     errorBackgroundHover: '#d13438',     //MS red10
