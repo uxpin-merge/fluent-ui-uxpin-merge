@@ -103,22 +103,23 @@ class StatusSet extends React.Component {
          }
          else {
             addIcon = false;
-            break;
          }
 
-         let c = UxpColors.getHexFromHexOrToken(this.props.iconColor);
-         if (c) {
-            iconColor = c;
-         }
-         else {
-            iconColor = UxpColors.getHexFromHexOrToken(defaultIconColor);
-         }
+         if (addIcon) {
+            let c = UxpColors.getHexFromHexOrToken(this.props.iconColor);
+            if (c) {
+               iconColor = c;
+            }
+            else {
+               iconColor = UxpColors.getHexFromHexOrToken(defaultIconColor);
+            }
 
-         if (this.props.text) {
-            textVal = this.props.text.trim();
-         }
-         else {
-            addText = false;
+            if (this.props.text) {
+               textVal = this.props.text.trim();
+            }
+            else {
+               addText = false;
+            }
          }
       }
       else {
