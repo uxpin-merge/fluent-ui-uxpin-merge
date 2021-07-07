@@ -137,15 +137,17 @@ class Breadcrumb extends React.Component {
       // };
 
       let bStyles = {
-         marginTop: -5,
-         marginBottom: -5,
-         display: 'inline-block',
-         width: 'min-content',
-         height: 'min-content',
-         selectors: {
-            '& .ms-Breadcrumb-list': {
-               height: 'min-content',
-               verticalAlign: 'middle',
+         root: {
+            marginTop: -5,
+            marginBottom: -5,
+            display: 'inline-block',
+            width: 'min-content',
+            height: 'min-content',
+            selectors: {
+               '& .ms-Breadcrumb-list': {
+                  height: 'min-content',
+                  verticalAlign: 'middle',
+               }
             }
          }
       };
@@ -153,6 +155,7 @@ class Breadcrumb extends React.Component {
       return (
          <FBreadcrumb
             {...this.props}
+            overflowIndex={1}
             items={this.state._items}
             styles={bStyles}
          />
