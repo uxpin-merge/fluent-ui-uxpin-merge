@@ -19,7 +19,6 @@ class Breadcrumb extends React.Component {
 
       this.state = {
          _items: [],
-         _selectedIndex: 0,
       }
    }
 
@@ -54,7 +53,6 @@ class Breadcrumb extends React.Component {
 
       this.setState({
          _items: list,
-         _selectedIndex: this.props.currentItem,
       })
    }
 
@@ -63,7 +61,8 @@ class Breadcrumb extends React.Component {
    }
 
    componentDidUpdate(prevProps) {
-      if (prevProps.items !== this.props.items) {
+      if (prevProps.items !== this.props.items ||
+         prevProps.currentItem !== this.props.currentItem) {
          this.set();
       }
    }
