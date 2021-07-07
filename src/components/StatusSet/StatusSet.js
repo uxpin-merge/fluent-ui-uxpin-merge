@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import Icon from '../Icon/Icon';
 import Text from '../Text/Text';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpStatus } from '../_helpers/uxpstatus';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
@@ -158,22 +160,39 @@ class StatusSet extends React.Component {
          this.props.iconPosition === posStart ? itemList.push(textUI) : itemList.unshift(textUI);
       }
 
+      const ttTargetID = _.uniqueId('ttTarget_');
+      const tooltipID = _.uniqueId('tooltip_');
+      const ttProps = {
+         gapSpace: 2,
+         target: `#${ttTargetID}`,
+      };
+
       return (
+         <>
+            <TooltipHost
+               content={this.props.tooltip}
+               id={tooltipID}
+               directionalHint={DirectionalHint.topLeftEdge}
+               calloutProps={ttProps}
+            >
+               <HorizontalStack
+                  {...this.props}
+                  widths={""}
+                  internalPadding={0}
+                  gutterPadding={this.props.gutterPadding}
+                  align={'stretch'}
+                  vAlign={'middle'}
+                  addSpanner={false}
+                  wrap={false}
+                  bgColor={''}
+                  id={ttTargetID}
+                  aria-describedby={tooltipID} >
 
-         <HorizontalStack
-            {...this.props}
-            widths={""}
-            internalPadding={0}
-            gutterPadding={this.props.gutterPadding}
-            align={'stretch'}
-            vAlign={'middle'}
-            addSpanner={false}
-            wrap={false}
-            bgColor={''} >
+                  {itemList}
 
-            {itemList}
-
-         </HorizontalStack>
+               </HorizontalStack>
+            </TooltipHost>
+         </>
 
       );
    }
@@ -247,6 +266,12 @@ StatusSet.propTypes = {
     * @uxpinpropname C Icon Color
     * */
    iconColor: PropTypes.string,
+
+   /**
+    * @uxpindescription Tooltip for the control
+    * @uxpinpropname Tooltip
+    * */
+   tooltip: PropTypes.string,
 };
 
 
