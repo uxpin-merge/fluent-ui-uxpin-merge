@@ -31,6 +31,7 @@ module.exports = {
           'src/components/Image/Image.js',
           'src/components/Link/Link.js',
           'src/components/Separator/Separator.js',
+          'src/components/StatusSet/StatusSet.js',
           'src/components/Text/Text.js',
           'src/components/Timestamp/Timestamp.js',
         ],
