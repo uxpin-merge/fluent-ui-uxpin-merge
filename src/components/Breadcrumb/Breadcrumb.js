@@ -129,20 +129,34 @@ class Breadcrumb extends React.Component {
 
    render() {
 
+      // let bStyles = {
+      //    root: {
+      //       display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
+      //       lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
+      //    }
+      // };
+
       let bStyles = {
-         root: {
-            display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
-            lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
+         marginTop: -5,
+         marginBottom: -5,
+         display: 'inline-block',
+         width: 'min-content',
+         height: 'min-content',
+         selectors: {
+            '& .ms-Breadcrumb-list': {
+               height: 'min-content',
+               verticalAlign: 'middle',
+            }
          }
       };
 
       return (
          <FBreadcrumb
+            {...this.props}
             items={this.state._items}
             styles={bStyles}
          />
       );
-
    };
 }
 
