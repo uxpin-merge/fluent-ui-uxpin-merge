@@ -148,15 +148,15 @@ export const UxpStatus = {
                return this.blocked;
             case 'syncing':
                return this.syncing;
-            case 'inProgress':
+            case 'inprogress':
                return this.inProgress;
             case 'queued':
                return this.queued;
             case 'waiting':
                return this.waiting;
-            case 'currentStep':
+            case 'currentstep':
                return this.currentStep;
-            case 'futureStep':
+            case 'futurestep':
                return this.futureStep;
             case 'reverted':
                return this.reverted;
