@@ -31,13 +31,8 @@ class Breadcrumb extends React.Component {
 
          if (itemList && itemList.length) {
 
-            //Adjust for floor and ceiling. 1-based. 0 for none.
-            currentItem = this.props.currentItem < 0 ? 0 :
-               this.props.currentItem > (itemList.length - 1) ? itemList.length - 1 :
-                  this.props.currentItem;
-
             //Prepare for use by Breadcrumb. Must be 0 based.
-            let adjustedCurrentItem = currentItem - 1;
+            let adjustedCurrentItem = this.props.currentItem - 1;
 
             for (var i = 0; i < itemList.length; i++) {
                let item = itemList[i];
