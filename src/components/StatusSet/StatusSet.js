@@ -27,15 +27,15 @@ class StatusSet extends React.Component {
       super(props);
 
       this.state = {
-         statusList = UxpStatus.getStatuses(),
-         status = UxpStatus.info,
+         statusList: UxpStatus.getStatuses(),
+         status: UxpStatus.info,
       }
    }
 
    set() {
 
       this.setState({
-         status = this.getSelectedStatus(),
+         status: this.getSelectedStatus(),
       });
    }
 
