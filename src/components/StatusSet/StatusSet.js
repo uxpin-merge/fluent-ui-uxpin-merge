@@ -205,10 +205,22 @@ StatusSet.propTypes = {
    iconPosition: PropTypes.oneOf([posStart, posEnd]),
 
    /**
-   * @uxpindescription Custom text displayed in the control. Note: Type must be set to 'Custom'.
-   * @uxpinpropname Cust Text
+   * @uxpindescription Custom text displayed in the control. Note: Role must be set to 'Custom'.
+   * @uxpinpropname C Text
    * */
    text: PropTypes.string,
+
+   /**
+    * @uxpindescription Custom icon to display. Note: Role must be set to 'Custom'.
+    * @uxpinpropname C Icon Name
+    * */
+   iconName: PropTypes.string,
+
+   /**
+    * @uxpindescription Custom color for a custom icon. Use a color token or a standard Hex Color, such as '#0070BA', Note: Role must be set to 'Custom'.
+    * @uxpinpropname C Icon Color
+    * */
+   iconColor: PropTypes.string,
 
    /**
    * @uxpindescription To apply bold formatting
@@ -219,18 +231,6 @@ StatusSet.propTypes = {
     * @uxpindescription To apply italic formatting
     */
    italic: PropTypes.bool,
-
-   /**
-    * @uxpindescription Custom icon to display. Note: Type must be set to 'Custom'.
-    * @uxpinpropname Icon Name
-    * */
-   iconName: PropTypes.string,
-
-   /**
-    * @uxpindescription Custom color for a custom icon. Use a color token or a standard Hex Color, such as '#0070BA', Note: Type must be set to 'Custom'.
-    * @uxpinpropname Icon Color
-    * */
-   iconColor: PropTypes.string,
 
    /**
     * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
