@@ -199,6 +199,32 @@ StatusSet.propTypes = {
    gutterPadding: PropTypes.number,
 
    /**
+    * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
+    */
+   size: PropTypes.oneOf([
+      'tiny',
+      'xSmall',
+      'small',
+      'smallPlus',
+      'medium',
+      'mediumPlus',
+      'large',
+      'xLarge',
+      'xxLarge',
+      'mega',
+   ]),
+
+   /**
+   * @uxpindescription To apply bold formatting
+   */
+   bold: PropTypes.bool,
+
+   /**
+    * @uxpindescription To apply italic formatting
+    */
+   italic: PropTypes.bool,
+
+   /**
     * @uxpindescription The location to display an icon, if one is set
     * @uxpinpropname Icon Position
     * */
@@ -221,33 +247,6 @@ StatusSet.propTypes = {
     * @uxpinpropname C Icon Color
     * */
    iconColor: PropTypes.string,
-
-   /**
-   * @uxpindescription To apply bold formatting
-   */
-   bold: PropTypes.bool,
-
-   /**
-    * @uxpindescription To apply italic formatting
-    */
-   italic: PropTypes.bool,
-
-   /**
-    * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
-    */
-   size: PropTypes.oneOf([
-      'tiny',
-      'xSmall',
-      'small',
-      'smallPlus',
-      'medium',
-      'mediumPlus',
-      'large',
-      'xLarge',
-      'xxLarge',
-      'mega',
-   ]),
-
 };
 
 
