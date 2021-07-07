@@ -46,7 +46,7 @@ export const UxpStatus = {
 
    unknown: {
       role: 'unknown',
-      text: 'unknown',
+      text: 'Unknown',
       color: 'neutralPrimary',
       iconName: 'Unknown',
    },
