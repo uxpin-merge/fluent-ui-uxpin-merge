@@ -143,36 +143,36 @@ class Breadcrumb extends React.Component {
          />
       );
 
-
    };
+}
 
-   /** 
-    * Set up the properties to be available in the UXPin property inspector. 
-    */
-   Breadcrumb.propTypes = {
-
-      /**
-       * @uxpindescription The list of Breadcrumb items. Put each item on a separate line using this pattern: Display Text | http://www.website.com (Optional)
-       * @uxpinpropname Items
-       * @uxpincontroltype codeeditor
-       */
-      items: PropTypes.string,
-
-      /**
-       * @uxpindescription The 1-based index for the item to display as the 'current item'. Use 0 if no item should be shown as the current one.
-       * @uxpinpropname Current Item
-       * */
-      currentItem: PropTypes.number,
-
-   };
+/** 
+ * Set up the properties to be available in the UXPin property inspector. 
+ */
+Breadcrumb.propTypes = {
 
    /**
-   * Set the default values for this control in the UXPin Editor.
-   */
-   Breadcrumb.defaultProps = {
-      items: defaultItems,
-      currentItem: 0,
-   };
+    * @uxpindescription The list of Breadcrumb items. Put each item on a separate line using this pattern: Display Text | http://www.website.com (Optional)
+    * @uxpinpropname Items
+    * @uxpincontroltype codeeditor
+    */
+   items: PropTypes.string,
+
+   /**
+    * @uxpindescription The 1-based index for the item to display as the 'current item'. Use 0 if no item should be shown as the current one.
+    * @uxpinpropname Current Item
+    * */
+   currentItem: PropTypes.number,
+
+};
+
+/**
+* Set the default values for this control in the UXPin Editor.
+*/
+Breadcrumb.defaultProps = {
+   items: defaultItems,
+   currentItem: 0,
+};
 
 
 export { Breadcrumb as default };
