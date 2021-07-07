@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import Icon from '../Icon/Icon';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
+import Icon from '../Icon/Icon';
 import Text from '../Text/Text';
 import { UxpStatus } from '../_helpers/uxpstatus';
 import { UxpColors } from '../_helpers/uxpcolorutils';
@@ -10,6 +10,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 const defaultGutter = 6;
 const defaultIconColor = "neutralPrimary";
+const defaultSize = 'medium';
 
 const posStart = 'start';
 const posEnd = 'end';
@@ -257,6 +258,7 @@ StatusSet.defaultProps = {
    roleType: statusDefault,
    gutterPadding: defaultGutter,
    iconPosition: posEnd,
+   size: defaultSize,
    text: '',
    iconName: '',
    iconColor: '',
