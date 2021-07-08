@@ -90,11 +90,16 @@ class ChoiceGroup extends React.Component {
     let pitems = UXPinParser.split(this.props.items).map(
       (item, index) => ({
         text: item.text,
+        iconName: item.iconName,
         key: index,
       })
     );
 
-    console.log("Found " + pitems.length + " items: " + pitems.toString());
+    let pitems2 = UXPinParser.parse(this.props.items);
+
+    console.log("pitems split: Found " + pitems.length + " items: " + pitems.toString());
+
+    console.log("pitems2 parse: Found " + pitems2.length + " items: " + pitems2.toString());
 
 
     this.setState({
