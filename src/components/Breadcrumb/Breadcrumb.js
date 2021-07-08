@@ -112,6 +112,7 @@ class Breadcrumb extends React.Component {
 
    render() {
 
+      //Overflow
       //Convert to 0-based index.
       //Floor: 0 or higher. 
       //Ceiling: Number of displayed items - 1. 
@@ -120,6 +121,12 @@ class Breadcrumb extends React.Component {
       let oIndex = overflow < 0 ? 0 :
          overflow > ceiling ? ceiling :
             overflow;
+
+      //MaxDisplayItems
+      //Floor: 1
+      //Ceiling: Any positive value
+      let mDisplay = this.props.maxDisplayedItems < 1 ? 1 :
+         this.props.maxDisplayedItems;
 
       let bStyles = {
          root: {
@@ -142,7 +149,7 @@ class Breadcrumb extends React.Component {
             {...this.props}
             overflowIndex={oIndex}
             items={this.state._items}
-            maxDisplayedItems={this.props.maxDisplayedItems}
+            maxDisplayedItems={mDisplay}
             styles={bStyles}
          />
       );
