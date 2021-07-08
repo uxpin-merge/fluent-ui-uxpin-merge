@@ -25,20 +25,35 @@ class Breadcrumb extends React.Component {
    set() {
       let list = [];
 
-      if (this.props.items) {
-         let itemList = this.props.items.match(/[^\r\n]+/g);
+      // if (this.props.items) {
+      //    let itemList = this.props.items.match(/[^\r\n]+/g);
 
-         if (itemList && itemList.length) {
+      //    if (itemList && itemList.length) {
 
-            for (var i = 0; i < itemList.length; i++) {
-               let item = itemList[i];
+      //       for (var i = 0; i < itemList.length; i++) {
+      //          let item = itemList[i];
 
-               let token = this._parseTextAndLink(item, i);
-               if (token)
-                  list.push(token);
-            }
+      //          let token = this._parseTextAndLink(item, i);
+      //          if (token)
+      //             list.push(token);
+      //       }
+      //    }
+      // }
+
+      UXPinParser.parse(this.props.items).map(
+         (item, index) => {
+            let token = this._parseTextAndLink(item?.text, index);
+            if (token)
+               list.push(token);
          }
-      }
+
+         //    {
+         //    key: index,
+         //    text: item.text ? item.text : '',
+         //    iconProps: this.props.tiled ? { iconName: item?.iconName } : '',
+         //    disabled: this.props.disabled,
+         // }
+      );
 
       this.setState({
          _items: list,
