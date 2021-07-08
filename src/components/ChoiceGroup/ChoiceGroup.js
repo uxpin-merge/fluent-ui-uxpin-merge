@@ -96,7 +96,13 @@ class ChoiceGroup extends React.Component {
       })
     );
 
-    let pitems2 = UXPinParser.parse(this.props.items);
+    let pitems2 = UXPinParser.parse(this.props.items).map(
+      (item, index) => ({
+        type: item?.type,
+        text: item?.text,
+        iconName: item?.iconName,
+        key: index,
+      }));
 
     var i = 0;
     for (i = 0; i < pitems.length; i++) {
