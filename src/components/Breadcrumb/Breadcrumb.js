@@ -6,7 +6,7 @@ import { Breadcrumb as FBreadcrumb } from '@fluentui/react/lib/Breadcrumb';
 
 const defaultMaxDisplayedItems = 5;
 const defaultOverflowIndex = 1;
-const defaultItems = `Home | http://www.uxpin.com
+const defaultItems = `Home
 Examples 
 Accordian`;
 
