@@ -90,7 +90,7 @@ class ChoiceGroup extends React.Component {
       (item, index) => { item }
     );
 
-    Console.log(parsedItems.toString());
+    console.log(parsedItems.toString());
 
 
 
