@@ -112,6 +112,9 @@ class Breadcrumb extends React.Component {
 
    render() {
 
+      //Convert to 0-based index.
+      let overflow = this.props.overflowIndex - 1;
+
       let bStyles = {
          root: {
             marginTop: -5,
@@ -131,7 +134,7 @@ class Breadcrumb extends React.Component {
       return (
          <FBreadcrumb
             {...this.props}
-            overflowIndex={1}
+            overflowIndex={overflow}
             items={this.state._items}
             maxDisplayedItems={this.props.maxDisplayedItems}
             size={this.props.size}
