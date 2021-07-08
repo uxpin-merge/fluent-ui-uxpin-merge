@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
+import * as UXPinParser from '../_helpers/UXPinParser';
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
@@ -28,15 +29,22 @@ class GroupButton extends React.Component {
 
       var items = [];
 
-      if (this.props.items) {
-         items = csv2arr(this.props.items)
-            .flat()
-            .map((val, index) => ({
-               text: getTokens(val).text,
-               key: index + 1,
-               icon: this.getLeftIcon(val)
-            }));
-      }
+      // if (this.props.items) {
+      //    items = csv2arr(this.props.items)
+      //       .flat()
+      //       .map((val, index) => ({
+      //          text: getTokens(val).text,
+      //          key: index + 1,
+      //          icon: this.getLeftIcon(val)
+      //       }));
+      // }
+
+      items = UXPinParser.parse(this.props.items).map(
+         (item, index) => ({
+            key: index + 1,
+            text: item.text ? item.text : '',
+            icon: item?.iconName,
+         }));
 
       //Adjust against the floor (0) and ceiling (number of items)
       //If it's 0 then nothing is selected, which is OK for some use cases.
