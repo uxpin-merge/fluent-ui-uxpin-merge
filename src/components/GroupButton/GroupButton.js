@@ -26,14 +26,20 @@ class GroupButton extends React.Component {
 
    set() {
 
-      var items = [];
-
-      items = UXPinParser.parse(this.props.items).map(
+      let items = UXPinParser.parse(this.props.items).map(
          (item, index) => ({
             key: index + 1,
             text: item.text ? item.text : '',
             icon: item?.iconName,
          }));
+
+      if (!items || items.length < 1) {
+         items.push({
+            key: 1,
+            text: "Group Button",
+            icon: '',
+         });
+      }
 
       //Adjust against the floor (0) and ceiling (number of items)
       //If it's 0 then nothing is selected, which is OK for some use cases.
