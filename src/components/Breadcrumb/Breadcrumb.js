@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Breadcrumb as FBreadcrumb } from '@fluentui/react/lib/Breadcrumb';
-
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 const defaultMaxDisplayedItems = 5;
