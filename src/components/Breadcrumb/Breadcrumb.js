@@ -6,9 +6,10 @@ import { getTokens } from '../_helpers/parser';
 
 
 const defaultMaxDisplayedItems = 5;
+const defaultOverflowIndex = 1;
 const defaultItems = `Home | http://www.uxpin.com
-Examples | https://www.uxpin.com/examples/
-Accordian | https://www.uxpin.com/examples/accordion`;
+Examples 
+Accordian`;
 
 
 
@@ -31,20 +32,15 @@ class Breadcrumb extends React.Component {
 
          if (itemList && itemList.length) {
 
-            //Prepare for use by Breadcrumb. Must be 0 based.
-            let adjustedCurrentItem = this.props.currentItem - 1;
-
             for (var i = 0; i < itemList.length; i++) {
                let item = itemList[i];
 
-               let isCurrent = adjustedCurrentItem == i;
-               let token = this._parseTextAndLink(item, i, isCurrent);
-
+               let token = this._parseTextAndLink(item, i);
                if (token)
                   list.push(token);
-            } //for loop
-         } //if items
-      } //if props.links
+            }
+         }
+      }
 
       this.setState({
          _items: list,
@@ -56,13 +52,12 @@ class Breadcrumb extends React.Component {
    }
 
    componentDidUpdate(prevProps) {
-      if (prevProps.items !== this.props.items ||
-         prevProps.currentItem !== this.props.currentItem) {
+      if (prevProps.items !== this.props.items) {
          this.set();
       }
    }
 
-   _parseTextAndLink(rawStr, order, isCurrent) {
+   _parseTextAndLink(rawStr, order) {
       if (rawStr && rawStr.length) {
          let links = rawStr.split("|");
 
@@ -84,11 +79,8 @@ class Breadcrumb extends React.Component {
                key: order,
                text: left,
                href: right,
-               isCurrentItem: isCurrent,
                onClick: () => { this._onLinkClick(order + 1) },
             };
-
-            console.log(left + ". isCurrent: " + isCurrent);
 
             return token;
          }
@@ -156,17 +148,11 @@ class Breadcrumb extends React.Component {
 Breadcrumb.propTypes = {
 
    /**
-    * @uxpindescription The list of Breadcrumb items. Put each item on a separate line using this pattern: Display Text | http://www.website.com (Optional)
+    * @uxpindescription The list of Breadcrumb items. Optionally, specify a link in the item, or capture the item's Click event using an Interaction.  To specify a link here, use this pattern: Display Text | http://www.website.com 
     * @uxpinpropname Items
     * @uxpincontroltype codeeditor
     */
    items: PropTypes.string,
-
-   /**
-    * @uxpindescription The 1-based index for the item to display as the 'current item'. Use 0 if no item should be shown as the current one.
-    * @uxpinpropname Current Item
-    * */
-   currentItem: PropTypes.number,
 
    /**
     * @uxpindescription The maximum number of items to display before forcing extras into the overflow.
@@ -175,10 +161,22 @@ Breadcrumb.propTypes = {
    maxDisplayedItems: PropTypes.number,
 
    /**
-     * @uxpindescription The list of nav items to show as disabled, separated with commas. (1-based index)
-     * @uxpinpropname Disabled Items
+    * @uxpindescription The 1-based index for grouping any overflow breadcrumb items
+    * @uxpinpropname Overflow Index
+    * */
+   overflowIndex: PropTypes.number,
+
+   /**
+    * @uxpindescription The display size of the Breadcrumb text
+    * @uxpinpropname Size
+    * */
+   size: PropTypes.oneOf(['smaller', 'small', 'medium', 'large']),
+
+   /**
+     * @uxpindescription Whether the control should be shown as disabled
+     * @uxpinpropname Disabled 
      * */
-   disabled: PropTypes.string,
+   disabled: PropTypes.bool,
 
    /**
    * @uxpindescription Fires when Item 1 is clicked
@@ -246,8 +244,10 @@ Breadcrumb.propTypes = {
 */
 Breadcrumb.defaultProps = {
    items: defaultItems,
-   currentItem: 0,
+   size: 'medium',
    maxDisplayedItems: defaultMaxDisplayedItems,
+   overflowIndex: defaultOverflowIndex,
+   disabled: false,
 };
 
 
