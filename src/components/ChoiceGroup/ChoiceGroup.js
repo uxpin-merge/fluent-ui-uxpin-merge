@@ -87,35 +87,21 @@ class ChoiceGroup extends React.Component {
 
     //Let's try the new UXPin Parser
 
-    let pitems = UXPinParser.split(this.props.items).map(
-      (item, index) => ({
-        type: item?.type,
-        text: item?.text,
-        iconName: item?.iconName,
-        key: index,
-      })
-    );
-
     let pitems2 = UXPinParser.parse(this.props.items).map(
       (item, index) => ({
-        type: item?.type,
-        text: item?.text,
-        iconName: item?.iconName,
         key: index,
+        text: item.text ? item.text : '',
+        iconName: item.iconName ? item.iconName : '',
+        iconProps: item.iconName ? this.getIconProps(item.iconName) : '',
+        disabled: this.props.disabled,
       }));
-
-    var i = 0;
-    for (i = 0; i < pitems.length; i++) {
-      let item = pitems[i];
-      console.log("p1 >> text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key);
-    }
 
     console.log("pitems2 parse: Found " + pitems2.length + " items: " + pitems2.toString());
 
     var i2 = 0;
     for (i2 = 0; i2 < pitems2.length; i2++) {
       let item = pitems2[i2];
-      console.log("p2 >> type: " + item?.type + " text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key);
+      console.log("p2 >> type: " + item?.type + " text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key + " iconProps: " + item?.iconProps);
     }
 
     this.setState({
