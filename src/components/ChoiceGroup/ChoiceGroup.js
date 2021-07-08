@@ -77,7 +77,7 @@ class ChoiceGroup extends React.Component {
   getIconProps2(str) {
     if (this.props.tiled) {
       return {
-        iconName: str,
+        iconName: str ? str : "  ",
       }
     }
 
