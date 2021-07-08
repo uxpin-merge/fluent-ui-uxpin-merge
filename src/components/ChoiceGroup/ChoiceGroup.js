@@ -97,10 +97,19 @@ class ChoiceGroup extends React.Component {
 
     let pitems2 = UXPinParser.parse(this.props.items);
 
-    console.log("pitems split: Found " + pitems.length + " items: " + pitems.toString());
+    var i = 0;
+    for (i = 0; i < pitems.length; i++) {
+      let item = pitems[i];
+      console.log("p1 >> text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key);
+    }
 
     console.log("pitems2 parse: Found " + pitems2.length + " items: " + pitems2.toString());
 
+    var i2 = 0;
+    for (i2 = 0; i2 < pitems.length; i2++) {
+      let item = pitems[i2];
+      console.log("p2 >> text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key);
+    }
 
     this.setState({
       items: items
