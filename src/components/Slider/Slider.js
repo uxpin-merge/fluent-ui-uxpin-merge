@@ -82,6 +82,13 @@ class Slider extends React.Component {
 Slider.propTypes = {
 
   /**
+   * @uxpindescription Description label of the Slider
+   * @uxpinpropname Label
+   * @uxpincontroltype textfield(3)
+   * */
+  label: PropTypes.string,
+
+  /**
    * @uxpindescription The value of the Slider. This prop's live value is available for scripting.
    * @uxpinbind onValueChange
    * @uxpinpropname * Value
@@ -89,11 +96,10 @@ Slider.propTypes = {
   sliderValue: PropTypes.number,
 
   /**
-   * @uxpindescription Description label of the Slider
-   * @uxpinpropname Label
-   * @uxpincontroltype textfield(3)
+   * @uxpindescription Optional flag whether to display the current Slider value
+   * @uxpinpropname Show Value
    * */
-  label: PropTypes.string,
+  showValue: PropTypes.bool,
 
   /**
    * @uxpindescription The minimum value of the Slider
@@ -124,12 +130,6 @@ Slider.propTypes = {
   //  * @uxpinpropname Vertical Height
   //  * */
   verticalHeight: PropTypes.number,
-
-  /**
-   * @uxpindescription Optional flag whether to display the current Slider value
-   * @uxpinpropname Show Value
-   * */
-  showValue: PropTypes.bool,
 
   /**
    * Providing a different event name to avoid uncontrolled collision with built in onChange event. 

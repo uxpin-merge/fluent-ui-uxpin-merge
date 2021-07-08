@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { LayerHost } from '@fluentui/react/lib/Layer';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { Text as Text } from '@fluentui/react/lib/Text';
+import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
@@ -13,9 +14,9 @@ const centerAlign = 'center';
 const rightAlign = 'right';
 const stretchAlign = 'stretch';
 
-const instructionText = `Vertical Stack Instructions: 
-1) Drag any Merge controls onto the canvas. 
-2) In the Layers Panel, drag and drop it onto this control.`;
+const instructionText = `Hideable Layer: 
+1) Like a Vertical Stack, add child objects. 
+2) In the Props Panel or at runtime, show/hide this Hideable Layer.`;
 
 
 //Use this color if the UXPin user doesn't enter a valid hex or color token.
@@ -26,9 +27,38 @@ const defaultPadding = "0";
 
 
 
-class VerticalStack extends React.Component {
+class HideablePanel extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            open: false
+        }
+    }
+
+    set() {
+        var isOpen = false;
+
+        if (this.props.show) {
+            isOpen = true;
+        }
+
+        this.setState(
+            { open: isOpen }
+        )
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+
+        if (
+            prevProps.show !== this.props.show
+        ) {
+            this.set();
+        }
     }
 
     _getHorizontalAlignmentToken() {
@@ -128,49 +158,35 @@ class VerticalStack extends React.Component {
                     stackList.push(stack);
                 } //for loop
 
-                //Do we need to add a spanner?
-                if (this.props.addSpanner && this.props.spannerIndex > 0 && this.props.spannerIndex <= stackList.length) {
-                    let newIndex = this.props.spannerIndex - 1;
-
-                    //Let's make sure we have a positive number. 
-                    let spanHeight = this.props.spannerHeight > 0 ? this.props.spannerHeight : 0;
-
-                    let spanStyles = {
-                        root: {
-                            height: spanHeight + "px",
-                        }
-                    }
-
-                    //A StackItem that will spring to fill available space. 
-                    let spanner = (<StackItem
-                        grow={true}
-                        styles={spanStyles}>
-                        <span />
-                    </StackItem>);
-
-                    //Add the spanner at the specified index, deleting 0 other items.
-                    stackList.splice(newIndex, 0, spanner);
-                }
             } //if childList
         } //If props.children
 
+        const layerID = _.uniqueId('layerhost_');
+
 
         return (
+            <>
+                {this.state.open && (
+                    <LayerHost
+                        id={layerID}
+                    >
+                        <Stack
+                            {...this.props}
+                            tokens={stackTokens}
+                            padding={internalPadding + 'px'}
+                            horizontal={false}
+                            horizontalAlign={hAlign}
+                            verticalAlign={verticalAlign}
+                            wrap={false}
+                            styles={topStackItemStyles}>
 
-            <Stack
-                {...this.props}
-                tokens={stackTokens}
-                padding={internalPadding + 'px'}
-                horizontal={false}
-                horizontalAlign={hAlign}
-                verticalAlign={verticalAlign}
-                wrap={false}
-                styles={topStackItemStyles}>
+                            {_.isEmpty(this.props.children) && instructions}
+                            {stackList}
 
-                {_.isEmpty(this.props.children) && instructions}
-                {stackList}
-
-            </Stack>
+                        </Stack>
+                    </LayerHost>
+                )}
+            </>
         );
     }
 }
@@ -180,15 +196,20 @@ class VerticalStack extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-VerticalStack.propTypes = {
+HideablePanel.propTypes = {
 
     /**
      * Don't show this prop in the UXPin Editor. 
      * @uxpinignoreprop 
      * @uxpindescription Contents for the body of the control. 
-     * @uxpinpropname Children
+     * @uxpinpropname Child Contents
      */
     children: PropTypes.node,
+
+    /**
+     * @uxpindescription Whether to display the layer 
+     */
+    show: PropTypes.bool,
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
@@ -211,24 +232,6 @@ VerticalStack.propTypes = {
     align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign, stretchAlign]),
 
     /**
-     * @uxpindescription To insert a spanner to fill empty space between two elements. 
-     * @uxpinpropname Add Spanner
-     */
-    addSpanner: PropTypes.bool,
-
-    /**
-     * @uxpindescription The 1-based index for where to insert a Spanner. The Spanner will be inserted above the item that is at this index value.
-     * @uxpinpropname Spanner Index
-     */
-    spannerIndex: PropTypes.number,
-
-    /**
-     * @uxpindescription The Spanner's height (pixels)
-     * @uxpinpropname Spanner Height
-     */
-    spannerHeight: PropTypes.number,
-
-    /**
      * @uxpindescription Use a PayPal UI color token, such as 'blue-600' or 'black', or a standard Hex Color, such as '#0070BA'
      * @uxpinpropname Bg Color
      * */
@@ -239,15 +242,13 @@ VerticalStack.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-VerticalStack.defaultProps = {
+HideablePanel.defaultProps = {
+    show: true,
     internalPadding: 0,
     gutterPadding: 12,
     align: leftAlign,
-    addSpanner: false,
-    spannerIndex: 1,
-    spannerHeight: 48,
     bgColor: '',
 }
 
 
-export { VerticalStack as default };
+export { HideablePanel as default };

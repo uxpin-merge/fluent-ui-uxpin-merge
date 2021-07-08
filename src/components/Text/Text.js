@@ -37,6 +37,15 @@ class Text extends React.Component {
     }
   }
 
+  _getTextColor() {
+    var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
+    if (!textColor) {
+      textColor = defaultTextColor;
+    }
+
+    return textColor;
+  }
+
   //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
   _getTokenizedText(text) {
 
@@ -62,10 +71,7 @@ class Text extends React.Component {
   render() {
 
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
-    var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
-    if (!textColor) {
-      textColor = defaultTextColor;
-    }
+    let textColor = this._getTextColor();
 
     let fTextStyles = {
       root: {
@@ -87,7 +93,7 @@ class Text extends React.Component {
         variant={this.props.size}
         nowrap={this.props.truncate}>
 
-        { message}
+        {message}
 
       </FText >
     );

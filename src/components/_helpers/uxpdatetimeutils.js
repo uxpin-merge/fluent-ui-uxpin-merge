@@ -40,8 +40,6 @@ export const UxpDateTimeUtils = {
 		return false;
 	},
 
-
-
 	parseDate: function (dateStr) {
 		if (this.isValidDate(dateStr)) {
 			return new Date(dateStr);
@@ -71,7 +69,6 @@ export const UxpDateTimeUtils = {
 
 		return date.toUTCString();
 	},
-
 
 	getNowFormattedDate: function () {
 		return this.getFormattedDate(new Date());
@@ -103,7 +100,6 @@ export const UxpDateTimeUtils = {
 		return month + " " + date + ", " + year;
 	},
 
-
 	getFormattedTime: function (dateStr) {
 		return this.getFormattedTimeAdvanced(dateStr, true, false);
 	},
@@ -119,6 +115,15 @@ export const UxpDateTimeUtils = {
 		}
 	},
 
+	getFormattedDateTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
+
+		let dt = this.getFormattedDate(dateStr);
+		let time = this.getFormattedTimeAdvanced(dateStr, in12HrFormat, withSeconds);
+
+		if (dt && time) {
+			return dt + ", " + time;
+		}
+	},
 
 	getFormattedTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
 		if (!this.isValidDate(dateStr)) {
@@ -171,5 +176,42 @@ export const UxpDateTimeUtils = {
 		return time;
 	},
 
+	getFullDate: function (dateStr) {
+
+		if (!this.isValidDate(dateStr)) {
+			return undefined;
+		}
+
+		//Get the parts
+		let dt = new Date(dateStr);
+
+		let year = dt.getFullYear();
+		let date = dt.getDate();
+		let i = dt.getMonth() //0-based
+
+		//Assemble the preferred format like: 'February 8, 2020'
+		let month = this.months[i];
+		return month + " " + date + ", " + year;
+	},
+
+	getFullDateTime: function (dateStr) {
+
+		let dt = this.getFullDate(dateStr);
+		let time = this.getFormattedTime(dateStr);
+
+		if (dt && time) {
+			return dt + ", " + time;
+		}
+	},
+
+	getFullDateTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
+
+		let dt = this.getFullDate(dateStr);
+		let time = this.getFormattedTimeAdvanced(dateStr, in12HrFormat, withSeconds);
+
+		if (dt && time) {
+			return dt + ", " + time;
+		}
+	},
 
 }

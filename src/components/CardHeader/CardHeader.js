@@ -11,10 +11,10 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 //****** STYLES */
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
-const defaultTextColor = "#000000";
-const defaultIconColor = '#0070BA';
+const defaultTextColor = "black";
+const defaultIconColor = 'info';
 const defaultIconSize = 18;
-const defaultIconName = 'InfoSolid';
+const defaultIconName = 'Info';
 
 //****** OTHER */
 

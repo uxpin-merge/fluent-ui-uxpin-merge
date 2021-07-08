@@ -4,6 +4,11 @@ import { ActionButton as FActionButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
+const defaultIcon = "Add";
+const defaultText = "Action Button";
+const posStart = 'start';
+const posEnd = 'end';
+
 
 class ActionButton extends React.Component {
   constructor(props) {
@@ -39,7 +44,7 @@ class ActionButton extends React.Component {
       }
     }
 
-    if (this.props.iconPosition === "end") styles.flexContainer = {
+    if (this.props.iconPosition === posEnd) styles.flexContainer = {
       flexDirection: 'row-reverse'
     }
 
@@ -93,7 +98,7 @@ ActionButton.propTypes = {
    * @uxpindescription The location to display an icon, if one is set
    * @uxpinpropname Icon Position
    * */
-  iconPosition: PropTypes.oneOf(['start', 'end']),
+  iconPosition: PropTypes.oneOf([posStart, posEnd]),
 
   /**
    * @uxpindescription Tooltip for the control
@@ -120,9 +125,10 @@ ActionButton.propTypes = {
  */
 ActionButton.defaultProps = {
   disabled: false,
-  text: 'Action Button',
-  iconName: '',
-  tooltip: ''
+  text: defaultText,
+  iconName: defaultIcon,
+  tooltip: '',
+  iconPosition: posStart,
 };
 
 export { ActionButton as default };

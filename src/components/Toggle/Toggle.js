@@ -54,11 +54,13 @@ class Toggle extends React.Component {
     let checked = this.state._isChecked;
 
     return (
+
       <FToggle
         {...this.props}
         checked={checked}
-        onChange={(e, v) => { this._onSelectionChange(v); }}   //Only catch the new value
+        onChange={(e, v) => { this._onSelectionChange(v); }}
       />
+
     );
   }
 }
@@ -103,7 +105,6 @@ Toggle.propTypes = {
 
   /**
    * @uxpindescription To disable the control
-   * @uxpinpropname Disabled
    * */
   disabled: PropTypes.bool,
 

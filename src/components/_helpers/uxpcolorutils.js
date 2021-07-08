@@ -18,14 +18,14 @@ export const UxpColors = {
     success: '#107c10',             //MS green
     successText: '#000000',           //White
     successBackground: '#dff6dd',   //MS Messaging success
-    successBackgroundHover: '#c8e6bb7006c9',   //MS Presence online
+    successBackgroundHover: '#8cbd18',   //MS yellowGreen10
 
-    warning: '#d83b01',             //MS orange
+    warning: '#ea4300',             //MS orangeLight
     warningText: '#000000',           //Black
     warningBackground: '#fed9cc',   //MS severe warning
-    warningBackgroundHover: '#ff8c00',   //MS orangeLighter
+    warningBackgroundHover: '#ffaa44',   //MS orange10
 
-    error: '#a80000',               //MS error block icon
+    error: '#d13438',               //MS red
     errorText: '#000000',           //Black,
     errorBackground: '#fde7e9',     //MS error block
     errorBackgroundHover: '#d13438',     //MS red10

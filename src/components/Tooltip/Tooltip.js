@@ -1,10 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {
-    Coachmark as FCoachmark
-} from '@fluentui/react/lib/Coachmark';
-import { Tooltip as FTooltip, TooltipHost, } from '@fluentui/react/lib/Tooltip';
+import { TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
+import { Stack } from '@fluentui/react/lib/Stack';
 
 
 
@@ -12,37 +10,87 @@ class Tooltip extends React.Component {
     constructor(props) {
         super(props);
 
-        this._targetElm = React.createRef();
+        this.state = {
+            ttDirection: "topCenter",
+        }
+    }
+
+    set() {
+        //Let's see if we can parse a real date
+        let direction = this.props.direction;
+
+        this.setState(
+            { ttDirection: direction }
+        )
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.direction !== this.props.direction) {
+            this.set();
+        }
     }
 
 
     render() {
 
-        return (
-            <div>
-                <div //The control actually acting as the tooltip target. 
-                    className="trigger"
-                    ref={this._targetElm}
-                    style={{
-                        display: 'inline-block', //required for tooltip host
-                        width: 20,
-                        height: 20,
-                        borderRadius: 4,
-                        background: this.props.showMarker ? '#640487' : 'transparent',
-                    }} />
-                <FTooltip
-                    {...this.props}
-                    targetElement={this._targetElm}
-                    calloutProps={{
-                        hidden: !this.props.show,
-                        isBeakVisible: this.props.showBeak,
-                        gapSpace: 2,
-                    }}
-                    content={this.props.text}
-                    directionalHint={this.props.direction}
-                // directionalHint={DirectionalHint[this.props.direction]}
-                />
+        const ttTargetID = _.uniqueId('ttTarget_');
+        const tooltipID = _.uniqueId('tooltip_');
+
+        var hasChildren = false;
+
+        var ttChild = (
+            <div
+                style={{
+                    display: 'inline-block',
+                    width: 20,
+                    height: 20,
+                    borderRadius: 10,
+                    background: this.props.showMarker ? '#640487' : 'transparent',
+                }} >
             </div>
+        );
+
+        if (this.props.children) {
+
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            if (childList.length) {
+                //We only use the first child. All other children are ignored.
+                ttChild = childList[0];
+                hasChildren = true;
+            }
+        }
+
+        const ttProps = {
+            gapSpace: 4,
+            target: `#${ttTargetID}`,
+            isBeakVisible: this.props.showBeak,
+        };
+
+        return (
+            <>
+                <TooltipHost
+                    content={this.props.text}
+                    directionalHint={DirectionalHint[this.props.direction]}
+                    closeDelay={300}
+                    id={tooltipID}
+                    calloutProps={ttProps}
+                >
+                    <Stack
+                        {...this.props}
+                        id={ttTargetID}
+                        aria-describedby={tooltipID}
+                    >
+                        {ttChild}
+                    </Stack>
+                </TooltipHost>
+            </>
+
         );
     }
 }
@@ -54,13 +102,21 @@ class Tooltip extends React.Component {
 Tooltip.propTypes = {
 
     /**
-     * @uxpindescription Whether to display the Tooltlip 
-     * @uxpinpropname Show
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
      */
-    show: PropTypes.bool,
+    children: PropTypes.node,
 
     /**
-     * @uxpindescription Whether to show the purple target marker on the canvas 
+     * @uxpindescription The main message text
+     * @uxpincontroltype textfield(4)
+     */
+    text: PropTypes.string,
+
+    /**
+     * @uxpindescription In the standalone use case, whether to show the purple target marker on the canvas 
      * @uxpinpropname Show Marker
      */
     showMarker: PropTypes.bool,
@@ -69,12 +125,6 @@ Tooltip.propTypes = {
      * @uxpindescription Whether to show the 'beak' (or tip) of the Tooltlip 
      */
     showBeak: PropTypes.bool,
-
-    /**
-     * @uxpindescription The main message text
-     * @uxpincontroltype textfield(3)
-     */
-    text: PropTypes.string,
 
     /**
      * @uxpindescription The control's display direction
@@ -104,7 +154,6 @@ Tooltip.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Tooltip.defaultProps = {
-    show: true,
     showBeak: true,
     text: "I'm a basic tooltip",
     direction: "topCenter",

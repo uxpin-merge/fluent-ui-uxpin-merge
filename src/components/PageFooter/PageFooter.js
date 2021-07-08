@@ -11,8 +11,8 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-const defaultTextColor = '#2C2E2F';
-const defaultTextColorHex = '#2C2E2F';
+const defaultTextColor = 'black';
+const defaultTextColorHex = '#000000';
 const defaultTextSize = '14px';
 
 const defaultLine1Text = "Product or Team Name";
@@ -22,7 +22,7 @@ const defaultLine3Text = "prod_support@email.com | mailto:prod_support@email.com
 
 const defaultBgColor = 'transparent';
 
-const defaultBorderColor = '#005EA6';
+const defaultBorderColor = 'themeDark';
 const defaultBorderThickness = 4;
 const borderSolid = 'solid';
 
@@ -34,7 +34,7 @@ const defaultTextStackMinWidth = '300px';
 const dividerStyle = {
     width: 1,
     height: 60,
-    borderLeft: '1px solid #CBD2D6',
+    borderLeft: '1px solid #c8c6c4',
 }
 
 const logoURL = 'https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/fpfv4zlqg5cyaek0q4ln';

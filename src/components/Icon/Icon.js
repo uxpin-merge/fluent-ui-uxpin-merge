@@ -5,7 +5,9 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-const defaultColor = '#000000';
+const defaultColor = 'black';
+const defaultIcon = 'Home';
+const defaultSize = 50;
 
 
 
@@ -69,9 +71,9 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  iconName: "Home",
-  size: 50,
-  color: "grey-700"
+  iconName: defaultIcon,
+  size: defaultSize,
+  color: defaultColor,
 };
 
 export { Icon as default }

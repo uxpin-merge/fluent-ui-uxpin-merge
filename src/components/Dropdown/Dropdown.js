@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Dropdown as FDropdown } from '@fluentui/react/lib/Dropdown';
-import { csv2arr } from '../_helpers/parser';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 const defaultItems = `Apples
@@ -141,22 +141,39 @@ class Dropdown extends React.Component {
       sIndex = this.state._selectedIndex;
     }
 
-    let items = csv2arr(this.props.items)
-      .flat()
-      .map(
-        (text, index) => ({ text: text, key: index })
-      );
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => ({
+        text: item.text,
+        key: index,
+      })
+    );
+
+    const ttTargetID = _.uniqueId('ttTarget_');
+    const tooltipID = _.uniqueId('tooltip_');
+    const ttProps = {
+      gapSpace: 4,
+      target: `#${ttTargetID}`,
+    };
 
     return (
+      <div>
+        <TooltipHost
+          content={this.props.tooltip}
+          id={tooltipID}
+          calloutProps={ttProps}
+        >
+          <FDropdown
+            {...this.props}
+            options={items}
+            selectedKey={sIndex}
+            selectedKeys={mIndices}
+            id={ttTargetID}
+            aria-describedby={tooltipID}
+            onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
+          />
 
-      <FDropdown
-        {...this.props}
-        options={items}
-        selectedKey={sIndex}
-        selectedKeys={mIndices}
-        onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
-      />
-
+        </TooltipHost>
+      </div>
     );
   }
 }
@@ -213,6 +230,12 @@ Dropdown.propTypes = {
   required: PropTypes.bool,
 
   /**
+   * @uxpindescription Tooltip for the control
+   * @uxpinpropname Tooltip
+   * */
+  tooltip: PropTypes.string,
+
+  /**
    * @uxpindescription To disable the control
    * @uxpinpropname Disabled
    * */
@@ -236,6 +259,7 @@ Dropdown.defaultProps = {
   placeholder: "- Select -",
   disabled: false,
   required: false,
+  tooltip: '',
 };
 
 

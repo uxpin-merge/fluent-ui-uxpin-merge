@@ -4,6 +4,7 @@ module.exports = {
       {
         name: 'Containers',
         include: [
+          'src/components/HideablePanel/HideablePanel.js',
           'src/components/HorizontalStack/HorizontalStack.js',
           'src/components/MetaDataGroup/MetaDataGroup.js',
           'src/components/MetaDataPair/MetaDataPair.js',
@@ -26,11 +27,13 @@ module.exports = {
         name: 'Utilities',
         include: [
           'src/components/Chip/Chip.js',
+          'src/components/Icon/Icon.js',
           'src/components/Image/Image.js',
           'src/components/Link/Link.js',
           'src/components/Separator/Separator.js',
+          'src/components/StatusSet/StatusSet.js',
           'src/components/Text/Text.js',
-          'src/components/Icon/Icon.js',
+          'src/components/Timestamp/Timestamp.js',
         ],
       },
       {
@@ -39,6 +42,7 @@ module.exports = {
           'src/components/ActionButton/ActionButton.js',
           'src/components/Button/Button.js',
           'src/components/CompoundButton/CompoundButton.js',
+          'src/components/SplitButton/SplitButton.js',
           'src/components/ToggleButton/ToggleButton.js',
         ],
       },
@@ -51,6 +55,7 @@ module.exports = {
           'src/components/ChoiceGroup/ChoiceGroup.js',
           'src/components/ColorPicker/ColorPicker.js',
           'src/components/Dropdown/Dropdown.js',
+          'src/components/GroupButton/GroupButton.js',
           'src/components/Rating/Rating.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',

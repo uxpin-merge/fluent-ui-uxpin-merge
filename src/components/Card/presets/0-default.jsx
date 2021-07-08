@@ -20,7 +20,7 @@ export default (
     <Card uxpId="card1" style={{ width: '100%' }} >
         <CardHeader uxpId="cardheader1" />
         <CardBody uxpId="cardbody1" >
-            <Text uxpId="text1" value={instructions} />
+            <Text uxpId="text1" textValue={instructions} />
         </CardBody>
         <CardFooter uxpId="cardfooter1" addSpanner={true} spannerIndex={2} >
             <ToggleButton uxpId="togglebutton1" />
