@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Breadcrumb as FBreadcrumb } from '@fluentui/react/lib/Breadcrumb';
-import { getTokens } from '../_helpers/parser';
 
 
 
@@ -25,7 +24,6 @@ class Breadcrumb extends React.Component {
 
    set() {
       let list = [];
-      var currentItem = 0;
 
       if (this.props.items) {
          let itemList = this.props.items.match(/[^\r\n]+/g);
@@ -136,6 +134,7 @@ class Breadcrumb extends React.Component {
             overflowIndex={1}
             items={this.state._items}
             maxDisplayedItems={this.props.maxDisplayedItems}
+            size={this.props.size}
             styles={bStyles}
          />
       );
