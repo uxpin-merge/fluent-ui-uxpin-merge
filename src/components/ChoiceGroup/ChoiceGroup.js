@@ -74,6 +74,16 @@ class ChoiceGroup extends React.Component {
     return "";
   }
 
+  getIconProps2(str) {
+    if (this.props.tiled && str) {
+      return {
+        iconName: str,
+      }
+    }
+
+    return "";
+  }
+
   //Parse the choice items
   setItems() {
     let items = csv2arr(this.props.items)
@@ -92,7 +102,7 @@ class ChoiceGroup extends React.Component {
         key: index,
         text: item.text ? item.text : '',
         iconName: item.iconName ? item.iconName : '',
-        iconProps: item.iconName ? this.getIconProps(item.iconName) : '',
+        iconProps: this.props.tiled && item.iconName ? { iconName: item.iconName } : '',
         disabled: this.props.disabled,
       }));
 
