@@ -147,7 +147,7 @@ class Breadcrumb extends React.Component {
       return (
          <FBreadcrumb
             {...this.props}
-            overflowIndex={oIndex}
+            overflowIndex={oIndex < mDisplay ? oIndex : mDisplay - 1}
             items={this.state._items}
             maxDisplayedItems={mDisplay}
             styles={bStyles}
