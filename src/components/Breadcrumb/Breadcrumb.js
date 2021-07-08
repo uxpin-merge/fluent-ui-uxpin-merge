@@ -143,7 +143,6 @@ class Breadcrumb extends React.Component {
             overflowIndex={oIndex}
             items={this.state._items}
             maxDisplayedItems={this.props.maxDisplayedItems}
-            size={this.props.size}
             styles={bStyles}
          />
       );
@@ -173,18 +172,6 @@ Breadcrumb.propTypes = {
     * @uxpinpropname Overflow Index
     * */
    overflowIndex: PropTypes.number,
-
-   /**
-    * @uxpindescription The display size of the Breadcrumb text
-    * @uxpinpropname Size
-    * */
-   size: PropTypes.oneOf(['smaller', 'small', 'medium', 'large']),
-
-   /**
-     * @uxpindescription Whether the control should be shown as disabled
-     * @uxpinpropname Disabled 
-     * */
-   disabled: PropTypes.bool,
 
    /**
    * @uxpindescription Fires when Item 1 is clicked
@@ -252,10 +239,8 @@ Breadcrumb.propTypes = {
 */
 Breadcrumb.defaultProps = {
    items: defaultItems,
-   size: 'medium',
    maxDisplayedItems: defaultMaxDisplayedItems,
    overflowIndex: defaultOverflowIndex,
-   disabled: false,
 };
 
 
