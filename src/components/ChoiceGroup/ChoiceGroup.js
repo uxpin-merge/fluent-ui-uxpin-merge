@@ -87,14 +87,14 @@ class ChoiceGroup extends React.Component {
 
     //Let's try the new UXPin Parser
 
-    let pitems = UXPinParser.parse(this.props.items).map(
+    let pitems = UXPinParser.split(this.props.items).map(
       (item, index) => ({
         text: item.text,
         key: index,
       })
     );
 
-    console.log(pitems);
+    console.log("Found " + pitems.length + " items: " + pitems.toString());
 
 
     this.setState({
