@@ -5,6 +5,7 @@ import {
   PivotItem
 } from '@fluentui/react/lib/Pivot';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import * as UXPinParser from '../_helpers/UXPinParser';
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
@@ -16,9 +17,6 @@ Tab Two
 Tab Three
 Tab Four`;
 
-
-//The smallest allowed box size
-const defaultBoxSize = '0';
 const verticalAlign = 'start';
 const stretchAlign = 'stretch';
 
@@ -49,15 +47,22 @@ class Pivot extends React.Component {
     }
   }
 
-  //Parse the choice items
   set() {
-    let items = csv2arr(this.props.tabs)
-      .flat()
-      .map((val, index) => ({
-        text: getTokens(val).text,
+
+    let items = UXPinParser.parse(this.props.tabs).map(
+      (item, index) => ({
         key: index + 1,
-        icon: this.getLeftIcon(val)
+        text: item.text ? item.text : '',
+        icon: item?.iconName,
       }));
+
+    // let items = csv2arr(this.props.tabs)
+    //   .flat()
+    //   .map((val, index) => ({
+    //     text: getTokens(val).text,
+    //     key: index + 1,
+    //     icon: this.getLeftIcon(val)
+    //   }));
 
     this.setState({
       tabs: items,
