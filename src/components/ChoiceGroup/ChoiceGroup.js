@@ -101,7 +101,7 @@ class ChoiceGroup extends React.Component {
     var i2 = 0;
     for (i2 = 0; i2 < pitems2.length; i2++) {
       let item = pitems2[i2];
-      console.log("p2 >> type: " + item?.type + " text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key + " iconProps: " + item?.iconProps);
+      console.log("p2 >> type: " + item?.type + " text: " + item?.text + " iconName: " + item?.iconName + " key: " + item?.key + " iconProps: " + item?.iconProps?.toString());
     }
 
     this.setState({
