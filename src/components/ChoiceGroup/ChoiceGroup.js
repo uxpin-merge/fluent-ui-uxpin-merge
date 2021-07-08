@@ -115,7 +115,7 @@ class ChoiceGroup extends React.Component {
     }
 
     this.setState({
-      items: items
+      items: pitems2
     });
   }
 
