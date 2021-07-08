@@ -117,7 +117,7 @@ class Breadcrumb extends React.Component {
       //Floor: 0 or higher. 
       //Ceiling: Number of displayed items - 1. 
       let overflow = this.props.overflowIndex - 1;
-      let ceiling = this.props.maxDisplayedItems - 1;
+      let ceiling = this.state._items?.length > 1 ? (this.state._items.length - 1) : 0;
       let oIndex = overflow < 0 ? 0 :
          overflow > ceiling ? ceiling :
             overflow;
