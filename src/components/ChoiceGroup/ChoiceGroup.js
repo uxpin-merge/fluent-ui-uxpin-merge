@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
 import { getTokens, csv2arr } from '../_helpers/parser';
-
+import * as UXPinParser from '../_helpers/UXPinParser';
+import { Console } from 'node:console';
 
 
 //Default nav items to populate the control with.
@@ -84,6 +85,22 @@ class ChoiceGroup extends React.Component {
         disabled: this.props.disabled,
         iconProps: this.getIconProps(val)
       }));
+
+    //Let's try the new UXPin Parser
+    let parsedItems = UXPinParser.parse(this.props.items).map(
+      (item, index) => {
+
+        Console.log("item " + index + ": " + item.toString());
+
+        // let params = {
+        //   text: item.text,
+        //   key: index,
+        // };
+
+        return "";
+      });
+
+
 
     this.setState({
       items: items
