@@ -44,18 +44,15 @@ class SplitButton extends React.Component {
   set() {
 
     let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => {
-        //Do not add empty items
-        if (item?.text || item?.icon) {
-          return {
-            key: index + 1,
-            text: item.text ? item.text : '',
-            iconProps: { iconName: item?.iconName },
-            disabled: false,
-            onClick: () => { this._onClick(index + 1) },
-          }
-        }
-      }
+      (item, index) => ({
+
+        key: index + 1,
+        text: item.text ? item.text : '',
+        iconProps: { iconName: item?.iconName },
+        disabled: false,
+        onClick: () => { this._onClick(index + 1) },
+
+      })
     );
 
     this.setState({
