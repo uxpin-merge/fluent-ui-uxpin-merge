@@ -47,41 +47,23 @@ class SplitButton extends React.Component {
       return;
 
     let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => ({
-        key: index + 1,
-        text: item.text ? item.text : '',
-        iconProps: { iconName: item?.iconName },
-        disabled: false,
-        onClick: () => { this._onClick(index + 1) },
-      }));
-
-    // let items = csv2arr(this.props.items)
-    //   .flat()
-    //   .map((val, index) => ({
-    //     text: getTokens(val).text,
-    //     key: index + 1,  //1 based index
-    //     disabled: false,
-    //     iconProps: this.getIconProps(val),
-    //     onClick: () => { this._onClick(index + 1) } //same as key, 1-based
-    //   }));
+      (item, index) => {
+        //Do not add empty items
+        if (item?.text || item?.icon) {
+          return {
+            key: index + 1,
+            text: item.text ? item.text : '',
+            iconProps: { iconName: item?.iconName },
+            disabled: false,
+            onClick: () => { this._onClick(index + 1) },
+          }
+        }
+      }
+    );
 
     this.setState({
       items: items
     });
-  }
-
-  //Get the user-entered left icon name, if there is one
-  getLeftIcon(str) {
-    const tokens = getTokens(str).tokens
-    const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
-    return leftIcon ? leftIcon.target : null
-  }
-
-  //If the user has chosen a tiled options display, let's figure out the icon names.
-  getIconProps(str) {
-    return {
-      iconName: this.getLeftIcon(str)
-    }
   }
 
   _onClick(index) {
@@ -94,7 +76,6 @@ class SplitButton extends React.Component {
       this.props.onButtonClick(index);
     }
   }
-
 
   render() {
 
