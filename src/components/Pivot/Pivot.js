@@ -6,7 +6,6 @@ import {
 } from '@fluentui/react/lib/Pivot';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import * as UXPinParser from '../_helpers/UXPinParser';
-import { getTokens, csv2arr } from '../_helpers/parser';
 
 
 
