@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import * as UXPinParser from '../_helpers/UXPinParser';
-import { getTokens, csv2arr } from '../_helpers/parser';
 
 
 
@@ -45,13 +44,11 @@ class SplitButton extends React.Component {
 
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => ({
-
         key: index + 1,
         text: item.text ? item.text : '',
         iconProps: { iconName: item?.iconName },
         disabled: false,
         onClick: () => { this._onClick(index + 1) },
-
       })
     );
 
@@ -83,7 +80,7 @@ class SplitButton extends React.Component {
     let iconProps = { iconName: this.props.iconName }
 
     var menuProps = undefined;
-    if (this.props.items) {
+    if (this.state.items?.length) {
       menuProps = {
         items: this.state.items,
         directionalHintFixed: true
