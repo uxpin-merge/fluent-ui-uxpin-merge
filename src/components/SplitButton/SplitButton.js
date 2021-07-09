@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
+import * as UXPinParser from '../_helpers/UXPinParser';
 import { getTokens, csv2arr } from '../_helpers/parser';
 
 
@@ -45,15 +46,24 @@ class SplitButton extends React.Component {
     if (!this.props.items)
       return;
 
-    let items = csv2arr(this.props.items)
-      .flat()
-      .map((val, index) => ({
-        text: getTokens(val).text,
-        key: index + 1,  //1 based index
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => ({
+        key: index + 1,
+        text: item.text ? item.text : '',
+        iconProps: { iconName: item?.iconName },
         disabled: false,
-        iconProps: this.getIconProps(val),
-        onClick: () => { this._onClick(index + 1) } //same as key, 1-based
+        onClick: () => { this._onClick(index + 1) },
       }));
+
+    // let items = csv2arr(this.props.items)
+    //   .flat()
+    //   .map((val, index) => ({
+    //     text: getTokens(val).text,
+    //     key: index + 1,  //1 based index
+    //     disabled: false,
+    //     iconProps: this.getIconProps(val),
+    //     onClick: () => { this._onClick(index + 1) } //same as key, 1-based
+    //   }));
 
     this.setState({
       items: items
