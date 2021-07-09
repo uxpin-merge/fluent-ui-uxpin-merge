@@ -55,25 +55,10 @@ class Pivot extends React.Component {
         icon: item?.iconName,
       }));
 
-    // let items = csv2arr(this.props.tabs)
-    //   .flat()
-    //   .map((val, index) => ({
-    //     text: getTokens(val).text,
-    //     key: index + 1,
-    //     icon: this.getLeftIcon(val)
-    //   }));
-
     this.setState({
       tabs: items,
       selectedIndex: this.props.selectedIndex
     });
-  }
-
-  //Get the user-entered left icon name, if there is one
-  getLeftIcon(str) {
-    const tokens = getTokens(str).tokens
-    const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
-    return leftIcon ? leftIcon.target : null
   }
 
   _onLinkClick(selectedItem) {
@@ -92,7 +77,6 @@ class Pivot extends React.Component {
       }
     }
   }
-
 
   render() {
 
