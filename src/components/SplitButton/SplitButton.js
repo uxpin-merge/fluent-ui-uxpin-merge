@@ -43,9 +43,6 @@ class SplitButton extends React.Component {
   //Parse the choice items
   set() {
 
-    if (!this.props.items)
-      return;
-
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => {
         //Do not add empty items
