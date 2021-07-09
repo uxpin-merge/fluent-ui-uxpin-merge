@@ -99,21 +99,24 @@ class GroupButton extends React.Component {
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
 
-         let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
+         if (btn?.text || btn?.icon) {
+            let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
 
-         //The key is already 1 based
-         let button = (
-            <Button
-               {...this.props}
-               primary={isPrimary}
-               text={btn.text}
-               iconName={btn.icon}
-               disabled={this.props.disabled}
-               styles={btnStyles}
-               onClick={() => { this._onButtonClick(btn.key) }}
-            />
-         );
-         buttonList.push(button);
+            //The key is already 1 based
+            let button = (
+               <Button
+                  {...this.props}
+                  primary={isPrimary}
+                  text={btn.text}
+                  iconName={btn.icon}
+                  disabled={this.props.disabled}
+                  styles={btnStyles}
+                  onClick={() => { this._onButtonClick(btn.key) }}
+               />
+            );
+            buttonList.push(button);
+         }
+
       }
 
       return (
