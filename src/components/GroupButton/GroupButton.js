@@ -99,24 +99,22 @@ class GroupButton extends React.Component {
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
 
-         if (btn?.text || btn?.icon) {
-            let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
+         let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
 
-            //The key is already 1 based
-            let button = (
-               <Button
-                  {...this.props}
-                  primary={isPrimary}
-                  text={btn.text}
-                  iconName={btn.icon}
-                  disabled={this.props.disabled}
-                  styles={btnStyles}
-                  onClick={() => { this._onButtonClick(btn.key) }}
-               />
-            );
-            buttonList.push(button);
-         }
-
+         //The key is already 1 based
+         //We don't correct for empty buttons. If we do, then the isPrimary number can get off. So users need to pay attention. 
+         let button = (
+            <Button
+               {...this.props}
+               primary={isPrimary}
+               text={btn.text}
+               iconName={btn.icon}
+               disabled={this.props.disabled}
+               styles={btnStyles}
+               onClick={() => { this._onButtonClick(btn.key) }}
+            />
+         );
+         buttonList.push(button);
       }
 
       return (
