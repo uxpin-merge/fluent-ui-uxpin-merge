@@ -105,16 +105,21 @@ class Pivot extends React.Component {
 
     for (i = 0; i < tabs.length; i++) {
       let t = tabs[i];
+
       //The key is already 1 based
-      let tab = (
-        <PivotItem
-          headerText={t.text}
-          itemKey={t.key}
-          key={t.key}
-          itemIcon={t.icon}
-        />
-      );
-      tabList.push(tab);
+      //Let's avoid empty items
+      if (t?.text || t?.icon) {
+        let tab = (
+          <PivotItem
+            headerText={t.text}
+            itemKey={t.key}
+            key={t.key}
+            itemIcon={t.icon}
+          />
+        );
+
+        tabList.push(tab);
+      }
     }
 
     //The prop is 1-based. The tab keys are also 1-based.
