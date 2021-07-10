@@ -104,18 +104,18 @@ class Nav extends React.Component {
     //         callback)
     // }
 
-    _onItemClick(event, item) {
+    _onItemClick(item) {
 
         if (!item)
             return;
-
-        event.preventDefault();
 
         // const index = this.state.links.findIndex(link => link.key === element.key) + 1;
 
         //The item's key is already its 1-based index.
         let index = item.key;
         // let index = this.state.links.findIndex(link => link.key === key) + 1;
+
+
 
         this.setState(
             { selectedIndex: index }
@@ -166,7 +166,7 @@ class Nav extends React.Component {
                         selectedKey={index}
                         styles={navStyles}
                         groups={groupParams}
-                        onLinkClick={(evt, item) => { this._onLinkClick(evt, item) }} />
+                        onLinkClick={(evt, item) => { this._onItemClick(item) }} />
                     : <div> </div>}
             </>
         )
