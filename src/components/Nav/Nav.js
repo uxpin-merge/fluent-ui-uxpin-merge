@@ -98,14 +98,10 @@ class Nav extends React.Component {
         let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
 
         let mHeight = this.props.controlHeight > 0 ? this.props.controlHeight : 1;
-        var height = 'auto';
-        if (this.props.stretch) {
-            height = '100%'
-        }
 
         let navStyles = {
             root: {
-                height,
+                height: 'auto',
                 minHeight: mHeight,
                 width: 'auto',
                 paddingTop: topPad + 'px',
@@ -155,13 +151,7 @@ Nav.propTypes = {
     controlHeight: PropTypes.number,
 
     /**
-    * @uxpindescription To stretch the control vertically to fill the space  
-    * @uxpinpropname Stretch
-    */
-    stretch: PropTypes.bool,
-
-    /**
-     * @uxpindescription The 1-based index value of the tab to be shown as selected by default
+     * @uxpindescription The 1-based index value of the tab to be shown as selected by default. 
      * @uxpinpropname Selected Index
      */
     selectedIndex: PropTypes.number,
@@ -286,7 +276,6 @@ Nav.defaultProps = {
     items: defaultNavItems,
     styledBackground: false,
     disabled: '',
-    stretch: true,
 };
 
 

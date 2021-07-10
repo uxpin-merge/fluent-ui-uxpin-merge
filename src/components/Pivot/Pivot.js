@@ -188,7 +188,8 @@ Pivot.propTypes = {
 
   /**
   * @uxpindescription The 1-based index value of the tab to be shown as selected by default. This prop's live value is available for scripting.
-  * @uxpinpropname * Selected Index
+  * @uxpinpropname * Selected Index 
+  * @uxpinbind onIndexChanged
   */
   selectedIndex: PropTypes.number,
 
