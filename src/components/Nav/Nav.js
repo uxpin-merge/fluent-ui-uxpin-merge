@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
 import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -28,15 +29,30 @@ class Nav extends React.Component {
         this.state = {
             links: [],
             selectedIndex: 1,
-            disabledIndexes: []
+            disabledIndexes: [],
         }
     }
 
+    set() {
+        let disabledItems = UxpNumberParser.parseInts(this.props.disabled);
+
+        let items = UXPinParser.parse(this.props.items).map(
+            (item, index) => ({
+                key: index + 1,
+                name: item.text ? item.text : '',
+                icon: item?.iconName,
+                disabled: disabledItems.includes(index + 1),
+            }));
+
+        this.setState({
+            disabledIndexes: disabledItems,
+            links: items,
+            selectedIndex: this.props.selectedIndex,
+        });
+    }
+
     componentDidMount() {
-        this.setState(
-            { selectedIndex: this.props.selectedIndex }
-        )
-        this.setDisabledIndexes(this.setItems);
+        this.set();
     }
 
     componentDidUpdate(prevProps) {
@@ -50,55 +66,62 @@ class Nav extends React.Component {
         //Call them both if one or the other has changed
         if (prevProps.disabled !== this.props.disabled ||
             prevProps.items !== this.props.items) {
-            this.setDisabledIndexes(this.setItems);
+            this.set();
         }
     }
 
-    getLeftIcon(str) {
-        let tokens = getTokens(str).tokens;
+    // getLeftIcon(str) {
+    //     let tokens = getTokens(str).tokens;
 
-        let leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
+    //     let leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
 
-        return leftIcon ? leftIcon.target : '';
-    }
+    //     return leftIcon ? leftIcon.target : '';
+    // }
 
-    //Parse the nav items
-    setItems(callback) {
+    // //Parse the nav items
+    // setItems(callback) {
 
-        let itemlist = csv2arr(this.props.items)
-            .flat()
-            .map((val, i) => ({
-                name: getTokens(val).text,
-                key: i + 1,  //Setting the key to the 1-based index
-                disabled: this.state.disabledIndexes.includes(i + 1),
-                icon: this.getLeftIcon(val)
-            }));
+    //     let itemlist = csv2arr(this.props.items)
+    //         .flat()
+    //         .map((val, i) => ({
+    //             name: getTokens(val).text,
+    //             key: i + 1,  //Setting the key to the 1-based index
+    //             disabled: this.state.disabledIndexes.includes(i + 1),
+    //             icon: this.getLeftIcon(val)
+    //         }));
 
-        this.setState({
-            links: itemlist,
-        }, callback)
-    }
+    //     this.setState({
+    //         links: itemlist,
+    //     }, callback)
+    // }
 
-    //Parse the disabled items
-    setDisabledIndexes(callback) {
-        let disabledIndexes = UxpNumberParser.parseInts(this.props.disabled);
+    // //Parse the disabled items
+    // setDisabledIndexes(callback) {
+    //     let disabledIndexes = UxpNumberParser.parseInts(this.props.disabled);
 
-        this.setState(
-            { disabledIndexes },
-            callback)
-    }
+    //     this.setState(
+    //         { disabledIndexes },
+    //         callback)
+    // }
 
-    onMenuClick(event, element) {
+    _onItemClick(event, item) {
+
+        if (!item)
+            return;
+
         event.preventDefault();
 
-        const index = this.state.links.findIndex(link => link.key === element.key) + 1;
+        // const index = this.state.links.findIndex(link => link.key === element.key) + 1;
+
+        //The item's key is already its 1-based index.
+        let index = item.key;
+        // let index = this.state.links.findIndex(link => link.key === key) + 1;
 
         this.setState(
             { selectedIndex: index }
         )
 
-        //If the prop for an individual nav item's click event exists, let's push it. 
-        //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
+        //Raise this event to UXPin. We'll send them info about which item was clicked on.
         if (this.props[`onLink${index}Click`]) {
             this.props[`onLink${index}Click`](index);
         }
@@ -143,7 +166,7 @@ class Nav extends React.Component {
                         selectedKey={index}
                         styles={navStyles}
                         groups={groupParams}
-                        onLinkClick={this.onMenuClick.bind(this)} />
+                        onLinkClick={(evt, item) => { this._onLinkClick(evt, item) }} />
                     : <div> </div>}
             </>
         )
