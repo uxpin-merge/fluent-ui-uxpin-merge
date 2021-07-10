@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
-import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -70,60 +69,23 @@ class Nav extends React.Component {
         }
     }
 
-    // getLeftIcon(str) {
-    //     let tokens = getTokens(str).tokens;
-
-    //     let leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
-
-    //     return leftIcon ? leftIcon.target : '';
-    // }
-
-    // //Parse the nav items
-    // setItems(callback) {
-
-    //     let itemlist = csv2arr(this.props.items)
-    //         .flat()
-    //         .map((val, i) => ({
-    //             name: getTokens(val).text,
-    //             key: i + 1,  //Setting the key to the 1-based index
-    //             disabled: this.state.disabledIndexes.includes(i + 1),
-    //             icon: this.getLeftIcon(val)
-    //         }));
-
-    //     this.setState({
-    //         links: itemlist,
-    //     }, callback)
-    // }
-
-    // //Parse the disabled items
-    // setDisabledIndexes(callback) {
-    //     let disabledIndexes = UxpNumberParser.parseInts(this.props.disabled);
-
-    //     this.setState(
-    //         { disabledIndexes },
-    //         callback)
-    // }
-
     _onItemClick(item) {
 
         if (!item)
             return;
 
-        // const index = this.state.links.findIndex(link => link.key === element.key) + 1;
-
         //The item's key is already its 1-based index.
         let index = item.key;
-        // let index = this.state.links.findIndex(link => link.key === key) + 1;
 
+        if (index !== this.state.selectedIndex) {
+            this.setState(
+                { selectedIndex: index }
+            )
 
-
-        this.setState(
-            { selectedIndex: index }
-        )
-
-        //Raise this event to UXPin. We'll send them info about which item was clicked on.
-        if (this.props[`onLink${index}Click`]) {
-            this.props[`onLink${index}Click`](index);
+            //Raise this event to UXPin. We'll send them info about which item was clicked on.
+            if (this.props[`onLink${index}Click`]) {
+                this.props[`onLink${index}Click`](index);
+            }
         }
     }
 
@@ -136,7 +98,7 @@ class Nav extends React.Component {
         let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
 
         let mHeight = this.props.controlHeight > 0 ? this.props.controlHeight : 1;
-        let height = 'auto';
+        var height = 'auto';
         if (this.props.stretch) {
             height = '100%'
         }
