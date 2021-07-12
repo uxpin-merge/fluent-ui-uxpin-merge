@@ -20,6 +20,7 @@ export const UxpPersonaData = {
         initialsColor: 8, // "blue",
         email: "alindqvist@company.com",
         role: "Sr. Software Engineer",
+        token: "female01",
     },
 
     /**
@@ -35,6 +36,7 @@ export const UxpPersonaData = {
         initialsColor: 12, //"orange",
         email: "arao@company.com",
         role: "Director, Engineering",
+        token: "male01",
     },
 
     /**
@@ -50,6 +52,7 @@ export const UxpPersonaData = {
         initialsColor: 2, //"warmGray",
         email: "mhernandez@company.com",
         role: "Engineering Manager",
+        token: "male02",
     },
 
     /**
@@ -65,6 +68,7 @@ export const UxpPersonaData = {
         initialsColor: 17, //"lightRed",
         email: "yabe@company.com",
         role: "Sr. User Experience Designer",
+        token: "female02",
     },
 
     /**
@@ -80,6 +84,7 @@ export const UxpPersonaData = {
         initialsColor: 4, //"lightGreen",
         email: "jwang@company.com",
         role: "Program Manager",
+        token: "female03",
     },
 
     /**
@@ -95,6 +100,7 @@ export const UxpPersonaData = {
         initialsColor: 2, //"darkBlue",
         email: "mjohnson@company.com",
         role: "Software Engineer",
+        token: "male03",
     },
 
 
@@ -111,6 +117,7 @@ export const UxpPersonaData = {
         initialsColor: 19, //"burgundy",
         email: "kchowdhury@company.com",
         role: "Software Engineering Intern",
+        token: "female04",
     },
 
 
@@ -127,6 +134,7 @@ export const UxpPersonaData = {
         initialsColor: 10, //"purple",
         email: "pgreen@company.com",
         role: "Vice President, Engineering",
+        token: "female05",
     },
 
     /**
@@ -142,6 +150,7 @@ export const UxpPersonaData = {
         initialsColor: 8, //"pink",
         email: "lramirez@company.com",
         role: "Product Marketing Manager",
+        token: "female06",
     },
 
     /**
@@ -157,6 +166,7 @@ export const UxpPersonaData = {
         initialsColor: 14, //"darkRed",
         email: "krama@company.com",
         role: "Sr. Software Engineer",
+        token: "female07",
     },
 
     /** 
