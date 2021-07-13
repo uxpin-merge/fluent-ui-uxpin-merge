@@ -13,7 +13,7 @@ export const UxpPersonaData = {
      */
     personaAmaya: {
         key: "person01",
-        imageUrl: "https://randomuser.me/api/portraits/women/44.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person01.jpg",
         imageInitials: "AD",
         text: "Amaya Davani",
         presence: 4, //"dnd",
@@ -29,7 +29,7 @@ export const UxpPersonaData = {
      */
     personaMarcus: {
         key: "person02",
-        imageUrl: "https://randomuser.me/api/portraits/men/79.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person02.jpg",
         imageInitials: "MJ",
         text: "Marcus Jones",
         presence: 1,
@@ -45,7 +45,7 @@ export const UxpPersonaData = {
      */
     personaJavier: {
         key: "person03",
-        imageUrl: "https://randomuser.me/api/portraits/men/87.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person03.jpg",
         imageInitials: "JR",
         text: "Javier Rubio",
         presence: 6, //"busy",
@@ -61,7 +61,7 @@ export const UxpPersonaData = {
      */
     personaSydney: {
         key: "person04",
-        imageUrl: "https://randomuser.me/api/portraits/women/85.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg",
         imageInitials: "SC",
         text: "Sydney Coleman",
         presence: 2, //"online",
@@ -77,7 +77,7 @@ export const UxpPersonaData = {
     */
     personaJohar: {
         key: "person05",
-        imageUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-male.png",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person05.jpg",
         imageInitials: "JA",
         text: "Johar Ahuja",
         presence: 3, // "away",
@@ -93,7 +93,7 @@ export const UxpPersonaData = {
      */
     personaMelanie: {
         key: "person06",
-        imageUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person06.jpg",
         imageInitials: "MF",
         text: "Melanie Foote",
         presence: 2, //"online",
@@ -109,7 +109,7 @@ export const UxpPersonaData = {
      */
     personaJayden: {
         key: "person07",
-        imageUrl: "https://randomuser.me/api/portraits/men/40.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person07.jpg",
         imageInitials: "JH",
         text: "Jayden Harris",
         presence: 2,
@@ -125,7 +125,7 @@ export const UxpPersonaData = {
      */
     personaGabriel: {
         key: "person08",
-        imageUrl: "https://randomuser.me/api/portraits/men/83.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person08.jpg",
         imageInitials: "GM",
         text: "Gabriel Martinez",
         presence: 6, //"busy",
@@ -141,7 +141,7 @@ export const UxpPersonaData = {
      */
     personaCameron: {
         key: "person09",
-        imageUrl: "",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person09.jpg",
         imageInitials: "CT",
         text: "Cameron Thomas",
         presence: 2,
@@ -157,7 +157,7 @@ export const UxpPersonaData = {
      */
     personaDavid: {
         key: "person10",
-        imageUrl: "https://randomuser.me/api/portraits/women/9.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person10.jpg",
         imageInitials: "DH",
         text: "David Hilliers",
         presence: 2, //"online",
@@ -173,7 +173,7 @@ export const UxpPersonaData = {
      */
     personaJessica: {
         key: "person11",
-        imageUrl: "https://randomuser.me/api/portraits/women/83.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person11.jpg",
         imageInitials: "JF",
         text: "Jessica Furst",
         presence: 2, //"online",
@@ -189,7 +189,7 @@ export const UxpPersonaData = {
      */
     personaMaria: {
         key: "person12",
-        imageUrl: "https://randomuser.me/api/portraits/women/15.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person12.jpg",
         imageInitials: "MO",
         text: "Maria Ortiz",
         presence: 2, //"online",
@@ -205,7 +205,7 @@ export const UxpPersonaData = {
      */
     personaJulia: {
         key: "person13",
-        imageUrl: "https://randomuser.me/api/portraits/men/54.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person13.jpg",
         imageInitials: "JC",
         text: "Julia Colon",
         presence: 0,
@@ -221,7 +221,7 @@ export const UxpPersonaData = {
      */
     personaHailey: {
         key: "person14",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person14.jpg",
         imageInitials: "HJ",
         text: "Hailey Jackson",
         presence: 2,
@@ -237,7 +237,7 @@ export const UxpPersonaData = {
      */
     personaTyler: {
         key: "person15",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person15.jpg",
         imageInitials: "TB",
         text: "Tyler Brown",
         presence: 2,
@@ -253,7 +253,7 @@ export const UxpPersonaData = {
      */
     personaJasmine: {
         key: "person16",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person16.jpg",
         imageInitials: "JR",
         text: "Jasmine Robinson",
         presence: 2,
@@ -269,7 +269,7 @@ export const UxpPersonaData = {
      */
     personaTiana: {
         key: "person17",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person17.jpg",
         imageInitials: "TW",
         text: "Tiana Walker",
         presence: 2,
@@ -285,7 +285,7 @@ export const UxpPersonaData = {
      */
     personaJivan: {
         key: "person18",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person18.jpg",
         imageInitials: "JP",
         text: "Jivan Patel",
         presence: 2,
@@ -301,7 +301,7 @@ export const UxpPersonaData = {
      */
     personaGael: {
         key: "person19",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person19.jpg",
         imageInitials: "GL",
         text: "Gael Lopez",
         presence: 2,
@@ -317,7 +317,7 @@ export const UxpPersonaData = {
      */
     personaQiang: {
         key: "person20",
-        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person20.jpg",
         imageInitials: "QL",
         text: "Qiang Li",
         presence: 2,
