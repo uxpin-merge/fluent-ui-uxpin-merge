@@ -103,7 +103,6 @@ export const UxpPersonaData = {
         token: "male03",
     },
 
-
     /**
      * Persona info for Kiara Chowdhury. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
@@ -169,6 +168,70 @@ export const UxpPersonaData = {
         token: "female07",
     },
 
+    /**
+     * Persona info for Calvin Green. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaCalvin: {
+        key: 11,
+        imageUrl: "https://randomuser.me/api/portraits/men/54.jpg",
+        imageInitials: "CG",
+        text: "Calvin Green",
+        presence: 0, //"busy",
+        initialsColor: 10,
+        email: "cgreen@company.com",
+        role: "Software Engineer",
+        token: "male04",
+    },
+
+    /**
+     * Persona info for Toshiro Nakahara. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaToshiro: {
+        key: 12,
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "TN",
+        text: "Toshiro Nakahara",
+        presence: 2,
+        initialsColor: 16,
+        email: "tnakahara@company.com",
+        role: "Technical Writer",
+        token: "male05",
+    },
+
+    /**
+     * Persona info for Diego Rodriguez. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaDiego: {
+        key: 13,
+        imageUrl: "https://randomuser.me/api/portraits/men/40.jpg",
+        imageInitials: "DR",
+        text: "Diego Rodriguez",
+        presence: 2,
+        initialsColor: 9,
+        email: "drodriguez@company.com",
+        role: "Project Manager",
+        token: "male06",
+    },
+
+    /**
+     * Persona info for Bennett Coleman. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaBennett: {
+        key: 14,
+        imageUrl: "https://randomuser.me/api/portraits/men/79.jpg",
+        imageInitials: "BC",
+        text: "Bennett Coleman",
+        presence: 1,
+        initialsColor: 17,
+        email: "bcoleman@company.com",
+        role: "Intern",
+        token: "male07",
+    },
+
     /** 
     * The Persona Presence codes.
     */
@@ -212,6 +275,50 @@ export const UxpPersonaData = {
     },
 
     /**
+     * The user may invoke a persona by its token, as indicated
+     * @param {string} token The token for a persona. 
+     * @returns {string} If found, returns a Persona params object. If not found, returns undefined.
+     */
+    getPersonaByToken: function (token) {
+        if (token && token.length) {
+            let t = token.trim().toLowerCase();
+
+            switch (t) {
+                case "female01":
+                    return this.personaAnnie;
+                case "female02":
+                    return this.personaYuki;
+                case "female03":
+                    return this.personaJian;
+                case "female04":
+                    return this.personaKiara;
+                case "female05":
+                    return this.personaPatricia;
+                case "female06":
+                    return this.personaLucia;
+                case "female07":
+                    return this.personaKaasni;
+                case "male01":
+                    return this.personaAbhik;
+                case "male02":
+                    return this.personaMiguel;
+                case "male03":
+                    return this.personaMark;
+                case "male04":
+                    return this.personaCalvin;
+                case "male05":
+                    return this.personaToshiro;
+                case "male06":
+                    return this.personaDiego;
+                case "male07":
+                    return this.personaBennett;
+                default:
+                    return undefined;
+            }
+        }
+    },
+
+    /**
      * We build our own list of sample personas.
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      * Note that we use 'text' for the full name to be consistent with Microsoft's Persona props. 
@@ -248,8 +355,20 @@ export const UxpPersonaData = {
         personas.push(this.personaLucia);
         if (count == 9) return personas;
 
-        personas.push(this.personaKaasni);
+        personas.push(this.personaCalvin);
         if (count == 10) return personas;
+
+        personas.push(this.personaKaasni);
+        if (count == 11) return personas;
+
+        personas.push(this.personaToshiro);
+        if (count == 12) return personas;
+
+        personas.push(this.personaDiego);
+        if (count == 13) return personas;
+
+        personas.push(this.personaBennett);
+        if (count == 14) return personas;
 
         //After this, add in any additional personas, as requested, up to the max.
         //Let's add more then!
