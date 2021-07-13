@@ -10,7 +10,7 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
 //This is the default URL to use for a generic female user
-let personaFemaleUrl = "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png"
+let personaFemaleUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg"
 
 //Fix the weird line height issue in the top line of the Persona
 const personaStyles = {
