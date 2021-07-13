@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import { UxpNumberParser } from '../_helpers/uxpnumberutils';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
@@ -115,7 +115,7 @@ class MetaDataGroup extends React.Component {
                         <StackItem
                             grow={this.props.stretch ? true : ''}
                             align={this.props.stretch ? "stretch" : ''}   >
-                            { child}
+                            {child}
                         </StackItem>
                     );
                     stackList.push(stack);
@@ -134,8 +134,8 @@ class MetaDataGroup extends React.Component {
                 wrap={false}
                 styles={topStackItemStyles}>
 
-                { headerTxt}
-                { stackList}
+                {headerTxt}
+                {stackList}
 
             </Stack>
         );
