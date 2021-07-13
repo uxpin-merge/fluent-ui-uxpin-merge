@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
-import { getTokens, csv2arr } from '../_helpers/parser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 
@@ -32,56 +31,38 @@ class ChoiceGroup extends React.Component {
 
     //Store the selected index as 1 based, same as user input
     this.setState(
-      { _index: this.props.selectedIndex }
+      {
+        _items: [],
+        _index: 0,
+      }
     )
   }
 
-  componentDidUpdate(prevProps) {
-
-    if (prevProps.selectedIndex !== this.props.selectedIndex) {
-      //Store the selected index as 1 based, same as user input
-      this.setState(
-        { _index: this.props.selectedIndex }
-      )
-    }
-
-    //If the user sets props to true, then we add icons, which automatically converts it to tiled display.
-    //So if either condition is true, we need to reset the items list. 
-    if (prevProps.items !== this.props.items || prevProps.tiled !== this.props.tiled) {
-      this.setItems();
-    }
-  }
-
-  //Get the user-entered left icon name, if there is one
-  getLeftIcon(str) {
-    if (this.props.tiled) {
-      const tokens = getTokens(str).tokens;
-      const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
-      return leftIcon ? leftIcon.target : '';
-    }
-    else {
-      return '';
-    }
-  }
-
-  //If the user has chosen a tiled options display, let's figure out the icon names.
-  getIconProps(str) {
-    if (this.props.tiled) {
-      return {
-        iconName: this.getLeftIcon(str),
-      }
-    }
-
-    return "";
-  }
-
-  //Parse the choice items
-  setItems() {
-    let items = UXPinParser.parse(this.props.items);
+  set() {
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => ({
+        key: index,
+        text: item.text ? item.text : '',
+        iconProps: this.props.tiled ? { iconName: item?.iconName } : '',
+        disabled: this.props.disabled,
+      }));
 
     this.setState({
-      items: items
+      _items: items,
+      _index: this.props.selectedIndex,
     });
+  }
+
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.items !== this.props.items ||
+      prevProps.tiled !== this.props.tiled ||
+      prevProps.selectedIndex !== this.props.selectedIndex) {
+      this.set();
+    }
   }
 
   _onChoiceChange(option) {
@@ -101,16 +82,15 @@ class ChoiceGroup extends React.Component {
 
   render() {
 
-    //Get the value from state. Subtract 1 because it's stored as a 1-based index to be more user friendly.
+    //Subtract 1 because it's stored as a 1-based index to be more user friendly.
     const selectedKey = this.state._index - 1;
 
     return (
 
       <FChoiceGroup
         {...this.props}
-        options={this.state.items}
+        options={this.state._items}
         selectedKey={selectedKey}
-
         onChange={(e, o) => { this._onChoiceChange(o); }}
       />
 

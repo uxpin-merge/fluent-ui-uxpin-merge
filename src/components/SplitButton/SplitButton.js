@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
-import { getTokens, csv2arr } from '../_helpers/parser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -42,36 +42,19 @@ class SplitButton extends React.Component {
   //Parse the choice items
   set() {
 
-    if (!this.props.items)
-      return;
-
-    let items = csv2arr(this.props.items)
-      .flat()
-      .map((val, index) => ({
-        text: getTokens(val).text,
-        key: index + 1,  //1 based index
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => ({
+        key: index + 1,
+        text: item.text ? item.text : '',
+        iconProps: { iconName: item?.iconName },
         disabled: false,
-        iconProps: this.getIconProps(val),
-        onClick: () => { this._onClick(index + 1) } //same as key, 1-based
-      }));
+        onClick: () => { this._onClick(index + 1) },
+      })
+    );
 
     this.setState({
       items: items
     });
-  }
-
-  //Get the user-entered left icon name, if there is one
-  getLeftIcon(str) {
-    const tokens = getTokens(str).tokens
-    const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
-    return leftIcon ? leftIcon.target : null
-  }
-
-  //If the user has chosen a tiled options display, let's figure out the icon names.
-  getIconProps(str) {
-    return {
-      iconName: this.getLeftIcon(str)
-    }
   }
 
   _onClick(index) {
@@ -85,7 +68,6 @@ class SplitButton extends React.Component {
     }
   }
 
-
   render() {
 
     const targetID = _.uniqueId('target_');
@@ -98,7 +80,7 @@ class SplitButton extends React.Component {
     let iconProps = { iconName: this.props.iconName }
 
     var menuProps = undefined;
-    if (this.props.items) {
+    if (this.state.items?.length) {
       menuProps = {
         items: this.state.items,
         directionalHintFixed: true

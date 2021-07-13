@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
-import { getTokens, csv2arr } from '../_helpers/parser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -26,16 +26,19 @@ class GroupButton extends React.Component {
 
    set() {
 
-      var items = [];
+      let items = UXPinParser.parse(this.props.items).map(
+         (item, index) => ({
+            key: index + 1,
+            text: item.text ? item.text : '',
+            icon: item?.iconName,
+         }));
 
-      if (this.props.items) {
-         items = csv2arr(this.props.items)
-            .flat()
-            .map((val, index) => ({
-               text: getTokens(val).text,
-               key: index + 1,
-               icon: this.getLeftIcon(val)
-            }));
+      if (!items || items.length < 1) {
+         items.push({
+            key: 1,
+            text: "Group Button",
+            icon: '',
+         });
       }
 
       //Adjust against the floor (0) and ceiling (number of items)
@@ -49,13 +52,6 @@ class GroupButton extends React.Component {
          items: items,
          selectedIndex: index
       });
-   }
-
-   //Get the user-entered left icon name, if there is one
-   getLeftIcon(str) {
-      const tokens = getTokens(str).tokens
-      const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
-      return leftIcon ? leftIcon.target : null
    }
 
    componentDidMount() {
@@ -106,6 +102,7 @@ class GroupButton extends React.Component {
          let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
 
          //The key is already 1 based
+         //We don't correct for empty buttons. If we do, then the isPrimary number can get off. So users need to pay attention. 
          let button = (
             <Button
                {...this.props}

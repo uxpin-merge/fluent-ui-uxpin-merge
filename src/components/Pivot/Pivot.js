@@ -5,7 +5,7 @@ import {
   PivotItem
 } from '@fluentui/react/lib/Pivot';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { getTokens, csv2arr } from '../_helpers/parser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -16,9 +16,6 @@ Tab Two
 Tab Three
 Tab Four`;
 
-
-//The smallest allowed box size
-const defaultBoxSize = '0';
 const verticalAlign = 'start';
 const stretchAlign = 'stretch';
 
@@ -49,27 +46,19 @@ class Pivot extends React.Component {
     }
   }
 
-  //Parse the choice items
   set() {
-    let items = csv2arr(this.props.tabs)
-      .flat()
-      .map((val, index) => ({
-        text: getTokens(val).text,
+
+    let items = UXPinParser.parse(this.props.tabs).map(
+      (item, index) => ({
         key: index + 1,
-        icon: this.getLeftIcon(val)
+        text: item.text ? item.text : '',
+        icon: item?.iconName,
       }));
 
     this.setState({
       tabs: items,
       selectedIndex: this.props.selectedIndex
     });
-  }
-
-  //Get the user-entered left icon name, if there is one
-  getLeftIcon(str) {
-    const tokens = getTokens(str).tokens
-    const leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start')
-    return leftIcon ? leftIcon.target : null
   }
 
   _onLinkClick(selectedItem) {
@@ -89,7 +78,6 @@ class Pivot extends React.Component {
     }
   }
 
-
   render() {
 
     //Set up the tabs
@@ -100,16 +88,21 @@ class Pivot extends React.Component {
 
     for (i = 0; i < tabs.length; i++) {
       let t = tabs[i];
+
       //The key is already 1 based
-      let tab = (
-        <PivotItem
-          headerText={t.text}
-          itemKey={t.key}
-          key={t.key}
-          itemIcon={t.icon}
-        />
-      );
-      tabList.push(tab);
+      //Let's avoid empty items
+      if (t?.text || t?.icon) {
+        let tab = (
+          <PivotItem
+            headerText={t.text}
+            itemKey={t.key}
+            key={t.key}
+            itemIcon={t.icon}
+          />
+        );
+
+        tabList.push(tab);
+      }
     }
 
     //The prop is 1-based. The tab keys are also 1-based.
@@ -195,7 +188,8 @@ Pivot.propTypes = {
 
   /**
   * @uxpindescription The 1-based index value of the tab to be shown as selected by default. This prop's live value is available for scripting.
-  * @uxpinpropname * Selected Index
+  * @uxpinpropname * Selected Index 
+  * @uxpinbind onIndexChanged
   */
   selectedIndex: PropTypes.number,
 

@@ -8,155 +8,323 @@ export const UxpPersonaData = {
     personaMaleUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-male.png",
 
     /**
-     * Persona info for Annie Lindqvist. 
+     * Persona info for Amaya Davani. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaAnnie: {
-        key: 1,
-        imageUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png",
-        imageInitials: "AL",
-        text: "Annie Lindqvist",
-        presence: 2, //"online",
-        initialsColor: 8, // "blue",
-        email: "alindqvist@company.com",
-        role: "Sr. Software Engineer",
-    },
-
-    /**
-    * Persona info for Abhik Rao. 
-    * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
-    */
-    personaAbhik: {
-        key: 2,
-        imageUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-male.png",
-        imageInitials: "AR",
-        text: "Abhik Rao",
-        presence: 3, // "away",
-        initialsColor: 12, //"orange",
-        email: "arao@company.com",
-        role: "Director, Engineering",
-    },
-
-    /**
-     * Persona info for Miguel Hernandez. 
-     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
-     */
-    personaMiguel: {
-        key: 3,
-        imageUrl: "https://randomuser.me/api/portraits/men/87.jpg",
-        imageInitials: "MH",
-        text: "Miguel Hernandez",
-        presence: 6, //"busy",
-        initialsColor: 2, //"warmGray",
-        email: "mhernandez@company.com",
-        role: "Engineering Manager",
-    },
-
-    /**
-     * Persona info for Yuki Abe. 
-     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
-     */
-    personaYuki: {
-        key: 4,
+    personaAmaya: {
+        key: "person01",
         imageUrl: "https://randomuser.me/api/portraits/women/44.jpg",
-        imageInitials: "YA",
-        text: "Yuki Abe",
+        imageInitials: "AD",
+        text: "Amaya Davani",
         presence: 4, //"dnd",
         initialsColor: 17, //"lightRed",
-        email: "yabe@company.com",
-        role: "Sr. User Experience Designer",
+        email: "adavani@company.com",
+        role: "Sr. Software Developer",
+        token: "person01",
     },
 
     /**
-     * Persona info for Jian Wang. 
+     * Persona info for Marcus Jones. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaJian: {
-        key: 5,
+    personaMarcus: {
+        key: "person02",
+        imageUrl: "https://randomuser.me/api/portraits/men/79.jpg",
+        imageInitials: "MJ",
+        text: "Marcus Jones",
+        presence: 1,
+        initialsColor: 17,
+        email: "jmones@company.com",
+        role: "Business Analyst",
+        token: "person02",
+    },
+
+    /**
+     * Persona info for Javier Rubio. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaJavier: {
+        key: "person03",
+        imageUrl: "https://randomuser.me/api/portraits/men/87.jpg",
+        imageInitials: "JR",
+        text: "Javier Rubio",
+        presence: 6, //"busy",
+        initialsColor: 2, //"warmGray",
+        email: "jrubio@company.com",
+        role: "Application Support Analyst",
+        token: "person03",
+    },
+
+    /**
+     * Persona info for Sydney Coleman. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaSydney: {
+        key: "person04",
         imageUrl: "https://randomuser.me/api/portraits/women/85.jpg",
-        imageInitials: "JW",
-        text: "Jian Wang",
+        imageInitials: "SC",
+        text: "Sydney Coleman",
         presence: 2, //"online",
         initialsColor: 4, //"lightGreen",
-        email: "jwang@company.com",
-        role: "Program Manager",
+        email: "scoleman@company.com",
+        role: "Financial Analyst II",
+        token: "person04",
     },
 
     /**
-     * Persona info for Mark Johnson. 
+    * Persona info for Johar Ahuja. 
+    * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+    */
+    personaJohar: {
+        key: "person05",
+        imageUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-male.png",
+        imageInitials: "JA",
+        text: "Johar Ahuja",
+        presence: 3, // "away",
+        initialsColor: 12, //"orange",
+        email: "jahuja@company.com",
+        role: "Data Center Support Specialist",
+        token: "person05",
+    },
+
+    /**
+     * Persona info for Melanie Foote. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaMark: {
-        key: 6,
+    personaMelanie: {
+        key: "person06",
+        imageUrl: "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-react-assets/persona-female.png",
+        imageInitials: "MF",
+        text: "Melanie Foote",
+        presence: 2, //"online",
+        initialsColor: 8, // "blue",
+        email: "mfoote@company.com",
+        role: "Marketing Promotions Specialist",
+        token: "person06",
+    },
+
+    /**
+     * Persona info for Jayden Harris. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaJayden: {
+        key: "person07",
+        imageUrl: "https://randomuser.me/api/portraits/men/40.jpg",
+        imageInitials: "JH",
+        text: "Jayden Harris",
+        presence: 2,
+        initialsColor: 9,
+        email: "jharris@company.com",
+        role: "Product Marketing Manager",
+        token: "person07",
+    },
+
+    /**
+     * Persona info for Gabriel Martinez. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaGabriel: {
+        key: "person08",
         imageUrl: "https://randomuser.me/api/portraits/men/83.jpg",
-        imageInitials: "MJ",
-        text: "Mark Johnson",
+        imageInitials: "GM",
+        text: "Gabriel Martinez",
         presence: 6, //"busy",
         initialsColor: 2, //"darkBlue",
-        email: "mjohnson@company.com",
-        role: "Software Engineer",
+        email: "gmartinez@company.com",
+        role: "Marketing Research Associate",
+        token: "person08",
     },
 
-
     /**
-     * Persona info for Kiara Chowdhury. 
+     * Persona info for Cameron Thomas. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaKiara: {
-        key: 7,
+    personaCameron: {
+        key: "person09",
         imageUrl: "",
-        imageInitials: "KC",
-        text: "Kiara Chowdhury",
-        presence: 2, //"online",
-        initialsColor: 19, //"burgundy",
-        email: "kchowdhury@company.com",
-        role: "Software Engineering Intern",
+        imageInitials: "CT",
+        text: "Cameron Thomas",
+        presence: 2,
+        initialsColor: 19,
+        email: "cthomas@company.com",
+        role: "Information Systems Director",
+        token: "person09",
     },
 
-
     /**
-     * Persona info for Patricia Green. 
+     * Persona info for David Hilliers. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaPatricia: {
-        key: 8,
+    personaDavid: {
+        key: "person10",
         imageUrl: "https://randomuser.me/api/portraits/women/9.jpg",
-        imageInitials: "PG",
-        text: "Patricia Green",
+        imageInitials: "DH",
+        text: "David Hilliers",
         presence: 2, //"online",
         initialsColor: 10, //"purple",
-        email: "pgreen@company.com",
-        role: "Vice President, Engineering",
+        email: "dhilliers@company.com",
+        role: "Sr. Database Administrator",
+        token: "person10",
     },
 
     /**
-     * Persona info for Lucia Ramirez. 
+     * Persona info for Jessica Furst. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaLucia: {
-        key: 9,
+    personaJessica: {
+        key: "person11",
         imageUrl: "https://randomuser.me/api/portraits/women/83.jpg",
-        imageInitials: "LR",
-        text: "Lucia Ramirez",
+        imageInitials: "JF",
+        text: "Jessica Furst",
         presence: 2, //"online",
         initialsColor: 8, //"pink",
-        email: "lramirez@company.com",
-        role: "Product Marketing Manager",
+        email: "jfurst@company.com",
+        role: "Data Quality Manager",
+        token: "person11",
     },
 
     /**
-     * Persona info for Kaasni Rama. 
+     * Persona info for Maria Ortiz. 
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      */
-    personaKaasni: {
-        key: 10,
+    personaMaria: {
+        key: "person12",
         imageUrl: "https://randomuser.me/api/portraits/women/15.jpg",
-        imageInitials: "LR",
-        text: "Kaasni Rama",
+        imageInitials: "MO",
+        text: "Maria Ortiz",
         presence: 2, //"online",
         initialsColor: 14, //"darkRed",
-        email: "krama@company.com",
-        role: "Sr. Software Engineer",
+        email: "mortiz@company.com",
+        role: "Risk & Compliance Officer",
+        token: "person12",
+    },
+
+    /**
+     * Persona info for Julia Colon. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaJulia: {
+        key: "person13",
+        imageUrl: "https://randomuser.me/api/portraits/men/54.jpg",
+        imageInitials: "JC",
+        text: "Julia Colon",
+        presence: 0,
+        initialsColor: 10,
+        email: "jcolon@company.com",
+        role: "IP Attorney",
+        token: "person13",
+    },
+
+    /**
+     * Persona info for Hailey Jackson. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaHailey: {
+        key: "person14",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "HJ",
+        text: "Hailey Jackson",
+        presence: 2,
+        initialsColor: 16,
+        email: "hjackson@company.com",
+        role: "Blockchain Engineer",
+        token: "person14",
+    },
+
+    /**
+     * Persona info for Tyler Brown. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaTyler: {
+        key: "person15",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "TB",
+        text: "Tyler Brown",
+        presence: 2,
+        initialsColor: 18,
+        email: "tbrown@company.com",
+        role: "Quantitative Analyst",
+        token: "person15",
+    },
+
+    /**
+     * Persona info for Jasmine Robinson. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaJasmine: {
+        key: "person16",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "JR",
+        text: "Jasmine Robinson",
+        presence: 2,
+        initialsColor: 2,
+        email: "jrobinson@company.com",
+        role: "Quantitative Analyst",
+        token: "person16",
+    },
+
+    /**
+     * Persona info for Tiana Walker. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaTiana: {
+        key: "person17",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "TW",
+        text: "Tiana Walker",
+        presence: 2,
+        initialsColor: 14,
+        email: "twalker@company.com",
+        role: "Quantitative Analyst",
+        token: "person17",
+    },
+
+    /**
+     * Persona info for Jivan Patel. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaJivan: {
+        key: "person18",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "JP",
+        text: "Jivan Patel",
+        presence: 2,
+        initialsColor: 1,
+        email: "jpatel@company.com",
+        role: "Machine Learning Engineer",
+        token: "person18",
+    },
+
+    /**
+     * Persona info for Gael Lopez. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaGael: {
+        key: "person19",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "GL",
+        text: "Gael Lopez",
+        presence: 2,
+        initialsColor: 1,
+        email: "jlopez@company.com",
+        role: "Senior Web Administrator",
+        token: "person19",
+    },
+
+    /**
+     * Persona info for Qiang Li. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     */
+    personaQiang: {
+        key: "person20",
+        imageUrl: "https://randomuser.me/api/portraits/men/90.jpg",
+        imageInitials: "QL",
+        text: "Qiang Li",
+        presence: 2,
+        initialsColor: 5,
+        email: "qli@company.com",
+        role: "HR Specialist",
+        token: "person20",
     },
 
     /** 
@@ -202,6 +370,64 @@ export const UxpPersonaData = {
     },
 
     /**
+     * The user may invoke a persona by its token, as indicated
+     * @param {string} token The token for a persona. 
+     * @returns {string} If found, returns a Persona params object. If not found, returns undefined.
+     */
+    getPersonaByToken: function (token) {
+        if (token && token.length) {
+            let t = token.trim().toLowerCase();
+
+            switch (t) {
+                case "person01":
+                    return this.personaAmaya;
+                case "person02":
+                    return this.personaMarcus;
+                case "person03":
+                    return this.personaJavier;
+                case "person04":
+                    return this.personaSydney;
+                case "person05":
+                    return this.personaJohar;
+                case "person06":
+                    return this.personaMelanie;
+                case "person07":
+                    return this.personaJayden;
+                case "person08":
+                    return this.personaGabriel;
+                case "person09":
+                    return this.personaCameron;
+                case "person10":
+                    return this.personaDavid;
+                case "person11":
+                    return this.personaJessica;
+                case "person12":
+                    return this.personaMaria;
+                case "person13":
+                    return this.personaJulia;
+                case "person14":
+                    return this.personaHailey;
+                case "person15":
+                    return this.personaTyler;
+                case "person16":
+                    return this.personaJasmine;
+                case "person17":
+                    return this.personaTiana;
+                case "person18":
+                    return this.personaJivan;
+                case "person19":
+                    return this.personaGael;
+                case "person20":
+                    return this.personaQiang;
+                default:
+                    return undefined;
+            }
+        }
+
+        return undefined;
+    },
+
+    /**
      * We build our own list of sample personas.
      * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
      * Note that we use 'text' for the full name to be consistent with Microsoft's Persona props. 
@@ -211,35 +437,65 @@ export const UxpPersonaData = {
 
         const personas = [];
 
-        personas.push(this.personaAnnie);
+        personas.push(this.personaAmaya);
         if (count == 1) return personas;
 
-        personas.push(this.personaMiguel);
+        personas.push(this.personaMarcus);
         if (count == 2) return personas;
 
-        personas.push(this.personaAbhik);
+        personas.push(this.personaJavier);
         if (count == 3) return personas;
 
-        personas.push(this.personaYuki);
+        personas.push(this.personaSydney);
         if (count == 4) return personas;
 
-        personas.push(this.personaJian);
+        personas.push(this.personaJohar);
         if (count == 5) return personas;
 
-        personas.push(this.personaMark);
+        personas.push(this.personaMelanie);
         if (count == 6) return personas;
 
-        personas.push(this.personaKiara);
+        personas.push(this.personaJayden);
         if (count == 7) return personas;
 
-        personas.push(this.personaPatricia);
+        personas.push(this.personaGabriel);
         if (count == 8) return personas;
 
-        personas.push(this.personaLucia);
+        personas.push(this.personaCameron);
         if (count == 9) return personas;
 
-        personas.push(this.personaKaasni);
+        personas.push(this.personaDavid);
         if (count == 10) return personas;
+
+        personas.push(this.personaJessica);
+        if (count == 11) return personas;
+
+        personas.push(this.personaMaria);
+        if (count == 12) return personas;
+
+        personas.push(this.personaJulia);
+        if (count == 13) return personas;
+
+        personas.push(this.personaHailey);
+        if (count == 14) return personas;
+
+        personas.push(this.personaTyler);
+        if (count == 15) return personas;
+
+        personas.push(this.personaJasmine);
+        if (count == 16) return personas;
+
+        personas.push(this.personaTiana);
+        if (count == 17) return personas;
+
+        personas.push(this.personaJivan);
+        if (count == 18) return personas;
+
+        personas.push(this.personaGael);
+        if (count == 19) return personas;
+
+        personas.push(this.personaQiang);
+        if (count == 20) return personas;
 
         //After this, add in any additional personas, as requested, up to the max.
         //Let's add more then!

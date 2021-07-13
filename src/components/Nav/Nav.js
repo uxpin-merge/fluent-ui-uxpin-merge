@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
-import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -28,15 +28,30 @@ class Nav extends React.Component {
         this.state = {
             links: [],
             selectedIndex: 1,
-            disabledIndexes: []
+            disabledIndexes: [],
         }
     }
 
+    set() {
+        let disabledItems = UxpNumberParser.parseInts(this.props.disabled);
+
+        let items = UXPinParser.parse(this.props.items).map(
+            (item, index) => ({
+                key: index + 1,
+                name: item.text ? item.text : '',
+                icon: item?.iconName,
+                disabled: disabledItems.includes(index + 1),
+            }));
+
+        this.setState({
+            disabledIndexes: disabledItems,
+            links: items,
+            selectedIndex: this.props.selectedIndex,
+        });
+    }
+
     componentDidMount() {
-        this.setState(
-            { selectedIndex: this.props.selectedIndex }
-        )
-        this.setDisabledIndexes(this.setItems);
+        this.set();
     }
 
     componentDidUpdate(prevProps) {
@@ -50,57 +65,27 @@ class Nav extends React.Component {
         //Call them both if one or the other has changed
         if (prevProps.disabled !== this.props.disabled ||
             prevProps.items !== this.props.items) {
-            this.setDisabledIndexes(this.setItems);
+            this.set();
         }
     }
 
-    getLeftIcon(str) {
-        let tokens = getTokens(str).tokens;
+    _onItemClick(item) {
 
-        let leftIcon = tokens && tokens.find(t => t.type === 'icon' && t.position.placement === 'start');
+        if (!item)
+            return;
 
-        return leftIcon ? leftIcon.target : '';
-    }
+        //The item's key is already its 1-based index.
+        let index = item.key;
 
-    //Parse the nav items
-    setItems(callback) {
+        if (index !== this.state.selectedIndex) {
+            this.setState(
+                { selectedIndex: index }
+            )
 
-        let itemlist = csv2arr(this.props.items)
-            .flat()
-            .map((val, i) => ({
-                name: getTokens(val).text,
-                key: i + 1,  //Setting the key to the 1-based index
-                disabled: this.state.disabledIndexes.includes(i + 1),
-                icon: this.getLeftIcon(val)
-            }));
-
-        this.setState({
-            links: itemlist,
-        }, callback)
-    }
-
-    //Parse the disabled items
-    setDisabledIndexes(callback) {
-        let disabledIndexes = UxpNumberParser.parseInts(this.props.disabled);
-
-        this.setState(
-            { disabledIndexes },
-            callback)
-    }
-
-    onMenuClick(event, element) {
-        event.preventDefault();
-
-        const index = this.state.links.findIndex(link => link.key === element.key) + 1;
-
-        this.setState(
-            { selectedIndex: index }
-        )
-
-        //If the prop for an individual nav item's click event exists, let's push it. 
-        //Raise this event to UXPin. We'll send them info about which item was clicked on in case they can catch it.
-        if (this.props[`onLink${index}Click`]) {
-            this.props[`onLink${index}Click`](index);
+            //Raise this event to UXPin. We'll send them info about which item was clicked on.
+            if (this.props[`onLink${index}Click`]) {
+                this.props[`onLink${index}Click`](index);
+            }
         }
     }
 
@@ -113,14 +98,10 @@ class Nav extends React.Component {
         let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
 
         let mHeight = this.props.controlHeight > 0 ? this.props.controlHeight : 1;
-        let height = 'auto';
-        if (this.props.stretch) {
-            height = '100%'
-        }
 
         let navStyles = {
             root: {
-                height,
+                height: 'auto',
                 minHeight: mHeight,
                 width: 'auto',
                 paddingTop: topPad + 'px',
@@ -143,7 +124,7 @@ class Nav extends React.Component {
                         selectedKey={index}
                         styles={navStyles}
                         groups={groupParams}
-                        onLinkClick={this.onMenuClick.bind(this)} />
+                        onLinkClick={(evt, item) => { this._onItemClick(item) }} />
                     : <div> </div>}
             </>
         )
@@ -170,13 +151,7 @@ Nav.propTypes = {
     controlHeight: PropTypes.number,
 
     /**
-    * @uxpindescription To stretch the control vertically to fill the space  
-    * @uxpinpropname Stretch
-    */
-    stretch: PropTypes.bool,
-
-    /**
-     * @uxpindescription The 1-based index value of the tab to be shown as selected by default
+     * @uxpindescription The 1-based index value of the tab to be shown as selected by default. 
      * @uxpinpropname Selected Index
      */
     selectedIndex: PropTypes.number,
@@ -301,7 +276,6 @@ Nav.defaultProps = {
     items: defaultNavItems,
     styledBackground: false,
     disabled: '',
-    stretch: true,
 };
 
 
