@@ -4,6 +4,7 @@ import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 
+
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
 const defaultChoices = `Apples
@@ -38,7 +39,6 @@ class ChoiceGroup extends React.Component {
   }
 
   set() {
-
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => ({
         key: index,
