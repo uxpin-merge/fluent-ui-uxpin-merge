@@ -4,6 +4,7 @@ import {
     Image as FImage,
     ImageFit
 } from '@fluentui/react/lib/Image';
+import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 
@@ -52,9 +53,11 @@ class Image extends React.Component {
         let mWidth = this.props.imgWidth > 0 ? this.props.imgWidth : 1;
         let mHeight = this.props.imgHeight > 0 ? this.props.imgHeight : 1;
 
+        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imgURL);
+
         let imgProps = {
             shouldFadeIn: true,
-            src: this.props.imageUrl,
+            src: imgURL ? imgURL : '',
             imageFit: fit,
             maximizeFrame: true,
             width: mWidth,
