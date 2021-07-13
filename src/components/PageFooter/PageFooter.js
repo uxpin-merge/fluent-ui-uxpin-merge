@@ -37,7 +37,7 @@ const dividerStyle = {
     borderLeft: '1px solid #c8c6c4',
 }
 
-const logoURL = 'https://res-4.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/fpfv4zlqg5cyaek0q4ln';
+const logoURL = 'https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/uxpin_logo_black.png';
 const logoWidth = '120px';
 const logoHeight = '60px';
 const logoFit = ImageFit.contain;
