@@ -1,10 +1,15 @@
 
 export const UxpPersonaData = {
 
-    //This is the URL to use for a generic female user (Thanks, Microsoft!)
+    /**
+     * This is the URL to use for a generic female photo. Thanks, Unsplash!
+     */
     personaFemaleUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg",
 
-    //This is the URL to use for a generic male user (Thanks, Microsoft!)
+
+    /**
+     * This is the URL to use for a generic male photo. Thanks, Unsplash!
+     */
     personaMaleUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person20.jpgg",
 
     /**
