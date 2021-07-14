@@ -55,8 +55,6 @@ class Image extends React.Component {
 
         let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
-        console.log("Returned imgURL: " + imgURL);
-
         let imgProps = {
             shouldFadeIn: true,
             src: imgURL ? imgURL : '',

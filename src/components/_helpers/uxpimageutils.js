@@ -28,9 +28,6 @@ export const UxpImageUtils = {
    */
    getImageUrlByToken: function (token) {
 
-      console.log("Incoming token: " + token);
-
-
       if (token && token.length) {
          let t = token.trim().toLowerCase().replaceAll(" ", "");
 
@@ -50,9 +47,13 @@ export const UxpImageUtils = {
             }
          }
 
-         console.log("   t: " + t);
-
          switch (t) {
+            case "woman":
+            case "female":
+               return UxpPersonaData.personaFemaleUrl;
+            case "man":
+            case "male":
+               return UxpPersonaData.personaMaleUrl;
             case "uxpin":
             case "logo":
             case "uxpinlogo":
