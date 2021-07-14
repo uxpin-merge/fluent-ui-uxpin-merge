@@ -31,8 +31,8 @@ export const UxpImageUtils = {
       console.log("Incoming token: " + token);
 
 
-      if (token) {
-         let t = token.trim().toLowerCase().replace(" ", "");
+      if (token && token.length) {
+         let t = token.trim().toLowerCase().replaceAll(" ", "");
 
          //Let's return common URLs
          if (t.startsWith("http")) {
@@ -57,11 +57,13 @@ export const UxpImageUtils = {
             case "logo":
             case "uxpinlogo":
             case "uxpinlogoblack":
+            case "logoblack":
             case "blacklogo":
             case "blacklogouxpin":
                return this.uxpinLogoBlack;
             case "uxpinlogowhite":
             case "whitelogo":
+            case "logowhite":
             case "whitelogouxpin":
                return this.uxpinLogoWhite;
             case "bridge":
