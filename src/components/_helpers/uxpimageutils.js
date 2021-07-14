@@ -59,12 +59,14 @@ export const UxpImageUtils = {
             case "uxpinlogo":
             case "uxpinlogoblack":
             case "logoblack":
+            case "uxpinblack":
             case "blacklogo":
             case "blacklogouxpin":
                return this.uxpinLogoBlack;
             case "uxpinlogowhite":
             case "whitelogo":
             case "logowhite":
+            case "uxpinwhite":
             case "whitelogouxpin":
                return this.uxpinLogoWhite;
             case "bridge":
