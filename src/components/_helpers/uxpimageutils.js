@@ -50,6 +50,8 @@ export const UxpImageUtils = {
             }
          }
 
+         console.log("   t: " + t);
+
          switch (t) {
             case "uxpin":
             case "logo":
