@@ -10,7 +10,7 @@ export const UxpPersonaData = {
     /**
      * This is the URL to use for a generic male photo. Thanks, Unsplash!
      */
-    personaMaleUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person20.jpgg",
+    personaMaleUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person20.jpg",
 
     /**
      * Persona info for Amaya Davani. 
