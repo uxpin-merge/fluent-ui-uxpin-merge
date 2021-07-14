@@ -53,7 +53,7 @@ class Image extends React.Component {
         let mWidth = this.props.imgWidth > 0 ? this.props.imgWidth : 1;
         let mHeight = this.props.imgHeight > 0 ? this.props.imgHeight : 1;
 
-        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imgURL);
+        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
         console.log("Returned imgURL: " + imgURL);
 
