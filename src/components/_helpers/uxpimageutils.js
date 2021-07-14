@@ -27,7 +27,11 @@ export const UxpImageUtils = {
    * @returns {string} If found, returns a URL string. If not found, returns undefined.
    */
    getImageUrlByToken: function (token) {
-      if (token && token.length) {
+
+      console.log("Incoming token: " + token);
+
+
+      if (token) {
          let t = token.trim().toLowerCase().replace(" ", "");
 
          //Let's return common URLs
