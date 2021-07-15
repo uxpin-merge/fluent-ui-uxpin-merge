@@ -167,24 +167,25 @@ Coachmark.propTypes = {
 
     /**
      * @uxpindescription The main message text
-     * @uxpincontroltype textfield(4)
+     * @uxpincontroltype textfield(6)
      */
     text: PropTypes.string,
 
     /**    
     * @uxpindescription Footer text to display in the bottom left corner. 
+    * @uxpinpropname Footer Text
     */
     footerText: PropTypes.string,
 
     /**
      * @uxpindescription The displayed text on the Primary Button. Remove text to hide button.
-     * @uxpinpropname Text: Primary Button
+     * @uxpinpropname Text-Primary Button
      */
     primaryButtonLabel: PropTypes.string,
 
     /**
      * @uxpindescription The displayed text on the Secondary Button. Remove text to hide button.
-     * @uxpinpropname Text: Secondary Button
+     * @uxpinpropname Text-Secondary Button
      */
     secondaryButtonLabel: PropTypes.string,
 
