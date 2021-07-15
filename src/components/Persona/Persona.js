@@ -9,8 +9,9 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
-//This is the default URL to use for a generic female user
-let personaFemaleUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg"
+
+//This is the image URL for Persona04
+let defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg"
 
 //Fix the weird line height issue in the top line of the Persona
 const personaStyles = {
@@ -48,8 +49,6 @@ class Persona extends React.Component {
         return (
             <FPersona
                 {...this.props}
-
-                //These props require their respective enum keys
                 size={PersonaSize[this.props.ppSize]}
                 presence={presenceCode}
                 initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
@@ -60,10 +59,7 @@ class Persona extends React.Component {
                 tertiaryText={this.props.status}
                 optionalText={this.props.optional}
                 hidePersonaDetails={this.props.hidePersonaDetails}
-
                 styles={personaStyles}
-
-                //Bind our new OnClick handler
                 onClick={() => { this._onClick() }}
             />
         )
@@ -155,16 +151,16 @@ Persona.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Persona.defaultProps = {
-    imageUrl: personaFemaleUrl,
-    initials: 'AL',
-    name: 'Annie Lindqvist',
-    role: 'Software Engineer',
+    imageUrl: defaultPersonaUrl,
+    initials: 'SC',
+    name: 'Sydney Coleman',
+    role: 'Financial Analyst II',
     status: 'In a meeting',
     optional: 'Available at 4:00 PM PST',
     ppSize: "size100",
     ppPresence: 'online',
     hidePersonaDetails: false,
-    ppInitialsColor: 'blue'
+    ppInitialsColor: 'lightBlue'
 };
 
 
