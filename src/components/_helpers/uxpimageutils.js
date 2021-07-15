@@ -35,6 +35,51 @@ export const UxpImageUtils = {
    fpo: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/fpo.png",
 
    /**
+    * Unsplash: https://unsplash.com/photos/nH0MnlVmduk
+    */
+   dress: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/dress.jpg",
+
+   /**
+    * Unsplash: https://unsplash.com/photos/YxbwyTb5ijs
+    */
+   suit: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/suit.jpg",
+
+   /**
+    * Unsplash: https://unsplash.com/photos/jiVeo0i1EB4
+    */
+   computer: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/computer.jpg",
+
+   /**
+    * Unsplash: https://unsplash.com/photos/2l0CWTpcChI
+    */
+   dog: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/dog.jpg",
+
+   /**
+    * Unsplash: https://unsplash.com/photos/YCPkW_r_6uA
+    */
+   cat: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/cat.jpg",
+
+   /**
+   * Unsplash: https://unsplash.com/photos/oNGdR6qb7Bg
+   */
+   party: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/party.jpg",
+
+   /**
+   * Unsplash: https://unsplash.com/photos/IYExyJnvJHw
+   */
+   cake: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/cake.jpg",
+
+   /**
+   * Unsplash: https://unsplash.com/photos/wgivdx9dBdQ
+   */
+   office: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/office.jpg",
+
+   /**
+   * Unsplash: https://unsplash.com/photos/KSfe2Z4REEM
+   */
+   livingroom: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/livingroom.jpg",
+
+   /**
    * The user may invoke an image by its token, as indicated
    * @param {string} token The token for an image. 
    * @returns {string} If found, returns a URL string. If not found, returns undefined.
@@ -77,6 +122,30 @@ export const UxpImageUtils = {
             case "man":
             case "male":
                return UxpPersonaData.personaMaleUrl;
+            case "dress":
+               return this.dress;
+            case "suit":
+               return ths.suit;
+            case "computer":
+            case "laptop":
+               return this.computer;
+            case "dog":
+            case "dogs":
+               return this.dog;
+            case "cat":
+            case "cats":
+               return this.cat;
+            case "cake":
+            case "unicorn":
+            case "cupcake":
+               return this.cake;
+            case "party":
+               return this.party;
+            case "office":
+               return this.office;
+            case "livingroom":
+            case "home":
+               return this.livingroom;
             case "uxpin":
             case "logo":
             case "uxpinlogo":
