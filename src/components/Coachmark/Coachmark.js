@@ -105,20 +105,18 @@ class Coachmark extends React.Component {
         }
 
         //Now put it all together...
-        if (this.props.primaryButtonLabel || pIconProps) {
+        if (this.props.primaryButtonLabel) {
             priBtnProps = ({
                 text: this.props.primaryButtonLabel,
-                hidden: hidePrimaryButton,
-                iconProps: pIconProps,
+                // hidden: hidePrimaryButton,
                 onClick: () => { this._onPrimaryButtonClicked() }
             });
         }
 
-        if (this.props.secondaryButtonLabel || sIconProps) {
+        if (this.props.secondaryButtonLabel) {
             secBtnProps = ({
                 text: this.props.secondaryButtonLabel,
-                hidden: hideSecondaryButton,
-                iconProps: sIconProps,
+                // hidden: hideSecondaryButton,
                 onClick: () => { this._onSecondaryButtonClicked() }
             });
         }
@@ -204,22 +202,10 @@ Coachmark.propTypes = {
     primaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
-     * @uxpinpropname Icon: Primary Button
-     */
-    primaryButtonIcon: PropTypes.string,
-
-    /**
      * @uxpindescription The displayed text on the Secondary Button. Remove text to hide button.
      * @uxpinpropname Text: Secondary Button
      */
     secondaryButtonLabel: PropTypes.string,
-
-    /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
-     * @uxpinpropname Icon: Secondary Button
-     */
-    secondaryButtonIcon: PropTypes.string,
 
     /**
      * @uxpindescription The control's display direction
