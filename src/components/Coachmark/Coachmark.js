@@ -82,29 +82,9 @@ class Coachmark extends React.Component {
     render() {
 
         //Determine whether to show the Primary and Secondary buttons. 
-        var hidePrimaryButton = false;
         var priBtnProps = undefined;
-        var hideSecondaryButton = false;
         var secBtnProps = undefined;
 
-        if (!this.props.primaryButtonLabel) {
-            hidePrimaryButton = true;
-        }
-        if (!this.props.secondaryButtonLabel) {
-            hideSecondaryButton = true;
-        }
-
-        var pIconProps = undefined;
-        if (this.props.primaryButtonIcon && this.props.primaryButtonIcon.length) {
-            pIconProps = { iconName: this.props.primaryButtonIcon.trim() };
-        }
-
-        var sIconProps = undefined;
-        if (this.props.secondaryButtonIcon && this.props.secondaryButtonIcon.length) {
-            sIconProps = { iconName: this.props.secondaryButtonIcon.trim(), style: { color: 'white' } };
-        }
-
-        //Now put it all together...
         if (this.props.primaryButtonLabel) {
             priBtnProps = ({
                 text: this.props.primaryButtonLabel,
@@ -119,6 +99,11 @@ class Coachmark extends React.Component {
                 // hidden: hideSecondaryButton,
                 onClick: () => { this._onSecondaryButtonClicked() }
             });
+        }
+
+        var footerText = undefined;
+        if (this.props.footerText && this.props.footerText.length) {
+            footerText = this.props.footerText.trim();
         }
 
 
@@ -146,7 +131,7 @@ class Coachmark extends React.Component {
                         }}>
                         <TeachingBubbleContent
                             headline={this.props.title}
-                            footerContent={this.props.footerText}
+                            footerContent={footerText}
                             hasCloseIcon={true}
                             primaryButtonProps={priBtnProps}
                             secondaryButtonProps={secBtnProps}
@@ -252,13 +237,12 @@ Coachmark.propTypes = {
  */
 Coachmark.defaultProps = {
     show: true,
-    title: "Basic Coachmark",
+    title: "Coachmark",
     text: "Welcome to the land of Coachmarks!",
     footerText: "",
     direction: "bottomCenter",
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
-    secondaryButtonIcon: "Close",
     showMarker: true,
 }
 
