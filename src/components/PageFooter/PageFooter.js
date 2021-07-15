@@ -39,8 +39,8 @@ const dividerStyle = {
 }
 
 const logoURL = 'https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/uxpin_logo_black.png';
-const logoWidth = '120px';
-const logoHeight = '60px';
+const logoWidth = '120';
+const logoHeight = '60';
 const logoFit = ImageFit.contain;
 
 //Default nav items to populate the control with.
@@ -550,7 +550,7 @@ PageFooter.propTypes = {
     links: PropTypes.string,
 
     /**
-     * @uxpindescription The full URL to an image file. (Optional)
+     * @uxpindescription The full URL to an image file. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. (Optional)
      * @uxpinpropname Logo URL 
      * @uxpincontroltype textfield(6)
      */

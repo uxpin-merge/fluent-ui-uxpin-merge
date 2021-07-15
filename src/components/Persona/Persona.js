@@ -73,7 +73,7 @@ class Persona extends React.Component {
 Persona.propTypes = {
 
     /**
-    * @uxpindescription The URL to an image file. Leave empty to display initials instead. 
+    * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
     * @uxpinpropname Img URL
     * @uxpincontroltype textfield(6)
     */
