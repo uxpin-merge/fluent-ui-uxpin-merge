@@ -381,7 +381,7 @@ export const UxpPersonaData = {
      */
     getPersonaByToken: function (token) {
         if (token && token.length) {
-            let t = token.trim().toLowerCase();
+            let t = token.trim().toLowerCase().replace("persona", "person");
 
             switch (t) {
                 case "person01":
