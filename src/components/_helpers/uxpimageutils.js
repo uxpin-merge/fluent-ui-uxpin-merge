@@ -122,6 +122,7 @@ export const UxpImageUtils = {
             case "londonmap":
                return this.maplondon;
             case "blurry":
+            case "city":
             case "sydney":
                return this.blurry;
             case "woman":
