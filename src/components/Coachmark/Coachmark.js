@@ -41,7 +41,6 @@ class Coachmark extends React.Component {
         }
     }
 
-
     dismissControl() {
         //Set the control to not open to dismiss it.
         this.setState(
@@ -82,20 +81,27 @@ class Coachmark extends React.Component {
     render() {
 
         //Determine whether to show the Primary and Secondary buttons. 
-        var hidePrimaryButton = false;
-        var hideSecondaryButton = false;
+        var priBtnProps = undefined;
+        var secBtnProps = undefined;
 
-        //If the primary or secondary button labels are empty, we need to hide them. 
-        if (!this.props.primaryButtonLabel) {
-            hidePrimaryButton = true;
+        if (this.props.primaryButtonLabel && this.props.primaryButtonLabel.trim().length > 0) {
+            priBtnProps = ({
+                text: this.props.primaryButtonLabel,
+                onClick: () => { this._onPrimaryButtonClicked() }
+            });
         }
-        if (!this.props.secondaryButtonLabel) {
-            hideSecondaryButton = true;
+
+        if (this.props.secondaryButtonLabel && this.props.secondaryButtonLabel.trim().length > 0) {
+            secBtnProps = ({
+                text: this.props.secondaryButtonLabel,
+                onClick: () => { this._onSecondaryButtonClicked() }
+            });
         }
 
-
-        let pIconProps = { iconName: this.props.primaryButtonIcon };
-        let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' } };
+        var footerText = undefined;
+        if (this.props.footerText && this.props.footerText.length) {
+            footerText = this.props.footerText.trim();
+        }
 
         return (
             <>
@@ -121,20 +127,10 @@ class Coachmark extends React.Component {
                         }}>
                         <TeachingBubbleContent
                             headline={this.props.title}
-                            footerContent={this.props.footerText}
+                            footerContent={footerText}
                             hasCloseIcon={true}
-                            primaryButtonProps={{
-                                text: this.props.primaryButtonLabel,
-                                hidden: hidePrimaryButton,
-                                iconProps: pIconProps,
-                                onClick: () => { this._onPrimaryButtonClicked() }
-                            }}
-                            secondaryButtonProps={{
-                                text: this.props.secondaryButtonLabel,
-                                hidden: hideSecondaryButton,
-                                iconProps: sIconProps,
-                                onClick: () => { this._onSecondaryButtonClicked() }
-                            }}
+                            primaryButtonProps={priBtnProps}
+                            secondaryButtonProps={secBtnProps}
                             onDismiss={() => { this._onDismissClicked() }} >
                             {this.props.text}
                         </TeachingBubbleContent>
@@ -171,38 +167,27 @@ Coachmark.propTypes = {
 
     /**
      * @uxpindescription The main message text
-     * @uxpincontroltype textfield(4)
+     * @uxpincontroltype textfield(6)
      */
     text: PropTypes.string,
 
     /**    
     * @uxpindescription Footer text to display in the bottom left corner. 
+    * @uxpinpropname Footer Text
     */
     footerText: PropTypes.string,
 
     /**
      * @uxpindescription The displayed text on the Primary Button. Remove text to hide button.
-     * @uxpinpropname Text: Primary Button
+     * @uxpinpropname Text-Primary Button
      */
     primaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
-     * @uxpinpropname Icon: Primary Button
-     */
-    primaryButtonIcon: PropTypes.string,
-
-    /**
      * @uxpindescription The displayed text on the Secondary Button. Remove text to hide button.
-     * @uxpinpropname Text: Secondary Button
+     * @uxpinpropname Text-Secondary Button
      */
     secondaryButtonLabel: PropTypes.string,
-
-    /**
-     * @uxpindescription The exact name from the PayPal icon library (Optional)
-     * @uxpinpropname Icon: Secondary Button
-     */
-    secondaryButtonIcon: PropTypes.string,
 
     /**
      * @uxpindescription The control's display direction
@@ -249,13 +234,11 @@ Coachmark.propTypes = {
  */
 Coachmark.defaultProps = {
     show: true,
-    title: "Basic Coachmark",
+    title: "Coachmark",
     text: "Welcome to the land of Coachmarks!",
-    footerText: "",
     direction: "bottomCenter",
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
-    secondaryButtonIcon: "Close",
     showMarker: true,
 }
 

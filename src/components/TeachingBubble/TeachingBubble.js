@@ -83,19 +83,27 @@ class TeachingBubble extends React.Component {
     render() {
 
         //Determine whether to show the Primary and Secondary buttons. 
-        var hidePrimaryButton = false;
-        var hideSecondaryButton = false;
+        var priBtnProps = undefined;
+        var secBtnProps = undefined;
 
-        //If the primary or secondary button labels are empty, we need to hide them. 
-        if (!this.props.primaryButtonLabel) {
-            hidePrimaryButton = true;
-        }
-        if (!this.props.secondaryButtonLabel) {
-            hideSecondaryButton = true;
+        if (this.props.primaryButtonLabel && this.props.primaryButtonLabel.trim().length > 0) {
+            priBtnProps = ({
+                text: this.props.primaryButtonLabel,
+                onClick: () => { this._onPrimaryButtonClicked() }
+            });
         }
 
-        let pIconProps = { iconName: this.props.primaryButtonIcon };
-        let sIconProps = { iconName: this.props.secondaryButtonIcon, style: { color: 'white' } };
+        if (this.props.secondaryButtonLabel && this.props.secondaryButtonLabel.trim().length > 0) {
+            secBtnProps = ({
+                text: this.props.secondaryButtonLabel,
+                onClick: () => { this._onSecondaryButtonClicked() }
+            });
+        }
+
+        var footerText = undefined;
+        if (this.props.footerText && this.props.footerText.trim().length > 0) {
+            footerText = this.props.footerText.trim();
+        }
 
         return (
             <>
@@ -105,7 +113,7 @@ class TeachingBubble extends React.Component {
                     style={{
                         width: 20,
                         height: 20,
-                        background: this.props.showMarker ? '#640487' : 'transparent',
+                        background: this.props.showMarker ? '#b4009e' : 'transparent',
                         borderRadius: 4,
                     }} />
 
@@ -115,20 +123,10 @@ class TeachingBubble extends React.Component {
                         {...this.props}
                         calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
                         headline={this.props.title}
-                        footerContent={this.props.footerText}
+                        footerContent={footerText}
                         hasCloseButton={this.props.hasCloseButton}
-                        primaryButtonProps={{
-                            text: this.props.primaryButtonLabel,
-                            hidden: hidePrimaryButton,
-                            iconProps: pIconProps,
-                            onClick: () => { this._onPrimaryButtonClicked() }
-                        }}
-                        secondaryButtonProps={{
-                            text: this.props.secondaryButtonLabel,
-                            hidden: hideSecondaryButton,
-                            iconProps: sIconProps,
-                            onClick: () => { this._onSecondaryButtonClicked() }
-                        }}
+                        primaryButtonProps={priBtnProps}
+                        secondaryButtonProps={secBtnProps}
                         onDismiss={() => { this._onDismissClicked() }} >
                         {this.props.text}
                     </FTeachingBubble>
@@ -176,27 +174,15 @@ TeachingBubble.propTypes = {
 
     /**
      * @uxpindescription The displayed text on the Primary Button. Remove text to hide button.
-     * @uxpinpropname Text: Primary Button
+     * @uxpinpropname Text-Primary Button
      */
     primaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription The exact name from the icon library (Optional)
-     * @uxpinpropname Icon: Primary Button
-     */
-    primaryButtonIcon: PropTypes.string,
-
-    /**
      * @uxpindescription The displayed text on the Secondary Button. Remove text to hide button.
-     * @uxpinpropname Text: Secondary Button
+     * @uxpinpropname Text-Secondary Button
      */
     secondaryButtonLabel: PropTypes.string,
-
-    /**
-     * @uxpindescription The exact name from the icon library (Optional)
-     * @uxpinpropname Icon: Secondary Button
-     */
-    secondaryButtonIcon: PropTypes.string,
 
     /**
      * @uxpindescription Whether to display the Close button
@@ -250,14 +236,13 @@ TeachingBubble.propTypes = {
  */
 TeachingBubble.defaultProps = {
     show: true,
-    title: "Basic TeachingBubble",
+    title: "Teaching Bubble",
     text: "Set my 'Show' property to true to view me in a mockup.",
     footerText: "",
     direction: "bottomCenter",
     hasCloseButton: true,
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
-    secondaryButtonIcon: "Close",
     showMarker: true,
 }
 
