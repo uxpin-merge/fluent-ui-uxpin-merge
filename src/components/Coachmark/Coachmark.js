@@ -41,7 +41,6 @@ class Coachmark extends React.Component {
         }
     }
 
-
     dismissControl() {
         //Set the control to not open to dismiss it.
         this.setState(
@@ -85,18 +84,16 @@ class Coachmark extends React.Component {
         var priBtnProps = undefined;
         var secBtnProps = undefined;
 
-        if (this.props.primaryButtonLabel) {
+        if (this.props.primaryButtonLabel && this.props.primaryButtonLabel.trim().length > 0) {
             priBtnProps = ({
                 text: this.props.primaryButtonLabel,
-                // hidden: hidePrimaryButton,
                 onClick: () => { this._onPrimaryButtonClicked() }
             });
         }
 
-        if (this.props.secondaryButtonLabel) {
+        if (this.props.secondaryButtonLabel && this.props.secondaryButtonLabel.trim().length > 0) {
             secBtnProps = ({
                 text: this.props.secondaryButtonLabel,
-                // hidden: hideSecondaryButton,
                 onClick: () => { this._onSecondaryButtonClicked() }
             });
         }
@@ -105,7 +102,6 @@ class Coachmark extends React.Component {
         if (this.props.footerText && this.props.footerText.length) {
             footerText = this.props.footerText.trim();
         }
-
 
         return (
             <>
@@ -239,7 +235,6 @@ Coachmark.defaultProps = {
     show: true,
     title: "Coachmark",
     text: "Welcome to the land of Coachmarks!",
-    footerText: "",
     direction: "bottomCenter",
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
