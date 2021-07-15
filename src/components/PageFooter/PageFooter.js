@@ -8,6 +8,7 @@ import { Link } from '@fluentui/react/lib/Link';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 
@@ -38,8 +39,8 @@ const dividerStyle = {
 }
 
 const logoURL = 'https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/uxpin_logo_black.png';
-const logoWidth = '120px';
-const logoHeight = '60px';
+const logoWidth = '120';
+const logoHeight = '60';
 const logoFit = ImageFit.contain;
 
 //Default nav items to populate the control with.
@@ -58,8 +59,6 @@ const confidentiality = 'CONFIDENTIALITY NOTICE: This web site is intended only 
 class PageFooter extends React.Component {
     constructor(props) {
         super(props);
-
-
 
         this.state = {
             copyright: '',
@@ -229,7 +228,6 @@ class PageFooter extends React.Component {
         //Let's track whether to show the Divider. We only show it if there is left side text to display
         var showDivider = false;
 
-
         //****************************
         //OUTER HORIZONTAL STACK
         //For internal padding within the stack. 
@@ -361,14 +359,15 @@ class PageFooter extends React.Component {
         };
 
         var logoStack = '';
-        if (this.props.logoURL) {
+        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.logoURL);
+        if (imgURL) {
 
             let logoW = this.props.logoWidth > -1 ? this.props.logoWidth + 'px' : logoWidth;
             let logoH = this.props.logoHeight > -1 ? this.props.logoHeight + 'px' : logoHeight;
 
             let logoProps = {
                 shouldFadeIn: true,
-                src: this.props.logoURL,
+                src: imgURL,
                 imageFit: logoFit,
                 maximizeFrame: true,
                 width: logoW,
@@ -551,7 +550,7 @@ PageFooter.propTypes = {
     links: PropTypes.string,
 
     /**
-     * @uxpindescription The full URL to an image file. (Optional)
+     * @uxpindescription The full URL to an image file. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. (Optional)
      * @uxpinpropname Logo URL 
      * @uxpincontroltype textfield(6)
      */

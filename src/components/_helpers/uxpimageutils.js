@@ -134,7 +134,7 @@ export const UxpImageUtils = {
             case "dress":
                return this.dress;
             case "suit":
-               return ths.suit;
+               return this.suit;
             case "computer":
             case "laptop":
                return this.computer;
