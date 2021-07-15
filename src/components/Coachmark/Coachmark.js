@@ -83,9 +83,10 @@ class Coachmark extends React.Component {
 
         //Determine whether to show the Primary and Secondary buttons. 
         var hidePrimaryButton = false;
+        var priBtnProps = undefined;
         var hideSecondaryButton = false;
+        var secBtnProps = undefined;
 
-        //If the primary or secondary button labels are empty, we need to hide them. 
         if (!this.props.primaryButtonLabel) {
             hidePrimaryButton = true;
         }
@@ -102,6 +103,26 @@ class Coachmark extends React.Component {
         if (this.props.secondaryButtonIcon && this.props.secondaryButtonIcon.length) {
             sIconProps = { iconName: this.props.secondaryButtonIcon.trim(), style: { color: 'white' } };
         }
+
+        //Now put it all together...
+        if (this.props.primaryButtonLabel || pIconProps) {
+            priBtnProps = ({
+                text: this.props.primaryButtonLabel,
+                hidden: hidePrimaryButton,
+                iconProps: pIconProps,
+                onClick: () => { this._onPrimaryButtonClicked() }
+            });
+        }
+
+        if (this.props.secondaryButtonLabel || sIconProps) {
+            secBtnProps = ({
+                text: this.props.secondaryButtonLabel,
+                hidden: hideSecondaryButton,
+                iconProps: sIconProps,
+                onClick: () => { this._onSecondaryButtonClicked() }
+            });
+        }
+
 
         return (
             <>
@@ -129,18 +150,8 @@ class Coachmark extends React.Component {
                             headline={this.props.title}
                             footerContent={this.props.footerText}
                             hasCloseIcon={true}
-                            primaryButtonProps={{
-                                text: this.props.primaryButtonLabel,
-                                hidden: hidePrimaryButton,
-                                iconProps: pIconProps,
-                                onClick: () => { this._onPrimaryButtonClicked() }
-                            }}
-                            secondaryButtonProps={{
-                                text: this.props.secondaryButtonLabel,
-                                hidden: hideSecondaryButton,
-                                iconProps: sIconProps,
-                                onClick: () => { this._onSecondaryButtonClicked() }
-                            }}
+                            primaryButtonProps={priBtnProps}
+                            secondaryButtonProps={secBtnProps}
                             onDismiss={() => { this._onDismissClicked() }} >
                             {this.props.text}
                         </TeachingBubbleContent>
