@@ -385,22 +385,31 @@ export const UxpPersonaData = {
 
             switch (t) {
                 case "person01":
+                case "person1":
                     return this.personaAmaya;
                 case "person02":
+                case "person2":
                     return this.personaMarcus;
                 case "person03":
+                case "person3":
                     return this.personaJavier;
                 case "person04":
+                case "person4":
                     return this.personaSydney;
                 case "person05":
+                case "person5":
                     return this.personaJohar;
                 case "person06":
+                case "person6":
                     return this.personaMelanie;
                 case "person07":
+                case "person7":
                     return this.personaJayden;
                 case "person08":
+                case "person8":
                     return this.personaGabriel;
                 case "person09":
+                case "person9":
                     return this.personaCameron;
                 case "person10":
                     return this.personaDavid;

@@ -19,7 +19,20 @@ export const UxpImageUtils = {
     */
    goldenGateBridge: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/golden_gate_bridge.jpg",
 
+   /**
+    * Open Street Map: https://www.openstreetmap.org/
+    */
+   mapsf: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/map_sf.jpg",
 
+   /**
+    * Open Street Map: https://www.openstreetmap.org/
+    */
+   maplondon: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/map_london.jpg",
+
+   /**
+    * Courtesy of UXPin
+    */
+   fpo: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/fpo.jpg",
 
    /**
    * The user may invoke an image by its token, as indicated
@@ -48,6 +61,16 @@ export const UxpImageUtils = {
          }
 
          switch (t) {
+            case "fpo":
+               return this.fpo;
+            case "map":
+            case "sf":
+            case "sanfrancisco":
+            case "sfmap":
+               return this.mapsf;
+            case "london":
+            case "londonmap":
+               return this.maplondon;
             case "woman":
             case "female":
                return UxpPersonaData.personaFemaleUrl;
