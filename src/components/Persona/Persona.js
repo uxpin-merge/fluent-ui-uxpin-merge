@@ -6,7 +6,7 @@ import {
     PersonaInitialsColor
 } from '@fluentui/react/lib/Persona';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
-
+import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 //This is the default URL to use for a generic female user
@@ -25,7 +25,6 @@ class Persona extends React.Component {
 
     constructor(props) {
         super(props);
-
     }
 
     _onClick() {
@@ -44,6 +43,8 @@ class Persona extends React.Component {
 
         let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
 
+        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+
         return (
             <FPersona
                 {...this.props}
@@ -52,9 +53,7 @@ class Persona extends React.Component {
                 size={PersonaSize[this.props.ppSize]}
                 presence={presenceCode}
                 initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
-
-                //We can set these props as-is
-                imageUrl={this.props.imageUrl}
+                imageUrl={imgURL}
                 imageInitials={this.props.initials}
                 text={this.props.name}
                 secondaryText={this.props.role}
