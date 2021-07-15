@@ -113,7 +113,7 @@ class TeachingBubble extends React.Component {
                     style={{
                         width: 20,
                         height: 20,
-                        background: this.props.showMarker ? '#640487' : 'transparent',
+                        background: this.props.showMarker ? '#b4009e' : 'transparent',
                         borderRadius: 4,
                     }} />
 
