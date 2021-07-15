@@ -80,6 +80,11 @@ export const UxpImageUtils = {
    livingroom: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/livingroom.jpg",
 
    /**
+   * Unsplash: https://unsplash.com/photos/I5b0wNCiDg4
+   */
+   blurry: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/blurry.jpg",
+
+   /**
    * The user may invoke an image by its token, as indicated
    * @param {string} token The token for an image. 
    * @returns {string} If found, returns a URL string. If not found, returns undefined.
@@ -116,6 +121,9 @@ export const UxpImageUtils = {
             case "london":
             case "londonmap":
                return this.maplondon;
+            case "blurry":
+            case "sydney":
+               return this.blurry;
             case "woman":
             case "female":
                return UxpPersonaData.personaFemaleUrl;
