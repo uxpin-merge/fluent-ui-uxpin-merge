@@ -32,7 +32,7 @@ export const UxpImageUtils = {
    /**
     * Courtesy of UXPin
     */
-   fpo: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/fpo.jpg",
+   fpo: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/fpo.png",
 
    /**
    * The user may invoke an image by its token, as indicated
