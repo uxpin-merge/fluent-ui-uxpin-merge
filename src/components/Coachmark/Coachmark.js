@@ -93,12 +93,12 @@ class Coachmark extends React.Component {
             hideSecondaryButton = true;
         }
 
-        var pIconProps = '';
+        var pIconProps = undefined;
         if (this.props.primaryButtonIcon && this.props.primaryButtonIcon.length) {
             pIconProps = { iconName: this.props.primaryButtonIcon.trim() };
         }
 
-        var sIconProps = '';
+        var sIconProps = undefined;
         if (this.props.secondaryButtonIcon && this.props.secondaryButtonIcon.length) {
             sIconProps = { iconName: this.props.secondaryButtonIcon.trim(), style: { color: 'white' } };
         }
