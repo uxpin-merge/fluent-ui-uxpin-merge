@@ -3,11 +3,25 @@ import * as PropTypes from 'prop-types';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import Persona from '../Persona/Persona';
 import { PersonaSize } from '@fluentui/react/lib/Persona';
-import VerticalStack from '../VerticalStack/VerticalStack';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
+
+//For the Stack
+const stackVAlign = 'start';
+const stackHAlign = 'stretch';
+const stackItemStyles = {
+    root: {
+        height: 'auto',
+        width: 'auto',
+    },
+};
+const stackTokens = {
+    childrenGap: 0,
+    padding: '12px',
+};
 
 //This is the default URL to use for a generic female user
 const defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg";
@@ -61,12 +75,15 @@ class ProfileCard extends React.Component {
 
         return (
 
-            <VerticalStack
+            <Stack
                 {...this.props}
-                gutterPadding={12}
-                align={'stretch'}
-                children={""}
-            >
+                tokens={stackTokens}
+                horizontal={false}
+                horizontalAlign={stackHAlign}
+                verticalAlign={stackVAlign}
+                wrap={false}
+                styles={stackItemStyles}>
+
                 <Persona
                     {...this.props}
                     ppSize={PersonaSize[this.props.ppSize]}
@@ -80,11 +97,9 @@ class ProfileCard extends React.Component {
                     onClick={() => this._onClick(0)}
                 />
 
-                {"hello"}
-
                 {commandBar}
 
-            </VerticalStack>
+            </Stack>
 
             // <Stack
             //     styles={stackStyles}
