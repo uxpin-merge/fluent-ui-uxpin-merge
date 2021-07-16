@@ -2,11 +2,9 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import Persona from '../Persona/Persona';
-import {
-    PersonaSize,
-    PersonaPresence
-} from '@fluentui/react/lib/Persona';
+import { PersonaSize } from '@fluentui/react/lib/Persona';
 import VerticalStack from '../VerticalStack/VerticalStack';
+import { UxpImageUtils } from '../_helpers/uxpimageutils';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
