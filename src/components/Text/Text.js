@@ -53,7 +53,7 @@ class Text extends React.Component {
   //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
   _getTokenizedText(text) {
 
-    let items = UXPinParser.parse(text).map(
+    let items = UXPinParser.parseRow(text).map(
       (item, index) => ({
         text: item?.text,
         order: item?.order,
@@ -70,13 +70,13 @@ class Text extends React.Component {
     for (i = 0; i < items.length; i++) {
       let item = items[i];
       console.log("order: " + item.order +
-        "/n     index: " + item.index +
-        "/n     type: " + item.type +
-        "/n     text: " + item?.text +
-        "/n     href: " + item?.href +
-        "/n     iconName: " + item?.iconName +
-        "/n     iconColor: " + item?.iconColor +
-        "/n     colorToken: " + item?.colorToken);
+        "     index: " + item.index +
+        "     type: " + item.type +
+        "     text: " + item?.text +
+        "     href: " + item?.href +
+        "     iconName: " + item?.iconName +
+        "     iconColor: " + item?.iconColor +
+        "     colorToken: " + item?.colorToken);
     }
 
     // var tokens = getTokens(text).mixed.map((el, i) => {
