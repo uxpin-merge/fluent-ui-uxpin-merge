@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
+import Link from '../Link/Link';
 import Persona from '../Persona/Persona';
 import { PersonaSize } from '@fluentui/react/lib/Persona';
-import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import { Stack } from '@fluentui/react/lib/Stack';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
@@ -93,12 +94,16 @@ class ProfileCard extends React.Component {
                     ppInitialsColor={this.props.ppInitialsColor}
                     name={this.props.name}
                     role={this.props.role}
-                    status={""}
+                    status={this.props.email}
                     optional={""}
-                    tertiaryText={this.props.email}
                     children={undefined}
                     onClick={() => this._onClick(0)}
-                />
+                >
+                    <Link
+                        {...this.props}
+                        value={this.props.email + " test"}
+                    />
+                </Persona>
 
                 {commandBar}
 
