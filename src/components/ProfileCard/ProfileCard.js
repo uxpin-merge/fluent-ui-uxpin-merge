@@ -48,7 +48,7 @@ class ProfileCard extends React.Component {
             >
                 <Persona
                     {...this.props}
-                    ppSize={PersonaSize[defaultSize]}
+                    ppSize={PersonaSize[this.props.ppSize]}
                     imageUrl={imgURL}
                     initials={this.props.initials}
                     ppPresence={presenceCode}
@@ -116,6 +116,13 @@ ProfileCard.propTypes = {
     imageUrl: PropTypes.string,
 
     /**
+    * Requires a proprietary PayPal prop name, or else things get screwy. 
+    * @uxpindescription The control's size 
+    * @uxpinpropname Size
+    */
+    ppSize: PropTypes.oneOf(['size8', 'size24', 'size32', 'size40', 'size56', 'size72', 'size100']),
+
+    /**
      * Requires a proprietary prop name, or else things get screwy. 
      * @uxpindescription The user's presence status 
      * @uxpinpropname Presence
@@ -173,6 +180,7 @@ ProfileCard.defaultProps = {
     name: 'Sydney Coleman PC',
     role: 'Financial Analyst II PC',
     email: 'alindqvist_pc@paypal.com',
+    ppSize: defaultSize,
     ppPresence: 'online',
     ppInitialsColor: 'lightBlue',
 }
