@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Text as FText } from '@fluentui/react/lib/Text';
+import Image from '../Image/Image';
+import Link from '../Link/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import * as UXPinParser from '../_helpers/UXPinParser';
+
 import { getTokens } from '../_helpers/parser';
 
 
@@ -49,23 +53,51 @@ class Text extends React.Component {
   //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
   _getTokenizedText(text) {
 
-    var tokens = getTokens(text).mixed.map((el, i) => {
-      if (typeof (el) === 'string') {
-        return (<span key={i}> {el} </span>);
-      }
-      else if (el.type == 'link') {
-        return el.suggestions[0];
-      }
-      else if (el.suggestions[0]) {
-        // if there's a suggestion, call the function
-        return el.suggestions[0];
-      } else {
-        // there's no suggestion, return the text
-        return (<span key={i}> {el.tokenString} </span>);
-      }
-    });
+    let items = UXPinParser.parse(text).map(
+      (item, index) => ({
+        text: item?.text,
+        order: item?.order,
+        index: index,
+        type: item?.type,
+        href: item?.href,
+        iconName: item?.iconName,
+        iconColor: item?.iconColor,
+        colorToken: item?.colorToken,
+      })
+    );
 
-    return tokens;
+    var i = 0;
+    for (i = 0; i < items.length; i++) {
+      let item = items[i];
+      console.log("order: " + item.order +
+        "/n     index: " + item.index +
+        "/n     type: " + item.type +
+        "/n     text: " + item?.text +
+        "/n     href: " + item?.href +
+        "/n     iconName: " + item?.iconName +
+        "/n     iconColor: " + item?.iconColor +
+        "/n     colorToken: " + item?.colorToken);
+    }
+
+    // var tokens = getTokens(text).mixed.map((el, i) => {
+    //   if (typeof (el) === 'string') {
+    //     return (<span key={i}> {el} </span>);
+    //   }
+    //   else if (el.type == 'link') {
+    //     return el.suggestions[0];
+    //   }
+    //   else if (el.suggestions[0]) {
+    //     // if there's a suggestion, call the function
+    //     return el.suggestions[0];
+    //   } else {
+    //     // there's no suggestion, return the text
+    //     return (<span key={i}> {el.tokenString} </span>);
+    //   }
+    // });
+
+    // return tokens;
+
+    return text;
   }
 
   render() {
