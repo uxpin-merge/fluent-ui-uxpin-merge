@@ -25,8 +25,8 @@ class ProfileCard extends React.Component {
      */
     _onClick(str) {
         //Raise this event to UXPin. We'll send them the button's index or email value in case they can catch it.
-        if (this.props.onClick) {
-            this.props.onClick(str);
+        if (this.props.onPersonaClick) {
+            this.props.onPersonaClick(str);
         }
 
         console.log("Persona click: " + str);
