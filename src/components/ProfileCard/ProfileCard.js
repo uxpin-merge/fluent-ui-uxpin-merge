@@ -1,50 +1,19 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Callout, DirectionalHint } from '@fluentui/react/lib/Callout';
-// import {
-//     Persona,
-//     PersonaSize,
-//     PersonaPresence
-// } from '@fluentui/react/lib/Persona';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import Persona from '../Persona/Persona';
+import {
+    PersonaSize,
+    PersonaPresence
+} from '@fluentui/react/lib/Persona';
 import VerticalStack from '../VerticalStack/VerticalStack';
-import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
-// import { getTokens, csv2arr } from '../_helpers/parser.jsx';
 
 
-
-//Default action items to populate the control with.
-//Leave these left aligned as they show up in UXPin exactly as-is. 
-// const defaultItems = `icon(Email) Send email
-// icon(BubbleUser) Teams chat
-// icon(Chat) Slack
-// icon(CircleInfo) `;
 
 //This is the default URL to use for a generic female user
 const defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg";
 const defaultSize = 'size72';
-
-//Special styling for the Callout
-const calloutStyles = {
-    root: {
-        padding: "12px",
-        background: 'white',
-    }
-};
-
-//Special styling for the Stack
-const stackStyles = {
-    root: {
-        background: 'white',
-    },
-};
-
-//Padding for the Stack
-const verticalGapStackTokens = {
-    childrenGap: 12,
-};
 
 
 
