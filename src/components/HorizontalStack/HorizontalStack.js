@@ -66,7 +66,7 @@ class HorizontalStack extends React.Component {
     set() {
         //Let's set up the column widths as specified by the user, and fill in any extra gaps.
         var columnWidths = [];
-        let colWidths = this.props.widths.split("\n");
+        let colWidths = this.props.widths.toString().split("\n");
 
         if (colWidths.length) {
             var i;
