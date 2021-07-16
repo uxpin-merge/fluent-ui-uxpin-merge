@@ -50,6 +50,8 @@ class ProfileCard extends React.Component {
                 <HorizontalStack
                     {...this.props}
                     gutterPadding={0}
+                    widths={0}
+                    addSpanner={false}
                     align={cmdBarHAlign}
                     vAlign={cmdBarVAlign}>
                     {childList}
@@ -63,6 +65,7 @@ class ProfileCard extends React.Component {
                 {...this.props}
                 gutterPadding={12}
                 align={'stretch'}
+                children={""}
             >
                 <Persona
                     {...this.props}
@@ -76,6 +79,8 @@ class ProfileCard extends React.Component {
                     tertiaryText={this.props.email}
                     onClick={() => this._onClick(0)}
                 />
+
+                {"hello"}
 
                 {commandBar}
 
