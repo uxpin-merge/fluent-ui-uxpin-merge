@@ -19,8 +19,8 @@ const stackItemStyles = {
     },
 };
 const stackTokens = {
-    childrenGap: 0,
-    padding: '12px',
+    childrenGap: '12px',
+    padding: 0,
 };
 
 //This is the default URL to use for a generic female user
@@ -53,7 +53,8 @@ class ProfileCard extends React.Component {
 
         let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
 
-        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+        var imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+        imgURL = imgURL ? imgURL : '';
 
         var commandBar = '';
         if (this.props.children) {
@@ -92,6 +93,8 @@ class ProfileCard extends React.Component {
                     ppInitialsColor={this.props.ppInitialsColor}
                     name={this.props.name}
                     role={this.props.role}
+                    status={""}
+                    optional={""}
                     tertiaryText={this.props.email}
                     children={undefined}
                     onClick={() => this._onClick(0)}
