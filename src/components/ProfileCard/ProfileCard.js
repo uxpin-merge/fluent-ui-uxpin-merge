@@ -12,6 +12,8 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 //This is the default URL to use for a generic female user
 const defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg";
 const defaultSize = 'size72';
+const cmdBarHAlign = 'left';
+const cmdBarVAlign = 'middle';
 
 
 
@@ -39,6 +41,22 @@ class ProfileCard extends React.Component {
 
         let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
+        var commandBar = '';
+        if (this.props.children) {
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            commandBar = (
+                <HorizontalStack
+                    {...this.props}
+                    gutterPadding={0}
+                    align={cmdBarHAlign}
+                    vAlign={cmdBarVAlign}>
+                    {childList}
+                </HorizontalStack>
+            );
+        }
+
         return (
 
             <VerticalStack
@@ -59,9 +77,7 @@ class ProfileCard extends React.Component {
                     onClick={() => this._onClick(0)}
                 />
 
-                <HorizontalStack>
-                    {"Hello!"}
-                </HorizontalStack>
+                {commandBar}
 
             </VerticalStack>
 
@@ -107,6 +123,14 @@ class ProfileCard extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 ProfileCard.propTypes = {
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
+     */
+    children: PropTypes.node,
 
     /**
     * @uxpindescription The URL to an image file. Leave empty to display initials instead. 
