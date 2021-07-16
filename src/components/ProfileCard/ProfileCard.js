@@ -85,14 +85,15 @@ class ProfileCard extends React.Component {
 
                 <Persona
                     {...this.props}
-                    ppSize={PersonaSize[this.props.ppSize]}
+                    size={PersonaSize[this.props.ppSize]}
                     imageUrl={imgURL}
                     initials={this.props.initials}
-                    ppPresence={presenceCode}
+                    presence={presenceCode}
                     ppInitialsColor={this.props.ppInitialsColor}
                     name={this.props.name}
                     role={this.props.role}
                     tertiaryText={this.props.email}
+                    children={undefined}
                     onClick={() => this._onClick(0)}
                 />
 
