@@ -37,21 +37,27 @@ class ProfileCard extends React.Component {
 
     render() {
 
+        let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
+
+        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+
         return (
 
             <VerticalStack
                 {...this.props}
+                gutterPadding={12}
+                align={'stretch'}
             >
                 <Persona
                     {...this.props}
                     ppSize={PersonaSize[defaultSize]}
-                    imageUrl={this.props.imageUrl}
+                    imageUrl={imgURL}
                     initials={this.props.initials}
-                    ppPresence={PersonaPresence[this.props.ppPresence]}
+                    ppPresence={presenceCode}
                     ppInitialsColor={this.props.ppInitialsColor}
                     name={this.props.name}
                     role={this.props.role}
-                    status={this.props.email}
+                    tertiaryText={this.props.email}
                     onClick={() => this._onClick(0)}
                 />
 
@@ -148,6 +154,7 @@ ProfileCard.propTypes = {
 
     /**
      * @uxpindescription This persona's email address
+     * @uxpinpropname Email
      */
     email: PropTypes.string,
 
