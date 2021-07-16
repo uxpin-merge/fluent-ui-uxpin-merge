@@ -76,7 +76,6 @@ class ProfileCard extends React.Component {
         return (
 
             <Stack
-                {...this.props}
                 tokens={stackTokens}
                 horizontal={false}
                 horizontalAlign={stackHAlign}
