@@ -6,11 +6,11 @@ import Link from '../Link/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
-import { getTokens } from '../_helpers/parser';
 
 
 const defaultTextColor = "#000000";
 const defaultTextValue = 'The quick brown fox jumped over the lazy dog.';
+
 
 
 class Text extends React.Component {
@@ -41,17 +41,11 @@ class Text extends React.Component {
     }
   }
 
-  _getTextColor() {
-    var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
-    if (!textColor) {
-      textColor = defaultTextColor;
-    }
-
-    return textColor;
-  }
-
-  //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
   _getTokenizedText(text) {
+
+    return text;
+
+    //***** For UXPin Parser Testing
 
     let items = UXPinParser.parseRow(text).map(
       (item, index) => ({
@@ -78,32 +72,15 @@ class Text extends React.Component {
         "     iconColor: " + item?.iconColor +
         "     colorToken: " + item?.colorToken);
     }
-
-    // var tokens = getTokens(text).mixed.map((el, i) => {
-    //   if (typeof (el) === 'string') {
-    //     return (<span key={i}> {el} </span>);
-    //   }
-    //   else if (el.type == 'link') {
-    //     return el.suggestions[0];
-    //   }
-    //   else if (el.suggestions[0]) {
-    //     // if there's a suggestion, call the function
-    //     return el.suggestions[0];
-    //   } else {
-    //     // there's no suggestion, return the text
-    //     return (<span key={i}> {el.tokenString} </span>);
-    //   }
-    // });
-
-    // return tokens;
-
-    return text;
   }
 
   render() {
 
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
-    let textColor = this._getTextColor();
+    var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
+    if (!textColor) {
+      textColor = defaultTextColor;
+    }
 
     let fTextStyles = {
       root: {
