@@ -30,26 +30,6 @@ class Persona extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            _open: false,
-        }
-    }
-
-    set() {
-        this.setState({
-            _open: this.props.show,
-        });
-    }
-
-    componentDidMount() {
-        this.set();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.show !== this.props.show) {
-            this.set();
-        }
     }
 
     _onClick() {
@@ -62,7 +42,6 @@ class Persona extends React.Component {
             this.props.onClick(returnValue);
         }
     }
-
 
     render() {
 
