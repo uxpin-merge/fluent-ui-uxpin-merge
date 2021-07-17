@@ -191,11 +191,6 @@ ProfileCard.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 ProfileCard.defaultProps = {
-    imageUrl: defaultPersonaUrl,
-    initials: 'SC',
-    name: 'Sydney Coleman',
-    role: 'Financial Analyst II',
-    email: 'scoleman@company.com',
     ppSize: defaultSize,
     ppPresence: 'none',
     ppInitialsColor: 'lightBlue',
