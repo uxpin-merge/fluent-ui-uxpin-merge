@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
-import Link from '../Link/Link';
 import Persona from '../Persona/Persona';
 import { PersonaSize } from '@fluentui/react/lib/Persona';
 import { Stack } from '@fluentui/react/lib/Stack';
@@ -65,6 +64,7 @@ class ProfileCard extends React.Component {
         return (
 
             <Stack
+                {...this.props}
                 tokens={stackTokens}
                 horizontal={false}
                 horizontalAlign={stackHAlign}
