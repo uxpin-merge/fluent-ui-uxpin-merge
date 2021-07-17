@@ -184,13 +184,13 @@ ProfileCard.propTypes = {
     role: PropTypes.string,
 
     /**
-    * @uxpindescription This persona's current availability status, such as 'In a meeting'
+    * @uxpindescription At size72 or size100, this persona's current availability status, such as 'In a meeting'
     * @uxpinpropname Status
     */
     status: PropTypes.string,
 
     /**
-    * @uxpindescription In very large Personas, a 4th line of text can show more info, if desired
+    * @uxpindescription At size100, a 4th line of text can show more info, if desired
     * @uxpinpropname Additional Text
     */
     optional: PropTypes.string,
