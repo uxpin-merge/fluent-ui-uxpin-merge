@@ -105,7 +105,7 @@ class ProfileCard extends React.Component {
                     text={this.props.name}
                     secondaryText={this.props.role}
                     tertiaryText={this.props.status}
-                    optional={this.props.optional}
+                    optionalText={this.props.optional}
                     children={undefined}
                     styles={personaStyles}
                 >
