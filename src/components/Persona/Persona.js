@@ -51,7 +51,7 @@ class Persona extends React.Component {
         if (this.props.email && this.props?.email?.trim().length > 0) {
 
             let trimmedLink = this.props.email.trim();
-            let link = trimmedLink.startsWith("mailto:") ? link : 'mailto:' + trimmedLink;
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
 
             email = (
                 <Link

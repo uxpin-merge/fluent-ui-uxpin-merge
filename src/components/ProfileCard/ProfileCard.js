@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
-import { Link } from '@fluentui/react/lib/Link';
+import Link from '../Link/Link';
 import Persona from '../Persona/Persona';
 import { PersonaSize } from '@fluentui/react/lib/Persona';
 import { Stack } from '@fluentui/react/lib/Stack';
@@ -63,19 +63,16 @@ class ProfileCard extends React.Component {
         }
 
         var email = '';
-        if (this.props.email && this.props?.email?.trim().length > 0) {
+        if (this.props.email) {
 
             let trimmedLink = this.props.email.trim();
-            let link = trimmedLink.startsWith("mailto:") ? link : 'mailto:' + trimmedLink;
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
 
             email = (
                 <Link
-                    {...this.props}
-
-                    href={link ? link : ''}
-                >
-                    {this.props.email}
-                </Link>
+                    value={this.props.email}
+                    linkHref={link ? link : ''}
+                />
             );
         }
 
