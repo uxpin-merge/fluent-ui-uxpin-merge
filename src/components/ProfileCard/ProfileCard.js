@@ -63,7 +63,7 @@ class ProfileCard extends React.Component {
         }
 
         var email = '';
-        if (this.props.email && this.props?.email.trim().length > 0) {
+        if (this.props.email && this.props?.email?.trim().length > 0) {
 
             let trimmedLink = this.props.email.trim();
             let link = trimmedLink.startsWith("mailto:") ? link : 'mailto:' + trimmedLink;
