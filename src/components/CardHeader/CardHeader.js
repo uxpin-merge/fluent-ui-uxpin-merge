@@ -11,7 +11,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 //****** STYLES */
 
 //Use this color if the UXPin user doesn't enter a valid hex or PPUI color token.
-const defaultTextColor = "black";
+const defaultTextColor = "#000000";
 const defaultIconColor = 'info';
 const defaultIconSize = 18;
 const defaultIconName = 'Info';
@@ -68,40 +68,18 @@ class CardHeader extends React.Component {
 
         var iconStackItem = '';
         if (this.props.iconName) {
-            let iName = this.props.iconName.trim();
-            let iSize = this.props.iconSize;
+            let iName = this.props.iconName ? this.props.iconName.trim() : '';
+            let iSize = this.props.iconSize > 0 ? this.props.iconSize : 1;
 
-            //Let's see if the user entered a valid color value. This method returns undefined if not. 
-            var iColor = UxpColors.getHexFromHexOrToken(this.props.iconColor);
-
-            console.log("color prop: " + this.props.iconColor);
-            console.log("     Returned value: " + iColor);
-
-            if (!iColor) {
-                iColor = defaultTextColor;
-            }
-
-            console.log("     Setting it as: " + iColor);
-
-            let colorClass = {
-                color: iColor,
-            }
-
-            let iconClass = {
-                fontSize: iSize,
-                height: iSize,
-                width: iSize,
-                display: 'block',           //Required
-                lineHeight: 'normal',       //Required
-            };
+            //This func returns undefined if not found. 
+            let iColor = UxpColors.getHexFromHexOrToken(this.props.iconColor);
 
             iconStackItem = (
                 <StackItem>
                     <Icon
                         iconName={iName}
-                        color={iColor}
+                        color={iColor ? iColor : defaultTextColor}
                         size={iSize}
-                    // className={[iconClass, colorClass]}
                     />
                 </StackItem>
             );
