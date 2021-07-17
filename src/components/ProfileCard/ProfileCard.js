@@ -37,19 +37,6 @@ class ProfileCard extends React.Component {
         super(props);
     }
 
-    /**
-     * Handle the onClick handling for the Persona's email link and CommandBar buttons. 
-     */
-    _onClick(str) {
-        //Raise this event to UXPin. We'll send them the button's index or email value in case they can catch it.
-        if (this.props.onPersonaClick) {
-            this.props.onPersonaClick(str);
-        }
-
-        console.log("Persona click: " + str);
-    }
-
-
     render() {
 
         let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
@@ -77,14 +64,15 @@ class ProfileCard extends React.Component {
 
         var email = '';
         if (this.props.email && this.props?.email.trim().length > 0) {
+
             let trimmedLink = this.props.email.trim();
             let link = trimmedLink.startsWith("mailto:") ? link : 'mailto:' + trimmedLink;
+
             email = (
                 <Link
                     {...this.props}
                     value={this.props.email}
-                    href={link ? link : ''}
-                    onLinkClick={() => this._onClick(this.props.email)}
+                    linkHref={link ? link : ''}
                 />
             );
         }
@@ -118,39 +106,6 @@ class ProfileCard extends React.Component {
                 {commandBar}
 
             </Stack>
-
-            // <Stack
-            //     styles={stackStyles}
-            //     tokens={verticalGapStackTokens} >
-
-            //     <StackItem align={'start'}>
-            //         <Persona
-            //             {...this.props}
-            //             size={PersonaSize['size72']}
-            //             presence={PersonaPresence[this.props.ppPresence]}
-            //             initialsColor={this.props.ppInitialsColor}
-            //             styles={personaStyles}
-
-            //             //We can set these props as-is
-            //             imageUrl={this.props.imageUrl}
-            //             imageInitials={this.props.initials}
-            //             text={this.props.name}
-            //             secondaryText={this.props.role}
-            //             tertiaryText={this.props.email}
-            //             onClick={() => this._onClick(0)} //Always send 0
-            //         />
-            //     </StackItem>
-
-            //     {this.state.showCommandBar && (
-            //         <StackItem align={'start'}>
-            //             <CommandBar
-            //                 items={this.state.items}
-            //                 styles={cbStyles}
-            //             />
-            //         </StackItem>
-            //     )}
-            // </Stack>
-
         );
     }
 }
@@ -224,12 +179,6 @@ ProfileCard.propTypes = {
      * @uxpinpropname Email
      */
     email: PropTypes.string,
-
-    /**
-     * @uxpindescription Fires when th Persona component is clicked on
-     * @uxpinpropname  Click Persona
-     * */
-    onPersonaClick: PropTypes.func,
 }
 
 
@@ -238,12 +187,12 @@ ProfileCard.propTypes = {
  */
 ProfileCard.defaultProps = {
     imageUrl: defaultPersonaUrl,
-    initials: 'SCPC',
-    name: 'Sydney Coleman PC',
-    role: 'Financial Analyst II PC',
-    email: 'alindqvist_pc@paypal.com',
+    initials: 'SC',
+    name: 'Sydney Coleman',
+    role: 'Financial Analyst II',
+    email: 'scoleman@company.com',
     ppSize: defaultSize,
-    ppPresence: 'online',
+    ppPresence: 'none',
     ppInitialsColor: 'lightBlue',
 }
 
