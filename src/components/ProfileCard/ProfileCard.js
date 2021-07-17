@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
-import Persona from '../Persona/Persona';
-import { PersonaSize } from '@fluentui/react/lib/Persona';
+import Link from '../Link/Link';
+import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { Stack } from '@fluentui/react/lib/Stack';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
@@ -21,6 +21,14 @@ const stackItemStyles = {
 const stackTokens = {
     childrenGap: '12px',
     padding: 0,
+};
+
+//For the Persona
+//Fix the weird line height issue in the top line of the Persona
+const personaStyles = {
+    root: {
+        lineHeight: '1.35',
+    },
 };
 
 //This is the default URL to use for a generic female user
@@ -42,6 +50,21 @@ class ProfileCard extends React.Component {
 
         var imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
         imgURL = imgURL ? imgURL : '';
+
+        var email = '';
+        if (this.props.email && this.props?.email?.trim().length > 0) {
+
+            let trimmedLink = this.props.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            email = (
+                <Link
+                    {...this.props}
+                    value={this.props.email}
+                    linkHref={link ? link : ''}
+                />
+            );
+        }
 
         var commandBar = '';
         if (this.props.children) {
@@ -76,14 +99,18 @@ class ProfileCard extends React.Component {
                     {...this.props}
                     size={PersonaSize[this.props.ppSize]}
                     imageUrl={imgURL}
-                    initials={this.props.initials}
+                    imageInitials={this.props.initials}
                     presence={presenceCode}
-                    ppInitialsColor={this.props.ppInitialsColor}
-                    name={this.props.name}
-                    role={this.props.role}
-                    status={this.props.status}
+                    initialsColor={this.props.ppInitialsColor}
+                    text={this.props.name}
+                    secondaryText={this.props.role}
+                    tertiaryText={this.props.status}
                     optional={this.props.optional}
-                />
+                    children={undefined}
+                    styles={personaStyles}
+                >
+                    {email}
+                </Persona>
 
                 {commandBar}
 
