@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import Link from '../Link/Link';
 import {
     Persona as FPersona,
     PersonaSize,
@@ -46,6 +47,21 @@ class Persona extends React.Component {
 
         let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
+        var email = '';
+        if (this.props.email && this.props?.email?.trim().length > 0) {
+
+            let trimmedLink = this.props.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            email = (
+                <Link
+                    {...this.props}
+                    value={this.props.email}
+                    linkHref={link ? link : ''}
+                />
+            );
+        }
+
         return (
             <FPersona
                 {...this.props}
@@ -61,7 +77,10 @@ class Persona extends React.Component {
                 hidePersonaDetails={this.props.hidePersonaDetails}
                 styles={personaStyles}
                 onClick={() => { this._onClick() }}
-            />
+                children={undefined}
+            >
+                {email}
+            </FPersona>
         )
     }
 }
@@ -122,16 +141,22 @@ Persona.propTypes = {
     role: PropTypes.string,
 
     /**
-    * @uxpindescription This persona's current availability status, such as 'In a meeting'
+    * @uxpindescription At size72 or size100, this persona's current availability status, such as 'In a meeting'
     * @uxpinpropname Status
     */
     status: PropTypes.string,
 
     /**
-    * @uxpindescription In very large Personas, a 4th line of text can show more info, if desired
+    * @uxpindescription At size100, a 4th line of text can show more info, if desired
     * @uxpinpropname Additional Text
     */
     optional: PropTypes.string,
+
+    /**
+     * @uxpindescription This persona's email address
+     * @uxpinpropname Email
+     */
+    email: PropTypes.string,
 
     /** 
     * @uxpindescription Whether to display the persona's details or only the 'coin'
@@ -151,12 +176,12 @@ Persona.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Persona.defaultProps = {
-    imageUrl: defaultPersonaUrl,
-    initials: 'SC',
-    name: 'Sydney Coleman',
-    role: 'Financial Analyst II',
-    status: 'In a meeting',
-    optional: 'Available at 4:00 PM PST',
+    imageUrl: '',
+    initials: '',
+    name: '',
+    role: '',
+    status: '',
+    optional: '',
     ppSize: "size100",
     ppPresence: 'online',
     hidePersonaDetails: false,

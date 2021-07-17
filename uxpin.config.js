@@ -76,6 +76,7 @@ module.exports = {
           'src/components/Persona/Persona.js',
           'src/components/Pivot/Pivot.js',
           'src/components/PivotPanel/PivotPanel.js',
+          'src/components/ProfileCard/ProfileCard.js',
         ],
       },
       {

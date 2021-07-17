@@ -15,6 +15,7 @@ const rightAlign = 'right';
 
 //****** STYLES */
 const borderRadius = '4px';
+const cardMargin = '6px';
 
 //PPUI Elevation Specs: https://engineering.paypalcorp.com/confluence/display/PPUI/Elevation
 const elevationShadow0 = '0 2px 4px rgba(0, 0, 0, 0.16)';
@@ -88,7 +89,7 @@ class Card extends React.Component {
             border: bStyle,
             boxShadow: this.props.showShadow ? cardShadow : '',
             padding: cardPad + 'px',
-            margin: this.props.margin,
+            margin: cardMargin,
             minWidth: this.props.boxWidth > 1 ? this.props.boxWidth : 1,
         };
 
@@ -179,16 +180,6 @@ Card.propTypes = {
     boxWidth: PropTypes.number,
 
     /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
-     * @uxpindescription The margin around the card. Value must be 0 or more.  
-     * @uxpinpropname Margin
-     */
-    margin: PropTypes.number,
-
-    /**
-     * Don't show this prop in the UXPin Editor. 
-     * @uxpinignoreprop 
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Inner padding for all card contents. Value must be 0 or more.  
      * @uxpinpropname Card Padding
@@ -238,7 +229,6 @@ Card.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Card.defaultProps = {
-    margin: 6,
     boxWidth: 0,
     cardPadding: 0,
     gutterPadding: 12,

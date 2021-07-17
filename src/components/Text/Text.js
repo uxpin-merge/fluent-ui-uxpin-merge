@@ -1,12 +1,16 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Text as FText } from '@fluentui/react/lib/Text';
+import Image from '../Image/Image';
+import Link from '../Link/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import { getTokens } from '../_helpers/parser';
+import * as UXPinParser from '../_helpers/UXPinParser';
+
 
 
 const defaultTextColor = "#000000";
 const defaultTextValue = 'The quick brown fox jumped over the lazy dog.';
+
 
 
 class Text extends React.Component {
@@ -37,45 +41,47 @@ class Text extends React.Component {
     }
   }
 
-  _getTextColor() {
-    var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
-    if (!textColor) {
-      textColor = defaultTextColor;
-    }
-
-    return textColor;
-  }
-
-  //Tokenize the string coming in from UXPin to support the link(Link Text) feature.
   _getTokenizedText(text) {
 
-    var tokens = getTokens(text).mixed.map((el, i) => {
-      if (typeof (el) === 'string') {
-        return (<span key={i}> {el} </span>);
-      }
-      else if (el.type == 'link') {
-        return el.suggestions[0];
-      }
-      else if (el.suggestions[0]) {
-        // if there's a suggestion, call the function
-        return el.suggestions[0];
-      } else {
-        // there's no suggestion, return the text
-        return (<span key={i}> {el.tokenString} </span>);
-      }
-    });
+    return text;
 
-    return tokens;
+    //***** For UXPin Parser Testing
+
+    let items = UXPinParser.parseRow(text).map(
+      (item, index) => ({
+        text: item?.text,
+        order: item?.order,
+        index: index,
+        type: item?.type,
+        href: item?.href,
+        iconName: item?.iconName,
+        iconColor: item?.iconColor,
+        colorToken: item?.colorToken,
+      })
+    );
+
+    var i = 0;
+    for (i = 0; i < items.length; i++) {
+      let item = items[i];
+      console.log("order: " + item.order +
+        "     index: " + item.index +
+        "     type: " + item.type +
+        "     text: " + item?.text +
+        "     href: " + item?.href +
+        "     iconName: " + item?.iconName +
+        "     iconColor: " + item?.iconColor +
+        "     colorToken: " + item?.colorToken);
+    }
   }
 
   render() {
 
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
-    let textColor = this._getTextColor();
+    let textColor = UxpColors.getHexFromHexOrToken(this.props.color);
 
     let fTextStyles = {
       root: {
-        color: textColor,
+        color: textColor ? textColor : defaultTextColor,
         fontWeight: this.props.bold ? 'bold' : 'normal',
         fontStyle: this.props.italic ? 'italic' : 'normal',
         display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
