@@ -96,7 +96,7 @@ class Persona extends React.Component {
 
         let pCard = (
             <ProfileCard
-                {...this.props}
+
                 size={'size100'}
                 ppPresence={presenceCode}
                 ppInitialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
