@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import Link from '../Link/Link';
 import {
     Persona as FPersona,
     PersonaSize,
@@ -46,6 +47,21 @@ class Persona extends React.Component {
 
         let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
+        var email = '';
+        if (this.props.email && this.props?.email?.trim().length > 0) {
+
+            let trimmedLink = this.props.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? link : 'mailto:' + trimmedLink;
+
+            email = (
+                <Link
+                    {...this.props}
+                    value={this.props.email}
+                    linkHref={link ? link : ''}
+                />
+            );
+        }
+
         return (
             <FPersona
                 {...this.props}
@@ -61,7 +77,10 @@ class Persona extends React.Component {
                 hidePersonaDetails={this.props.hidePersonaDetails}
                 styles={personaStyles}
                 onClick={() => { this._onClick() }}
-            />
+                children={undefined}
+            >
+                {email}
+            </FPersona>
         )
     }
 }
@@ -132,6 +151,12 @@ Persona.propTypes = {
     * @uxpinpropname Additional Text
     */
     optional: PropTypes.string,
+
+    /**
+     * @uxpindescription This persona's email address
+     * @uxpinpropname Email
+     */
+    email: PropTypes.string,
 
     /** 
     * @uxpindescription Whether to display the persona's details or only the 'coin'
