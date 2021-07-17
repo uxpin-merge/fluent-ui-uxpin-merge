@@ -151,12 +151,12 @@ Persona.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Persona.defaultProps = {
-    imageUrl: defaultPersonaUrl,
-    initials: 'SC',
-    name: 'Sydney Coleman',
-    role: 'Financial Analyst II',
-    status: 'In a meeting',
-    optional: 'Available at 4:00 PM PST',
+    imageUrl: '',
+    initials: '',
+    name: '',
+    role: '',
+    status: '',
+    optional: '',
     ppSize: "size100",
     ppPresence: 'online',
     hidePersonaDetails: false,
