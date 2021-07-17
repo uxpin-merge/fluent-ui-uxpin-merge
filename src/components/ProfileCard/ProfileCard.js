@@ -52,7 +52,7 @@ class ProfileCard extends React.Component {
             commandBar = (
                 <HorizontalStack
                     {...this.props}
-                    gutterPadding={0}
+                    gutterPadding={6}
                     widths={""}
                     addSpanner={false}
                     align={cmdBarHAlign}
