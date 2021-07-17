@@ -77,14 +77,11 @@ class Text extends React.Component {
   render() {
 
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
-    var textColor = UxpColors.getHexFromHexOrToken(this.props.color);
-    if (!textColor) {
-      textColor = defaultTextColor;
-    }
+    let textColor = UxpColors.getHexFromHexOrToken(this.props.color);
 
     let fTextStyles = {
       root: {
-        color: textColor,
+        color: textColor ? textColor : defaultTextColor,
         fontWeight: this.props.bold ? 'bold' : 'normal',
         fontStyle: this.props.italic ? 'italic' : 'normal',
         display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes

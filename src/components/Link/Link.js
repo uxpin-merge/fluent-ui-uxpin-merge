@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
-import { Text } from '@fluentui/react/lib/Text';
+// import { Text } from '@fluentui/react/lib/Text';
+import Text from '../Text/Text';
+
 
 
 class Link extends React.Component {
@@ -38,7 +40,6 @@ class Link extends React.Component {
         return (
             <Text
                 {...this.props}
-                styles={linkTextStyles}
                 variant={this.props.size}>
 
                 <FLink
