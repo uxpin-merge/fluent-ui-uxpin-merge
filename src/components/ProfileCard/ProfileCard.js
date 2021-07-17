@@ -38,23 +38,15 @@ class ProfileCard extends React.Component {
 
     render() {
 
-        console.log("Entering render");
-
         let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
-
-        console.log("    presenceCode: " + presenceCode);
 
         var imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
         imgURL = imgURL ? imgURL : '';
-
-        console.log("    imgURL: " + imgURL);
 
         var commandBar = '';
         if (this.props.children) {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
-
-            console.log("    childlist length: " + childList.length);
 
             commandBar = (
                 <HorizontalStack
@@ -68,8 +60,6 @@ class ProfileCard extends React.Component {
                 </HorizontalStack>
             );
         }
-
-        console.log("    render next: ");
 
         return (
 
@@ -93,7 +83,6 @@ class ProfileCard extends React.Component {
                     role={this.props.role}
                     status={this.props.status}
                     optional={this.props.optional}
-                    email={this.props.emailAddress}
                 />
 
                 {commandBar}
