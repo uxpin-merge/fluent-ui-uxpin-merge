@@ -27,7 +27,7 @@ class Link extends React.Component {
 
         let linkTextStyles = {
             root: {
-                color: "#000000",
+                // color: "#000000",
                 fontWeight: this.props.bold ? 'bold' : 'normal',
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Required - prevents a bug
