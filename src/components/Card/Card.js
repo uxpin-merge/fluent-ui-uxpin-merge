@@ -188,13 +188,6 @@ Card.propTypes = {
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
-     * @uxpindescription Padding within the stack. Value must be 0 or more. 
-     * @uxpinpropname Section Padding
-     */
-    internalPadding: PropTypes.number,
-
-    /**
-     * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
      * @uxpindescription Padding between the sections in the card. Value must be 0 or more.  
      * @uxpinpropname Section Padding
      */
