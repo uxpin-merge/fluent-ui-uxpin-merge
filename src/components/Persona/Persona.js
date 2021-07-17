@@ -115,7 +115,7 @@ class Persona extends React.Component {
         return (
             <>
                 <TooltipHost
-                    content={pCard}
+                    content={"Oops!"}
                     directionalHint={DirectionalHint.topLeftEdge}
                     closeDelay={300}
                     id={tooltipID}
