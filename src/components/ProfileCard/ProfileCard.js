@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import Link from '../Link/Link';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { Stack } from '@fluentui/react/lib/Stack';
@@ -71,16 +70,29 @@ class ProfileCard extends React.Component {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
+            const stackTokens = {
+                childrenGap: 6,
+                padding: 0,
+            };
+
+            const stackItemStyles = {
+                root: {
+                    height: 'auto',
+                },
+            };
+
             commandBar = (
-                <HorizontalStack
+
+                < Stack
                     {...this.props}
-                    gutterPadding={6}
-                    widths={""}
-                    addSpanner={false}
-                    align={cmdBarHAlign}
-                    vAlign={cmdBarVAlign}>
+                    tokens={stackTokens}
+                    styles={stackItemStyles}
+                    horizontal={true}
+                    horizontalAlign={'start'}
+                    verticalAlign={'middle'}
+                >
                     {childList}
-                </HorizontalStack>
+                </Stack >
             );
         }
 
@@ -93,7 +105,7 @@ class ProfileCard extends React.Component {
                 horizontalAlign={stackHAlign}
                 verticalAlign={stackVAlign}
                 wrap={false}
-                styles={stackItemStyles}>
+                styles={stackItemStyles} >
 
                 <Persona
                     {...this.props}

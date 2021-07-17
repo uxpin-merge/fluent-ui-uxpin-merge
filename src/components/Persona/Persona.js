@@ -11,9 +11,6 @@ import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 
-//This is the image URL for Persona04
-let defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg"
-
 //Fix the weird line height issue in the top line of the Persona
 const personaStyles = {
     root: {
@@ -39,7 +36,6 @@ class Persona extends React.Component {
             this.props.onClick(returnValue);
         }
     }
-
 
     render() {
 
