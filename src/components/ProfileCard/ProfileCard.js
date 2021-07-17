@@ -75,6 +75,20 @@ class ProfileCard extends React.Component {
             );
         }
 
+        var email = '';
+        if (this.props.email && this.props?.email.trim().length > 0) {
+            let trimmedLink = this.props.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? link : 'mailto:' + trimmedLink;
+            email = (
+                <Link
+                    {...this.props}
+                    value={this.props.email}
+                    href={link ? link : ''}
+                    onLinkClick={() => this._onClick(this.props.email)}
+                />
+            );
+        }
+
         return (
 
             <Stack
@@ -94,15 +108,11 @@ class ProfileCard extends React.Component {
                     ppInitialsColor={this.props.ppInitialsColor}
                     name={this.props.name}
                     role={this.props.role}
-                    status={this.props.email}
+                    status={""}
                     optional={""}
                     children={undefined}
-                    onClick={() => this._onClick(0)}
                 >
-                    <Link
-                        {...this.props}
-                        value={this.props.email + " test"}
-                    />
+                    {email}
                 </Persona>
 
                 {commandBar}
