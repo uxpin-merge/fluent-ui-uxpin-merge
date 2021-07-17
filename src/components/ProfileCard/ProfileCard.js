@@ -62,20 +62,6 @@ class ProfileCard extends React.Component {
             );
         }
 
-        var email = '';
-        if (this.props.email) {
-
-            let trimmedLink = this.props.email.trim();
-            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
-
-            email = (
-                <Link
-                    value={this.props.email}
-                    linkHref={link ? link : ''}
-                />
-            );
-        }
-
         return (
 
             <Stack
@@ -97,10 +83,8 @@ class ProfileCard extends React.Component {
                     role={this.props.role}
                     status={""}
                     optional={""}
-                    children={undefined}
-                >
-                    {email}
-                </Persona>
+                    email={this.props.email}
+                />
 
                 {commandBar}
 
