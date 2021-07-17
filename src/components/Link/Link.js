@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
-// import { Text } from '@fluentui/react/lib/Text';
-import Text from '../Text/Text';
+import { Text } from '@fluentui/react/lib/Text';
 
 
 
@@ -28,6 +27,7 @@ class Link extends React.Component {
 
         let linkTextStyles = {
             root: {
+                color: "#000000",
                 fontWeight: this.props.bold ? 'bold' : 'normal',
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Required - prevents a bug
@@ -40,6 +40,7 @@ class Link extends React.Component {
         return (
             <Text
                 {...this.props}
+                styles={linkTextStyles}
                 variant={this.props.size}>
 
                 <FLink
