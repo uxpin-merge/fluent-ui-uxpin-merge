@@ -107,7 +107,7 @@ class Persona extends React.Component {
                 optional={this.props.optional}
                 {...this.props}
             >
-                {"hello"}
+
             </ProfileCard>
         );
 
