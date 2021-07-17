@@ -96,7 +96,6 @@ class Persona extends React.Component {
 
         let pCard = (
             <ProfileCard
-                {...this.props}
                 size={'size100'}
                 ppPresence={presenceCode}
                 ppInitialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
@@ -106,7 +105,7 @@ class Persona extends React.Component {
                 role={this.props.role}
                 status={this.props.status}
                 optional={this.props.optional}
-                email={this.props.email}
+                {...this.props}
             >
                 {"hello"}
             </ProfileCard>
@@ -115,7 +114,7 @@ class Persona extends React.Component {
         return (
             <>
                 <TooltipHost
-                    content={"Oops!"}
+                    content={pCard}
                     directionalHint={DirectionalHint.topLeftEdge}
                     closeDelay={300}
                     id={tooltipID}
