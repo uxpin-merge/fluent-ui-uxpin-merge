@@ -199,7 +199,7 @@ ProfileCard.propTypes = {
      * @uxpindescription This persona's email address
      * @uxpinpropname Email
      */
-    emailAddress: PropTypes.string,
+    email: PropTypes.string,
 }
 
 
