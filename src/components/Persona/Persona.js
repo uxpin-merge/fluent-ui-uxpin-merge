@@ -97,7 +97,7 @@ class Persona extends React.Component {
         let pCard = (
             <ProfileCard
                 {...this.props}
-                ppSize={'size100'}
+                size={'size100'}
                 ppPresence={presenceCode}
                 ppInitialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
                 imageUrl={imgURL}
@@ -108,6 +108,7 @@ class Persona extends React.Component {
                 optional={this.props.optional}
                 email={this.props.email}
             >
+                {this.props.children}
             </ProfileCard>
         );
 
@@ -134,9 +135,9 @@ class Persona extends React.Component {
                         hidePersonaDetails={this.props.hidePersonaDetails}
                         styles={personaStyles}
                         onClick={() => { this._onClick() }}
-                        children={undefined}
                         id={ttTargetID}
                         aria-describedby={tooltipID}
+                        children={undefined}
                     >
                         {email}
                     </FPersona>
@@ -152,6 +153,14 @@ class Persona extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Persona.propTypes = {
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
+     */
+    children: PropTypes.node,
 
     /**
     * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
