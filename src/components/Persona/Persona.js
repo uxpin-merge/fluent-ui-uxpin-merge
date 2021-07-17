@@ -1,11 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import Link from '../Link/Link';
 import {
     Persona as FPersona,
     PersonaSize,
     PersonaInitialsColor
 } from '@fluentui/react/lib/Persona';
+import ProfileCard from '../ProfileCard/ProfileCard';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
@@ -27,6 +30,26 @@ class Persona extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            _open: false,
+        }
+    }
+
+    set() {
+        this.setState({
+            _open: this.props.show,
+        });
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.show !== this.props.show) {
+            this.set();
+        }
     }
 
     _onClick() {
@@ -62,25 +85,64 @@ class Persona extends React.Component {
             );
         }
 
-        return (
-            <FPersona
+        const ttTargetID = _.uniqueId('ttTarget_');
+        const tooltipID = _.uniqueId('tooltip_');
+
+        const ttProps = {
+            gapSpace: 4,
+            target: `#${ttTargetID}`,
+            isBeakVisible: this.props.showBeak,
+        };
+
+        let pCard = (
+            <ProfileCard
                 {...this.props}
-                size={PersonaSize[this.props.ppSize]}
-                presence={presenceCode}
-                initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+                ppSize={'size100'}
+                ppPresence={presenceCode}
+                ppInitialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
                 imageUrl={imgURL}
-                imageInitials={this.props.initials}
-                text={this.props.name}
-                secondaryText={this.props.role}
-                tertiaryText={this.props.status}
-                optionalText={this.props.optional}
-                hidePersonaDetails={this.props.hidePersonaDetails}
-                styles={personaStyles}
-                onClick={() => { this._onClick() }}
-                children={undefined}
+                initials={this.props.initials}
+                name={this.props.name}
+                role={this.props.role}
+                status={this.props.status}
+                optional={this.props.optional}
+                email={this.props.email}
             >
-                {email}
-            </FPersona>
+            </ProfileCard>
+        );
+
+        return (
+            <>
+                <TooltipHost
+                    content={pCard}
+                    directionalHint={DirectionalHint.topLeftEdge}
+                    closeDelay={300}
+                    id={tooltipID}
+                    calloutProps={ttProps}
+                >
+                    <FPersona
+                        {...this.props}
+                        size={PersonaSize[this.props.ppSize]}
+                        presence={presenceCode}
+                        initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+                        imageUrl={imgURL}
+                        imageInitials={this.props.initials}
+                        text={this.props.name}
+                        secondaryText={this.props.role}
+                        tertiaryText={this.props.status}
+                        optionalText={this.props.optional}
+                        hidePersonaDetails={this.props.hidePersonaDetails}
+                        styles={personaStyles}
+                        onClick={() => { this._onClick() }}
+                        children={undefined}
+                        id={ttTargetID}
+                        aria-describedby={tooltipID}
+                    >
+                        {email}
+                    </FPersona>
+
+                </TooltipHost>
+            </>
         )
     }
 }
