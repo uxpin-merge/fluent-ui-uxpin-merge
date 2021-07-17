@@ -91,9 +91,9 @@ class ProfileCard extends React.Component {
                     ppInitialsColor={this.props.ppInitialsColor}
                     name={this.props.name}
                     role={this.props.role}
-                    status={""}
-                    optional={""}
-                    email={this.props.email}
+                    status={this.props.status}
+                    optional={this.props.optional}
+                    email={this.props.emailAddress}
                 />
 
                 {commandBar}
@@ -168,10 +168,22 @@ ProfileCard.propTypes = {
     role: PropTypes.string,
 
     /**
+    * @uxpindescription This persona's current availability status, such as 'In a meeting'
+    * @uxpinpropname Status
+    */
+    status: PropTypes.string,
+
+    /**
+    * @uxpindescription In very large Personas, a 4th line of text can show more info, if desired
+    * @uxpinpropname Additional Text
+    */
+    optional: PropTypes.string,
+
+    /**
      * @uxpindescription This persona's email address
      * @uxpinpropname Email
      */
-    email: PropTypes.string,
+    emailAddress: PropTypes.string,
 }
 
 
