@@ -10,7 +10,7 @@ const name = 'Sydney Coleman';
 const role = 'Financial Analyst II';
 const status = '';
 const optional = '';
-const email = 'scolemand@company.com'
+const email = 'scolemand@company.com';
 
 
 
