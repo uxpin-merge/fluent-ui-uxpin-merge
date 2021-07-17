@@ -64,64 +64,27 @@ class Persona extends React.Component {
             );
         }
 
-        const ttTargetID = _.uniqueId('ttTarget_');
-        const tooltipID = _.uniqueId('tooltip_');
-
-        const ttProps = {
-            gapSpace: 4,
-            target: `#${ttTargetID}`,
-            isBeakVisible: this.props.showBeak,
-        };
-
-        let pCard = (
-            <ProfileCard
-                size={'size100'}
-                ppPresence={presenceCode}
-                ppInitialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
-                imageUrl={imgURL}
-                initials={this.props.initials}
-                name={this.props.name}
-                role={this.props.role}
-                status={this.props.status}
-                optional={this.props.optional}
-                {...this.props}
-            >
-
-            </ProfileCard>
-        );
-
         return (
-            <>
-                <TooltipHost
-                    content={pCard}
-                    directionalHint={DirectionalHint.topLeftEdge}
-                    closeDelay={300}
-                    id={tooltipID}
-                    calloutProps={ttProps}
-                >
-                    <FPersona
-                        {...this.props}
-                        size={PersonaSize[this.props.ppSize]}
-                        presence={presenceCode}
-                        initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
-                        imageUrl={imgURL}
-                        imageInitials={this.props.initials}
-                        text={this.props.name}
-                        secondaryText={this.props.role}
-                        tertiaryText={this.props.status}
-                        optionalText={this.props.optional}
-                        hidePersonaDetails={this.props.hidePersonaDetails}
-                        styles={personaStyles}
-                        onClick={() => { this._onClick() }}
-                        id={ttTargetID}
-                        aria-describedby={tooltipID}
-                        children={undefined}
-                    >
-                        {email}
-                    </FPersona>
-
-                </TooltipHost>
-            </>
+            <FPersona
+                {...this.props}
+                size={PersonaSize[this.props.ppSize]}
+                presence={presenceCode}
+                initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+                imageUrl={imgURL}
+                imageInitials={this.props.initials}
+                text={this.props.name}
+                secondaryText={this.props.role}
+                tertiaryText={this.props.status}
+                optionalText={this.props.optional}
+                hidePersonaDetails={this.props.hidePersonaDetails}
+                styles={personaStyles}
+                onClick={() => { this._onClick() }}
+                id={ttTargetID}
+                aria-describedby={tooltipID}
+                children={undefined}
+            >
+                {email}
+            </FPersona>
         )
     }
 }
