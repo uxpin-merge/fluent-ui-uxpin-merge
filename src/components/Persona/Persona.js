@@ -1,21 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import Link from '../Link/Link';
 import {
     Persona as FPersona,
     PersonaSize,
     PersonaInitialsColor
 } from '@fluentui/react/lib/Persona';
-import ProfileCard from '../ProfileCard/ProfileCard';
-import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
-
-//This is the image URL for Persona04
-let defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg"
 
 //Fix the weird line height issue in the top line of the Persona
 const personaStyles = {
@@ -79,8 +73,6 @@ class Persona extends React.Component {
                 hidePersonaDetails={this.props.hidePersonaDetails}
                 styles={personaStyles}
                 onClick={() => { this._onClick() }}
-                id={ttTargetID}
-                aria-describedby={tooltipID}
                 children={undefined}
             >
                 {email}
