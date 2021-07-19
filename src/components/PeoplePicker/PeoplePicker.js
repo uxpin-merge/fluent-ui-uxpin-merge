@@ -129,8 +129,8 @@ class PeoplePicker extends React.Component {
    getPeopleList() {
       let people = [];
 
-      if (this.props.persons) {
-         let items = this.props.persons.match(/[^\r\n]+/g);
+      if (defaultPeople) {
+         let items = defaultPeople.match(/[^\r\n]+/g);
 
          if (items && items.length) {
             for (var i = 0; i < items.length; i++) {
@@ -443,7 +443,7 @@ PeoplePicker.propTypes = {
     * @uxpinpropname People List
     * @uxpincontroltype codeeditor
     */
-   persons: PropTypes.string,
+   // persons: PropTypes.string,
 
    /**
     * @uxpindescription To display selected persons inline rather than below the input field
@@ -466,7 +466,7 @@ PeoplePicker.propTypes = {
 
 PeoplePicker.defaultProps = {
    inline: false,
-   persons: defaultPeople,
+   // persons: defaultPeople,
    selectedIndexes: '',
    disabled: false,
 };
