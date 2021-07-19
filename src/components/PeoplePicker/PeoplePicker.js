@@ -24,6 +24,27 @@ const textfieldStyle = {
 
 const maxNumberOfPersonas = 10;
 
+const defaultPeople = `Person1
+Person2
+Person3
+Tiffany Jackson | tjackson@company.com
+Abhik Rao | Dir., Product Management
+Person6
+Person7
+Person8
+Person9
+Person10
+Person11
+Person12
+Person13
+Person14
+Person15
+Person16
+Person17
+Person18
+Person19
+Person20`;
+
 
 
 class PeoplePicker extends React.Component {
@@ -49,6 +70,14 @@ class PeoplePicker extends React.Component {
       //We'll set this list as the default suggestion list. 
       var suggestions = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
 
+      //The suggestion list shows the Secondary Text line. 
+      //      Let's populate that with email addresses. 
+      var i;
+      for (i = 0; i < suggestions.length; i++) {
+         var p = suggestions[i];
+         p.secondaryText = p.email ? p.email : '';
+      }
+
       //We keep this duplicate to track selected persona indexes
       let personas = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
       personas.sort(function (a, b) {
@@ -59,13 +88,8 @@ class PeoplePicker extends React.Component {
          return 0;
       });
 
-      //The suggestion list shows the Secondary Text line. 
-      //      Let's populate that with email addresses. 
-      var i;
-      for (i = 0; i < suggestions.length; i++) {
-         var p = suggestions[i];
-         p.secondaryText = p.email;
-      }
+      let peeps = this.getPeopleList();
+
 
       //Finally, let's figure out whether to pre-populate any suggested items. 
       var prepopulatedList = [];
@@ -100,6 +124,76 @@ class PeoplePicker extends React.Component {
       if (prevProps.selectedIndexes !== this.props.selectedIndexes) {
          this.set();
       }
+   }
+
+   getPeopleList() {
+      let people = [];
+
+      if (this.props.people) {
+         let items = this.props.people.match(/[^\r\n]+/g);
+
+         if (items && items.length) {
+            for (var i = 0; i < items.length; i++) {
+               let item = items[i];
+
+               let personInfo = this._parsePersonInfo(item);
+
+               if (personInfo)
+                  people.push(personInfo);
+            }
+         }
+      }
+
+      return people;
+   }
+
+   _parsePersonInfo(rawStr) {
+      if (rawStr && rawStr.length) {
+         //If it's a Persona token...
+         if (rawStr?.toLowerCase()?.startsWith("person")) {
+
+            let tData = UxpPersonaData.getPersonaByToken(rawStr);
+            if (tData) {
+
+               console.log("Found a persona token! " + tData.text);
+
+               return {
+                  text: tData.text,
+                  secondaryText: tData.email,
+                  email: tData.email,
+               }
+            }
+         }
+         else {
+
+            //If the user entered it...
+            let pData = rawStr.split("|");
+
+            //Parse left side: display name
+            if (pData && pData.length) {
+               //This is the display text
+               let left = pData[0].trim();
+
+               //This is the optional Line 2 for the suggestions list. it might be an email address.
+               let right = pData[1] ? pData[1].trim() : '';
+               let email = right.includes('@') ? right : '';
+
+               console.log("Parsed user entered info! " + left);
+
+               return {
+                  text: left,
+                  secondaryText: right,
+                  email: email,
+               }
+            }
+         }
+
+         //In the odd case it makes it this far...
+         return undefined;
+      }
+
+      //If we made it this far, it didn't work out
+      return undefined;
    }
 
    /**
@@ -347,6 +441,13 @@ PeoplePicker.propTypes = {
    selectedIndexes: PropTypes.string,
 
    /**
+    * @uxpindescription The list of potential People matches. Put each person on a separate line. Use the Persona tokens, or create your own people info for Suggested Match Lines 1 and 2: Display Name | dname@company.com (or amy value for Line 2)
+    * @uxpinpropname People List
+    * @uxpincontroltype codeeditor
+    */
+   people: PropTypes.string,
+
+   /**
     * @uxpindescription To display selected persons inline rather than below the input field
     * @uxpinpropname Inline Selections
     * */
@@ -367,6 +468,7 @@ PeoplePicker.propTypes = {
 
 PeoplePicker.defaultProps = {
    inline: false,
+   people: defaultPeople,
    selectedIndexes: '',
    disabled: false,
 };
