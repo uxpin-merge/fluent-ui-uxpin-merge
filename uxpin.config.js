@@ -56,6 +56,7 @@ module.exports = {
           'src/components/ColorPicker/ColorPicker.js',
           'src/components/Dropdown/Dropdown.js',
           'src/components/GroupButton/GroupButton.js',
+          'src/components/PeoplePicker/PeoplePicker.js',
           'src/components/Rating/Rating.js',
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
