@@ -20,7 +20,7 @@ const textfieldStyle = {
    text: {
       marginBottom: '12px',
    }
-}
+};
 
 const maxNumberOfPersonas = 10;
 
@@ -65,7 +65,6 @@ class PeoplePicker extends React.Component {
       }
    }
 
-
    set() {
       //We'll set this list as the default suggestion list. 
       var suggestions = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
@@ -89,7 +88,7 @@ class PeoplePicker extends React.Component {
       });
 
       //Experiment
-      let peeps = this.getPeopleList();
+      let peeps = this._getPeopleList();
 
       //Finally, let's figure out whether to pre-populate any suggested items. 
       var prepopulatedList = [];
@@ -126,11 +125,11 @@ class PeoplePicker extends React.Component {
       }
    }
 
-   getPeopleList() {
+   _getPeopleList() {
       let people = [];
 
-      if (defaultPeople) {
-         let items = defaultPeople.match(/[^\r\n]+/g);
+      if (this.props.persons) {
+         let items = this.props.persons.match(/[^\r\n]+/g);
 
          if (items && items.length) {
             for (var i = 0; i < items.length; i++) {
@@ -150,7 +149,7 @@ class PeoplePicker extends React.Component {
    _parsePersonInfo(rawStr) {
       if (rawStr && rawStr.length) {
          //If it's a Persona token...
-         if (rawStr?.toLowerCase()?.startsWith("person")) {
+         if (rawStr.toLowerCase().startsWith("person")) {
 
             let tData = UxpPersonaData.getPersonaByToken(rawStr);
             if (tData) {
@@ -172,7 +171,7 @@ class PeoplePicker extends React.Component {
 
             //Parse left side: display name
             if (pData && pData.length) {
-               //This is the display text
+
                let left = pData[0].trim();
 
                //This is the optional Line 2 for the suggestions list. it might be an email address.
@@ -191,7 +190,7 @@ class PeoplePicker extends React.Component {
          }
       }
 
-      //If we made it this far, it didn't work out
+      //If we made it this far, there were errors.
       return undefined;
    }
 
@@ -391,9 +390,8 @@ class PeoplePicker extends React.Component {
    render() {
 
       return (
-         <div>
-            {this.props.inline
-               ? //Display normal one
+         <>
+            {this.props.inline ?
                <NormalPeoplePicker
                   {...this.props}
                   key={'normal'}
@@ -406,7 +404,8 @@ class PeoplePicker extends React.Component {
                   onResolveSuggestions={(f, s) => this._onFilterChanged(f, s)}
                   onChange={(items) => this._onItemsChanged(items)}
                />
-               : //Or display the inline option
+
+               :
                <ListPeoplePicker
                   {...this.props}
                   key={'list'}
@@ -420,11 +419,13 @@ class PeoplePicker extends React.Component {
                   onChange={(items) => this._onItemsChanged(items)}
                />
 
-            } </div>
+            }
+         </>
       );
    }
 
 }
+
 
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
@@ -442,8 +443,8 @@ PeoplePicker.propTypes = {
     * @uxpindescription The list of potential People matches. Put each person on a separate line. Use the Persona tokens, or create your own people info for Suggested Match Lines 1 and 2: Display Name | dname@company.com (or amy value for Line 2)
     * @uxpinpropname People List
     * @uxpincontroltype codeeditor
-    */
-   // persons: PropTypes.string,
+    * */
+   persons: PropTypes.string,
 
    /**
     * @uxpindescription To display selected persons inline rather than below the input field
@@ -465,10 +466,11 @@ PeoplePicker.propTypes = {
 
 
 PeoplePicker.defaultProps = {
-   inline: false,
-   // persons: defaultPeople,
    selectedIndexes: '',
+   persons: defaultPeople,
+   inline: false,
    disabled: false,
 };
+
 
 export { PeoplePicker as default };
