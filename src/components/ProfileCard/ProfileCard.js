@@ -18,7 +18,7 @@ const stackItemStyles = {
     },
 };
 const stackTokens = {
-    childrenGap: '12px',
+    childrenGap: '6px',
     padding: 12,
 };
 
