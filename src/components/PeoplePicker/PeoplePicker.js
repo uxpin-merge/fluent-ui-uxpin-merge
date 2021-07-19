@@ -66,29 +66,30 @@ class PeoplePicker extends React.Component {
    }
 
    set() {
-      //We'll set this list as the default suggestion list. 
-      var suggestions = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
+      // //We'll set this list as the default suggestion list. 
+      // var suggestions = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
 
-      //The suggestion list shows the Secondary Text line. 
-      //      Let's populate that with email addresses. 
-      var i;
-      for (i = 0; i < suggestions.length; i++) {
-         var p = suggestions[i];
-         p.secondaryText = p.email ? p.email : '';
-      }
+      // //The suggestion list shows the Secondary Text line. 
+      // //      Let's populate that with email addresses. 
+      // var i;
+      // for (i = 0; i < suggestions.length; i++) {
+      //    var p = suggestions[i];
+      //    p.secondaryText = p.email ? p.email : '';
+      // }
 
-      //We keep this duplicate to track selected persona indexes
-      let personas = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
-      personas.sort(function (a, b) {
-         var x = a.text.toLowerCase();
-         var y = b.text.toLowerCase();
-         if (x < y) { return -1; }
-         if (x > y) { return 1; }
-         return 0;
-      });
+      // //We keep this duplicate to track selected persona indexes
+      // let personas = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
+      // personas.sort(function (a, b) {
+      //    var x = a.text.toLowerCase();
+      //    var y = b.text.toLowerCase();
+      //    if (x < y) { return -1; }
+      //    if (x > y) { return 1; }
+      //    return 0;
+      // });
 
       //Experiment
-      let peeps = this._getPeopleList();
+      let suggestions = this._getPeopleList();
+      let personas = this._getPeopleList();
 
       //Finally, let's figure out whether to pre-populate any suggested items. 
       var prepopulatedList = [];
