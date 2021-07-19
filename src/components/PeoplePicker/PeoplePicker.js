@@ -157,7 +157,7 @@ class PeoplePicker extends React.Component {
                let email = right.includes('@') ? right : '';
 
                let personInfo = {
-                  text: left,
+                  text: left && left.length > 0 ? left : right,
                   secondaryText: right,
                   email: email,
                };
