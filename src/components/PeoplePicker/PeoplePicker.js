@@ -97,13 +97,10 @@ class PeoplePicker extends React.Component {
    }
 
    componentDidUpdate(prevProps) {
-      if (
-         prevProps.selectedIndexes !== this.props.selectedIndexes
-      ) {
+      if (prevProps.selectedIndexes !== this.props.selectedIndexes) {
          this.set();
       }
    }
-
 
    /**
     * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
@@ -194,24 +191,27 @@ class PeoplePicker extends React.Component {
       let filteredList = this.state.suggestionList.filter(
          function (persona) {
             let name = persona.text.toLowerCase();
-            let email = persona.email.toLowerCase();
+            let line2 = persona.secondaryText.toLowerCase();
 
             let includedInName = name.includes(fText);
 
-            //Checking if it's in email is 
-            var includedInEmail = false;
-            let index = email.indexOf("@");
-            if (index > -1) {
-               let uniquename = email.slice(0, index);
-               includedInEmail = uniquename.includes(fText);
-            }
+            //Checking if it's in Line 2, which is often but not always an email address
+            var includedInLine2 = false;
+            var secondaryTxt = line2;
 
-            return (includedInName || includedInEmail);
+            if (line2.includes('@')) {
+               let index = line2.indexOf("@");
+               if (index > -1) {
+                  secondaryTxt = line2.slice(0, index);
+               }
+            }
+            includedInLine2 = secondaryTxt.includes(fText);
+
+            return (includedInName || includedInLine2);
          });
 
       return filteredList;
    }
-
 
    /**
     * Removes potential duplicates from the given array, then returns the resulting array list. 
