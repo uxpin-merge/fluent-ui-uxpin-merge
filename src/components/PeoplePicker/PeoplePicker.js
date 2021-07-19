@@ -253,7 +253,7 @@ class PeoplePicker extends React.Component {
       var i;
       for (i = 0; i < personas.length; i++) {
          let p = personas[i];
-         if (name == p.text ?)
+         if (name == p.text)
             return i;
       }
 
