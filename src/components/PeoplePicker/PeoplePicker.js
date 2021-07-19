@@ -27,7 +27,7 @@ const maxNumberOfPersonas = 10;
 const defaultPeople = `Person1
 Person2
 Person3
-Tiffany Jackson | tjackson@company.com
+Tiffany Green | tgreen@company.com
 Abhik Rao | Dir., Product Management
 Person6
 Person7
@@ -66,32 +66,12 @@ class PeoplePicker extends React.Component {
    }
 
    set() {
-      // //We'll set this list as the default suggestion list. 
-      // var suggestions = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
 
-      // //The suggestion list shows the Secondary Text line. 
-      // //      Let's populate that with email addresses. 
-      // var i;
-      // for (i = 0; i < suggestions.length; i++) {
-      //    var p = suggestions[i];
-      //    p.secondaryText = p.email ? p.email : '';
-      // }
-
-      // //We keep this duplicate to track selected persona indexes
-      // let personas = UxpPersonaData.getPersonaList(maxNumberOfPersonas);
-      // personas.sort(function (a, b) {
-      //    var x = a.text.toLowerCase();
-      //    var y = b.text.toLowerCase();
-      //    if (x < y) { return -1; }
-      //    if (x > y) { return 1; }
-      //    return 0;
-      // });
-
-      //Experiment
+      //We get duplicate lists 
       let suggestions = this._getPeopleList();
       let personas = this._getPeopleList();
 
-      //Finally, let's figure out whether to pre-populate any suggested items. 
+      //Determine whether to pre-populate any persons. 
       var prepopulatedList = [];
       if (this.props.selectedIndexes) {
          prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes);
@@ -156,8 +136,6 @@ class PeoplePicker extends React.Component {
             let tData = UxpPersonaData.getPersonaByToken(rawStr);
             if (tData) {
 
-               console.log("Found a persona token! " + tData.text);
-
                let personInfo = {
                   text: tData.text,
                   secondaryText: tData.email,
@@ -179,8 +157,6 @@ class PeoplePicker extends React.Component {
                //This is the optional Line 2 for the suggestions list. it might be an email address.
                let right = pData[1] ? pData[1].trim() : '';
                let email = right.includes('@') ? right : '';
-
-               console.log("Parsed user entered info! " + left);
 
                let personInfo = {
                   text: left,
