@@ -61,7 +61,7 @@ class PeoplePicker extends React.Component {
          suggestionList: [],
 
          //The list of all personas we use in this UXPin demo. We push selected persona indexes back to the user in UXPin.
-         allPersonas: []
+         allPersonas: [],
       }
    }
 
@@ -88,8 +88,8 @@ class PeoplePicker extends React.Component {
          return 0;
       });
 
+      //Experiment
       let peeps = this.getPeopleList();
-
 
       //Finally, let's figure out whether to pre-populate any suggested items. 
       var prepopulatedList = [];
@@ -129,8 +129,8 @@ class PeoplePicker extends React.Component {
    getPeopleList() {
       let people = [];
 
-      if (this.props.people) {
-         let items = this.props.people.match(/[^\r\n]+/g);
+      if (this.props.persons) {
+         let items = this.props.persons.match(/[^\r\n]+/g);
 
          if (items && items.length) {
             for (var i = 0; i < items.length; i++) {
@@ -157,11 +157,12 @@ class PeoplePicker extends React.Component {
 
                console.log("Found a persona token! " + tData.text);
 
-               return {
+               let personInfo = {
                   text: tData.text,
                   secondaryText: tData.email,
                   email: tData.email,
-               }
+               };
+               return personInfo;
             }
          }
          else {
@@ -180,16 +181,14 @@ class PeoplePicker extends React.Component {
 
                console.log("Parsed user entered info! " + left);
 
-               return {
+               let personInfo = {
                   text: left,
                   secondaryText: right,
                   email: email,
-               }
+               };
+               return personInfo;
             }
          }
-
-         //In the odd case it makes it this far...
-         return undefined;
       }
 
       //If we made it this far, it didn't work out
@@ -243,7 +242,6 @@ class PeoplePicker extends React.Component {
       //Let's send back the full name
       return item.text;
    }
-
 
    /**
     * Returns a Persona params object from the current list of Personas.
@@ -445,7 +443,7 @@ PeoplePicker.propTypes = {
     * @uxpinpropname People List
     * @uxpincontroltype codeeditor
     */
-   people: PropTypes.string,
+   persons: PropTypes.string,
 
    /**
     * @uxpindescription To display selected persons inline rather than below the input field
@@ -463,12 +461,12 @@ PeoplePicker.propTypes = {
     * @uxpinpropname * Indexes Changed
     * */
    onChange: PropTypes.func,
-}
+};
 
 
 PeoplePicker.defaultProps = {
    inline: false,
-   people: defaultPeople,
+   persons: defaultPeople,
    selectedIndexes: '',
    disabled: false,
 };
