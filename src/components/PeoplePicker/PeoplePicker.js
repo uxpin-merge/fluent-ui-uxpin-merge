@@ -184,7 +184,9 @@ class PeoplePicker extends React.Component {
       let result = rawList.match(regex);
 
       var indexList = [];
-      let numberOfPersons = this.state.persons ? this.state.persons.length : 0;
+      let numberOfPersons = this.state.allPersonas ? this.state.allPersonas.length : 0;
+
+      console.log("numberOfPersons: " + numberOfPersons);
 
       //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
       if (result && result?.length > 0) {
