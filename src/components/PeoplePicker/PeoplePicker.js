@@ -398,7 +398,7 @@ PeoplePicker.propTypes = {
    selectedIndexes: PropTypes.string,
 
    /**
-    * @uxpindescription The list of potential People matches. Put each person on a separate line. Use the Persona tokens, or create your own people info for Suggested Match Lines 1 and 2: Display Name | dname@company.com (or amy value for Line 2)
+    * @uxpindescription The list of potential People matches. Put each person on a separate line. Use the Persona tokens, or create your own people info for Lines 1 and 2 in the Suggested Match list using the pattern: Display Name | dname@company.com (or any value for Line 2)
     * @uxpinpropname People List
     * @uxpincontroltype codeeditor
     * */
