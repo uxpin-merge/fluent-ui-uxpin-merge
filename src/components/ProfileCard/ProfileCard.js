@@ -19,7 +19,7 @@ const stackItemStyles = {
 };
 const stackTokens = {
     childrenGap: '12px',
-    padding: 0,
+    padding: 12,
 };
 
 //For the Persona
