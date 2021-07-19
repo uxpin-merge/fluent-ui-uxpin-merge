@@ -121,7 +121,8 @@ class PeoplePicker extends React.Component {
    }
 
    componentDidUpdate(prevProps) {
-      if (prevProps.selectedIndexes !== this.props.selectedIndexes) {
+      if (prevProps.selectedIndexes !== this.props.selectedIndexes ||
+         prevProps.persons !=== this.props.persons) {
          this.set();
       }
    }
