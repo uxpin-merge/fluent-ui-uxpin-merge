@@ -1,16 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import Link from '../Link/Link';
 import {
     Persona as FPersona,
     PersonaSize,
     PersonaInitialsColor
 } from '@fluentui/react/lib/Persona';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
+import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
-
-//This is the default URL to use for a generic female user
-let personaFemaleUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg"
 
 //Fix the weird line height issue in the top line of the Persona
 const personaStyles = {
@@ -25,7 +24,6 @@ class Persona extends React.Component {
 
     constructor(props) {
         super(props);
-
     }
 
     _onClick() {
@@ -39,34 +37,46 @@ class Persona extends React.Component {
         }
     }
 
-
     render() {
 
         let presenceCode = UxpPersonaData.presenceCodes[this.props.ppPresence];
 
+        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+
+        var email = '';
+        if (this.props.email && this.props?.email?.trim().length > 0) {
+
+            let trimmedLink = this.props.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            email = (
+                <Link
+                    {...this.props}
+                    value={this.props.email}
+                    linkHref={link ? link : ''}
+                />
+            );
+        }
+
         return (
             <FPersona
                 {...this.props}
-
-                //These props require their respective enum keys
                 size={PersonaSize[this.props.ppSize]}
                 presence={presenceCode}
                 initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
-
-                //We can set these props as-is
-                imageUrl={this.props.imageUrl}
+                imageUrl={imgURL}
                 imageInitials={this.props.initials}
                 text={this.props.name}
                 secondaryText={this.props.role}
                 tertiaryText={this.props.status}
                 optionalText={this.props.optional}
                 hidePersonaDetails={this.props.hidePersonaDetails}
-
                 styles={personaStyles}
-
-                //Bind our new OnClick handler
                 onClick={() => { this._onClick() }}
-            />
+                children={undefined}
+            >
+                {email}
+            </FPersona>
         )
     }
 }
@@ -78,7 +88,7 @@ class Persona extends React.Component {
 Persona.propTypes = {
 
     /**
-    * @uxpindescription The URL to an image file. Leave empty to display initials instead. 
+    * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
     * @uxpinpropname Img URL
     * @uxpincontroltype textfield(6)
     */
@@ -127,16 +137,22 @@ Persona.propTypes = {
     role: PropTypes.string,
 
     /**
-    * @uxpindescription This persona's current availability status, such as 'In a meeting'
+    * @uxpindescription At size72 or size100, this persona's current availability status, such as 'In a meeting'
     * @uxpinpropname Status
     */
     status: PropTypes.string,
 
     /**
-    * @uxpindescription In very large Personas, a 4th line of text can show more info, if desired
+    * @uxpindescription At size100, a 4th line of text can show more info, if desired
     * @uxpinpropname Additional Text
     */
     optional: PropTypes.string,
+
+    /**
+     * @uxpindescription This persona's email address
+     * @uxpinpropname Email
+     */
+    email: PropTypes.string,
 
     /** 
     * @uxpindescription Whether to display the persona's details or only the 'coin'
@@ -156,16 +172,16 @@ Persona.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Persona.defaultProps = {
-    imageUrl: personaFemaleUrl,
-    initials: 'AL',
-    name: 'Annie Lindqvist',
-    role: 'Software Engineer',
-    status: 'In a meeting',
-    optional: 'Available at 4:00 PM PST',
+    imageUrl: '',
+    initials: '',
+    name: '',
+    role: '',
+    status: '',
+    optional: '',
     ppSize: "size100",
     ppPresence: 'online',
     hidePersonaDetails: false,
-    ppInitialsColor: 'blue'
+    ppInitialsColor: 'lightBlue'
 };
 
 

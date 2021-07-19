@@ -4,6 +4,7 @@ import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
 
 
+
 class Link extends React.Component {
     constructor(props) {
         super(props);
@@ -26,6 +27,7 @@ class Link extends React.Component {
 
         let linkTextStyles = {
             root: {
+                // color: "#000000",
                 fontWeight: this.props.bold ? 'bold' : 'normal',
                 fontStyle: this.props.italic ? 'italic' : 'normal',
                 display: 'block',         //Required - prevents a bug
