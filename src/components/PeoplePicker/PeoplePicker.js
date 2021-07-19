@@ -22,8 +22,6 @@ const textfieldStyle = {
    }
 };
 
-const maxNumberOfPersonas = 10;
-
 const defaultPeople = `Person1
 Person2
 Person3
@@ -186,6 +184,7 @@ class PeoplePicker extends React.Component {
       let result = rawList.match(regex);
 
       var indexList = [];
+      let numberOfPersons = this.state.persons ? this.state.persons.length : 0;
 
       //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
       if (result && result?.length > 0) {
@@ -193,7 +192,7 @@ class PeoplePicker extends React.Component {
          for (i = 0; i < result.length; i++) {
             var item = result[i]
 
-            if (item < 1 || item > maxNumberOfPersonas) {
+            if (item < 1 || item > numberOfPersons) {
                //Toss it. Can't use it. 
             }
             else {
