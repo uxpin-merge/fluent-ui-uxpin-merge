@@ -30,6 +30,7 @@ class DatePicker extends React.Component {
   constructor(props) {
     super(props);
 
+    //This control wants a real Date object or null. 
     this.state = {
       selectedDate: null
     }
@@ -37,19 +38,10 @@ class DatePicker extends React.Component {
 
   set() {
     //Let's see if we can parse a real date
-    var dt = UxpDateTimeUtils.parseDate(this.props.calDate);
-
-    //If it doesn't come back as undefined, then we can use it. 
-    if (dt) {
-      dt = new Date(dt);
-    }
-    else {
-      //If it's not a real date, that's OK. Null is the preferred value.
-      dt = null;
-    }
+    let dt = UxpDateTimeUtils.parseDate(this.props.calDate);
 
     this.setState(
-      { selectedDate: dt }
+      { selectedDate: dt ? dt : null }
     )
   }
 
@@ -58,18 +50,11 @@ class DatePicker extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.calDate !== this.props.calDate
-    ) {
+    if (prevProps.calDate !== this.props.calDate) {
       this.set();
     }
   }
 
-
-  /**
-   * We'll immediately use the date. In the future, we may use the date range, too. 
-   * @param {*} date - The selected date
-   */
   _onChange(date) {
 
     this.setState(
@@ -89,7 +74,10 @@ class DatePicker extends React.Component {
    * @param {*} dateStr 
    */
   _onFormatDate(dateStr) {
-    return UxpDateTimeUtils.getFormattedDate(dateStr);
+    let dt = UxpDateTimeUtils.getFormattedDate(dateStr);
+    console.log('on format date' + dt);
+
+    return dt ? dt : '';
   }
 
   /**
@@ -97,7 +85,10 @@ class DatePicker extends React.Component {
    * @param {*} str - The string the user entered which might be a date
    */
   _onParseDate(str) {
-    return UxpDateTimeUtils.parseDate(str);
+    let dt = UxpDateTimeUtils.parseDate(str);
+    console.log('on parse date' + dt);
+
+    return dt ? dt : '';
   }
 
 
