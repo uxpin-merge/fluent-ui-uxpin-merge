@@ -37,12 +37,8 @@ class DatePicker extends React.Component {
   }
 
   set() {
-    console.log('entering set ');
-
     //Let's see if we can parse a real date
     let dt = UxpDateTimeUtils.parseDate(this.props.calDate);
-
-    console.log('   parsed date in set ' + dt);
 
     this.setState(
       { selectedDate: dt ? dt : '' }
@@ -79,8 +75,6 @@ class DatePicker extends React.Component {
    */
   _onFormatDate(dateStr) {
     let dt = UxpDateTimeUtils.getFormattedDate(dateStr);
-    console.log('on format date ' + dt);
-
     return dt ? dt : '';
   }
 
@@ -90,16 +84,11 @@ class DatePicker extends React.Component {
    */
   _onParseDate(str) {
     let dt = UxpDateTimeUtils.parseDate(str);
-
-    console.log('on parse date ' + dt);
-
     return dt ? dt : '';
   }
 
 
   render() {
-
-    console.log('entering render ');
 
     const calProps = {
       dateRangeType: DateRangeType.Day,
@@ -111,8 +100,6 @@ class DatePicker extends React.Component {
     };
 
     let dt = this.state.selectedDate ? this.state.selectedDate : new Date();
-
-    console.log("    Render. Date: " + dt);
 
     return (
 
