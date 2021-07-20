@@ -61,6 +61,7 @@ module.exports = {
           'src/components/SearchBox/SearchBox.js',
           'src/components/Slider/Slider.js',
           'src/components/SpinButton/SpinButton.js',
+          'src/components/TagPicker/TagPicker.js',
           'src/components/TextArea/TextArea.js',
           'src/components/TextField/TextField.js',
           'src/components/Toggle/Toggle.js',
