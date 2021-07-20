@@ -6,6 +6,14 @@ import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
+const defaultIcon = "Add";
+const defaultText = "Action Button";
+const defaultItems = `icon(Document) Add Document
+icon(FileCode) Add Code File
+icon(Picture) Add Picture`;
+
+
+
 class CommandButton extends React.Component {
 
   constructor(props) {
@@ -189,7 +197,9 @@ CommandButton.propTypes = {
 CommandButton.defaultProps = {
   disabled: false,
   tooltip: '',
-  items: '',
+  text: defaultText,
+  iconName: defaultIcon,
+  items: defaultItems,
   ellipsis: false,
   index: 0,
 };
