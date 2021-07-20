@@ -109,7 +109,7 @@ class CommandButton extends React.Component {
     }
 
     return (
-      <>
+      <div>
         <TooltipHost
           content={this.props.tooltip}
           id={tooltipID}
@@ -127,7 +127,7 @@ class CommandButton extends React.Component {
             onClick={() => { this._onClick(0) }}
           />
         </TooltipHost>
-      </>
+      </div>
     );
   }
 

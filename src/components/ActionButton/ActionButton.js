@@ -56,7 +56,7 @@ class ActionButton extends React.Component {
 
 
     return (
-      <>
+      <div>
         <TooltipHost
           content={this.props.tooltip}
           id={tooltipID}
@@ -70,7 +70,7 @@ class ActionButton extends React.Component {
             aria-describedby={tooltipID}
           />
         </TooltipHost>
-      </>
+      </div>
     );
   }
 
