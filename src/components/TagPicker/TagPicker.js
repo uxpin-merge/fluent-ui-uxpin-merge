@@ -45,14 +45,7 @@ class TagPicker extends React.Component {
       );
 
       //We keep this duplicate to track selected tag indexes
-      let items = UXPinParser.parse(this.props.items).map(
-         (item, index) => ({
-            name: item.text,
-            key: index + 1,
-         })
-      );
-
-      let items2 = suggestions.map(
+      let items = suggestions.map(
          (item) => ({
             name: item?.name,
             key: item?.key,
@@ -80,7 +73,7 @@ class TagPicker extends React.Component {
       this.setState({
          selectedItems: selectedItems,
          suggestionList: suggestions,
-         allTags: items2,
+         allTags: items,
       })
    }
 
@@ -291,20 +284,20 @@ class TagPicker extends React.Component {
 TagPicker.propTypes = {
 
    /**
-    * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional). This prop's live value is available for scripting.
+    * @uxpindescription Enter a list of 1-based index values for default items to be shown as selected (Optional). This prop's live value is available for scripting.
     * @uxpinpropname * Indexes
     * @uxpinbind onChange
     * */
    selectedIndexes: PropTypes.string,
 
    /**
-    * @uxpindescription The list of tags. Put one tag on each row. Enclose an item in quotes if including a comma. Icons are not currently supported.
+    * @uxpindescription The list of potential tags items. Put one tag on each row. Enclose an item in quotes if it includes a comma. Icons are not supported.
     * @uxpincontroltype codeeditor
     */
    items: PropTypes.string.isRequired,
 
    /**
-    * @uxpindescription To disable the control
+    * @uxpindescription Whether to disable the control
     * */
    disabled: PropTypes.bool,
 
