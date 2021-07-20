@@ -36,16 +36,7 @@ class TagPicker extends React.Component {
       }
    }
 
-
    set() {
-      //We'll set this list as the default suggestion list. 
-      // var suggestions = csv2arr(this.props.items)
-      //    .flat()
-      //    .map((val, index) => ({
-      //       name: getTokens(val).text,
-      //       key: index + 1,
-      //    }));
-
       let suggestions = UXPinParser.parse(this.props.items).map(
          (item, index) => ({
             name: item.text,
@@ -53,17 +44,18 @@ class TagPicker extends React.Component {
          })
       );
 
-      console.log("suggestions length: " + suggestions?.length);
-      var i = 0;
-      for (i = 0; i < suggestions.length; i++) {
-         console.log("suggestions itm: " + suggestions[i].name);
-      }
-
       //We keep this duplicate to track selected tag indexes
       let items = UXPinParser.parse(this.props.items).map(
          (item, index) => ({
             name: item.text,
             key: index + 1,
+         })
+      );
+
+      let items2 = suggestions.map(
+         (item) => ({
+            name: item?.name,
+            key: item?.key,
          })
       );
 
@@ -88,7 +80,7 @@ class TagPicker extends React.Component {
       this.setState({
          selectedItems: selectedItems,
          suggestionList: suggestions,
-         allTags: items,
+         allTags: items2,
       })
    }
 
