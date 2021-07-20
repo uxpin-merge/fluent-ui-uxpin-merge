@@ -124,6 +124,7 @@ class CommandButton extends React.Component {
             menuProps={menuProps}
             menuIconProps={this.props.ellipsis ? menuIconProps : ''}
             styles={styles}
+            split={this.props.split}
             onClick={() => { this._onClick(0) }}
           />
         </TooltipHost>
@@ -171,6 +172,12 @@ CommandButton.propTypes = {
   ellipsis: PropTypes.bool,
 
   /**
+   * @uxpindescription To add a divider and make it function like a SplitButton
+   * @uxpinpropname Split Divider
+   * */
+  split: PropTypes.bool,
+
+  /**
   * @uxpindescription To disable the control
   * @uxpinpropname Disabled
   * */
@@ -202,6 +209,7 @@ CommandButton.defaultProps = {
   items: defaultItems,
   ellipsis: false,
   index: 0,
+  split: false,
 };
 
 
