@@ -112,7 +112,7 @@ class DatePicker extends React.Component {
 
     let dt = this.state.selectedDate ? this.state.selectedDate : new Date();
 
-    console.log("    Render. Date: " = dt);
+    console.log("    Render. Date: " + dt);
 
     return (
 
