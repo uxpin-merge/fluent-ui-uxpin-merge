@@ -91,6 +91,8 @@ export const UxpDateTimeUtils = {
 		//Get the parts
 		let dt = new Date(dateStr);
 
+		console.log("Working with.... " + dt);
+
 		let year = dt.getFullYear();
 		let date = dt.getDate();
 		let i = dt.getMonth() //0-based

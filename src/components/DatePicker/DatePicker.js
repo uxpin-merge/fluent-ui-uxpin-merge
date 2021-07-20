@@ -32,7 +32,7 @@ class DatePicker extends React.Component {
 
     //This control wants a real Date object or null. 
     this.state = {
-      selectedDate: null
+      selectedDate: ''
     }
   }
 
@@ -41,7 +41,7 @@ class DatePicker extends React.Component {
     let dt = UxpDateTimeUtils.parseDate(this.props.calDate);
 
     this.setState(
-      { selectedDate: dt ? dt : null }
+      { selectedDate: dt ? dt : '' }
     )
   }
 
