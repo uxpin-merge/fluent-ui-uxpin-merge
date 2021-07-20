@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { CommandButton as FCommandButton } from '@fluentui/react/lib/Button';
+import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -36,20 +37,48 @@ class CommandButton extends React.Component {
 
   set() {
 
+    // let items = UXPinParser.parse(this.props.items).map(
+    //   (item, index) => ({
+    //     key: index + 1,
+    //     text: item?.text ? item.text : '',
+    //     iconProps: {
+    //       iconName: item?.iconName ? item.iconName : ''
+    //     },
+    //     onClick: () => { this._onClick(index + 1) },
+    //   })
+    // );
     let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => ({
-        key: index + 1,
-        text: item?.text ? item.text : '',
-        iconProps: {
-          iconName: item?.iconName ? item.iconName : ''
-        },
-        onClick: () => { this._onClick(index + 1) },
-      })
+      (item, index) => (
+        this._getMenuProps(index, item?.text, item?.iconName)
+      )
     );
 
     this.setState({
       items: items
     });
+  }
+
+  _getMenuProps(index, text, iconName) {
+    let key = index + 1;
+
+    if (text && text?.trim().toLowerCase() === "divider") {
+      let menuProps = {
+        key: "divider_" + key,
+        itemType: ContextualMenuItemType.Divider,
+      };
+      return menuProps;
+    }
+    else {
+      let menuProps = {
+        key: key,
+        text: item?.text ? item.text : '',
+        iconProps: {
+          iconName: item?.iconName ? item.iconName : ''
+        },
+        onClick: () => { this._onClick(key) },
+      };
+      return menuProps;
+    }
   }
 
   _onClick(index) {
