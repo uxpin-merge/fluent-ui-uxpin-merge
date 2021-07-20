@@ -67,6 +67,7 @@ class DatePicker extends React.Component {
 
       console.log("the changed date obj: " + date);
       console.log("     returning changed date: " + dt);
+      console.log("type of date: " + typeof date);
 
       this.props.onChange(dt ? dt : ' ');
     }
