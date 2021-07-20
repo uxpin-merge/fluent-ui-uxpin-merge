@@ -40,7 +40,6 @@ class ActionButton extends React.Component {
         key: index + 1,
         text: item.text ? item.text : '',
         iconProps: { iconName: item?.iconName },
-        disabled: false,
         onClick: () => { this._onClick(index + 1) },
       })
     );
@@ -111,6 +110,7 @@ class ActionButton extends React.Component {
             iconProps={iconProps}
             styles={styles}
             aria-describedby={tooltipId}
+            menuProps={this.state.items ? this.state.items : ''}
             onClick={() => { this._onClick(0) }}
           />
         </TooltipHost>
