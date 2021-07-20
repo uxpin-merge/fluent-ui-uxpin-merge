@@ -110,6 +110,8 @@ class DatePicker extends React.Component {
       workWeekDays: workWeekDays,
     };
 
+    let dt = this.state.selectedDate ? this.state.selectedDate : '';
+
     return (
 
       <FDatePicker
@@ -128,9 +130,9 @@ class DatePicker extends React.Component {
         calendarProps={calProps}
 
         label={this.props.label}
-        value={this.state.selectedDate}
+        value={dt}
         placeholder={this.props.placeholder}
-        initialPickerDate={this.state.selectedDate}
+        initialPickerDate={dt}
         allowTextInput={this.props.allowTextInput}
         showWeekNumbers={this.props.showWeekNumbers}
         disabled={this.props.disabled}
