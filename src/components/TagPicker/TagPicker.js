@@ -92,6 +92,17 @@ class TagPicker extends React.Component {
       })
    }
 
+   componentDidMount() {
+      this.set();
+   }
+
+   componentDidUpdate(prevProps) {
+      if (prevProps.items !== this.props.items ||
+         prevProps.selectedIndexes !== this.props.selectedIndexes) {
+         this.set();
+      }
+   }
+
    /**
     * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
     * @param {string} rawList A string that contains a list of numbers.
