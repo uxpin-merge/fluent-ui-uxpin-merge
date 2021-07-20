@@ -110,7 +110,9 @@ class DatePicker extends React.Component {
       workWeekDays: workWeekDays,
     };
 
-    let dt = this.state.selectedDate ? this.state.selectedDate : '';
+    let dt = this.state.selectedDate ? this.state.selectedDate : new Date();
+
+    console.log("    Render. Date: " = dt);
 
     return (
 
