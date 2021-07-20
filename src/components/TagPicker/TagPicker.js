@@ -61,10 +61,12 @@ class TagPicker extends React.Component {
 
       //We keep this duplicate to track selected tag indexes
       let items = UXPinParser.parse(this.props.items).map(
-         (item, index) => ({
+         (item, index) =>
+            console.log("item text: " + item.text),
+         {
             name: item.text,
             key: index + 1,
-         })
+         }
       );
 
       //Finally, let's figure out whether to pre-populate any suggested items. 
