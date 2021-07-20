@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { DatePicker as FDatePicker } from '@fluentui/react/lib/DatePicker';
+import { DayOfWeek, DateRangeType } from '@fluentui/react/lib/DateTimeUtilities'
 import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
-
 
 
 
