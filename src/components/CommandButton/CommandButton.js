@@ -71,9 +71,9 @@ class CommandButton extends React.Component {
     else {
       let menuProps = {
         key: key,
-        text: item?.text ? item.text : '',
+        text: text ? text : '',
         iconProps: {
-          iconName: item?.iconName ? item.iconName : ''
+          iconName: iconName ? iconName : ''
         },
         onClick: () => { this._onClick(key) },
       };
