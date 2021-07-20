@@ -53,6 +53,11 @@ class TagPicker extends React.Component {
          })
       );
 
+      var i = 0;
+      for (i = 0; i < suggestions.length; i++) {
+         console.log("suggestions itm: " + suggestions[i].text);
+      }
+
       //We keep this duplicate to track selected tag indexes
       let items = UXPinParser.parse(this.props.items).map(
          (item, index) => ({
