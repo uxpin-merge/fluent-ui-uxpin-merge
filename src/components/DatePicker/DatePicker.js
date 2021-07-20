@@ -132,7 +132,7 @@ class DatePicker extends React.Component {
         calendarProps={calProps}
 
         label={this.props.label}
-        value={dt}
+        value={this.state.selectedDate}
         placeholder={this.props.placeholder}
         initialPickerDate={dt}
         allowTextInput={this.props.allowTextInput}
