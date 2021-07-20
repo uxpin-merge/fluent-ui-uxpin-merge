@@ -64,12 +64,7 @@ class DatePicker extends React.Component {
     if (this.props.onChange) {
       //Format this before surfacing with style: 'Feb 8, 2020' 
       let dt = UxpDateTimeUtils.getFormattedDate(date);
-
-      console.log("the changed date obj: " + date);
-      console.log("     returning changed date: " + dt);
-      console.log("type of date: " + typeof date);
-
-      this.props.onChange(dt ? dt : ' ');
+      this.props.onChange(dt);
     }
   }
 
