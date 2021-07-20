@@ -5,6 +5,8 @@ import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
 
+const defaultIcon = "Add";
+const defaultText = "Action Button";
 const posStart = 'start';
 const posEnd = 'end';
 
@@ -17,7 +19,6 @@ class ActionButton extends React.Component {
   }
 
   render() {
-    const buttonID = _.uniqueId('actionbutton_');
 
     let iconProps = { iconName: this.props.iconName }
 
@@ -46,7 +47,8 @@ class ActionButton extends React.Component {
       flexDirection: 'row-reverse'
     }
 
-    const tooltipId = _.uniqueId('tooltip_');
+    const buttonID = _.uniqueId('actionbutton_');
+    const tooltipID = _.uniqueId('tooltip_');
     const ttProps = {
       gapSpace: 0,
       target: `#${buttonID}`,
@@ -57,7 +59,7 @@ class ActionButton extends React.Component {
       <>
         <TooltipHost
           content={this.props.tooltip}
-          id={tooltipId}
+          id={tooltipID}
           calloutProps={ttProps}
         >
           <FActionButton
@@ -65,7 +67,7 @@ class ActionButton extends React.Component {
             id={buttonID}
             iconProps={iconProps}
             styles={styles}
-            aria-describedby={tooltipId}
+            aria-describedby={tooltipID}
           />
         </TooltipHost>
       </>
@@ -123,8 +125,8 @@ ActionButton.propTypes = {
  */
 ActionButton.defaultProps = {
   disabled: false,
-  text: '',
-  iconName: '',
+  text: defaultText,
+  iconName: defaultIcon,
   tooltip: '',
   iconPosition: posStart,
 };
