@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ActionButton as FActionButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 const defaultIcon = "Add";
@@ -15,6 +16,48 @@ class ActionButton extends React.Component {
     super(props);
 
     this.state = {
+      items: []
+    }
+  }
+
+
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.items !== this.props.items
+    ) {
+      this.set();
+    }
+  }
+
+  set() {
+
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => ({
+        key: index + 1,
+        text: item.text ? item.text : '',
+        iconProps: { iconName: item?.iconName },
+        disabled: false,
+        onClick: () => { this._onClick(index + 1) },
+      })
+    );
+
+    this.setState({
+      items: items
+    });
+  }
+
+  _onClick(index) {
+
+    //The main Button always passes 0.
+    //Any popup menu buttons pass their 1-based index value.
+
+    //Raise this event to UXPin.
+    if (this.props.onButtonClick) {
+      this.props.onButtonClick(index);
     }
   }
 
@@ -68,6 +111,7 @@ class ActionButton extends React.Component {
             iconProps={iconProps}
             styles={styles}
             aria-describedby={tooltipId}
+            onClick={() => { this._onClick(0) }}
           />
         </TooltipHost>
       </div>
@@ -107,16 +151,30 @@ ActionButton.propTypes = {
   tooltip: PropTypes.string,
 
   /**
+   * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text  
+   * @uxpinpropname Menu Items
+   * @uxpincontroltype codeeditor
+   * */
+  items: PropTypes.string,
+
+  /**
   * @uxpindescription To disable the control
   * @uxpinpropname Disabled
   * */
   disabled: PropTypes.bool,
 
   /**
-   * @uxpindescription Fires when the button is clicked on
+  * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting. (Used at runtime only.)
+  * @uxpinpropname * Selected Index
+  * @uxpinbind onButtonClick
+  */
+  index: PropTypes.number,
+
+  /**
+   * @uxpindescription Fires when the main button or a popup menu button is clicked on
    * @uxpinpropname Click
    * */
-  onClick: PropTypes.func
+  onButtonClick: PropTypes.func
 };
 
 
@@ -128,6 +186,8 @@ ActionButton.defaultProps = {
   text: defaultText,
   iconName: defaultIcon,
   tooltip: '',
+  items: '',
+  index: 0,
   iconPosition: posStart,
 };
 
