@@ -53,6 +53,7 @@ class TagPicker extends React.Component {
          })
       );
 
+      console.log("suggestions length: " + suggestions?.length);
       var i = 0;
       for (i = 0; i < suggestions.length; i++) {
          console.log("suggestions itm: " + suggestions[i].text);
@@ -87,7 +88,7 @@ class TagPicker extends React.Component {
       this.setState({
          selectedItems: selectedItems,
          suggestionList: suggestions,
-         allTags: items
+         allTags: items,
       })
    }
 
@@ -287,17 +288,17 @@ class TagPicker extends React.Component {
 TagPicker.propTypes = {
 
    /**
-    * @uxpindescription The list of tags. Put one tag on each row. Enclose an item in quotes if including a comma. Icons are not currently supported.
-    * @uxpincontroltype codeeditor
-    */
-   items: PropTypes.string.isRequired,
-
-   /**
     * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional). This prop's live value is available for scripting.
     * @uxpinpropname * Indexes
     * @uxpinbind onChange
     * */
    selectedIndexes: PropTypes.string,
+
+   /**
+    * @uxpindescription The list of tags. Put one tag on each row. Enclose an item in quotes if including a comma. Icons are not currently supported.
+    * @uxpincontroltype codeeditor
+    */
+   items: PropTypes.string.isRequired,
 
    /**
     * @uxpindescription To disable the control
