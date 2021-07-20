@@ -26,13 +26,12 @@ export const UxpDateTimeUtils = {
 	*/
 	isValidDate: function (dateStr) {
 		//If we have an empty date string, return false.
-		if (!dateStr || dateStr == null)
+		if (!dateStr || dateStr === null)
 			return false;
 
 		//Test what was entered
-		const timestamp = Date.parse(dateStr);
-		if (isNaN(timestamp) == false) {
-			//It's valid
+		let timestamp = Date.parse(dateStr);
+		if (!isNaN(timestamp)) {
 			return true;
 		}
 
