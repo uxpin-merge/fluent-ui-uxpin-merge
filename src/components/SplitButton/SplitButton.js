@@ -14,6 +14,7 @@ const defaultIcon = '';
 //Leave these left aligned as they show up in UXPin exactly as-is. 
 const defaultItems = `icon(PageAdd) Add Document
 icon(Photo2Add) Add Picture
+divider
 icon(AddFriend) Add User`;
 
 
@@ -42,16 +43,6 @@ class SplitButton extends React.Component {
 
   //Parse the choice items
   set() {
-
-    // let items = UXPinParser.parse(this.props.items).map(
-    //   (item, index) => ({
-    //     key: index + 1,
-    //     text: item.text ? item.text : '',
-    //     iconProps: { iconName: item?.iconName },
-    //     disabled: false,
-    //     onClick: () => { this._onClick(index + 1) },
-    //   })
-    // );
 
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
