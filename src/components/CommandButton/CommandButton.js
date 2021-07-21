@@ -1,25 +1,22 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { CommandButton as FCommandButton } from '@fluentui/react/lib/Button';
 import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
-import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
-const defaultText = 'SplitButton';
-const defaultIcon = '';
-
-//Default items list to populate the control with.
-//Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultItems = `icon(PageAdd) Add Document
-icon(Photo2Add) Add Picture
+const defaultIcon = "Add";
+const defaultText = "Command Button";
+const defaultItems = `icon(Document) Add Document
+icon(FileCode) Add Code File
 divider
-icon(AddFriend) Add User`;
+icon(Picture) Add Picture`;
 
 
 
-class SplitButton extends React.Component {
+class CommandButton extends React.Component {
 
   constructor(props) {
     super(props);
@@ -34,16 +31,23 @@ class SplitButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.items !== this.props.items
-    ) {
+    if (prevProps.items !== this.props.items) {
       this.set();
     }
   }
 
-  //Parse the choice items
   set() {
 
+    // let items = UXPinParser.parse(this.props.items).map(
+    //   (item, index) => ({
+    //     key: index + 1,
+    //     text: item?.text ? item.text : '',
+    //     iconProps: {
+    //       iconName: item?.iconName ? item.iconName : ''
+    //     },
+    //     onClick: () => { this._onClick(index + 1) },
+    //   })
+    // );
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
         this._getMenuProps(index, item?.text, item?.iconName)
@@ -81,7 +85,7 @@ class SplitButton extends React.Component {
   _onClick(index) {
 
     //The main Button always passes 0.
-    //Any sub-menu buttons pass their 1-based index value.
+    //Any popup menu buttons pass their 1-based index value.
 
     //Raise this event to UXPin.
     if (this.props.onButtonClick) {
@@ -91,29 +95,47 @@ class SplitButton extends React.Component {
 
   render() {
 
-    const targetID = _.uniqueId('target_');
-    const tooltipID = _.uniqueId('tooltip_');
-    const ttProps = {
-      gapSpace: 2,
-      target: `#${targetID}`,
-    };
-
     let iconProps = { iconName: this.props.iconName }
 
+    const buttonID = _.uniqueId('commandbutton_');
+    const tooltipID = _.uniqueId('tooltip_');
+    const ttProps = {
+      gapSpace: 0,
+      target: `#${buttonID}`,
+    };
+
+
+    //We want the root's margin to help the control to equal 40px. We need to make up 14px when there is no text.
+    var rootPadding = '0 7px';
+    //The label margin is always present, even when there is no label
+    var labelMargin = '0';
+    if (this.props.text) {
+      rootPadding = '0';
+      labelMargin = '0 8px';
+    }
+
+    let styles = {
+      root: {
+        margin: 0,
+        padding: rootPadding,
+      },
+      label: {
+        whiteSpace: 'nowrap',
+        margin: labelMargin,
+        padding: 0,
+      }
+    }
+
     var menuProps = undefined;
-    if (this.state.items?.length) {
+    if (this.props.items) {
       menuProps = {
         items: this.state.items,
         directionalHintFixed: true
       };
     }
 
-    let btnStyles = {
-      root: {
-        //Fixes the 'nudge up/down' issue
-        display: 'block',
-        lineHeight: 'normal',
-      }
+    let menuIconProps = {
+      iconName: 'MoreVertical',
     }
 
     return (
@@ -123,20 +145,17 @@ class SplitButton extends React.Component {
           id={tooltipID}
           calloutProps={ttProps}
         >
-          <DefaultButton
+          <FCommandButton
             {...this.props}
-            id={targetID}
-            iconProps={iconProps}
+            id={buttonID}
             aria-describedby={tooltipID}
-            split={true}
-            primary={this.props.primary}
+            text={this.props.text}
             iconProps={iconProps}
             menuProps={menuProps}
-            styles={btnStyles}
-            //Always send 0 for the main button part
+            menuIconProps={this.props.ellipsis ? menuIconProps : ''}
+            styles={styles}
             onClick={() => { this._onClick(0) }}
           />
-
         </TooltipHost>
       </div>
     );
@@ -145,28 +164,28 @@ class SplitButton extends React.Component {
 }
 
 
-/**
- * Set up the properties to be available in the UXPin property inspector.
+/** 
+ * Set up the properties to be available in the UXPin property inspector. 
  */
-SplitButton.propTypes = {
+CommandButton.propTypes = {
 
   /**
-   * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
-   * @uxpinpropname Primary Style
-   * */
-  primary: PropTypes.bool,
-
-  /**
-  * @uxpindescription The displayed text on the button
-  * @uxpinpropname Text
-  * */
+    * @uxpindescription The displayed text on the button (Optional)
+    * @uxpinpropname Text
+    * */
   text: PropTypes.string,
 
   /**
-   * @uxpindescription The exact name from the Fluent icon library (Optional)
+   * @uxpindescription The exact name from the PayPal icon library (Optional)
    * @uxpinpropname Icon Name
    * */
   iconName: PropTypes.string,
+
+  /**
+   * @uxpindescription Tooltip for the control
+   * @uxpinpropname Tooltip
+   * */
+  tooltip: PropTypes.string,
 
   /**
    * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text. Use 'divider' to add a divider. 
@@ -176,10 +195,10 @@ SplitButton.propTypes = {
   items: PropTypes.string,
 
   /**
-   * @uxpindescription Tooltip for the control
-   * @uxpinpropname Tooltip
+   * @uxpindescription To show the sub-menu icon as an ellipsis
+   * @uxpinpropname Ellipsis Icon
    * */
-  tooltip: PropTypes.string,
+  ellipsis: PropTypes.bool,
 
   /**
   * @uxpindescription To disable the control
@@ -195,24 +214,25 @@ SplitButton.propTypes = {
   index: PropTypes.number,
 
   /**
- * @uxpindescription Fires when the button is clicked on.
- * @uxpinpropname * Click
- * */
-  onButtonClick: PropTypes.func,
+   * @uxpindescription Fires when the main button or a popup menu button is clicked on
+   * @uxpinpropname Click
+   * */
+  onButtonClick: PropTypes.func
 };
 
 
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-SplitButton.defaultProps = {
-  primary: true,
+CommandButton.defaultProps = {
   disabled: false,
-  iconName: defaultIcon,
-  text: defaultText,
-  items: defaultItems,
   tooltip: '',
+  text: defaultText,
+  iconName: defaultIcon,
+  items: defaultItems,
+  ellipsis: false,
+  index: 0,
 };
 
 
-export { SplitButton as default };
+export { CommandButton as default };

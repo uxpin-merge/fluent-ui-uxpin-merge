@@ -4,22 +4,21 @@ import { ActionButton as FActionButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
+
 const defaultIcon = "Add";
 const defaultText = "Action Button";
 const posStart = 'start';
 const posEnd = 'end';
 
 
+
 class ActionButton extends React.Component {
+
   constructor(props) {
     super(props);
-
-    this.state = {
-    }
   }
 
   render() {
-    const buttonID = _.uniqueId('actionbutton_');
 
     let iconProps = { iconName: this.props.iconName }
 
@@ -48,7 +47,8 @@ class ActionButton extends React.Component {
       flexDirection: 'row-reverse'
     }
 
-    const tooltipId = _.uniqueId('tooltip_');
+    const buttonID = _.uniqueId('actionbutton_');
+    const tooltipID = _.uniqueId('tooltip_');
     const ttProps = {
       gapSpace: 0,
       target: `#${buttonID}`,
@@ -59,7 +59,7 @@ class ActionButton extends React.Component {
       <div>
         <TooltipHost
           content={this.props.tooltip}
-          id={tooltipId}
+          id={tooltipID}
           calloutProps={ttProps}
         >
           <FActionButton
@@ -67,7 +67,7 @@ class ActionButton extends React.Component {
             id={buttonID}
             iconProps={iconProps}
             styles={styles}
-            aria-describedby={tooltipId}
+            aria-describedby={tooltipID}
           />
         </TooltipHost>
       </div>
@@ -113,7 +113,7 @@ ActionButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * @uxpindescription Fires when the button is clicked on
+   * @uxpindescription Fires when the main button or a popup menu button is clicked on
    * @uxpinpropname Click
    * */
   onClick: PropTypes.func
@@ -130,5 +130,6 @@ ActionButton.defaultProps = {
   tooltip: '',
   iconPosition: posStart,
 };
+
 
 export { ActionButton as default };
