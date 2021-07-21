@@ -11,6 +11,7 @@ const defaultIcon = "Add";
 const defaultText = "Command Button";
 const defaultItems = `icon(Document) Add Document
 icon(FileCode) Add Code File
+divider
 icon(Picture) Add Picture`;
 
 
@@ -187,7 +188,7 @@ CommandButton.propTypes = {
   tooltip: PropTypes.string,
 
   /**
-   * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text  
+   * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text. Use 'divider' to add a divider. 
    * @uxpinpropname Menu Items
    * @uxpincontroltype codeeditor
    * */

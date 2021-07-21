@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import * as UXPinParser from '../_helpers/UXPinParser';
@@ -42,19 +43,48 @@ class SplitButton extends React.Component {
   //Parse the choice items
   set() {
 
+    // let items = UXPinParser.parse(this.props.items).map(
+    //   (item, index) => ({
+    //     key: index + 1,
+    //     text: item.text ? item.text : '',
+    //     iconProps: { iconName: item?.iconName },
+    //     disabled: false,
+    //     onClick: () => { this._onClick(index + 1) },
+    //   })
+    // );
+
     let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => ({
-        key: index + 1,
-        text: item.text ? item.text : '',
-        iconProps: { iconName: item?.iconName },
-        disabled: false,
-        onClick: () => { this._onClick(index + 1) },
-      })
+      (item, index) => (
+        this._getMenuProps(index, item?.text, item?.iconName)
+      )
     );
 
     this.setState({
       items: items
     });
+  }
+
+  _getMenuProps(index, text, iconName) {
+    let key = index + 1;
+
+    if (text && text?.trim().toLowerCase() === "divider") {
+      let menuProps = {
+        key: "divider_" + key,
+        itemType: ContextualMenuItemType.Divider,
+      };
+      return menuProps;
+    }
+    else {
+      let menuProps = {
+        key: key,
+        text: text ? text : '',
+        iconProps: {
+          iconName: iconName ? iconName : ''
+        },
+        onClick: () => { this._onClick(key) },
+      };
+      return menuProps;
+    }
   }
 
   _onClick(index) {
@@ -148,7 +178,7 @@ SplitButton.propTypes = {
   iconName: PropTypes.string,
 
   /**
-   * @uxpindescription An optional list of menu items. Put each option on a separate line.  Add an icon(IconName) at the start of each line.
+   * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text. Use 'divider' to add a divider. 
    * @uxpinpropname Menu Items
    * @uxpincontroltype codeeditor
    * */
