@@ -135,6 +135,10 @@ class ComboBox extends React.Component {
       }
    }
 
+   _onBlur() {
+      console.log("Blurred!");
+   }
+
    render() {
       //Microsoft uses one prop for both single and multi-select use cases, unlike the Dropdown. 
       var keys = this.state._selectedIndex;
@@ -155,6 +159,7 @@ class ComboBox extends React.Component {
             autoComplete={autoComplete}
             selectedKey={keys}
             onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
+            onBlur={() => this._onBlur()}
          />
 
       );
