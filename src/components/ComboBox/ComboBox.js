@@ -4,7 +4,7 @@ import { ComboBox as ComboBoxM } from '@fluentui/react/lib/ComboBox';
 import {
   IComboBox,
   SelectableOptionMenuItemType,
-} from '@fluentui/react/lib/ComboBox';
+} from '@fluentui/react/';
 import { PrimaryButton } from '@fluentui/react/lib/Button';
 
 const options = [
