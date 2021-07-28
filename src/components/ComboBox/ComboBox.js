@@ -23,6 +23,7 @@ class ComboBox extends React.Component {
          _selectedIndex: undefined,
          _selectedIndices: [],
          items: [],
+         isDirty: false,
       }
    }
 
@@ -87,7 +88,10 @@ class ComboBox extends React.Component {
    _onChangeSingle(index) {
       //We MUST set the state with the updated index value. This will also force the control to update in UXPin at runtime.
       this.setState(
-         { _selectedIndex: index }
+         {
+            _selectedIndex: index,
+            isDirty: false,
+         }
       )
 
       //Raise this event to UXPin. We'll send them the new index value.
@@ -125,18 +129,30 @@ class ComboBox extends React.Component {
 
       //We MUST update the state with the new values. This will also force the control to update in UXPin at runtime.
       this.setState(
-         { _selectedIndices: keys }
+         {
+            _selectedIndices: keys,
+            isDirty: true,
+         }
       )
 
-      //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
-      if (this.props.onChoiceChange) {
-         let list = keys.sort().map(key => key + 1).toString();
-         this.props.onChoiceChange(list);
-      }
+
    }
 
+   //If it's multiselect, only notify UXPin of changes on blur.
    _onBlur() {
       console.log("Blurred!");
+
+      if (this.state.isDirty && this.props.multiSelect) {
+         //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
+         if (this.props.onChoiceChange) {
+            let list = this.state._selectedIndices.sort().map(key => key + 1).toString();
+            this.props.onChoiceChange(list);
+         }
+
+         this.setState(
+            { isDirty: false }
+         )
+      }
    }
 
    render() {
