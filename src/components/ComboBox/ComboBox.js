@@ -33,8 +33,8 @@ class ComboBox extends React.Component {
   constructor(props) {
     super(props);
 
-    const comboBoxRef = React.useRef < IComboBox > (null);
-
+    //const comboBoxRef = React.useRef < IComboBox > (null);
+    this._targetElm = React.createRef();
 
     this.state = {
       //default must be undefined
@@ -46,12 +46,12 @@ class ComboBox extends React.Component {
   }
 
   render() {
-    const onOpenClick = React.useCallback(() => comboBoxRef.current?.focus(true), []);
+    const onOpenClick = React.useCallback(() => this._targetElm.current?.focus(true), []);
 
     return (
       <div>
         <FComboBox
-          componentRef={comboBoxRef}
+          componentRef={this._targetElm}
           defaultSelectedKey={"C"}
           label={"Basic single-select ComboBox"}
           options={options}
