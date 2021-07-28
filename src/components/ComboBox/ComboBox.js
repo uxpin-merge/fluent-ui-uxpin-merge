@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ComboBox as ComboBoxM } from '@fluentui/react/lib/ComboBox';
+import { ComboBox as FComboBox } from '@fluentui/react/lib/ComboBox';
 import {
   IComboBox,
   SelectableOptionMenuItemType,
 } from '@fluentui/react/';
 import { PrimaryButton } from '@fluentui/react/lib/Button';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 const options = [
   { key: 'Header1', text: 'First heading', itemType: SelectableOptionMenuItemType.Header },
@@ -26,28 +28,45 @@ const options = [
 // const comboBoxStyles: Partial<IComboBoxStyles> = { root: { maxWidth: 300 } };
 // const buttonStyles: Partial<IButtonStyles> = { root: { display: 'block', margin: '10px 0 20px' } };
 
-const ComboBox = () => {
-  const comboBoxRef = React.useRef < IComboBox > (null);
-  const onOpenClick = React.useCallback(() => comboBoxRef.current?.focus(true), []);
+class ComboBox extends React.Component {
 
-  return (
-    <div>
-      <ComboBoxM
-        componentRef={comboBoxRef}
-        defaultSelectedKey={"C"}
-        label={"Basic single-select ComboBox"}
-        options={options}
-      />
-      <PrimaryButton text="Open first ComboBox" onClick={onOpenClick} />
+  constructor(props) {
+    super(props);
 
-      <ComboBoxM
-        defaultSelectedKey={"C"}
-        label={"Basic multi-select ComboBox"}
-        multiSelect={true}
-        options={options}
-      />
-    </div>
-  );
+    const comboBoxRef = React.useRef < IComboBox > (null);
+
+
+    this.state = {
+      //default must be undefined
+      _selectedIndex: undefined,
+      _selectedIndices: [],
+      items: [],
+      isDirty: false,
+    }
+  }
+
+  render() {
+    const onOpenClick = React.useCallback(() => comboBoxRef.current?.focus(true), []);
+
+    return (
+      <div>
+        <FComboBox
+          componentRef={comboBoxRef}
+          defaultSelectedKey={"C"}
+          label={"Basic single-select ComboBox"}
+          options={options}
+        />
+        <PrimaryButton text="Open first ComboBox" onClick={onOpenClick} />
+
+        <FComboBox
+          defaultSelectedKey={"C"}
+          label={"Basic multi-select ComboBox"}
+          multiSelect={true}
+          options={options}
+        />
+      </div >
+    )
+  }
 };
 
 /**
