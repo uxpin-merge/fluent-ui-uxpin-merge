@@ -3,12 +3,9 @@ import * as PropTypes from 'prop-types';
 import { ComboBox as ComboBoxM } from '@fluentui/react/lib/ComboBox';
 import {
   IComboBox,
-  // IComboBoxOption,
-  IComboBoxStyles,
   SelectableOptionMenuItemType,
-  PrimaryButton,
-  IButtonStyles,
-} from '@fluentui/react';
+} from '@fluentui/react/lib/ComboBox';
+import { PrimaryButton } from '@fluentui/react/lib/Button';
 
 const options = [
   { key: 'Header1', text: 'First heading', itemType: SelectableOptionMenuItemType.Header },
@@ -30,26 +27,24 @@ const options = [
 // const buttonStyles: Partial<IButtonStyles> = { root: { display: 'block', margin: '10px 0 20px' } };
 
 const ComboBox = () => {
-  const comboBoxRef = React.useRef<IComboBox>(null);
+  const comboBoxRef = React.useRef < IComboBox > (null);
   const onOpenClick = React.useCallback(() => comboBoxRef.current?.focus(true), []);
 
   return (
     <div>
       <ComboBoxM
         componentRef={comboBoxRef}
-        defaultSelectedKey="C"
-        label="Basic single-select ComboBox"
+        defaultSelectedKey={"C"}
+        label={"Basic single-select ComboBox"}
         options={options}
-        // styles={comboBoxStyles}
       />
       <PrimaryButton text="Open first ComboBox" onClick={onOpenClick} />
 
       <ComboBoxM
-        defaultSelectedKey="C"
-        label="Basic multi-select ComboBox"
-        multiSelect
+        defaultSelectedKey={"C"}
+        label={"Basic multi-select ComboBox"}
+        multiSelect={true}
         options={options}
-        // styles={comboBoxStyles}
       />
     </div>
   );
