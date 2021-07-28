@@ -174,6 +174,7 @@ class ComboBox extends React.Component {
             options={this.state.items}
             autoComplete={autoComplete}
             selectedKey={keys}
+            allowFreeform={false}
             onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
             onBlur={() => this._onBlur()}
          />
