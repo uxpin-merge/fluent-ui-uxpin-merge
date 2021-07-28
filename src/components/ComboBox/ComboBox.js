@@ -1,8 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ComboBox as FComboBox } from '@fluentui/react/lib/ComboBox';
-import { Dropdown as FDropdown } from '@fluentui/react/lib/Dropdown';
-import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -137,18 +135,13 @@ class ComboBox extends React.Component {
       }
    }
 
-
    render() {
-
       //Microsoft uses one prop for both single and multi-select use cases, unlike the Dropdown. 
-      var keys = null;
+      var keys = this.state._selectedIndex;
 
       if (this.props.multiSelect &&
          this.state._selectedIndices) {
          keys = this.state._selectedIndices;
-      }
-      else {
-         keys = this.state._selectedIndex;
       }
 
       //Convert the autocomplete boolean to one of Microsoft's preferred strings.
@@ -239,12 +232,11 @@ ComboBox.propTypes = {
  */
 ComboBox.defaultProps = {
    label: "ComboBox",
-   placeholder: " - Select -",
+   placeholder: "- Select -",
    disabled: false,
    multiSelect: false,
    autoComplete: false,
    items: defaultItems,
-   selected: ""
 };
 
 
