@@ -197,12 +197,27 @@ class Dropdown extends React.Component {
       //Raise this event to UXPin. 
       if (this.props.onControlChange) {
         let items = this.state.items;
-        let keys = this.state._selectedIndices.filter(
-          function (currVal) {
-            return items[currVal] && (items[currVal]?.itemType !== itemTypeHeader || itemTypeDivider)
-          });
+        let indexes = this.state._selectedIndices;
+
+        // We'll filter this list the old fashioned way...
+        var keys = [];
+        var i;
+        for (i = 0; i < indexes.length; i++) {
+          let index = indexes[i];
+          if (items[index]) {
+            let type = items[index].itemType;
+
+            if (type) {
+              //do nothing
+            }
+            else {
+              //If it's undefined, then it's a regular item
+              keys.push(index);
+            }
+          }
+        }
         let list = keys.sort().map(key => key + 1).toString();
-        this.props.onControlChange(list);
+        this.props.onChoiceChange(list);
       }
 
       this.setState(
