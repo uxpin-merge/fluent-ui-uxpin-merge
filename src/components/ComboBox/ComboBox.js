@@ -215,6 +215,8 @@ class ComboBox extends React.Component {
           multiSelect={this.props.multiSelect}
           errorMessage={this.props.errorMessage}
           disabled={this.props.disabled}
+          onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
+          onBlur={() => this._onBlur()}
         />
 
         {/* <FComboBox
