@@ -110,7 +110,7 @@ class Dropdown extends React.Component {
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
 
       let itemText = hasHeadersAndChildren && isChild ?
-        text.substring(text.indexOf(childTag) + 1) : text;
+        text.substring(text.indexOf(childTag) + 1).trim() : text;
 
       let itemProps = {
         key: itemKey,
