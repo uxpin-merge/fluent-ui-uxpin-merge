@@ -224,7 +224,7 @@ class ComboBox extends React.Component {
     const ttTargetID = _.uniqueId('ttTarget_');
     const tooltipID = _.uniqueId('tooltip_');
     const ttProps = {
-      gapSpace: 4,
+      gapSpace: 0,
       target: `#${ttTargetID}`,
     };
 
@@ -275,17 +275,17 @@ ComboBox.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. 
-   * @uxpincontroltype codeeditor
-   */
-  items: PropTypes.string,
-
-  /**
    * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided. This prop's live value is available for scripting.
    * @uxpinbind onChoiceChange
    * @uxpinpropname * Indexes
    * */
   selected: PropTypes.string,
+
+  /**
+   * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. 
+   * @uxpincontroltype codeeditor
+   */
+  items: PropTypes.string,
 
   /**
    * @uxpindescription To allow multiple selections
