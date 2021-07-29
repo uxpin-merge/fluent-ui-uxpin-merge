@@ -202,29 +202,27 @@ class ComboBox extends React.Component {
         let items = this.state.items;
         let indexes = this.state._selectedIndices;
 
-        // let keys = this.state._selectedIndices.filter(index =>
-        //   items[index] && items[index].itemType !== itemTypeHeader || itemTypeDivider
-        // );
-
+        // We'll filter this list the old fashioned way...
         var keys = [];
         var i;
         for (i = 0; i < indexes.length; i++) {
           let index = indexes[i];
           if (items[index]) {
-            let type = items[index].itemType;
-            console.log(items[index]?.text + " type: " + type);
 
-            if (type) {
-              //do nothing
-            }
-            else {
-              keys.push(index);
-            }
+            items[index].itemType ? '' : keys.push(index);
+
+            // let type = items[index].itemType;
+
+            // if (type) {
+            //   //do nothing
+            // }
+            // else {
+            //   //If it's undefined, then it's a regular item
+            //   keys.push(index);
+            // }
           }
         }
         let list = keys.sort().map(key => key + 1).toString();
-
-        console.log("Return list... " + list);
         this.props.onChoiceChange(list);
       }
 
