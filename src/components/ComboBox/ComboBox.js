@@ -18,6 +18,7 @@ Option F`;
 
 const childTag = "*";
 const itemTypeHeader = SelectableOptionMenuItemType.Header;
+const itemTypeDivider = SelectableOptionMenuItemType.Divider;
 
 
 
@@ -62,7 +63,13 @@ class ComboBox extends React.Component {
     var list = [];
 
     //Props are 1 based. Subtract 1 from whatever the user entered.
-    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+    var selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+
+    //Remove indexes that refer to a divider or header
+    selected = selected.filter(
+      function (currVal) {
+        return items[currVal] && (items[currVal]?.itemType !== itemTypeHeader || itemTypeDivider)
+      });
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -101,7 +108,7 @@ class ComboBox extends React.Component {
     if (text && text?.trim().toLowerCase() === "divider") {
       let itemProps = {
         key: "divider_" + key,
-        itemType: SelectableOptionMenuItemType.Divider,
+        itemType: itemTypeDivider,
       };
       return itemProps;
     }
