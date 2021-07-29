@@ -31,6 +31,7 @@ class Dropdown extends React.Component {
       _selectedIndices: [],
 
       items: [],
+      isDirty: false,
     }
   }
 
@@ -144,7 +145,10 @@ class Dropdown extends React.Component {
 
     // We MUST set the state with the updated index value. This will also force the control to update in UXPin at runtime.
     this.setState(
-      { _selectedIndex: index }
+      {
+        _selectedIndex: index,
+        isDirty: false,
+      }
     )
 
 
@@ -185,13 +189,25 @@ class Dropdown extends React.Component {
     }
 
     this.setState(
-      { _selectedIndices: keys }
+      {
+        _selectedIndices: keys,
+        isDirty: true,
+      }
     )
+  }
 
-    //Raise this event to UXPin. 
-    if (this.props.onControlChange) {
-      const list = keys.sort().map(key => key + 1).toString(); //comma separated
-      this.props.onControlChange(list);
+  //If it's multiselect, only notify UXPin of changes on blur.
+  _onBlur() {
+    if (this.state.isDirty && this.props.multiSelect) {
+      //Raise this event to UXPin. 
+      if (this.props.onControlChange) {
+        let list = this.state._selectedIndices.sort().map(key => key + 1).toString();
+        this.props.onControlChange(list);
+      }
+
+      this.setState(
+        { isDirty: false }
+      )
     }
   }
 
@@ -226,6 +242,7 @@ class Dropdown extends React.Component {
             id={ttTargetID}
             aria-describedby={tooltipID}
             onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
+            onBlur={() => this._onBlur()}
           />
 
         </TooltipHost>
