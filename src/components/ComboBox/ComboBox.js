@@ -86,7 +86,7 @@ class ComboBox extends React.Component {
   }
 
   _getItemProps(index, text) {
-    let key = index + 1;
+    let key = index;
 
     if (text && text?.trim().toLowerCase() === "divider") {
       let itemProps = {
@@ -207,7 +207,6 @@ class ComboBox extends React.Component {
         <FComboBox
           defaultSelectedKey={"C"}
           label={this.props.label + " >> single"}
-          // options={options}
           options={this.state.items}
           selectedKey={keys}
           placeholder={this.props.placeholder}
@@ -221,7 +220,6 @@ class ComboBox extends React.Component {
           defaultSelectedKey={"C"}
           label={this.props.label + "  >> multi"}
           multiSelect={true}
-          // options={options}
           options={this.state.items}
           selectedKey={keys}
           placeholder={this.props.placeholder}
