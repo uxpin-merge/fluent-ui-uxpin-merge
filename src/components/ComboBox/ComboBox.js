@@ -172,8 +172,12 @@ class ComboBox extends React.Component {
     let selected = option.selected;
     let key = option.key;
 
-    //Clone the array.
-    var keys = [...this.state._selectedIndices];
+    //Remove indexes that refer to a divider or header
+    let items = this.state.items;
+    var keys = this.state._selectedIndices.filter(
+      function (currVal) {
+        return items[currVal] && (items[currVal]?.itemType !== itemTypeHeader || itemTypeDivider)
+      });
     let included = keys.includes(key);
 
     //If selected, let's add it to our tracking array prop.
