@@ -81,13 +81,13 @@ class ComboBox extends React.Component {
     var list = [];
 
     //Props are 1 based. Subtract 1 from whatever the user entered.
-    var selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
 
-    //Remove any section headers 
-    selected = selected.filter(
-      function (currVal) {
-        return items[currVal] && items[currVal]?.itemType !== itemTypeHeader
-      });
+    // //Remove any section headers 
+    // selected = selected.filter(
+    //   function (currVal) {
+    //     return items[currVal] && items[currVal]?.itemType !== itemTypeHeader
+    //   });
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -132,13 +132,14 @@ class ComboBox extends React.Component {
     else {
       let isChild = hasHeadersAndChildren && text.startsWith(childTag);
 
+      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
 
       let itemText = hasHeadersAndChildren && isChild ?
         text.substring(text.indexOf(childTag) + 1) : text;
 
       let itemProps = {
-        key: key,
+        key: itemKey,
         text: itemText,
         itemType: itemType,
         disabled: false,
