@@ -204,6 +204,8 @@ class ComboBox extends React.Component {
           items[index] && items[index].itemType !== itemTypeHeader || itemTypeDivider
         );
         let list = keys.sort().map(key => key + 1).toString();
+
+        console.log("Return list... " + list);
         this.props.onChoiceChange(list);
       }
 
