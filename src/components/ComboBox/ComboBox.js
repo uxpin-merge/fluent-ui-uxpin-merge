@@ -119,12 +119,19 @@ class ComboBox extends React.Component {
       return itemProps;
     }
     else {
-      let isChild = startsWith(childTag);
+      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
       let itemType = hasHeadersAndChildren && !isChild ? SelectableOptionMenuItemType.Header : '';
+      // str. substring(str. indexOf('-') + 1);
+      // let itemType = isChild ? '' :
+      // hasHeadersAndChildren ? SelectableOptionMenuItemType.Header : '';
+      let itemText = hasHeadersAndChildren && isChild ?
+        text.substring(text.indexOf(childTag) + 1) : text;
+
+      console(text + " isChild: " + isChild + " " + itemType);
 
       let itemProps = {
         key: key,
-        text: text ? text : '',
+        text: itemText,
         itemType: itemType,
         disabled: false,
       };
