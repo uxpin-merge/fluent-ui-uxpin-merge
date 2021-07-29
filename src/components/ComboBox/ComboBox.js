@@ -92,7 +92,7 @@ class ComboBox extends React.Component {
 
   _testForHeaders() {
     if (this.props.items) {
-      let items = this.props.links.items(/[^\r\n]+/g);
+      let items = this.props.items.items(/[^\r\n]+/g);
 
       if (items && items.length) {
         for (var i = 0; i < items.length; i++) {
