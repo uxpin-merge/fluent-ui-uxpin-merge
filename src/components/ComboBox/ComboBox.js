@@ -7,7 +7,9 @@ import {
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
-const defaultItems = [
+
+
+const options = [
   { key: 'Header1', text: 'First heading', itemType: SelectableOptionMenuItemType.Header },
   { key: 'A', text: 'Option A' },
   { key: 'B', text: 'Option B' },
@@ -147,7 +149,7 @@ ComboBox.defaultProps = {
   disabled: false,
   multiSelect: false,
   autoComplete: false,
-  items: defaultItems,
+  items: options,
 };
 
 
