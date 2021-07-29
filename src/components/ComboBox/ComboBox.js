@@ -127,7 +127,7 @@ class ComboBox extends React.Component {
       let itemText = hasHeadersAndChildren && isChild ?
         text.substring(text.indexOf(childTag) + 1) : text;
 
-      console(text + " isChild: " + isChild + " " + itemType);
+      console.log(text + " isChild: " + isChild + " " + itemType);
 
       let itemProps = {
         key: key,
