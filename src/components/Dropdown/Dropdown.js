@@ -12,6 +12,9 @@ Bananas
 "I love you, Grapes!"
 Pears`;
 
+const childTag = "*";
+const itemTypeHeader = SelectableOptionMenuItemType.Header;
+
 
 
 class Dropdown extends React.Component {
