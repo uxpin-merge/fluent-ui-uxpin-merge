@@ -212,11 +212,12 @@ class ComboBox extends React.Component {
           placeholder={this.props.placeholder}
           autoComplete={autoComplete}
           allowFreeform={false}
+          multiSelect={this.props.multiSelect}
           errorMessage={this.props.errorMessage}
           disabled={this.props.disabled}
         />
 
-        <FComboBox
+        {/* <FComboBox
           defaultSelectedKey={"C"}
           label={this.props.label + "  >> multi"}
           multiSelect={true}
@@ -227,7 +228,7 @@ class ComboBox extends React.Component {
           allowFreeform={false}
           errorMessage={this.props.errorMessage}
           disabled={this.props.disabled}
-        />
+        /> */}
       </div >
     )
   }
