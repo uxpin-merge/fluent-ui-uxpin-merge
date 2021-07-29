@@ -24,9 +24,16 @@ const options = [
   { key: 'I', text: 'Option I' },
   { key: 'J', text: 'Option J' },
 ];
-// Optional styling to make the example look nicer
-// const comboBoxStyles: Partial<IComboBoxStyles> = { root: { maxWidth: 300 } };
-// const buttonStyles: Partial<IButtonStyles> = { root: { display: 'block', margin: '10px 0 20px' } };
+
+const defaultItems = `Option A
+Option B
+Option C
+divider
+Option D
+Option E
+Option F`;
+
+
 
 class ComboBox extends React.Component {
 
@@ -42,7 +49,155 @@ class ComboBox extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.set();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.items !== this.props.items
+      || prevProps.selected !== this.props.selected) {
+      this.set();
+    }
+  }
+
+  set() {
+    var index = undefined;
+    var list = [];
+
+    //Props are 1 based. Subtract 1 from whatever the user entered.
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+
+    if (selected && selected.length > 0) {
+      index = selected[0];
+      list = selected;
+    }
+
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => (
+        this._getItemProps(index, item?.text)
+      )
+    );
+
+    this.setState({
+      items: items,
+      _selectedIndex: index,
+      _selectedIndices: list,
+    })
+  }
+
+  _getItemProps(index, text) {
+    let key = index + 1;
+
+    if (text && text?.trim().toLowerCase() === "divider") {
+      let itemProps = {
+        key: "divider_" + key,
+        itemType: SelectableOptionMenuItemType.Divider,
+      };
+      return itemProps;
+    }
+    else {
+      let itemProps = {
+        key: key,
+        text: text ? text : '',
+        disabled: false,
+      };
+      return itemProps;
+    }
+  }
+
+  //The main entry point for the control's onChange event. 
+  // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
+  // And in the case of multi-select, each individual item comes in separately. 
+  _onChoiceChange(option, index) {
+
+    if (this.props.multiSelect) {
+      //Case Multi Select
+      // Option info has the new selection state info for a specific item. 
+      // Option.selected has its new selection state, true or false. Index is its index. 
+      this._onChangeMulti(option);
+    }
+    else {
+      //Case Single Select
+      // Option info is undefined. The Index is the index of the newly selected item. 
+      this._onChangeSingle(index);
+    }
+  }
+
+  //To process the onChange event for a single select use case. 
+  _onChangeSingle(index) {
+    //We MUST set the state with the updated index value. This will also force the control to update in UXPin at runtime.
+    this.setState(
+      {
+        _selectedIndex: index,
+        isDirty: false,
+      }
+    )
+
+    //Raise this event to UXPin. We'll send them the new index value.
+    //For the end user in UXPin, convert the index to a 1-based number. 
+    //Always pass a string -- not a number. 
+    if (this.props.onChoiceChange) {
+      this.props.onChoiceChange((index + 1).toString());
+    }
+  }
+
+  //To process the onChange event for a multi-select use case. 
+  _onChangeMulti(option) {
+    let selected = option.selected;
+    let key = option.key;
+
+    //Clone the array.
+    var keys = [...this.state._selectedIndices];
+    let included = keys.includes(key);
+
+    //If selected, let's add it to our tracking array prop.
+    if (selected && included === false) {
+      keys.push(key);
+    }
+    else if (selected === false && included) {
+
+      //Otherwise let's remove it from our tracking array. 
+      let filtered = keys.filter(
+        function (currVal) {
+          return currVal != key;
+        });
+
+      // Now we set the filtered array to the keys array.
+      keys = filtered;
+    }
+
+    //We MUST update the state with the new values. This will also force the control to update in UXPin at runtime.
+    this.setState(
+      {
+        _selectedIndices: keys,
+        isDirty: true,
+      }
+    )
+  }
+
+  //If it's multiselect, only notify UXPin of changes on blur.
+  _onBlur() {
+    if (this.state.isDirty && this.props.multiSelect) {
+      //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
+      if (this.props.onChoiceChange) {
+        let list = this.state._selectedIndices.sort().map(key => key + 1).toString();
+        this.props.onChoiceChange(list);
+      }
+
+      this.setState(
+        { isDirty: false }
+      )
+    }
+  }
+
   render() {
+    //Microsoft uses one prop for both single and multi-select use cases, unlike the Dropdown. 
+    var keys = this.state._selectedIndex;
+
+    if (this.props.multiSelect &&
+      this.state._selectedIndices) {
+      keys = this.state._selectedIndices;
+    }
 
     //Convert the autocomplete boolean to one of Microsoft's preferred strings.
     let autoComplete = this.props.autoComplete ? "on" : "off";
@@ -52,7 +207,9 @@ class ComboBox extends React.Component {
         <FComboBox
           defaultSelectedKey={"C"}
           label={this.props.label + " >> single"}
-          options={options}
+          // options={options}
+          options={this.state.items}
+          selectedKey={keys}
           placeholder={this.props.placeholder}
           autoComplete={autoComplete}
           allowFreeform={false}
@@ -64,7 +221,9 @@ class ComboBox extends React.Component {
           defaultSelectedKey={"C"}
           label={this.props.label + "  >> multi"}
           multiSelect={true}
-          options={options}
+          // options={options}
+          options={this.state.items}
+          selectedKey={keys}
           placeholder={this.props.placeholder}
           autoComplete={autoComplete}
           allowFreeform={false}
@@ -149,7 +308,7 @@ ComboBox.defaultProps = {
   disabled: false,
   multiSelect: false,
   autoComplete: false,
-  items: options,
+  items: defaultItems,
 };
 
 
