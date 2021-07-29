@@ -1,30 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ComboBox as FComboBox } from '@fluentui/react/lib/ComboBox';
-import {
-  SelectableOptionMenuItemType,
-} from '@fluentui/react/';
+import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
-import { startsWith } from 'lodash';
 
 
-
-const options = [
-  { key: 'Header1', text: 'First heading', itemType: SelectableOptionMenuItemType.Header },
-  { key: 'A', text: 'Option A' },
-  { key: 'B', text: 'Option B' },
-  { key: 'C', text: 'Option C' },
-  { key: 'D', text: 'Option D' },
-  { key: 'divider', text: '-', itemType: SelectableOptionMenuItemType.Divider },
-  { key: 'Header2', text: 'Second heading', itemType: SelectableOptionMenuItemType.Header },
-  { key: 'E', text: 'Option E' },
-  { key: 'F', text: 'Option F', disabled: true },
-  { key: 'G', text: 'Option G' },
-  { key: 'H', text: 'Option H' },
-  { key: 'I', text: 'Option I' },
-  { key: 'J', text: 'Option J' },
-];
 
 const defaultItems = `Option A
 Option B
@@ -35,7 +16,6 @@ Option E
 Option F`;
 
 const childTag = "*";
-
 const itemTypeHeader = SelectableOptionMenuItemType.Header;
 
 
@@ -46,7 +26,7 @@ class ComboBox extends React.Component {
     super(props);
 
     this.state = {
-      //default must be undefined
+      //_selectedIndex default must be undefined
       _selectedIndex: undefined,
       _selectedIndices: [],
       items: [],
@@ -67,7 +47,7 @@ class ComboBox extends React.Component {
 
   set() {
 
-    //First, figure out the items
+    //Figure out the items
     let hasHeadersAndChildren = this._testForHeaders();
 
     let items = UXPinParser.parse(this.props.items).map(
@@ -76,18 +56,12 @@ class ComboBox extends React.Component {
       )
     );
 
-    //Now, figure out the selected indexes. Remove any section headers
+    //Figure out the selected indexes
     var index = undefined;
     var list = [];
 
     //Props are 1 based. Subtract 1 from whatever the user entered.
     let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
-
-    // //Remove any section headers 
-    // selected = selected.filter(
-    //   function (currVal) {
-    //     return items[currVal] && items[currVal]?.itemType !== itemTypeHeader
-    //   });
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -101,6 +75,7 @@ class ComboBox extends React.Component {
     })
   }
 
+  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
   _testForHeaders() {
     if (this.props.items) {
       let items = this.props.items.match(/[^\r\n]+/g);

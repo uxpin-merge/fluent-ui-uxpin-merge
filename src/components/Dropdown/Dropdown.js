@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Dropdown as FDropdown } from '@fluentui/react/lib/Dropdown';
+import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
@@ -24,10 +25,22 @@ class Dropdown extends React.Component {
 
       //0 based. default must be an empty array
       _selectedIndices: [],
+
+      items: [],
     }
   }
 
   set() {
+    //Figure out the items
+    let hasHeadersAndChildren = this._testForHeaders();
+
+    let items = UXPinParser.parse(this.props.items).map(
+      (item, index) => (
+        this._getItemProps(index, item?.text, hasHeadersAndChildren)
+      )
+    );
+
+    //Figure out the selected indexes
     var index = undefined;
     var list = [];
 
@@ -42,6 +55,7 @@ class Dropdown extends React.Component {
     this.setState({
       _selectedIndex: index,
       _selectedIndices: list,
+      items: items,
     })
   }
 
@@ -55,21 +69,68 @@ class Dropdown extends React.Component {
     }
   }
 
+  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
+  _testForHeaders() {
+    if (this.props.items) {
+      let items = this.props.items.match(/[^\r\n]+/g);
+
+      if (items && items.length) {
+        for (var i = 0; i < items.length; i++) {
+          let item = items[i]?.trim();
+          if (item.startsWith(childTag)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    //Else if we made it this far, there are no headers/children pattern
+    return false;
+  }
+
+  _getItemProps(index, text, hasHeadersAndChildren) {
+    let key = index;
+
+    if (text && text?.trim().toLowerCase() === "divider") {
+      let itemProps = {
+        key: "divider_" + key,
+        itemType: SelectableOptionMenuItemType.Divider,
+      };
+      return itemProps;
+    }
+    else {
+      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
+
+      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
+      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
+
+      let itemText = hasHeadersAndChildren && isChild ?
+        text.substring(text.indexOf(childTag) + 1) : text;
+
+      let itemProps = {
+        key: itemKey,
+        text: itemText,
+        itemType: itemType,
+        disabled: false,
+      };
+      return itemProps;
+    }
+  }
+
   //The main entry point for the control's onChange event. 
   // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
   // And in the case of multi-select, each individual item comes in separately. 
   _onChoiceChange(option, index) {
-    //Case Single Select
-    // Option info is undefined. The Index is the index of the newly selected item. 
-
-    //Case Multi Select
-    // Option info has the new selection state info for a specific item. 
-    // Option.selected has its new selection state, true or false. Index is its index. 
 
     if (this.props.multiSelect) {
+      //Case Multi Select
+      // Option info has the new selection state info for a specific item. 
+      // Option.selected has its new selection state, true or false. Index is its index. 
       this._onChangeMulti(option);
     }
     else {
+      //Case Single Select
+      // Option info is undefined. The Index is the index of the newly selected item. 
       this._onChangeSingle(index);
     }
   }
@@ -87,7 +148,6 @@ class Dropdown extends React.Component {
     if (this.props.onControlChange) {
       this.props.onControlChange((index + 1).toString());
     }
-
   }
 
   //To process the onChange event for a multi-select use case. 
@@ -129,24 +189,12 @@ class Dropdown extends React.Component {
 
   render() {
 
-    //We set both props in the Return.
+    //We muse set both props.
     // One of these must be set to undefined, depending on whether this is single or multi select.
-    var sIndex = undefined;
-    var mIndices = undefined;
-
-    if (this.props.multiSelect) {
-      mIndices = this.state._selectedIndices;
-    }
-    else {
-      sIndex = this.state._selectedIndex;
-    }
-
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => ({
-        text: item.text,
-        key: index,
-      })
-    );
+    let sIndex = this.props.multiSelect ? undefined
+      : this.state._selectedIndex;
+    let mIndices = this.props.multiSelect ? this.state._selectedIndices
+      : undefined;
 
     const ttTargetID = _.uniqueId('ttTarget_');
     const tooltipID = _.uniqueId('tooltip_');
@@ -164,7 +212,7 @@ class Dropdown extends React.Component {
         >
           <FDropdown
             {...this.props}
-            options={items}
+            options={this.state.items}
             selectedKey={sIndex}
             selectedKeys={mIndices}
             id={ttTargetID}
