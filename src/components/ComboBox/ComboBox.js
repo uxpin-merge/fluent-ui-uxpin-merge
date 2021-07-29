@@ -36,6 +36,8 @@ Option F`;
 
 const childTag = "*";
 
+const itemTypeHeader = SelectableOptionMenuItemType.Header;
+
 
 
 class ComboBox extends React.Component {
@@ -64,17 +66,8 @@ class ComboBox extends React.Component {
   }
 
   set() {
-    var index = undefined;
-    var list = [];
 
-    //Props are 1 based. Subtract 1 from whatever the user entered.
-    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
-
-    if (selected && selected.length > 0) {
-      index = selected[0];
-      list = selected;
-    }
-
+    //First, figure out the items
     let hasHeadersAndChildren = this._testForHeaders();
 
     let items = UXPinParser.parse(this.props.items).map(
@@ -82,6 +75,24 @@ class ComboBox extends React.Component {
         this._getItemProps(index, item?.text, hasHeadersAndChildren)
       )
     );
+
+    //Now, figure out the selected indexes. Remove any section headers
+    var index = undefined;
+    var list = [];
+
+    //Props are 1 based. Subtract 1 from whatever the user entered.
+    var selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+
+    //Remove any section headers 
+    selected = selected.filter(
+      function (currVal) {
+        return items[currVal] && items[currVal]?.itemType !== itemTypeHeader
+      });
+
+    if (selected && selected.length > 0) {
+      index = selected[0];
+      list = selected;
+    }
 
     this.setState({
       items: items,
@@ -120,14 +131,11 @@ class ComboBox extends React.Component {
     }
     else {
       let isChild = hasHeadersAndChildren && text.startsWith(childTag);
-      let itemType = hasHeadersAndChildren && !isChild ? SelectableOptionMenuItemType.Header : '';
-      // str. substring(str. indexOf('-') + 1);
-      // let itemType = isChild ? '' :
-      // hasHeadersAndChildren ? SelectableOptionMenuItemType.Header : '';
+
+      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
+
       let itemText = hasHeadersAndChildren && isChild ?
         text.substring(text.indexOf(childTag) + 1) : text;
-
-      console.log(text + " isChild: " + isChild + " " + itemType);
 
       let itemProps = {
         key: key,
