@@ -113,7 +113,7 @@ class ComboBox extends React.Component {
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
 
       let itemText = hasHeadersAndChildren && isChild ?
-        text.substring(text.indexOf(childTag) + 1) : text;
+        text.substring(text.indexOf(childTag) + 1).trim() : text;
 
       let itemProps = {
         key: itemKey,
@@ -214,7 +214,10 @@ class ComboBox extends React.Component {
             let type = items[index].itemType;
             console.log(items[index]?.text + " type: " + type);
 
-            if (type === undefined) {
+            if (type) {
+              //do nothing
+            }
+            else {
               keys.push(index);
             }
           }
