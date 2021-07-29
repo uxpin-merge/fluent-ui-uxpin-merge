@@ -236,6 +236,8 @@ class ComboBox extends React.Component {
           calloutProps={ttProps}
         >
           <FComboBox
+            id={ttTargetID}
+            aria-describedby={tooltipID}
             label={this.props.label}
             options={this.state.items}
             selectedKey={keys}
