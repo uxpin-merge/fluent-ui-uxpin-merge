@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ComboBox as FComboBox } from '@fluentui/react/lib/ComboBox';
 import { SelectableOptionMenuItemType } from '@fluentui/react/';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -220,20 +221,35 @@ class ComboBox extends React.Component {
     //Convert the autocomplete boolean to one of Microsoft's preferred strings.
     let autoComplete = this.props.autoComplete ? "on" : "off";
 
+    const ttTargetID = _.uniqueId('ttTarget_');
+    const tooltipID = _.uniqueId('tooltip_');
+    const ttProps = {
+      gapSpace: 4,
+      target: `#${ttTargetID}`,
+    };
+
     return (
-      <FComboBox
-        label={this.props.label}
-        options={this.state.items}
-        selectedKey={keys}
-        placeholder={this.props.placeholder}
-        autoComplete={autoComplete}
-        allowFreeform={false}
-        multiSelect={this.props.multiSelect}
-        errorMessage={this.props.errorMessage}
-        disabled={this.props.disabled}
-        onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
-        onBlur={() => this._onBlur()}
-      />
+      <div>
+        <TooltipHost
+          content={this.props.tooltip}
+          id={tooltipID}
+          calloutProps={ttProps}
+        >
+          <FComboBox
+            label={this.props.label}
+            options={this.state.items}
+            selectedKey={keys}
+            placeholder={this.props.placeholder}
+            autoComplete={autoComplete}
+            allowFreeform={false}
+            multiSelect={this.props.multiSelect}
+            errorMessage={this.props.errorMessage}
+            disabled={this.props.disabled}
+            onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
+            onBlur={() => this._onBlur()}
+          />
+        </TooltipHost>
+      </div>
     )
   }
 };
@@ -289,6 +305,12 @@ ComboBox.propTypes = {
   errorMessage: PropTypes.string,
 
   /**
+     * @uxpindescription Tooltip for the control
+     * @uxpinpropname Tooltip
+     * */
+  tooltip: PropTypes.string,
+
+  /**
    * @uxpindescription To disable the control
    * @uxpinpropname Disabled
    * */
@@ -312,6 +334,7 @@ ComboBox.defaultProps = {
   multiSelect: false,
   autoComplete: false,
   items: defaultItems,
+  tooltip: '',
 };
 
 
