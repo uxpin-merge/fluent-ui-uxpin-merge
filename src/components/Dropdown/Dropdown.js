@@ -217,7 +217,7 @@ class Dropdown extends React.Component {
           }
         }
         let list = keys.sort().map(key => key + 1).toString();
-        this.props.onChoiceChange(list);
+        this.props.onControlChange(list);
       }
 
       this.setState(
