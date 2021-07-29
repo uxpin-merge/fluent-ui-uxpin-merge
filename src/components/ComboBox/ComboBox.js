@@ -63,13 +63,7 @@ class ComboBox extends React.Component {
     var list = [];
 
     //Props are 1 based. Subtract 1 from whatever the user entered.
-    var selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
-
-    //Remove indexes that refer to a divider or header
-    selected = selected.filter(
-      function (currVal) {
-        return items[currVal] && (items[currVal]?.itemType !== itemTypeHeader || itemTypeDivider)
-      });
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -172,12 +166,7 @@ class ComboBox extends React.Component {
     let selected = option.selected;
     let key = option.key;
 
-    //Remove indexes that refer to a divider or header
-    let items = this.state.items;
-    var keys = this.state._selectedIndices.filter(
-      function (currVal) {
-        return items[currVal] && (items[currVal]?.itemType !== itemTypeHeader || itemTypeDivider)
-      });
+    var keys = [...this.state._selectedIndices];
     let included = keys.includes(key);
 
     //If selected, let's add it to our tracking array prop.
