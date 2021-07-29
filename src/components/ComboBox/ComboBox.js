@@ -6,6 +6,7 @@ import {
 } from '@fluentui/react/';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
+import { startsWith } from 'lodash';
 
 
 
@@ -32,6 +33,8 @@ divider
 Option D
 Option E
 Option F`;
+
+const childTag = "*";
 
 
 
@@ -72,9 +75,11 @@ class ComboBox extends React.Component {
       list = selected;
     }
 
+    let hasHeadersAndChildren = this._testForHeaders();
+
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
-        this._getItemProps(index, item?.text)
+        this._getItemProps(index, item?.text, hasHeadersAndChildren)
       )
     );
 
@@ -85,7 +90,25 @@ class ComboBox extends React.Component {
     })
   }
 
-  _getItemProps(index, text) {
+  _testForHeaders() {
+    if (this.props.items) {
+      let items = this.props.links.items(/[^\r\n]+/g);
+
+      if (items && items.length) {
+        for (var i = 0; i < items.length; i++) {
+          let item = items[i]?.trim();
+          if (item.startsWith(childTag)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    //Else if we made it this far, there are no headers/children pattern
+    return false;
+  }
+
+  _getItemProps(index, text, hasHeadersAndChildren) {
     let key = index;
 
     if (text && text?.trim().toLowerCase() === "divider") {
@@ -96,9 +119,13 @@ class ComboBox extends React.Component {
       return itemProps;
     }
     else {
+      let isChild = startsWith(childTag);
+      let itemType = hasHeadersAndChildren && !isChild ? SelectableOptionMenuItemType.Header : '';
+
       let itemProps = {
         key: key,
         text: text ? text : '',
+        itemType: itemType,
         disabled: false,
       };
       return itemProps;
@@ -203,35 +230,19 @@ class ComboBox extends React.Component {
     let autoComplete = this.props.autoComplete ? "on" : "off";
 
     return (
-      <div>
-        <FComboBox
-          defaultSelectedKey={"C"}
-          label={this.props.label + " >> single"}
-          options={this.state.items}
-          selectedKey={keys}
-          placeholder={this.props.placeholder}
-          autoComplete={autoComplete}
-          allowFreeform={false}
-          multiSelect={this.props.multiSelect}
-          errorMessage={this.props.errorMessage}
-          disabled={this.props.disabled}
-          onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
-          onBlur={() => this._onBlur()}
-        />
-
-        {/* <FComboBox
-          defaultSelectedKey={"C"}
-          label={this.props.label + "  >> multi"}
-          multiSelect={true}
-          options={this.state.items}
-          selectedKey={keys}
-          placeholder={this.props.placeholder}
-          autoComplete={autoComplete}
-          allowFreeform={false}
-          errorMessage={this.props.errorMessage}
-          disabled={this.props.disabled}
-        /> */}
-      </div >
+      <FComboBox
+        label={this.props.label}
+        options={this.state.items}
+        selectedKey={keys}
+        placeholder={this.props.placeholder}
+        autoComplete={autoComplete}
+        allowFreeform={false}
+        multiSelect={this.props.multiSelect}
+        errorMessage={this.props.errorMessage}
+        disabled={this.props.disabled}
+        onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
+        onBlur={() => this._onBlur()}
+      />
     )
   }
 };
