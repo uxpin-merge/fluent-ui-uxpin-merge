@@ -214,7 +214,7 @@ class ComboBox extends React.Component {
             let type = items[index].itemType;
             console.log(items[index]?.text + " type: " + type);
 
-            if (type === itemTypeHeader || itemTypeDivider) {
+            if (type === undefined) {
               keys.push(index);
             }
           }
