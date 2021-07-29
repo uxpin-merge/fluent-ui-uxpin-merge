@@ -57,7 +57,7 @@ const chartStartData = [
 export default (
   <AreaChart
     animation="gentle"
-    colorRange={['teal', 'red']}
+    colorRange={"teal\n" + "red"}
     curve="curveLinear"
     data={chartData}
     opacity="0.6"

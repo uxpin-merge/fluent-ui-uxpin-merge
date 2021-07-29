@@ -21,6 +21,7 @@ import {
   YAxis,
 } from 'react-vis';
 import AreaChartStyles from './AreaChart.styles';
+import * as UXPinParser from '../../_helpers/UXPinParser';
 
 export default class AreaChart extends React.Component {
   constructor(props) {
@@ -54,6 +55,10 @@ export default class AreaChart extends React.Component {
 
   restartCrosshair() {
     this.setState({ crosshairValues: [] });
+  }
+
+  getColorRange() {
+    return UXPinParser.parse(this.props.colorRange).map((item) => (item.text));
   }
 
   render() {
@@ -125,10 +130,10 @@ export default class AreaChart extends React.Component {
           <AreaSeries
             data={this.state.data}
             color={
-              this.props.colorRange !== undefined
-            && this.props.colorRange[0]
-                ? this.props.colorRange[0]
-                : this.props.color
+               this.getColorRange !== undefined
+            && this.getColorRange()[0]
+              ? this.getColorRange()[0]
+              : this.props.color
             }
             curve={curve(this.props.curve)}
             opacity={
@@ -172,10 +177,10 @@ export default class AreaChart extends React.Component {
               key={i}
               data={this.state.data[i]}
               color={
-                  this.props.colorRange !== undefined
-                  && this.props.colorRange[i]
-                    ? this.props.colorRange[i]
-                    : this.props.color
+                this.getColorRange !== undefined
+                && this.getColorRange()[i]
+                  ? this.getColorRange()[i]
+                  : this.props.color
                 }
               curve={curve(this.props.curve)}
               opacity={
@@ -235,7 +240,10 @@ AreaChart.propTypes = {
    */
   color: PropTypes.string,
   /** Array with colors to be used across all chart lines. If array doesn't specify color for all the chart lines, color property is used. */
-  colorRange: PropTypes.arrayOf(PropTypes.string),
+  /**
+   * @uxpincontroltype codeeditor
+   */
+  colorRange: PropTypes.string,
   /**
    * Turns on/off crossHair
    * @uxpindescription Turns on/off crossHair (only in prototype preview)
