@@ -109,7 +109,7 @@ export function parseRow(inputStr, index) {
       }
       else {
         // i = 0: type; i = 1: text; i >= 2: more text (we need to add space)
-        (i < 2) ? parsedOutput[0].text += `${allTokens[i]}` : parsedOutput[0].text += ` ${allTokens[i]}`;
+        (i >= 2 || parsedOutput[0].type === 'link') ? parsedOutput[0].text += ` ${allTokens[i]}` : parsedOutput[0].text += `${allTokens[i]}`;
       }
     } else if (hasType && tokensWithType?.length >= 1) {
        if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
