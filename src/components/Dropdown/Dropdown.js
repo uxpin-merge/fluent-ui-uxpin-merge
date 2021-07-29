@@ -193,6 +193,9 @@ class Dropdown extends React.Component {
 
   //If it's multiselect, only notify UXPin of changes on blur.
   _onBlur() {
+
+    console.log("onBlur : " + this.state.isDirty);
+
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onControlChange) {
