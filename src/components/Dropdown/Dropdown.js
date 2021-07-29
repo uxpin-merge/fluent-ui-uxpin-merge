@@ -201,7 +201,12 @@ class Dropdown extends React.Component {
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onControlChange) {
-        let list = this.state._selectedIndices.sort().map(key => key + 1).toString();
+        let items = this.state.items;
+        let keys = this.state._selectedIndices.filter(
+          function (currVal) {
+            return items[currVal] && (items[currVal]?.itemType !== itemTypeHeader || itemTypeDivider)
+          });
+        let list = keys.sort().map(key => key + 1).toString();
         this.props.onControlChange(list);
       }
 
