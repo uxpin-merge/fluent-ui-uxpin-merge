@@ -7,7 +7,7 @@ import {
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
-const options = [
+const defaultItems = [
   { key: 'Header1', text: 'First heading', itemType: SelectableOptionMenuItemType.Header },
   { key: 'A', text: 'Option A' },
   { key: 'B', text: 'Option B' },
@@ -42,19 +42,32 @@ class ComboBox extends React.Component {
 
   render() {
 
+    //Convert the autocomplete boolean to one of Microsoft's preferred strings.
+    let autoComplete = this.props.autoComplete ? "on" : "off";
+
     return (
       <div>
         <FComboBox
           defaultSelectedKey={"C"}
-          label={"Basic single-select ComboBox"}
+          label={this.props.label + " >> single"}
           options={options}
+          placeholder={this.props.placeholder}
+          autoComplete={autoComplete}
+          allowFreeform={false}
+          errorMessage={this.props.errorMessage}
+          disabled={this.props.disabled}
         />
 
         <FComboBox
           defaultSelectedKey={"C"}
-          label={"Basic multi-select ComboBox"}
+          label={this.props.label + "  >> multi"}
           multiSelect={true}
           options={options}
+          placeholder={this.props.placeholder}
+          autoComplete={autoComplete}
+          allowFreeform={false}
+          errorMessage={this.props.errorMessage}
+          disabled={this.props.disabled}
         />
       </div >
     )
@@ -65,7 +78,63 @@ class ComboBox extends React.Component {
  * Set up the properties to be available in the UXPin property inspector.
  */
 ComboBox.propTypes = {
-  dropdownMaxWidth: PropTypes.number,
+
+  /**
+   * @uxpindescription The label for the control
+   * @uxpinpropname Label
+   * @uxpincontroltype textfield(2)
+   * */
+  label: PropTypes.string,
+
+  /**
+   * @uxpindescription Placeholder text to show until an item(s) is selected
+   * @uxpinpropname Placeholder
+   */
+  placeholder: PropTypes.string,
+
+  /**
+   * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. 
+   * @uxpincontroltype codeeditor
+   */
+  items: PropTypes.string,
+
+  /**
+   * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided. This prop's live value is available for scripting.
+   * @uxpinbind onChoiceChange
+   * @uxpinpropname * Indexes
+   * */
+  selected: PropTypes.string,
+
+  /**
+   * @uxpindescription To allow multiple selections
+   * @uxpinpropname Multi-select
+   */
+  multiSelect: PropTypes.bool,
+
+  /**
+   * Microsoft uses the values: "on", "off" 
+   * @uxpindescription Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options. 
+   * @uxpinpropname Auto-Complete
+   */
+  autoComplete: PropTypes.bool,
+
+  /**
+   * @uxpindescription An error message to display below the control. Setting this value also displays the control in an error state.
+   * @uxpinpropname Error Message
+   */
+  errorMessage: PropTypes.string,
+
+  /**
+   * @uxpindescription To disable the control
+   * @uxpinpropname Disabled
+   * */
+  disabled: PropTypes.bool,
+
+  /**
+   * @uxpindescription Fires when the selected index(es) changes.
+   * @uxpinpropname * Indexes Changed
+   * */
+  onChoiceChange: PropTypes.func,
 };
 
 
@@ -73,7 +142,12 @@ ComboBox.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 ComboBox.defaultProps = {
-  dropdownMaxWidth: 100,
+  label: "ComboBox",
+  placeholder: "- Select -",
+  disabled: false,
+  multiSelect: false,
+  autoComplete: false,
+  items: defaultItems,
 };
 
 
