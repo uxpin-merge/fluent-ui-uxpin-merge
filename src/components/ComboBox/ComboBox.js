@@ -200,9 +200,25 @@ class ComboBox extends React.Component {
       //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
       if (this.props.onChoiceChange) {
         let items = this.state.items;
-        let keys = this.state._selectedIndices.filter(index =>
-          items[index] && items[index].itemType !== itemTypeHeader || itemTypeDivider
-        );
+        let indexes = this.state._selectedIndices;
+
+        // let keys = this.state._selectedIndices.filter(index =>
+        //   items[index] && items[index].itemType !== itemTypeHeader || itemTypeDivider
+        // );
+
+        var keys = [];
+        var i;
+        for (i = 0; i < indexes.length; i++) {
+          let index = indexes[i];
+          if (items[index]) {
+            let type = items[index].itemType;
+            console.log(items[index]?.text + " type: " + type);
+
+            if (type === itemTypeHeader || itemTypeDivider) {
+              keys.push(index);
+            }
+          }
+        }
         let list = keys.sort().map(key => key + 1).toString();
 
         console.log("Return list... " + list);
