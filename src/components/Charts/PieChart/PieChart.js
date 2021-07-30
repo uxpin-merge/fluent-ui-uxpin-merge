@@ -7,6 +7,7 @@ import {
   RadialChart,
 } from 'react-vis';
 import ChartStyles from '../chartStyles/chart.styles';
+import * as UXPinParser from '../../_helpers/UXPinParser';
 
 export default class PieChart extends React.Component {
   constructor(props) {
@@ -42,6 +43,10 @@ export default class PieChart extends React.Component {
     }
   }
 
+  getColorRange() {
+    return UXPinParser.parse(this.props.colorRange).map((item) => (item.text));
+  }
+
   render() {
     return (
       <RadialChart
@@ -56,7 +61,7 @@ export default class PieChart extends React.Component {
         data={this.state.data}
         width={this.props.width}
         height={this.props.height}
-        colorRange={this.props.colorRange}
+        colorRange={this.getColorRange()}
         opacity={parseFloat(this.props.opacity)}
         onValueClick={(value) => this.getHint(value)}
         onNearestXY={this.props.onNearestXY}
@@ -90,7 +95,10 @@ PieChart.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   color: PropTypes.string,
   /** Array with colors to be used across all chart lines. If array doesn't specify color for all the chart lines, color property is used. */
-  colorRange: PropTypes.arrayOf(PropTypes.string),
+  /**
+   * @uxpincontroltype codeeditor
+   */
+  colorRange: PropTypes.string,
   /** Data Array. Structure:  [{ "theta": 1, "label": "apples" }, {"theta": 4, "label": "oranges"}, {"theta": 6, "label": "cherries"}]  */
   data: PropTypes.array,
   /** Shows hint on click into every part of the pie chart */
