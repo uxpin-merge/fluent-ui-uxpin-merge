@@ -8,30 +8,21 @@ import {
 } from 'react-vis';
 import ChartStyles from '../chartStyles/chart.styles';
 import * as UXPinParser from '../../_helpers/UXPinParser';
+import { UxpColors } from '../../_helpers/uxpcolorutils';
 
 export default class PieChart extends React.Component {
   constructor(props) {
     super(props);
 
-    const getStartData = () => {
-      if (Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
-        return this.props.startData;
-      } if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
-        return this.props.startData;
-      }
-
-      return this.props.data;
-    };
-
     this.state = {
-      data: this.props.startData ? getStartData() : this.props.data,
+      data: this.getData(),
       hintValue: '',
       showHint: false,
     };
   }
 
   componentDidMount() {
-    this.setState({ data: this.props.data });
+    this.setState({ data: this.getData() });
   }
 
   getHint(value) {
@@ -44,7 +35,24 @@ export default class PieChart extends React.Component {
   }
 
   getColorRange() {
-    return UXPinParser.parse(this.props.colorRange).map((item) => (item.text));
+    return UXPinParser.parse(this.props.colorRange).map((item) => (UxpColors.getHexFromHexOrToken(item.text)));
+  }
+
+  getData() {
+    let output = [];
+    UXPinParser.parse(this.props.data).forEach((element, index) => {
+      // Is this an odd or even row of the array?
+      if (element.order % 2 == 0) {
+        output.push({
+          label: element.text.split('label ')[1],
+          theta: undefined,
+        });
+      } else {
+        output[output.length-1].theta = parseInt(element.text.split('theta ')[1]);
+      }
+    });
+
+    return output;
   }
 
   render() {
@@ -58,7 +66,7 @@ export default class PieChart extends React.Component {
         showLabels={this.props.showLabels}
         labelsRadiusMultiplier={parseFloat(this.props.labelsRadiusMultiplier)}
         labelsStyle={this.props.labelsStyle}
-        data={this.state.data}
+        data={this.getData()}
         width={this.props.width}
         height={this.props.height}
         colorRange={this.getColorRange()}
@@ -99,8 +107,10 @@ PieChart.propTypes = {
    * @uxpincontroltype codeeditor
    */
   colorRange: PropTypes.string,
-  /** Data Array. Structure:  [{ "theta": 1, "label": "apples" }, {"theta": 4, "label": "oranges"}, {"theta": 6, "label": "cherries"}]  */
-  data: PropTypes.array,
+  /**
+   * @uxpincontroltype codeeditor
+   */
+  data: PropTypes.string,
   /** Shows hint on click into every part of the pie chart */
   hint: PropTypes.bool,
   /** In combination with radius property, innerRadius enables ability to create a donut chart. The higher the value the bigger tha hole in the donut.  */
@@ -138,8 +148,6 @@ PieChart.propTypes = {
   radius: PropTypes.number,
   /** Shows labels one the chart. Set up labels in the data object. Example: {"theta": 1, "label": "Apples"} */
   showLabels: PropTypes.bool,
-  /** Starting point for data set. Used for triggering animation. Same data structure as data property. Place "0" in theta to animate. */
-  startData: PropTypes.array,
 };
 /* eslint-enable sort-keys */
 

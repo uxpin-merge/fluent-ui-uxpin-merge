@@ -4,7 +4,7 @@ import {
     MessageBar as FMessageBar,
     MessageBarButton,
     MessageBarType
-} from '@fluentui/react/lib/MessageBar';
+} from '@fluentui/react';
 import { getTokens } from '../_helpers/parser';
 
 
@@ -85,43 +85,41 @@ class MessageBar extends React.Component {
         let message = this.state.message;
 
         //Adding ANY buttons to the control appears to cause fatal errors. 
-        // var btn1 = '';
-        // var btn2 = '';
-        // var btnActions = '';
-        // var hasBtns = false;
+        var btn1 = '';
+        var btn2 = '';
+        var btnActions = '';
+        var hasBtns = false;
 
-        // if (this.props.button1Text) {
-        //     btn1 = (
-        //         <MessageBarButton
-        //             primary
-        //             style={{ fontSize: '10px', fontWeight: 'lighter' }}
-        //             onClick={() => { this._onClickButton1(); }}>
-        //             {this.props.button1Text}
-        //         </MessageBarButton>
-        //     );
-        //     hasBtns = true;
-        // }
+        if (this.props.button1Text) {
+            btn1 = (
+                <MessageBarButton
+                    primary
+                    style={{ fontSize: '10px', fontWeight: 'lighter' }}
+                    onClick={() => { this._onClickButton1(); }}>
+                    {this.props.button1Text}
+                </MessageBarButton>
+            );
+            hasBtns = true;
+        }
 
-        // if (this.props.button2Text) {
-        //     btn2 = (
-        //         <MessageBarButton
-        //             style={{ fontSize: '10px', fontWeight: 'lighter' }}
-        //             onClick={() => { this._onClickButton2(); }}>
-        //             {this.props.button2Text}
-        //         </MessageBarButton>);
-        //     hasBtns = true;
-        // }
+        if (this.props.button2Text) {
+            btn2 = (
+                <MessageBarButton
+                    style={{ fontSize: '10px', fontWeight: 'lighter' }}
+                    onClick={() => { this._onClickButton2(); }}>
+                    {this.props.button2Text}
+                </MessageBarButton>);
+            hasBtns = true;
+        }
 
-        // if (hasBtns) {
-        //     btnActions = (
-        //         <div>
-        //             {btn2}
-        //             {btn1}
-        //         </div>
-        //     )
-        // }
-
-        // actions={btnActions}
+        if (hasBtns) {
+            btnActions = (
+                <div>
+                    {btn2}
+                    {btn1}
+                </div>
+            )
+        }
 
         var dismissProps = '';
         if (this.props.showDismissButton) {
@@ -138,6 +136,8 @@ class MessageBar extends React.Component {
                 truncated={truncated}
                 messageBarType={MessageBarType[this.props.messageBarType]}
                 {...dismissProps}
+                actions={btnActions}
+
             >
                 {message}
             </FMessageBar>
@@ -184,17 +184,17 @@ MessageBar.propTypes = {
     */
     showDismissButton: PropTypes.bool,
 
-    // /**
-    //  * @uxpindescription The text to display on the Primary Button (Optional)
-    //  * @uxpinpropname Primary Button Text
-    //  */
-    // button1Text: PropTypes.string,
+    /**
+     * @uxpindescription The text to display on the Primary Button (Optional)
+     * @uxpinpropname Primary Button Text
+     */
+    button1Text: PropTypes.string,
 
-    // /**
-    //  * @uxpindescription The text to display on the Secondary Button (Optional)
-    //  * @uxpinpropname Secondary Button Text
-    //  */
-    // button2Text: PropTypes.string,
+    /**
+     * @uxpindescription The text to display on the Secondary Button (Optional)
+     * @uxpinpropname Secondary Button Text
+     */
+    button2Text: PropTypes.string,
 
     /**
      * @uxpindescription Fires when the Close button is clicked on
@@ -202,17 +202,17 @@ MessageBar.propTypes = {
      */
     onDismissClicked: PropTypes.func,
 
-    // /**
-    //  * @uxpindescription Fires when the Primary Button is clicked on
-    //  * @uxpinpropname Primary Click
-    //  */
-    // onClick1: PropTypes.func,
+    /**
+     * @uxpindescription Fires when the Primary Button is clicked on
+     * @uxpinpropname Primary Click
+     */
+    onClick1: PropTypes.func,
 
-    // /**
-    //  * @uxpindescription Fires when the Secondary Button is clicked on
-    //  * @uxpinpropname Secondary Click
-    //  */
-    // onClick2: PropTypes.func
+    /**
+     * @uxpindescription Fires when the Secondary Button is clicked on
+     * @uxpinpropname Secondary Click
+     */
+    onClick2: PropTypes.func
 };
 
 
@@ -223,8 +223,8 @@ MessageBar.defaultProps = {
     message: "This is a Basic Message Bar. link(Learn More...)",
     messageBarType: "info",
     isMultiline: true,
-    // button1Text: "Yes",
-    // button2Text: "No",
+    button1Text: "Yes",
+    button2Text: "No",
     showDismissButton: true
 };
 
