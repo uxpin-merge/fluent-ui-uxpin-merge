@@ -6,8 +6,7 @@ import {
     MessageBarType
 } from '@fluentui/react';
 import { getTokens } from '../_helpers/parser';
-
-
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 class MessageBar extends React.Component {
 
@@ -15,15 +14,17 @@ class MessageBar extends React.Component {
         super(props);
 
         this.state = {
-            message: ""
+            message: this.props.message? this.props.message : "hello!",
         }
     }
 
     set() {
-        let message = this._getTokenizedText(this.props.message);
+        let message = this.getMessageText(this.props.message);
 
         this.setState(
-            { message: message }
+            {
+                message: message,
+            }
         )
     }
 
@@ -37,27 +38,33 @@ class MessageBar extends React.Component {
         }
     }
 
-    //Tokenize the string coming in from UXPin for the description and 
-    //    comments (Body Copy) to support the link(Link Text) feature.
-    _getTokenizedText(text) {
 
-        var tokens = getTokens(text).mixed.map((el, i) => {
-            if (typeof (el) === 'string') {
-                return (<span key={i}> {el} </span>);
+    getMessageText() {
+        let elements;
+        const parsedOutput = UXPinParser.parse(this.props.message);
+        // console.log("parsedOutput Variable value: " + parsedOutput);
+        // console.log("parsedOutput Variable value in JSON: " + JSON.stringify(parsedOutput));
+        return parsedOutput.map(
+            (item, index) => {
+                // console.log("First map of parsedOutput: " + JSON.stringify(item));
+                // If not type compound, return single element
+                if (item.type !== "compound") {
+                    // console.log("This is NOT type Compound, this is a " + item.type)
+                    return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
+                } else {
+                    // console.log("This is type " + item.type)
+                    // If type compound, map the item values
+                    elements = item.value.map(
+                        (subItem, subIndex) => {
+                            // Second map of parsedOutput.value to seperate each object of links and text
+                            // console.log("Second map of parsedOutput.value: " + JSON.stringify(subItem) + " subItem");
+                            return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
+                        }
+                    )
+                    return elements;
+                }
             }
-            else if (el.type == 'link') {
-                return el.suggestions[0];
-            }
-            else if (el.suggestions[0]) {
-                // if there's a suggestion, call the function
-                return el.suggestions[0];
-            } else {
-                // there's no suggestion, return the text
-                return (<span key={i}> {el.tokenString} </span>);
-            }
-        });
-
-        return tokens;
+        )
     }
 
     _onDismiss() {
@@ -137,9 +144,8 @@ class MessageBar extends React.Component {
                 messageBarType={MessageBarType[this.props.messageBarType]}
                 {...dismissProps}
                 actions={btnActions}
-
             >
-                {message}
+                <div>{message}</div>
             </FMessageBar>
         );
     }
@@ -152,9 +158,8 @@ class MessageBar extends React.Component {
 MessageBar.propTypes = {
 
     /**
-     * @uxpindescription The control's message. Supports the link(Click Me) feature.
-     * @uxpinpropname Description
-     * @uxpincontroltype textfield(6)
+     * @uxpindescription The control's message. Supports the link(link text | link url) feature.
+       * @uxpincontroltype codeeditor
      */
     message: PropTypes.string,
 
@@ -220,7 +225,7 @@ MessageBar.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 MessageBar.defaultProps = {
-    message: "This is a Basic Message Bar. link(Learn More...)",
+    message: "This is a Basic Message Bar. link(Learn More... | google.com)",
     messageBarType: "info",
     isMultiline: true,
     button1Text: "Yes",
