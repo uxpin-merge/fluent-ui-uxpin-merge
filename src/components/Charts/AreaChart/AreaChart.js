@@ -22,35 +22,26 @@ import {
 } from 'react-vis';
 import AreaChartStyles from './AreaChart.styles';
 import * as UXPinParser from '../../_helpers/UXPinParser';
+import { UxpColors } from '../../_helpers/uxpcolorutils';
 
 export default class AreaChart extends React.Component {
   constructor(props) {
     super(props);
 
-    const getStartData = () => {
-      if (Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
-        return this.props.startData;
-      } if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
-        return this.props.startData;
-      }
-
-      return this.props.data;
-    };
-
     this.state = {
       crosshairValues: [],
-      data: this.props.startData ? getStartData() : this.props.data,
+      data: this.getData(),
       // eslint-disable-next-line react/no-unused-state
       hintValue: {},
     };
   }
 
   componentDidMount() {
-    this.setState({ data: this.props.data });
+    this.setState({ data: this.getData() });
   }
 
   getCrosshair(value, { index }) {
-    this.setState({ crosshairValues: this.state.data.map((d) => d[index]) });
+    this.setState({ crosshairValues: this.getData().map((d) => d[index]) });
   }
 
   restartCrosshair() {
@@ -58,7 +49,46 @@ export default class AreaChart extends React.Component {
   }
 
   getColorRange() {
-    return UXPinParser.parse(this.props.colorRange).map((item) => (item.text));
+    return UXPinParser.parse(this.props.colorRange).map((item) => (UxpColors.getHexFromHexOrToken(item.text)));
+  }
+
+  getData() {
+    const parsedOutput = UXPinParser.parse(this.props.data);
+    let firstDataSet = [], secondDataSet = [];
+    let switchDataSet = false;
+
+    for (let i = 0; i < parsedOutput.length; i++) {
+      // Data Sets are seperated by a single line break
+      // ...in which case the CSV parser returns and empty string
+      if (parsedOutput[i].text === '') {
+        switchDataSet = true;
+        continue;
+      }
+
+      if (!switchDataSet) {
+        // Is this an odd or even row of the array?
+        if (i % 2 === 0) {
+          firstDataSet.push({
+            x: parseInt(parsedOutput[i].text.split('x ')[1]),
+            y: undefined,
+          });
+        } else {
+          firstDataSet[firstDataSet.length-1].y = parseInt(parsedOutput[i].text.split('y ')[1]);
+        }
+      } else {
+        // Is this an odd or even row of the array?
+        if (i % 2 !== 0) {
+          secondDataSet.push({
+            x: parseInt(parsedOutput[i].text.split('x ')[1]),
+            y: undefined,
+          });
+        } else {
+          secondDataSet[secondDataSet.length-1].y = parseInt(parsedOutput[i].text.split('y ')[1]);
+        }
+      }
+    }
+
+    return [firstDataSet, secondDataSet];
   }
 
   render() {
@@ -126,9 +156,9 @@ export default class AreaChart extends React.Component {
         {this.props.horizontalGridLines ? <HorizontalGridLines /> : undefined}
         {this.props.xLabels ? <XAxis /> : undefined}
         {this.props.yLabels ? <YAxis /> : undefined}
-        {!Array.isArray(this.props.data[0]) ? (
+        {!Array.isArray(this.getData()[0]) ? (
           <AreaSeries
-            data={this.state.data}
+            data={this.getData()}
             color={
                this.getColorRange !== undefined
             && this.getColorRange()[0]
@@ -172,10 +202,10 @@ export default class AreaChart extends React.Component {
             animation={this.props.animation}
           />
         ) : (
-          this.state.data.map((e, i) => (
+          this.getData().map((e, i) => (
             <AreaSeries
               key={i}
-              data={this.state.data[i]}
+              data={this.getData()[i]}
               color={
                 this.getColorRange !== undefined
                 && this.getColorRange()[i]
@@ -285,8 +315,10 @@ AreaChart.propTypes = {
    * @uxpinignoreprop
    */
   curveCatmullRomAlpha: PropTypes.string,
-  /** Data Array. Structure: [[{"x": 0, "y": 1}, {"x": 1, "y": 3}], [{"x: 0", "y": 2}, {"x": 1, "y": 3]].  */
-  data: PropTypes.array,
+  /**
+   * @uxpincontroltype codeeditor
+   */
+  data: PropTypes.string,
   /** Turns on/off horizontal grid lines. */
   horizontalGridLines: PropTypes.bool,
   /** Turns on/off vertical grid lines. */
@@ -324,8 +356,6 @@ AreaChart.propTypes = {
   onSeriesRightClick: PropTypes.func,
   /** Specifies opacity for all the chart lines, unless styles array is provided */
   opacity: PropTypes.string,
-  /** Starting point for data set. Used for triggering animation. Same data structure as data property. */
-  startData: PropTypes.array,
   /** Color of the upper edge of the area. Overrides color property/ */
   strokeColor: PropTypes.string,
   /** Array of colors of the upper edge of the area. Overrides color property/ */
