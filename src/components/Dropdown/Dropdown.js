@@ -195,7 +195,7 @@ class Dropdown extends React.Component {
   _onBlur() {
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
-      if (this.props.onControlChange) {
+      if (this.props.onChoiceChange) {
         let items = this.state.items;
         let indexes = this.state._selectedIndices;
 
@@ -209,7 +209,7 @@ class Dropdown extends React.Component {
           }
         }
         let list = keys.sort().map(key => key + 1).toString();
-        this.props.onControlChange(list);
+        this.props.onChoiceChange(list);
       }
 
       this.setState(
@@ -280,7 +280,7 @@ Dropdown.propTypes = {
 
   /**
    * @uxpindescription The selected indexes, separated with commas (1-based index). In case of Single Select mode, the first number will be used if multiple values are provided. This prop's live value is available for scripting.
-   * @uxpinbind onControlChange
+   * @uxpinbind onChoiceChange
    * @uxpinpropname * Indexes
    * */
   selected: PropTypes.string,
@@ -325,7 +325,7 @@ Dropdown.propTypes = {
    * @uxpindescription Fires when the selected index(es) changes.
    * @uxpinpropname * Indexes Changed
    * */
-  onControlChange: PropTypes.func,
+  onChoiceChange: PropTypes.func,
 };
 
 
