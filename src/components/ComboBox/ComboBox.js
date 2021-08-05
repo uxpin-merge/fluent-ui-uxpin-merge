@@ -210,16 +210,6 @@ class ComboBox extends React.Component {
           if (items[index]) {
 
             items[index].itemType ? '' : keys.push(index);
-
-            // let type = items[index].itemType;
-
-            // if (type) {
-            //   //do nothing
-            // }
-            // else {
-            //   //If it's undefined, then it's a regular item
-            //   keys.push(index);
-            // }
           }
         }
         let list = keys.sort().map(key => key + 1).toString();

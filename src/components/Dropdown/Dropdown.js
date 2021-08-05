@@ -193,9 +193,6 @@ class Dropdown extends React.Component {
 
   //If it's multiselect, only notify UXPin of changes on blur.
   _onBlur() {
-
-    console.log("onBlur : " + this.state.isDirty);
-
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onControlChange) {
@@ -208,15 +205,7 @@ class Dropdown extends React.Component {
         for (i = 0; i < indexes.length; i++) {
           let index = indexes[i];
           if (items[index]) {
-            let type = items[index].itemType;
-
-            if (type) {
-              //do nothing
-            }
-            else {
-              //If it's undefined, then it's a regular item
-              keys.push(index);
-            }
+            items[index].itemType ? '' : keys.push(index);
           }
         }
         let list = keys.sort().map(key => key + 1).toString();
