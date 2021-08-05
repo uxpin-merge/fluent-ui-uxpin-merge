@@ -14,6 +14,10 @@ icon(FileCode) Add Code File
 divider
 icon(Picture) Add Picture`;
 
+const childTag = "*";
+const itemTypeHeader = ContextualMenuItemType.Header;
+const itemTypeDivider = ContextualMenuItemType.Divider;
+
 
 
 class CommandButton extends React.Component {
@@ -37,9 +41,12 @@ class CommandButton extends React.Component {
   }
 
   set() {
+
+    let hasHeadersAndChildren = this._testForHeaders();
+
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
-        this._getMenuProps(index, item?.text, item?.iconName)
+        this._getMenuProps(index, item?.text, item?.iconName, , hasHeadersAndChildren)
       )
     );
 
@@ -48,20 +55,48 @@ class CommandButton extends React.Component {
     });
   }
 
-  _getMenuProps(index, text, iconName) {
+  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
+  _testForHeaders() {
+    if (this.props.items) {
+      let items = this.props.items.match(/[^\r\n]+/g);
+
+      if (items && items.length) {
+        for (var i = 0; i < items.length; i++) {
+          let item = items[i]?.trim();
+          if (item.startsWith(childTag)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    //Else if we made it this far, there are no headers/children pattern
+    return false;
+  }
+
+  _getMenuProps(index, text, iconName, hasHeadersAndChildren) {
     let key = index + 1;
 
     if (text && text?.trim().toLowerCase() === "divider") {
       let menuProps = {
         key: "divider_" + key,
-        itemType: ContextualMenuItemType.Divider,
+        itemType: itemTypeDivider,
       };
       return menuProps;
     }
     else {
+      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
+
+      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
+      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
+
+      let itemText = hasHeadersAndChildren && isChild ?
+        text.substring(text.indexOf(childTag) + 1).trim() : text;
+
       let menuProps = {
-        key: key,
-        text: text ? text : '',
+        key: itemKey,
+        text: itemText ? itemText : '',
+        itemType: itemType,
         iconProps: {
           iconName: iconName ? iconName : ''
         },
@@ -93,7 +128,6 @@ class CommandButton extends React.Component {
       target: `#${buttonID}`,
     };
 
-
     //We want the root's margin to help the control to equal 40px. We need to make up 14px when there is no text.
     var rootPadding = '0 7px';
     //The label margin is always present, even when there is no label
@@ -119,7 +153,7 @@ class CommandButton extends React.Component {
     if (this.props.items) {
       menuProps = {
         items: this.state.items,
-        directionalHintFixed: true
+        directionalHintFixed: true,
       };
     }
 
@@ -206,7 +240,7 @@ CommandButton.propTypes = {
    * @uxpindescription Fires when the main button or a popup menu button is clicked on
    * @uxpinpropname Click
    * */
-  onButtonClick: PropTypes.func
+  onButtonClick: PropTypes.func,
 };
 
 

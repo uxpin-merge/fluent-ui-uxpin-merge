@@ -17,6 +17,10 @@ icon(Photo2Add) Add Picture
 divider
 icon(AddFriend) Add User`;
 
+const childTag = "*";
+const itemTypeHeader = ContextualMenuItemType.Header;
+const itemTypeDivider = ContextualMenuItemType.Divider;
+
 
 
 class SplitButton extends React.Component {
@@ -44,9 +48,11 @@ class SplitButton extends React.Component {
   //Parse the choice items
   set() {
 
+    let hasHeadersAndChildren = this._testForHeaders();
+
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
-        this._getMenuProps(index, item?.text, item?.iconName)
+        this._getMenuProps(index, item?.text, item?.iconName, , hasHeadersAndChildren)
       )
     );
 
@@ -55,20 +61,48 @@ class SplitButton extends React.Component {
     });
   }
 
-  _getMenuProps(index, text, iconName) {
+  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
+  _testForHeaders() {
+    if (this.props.items) {
+      let items = this.props.items.match(/[^\r\n]+/g);
+
+      if (items && items.length) {
+        for (var i = 0; i < items.length; i++) {
+          let item = items[i]?.trim();
+          if (item.startsWith(childTag)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    //Else if we made it this far, there are no headers/children pattern
+    return false;
+  }
+
+  _getMenuProps(index, text, iconName, hasHeadersAndChildren) {
     let key = index + 1;
 
     if (text && text?.trim().toLowerCase() === "divider") {
       let menuProps = {
         key: "divider_" + key,
-        itemType: ContextualMenuItemType.Divider,
+        itemType: itemTypeDivider,
       };
       return menuProps;
     }
     else {
+      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
+
+      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
+      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
+
+      let itemText = hasHeadersAndChildren && isChild ?
+        text.substring(text.indexOf(childTag) + 1).trim() : text;
+
       let menuProps = {
-        key: key,
-        text: text ? text : '',
+        key: itemKey,
+        text: itemText ? itemText : '',
+        itemType: itemType,
         iconProps: {
           iconName: iconName ? iconName : ''
         },
