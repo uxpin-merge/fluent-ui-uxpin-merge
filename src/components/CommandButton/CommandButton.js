@@ -46,7 +46,7 @@ class CommandButton extends React.Component {
 
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
-        this._getMenuProps(index, item?.text, item?.iconName, hasHeadersAndChildren)
+        this._getMenuProps(index, item?.text?.trim(), item?.iconName, hasHeadersAndChildren)
       )
     );
 
@@ -64,9 +64,6 @@ class CommandButton extends React.Component {
         var i;
         for (i = 0; i < items.length; i++) {
           let item = items[i]?.trim();
-
-          console.log("Looking at " + item);
-
           if (item?.startsWith(childTag)) {
             return true;
           }
@@ -80,8 +77,9 @@ class CommandButton extends React.Component {
 
   _getMenuProps(index, text, iconName, hasHeadersAndChildren) {
     let key = index + 1;
+    let itemText = text?.toLowerCase();
 
-    if (text && text?.trim().toLowerCase() === "divider") {
+    if (text && itemText === "divider") {
       let menuProps = {
         key: "divider_" + key,
         itemType: itemTypeDivider,
@@ -89,8 +87,12 @@ class CommandButton extends React.Component {
       return menuProps;
     }
     else {
-      let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
+      //If there's no text, we don't want it. 
+      if (text?.length < 1) {
+        return '';
+      }
 
+      let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
       let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
 
