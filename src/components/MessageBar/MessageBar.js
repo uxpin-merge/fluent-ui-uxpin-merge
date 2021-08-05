@@ -14,7 +14,7 @@ class MessageBar extends React.Component {
         super(props);
 
         this.state = {
-            message: this.props.message? this.props.message : "hello!",
+            message: "",
         }
     }
 
@@ -37,7 +37,6 @@ class MessageBar extends React.Component {
             this.set();
         }
     }
-
 
     getMessageText() {
         let elements;
@@ -68,9 +67,8 @@ class MessageBar extends React.Component {
     }
 
     _onDismiss() {
-
         if (this.props.onDismissClicked) {
-            this.props.onDismissClicked();
+            this.props.onDismissClicked(true);
         }
     }
 
@@ -131,7 +129,7 @@ class MessageBar extends React.Component {
         var dismissProps = '';
         if (this.props.showDismissButton) {
             dismissProps = {
-                onDismiss: this._onDismiss
+                onDismiss: () => { this._onDismiss(); }
             }
         }
 
@@ -159,7 +157,7 @@ MessageBar.propTypes = {
 
     /**
      * @uxpindescription The control's message. Supports the link(link text | link url) feature.
-       * @uxpincontroltype codeeditor
+    * @uxpincontroltype textfield(6)
      */
     message: PropTypes.string,
 
