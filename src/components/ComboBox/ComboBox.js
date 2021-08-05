@@ -208,7 +208,6 @@ class ComboBox extends React.Component {
         for (i = 0; i < indexes.length; i++) {
           let index = indexes[i];
           if (items[index]) {
-
             items[index].itemType ? '' : keys.push(index);
           }
         }
