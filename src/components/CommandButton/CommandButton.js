@@ -15,6 +15,8 @@ divider
 icon(Picture) Add Picture`;
 
 const childTag = "*";
+const dividerText1 = "divider";
+const dividerText2 = "---";
 const itemTypeHeader = ContextualMenuItemType.Header;
 const itemTypeDivider = ContextualMenuItemType.Divider;
 
@@ -41,16 +43,6 @@ class CommandButton extends React.Component {
   }
 
   set() {
-
-    // let hasHeadersAndChildren = this._testForHeaders();
-
-    // let items = UXPinParser.parse(this.props.items).map(
-    //   (item, index) => (
-    //     console.log(this.props.text + ": " + item?.text + ", " + item?.iconName),
-    //     this._getMenuProps(index, item?.text?.trim(), item?.iconName, hasHeadersAndChildren)
-    //   )
-    // );
-
     this.setState({
       items: this._parseMenuItems()
     });
@@ -122,9 +114,9 @@ class CommandButton extends React.Component {
 
   _getMenuProps(index, text, iconName, isChild) {
     let key = index + 1;
-    let itemText = text?.toLowerCase();
+    let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
 
-    if (text && itemText === "divider") {
+    if (text && isDivider) {
       let menuProps = {
         key: "divider_" + key,
         itemType: itemTypeDivider,
@@ -132,17 +124,8 @@ class CommandButton extends React.Component {
       return menuProps;
     }
     else {
-
-      if (!text && !iconName)
-        return '';
-
-      //let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
       let itemKey = isChild ? key : 'header_' + key;
       let itemType = isChild ? '' : itemTypeHeader;
-      // let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
-      // let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
-      // let itemText = hasHeadersAndChildren && isChild ?
-      //   text.substring(text.indexOf(childTag) + 1).trim() : text;
 
       let menuProps = {
         key: itemKey,
