@@ -92,7 +92,7 @@ class SplitButton extends React.Component {
       return menuProps;
     }
     else {
-      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
+      let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
 
       let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
