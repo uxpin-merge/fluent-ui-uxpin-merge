@@ -53,7 +53,7 @@ class SplitButton extends React.Component {
 
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
-        this._getMenuProps(index, item?.text, item?.iconName, hasHeadersAndChildren)
+        this._getMenuProps(index, item?.text?.trim(), item?.iconName, hasHeadersAndChildren)
       )
     );
 
@@ -83,17 +83,19 @@ class SplitButton extends React.Component {
 
   _getMenuProps(index, text, iconName, hasHeadersAndChildren) {
     let key = index + 1;
+    let itemText = text?.toLowerCase();
 
-    if (text && text?.trim().toLowerCase() === "divider") {
+    console.log(this.props.text + ": " + itemText);
+
+    if (itemText && itemText === "divider") {
       let menuProps = {
         key: "divider_" + key,
         itemType: itemTypeDivider,
       };
       return menuProps;
     }
-    else {
+    else if (itemText) {
       let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
-
       let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
 
@@ -111,6 +113,8 @@ class SplitButton extends React.Component {
       };
       return menuProps;
     }
+
+    return '';
   }
 
   _onClick(index) {
