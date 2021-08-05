@@ -46,6 +46,7 @@ class CommandButton extends React.Component {
 
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
+        console.log(this.props.text + ": " + item?.text + ", " + item?.iconName),
         this._getMenuProps(index, item?.text?.trim(), item?.iconName, hasHeadersAndChildren)
       )
     );
@@ -87,11 +88,6 @@ class CommandButton extends React.Component {
       return menuProps;
     }
     else {
-      //If there's no text, we don't want it. 
-      if (text?.length < 1) {
-        return;
-      }
-
       let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
       let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
       let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
