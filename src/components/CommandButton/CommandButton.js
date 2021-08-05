@@ -46,7 +46,7 @@ class CommandButton extends React.Component {
 
     let items = UXPinParser.parse(this.props.items).map(
       (item, index) => (
-        this._getMenuProps(index, item?.text, item?.iconName, , hasHeadersAndChildren)
+        this._getMenuProps(index, item?.text, item?.iconName, hasHeadersAndChildren)
       )
     );
 
