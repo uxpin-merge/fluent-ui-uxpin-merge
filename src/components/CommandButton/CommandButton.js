@@ -245,7 +245,7 @@ CommandButton.propTypes = {
   tooltip: PropTypes.string,
 
   /**
-   * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text. Use 'divider' to add a divider. 
+   * @uxpindescription An optional list of popup menu items. Put each item on a separate line. Optionally add an icon. Supported syntax:  icon(IconName) Item Text. Use 'divider' to add a divider. To activate headers with children, put a * in front of any child, such as: * icon(IconName) Item Text.
    * @uxpinpropname Menu Items
    * @uxpincontroltype codeeditor
    * */
