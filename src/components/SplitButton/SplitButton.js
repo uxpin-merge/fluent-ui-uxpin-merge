@@ -18,6 +18,8 @@ divider
 icon(AddFriend) Add User`;
 
 const childTag = "*";
+const dividerText1 = "divider";
+const dividerText2 = "----";
 const itemTypeHeader = ContextualMenuItemType.Header;
 const itemTypeDivider = ContextualMenuItemType.Divider;
 
@@ -45,21 +47,54 @@ class SplitButton extends React.Component {
     }
   }
 
-  //Parse the choice items
   set() {
-
-    //Figure out the items
-    let hasHeadersAndChildren = this._testForHeaders();
-
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => (
-        this._getMenuProps(index, item?.text?.trim(), item?.iconName, hasHeadersAndChildren)
-      )
-    );
-
     this.setState({
-      items: items,
+      items: this._parseMenuItems()
     });
+  }
+
+  _parseMenuItems() {
+    var itemList = [];
+
+    if (this.props.items) {
+      let hasHeadersAndChildren = this._testForHeaders();
+
+      if (hasHeadersAndChildren) {
+        let items = this.props.items.match(/[^\r\n]+/g);
+
+        if (items && items.length) {
+          var i;
+          for (i = 0; i < items.length; i++) {
+            var item = items[i]?.trim();
+            let isChild = item?.startsWith(childTag);
+
+            if (isChild) {
+              //We must remove the * before parsing.
+              item = item.substring(1).trim();
+            }
+
+            let parsedMenuItems = UXPinParser.parse(item);
+            if (parsedMenuItems && parsedMenuItems.length > 0) {
+              let menuItem = parsedMenuItems[0];
+              let trimmedText = menuItem.text?.trim();
+              if (menuItem && trimmedText) {
+                let props = this._getMenuProps(i, trimmedText, menuItem?.iconName, isChild);
+                props ? itemList.push(props) : '';
+              }
+            }
+          }
+        }
+      }
+      else {
+        itemList = UXPinParser.parse(this.props.items?.trim()).map(
+          (item, index) => (
+            this._getMenuProps(index, item?.text?.trim(), item?.iconName, true)
+          )
+        );
+      }
+
+      return itemList;
+    }
   }
 
   //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
@@ -68,9 +103,10 @@ class SplitButton extends React.Component {
       let items = this.props.items.match(/[^\r\n]+/g);
 
       if (items && items.length) {
-        for (var i = 0; i < items.length; i++) {
+        var i;
+        for (i = 0; i < items.length; i++) {
           let item = items[i]?.trim();
-          if (item.startsWith(childTag)) {
+          if (item?.startsWith(childTag)) {
             return true;
           }
         }
@@ -81,30 +117,24 @@ class SplitButton extends React.Component {
     return false;
   }
 
-  _getMenuProps(index, text, iconName, hasHeadersAndChildren) {
+  _getMenuProps(index, text, iconName, isChild) {
     let key = index + 1;
-    let itemText = text?.toLowerCase();
+    let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
 
-    console.log(this.props.text + ": " + itemText);
-
-    if (itemText && itemText === "divider") {
+    if (text && isDivider) {
       let menuProps = {
         key: "divider_" + key,
         itemType: itemTypeDivider,
       };
       return menuProps;
     }
-    else if (itemText) {
-      let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
-      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
-      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
-
-      let itemText = hasHeadersAndChildren && isChild ?
-        text.substring(text.indexOf(childTag) + 1).trim() : text;
+    else {
+      let itemKey = isChild ? key : 'header_' + key;
+      let itemType = isChild ? '' : itemTypeHeader;
 
       let menuProps = {
         key: itemKey,
-        text: itemText ? itemText : '',
+        text: text ? text : '',
         itemType: itemType,
         iconProps: {
           iconName: iconName ? iconName : ''
@@ -113,8 +143,6 @@ class SplitButton extends React.Component {
       };
       return menuProps;
     }
-
-    return '';
   }
 
   _onClick(index) {

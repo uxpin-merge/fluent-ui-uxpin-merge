@@ -16,7 +16,7 @@ icon(Picture) Add Picture`;
 
 const childTag = "*";
 const dividerText1 = "divider";
-const dividerText2 = "---";
+const dividerText2 = "----";
 const itemTypeHeader = ContextualMenuItemType.Header;
 const itemTypeDivider = ContextualMenuItemType.Divider;
 
