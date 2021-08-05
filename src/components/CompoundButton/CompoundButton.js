@@ -45,7 +45,6 @@ class CompoundButton extends React.Component {
         secondaryText={this.props.secondaryText}
         disabled={this.props.disabled}
         styles={styles}
-      // onClick={() => { this._onClick(); }}
       />
     )
   }
@@ -101,7 +100,7 @@ CompoundButton.propTypes = {
    * @uxpindescription Fires when the button is clicked on.
    * @uxpinpropname Click
    * */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 
