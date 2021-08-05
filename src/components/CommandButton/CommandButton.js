@@ -89,7 +89,7 @@ class CommandButton extends React.Component {
     else {
       //If there's no text, we don't want it. 
       if (text?.length < 1) {
-        return '';
+        return;
       }
 
       let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
