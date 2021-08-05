@@ -17,6 +17,12 @@ icon(Photo2Add) Add Picture
 divider
 icon(AddFriend) Add User`;
 
+const childTag = "*";
+const dividerText1 = "divider";
+const dividerText2 = "----";
+const itemTypeHeader = ContextualMenuItemType.Header;
+const itemTypeDivider = ContextualMenuItemType.Divider;
+
 
 
 class SplitButton extends React.Component {
@@ -41,38 +47,99 @@ class SplitButton extends React.Component {
     }
   }
 
-  //Parse the choice items
   set() {
-
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => (
-        this._getMenuProps(index, item?.text, item?.iconName)
-      )
-    );
-
     this.setState({
-      items: items
+      items: this._parseMenuItems()
     });
   }
 
-  _getMenuProps(index, text, iconName) {
-    let key = index + 1;
+  _parseMenuItems() {
+    var itemList = [];
 
-    if (text && text?.trim().toLowerCase() === "divider") {
+    if (this.props.items) {
+      let hasHeadersAndChildren = this._testForHeaders();
+
+      if (hasHeadersAndChildren) {
+        let items = this.props.items.match(/[^\r\n]+/g);
+
+        if (items && items.length) {
+          var i;
+          for (i = 0; i < items.length; i++) {
+            var item = items[i]?.trim();
+            let isChild = item?.startsWith(childTag);
+
+            if (isChild) {
+              //We must remove the * before parsing.
+              item = item.substring(1).trim();
+            }
+
+            let parsedMenuItems = UXPinParser.parse(item);
+            if (parsedMenuItems && parsedMenuItems.length > 0) {
+              let menuItem = parsedMenuItems[0];
+              let trimmedText = menuItem.text?.trim();
+              if (menuItem && trimmedText) {
+                let props = this._getMenuProps(i, trimmedText, menuItem?.iconName, isChild);
+                props ? itemList.push(props) : '';
+              }
+            }
+          }
+        }
+      }
+      else {
+        itemList = UXPinParser.parse(this.props.items?.trim()).map(
+          (item, index) => (
+            this._getMenuProps(index, item?.text?.trim(), item?.iconName, true)
+          )
+        );
+      }
+
+      return itemList;
+    }
+  }
+
+  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
+  _testForHeaders() {
+    if (this.props.items) {
+      let items = this.props.items.match(/[^\r\n]+/g);
+
+      if (items && items.length) {
+        var i;
+        for (i = 0; i < items.length; i++) {
+          let item = items[i]?.trim();
+          if (item?.startsWith(childTag)) {
+            return true;
+          }
+        }
+      }
+    }
+
+    //Else if we made it this far, there are no headers/children pattern
+    return false;
+  }
+
+  _getMenuProps(index, text, iconName, isChild) {
+    let key = index + 1;
+    let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
+
+    if (text && isDivider) {
       let menuProps = {
         key: "divider_" + key,
-        itemType: ContextualMenuItemType.Divider,
+        itemType: itemTypeDivider,
       };
       return menuProps;
     }
     else {
+      let itemKey = isChild ? key : 'header_' + key;
+      let itemType = isChild ? '' : itemTypeHeader;
+
       let menuProps = {
-        key: key,
+        key: itemKey,
         text: text ? text : '',
+        itemType: itemType,
         iconProps: {
           iconName: iconName ? iconName : ''
         },
-        onClick: () => { this._onClick(key) },
+        onClick: () => { this._onClick(itemKey) },
       };
       return menuProps;
     }

@@ -57,16 +57,16 @@ class ActivityItem extends React.Component {
     //    to support the link(Link Text) feature.
     _getTokenizedText(text) {
 
-        // var tokens = UXPinParser.parseRow(text).map(
+        // let tokens = UXPinParser.parseRow(text).map(
         //     (item, index) => {
         //         if (item.type === "link") {
         //             console.log("Found a link: (" + item.text + ") href= " + item.href);
         //             return (
-        //                 <span>{item.text}</span>
-        //                 // <Link
-        //                 //     value={item.text}
-        //                 //     linkHref={item.href}
-        //                 // />
+        //                 // <span>{item.text}</span>
+        //                 <Link
+        //                     value={item.text}
+        //                     linkHref={item.href}
+        //                 />
         //             );
         //         }
         //         if (item.type === "text") {
@@ -77,7 +77,7 @@ class ActivityItem extends React.Component {
 
 
 
-        var tokens = getTokens(text).mixed.map((el, i) => {
+        let tokens = getTokens(text).mixed.map((el, i) => {
             if (typeof (el) === 'string') {
                 return (<span key={i}> {el} </span>);
             }

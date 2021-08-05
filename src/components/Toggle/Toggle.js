@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Toggle as FToggle } from '@fluentui/react/lib/Toggle';
-import { check } from 'prettier';
 
 
 

@@ -75,8 +75,8 @@ class ChoiceGroup extends React.Component {
     )
 
     //Raise this event to UXPin. 
-    if (this.props.onChange) {
-      this.props.onChange(i);
+    if (this.props.onChoiceChange) {
+      this.props.onChoiceChange(i);
     }
   }
 
@@ -113,7 +113,7 @@ ChoiceGroup.propTypes = {
 
   /**
   * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional). This prop's live value is available for scripting.
-  * @uxpinbind onChange
+  * @uxpinbind onChoiceChange
   * @uxpinpropname * Index
    * */
   selectedIndex: PropTypes.number,
@@ -147,7 +147,7 @@ ChoiceGroup.propTypes = {
    * @uxpindescription Fires when the selected index value changes.
    * @uxpinpropname * Index Changed
    * */
-  onChange: PropTypes.func
+  onChoiceChange: PropTypes.func
 };
 
 /**
