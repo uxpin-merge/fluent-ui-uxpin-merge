@@ -17,6 +17,8 @@ Option E
 Option F`;
 
 const childTag = "*";
+const dividerText1 = "divider";
+const dividerText2 = "----";
 const itemTypeHeader = SelectableOptionMenuItemType.Header;
 const itemTypeDivider = SelectableOptionMenuItemType.Divider;
 
@@ -98,8 +100,9 @@ class ComboBox extends React.Component {
 
   _getItemProps(index, text, hasHeadersAndChildren) {
     let key = index;
+    let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
 
-    if (text && text?.trim().toLowerCase() === "divider") {
+    if (text && isDivider) {
       let itemProps = {
         key: "divider_" + key,
         itemType: itemTypeDivider,
@@ -294,7 +297,7 @@ ComboBox.propTypes = {
   selected: PropTypes.string,
 
   /**
-   * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. 
+   * @uxpindescription The list of available options. Put each item on a separate line. Put quotes around an item to use a comma in it. Use 'divider' to add a divider. To activate headers with children, put a * in front of any child, such as: * Item Text
    * @uxpincontroltype codeeditor
    */
   items: PropTypes.string,
