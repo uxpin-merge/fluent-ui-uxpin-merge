@@ -136,6 +136,10 @@ class CommandButton extends React.Component {
       return menuProps;
     }
     else {
+
+      if (!text && !iconName)
+        return;
+
       //let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
       let itemKey = isChild ? key : 'header_' + key;
       let itemType = isChild ? '' : itemTypeHeader;
