@@ -89,7 +89,7 @@ class CommandButton extends React.Component {
         }
       }
       else {
-        itemList = UXPinParser.parse(this.props.items).map(
+        itemList = UXPinParser.parse(this.props.items?.trim()).map(
           (item, index) => (
             this._getMenuProps(index, item?.text?.trim(), item?.iconName, true)
           )
@@ -121,10 +121,6 @@ class CommandButton extends React.Component {
   }
 
   _getMenuProps(index, text, iconName, isChild) {
-
-    console.log("     getting props for " + text);
-
-
     let key = index + 1;
     let itemText = text?.toLowerCase();
 
@@ -138,7 +134,7 @@ class CommandButton extends React.Component {
     else {
 
       if (!text && !iconName)
-        return;
+        return '';
 
       //let isChild = hasHeadersAndChildren && text?.startsWith(childTag);
       let itemKey = isChild ? key : 'header_' + key;
