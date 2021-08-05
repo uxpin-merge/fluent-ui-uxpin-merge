@@ -48,6 +48,7 @@ class SplitButton extends React.Component {
   //Parse the choice items
   set() {
 
+    //Figure out the items
     let hasHeadersAndChildren = this._testForHeaders();
 
     let items = UXPinParser.parse(this.props.items).map(
