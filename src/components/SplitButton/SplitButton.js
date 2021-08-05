@@ -58,7 +58,7 @@ class SplitButton extends React.Component {
     );
 
     this.setState({
-      items: items
+      items: items,
     });
   }
 
@@ -107,7 +107,7 @@ class SplitButton extends React.Component {
         iconProps: {
           iconName: iconName ? iconName : ''
         },
-        onClick: () => { this._onClick(key) },
+        onClick: () => { this._onClick(itemKey) },
       };
       return menuProps;
     }

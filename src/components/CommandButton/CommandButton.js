@@ -100,7 +100,7 @@ class CommandButton extends React.Component {
         iconProps: {
           iconName: iconName ? iconName : ''
         },
-        onClick: () => { this._onClick(key) },
+        onClick: () => { this._onClick(itemKey) },
       };
       return menuProps;
     }
