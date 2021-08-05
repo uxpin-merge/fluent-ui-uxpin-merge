@@ -77,8 +77,8 @@ class GroupButton extends React.Component {
          )
 
          //If the index changed, let's push the new index value
-         if (this.props.onButtonClick) {
-            this.props.onButtonClick(newIndex);
+         if (this.props.onChoiceChange) {
+            this.props.onChoiceChange(newIndex);
          }
       }
    }
@@ -150,7 +150,7 @@ GroupButton.propTypes = {
    /**
    * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional). This prop's live value is available for scripting.
    * @uxpinpropname * Index
-   * @uxpinbind onButtonClick
+   * @uxpinbind onChoiceChange
     * */
    selectedIndex: PropTypes.number,
 
@@ -171,8 +171,7 @@ GroupButton.propTypes = {
     * @uxpindescription Fires when the selected index value changes.
     * @uxpinpropname * Click
     * */
-   onButtonClick: PropTypes.func
-
+   onChoiceChange: PropTypes.func,
 };
 
 
