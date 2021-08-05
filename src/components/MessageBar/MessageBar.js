@@ -14,7 +14,7 @@ class MessageBar extends React.Component {
         super(props);
 
         this.state = {
-            message: this.props.message? this.props.message : "hello!",
+            message: "",
         }
     }
 
@@ -70,7 +70,7 @@ class MessageBar extends React.Component {
     _onDismiss() {
 
         if (this.props.onDismissClicked) {
-            this.props.onDismissClicked();
+            this.props.onDismissClicked("");
         }
     }
 
