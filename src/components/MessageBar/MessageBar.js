@@ -157,7 +157,7 @@ MessageBar.propTypes = {
 
     /**
      * @uxpindescription The control's message. Supports the link(link text | link url) feature.
-       * @uxpincontroltype codeeditor
+    * @uxpincontroltype textfield(6)
      */
     message: PropTypes.string,
 
