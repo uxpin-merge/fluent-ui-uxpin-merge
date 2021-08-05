@@ -137,13 +137,12 @@ class CommandButton extends React.Component {
       let itemType = isChild ? '' : itemTypeHeader;
       // let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
       // let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
-
-      let itemText = hasHeadersAndChildren && isChild ?
-        text.substring(text.indexOf(childTag) + 1).trim() : text;
+      // let itemText = hasHeadersAndChildren && isChild ?
+      //   text.substring(text.indexOf(childTag) + 1).trim() : text;
 
       let menuProps = {
         key: itemKey,
-        text: itemText ? itemText : '',
+        text: text ? text : '',
         itemType: itemType,
         iconProps: {
           iconName: iconName ? iconName : ''
