@@ -61,9 +61,13 @@ class CommandButton extends React.Component {
       let items = this.props.items.match(/[^\r\n]+/g);
 
       if (items && items.length) {
-        for (var i = 0; i < items.length; i++) {
+        var i;
+        for (i = 0; i < items.length; i++) {
           let item = items[i]?.trim();
-          if (item.startsWith(childTag)) {
+
+          console.log("Looking at " + item);
+
+          if (item?.startsWith(childTag)) {
             return true;
           }
         }
