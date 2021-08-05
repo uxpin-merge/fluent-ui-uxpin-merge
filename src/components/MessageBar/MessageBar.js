@@ -38,7 +38,6 @@ class MessageBar extends React.Component {
         }
     }
 
-
     getMessageText() {
         let elements;
         const parsedOutput = UXPinParser.parse(this.props.message);
@@ -68,9 +67,8 @@ class MessageBar extends React.Component {
     }
 
     _onDismiss() {
-
         if (this.props.onDismissClicked) {
-            this.props.onDismissClicked("");
+            this.props.onDismissClicked(true);
         }
     }
 
@@ -131,7 +129,7 @@ class MessageBar extends React.Component {
         var dismissProps = '';
         if (this.props.showDismissButton) {
             dismissProps = {
-                onDismiss: this._onDismiss
+                onDismiss: this._onDismiss()
             }
         }
 
