@@ -30,7 +30,7 @@ class Text extends React.Component {
     let newMessage = this.getMessageText();
 
     this.setState(
-      { message: message }
+      { message: newMessage }
     )
   }
 
