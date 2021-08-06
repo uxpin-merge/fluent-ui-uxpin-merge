@@ -22,6 +22,18 @@ const statusCustom = 'custom';
 const statusList = [
    'info', 'success', 'done', 'warning', 'error', 'failed', 'skipped', 'unknown', 'blocked', 'syncing', 'inProgress', 'queued', 'waiting', 'currentStep', 'futureStep', 'reverted', 'restored', statusCustom
 ];
+const iconSizeMap = {
+   tiny: 10,
+   xSmall: 10,
+   small: 14,
+   smallPlus: 14,
+   medium: 16,
+   mediumPlus: 16,
+   large: 18,
+   xxLarge: 32,
+   mega: 64,
+};
+
 
 
 class StatusSet extends React.Component {
@@ -58,43 +70,12 @@ class StatusSet extends React.Component {
       return status ? status : UxpStatus.info;
    }
 
-   getIconSize() {
-      let variant = this.props.size;
-
-      switch (variant) {
-         case '':
-            return;
-         case 'tiny':
-            return 12;
-         case 'xSmall':
-            return 12;
-         case 'small':
-            return 14;
-         case 'smallPlus':
-            return 14;
-         case 'medium':
-            return 16;
-         case 'mediumPlus':
-            return 16;
-         case 'large':
-            return 20;
-         case 'xLarge':
-            return 24;
-         case 'xxLarge':
-            return 32;
-         case 'mega':
-            return 64;
-         default:
-            return 16;
-      }
-   }
-
    render() {
       let itemList = [];
 
       var iconName = UxpStatus.info.icon;
       var iconColor = UxpStatus.info.iconColor;
-      var iconSize = this.getIconSize();
+      var iconSize = iconSizeMap[this.props.size];
       var addIcon = true;
 
       var textVal = UxpStatus.info.text;
