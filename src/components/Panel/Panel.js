@@ -37,7 +37,9 @@ class Panel extends React.Component {
   _onDismiss() {
     console.log("Just hit dismiss");
 
-    this.props.show = false;
+    if (this.props.show) {
+      this.props.show = false;
+    }
 
     this.setState({
       isOpen: false,
@@ -115,6 +117,7 @@ class Panel extends React.Component {
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
           hasCloseButton={true}
+          isLightDismiss={true}
           onDismiss={this._onDismiss}
           closeButtonAriaLabel={"Close"}
         >
