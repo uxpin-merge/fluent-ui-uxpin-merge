@@ -78,12 +78,13 @@ class Image extends React.Component {
         let mWidth = this.props.imgWidth > 0 ? this.props.imgWidth : 1;
         let mHeight = this.props.imgHeight > 0 ? this.props.imgHeight : 1;
 
-        let token = this.props.imageToken === customImgToken ? this.props.imageUrl : UxpImageUtils.getImageUrlByToken(this.props.imageToken);
-        // let imgURL = UxpImageUtils.getImageUrlByToken(token);
+        let token = this.props.imageToken === customImgToken ? this.props.imageUrl : this.props.imageToken;
+        //This utility also corrects if the user forgot the HTTP
+        let imgURL = UxpImageUtils.getImageUrlByToken(token);
 
         let imgProps = {
             shouldFadeIn: true,
-            src: token ? token : '',
+            src: imgURL ? imgURL : '',
             imageFit: fit,
             maximizeFrame: true,
             width: mWidth,
@@ -114,7 +115,11 @@ Image.propTypes = {
     imageToken: PropTypes.oneOf(imageTokens),
 
     /**
-    * @uxpindescription The URL to an image file. TIP: Put any image on screen, in the UXPin Preview, right-click and copy the image URL, then paste that URL into this box. Then move the original image off canvas -- but don't delete it! Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
+    * @uxpindescription The URL to an image file. 
+    * Be sure the Img Token is set to 'custom'!
+    * Must start with 'www' or 'http'.
+    * TIP: Put any image on screen, in the UXPin Preview, right-click and copy the image URL, then paste that URL into this box. Then move the original image off canvas -- but don't delete it!  
+    * Supports the full list of image tokens, too.
     * @uxpinpropname Img URL
     * @uxpincontroltype textfield(6)
     */
