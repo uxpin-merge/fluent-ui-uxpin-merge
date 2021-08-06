@@ -18,6 +18,7 @@ const fitContain = 'contain';
 const fitCover = 'cover';
 const fitNone = 'none';
 const customImgToken = "custom URL";
+const defaultImageToken = "bridge";
 const imageTokens = [
     "person 1", "persona 1",
     "person 20", "persona 20",
@@ -151,7 +152,7 @@ Image.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Image.defaultProps = {
-    imageToken: ,
+    imageToken: defaultImageToken,
     imageUrl: '',
     imageFit: fitContain,
     imgWidth: 200,

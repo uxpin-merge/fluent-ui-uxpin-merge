@@ -3,13 +3,6 @@ import Image from '../Image';
 
 
 
-const defaultImageToken = "bridge";
-
-
-
 export default (
-  <Image
-    uxpId="image1"
-    imageToken={defaultImageToken}
-  />
+  <Image uxpId="image1" />
 );
