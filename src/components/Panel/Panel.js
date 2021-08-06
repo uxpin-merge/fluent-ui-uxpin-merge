@@ -157,6 +157,14 @@ class Panel extends React.Component {
       );
     }
 
+    let headerStyle = {
+      main: {
+        header: {
+          paddingBottom: 24,
+        }
+      }
+    }
+
     return (
       <div >
         <div  //A visual aid for the designer to see in UXPin
@@ -180,6 +188,7 @@ class Panel extends React.Component {
           isFooterAtBottom={true}
           onRenderFooterContent={() => this._onRenderFooterContent()}
           onDismiss={(evt) => this._onDismiss()}
+          styles={headerStyle}
         >
           {panelContents}
         </FPanel>
