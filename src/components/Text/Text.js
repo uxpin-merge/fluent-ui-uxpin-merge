@@ -120,12 +120,12 @@ class Text extends React.Component {
       verticalAlign: 'middle',
     };
 
-    return (<span key={key}>
+    return (<span key={key} style={verticalAlign = 'middle'}>
       <Icon
         iconName={name}
         className={iconDisplayClass}
       />
-    </span>)
+    </span >)
   }
 
   _getTokenizedText(text) {
