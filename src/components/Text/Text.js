@@ -15,7 +15,7 @@ const iconSizeMap = {
   tiny: 12,
   xSmall: 12,
   small: 14,
-  smallPluss: 14,
+  smallPlus: 14,
   medium: 16,
   mediumPlus: 16,
   large: 20,
@@ -105,6 +105,9 @@ class Text extends React.Component {
   _getIconElement(key, iconName, colorToken) {
     let name = iconName ? iconName.trim() : '';
     let size = iconSizeMap[this.props.size];
+
+    console.log("   icon size: " + size);
+
     let color = UxpColors.getHexFromHexOrToken(colorToken);
     if (!color) {
       color = defaultTextColor;
