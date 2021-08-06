@@ -110,7 +110,7 @@ class Text extends React.Component {
     if (!color) {
       color = defaultTextColor;
     }
-    const iconDisplayClass = {
+    let iconDisplayClass = {
       color: color,
       fontSize: size,
       height: size,
@@ -119,8 +119,11 @@ class Text extends React.Component {
       lineHeight: 'normal',
       verticalAlign: 'middle',
     };
+    const spanStyle = {
+      verticalAlign: 'middle',
+    }
 
-    return (<span key={key} style={verticalAlign = 'middle'}>
+    return (<span key={key} style={spanStyle}>
       <Icon
         iconName={name}
         className={iconDisplayClass}
