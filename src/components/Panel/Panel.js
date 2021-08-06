@@ -43,8 +43,8 @@ class Panel extends React.Component {
       isOpen: false,
     });
 
-    if (this.dismiss) {
-      this.dismiss(true);
+    if (this.onPanelDismiss) {
+      this.onPanelDismiss(true);
     }
   }
 
@@ -114,7 +114,8 @@ class Panel extends React.Component {
           {...this.props}
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
-          onDismissed={() => this._onDismiss()}
+          hasCloseButton={true}
+          dismiss={(evt) => this._onDismiss()}
           closeButtonAriaLabel={"Close"}
         >
           {panelContents}
@@ -148,7 +149,7 @@ Panel.propTypes = {
     * @uxpindescription Fires when the Panel is closed
     * @uxpinpropname Dismiss
     */
-  dismiss: PropTypes.func
+  onPanelDismiss: PropTypes.func
 };
 
 
