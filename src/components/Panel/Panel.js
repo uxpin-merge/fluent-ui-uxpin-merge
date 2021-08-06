@@ -1,14 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { DefaultButton } from '@fluentui/react/lib/Button';
 import { Panel as FPanel, PanelType } from '@fluentui/react/lib/Panel';
-import { useBoolean } from '@fluentui/react-hooks';
 
 
 
-const Panel = () => {
-  const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
-}
+// const Panel = () => {
+//   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
+// }
 
 class Panel extends React.Component {
 
