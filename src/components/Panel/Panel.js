@@ -12,11 +12,11 @@ const panelSize = {
   small: PanelType.smallFixedFar,
   smallFluid: PanelType.smallFluid,
   medium: PanelType.medium,
-  large: PanelType.largeFixed,
+  large: PanelType.large,
   xLarge: PanelType.extraLarge,
 };
 
-const panelSizeList = ["small", "smallFluid", "medium", "large", "xLarge"];
+const panelSizeList = ["smallFixed", "smallFluid", "medium", "large", "xLarge"];
 const defaultPanelSize = 'medium';
 
 
