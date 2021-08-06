@@ -101,7 +101,7 @@ class Text extends React.Component {
   _getLinkElement(key, text, href) {
     return (<a key={key} href={href ? href : ''} target={linkTarget}>{text}</a>)
   }
-  _getIconElement(iconName, colorToken) {
+  _getIconElement(key, iconName, colorToken) {
     let iSize = iconSizeMap[this.props.size];
     return (<span key={key}>
       <Icon
