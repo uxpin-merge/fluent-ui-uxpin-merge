@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Text as FText } from '@fluentui/react/lib/Text';
-import Icon from '../Icon/Icon';
+// import Icon from '../Icon/Icon';
+import { Icon } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -102,12 +103,25 @@ class Text extends React.Component {
     return (<a key={key} href={href ? href : ''} target={linkTarget}>{text}</a>)
   }
   _getIconElement(key, iconName, colorToken) {
-    let iSize = iconSizeMap[this.props.size];
+    let name = iconName ? iconName.trim() : '';
+    let size = iconSizeMap[this.props.size];
+    let color = UxpColors.getHexFromHexOrToken(colorToken);
+    if (!color) {
+      color = defaultTextColor;
+    }
+    const iconDisplayClass = {
+      color: color,
+      fontSize: size,
+      height: size,
+      width: size,
+      display: 'block',
+      lineHeight: 'normal',
+    };
+
     return (<span key={key}>
       <Icon
-        iconName={iconName}
-        iconColor={colorToken}
-        size={iSize}
+        iconName={name}
+        className={iconDisplayClass}
       />
     </span>)
   }
