@@ -51,7 +51,8 @@ class Text extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.textValue !== this.props.textValue) {
+    if (prevProps.textValue !== this.props.textValue ||
+      prevProps.size !== this.props.size) {
       this.set();
     }
   }
@@ -117,7 +118,7 @@ class Text extends React.Component {
       fontSize: size,
       height: size,
       width: size,
-      display: 'block',
+      display: 'inline',
       lineHeight: 'normal',
     };
 
