@@ -157,8 +157,13 @@ class Panel extends React.Component {
       );
     }
 
+    let divProps = {
+      width: 0,
+      height: 0,
+    }
+
     return (
-      <div>
+      <div style={divProps} >
         <FPanel
           {...this.props}
           closeButtonAriaLabel={"Close"}
