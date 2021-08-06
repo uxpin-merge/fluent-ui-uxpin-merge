@@ -90,6 +90,9 @@ class Panel extends React.Component {
 
     //Do we have children? 
     if (stackList && stackList.length > 0) {
+      let padStyle = {
+        paddingTop: 24,
+      };
 
       panelContents = (
         <Stack
@@ -98,6 +101,7 @@ class Panel extends React.Component {
           horizontal={false}
           horizontalAlign={'left'}
           wrap={false}
+          styles={padStyle}
         >
           {stackList}
         </Stack>
@@ -110,8 +114,8 @@ class Panel extends React.Component {
           {...this.props}
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
-          onDismiss={() => this._onDismiss()}
-          closeButtonAriaLabel="Close"
+          onDismissed={() => this._onDismiss()}
+          closeButtonAriaLabel={"Close"}
         >
           {panelContents}
         </FPanel>
