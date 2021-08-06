@@ -4,20 +4,17 @@ import { Panel as FPanel, PanelType } from '@fluentui/react/lib/Panel';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 
 
-// const Panel = () => {
-//   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
-// }
 
 const panelSize = {
-  small: PanelType.smallFixedFar,
-  smallFluid: PanelType.smallFluid,
+  small: PanelType.smallFluid,
   medium: PanelType.medium,
   large: PanelType.large,
   xLarge: PanelType.extraLarge,
 };
 
-const panelSizeList = ["smallFixed", "smallFluid", "medium", "large", "xLarge"];
+const panelSizeList = ["small", "medium", "large", "xLarge"];
 const defaultPanelSize = 'medium';
+
 
 
 class Panel extends React.Component {
@@ -46,6 +43,39 @@ class Panel extends React.Component {
     });
   }
 
+  _onRenderFooterContent() {
+    if (this.props.hasFooter && this.props.children) {
+      //Get the last child in the array
+      let childList = React.Children.toArray(this.props.children);
+
+      if (childList.length && childList.length > 0) {
+        let footerIndex = childList.length - 1;
+
+        if (footerIndex > 0) {
+          let footerContent = (
+            <Stack
+              horizontal={true}
+              horizontalAlign={'left'}
+              wrap={false}
+            >
+              <StackItem
+                key={key}
+                align={'stretch'}
+                grow={false}
+              >
+                {child}
+              </StackItem>
+            </Stack>
+          );
+
+          return footerContent;
+        }
+      }
+    }
+
+    return '';
+  }
+
   _onDismiss() {
     this.props.show = false;
 
@@ -69,11 +99,11 @@ class Panel extends React.Component {
     const stackTokens = {
       childrenGap: 24,
       padding: 0,
-      paddingTop: 24,
     };
 
     //Set up the StackItems
     var stackList = [];
+    var footerContent = '';
     if (this.props.children) {
 
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -81,24 +111,30 @@ class Panel extends React.Component {
 
       //Now, we configure the StackItems
       if (childList.length) {
+        let footerIndex = childList.length > 0 ? childList.length - 1 : -1;
 
         for (var i = 0; i < childList.length; i++) {
           let child = childList[i];
           let key = _.uniqueId('child_');
 
-          let stack = (
-            <StackItem
-              key={key}
-              align={'stretch'}
-              grow={false}
-            >
-              {child}
-            </StackItem>
-          );
-          stackList.push(stack);
+          if (this.props.hasFooter && i === footerIndex) {
+            //Ignore this object for now. We'll render it later. 
+          }
+          else {
+            let stack = (
+              <StackItem
+                key={key}
+                align={'stretch'}
+                grow={false}
+              >
+                {child}
+              </StackItem>
+            );
+            stackList.push(stack);
+          }
         }
       }
-    }
+    } //organize children
 
     let panelContents = '';
 
@@ -121,13 +157,15 @@ class Panel extends React.Component {
       <div>
         <FPanel
           {...this.props}
+          closeButtonAriaLabel={"Close"}
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
           hasCloseButton={true}
           isLightDismiss={this.props.lightDismiss}
-          onDismiss={(evt) => this._onDismiss()}
           type={panelType}
-          closeButtonAriaLabel={"Close"}
+          isFooterAtBottom={true}
+          onRenderFooterContent={() => this.onRenderFooterContent()}
+          onDismiss={(evt) => this._onDismiss()}
         >
           {panelContents}
         </FPanel>
@@ -164,6 +202,12 @@ Panel.propTypes = {
   panelWidth: PropTypes.oneOf(panelSizeList),
 
   /**
+   * @uxpindescription To put the last child object into the Footer area.
+   * @uxpinpropname Footer
+   */
+  hasFooter: PropTypes.bool,
+
+  /**
    * @uxpindescription To allow dismissing the panel by clicking anywhere off it.
    * @uxpinpropname Light Dismiss
    */
@@ -182,6 +226,7 @@ Panel.defaultProps = {
   show: true,
   lightDismiss: true,
   panelWidth: defaultPanelSize,
+  hasFooter: false,
 }
 
 
