@@ -5,6 +5,7 @@ import { Text as FText } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
+import { FlexibleHeightXYPlot } from 'react-vis';
 
 
 
@@ -115,11 +116,13 @@ class Text extends React.Component {
       fontSize: size,
       height: size,
       width: size,
-      display: 'block',
+      display: 'inline',
       lineHeight: 'normal',
     };
     const spanStyle = {
       verticalAlign: 'middle',
+      display: 'flex',
+      alignItems: 'center',
     }
 
     return (<span key={key} style={spanStyle}>
