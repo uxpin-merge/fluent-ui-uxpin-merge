@@ -38,6 +38,7 @@ class Panel extends React.Component {
     console.log("Just hit dismiss");
 
     if (this.props.show) {
+      console.log("    Set the show prop to false");
       this.props.show = false;
     }
 
