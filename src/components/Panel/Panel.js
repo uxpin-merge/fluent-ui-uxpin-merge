@@ -60,9 +60,8 @@ class Panel extends React.Component {
 
   render() {
 
-    // let pt = panelSize`${this.props.panelWidth}`;
-    let rt = panelSize[this.props.panelWidth];
-    console.log("RT: " + rt);
+    //Panel Type
+    let panelType = panelSize[this.props.panelWidth];
 
     //****************************
     //For Inner Stack
@@ -127,6 +126,7 @@ class Panel extends React.Component {
           hasCloseButton={true}
           isLightDismiss={this.props.lightDismiss}
           onDismiss={(evt) => this._onDismiss()}
+          type={panelType}
           closeButtonAriaLabel={"Close"}
         >
           {panelContents}
