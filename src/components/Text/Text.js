@@ -69,10 +69,10 @@ class Text extends React.Component {
         if (item.type !== "compound") {
           // console.log("This is NOT type Compound, this is a " + item.type)
           // return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
-
-          return item.type === "text" ? this._getTextElement(index, item?.text)
-            : item.type === "link" ? this._getLinkElement(index, item?.text, item?.href)
-              : item.type === "icon" ? this._getIconElement(item?.iconName, item?.colorToken)
+          const key = _.uniqueId('text_');
+          return item.type === "text" ? this._getTextElement(key, item?.text)
+            : item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+              : item.type === "icon" ? this._getIconElement(key, item?.iconName, item?.colorToken)
                 : '';
         } else {
           // console.log("This is type " + item.type)
@@ -81,10 +81,10 @@ class Text extends React.Component {
             (subItem, subIndex) => {
               // Second map of parsedOutput.value to seperate each object of links and text
               console.log("      >>> Map item " + subIndex + " of parsedOutput.value: " + JSON.stringify(subItem) + " subItem");
-
-              return subItem.type === "text" ? this._getTextElement(subIndex, subItem?.text)
-                : subItem.type === "link" ? this._getLinkElement(subIndex, subItem?.text, subItem?.href)
-                  : subItem.type === "icon" ? this._getIconElement(subItem?.iconName, subItem?.colorToken)
+              const key = _.uniqueId('text_');
+              return subItem.type === "text" ? this._getTextElement(key, subItem?.text)
+                : subItem.type === "link" ? this._getLinkElement(key, subItem?.text, subItem?.href)
+                  : subItem.type === "icon" ? this._getIconElement(key, subItem?.iconName, subItem?.colorToken)
                     : '';
               // return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
             }
@@ -103,11 +103,13 @@ class Text extends React.Component {
   }
   _getIconElement(iconName, colorToken) {
     let iSize = iconSizeMap[this.props.size];
-    return (<Icon
-      iconName={iconName}
-      iconColor={colorToken}
-      size={iSize}
-    />)
+    return (<span key={key}>
+      <Icon
+        iconName={iconName}
+        iconColor={colorToken}
+        size={iSize}
+      />
+    </span>)
   }
 
   _getTokenizedText(text) {
