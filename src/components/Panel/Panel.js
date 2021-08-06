@@ -157,13 +157,18 @@ class Panel extends React.Component {
       );
     }
 
-    let divProps = {
-      width: 0,
-      height: 0,
-    }
-
     return (
-      <div style={divProps} >
+      <div >
+        <div  //A visual aid for the designer to see in UXPin
+          style={{
+            width: '100px',
+            height: '100px',
+            color: "white",
+            textAlign: "center",
+            verticalAlign: "middle",
+            background: "#666600",
+            borderRadius: 10
+          }}><br /><em><strong>Panel:</strong></em><br />Move this marker offscreen</div>
         <FPanel
           {...this.props}
           closeButtonAriaLabel={"Close"}
