@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Panel as FPanel, PanelType } from '@fluentui/react/lib/Panel';
-
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 
 
 // const Panel = () => {
@@ -35,6 +35,8 @@ class Panel extends React.Component {
   }
 
   _onDismiss() {
+    console.log("Just hit dismiss");
+
     this.props.show = false;
 
     this.setState({
@@ -42,11 +44,65 @@ class Panel extends React.Component {
     });
 
     if (this.dismiss) {
-      this.dismiss(false);
+      this.dismiss(true);
     }
   }
 
   render() {
+
+    //****************************
+    //For Inner Stack
+
+    const stackTokens = {
+      childrenGap: 24,
+      padding: 0,
+    };
+
+    //Set up the StackItems
+    var stackList = [];
+    if (this.props.children) {
+
+      //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+      let childList = React.Children.toArray(this.props.children);
+
+      //Now, we configure the StackItems
+      if (childList.length) {
+
+        for (var i = 0; i < childList.length; i++) {
+          let child = childList[i];
+          let key = _.uniqueId('child_');
+
+          let stack = (
+            <StackItem
+              key={key}
+              align={'stretch'}
+              grow={false}
+            >
+              {child}
+            </StackItem>
+          );
+          stackList.push(stack);
+        }
+      }
+    }
+
+    let panelContents = '';
+
+    //Do we have children? 
+    if (stackList && stackList.length > 0) {
+
+      panelContents = (
+        <Stack
+          {...this.props}
+          tokens={stackTokens}
+          horizontal={false}
+          horizontalAlign={'left'}
+          wrap={false}
+        >
+          {stackList}
+        </Stack>
+      );
+    }
 
     return (
       <div>
@@ -57,7 +113,7 @@ class Panel extends React.Component {
           onDismiss={() => this._onDismiss()}
           closeButtonAriaLabel="Close"
         >
-          <p>Content goes here.</p>
+          {panelContents}
         </FPanel>
       </div >
     );
