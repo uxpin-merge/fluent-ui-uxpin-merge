@@ -23,9 +23,9 @@ class Panel extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.show !== this.props.show) {
-      this.set();
-    }
+    // if (prevProps.show !== this.props.show) {
+    //   this.set();
+    // }
   }
 
   set() {
