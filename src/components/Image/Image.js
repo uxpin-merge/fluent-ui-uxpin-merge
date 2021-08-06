@@ -17,6 +17,30 @@ const fitCenterContain = 'center contain';
 const fitContain = 'contain';
 const fitCover = 'cover';
 const fitNone = 'none';
+const customImgToken = "custom URL";
+const imageTokens = [
+    "person 1", "persona 1",
+    "person 20", "persona 20",
+    "map", "sf map",
+    "london map",
+    "city", "blurry", "sydney",
+    "woman", "female",
+    "man", "male",
+    "dress",
+    "suit",
+    "computer", "laptop",
+    "dog",
+    "cat",
+    "cake", "unicorn",
+    "party",
+    "office",
+    "home", "living room",
+    "logo", "uxpin", "uxpin logo black",
+    "uxpin logo white",
+    "bridge", "golden gate bridge",
+    "fpo",
+    customImgToken
+];
 
 
 
@@ -53,11 +77,12 @@ class Image extends React.Component {
         let mWidth = this.props.imgWidth > 0 ? this.props.imgWidth : 1;
         let mHeight = this.props.imgHeight > 0 ? this.props.imgHeight : 1;
 
-        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+        let token = this.props.imageToken === customImgToken ? this.props.imageUrl : UxpImageUtils.getImageUrlByToken(this.props.imageToken);
+        // let imgURL = UxpImageUtils.getImageUrlByToken(token);
 
         let imgProps = {
             shouldFadeIn: true,
-            src: imgURL ? imgURL : '',
+            src: token ? token : '',
             imageFit: fit,
             maximizeFrame: true,
             width: mWidth,
@@ -73,8 +98,6 @@ class Image extends React.Component {
 
         );
     }
-
-
 }
 
 
@@ -82,6 +105,12 @@ class Image extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Image.propTypes = {
+
+    /**  
+    * @uxpindescription Use one of the built in tokens, or enter a custom image URL. 
+    * @uxpinpropname Img Token
+    */
+    imageToken: PropTypes.oneOf(imageTokens),
 
     /**
     * @uxpindescription The URL to an image file. TIP: Put any image on screen, in the UXPin Preview, right-click and copy the image URL, then paste that URL into this box. Then move the original image off canvas -- but don't delete it! Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
@@ -122,7 +151,8 @@ Image.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Image.defaultProps = {
-    imageUrl: defaultImageURL,
+    imageToken: ,
+    imageUrl: '',
     imageFit: fitContain,
     imgWidth: 200,
     imgHeight: 200,

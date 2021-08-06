@@ -85,6 +85,37 @@ export const UxpImageUtils = {
    blurry: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/blurry.jpg",
 
    /**
+   * Provides a list of all supported image tokens. 
+   * @returns {string} An array of strings with the image token names. 
+   */
+   getImageTokenList: function () {
+      let list = [
+         "person 1", "persona 1",
+         "person 20", "persona 20",
+         "map", "sf map",
+         "london map",
+         "city", "blurry", "sydney",
+         "woman", "female",
+         "man", "male",
+         "dress",
+         "suit",
+         "computer", "laptop",
+         "dog",
+         "cat",
+         "cake", "unicorn",
+         "party",
+         "office",
+         "home", "living room",
+         "logo", "uxpin", "uxpin logo black",
+         "uxpin logo white",
+         "bridge", "golden gate bridge",
+         "fpo"
+      ];
+
+      return list;
+   },
+
+   /**
    * The user may invoke an image by its token, as indicated
    * @param {string} token The token for an image. 
    * @returns {string} If found, returns a URL string. If not found, returns undefined.
