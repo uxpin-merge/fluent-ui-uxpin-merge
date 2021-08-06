@@ -8,6 +8,18 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 //   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
 // }
 
+const panelSize = {
+  small: PanelType.smallFixedFar,
+  smallFluid: PanelType.smallFluid,
+  medium: PanelType.medium,
+  large: PanelType.largeFixed,
+  xLarge: PanelType.extraLarge,
+};
+
+const panelSizeList = ["small", "smallFluid", "medium", "large", "xLarge"];
+const defaultPanelSize = 'medium',
+
+
 class Panel extends React.Component {
 
   constructor(props) {
@@ -35,13 +47,7 @@ class Panel extends React.Component {
   }
 
   _onDismiss() {
-
-
-    console.log("dismissed");
-
-    if (this.props.show) {
-      this.props.show = false;
-    }
+    this.props.show = false;
 
     this.setState({
       isOpen: false,
@@ -54,12 +60,17 @@ class Panel extends React.Component {
 
   render() {
 
+    let pt = panelSize`${this.props.panelWidth}`;
+    let rt = panelSize[this.props.panelWidth];
+    console.log("PT: " + pt + ". and RT: " + rt);
+
     //****************************
     //For Inner Stack
 
     const stackTokens = {
       childrenGap: 24,
       padding: 0,
+      paddingTop: 24,
     };
 
     //Set up the StackItems
@@ -94,10 +105,6 @@ class Panel extends React.Component {
 
     //Do we have children? 
     if (stackList && stackList.length > 0) {
-      let padStyle = {
-        paddingTop: 24,
-      };
-
       panelContents = (
         <Stack
           {...this.props}
@@ -105,7 +112,6 @@ class Panel extends React.Component {
           horizontal={false}
           horizontalAlign={'left'}
           wrap={false}
-          styles={padStyle}
         >
           {stackList}
         </Stack>
@@ -152,6 +158,12 @@ Panel.propTypes = {
   headerText: PropTypes.string,
 
   /**
+  * @uxpindescription The display width of the panel. 
+  * @uxpinpropname Panel Size
+  */
+  panelWidth: PropTypes.oneOf(panelSizeList),
+
+  /**
    * @uxpindescription To allow dismissing the panel by clicking anywhere off it.
    * @uxpinpropname Light Dismiss
    */
@@ -168,6 +180,9 @@ Panel.propTypes = {
 Panel.defaultProps = {
   headerText: "Panel Header",
   show: true,
+  lightDismiss: true,
+  panelWidth: defaultPanelSize,
 }
+
 
 export { Panel as default };
