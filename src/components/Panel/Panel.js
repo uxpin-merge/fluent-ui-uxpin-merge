@@ -24,26 +24,18 @@ class Panel extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.show !== this.props.show) {
-      console.log("compDidUpdate: New value: " + this.props.show);
       this.set();
     }
   }
 
   set() {
-
-    console.log("In set(). show prop is: " + this.props.show);
-
-
     this.setState({
       isOpen: this.props.show,
     });
   }
 
   _onDismiss() {
-    console.log("Just hit dismiss");
-
     if (this.props.show) {
-      console.log("    Set the show prop to false");
       this.props.show = false;
     }
 
@@ -52,7 +44,7 @@ class Panel extends React.Component {
     });
 
     if (this.onPanelDismiss) {
-      this.onPanelDismiss(true);
+      this.onPanelDismiss(false);
     }
   }
 
@@ -116,8 +108,6 @@ class Panel extends React.Component {
       );
     }
 
-    console.log("isOpen: " + this.state.isOpen);
-
     return (
       <div>
         <FPanel
@@ -146,7 +136,9 @@ Panel.propTypes = {
   children: PropTypes.node,
 
   /**
-   * @uxpindescription To show or hide the panel 
+   * @uxpindescription To show or hide the panel. Available for scripting.
+   * @uxpinpropname * Show
+   * @uxpinbind onPanelDismiss
    */
   show: PropTypes.bool,
 
