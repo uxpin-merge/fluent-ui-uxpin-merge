@@ -161,7 +161,10 @@ class Panel extends React.Component {
       main: {
         header: {
           paddingBottom: 24,
-        }
+        },
+        headerText: {
+          paddingBottom: 24,
+        },
       }
     }
 
