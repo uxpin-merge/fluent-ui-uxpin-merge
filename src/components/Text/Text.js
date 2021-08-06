@@ -106,9 +106,6 @@ class Text extends React.Component {
   _getIconElement(key, iconName, colorToken) {
     let name = iconName ? iconName.trim() : '';
     let size = iconSizeMap[this.props.size];
-
-    console.log("   icon size: " + size);
-
     let color = UxpColors.getHexFromHexOrToken(colorToken);
     if (!color) {
       color = defaultTextColor;
@@ -120,6 +117,7 @@ class Text extends React.Component {
       width: size,
       display: 'inline',
       lineHeight: 'normal',
+      verticalAlign: 'middle',
     };
 
     return (<span key={key}>
