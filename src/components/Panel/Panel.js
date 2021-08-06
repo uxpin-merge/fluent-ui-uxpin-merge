@@ -60,9 +60,9 @@ class Panel extends React.Component {
 
   render() {
 
-    let pt = panelSize`${this.props.panelWidth}`;
+    // let pt = panelSize`${this.props.panelWidth}`;
     let rt = panelSize[this.props.panelWidth];
-    console.log("PT: " + pt + ". and RT: " + rt);
+    console.log("RT: " + rt);
 
     //****************************
     //For Inner Stack
