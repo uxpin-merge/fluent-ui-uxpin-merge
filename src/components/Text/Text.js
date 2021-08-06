@@ -115,9 +115,8 @@ class Text extends React.Component {
       fontSize: size,
       height: size,
       width: size,
-      display: 'inline',
+      display: 'block',
       lineHeight: 'normal',
-      verticalAlign: 'middle',
     };
     const spanStyle = {
       verticalAlign: 'middle',
