@@ -121,7 +121,6 @@ class Text extends React.Component {
     };
     const spanStyle = {
       verticalAlign: 'middle',
-      display: 'flex',
       alignItems: 'center',
     }
 
