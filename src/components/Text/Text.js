@@ -26,6 +26,9 @@ class Text extends React.Component {
   set() {
     let message = this._getTokenizedText(this.props.textValue);
 
+    //Try using new UXPin parser
+    let newMessage = this.getMessageText();
+
     this.setState(
       { message: message }
     )
@@ -39,6 +42,38 @@ class Text extends React.Component {
     if (prevProps.textValue !== this.props.textValue) {
       this.set();
     }
+  }
+
+  getMessageText() {
+    let elements;
+    const parsedOutput = UXPinParser.parse(this.props.textValue);
+
+    // console.log("parsedOutput Variable value: " + parsedOutput);
+    console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
+
+    return parsedOutput.map(
+      (item, index) => {
+        console.log("      Map item " + index + " of parsedOutput: " + JSON.stringify(item));
+        // If not type compound, return single element
+        if (item.type !== "compound") {
+          // console.log("This is NOT type Compound, this is a " + item.type)
+          return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
+        } else {
+          // console.log("This is type " + item.type)
+          // If type compound, map the item values
+          elements = item.value.map(
+            (subItem, subIndex) => {
+              // Second map of parsedOutput.value to seperate each object of links and text
+              console.log("      >>> Map item " + subIndex + " of parsedOutput.value: " + JSON.stringify(subItem) + " subItem");
+
+              return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
+
+            }
+          )
+          return elements;
+        }
+      }
+    )
   }
 
   _getTokenizedText(text) {
