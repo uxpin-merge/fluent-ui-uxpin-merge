@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Text as FText } from '@fluentui/react/lib/Text';
-import Image from '../Image/Image';
-import Link from '../Link/Link';
+import Icon from '../Icon/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -10,6 +9,18 @@ import * as UXPinParser from '../_helpers/UXPinParser';
 
 const defaultTextColor = "#000000";
 const defaultTextValue = 'The quick brown fox jumped over the lazy dog.';
+const linkTarget = 'uxpin_proto_';
+const iconSizeMap = {
+  tiny: 12,
+  xSmall: 12,
+  small: 14,
+  smallPluss: 14,
+  medium: 16,
+  mediumPlus: 16,
+  large: 20,
+  xxLarge: 32,
+  mega: 64,
+};
 
 
 
@@ -57,7 +68,12 @@ class Text extends React.Component {
         // If not type compound, return single element
         if (item.type !== "compound") {
           // console.log("This is NOT type Compound, this is a " + item.type)
-          return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
+          // return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
+
+          return item.type === "text" ? this._getTextElement(index, item?.text)
+            : item.type === "link" ? this._getLinkElement(index, item?.text, item?.href)
+              : item.type === "icon" ? this._getIconElement(item?.iconName, item?.colorToken)
+                : '';
         } else {
           // console.log("This is type " + item.type)
           // If type compound, map the item values
@@ -66,14 +82,32 @@ class Text extends React.Component {
               // Second map of parsedOutput.value to seperate each object of links and text
               console.log("      >>> Map item " + subIndex + " of parsedOutput.value: " + JSON.stringify(subItem) + " subItem");
 
-              return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
-
+              return subItem.type === "text" ? this._getTextElement(subIndex, subItem?.text)
+                : subItem.type === "link" ? this._getLinkElement(subIndex, subItem?.text, subItem?.href)
+                  : subItem.type === "icon" ? this._getIconElement(subItem?.iconName, subItem?.colorToken)
+                    : '';
+              // return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
             }
           )
           return elements;
         }
       }
     )
+  }
+
+  _getTextElement(key, text) {
+    return (<span key={key}> {text} </span>);
+  }
+  _getLinkElement(key, text, href) {
+    return (<a key={key} href={href ? href : ''} target={linkTarget}>{text}</a>)
+  }
+  _getIconElement(iconName, colorToken) {
+    let iSize = iconSizeMap[this.props.size];
+    return (<Icon
+      iconName={iconName}
+      iconColor={colorToken}
+      size={iSize}
+    />)
   }
 
   _getTokenizedText(text) {
