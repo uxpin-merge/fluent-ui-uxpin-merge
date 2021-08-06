@@ -12,8 +12,8 @@ const defaultTextColor = "#000000";
 const defaultTextValue = 'The quick brown fox jumped over the lazy dog.';
 const linkTarget = 'uxpin_proto_';
 const iconSizeMap = {
-  tiny: 12,
-  xSmall: 12,
+  tiny: 10,
+  xSmall: 10,
   small: 14,
   smallPlus: 14,
   medium: 16,
@@ -74,7 +74,7 @@ class Text extends React.Component {
           const key = _.uniqueId('text_');
           return item.type === "text" ? this._getTextElement(key, item?.text)
             : item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
-              : item.type === "icon" ? this._getIconElement(key, item?.iconName, subItem.color ? subItem.color : subItem?.colorToken)
+              : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
                 : '';
         } else {
           // console.log("This is type " + item.type)
