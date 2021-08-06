@@ -35,6 +35,10 @@ class Panel extends React.Component {
   }
 
   _onDismiss() {
+
+
+    console.log("dismissed");
+
     if (this.props.show) {
       this.props.show = false;
     }
@@ -115,7 +119,7 @@ class Panel extends React.Component {
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
           hasCloseButton={true}
-          isLightDismiss={true}
+          isLightDismiss={this.props.lightDismiss}
           onDismiss={(evt) => this._onDismiss()}
           closeButtonAriaLabel={"Close"}
         >
@@ -136,9 +140,8 @@ Panel.propTypes = {
   children: PropTypes.node,
 
   /**
-   * @uxpindescription To show or hide the panel. Available for scripting.
-   * @uxpinpropname * Show
-   * @uxpinbind onPanelDismiss
+   * @uxpindescription To show or hide the panel. 
+   * @uxpinpropname Show
    */
   show: PropTypes.bool,
 
@@ -147,6 +150,12 @@ Panel.propTypes = {
   * @uxpinpropname Header Text
   */
   headerText: PropTypes.string,
+
+  /**
+   * @uxpindescription To allow dismissing the panel by clicking anywhere off it.
+   * @uxpinpropname Light Dismiss
+   */
+  lightDismiss: PropTypes.bool,
 
   /**
     * @uxpindescription Fires when the Panel is closed
