@@ -164,7 +164,7 @@ class Panel extends React.Component {
           isLightDismiss={this.props.lightDismiss}
           type={panelType}
           isFooterAtBottom={true}
-          onRenderFooterContent={() => this.onRenderFooterContent()}
+          onRenderFooterContent={() => this._onRenderFooterContent()}
           onDismiss={(evt) => this._onDismiss()}
         >
           {panelContents}
