@@ -115,7 +115,7 @@ class Panel extends React.Component {
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
           hasCloseButton={true}
-          dismiss={(evt) => this._onDismiss()}
+          onDismiss={(evt) => this._onDismiss()}
           closeButtonAriaLabel={"Close"}
         >
           {panelContents}
