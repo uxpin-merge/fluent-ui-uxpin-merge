@@ -52,6 +52,7 @@ class Panel extends React.Component {
         let footerIndex = childList.length - 1;
 
         if (footerIndex > 0) {
+          let child = childList[footerIndex];
           let key = _.uniqueId('child_');
 
           let footerContent = (
