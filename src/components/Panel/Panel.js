@@ -18,7 +18,6 @@ const defaultPanelSize = 'medium';
 
 
 class Panel extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -92,7 +91,6 @@ class Panel extends React.Component {
   }
 
   render() {
-
     //Panel Type
     let panelType = panelSize[this.props.panelWidth];
 
@@ -185,13 +183,14 @@ class Panel extends React.Component {
         </FPanel>
       </div >
     );
-
   }
-
 };
 
-Panel.propTypes = {
 
+/** 
+ * Set up the properties to be available in the UXPin property inspector. 
+ */
+Panel.propTypes = {
   /**
    * @uxpinignoreprop hide this from the user
    */
@@ -235,6 +234,9 @@ Panel.propTypes = {
 };
 
 
+/**
+ * Set the default values for this control in the UXPin Editor.
+ */
 Panel.defaultProps = {
   headerText: "Panel Header",
   show: true,
