@@ -52,6 +52,8 @@ class Panel extends React.Component {
         let footerIndex = childList.length - 1;
 
         if (footerIndex > 0) {
+          let key = _.uniqueId('child_');
+
           let footerContent = (
             <Stack
               horizontal={true}
@@ -115,12 +117,13 @@ class Panel extends React.Component {
 
         for (var i = 0; i < childList.length; i++) {
           let child = childList[i];
-          let key = _.uniqueId('child_');
 
           if (this.props.hasFooter && i === footerIndex) {
             //Ignore this object for now. We'll render it later. 
           }
           else {
+            let key = _.uniqueId('child_');
+
             let stack = (
               <StackItem
                 key={key}
