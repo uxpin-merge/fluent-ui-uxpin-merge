@@ -14,7 +14,7 @@ class Panel extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: true,
+      isOpen: false,
     }
   }
 
@@ -35,6 +35,8 @@ class Panel extends React.Component {
   }
 
   _onDismiss() {
+    this.props.show = false;
+
     this.setState({
       isOpen: false,
     });
@@ -91,7 +93,8 @@ Panel.propTypes = {
 
 
 Panel.defaultProps = {
-
+  headerText: "Panel Header",
+  show: true,
 }
 
 export { Panel as default };
