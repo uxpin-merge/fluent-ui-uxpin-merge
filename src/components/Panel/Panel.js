@@ -24,11 +24,16 @@ class Panel extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.show !== this.props.show) {
+      console.log("compDidUpdate: New value: " + this.props.show);
       this.set();
     }
   }
 
   set() {
+
+    console.log("In set(). show prop is: " + this.props.show);
+
+
     this.setState({
       isOpen: this.props.show,
     });
