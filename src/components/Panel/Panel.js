@@ -17,7 +17,7 @@ const panelSize = {
 };
 
 const panelSizeList = ["small", "smallFluid", "medium", "large", "xLarge"];
-const defaultPanelSize = 'medium',
+const defaultPanelSize = 'medium';
 
 
 class Panel extends React.Component {
