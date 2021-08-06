@@ -72,7 +72,7 @@ class Text extends React.Component {
           const key = _.uniqueId('text_');
           return item.type === "text" ? this._getTextElement(key, item?.text)
             : item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
-              : item.type === "icon" ? this._getIconElement(key, item?.iconName, item?.colorToken)
+              : item.type === "icon" ? this._getIconElement(key, item?.iconName, subItem.color ? subItem.color : subItem?.colorToken)
                 : '';
         } else {
           // console.log("This is type " + item.type)
@@ -84,7 +84,7 @@ class Text extends React.Component {
               const key = _.uniqueId('text_');
               return subItem.type === "text" ? this._getTextElement(key, subItem?.text)
                 : subItem.type === "link" ? this._getLinkElement(key, subItem?.text, subItem?.href)
-                  : subItem.type === "icon" ? this._getIconElement(key, subItem?.iconName, subItem?.colorToken)
+                  : subItem.type === "icon" ? this._getIconElement(key, subItem?.iconName, subItem.color ? subItem.color : subItem?.colorToken)
                     : '';
               // return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
             }
