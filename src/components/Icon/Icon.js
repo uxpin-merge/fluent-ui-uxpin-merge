@@ -5,7 +5,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
 
-const defaultColor = 'black';
+const defaultColor = '#000000';
 const defaultIcon = 'Home';
 const defaultSize = 50;
 

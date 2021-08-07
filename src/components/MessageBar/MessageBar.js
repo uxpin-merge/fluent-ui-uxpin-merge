@@ -5,8 +5,13 @@ import {
     MessageBarButton,
     MessageBarType
 } from '@fluentui/react';
-import { getTokens } from '../_helpers/parser';
 import * as UXPinParser from '../_helpers/UXPinParser';
+
+
+
+const linkTarget = 'uxpin_proto_';
+
+
 
 class MessageBar extends React.Component {
 
@@ -19,12 +24,10 @@ class MessageBar extends React.Component {
     }
 
     set() {
-        let message = this.getMessageText(this.props.message);
+        let message = this._getMessageText();
 
         this.setState(
-            {
-                message: message,
-            }
+            { message: message, }
         )
     }
 
@@ -38,32 +41,45 @@ class MessageBar extends React.Component {
         }
     }
 
-    getMessageText() {
+    _getMessageText() {
         let elements;
-        const parsedOutput = UXPinParser.parse(this.props.message);
-        // console.log("parsedOutput Variable value: " + parsedOutput);
-        // console.log("parsedOutput Variable value in JSON: " + JSON.stringify(parsedOutput));
+        let parsedOutput = UXPinParser.parse(this.props.message);
+        // console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
+
         return parsedOutput.map(
-            (item, index) => {
-                // console.log("First map of parsedOutput: " + JSON.stringify(item));
-                // If not type compound, return single element
+            (item) => {
+                // If not type compound, return the single element
                 if (item.type !== "compound") {
-                    // console.log("This is NOT type Compound, this is a " + item.type)
-                    return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
-                } else {
-                    // console.log("This is type " + item.type)
+                    return this._parseItem(item);
+                }
+                else {
                     // If type compound, map the item values
                     elements = item.value.map(
-                        (subItem, subIndex) => {
-                            // Second map of parsedOutput.value to seperate each object of links and text
-                            // console.log("Second map of parsedOutput.value: " + JSON.stringify(subItem) + " subItem");
-                            return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
+                        (subItem) => {
+                            // Second map of parsedOutput.value to seperate each object of links, icons, and text
+                            return this._parseItem(subItem);
                         }
                     )
                     return elements;
                 }
             }
         )
+    }
+
+    _parseItem(item) {
+        if (item) {
+            const key = _.uniqueId('text_');
+            return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+                : this._getTextElement(key, item?.text);
+        }
+    }
+
+    _getTextElement(key, text) {
+        return (<span key={key}> {text} </span>);
+    }
+
+    _getLinkElement(key, text, href) {
+        return (<a key={key} href={href ? href : ''} target={href ? linkTarget : ''}>{text}</a>)
     }
 
     _onDismiss() {
@@ -133,7 +149,6 @@ class MessageBar extends React.Component {
             }
         }
 
-
         return (
 
             <FMessageBar
@@ -156,8 +171,11 @@ class MessageBar extends React.Component {
 MessageBar.propTypes = {
 
     /**
-     * @uxpindescription The control's message. Supports the link(link text | link url) feature.
-    * @uxpincontroltype textfield(6)
+    * @uxpindescription The control's message. 
+    * Supports the special syntax for links and icons. 
+    * Example: 
+    * link(Click here | href )
+    * @uxpincontroltype textfield(10)
      */
     message: PropTypes.string,
 
