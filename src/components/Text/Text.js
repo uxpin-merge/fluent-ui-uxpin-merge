@@ -5,7 +5,6 @@ import { Text as FText } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
-import { FlexibleHeightXYPlot } from 'react-vis';
 
 
 
@@ -37,7 +36,7 @@ class Text extends React.Component {
   }
 
   set() {
-    let message = this.getMessageText();
+    let message = this._getMessageText();
 
     this.setState(
       { message: message }
@@ -55,7 +54,7 @@ class Text extends React.Component {
     }
   }
 
-  getMessageText() {
+  _getMessageText() {
     let elements;
     let parsedOutput = UXPinParser.parse(this.props.textValue);
     // console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
@@ -92,9 +91,11 @@ class Text extends React.Component {
   _getTextElement(key, text) {
     return (<span key={key}> {text} </span>);
   }
+
   _getLinkElement(key, text, href) {
     return (<a key={key} href={href ? href : ''} target={linkTarget}>{text}</a>)
   }
+
   _getIconElement(key, iconName, colorToken) {
     let name = iconName ? iconName.trim() : '';
     let size = iconSizeMap[this.props.size];
@@ -124,7 +125,6 @@ class Text extends React.Component {
   }
 
   render() {
-
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
     let textColor = UxpColors.getHexFromHexOrToken(this.props.color);
 
@@ -133,13 +133,13 @@ class Text extends React.Component {
         color: textColor ? textColor : defaultTextColor,
         fontWeight: this.props.bold ? 'bold' : 'normal',
         fontStyle: this.props.italic ? 'italic' : 'normal',
-        display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
-        lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
+        //Fixes the 'nudge up/down' issues for larger and smaller sizes
+        display: 'block',
+        //Fixes the janked line height issues for larger and smaller sizes
+        lineHeight: 'normal',
         textAlign: this.props.align,
       }
     }
-
-    let message = this.state.message;
 
     return (
       <FText
@@ -148,13 +148,12 @@ class Text extends React.Component {
         variant={this.props.size}
         nowrap={this.props.truncate}>
 
-        {message}
+        {this.state.message}
 
       </FText >
     );
   }
 }
-
 
 
 /** 
