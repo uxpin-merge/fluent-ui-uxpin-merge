@@ -20,7 +20,7 @@ class MessageBar extends React.Component {
     }
 
     set() {
-        let message = this._getMessageText(this.props.message);
+        let message = this._getMessageText();
 
         this.setState(
             { message: message, }
@@ -39,7 +39,7 @@ class MessageBar extends React.Component {
 
     _getMessageText() {
         let elements;
-        let parsedOutput = UXPinParser.parse(this.props.textValue);
+        let parsedOutput = UXPinParser.parse(this.props.message);
         // console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
 
         return parsedOutput.map(
@@ -144,7 +144,6 @@ class MessageBar extends React.Component {
                 onDismiss: () => { this._onDismiss(); }
             }
         }
-
 
         return (
 
