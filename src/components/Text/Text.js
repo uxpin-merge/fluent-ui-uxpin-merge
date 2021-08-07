@@ -37,13 +37,10 @@ class Text extends React.Component {
   }
 
   set() {
-    let message = this._getTokenizedText(this.props.textValue);
-
-    //Try using new UXPin parser
-    let newMessage = this.getMessageText();
+    let message = this.getMessageText();
 
     this.setState(
-      { message: newMessage }
+      { message: message }
     )
   }
 
@@ -60,42 +57,45 @@ class Text extends React.Component {
 
   getMessageText() {
     let elements;
-    const parsedOutput = UXPinParser.parse(this.props.textValue);
-
-    // console.log("parsedOutput Variable value: " + parsedOutput);
-    console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
+    let parsedOutput = UXPinParser.parse(this.props.textValue);
+    // console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
 
     return parsedOutput.map(
-      (item, index) => {
-        console.log("      Map item " + index + " of parsedOutput: " + JSON.stringify(item));
-        // If not type compound, return single element
+      (item) => {
+        // If not type compound, return the single element
         if (item.type !== "compound") {
-          // console.log("This is NOT type Compound, this is a " + item.type)
-          // return (item.type === "link" ? <a key={index} href={item.href}>{item.text}</a> : <span key={index}> {item.text} </span>);
-          const key = _.uniqueId('text_');
-          return item.type === "text" ? this._getTextElement(key, item?.text)
-            : item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
-              : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
-                : '';
-        } else {
-          // console.log("This is type " + item.type)
+          return this._parseItem(item);
+          // return item.type === "text" ? this._getTextElement(key, item?.text)
+          //   : item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+          //     : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+          // : '';
+        }
+        else {
           // If type compound, map the item values
           elements = item.value.map(
-            (subItem, subIndex) => {
-              // Second map of parsedOutput.value to seperate each object of links and text
-              console.log("      >>> Map item " + subIndex + " of parsedOutput.value: " + JSON.stringify(subItem) + " subItem");
-              const key = _.uniqueId('text_');
-              return subItem.type === "text" ? this._getTextElement(key, subItem?.text)
-                : subItem.type === "link" ? this._getLinkElement(key, subItem?.text, subItem?.href)
-                  : subItem.type === "icon" ? this._getIconElement(key, subItem?.iconName, subItem.color ? subItem.color : subItem?.colorToken)
-                    : '';
-              // return (subItem.type === "link" ? <a key={subIndex} href={subItem.href}>{subItem.text}</a> : <span key={subIndex}> {subItem.text} </span>);
+            (subItem) => {
+              // Second map of parsedOutput.value to seperate each object of links, icons, and text
+              return this._parseItem(subItem);
+              // const key = _.uniqueId('text_');
+              // return subItem.type === "text" ? this._getTextElement(key, subItem?.text)
+              //   : subItem.type === "link" ? this._getLinkElement(key, subItem?.text, subItem?.href)
+              //     : subItem.type === "icon" ? this._getIconElement(key, subItem?.iconName, subItem.color ? subItem.color : subItem?.colorToken)
+              //       : '';
             }
           )
           return elements;
         }
       }
     )
+  }
+
+  _parseItem(item) {
+    if (item) {
+      const key = _.uniqueId('text_');
+      return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+          : this._getTextElement(key, item?.text);
+    }
   }
 
   _getTextElement(key, text) {
@@ -130,39 +130,6 @@ class Text extends React.Component {
         className={iconDisplayClass}
       />
     </span >)
-  }
-
-  _getTokenizedText(text) {
-
-    return text;
-
-    //***** For UXPin Parser Testing
-
-    let items = UXPinParser.parseRow(text).map(
-      (item, index) => ({
-        text: item?.text,
-        order: item?.order,
-        index: index,
-        type: item?.type,
-        href: item?.href,
-        iconName: item?.iconName,
-        iconColor: item?.iconColor,
-        colorToken: item?.colorToken,
-      })
-    );
-
-    var i = 0;
-    for (i = 0; i < items.length; i++) {
-      let item = items[i];
-      console.log("order: " + item.order +
-        "     index: " + item.index +
-        "     type: " + item.type +
-        "     text: " + item?.text +
-        "     href: " + item?.href +
-        "     iconName: " + item?.iconName +
-        "     iconColor: " + item?.iconColor +
-        "     colorToken: " + item?.colorToken);
-    }
   }
 
   render() {
