@@ -79,7 +79,7 @@ class MessageBar extends React.Component {
     }
 
     _getLinkElement(key, text, href) {
-        return (<a key={key} href={href ? href : ''} target={linkTarget}>{text}</a>)
+        return (<a key={key} href={href ? href : ''} target={href ? linkTarget : ''}>{text}</a>)
     }
 
     _onDismiss() {

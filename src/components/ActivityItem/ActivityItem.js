@@ -56,7 +56,7 @@ class ActivityItem extends React.Component {
     _getMessageText(rawText) {
         let elements;
         let parsedOutput = UXPinParser.parse(rawText);
-        console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
+        // console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
 
         return parsedOutput.map(
             (item) => {
@@ -94,49 +94,6 @@ class ActivityItem extends React.Component {
         return (<a key={key} href={href ? href : ''} target={href ? linkTarget : ''}>{text}</a>)
     }
 
-    //Tokenize the string coming in from UXPin for the message 
-    //    to support the link(Link Text) feature.
-    // _getTokenizedText(text) {
-
-    //     // let tokens = UXPinParser.parseRow(text).map(
-    //     //     (item, index) => {
-    //     //         if (item.type === "link") {
-    //     //             console.log("Found a link: (" + item.text + ") href= " + item.href);
-    //     //             return (
-    //     //                 // <span>{item.text}</span>
-    //     //                 <Link
-    //     //                     value={item.text}
-    //     //                     linkHref={item.href}
-    //     //                 />
-    //     //             );
-    //     //         }
-    //     //         if (item.type === "text") {
-    //     //             return (<span key={index}>{item.text}</span>);
-    //     //         }
-    //     //     }
-    //     // );
-
-
-
-    //     let tokens = getTokens(text).mixed.map((el, i) => {
-    //         if (typeof (el) === 'string') {
-    //             return (<span key={i}> {el} </span>);
-    //         }
-    //         else if (el.type == 'link') {
-    //             return el.suggestions[0];
-    //         }
-    //         else if (el.suggestions[0]) {
-    //             // if there's a suggestion, call the function
-    //             return el.suggestions[0];
-    //         } else {
-    //             // there's no suggestion, return the text
-    //             return (<span key={i}> {el.tokenString} </span>);
-    //         }
-    //     });
-
-    //     return tokens;
-    // }
-
     render() {
 
         var icon = '';
@@ -148,7 +105,7 @@ class ActivityItem extends React.Component {
 
             icon = (
                 <Icon
-                    iconName={this.props.icon.trim()}
+                    iconName={this.props.icon?.trim()}
                     className={cStyle} />
             );
         }
