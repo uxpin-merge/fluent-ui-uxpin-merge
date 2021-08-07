@@ -65,10 +65,6 @@ class Text extends React.Component {
         // If not type compound, return the single element
         if (item.type !== "compound") {
           return this._parseItem(item);
-          // return item.type === "text" ? this._getTextElement(key, item?.text)
-          //   : item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
-          //     : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
-          // : '';
         }
         else {
           // If type compound, map the item values
@@ -76,11 +72,6 @@ class Text extends React.Component {
             (subItem) => {
               // Second map of parsedOutput.value to seperate each object of links, icons, and text
               return this._parseItem(subItem);
-              // const key = _.uniqueId('text_');
-              // return subItem.type === "text" ? this._getTextElement(key, subItem?.text)
-              //   : subItem.type === "link" ? this._getLinkElement(key, subItem?.text, subItem?.href)
-              //     : subItem.type === "icon" ? this._getIconElement(key, subItem?.iconName, subItem.color ? subItem.color : subItem?.colorToken)
-              //       : '';
             }
           )
           return elements;
@@ -172,9 +163,12 @@ class Text extends React.Component {
 Text.propTypes = {
 
   /**
-   * @uxpindescription The text value to display. Supports the link(Click Me) feature.
+   * @uxpindescription The text value to display. 
+   * Supports the special syntax for links and icons. Example: 
+   * link(Click here | href )
+   * icon(icon_name | hex_or_token )
    * @uxpinpropname Text 
-   * @uxpincontroltype textfield(6)
+   * @uxpincontroltype textfield(10)
    */
   textValue: PropTypes.string,
 
