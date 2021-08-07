@@ -91,7 +91,7 @@ class ActivityItem extends React.Component {
     }
 
     _getLinkElement(key, text, href) {
-        return (<a key={key} href={href ? href : ''} target={linkTarget}>{text}</a>)
+        return (<a key={key} href={href ? href : ''} target={href ? linkTarget : ''}>{text}</a>)
     }
 
     //Tokenize the string coming in from UXPin for the message 
