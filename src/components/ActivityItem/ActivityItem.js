@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ActivityItem as FActivityItem } from '@fluentui/react/lib/ActivityItem';
 import { Icon } from '@fluentui/react/lib/Icon';
-import Link from '../Link/Link';
-import { getTokens } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
@@ -58,7 +56,7 @@ class ActivityItem extends React.Component {
     _getMessageText(rawText) {
         let elements;
         let parsedOutput = UXPinParser.parse(rawText);
-        // console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
+        console.log("Text parsedOutput in JSON: " + JSON.stringify(parsedOutput));
 
         return parsedOutput.map(
             (item) => {
