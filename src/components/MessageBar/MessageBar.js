@@ -9,6 +9,10 @@ import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
+const linkTarget = 'uxpin_proto_';
+
+
+
 class MessageBar extends React.Component {
 
     constructor(props) {
