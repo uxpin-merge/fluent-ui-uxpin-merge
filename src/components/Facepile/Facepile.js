@@ -8,8 +8,8 @@ import { HoverCard, HoverCardType, IPlainCardProps } from '@fluentui/react/lib/H
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
-
-
+import ProfileCard from '../ProfileCard/ProfileCard';
+import ActionButton from '../ActionButton/ActionButton';
 
 //The max count for the persona list 
 const maxPersonaCount = 99;
@@ -93,6 +93,27 @@ class Facepile extends React.Component {
                     presence={PersonaPresence[personaProps.presence]}
                     onClick={() => { this._onClick(personaProps) }}
                 />
+                  
+
+<ProfileCard 
+
+        imageUrl={personaProps.imageUrl}
+        initials="JB"
+        ppPresence="online"
+ 
+
+        name={personaProps.text}
+        role={personaProps.role}
+        // status="online"
+        optional="hello"
+        email={personaProps.email}
+        
+    >
+        <ActionButton  text="Email" iconName="Mail" />
+        <ActionButton  text="Call" iconName="Phone" />
+        <ActionButton  text="Chat" iconName="OfficeChat" />
+    </ProfileCard>
+
 
             </div>
 
@@ -144,6 +165,7 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
+        alert(this._getSelectedPersonaIndex(persona));
         let index = this._getSelectedPersonaIndex(persona);
 
         this.props.selectedIndex = index;
