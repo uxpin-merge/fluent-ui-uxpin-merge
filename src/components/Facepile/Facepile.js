@@ -4,7 +4,7 @@ import {
     Facepile as FFacepile,
     OverflowButtonType
 } from '@fluentui/react/lib/Facepile';
-import { HoverCard, HoverCardType, IPlainCardProps } from '@fluentui/react/lib/HoverCard';
+import { HoverCard as FHoverCard, HoverCardType } from '@fluentui/react/lib/HoverCard';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
 import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
@@ -76,10 +76,42 @@ class Facepile extends React.Component {
     _onRenderPersonaCoin(personaProps) {
 
         // className={customPersonaStyles}
+        const plainCardProps= {
+            onRenderPlainCard: onRenderPlainCard,
+          };
+    
+          function onRenderPlainCard(){
+            return (
+                <ProfileCard 
 
+                imageUrl={personaProps.imageUrl}
+                initials="JB"
+                ppPresence="online"
+         
+        
+                name={personaProps.text}
+                role={personaProps.role}
+                // status="online"
+                optional="hello"
+                email={personaProps.email}
+                
+            >
+                <ActionButton  text="Email" iconName="Mail" />
+                <ActionButton  text="Call" iconName="Phone" />
+                <ActionButton  text="Chat" iconName="OfficeChat" />
+            </ProfileCard>
+            )
+          }
         return (
             <div style={{ cursor: 'pointer' }} >
-
+ <FHoverCard
+        // cardDismissDelay={2000}
+        type={HoverCardType.plain}
+        plainCardProps={plainCardProps}
+        // onRenderCompactCard={onRenderCard}
+        // componentRef={hoverCard}
+        // onCardHide={onCardHide}
+      >
                 <Persona
                     {...personaProps}
                     hidePersonaDetails={true}
@@ -93,9 +125,9 @@ class Facepile extends React.Component {
                     presence={PersonaPresence[personaProps.presence]}
                     onClick={() => { this._onClick(personaProps) }}
                 />
-                  
+               </FHoverCard>   
 
-<ProfileCard 
+{/* <ProfileCard 
 
         imageUrl={personaProps.imageUrl}
         initials="JB"
@@ -112,7 +144,7 @@ class Facepile extends React.Component {
         <ActionButton  text="Email" iconName="Mail" />
         <ActionButton  text="Call" iconName="Phone" />
         <ActionButton  text="Chat" iconName="OfficeChat" />
-    </ProfileCard>
+    </ProfileCard> */}
 
 
             </div>
