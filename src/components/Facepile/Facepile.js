@@ -10,6 +10,7 @@ import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ActionButton from '../ActionButton/ActionButton';
+import { DirectionalHint } from '@fluentui/react/lib/common/DirectionalHint';
 
 //The max count for the persona list 
 const maxPersonaCount = 99;
@@ -74,12 +75,12 @@ class Facepile extends React.Component {
     }
 
     _onRenderPersonaCoin(personaProps) {
-
         // className={customPersonaStyles}
         const plainCardProps= {
             onRenderPlainCard: onRenderPlainCard,
+            directionalHint: DirectionalHint.topAutoEdge,
           };
-    
+          const targetElementRef= React.createRef();
           function onRenderPlainCard(){
             return (
                 <ProfileCard 
@@ -105,12 +106,9 @@ class Facepile extends React.Component {
         return (
             <div style={{ cursor: 'pointer' }} >
  <FHoverCard
-        // cardDismissDelay={2000}
         type={HoverCardType.plain}
         plainCardProps={plainCardProps}
-        // onRenderCompactCard={onRenderCard}
-        // componentRef={hoverCard}
-        // onCardHide={onCardHide}
+        shouldBlockHoverCard={this.props.showDetails ? false : true}
       >
                 <Persona
                     {...personaProps}
@@ -126,25 +124,6 @@ class Facepile extends React.Component {
                     onClick={() => { this._onClick(personaProps) }}
                 />
                </FHoverCard>   
-
-{/* <ProfileCard 
-
-        imageUrl={personaProps.imageUrl}
-        initials="JB"
-        ppPresence="online"
- 
-
-        name={personaProps.text}
-        role={personaProps.role}
-        // status="online"
-        optional="hello"
-        email={personaProps.email}
-        
-    >
-        <ActionButton  text="Email" iconName="Mail" />
-        <ActionButton  text="Call" iconName="Phone" />
-        <ActionButton  text="Chat" iconName="OfficeChat" />
-    </ProfileCard> */}
 
 
             </div>
@@ -162,7 +141,6 @@ class Facepile extends React.Component {
 
         return (
             <div style={{ cursor: 'pointer' }} >
-
                 <Persona
                     {...this.props}
                     hidePersonaDetails={false}
@@ -176,7 +154,6 @@ class Facepile extends React.Component {
                     presence={PersonaPresence[personaProps.presence]}
                     onClick={() => { this._onClick(personaProps) }}
                 />
-
             </div>
         );
 
@@ -304,7 +281,9 @@ Facepile.propTypes = {
      * @uxpindescription Fires when the Overflow Button is clicked on.
      * @uxpinpropname Overflow Click
      * */
-    onOverflowClick: PropTypes.func
+    onOverflowClick: PropTypes.func,
+
+    showDetails: PropTypes.bool,
 };
 
 
@@ -318,6 +297,7 @@ Facepile.defaultProps = {
     faceCount: 5,
     showAddButton: false,
     showOverflowButton: true,
+    showDetails: true,
 };
 
 
