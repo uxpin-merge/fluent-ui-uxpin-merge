@@ -264,6 +264,12 @@ Facepile.propTypes = {
     * @uxpinpropname Show Overflow Button
     */
     showOverflowButton: PropTypes.bool,
+    
+    /** 
+    * @uxpindescription Whether to display details on hover. 
+    * @uxpinpropname Show Details
+    */
+    showDetails: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when one of the personas is clicked on.
@@ -283,7 +289,7 @@ Facepile.propTypes = {
      * */
     onOverflowClick: PropTypes.func,
 
-    showDetails: PropTypes.bool,
+   
 };
 
 
