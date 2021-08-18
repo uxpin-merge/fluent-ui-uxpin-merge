@@ -5,6 +5,7 @@ import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 const defaultItems = `Apples
@@ -39,13 +40,15 @@ class Dropdown extends React.Component {
 
   set() {
     //Figure out the items
-    let hasHeadersAndChildren = this._testForHeaders();
+    // let hasHeadersAndChildren = this._testForHeaders();
 
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => (
-        this._getItemProps(index, item?.text, hasHeadersAndChildren)
-      )
-    );
+    // let items = UXPinParser.parse(this.props.items).map(
+    //   (item, index) => (
+    //     this._getItemProps(index, item?.text, hasHeadersAndChildren)
+    //   )
+    // );
+
+    let menuItems = UxpMenuUtils.parseItemText(this.props.items, true);
 
     //Figure out the selected indexes
     var index = undefined;
@@ -62,7 +65,7 @@ class Dropdown extends React.Component {
     this.setState({
       _selectedIndex: index,
       _selectedIndices: list,
-      items: items,
+      items: menuItems,
     })
   }
 
