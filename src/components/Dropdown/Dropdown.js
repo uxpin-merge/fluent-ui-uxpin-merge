@@ -199,7 +199,8 @@ class Dropdown extends React.Component {
             id={ttTargetID}
             aria-describedby={tooltipID}
             onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
-            onBlur={() => this._onBlur()}
+            // onBlur={() => this._onBlur()}
+            onDismiss={() => this._onBlur()}
           />
 
         </TooltipHost>
