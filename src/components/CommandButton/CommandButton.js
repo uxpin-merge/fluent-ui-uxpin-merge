@@ -37,7 +37,7 @@ class CommandButton extends React.Component {
   }
 
   set() {
-    var menuItems = UxpMenuUtils.parseItemText(this.props.items, false);
+    var menuItems = UxpMenuUtils.parseItemText(this.props.items, true);
     menuItems = this._addClickHandlers(menuItems);
 
     this.setState({
