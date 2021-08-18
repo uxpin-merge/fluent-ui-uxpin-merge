@@ -65,6 +65,8 @@ class CommandButton extends React.Component {
         }
       }
     }
+
+    return menuProps;
   }
 
   _parseMenuItems() {
