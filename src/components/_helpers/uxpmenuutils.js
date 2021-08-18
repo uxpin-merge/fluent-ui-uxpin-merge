@@ -123,7 +123,7 @@ export const UxpMenuUtils = {
     */
    getContextMenuProps: function (index, text, iconName, hasHeadersAndChildren, isChild) {
       let key = index + 1;
-      let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
+      let isDivider = (text?.toLowerCase() === this.dividerText1) || text?.startsWith(this.dividerText2);
 
       if (text && isDivider) {
          let menuProps = {
