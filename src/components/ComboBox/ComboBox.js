@@ -1,10 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ComboBox as FComboBox } from '@fluentui/react/lib/ComboBox';
-import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
@@ -15,12 +13,6 @@ const defaultItems = `Fruit
 divider
 Grains
 Vegetables`;
-
-const childTag = "*";
-const dividerText1 = "divider";
-const dividerText2 = "----";
-const itemTypeHeader = SelectableOptionMenuItemType.Header;
-const itemTypeDivider = SelectableOptionMenuItemType.Divider;
 
 
 
@@ -52,15 +44,6 @@ class ComboBox extends React.Component {
   set() {
     let menuItems = UxpMenuUtils.parseItemText(this.props.items, false);
 
-    // //Figure out the items
-    // let hasHeadersAndChildren = this._testForHeaders();
-
-    // let items = UXPinParser.parse(this.props.items).map(
-    //   (item, index) => (
-    //     this._getItemProps(index, item?.text, hasHeadersAndChildren)
-    //   )
-    // );
-
     //Figure out the selected indexes
     var index = undefined;
     var list = [];
@@ -79,55 +62,6 @@ class ComboBox extends React.Component {
       _selectedIndices: list,
     })
   }
-
-  // //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
-  // _testForHeaders() {
-  //   if (this.props.items) {
-  //     let items = this.props.items.match(/[^\r\n]+/g);
-
-  //     if (items && items.length) {
-  //       for (var i = 0; i < items.length; i++) {
-  //         let item = items[i]?.trim();
-  //         if (item.startsWith(childTag)) {
-  //           return true;
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   //Else if we made it this far, there are no headers/children pattern
-  //   return false;
-  // }
-
-  // _getItemProps(index, text, hasHeadersAndChildren) {
-  //   let key = index;
-  //   let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
-
-  //   if (text && isDivider) {
-  //     let itemProps = {
-  //       key: "divider_" + key,
-  //       itemType: itemTypeDivider,
-  //     };
-  //     return itemProps;
-  //   }
-  //   else {
-  //     let isChild = hasHeadersAndChildren && text.startsWith(childTag);
-
-  //     let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
-  //     let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
-
-  //     let itemText = hasHeadersAndChildren && isChild ?
-  //       text.substring(text.indexOf(childTag) + 1).trim() : text;
-
-  //     let itemProps = {
-  //       key: itemKey,
-  //       text: itemText,
-  //       itemType: itemType,
-  //       disabled: false,
-  //     };
-  //     return itemProps;
-  //   }
-  // }
 
   //The main entry point for the control's onChange event. 
   // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
@@ -255,7 +189,7 @@ class ComboBox extends React.Component {
             errorMessage={this.props.errorMessage}
             disabled={this.props.disabled}
             onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
-            onDismiss={() => this._onDismiss()}
+            onBlur={() => this._onDismiss()}
           />
         </TooltipHost>
       </div>
