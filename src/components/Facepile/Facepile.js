@@ -18,7 +18,7 @@ const maxPersonaCount = 99;
 
 
 class Facepile extends React.Component {
-
+    
     constructor(props) {
         super(props);
 
@@ -76,88 +76,107 @@ class Facepile extends React.Component {
 
     _onRenderPersonaCoin(personaProps) {
         // className={customPersonaStyles}
-        const plainCardProps= {
-            onRenderPlainCard: onRenderPlainCard,
-            directionalHint: DirectionalHint.topAutoEdge,
-          };
-          const targetElementRef= React.createRef();
-          function onRenderPlainCard(){
+
+        // Get the presence label from presence code
+        function getPresenceLabel(presenceCode) {
+            let presenceLabel
+            switch (presenceCode) {
+                case 0:
+                    presenceLabel = "none"
+                    break
+                case 1:
+                    presenceLabel = "offline"
+                    break
+                case 2:
+                    presenceLabel = "online"
+                    break
+                case 3:
+                    presenceLabel = "away"
+                    break
+                case 4:
+                    presenceLabel = "dnd"
+                    break
+                case 5:
+                    presenceLabel = "blocked"
+                    break
+                case 6:
+                    presenceLabel = "busy"
+                    break
+                default:
+                    presenceLabel = "none"
+            }
+            return presenceLabel
+        }
+
+        function onRenderPlainCard() {
             return (
-                <ProfileCard 
-
-                imageUrl={personaProps.imageUrl}
-                initials="JB"
-                ppPresence="online"
-         
-        
-                name={personaProps.text}
-                role={personaProps.role}
-                // status="online"
-                optional="hello"
-                email={personaProps.email}
-                
-            >
-                <ActionButton  text="Email" iconName="Mail" />
-                <ActionButton  text="Call" iconName="Phone" />
-                <ActionButton  text="Chat" iconName="OfficeChat" />
-            </ProfileCard>
+                <ProfileCard
+                    imageUrl={personaProps.imageUrl}
+                    initials={personaProps.initials}
+                    ppPresence={getPresenceLabel(personaProps.presence)}
+                    name={personaProps.text}
+                    role={personaProps.role}
+                    email={personaProps.email}
+                >
+                    <ActionButton text="Email" iconName="Mail" />
+                    <ActionButton text="Call" iconName="Phone" />
+                    <ActionButton text="Chat" iconName="OfficeChat" />
+                </ProfileCard>
             )
-          }
+        }
+        
         return (
-            <div style={{ cursor: 'pointer' }} >
- <FHoverCard
-        type={HoverCardType.plain}
-        plainCardProps={plainCardProps}
-        shouldBlockHoverCard={this.props.showDetails ? false : true}
-      >
-                <Persona
-                    {...personaProps}
-                    hidePersonaDetails={true}
-                    size={PersonaSize[this.props.size]}
-                    imageUrl={personaProps.imageUrl}
-                    imageInitials={personaProps.imageInitials}
-                    initialsColor={personaProps.initialsColor}
-                    text={personaProps.text}
-                    secondaryText={personaProps.role}
-                    tertiaryText={personaProps.email}
-                    presence={PersonaPresence[personaProps.presence]}
-                    onClick={() => { this._onClick(personaProps) }}
-                />
-               </FHoverCard>   
-
-
-            </div>
-
+            <FHoverCard
+                type={HoverCardType.plain}
+                plainCardProps={{
+                    onRenderPlainCard: onRenderPlainCard,
+                    directionalHint: DirectionalHint.topAutoEdge,
+                }}
+                shouldBlockHoverCard={this.props.showDetails ? false : true}
+            >
+                <div style={{ cursor: 'pointer' }}>
+                    <Persona
+                        {...personaProps}
+                        hidePersonaDetails={true}
+                        size={PersonaSize[this.props.size]}
+                        imageUrl={personaProps.imageUrl}
+                        imageInitials={personaProps.imageInitials}
+                        initialsColor={personaProps.initialsColor}
+                        text={personaProps.text}
+                        secondaryText={personaProps.role}
+                        tertiaryText={personaProps.email}
+                        onClick={() => { this._onClick(personaProps) }}
+                    />
+                </div>
+            </FHoverCard>
         );
-
     }
 
-    _onRenderSinglePersona(personaProps) {
+    // _onRenderSinglePersona(personaProps) {
 
-        //Sizes 16 and 28 aren's supported in the Persona control.
-        let pSize = this.props.size === 'size16' ? 'size24'
-            : this.props.size === 'size28' ? 'size24'
-                : this.props.size;
+    //     //Sizes 16 and 28 aren's supported in the Persona control.
+    //     let pSize = this.props.size === 'size16' ? 'size24'
+    //         : this.props.size === 'size28' ? 'size24'
+    //             : this.props.size;
 
-        return (
-            <div style={{ cursor: 'pointer' }} >
-                <Persona
-                    {...this.props}
-                    hidePersonaDetails={false}
-                    size={PersonaSize[pSize]}
-                    imageUrl={personaProps.imageUrl}
-                    imageInitials={personaProps.imageInitials}
-                    initialsColor={personaProps.initialsColor}
-                    text={personaProps.text}
-                    secondaryText={personaProps.role}
-                    tertiaryText={personaProps.email}
-                    presence={PersonaPresence[personaProps.presence]}
-                    onClick={() => { this._onClick(personaProps) }}
-                />
-            </div>
-        );
+    //     return (
+    //         <div style={{ cursor: 'pointer' }} >
+    //              <Persona
+    //                     {...personaProps}
+    //                     hidePersonaDetails={true}
+    //                     size={PersonaSize[this.props.size]}
+    //                     imageUrl={personaProps.imageUrl}
+    //                     imageInitials={personaProps.imageInitials}
+    //                     initialsColor={personaProps.initialsColor}
+    //                     text={personaProps.text}
+    //                     secondaryText={personaProps.role}
+    //                     tertiaryText={personaProps.email}
+    //                     onClick={() => { this._onClick(personaProps) }}
+    //                 />
+    //         </div>
+    //     );
 
-    }
+    // }
 
     _onClickOverflow(event) {
         //Raise this event to UXPin. 
@@ -210,10 +229,9 @@ class Facepile extends React.Component {
                 personaSize={PersonaSize[this.props.size]}
                 maxDisplayablePersonas={this.props.faceCount}
                 personas={this.state.personaList.slice(0, this.props.number)}
-
-                onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                onRenderPersona={(p) => this._onRenderPersonaCoin(p)}
                 onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
-
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
                 overflowButtonProps={overflowButtonParams}
@@ -264,7 +282,7 @@ Facepile.propTypes = {
     * @uxpinpropname Show Overflow Button
     */
     showOverflowButton: PropTypes.bool,
-    
+
     /** 
     * @uxpindescription Whether to display details on hover. 
     * @uxpinpropname Show Details
@@ -289,7 +307,7 @@ Facepile.propTypes = {
      * */
     onOverflowClick: PropTypes.func,
 
-   
+
 };
 
 
