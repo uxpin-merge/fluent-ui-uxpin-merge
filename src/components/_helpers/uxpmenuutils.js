@@ -1,4 +1,4 @@
-import * as UXPinParser from '../_helpers/UXPinParser';
+import * as UXPinParser from './UXPinParser';
 import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
 
@@ -19,6 +19,11 @@ export const UxpMenuUtils = {
    * An alternative divider string for a menu: '----' 
    */
    dividerText2 = "----",
+
+   uxpTypeDivider = "divider",
+   uxpTypeGroup = "group",
+   uxpTypeChild = "child",
+   uxpTypeStandardItem = "item",
 
    /**
    * For context menus, the enum to use for a header item.
@@ -66,6 +71,47 @@ export const UxpMenuUtils = {
       return false;
    },
 
+   parseItemText: function (rawPropText) {
+      var propsList = [];
+
+      if (rawPropText) {
+         //Split each line out.
+         let items = this.props.items.match(/[^\r\n]+/g);
+         let hasHeadersAndChildren = this.testForChildren(rawPropText);
+
+         if (items && items.length) {
+            var i;
+            for (i = 0; i < items.length; i++) {
+               var item = items[i]?.trim();
+               let isChild = item?.startsWith(childTag);
+
+               if (isChild) {
+                  //We must remove the * before parsing.
+                  item = item.substring(1).trim();
+               }
+
+               //Parse the individual item. It may have an icon.
+               let parsedMenuItems = UXPinParser.parse(item);
+
+               if (parsedMenuItems && parsedMenuItems.length > 0) {
+                  let menuItem = parsedMenuItems[0];
+                  let trimmedText = menuItem?.text?.trim();
+
+                  if (menuItem && trimmedText) {
+                     let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, hasHeadersAndChildren, isChild);
+
+                     if (props) {
+                        itemList.push(props);
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      return propsList;
+   },
+
    /**
     * Tests whether the raw UXPin prop text for a menu or item list includes 
     * any explicitly identified children. 
@@ -73,20 +119,23 @@ export const UxpMenuUtils = {
     * @param {number} index The raw UXPin prop text for a menu or item list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
     * @returns {bool} Returns true if explicitly identified children are found, false otherwise. 
     */
-   getContextMenuProps(index, text, iconName, isChild) {
+   getContextMenuProps: function (index, text, iconName, hasHeadersAndChildren, isChild) {
       let key = index + 1;
       let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
 
       if (text && isDivider) {
          let menuProps = {
             key: "divider_" + key,
-            itemType: itemTypeDivider,
+            itemType: this.somItemTypeDivider,
+            uxpType: this.uxpTypeDivider,
          };
          return menuProps;
       }
       else {
-         let itemKey = isChild ? key : 'header_' + key;
-         let itemType = isChild ? '' : itemTypeHeader;
+         let itemKey = !hasHeadersAndChildren || isChild ? key : 'header_' + key;
+         let itemType = !hasHeadersAndChildren || isChild ? '' : this.somItemTypeHeader;
+         let uxpType = !hasHeadersAndChildren ? this.uxpTypeStandardItem :
+            isChild ? this.uxpTypeChild : this.uxpTypeGroup;
 
          let menuProps = {
             key: itemKey,
@@ -95,7 +144,7 @@ export const UxpMenuUtils = {
             iconProps: {
                iconName: iconName ? iconName : ''
             },
-            onClick: () => { this._onClick(itemKey) },
+            uxpType: uxpType,
          };
          return menuProps;
       }
