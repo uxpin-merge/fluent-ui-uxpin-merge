@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
-import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
@@ -25,20 +24,8 @@ class ChoiceGroup extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.set();
-  }
-
   set() {
     var menuItems = UxpMenuUtils.parseSimpleListText(this.props.items, this.props.tiled, this.props.disabled);
-
-    // let items = UXPinParser.parse(this.props.items).map(
-    //   (item, index) => ({
-    //     key: index,
-    //     text: item.text ? item.text : '',
-    //     iconProps: this.props.tiled ? { iconName: item?.iconName } : '',
-    //     disabled: this.props.disabled,
-    //   }));
 
     this.setState({
       _items: menuItems,
