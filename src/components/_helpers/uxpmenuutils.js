@@ -71,10 +71,8 @@ export const UxpMenuUtils = {
       return false;
    },
 
-   parseItemText: function (rawPropText) {
+   parseItemText: function (rawPropText, isContextMenuType) {
       var propsList = [];
-
-      console.log("*** entered parseItemText");
 
       if (rawPropText) {
          //Split each line out.
@@ -105,7 +103,7 @@ export const UxpMenuUtils = {
 
                   if (menuItem && trimmedText) {
                      let mayBeHeader = hasHeadersAndChildren && hasChild;
-                     let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, mayBeHeader, isChild);
+                     let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, mayBeHeader, isChild, isContextMenuType);
 
                      if (props) {
                         propsList.push(props);
@@ -135,21 +133,22 @@ export const UxpMenuUtils = {
     * @param {number} index The raw UXPin prop text for a menu or item list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
     * @returns {bool} Returns true if explicitly identified children are found, false otherwise. 
     */
-   getContextMenuProps: function (index, text, iconName, isHeaderCandidate, isChild) {
+   getContextMenuProps: function (index, text, iconName, isHeaderCandidate, isChild, isContextMenuType) {
       let key = index + 1;
       let isDivider = (text?.toLowerCase() === this.dividerText1) || text?.startsWith(this.dividerText2);
 
       if (text && isDivider) {
          let menuProps = {
             key: "divider_" + key,
-            itemType: this.somItemTypeDivider,
+            itemType: isContextMenuType ? this.cmItemTypeDivider : this.somItemTypeDivider,
             uxpType: this.uxpTypeDivider,
          };
          return menuProps;
       }
       else {
          let itemKey = !isHeaderCandidate || isChild ? key : 'header_' + key;
-         let itemType = !isHeaderCandidate || isChild ? '' : this.somItemTypeHeader;
+         let itemType = !isHeaderCandidate || isChild ? '' :
+            isContextMenuType ? this.cmItemTypeHeader : this.somItemTypeHeader;
          let uxpType = !isHeaderCandidate ? this.uxpTypeStandardItem :
             isChild ? this.uxpTypeChild : this.uxpTypeGroup;
 
