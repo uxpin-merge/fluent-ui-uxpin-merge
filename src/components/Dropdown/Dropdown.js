@@ -128,7 +128,7 @@ class Dropdown extends React.Component {
 
     console.log("_onChangeMulti. key: " + option.key);
     console.log("     new index list: " + keys);
-    console.log("     isOpen: " + this?.isOpen);
+    console.log("     isOpen: " + this.state.isOpen);
 
     this.setState(
       {
