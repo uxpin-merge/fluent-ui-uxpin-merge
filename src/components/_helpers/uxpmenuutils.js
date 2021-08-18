@@ -85,11 +85,15 @@ export const UxpMenuUtils = {
             var i;
             for (i = 0; i < items.length; i++) {
                var item = items[i]?.trim();
-               let isChild = item?.startsWith(this.childTag);
 
+               let isChild = item?.startsWith(this.childTag);
+               var hasChild = false;
                if (isChild) {
                   //We must remove the * before parsing.
                   item = item.substring(1).trim();
+               }
+               else if (hasHeadersAndChildren) {
+                  hasChild = this.hasChild(items, i + 1);
                }
 
                //Parse the individual item. It may have an icon.
@@ -113,6 +117,15 @@ export const UxpMenuUtils = {
 
       return propsList;
    },
+
+   hasChild: function (itemList, testIndex) {
+      if (itemList && itemList.length && itemList.length > testIndex) {
+         let item = itemList[testIndex]?.trim();
+         return item?.startsWith(this.childTag);
+      }
+
+      return false;
+   }
 
    /**
     * Tests whether the raw UXPin prop text for a menu or item list includes 
