@@ -60,22 +60,28 @@ class SplitButton extends React.Component {
   }
 
   _addClickHandlers(menuProps) {
+    let updatedList = [];
     if (menuProps) {
       var i;
       for (i = 0; i < menuProps.length; i++) {
         let item = menuProps[i];
         if (item) {
-          if (!item.itemType) {
+          if (item.itemType) {
+            updatedList.push(item);
+          }
+          else {
             let newProps = {
+              ...item.props,
               onClick: () => { this._onClick(item.key) },
-            }
-            item.onClick = newProps;
+            };
+            let newItem = newProps;
+            updatedList.push(newItem);
           }
         }
       }
     }
 
-    return menuProps;
+    return updatedList;
   }
 
 
