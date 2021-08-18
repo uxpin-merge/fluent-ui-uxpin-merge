@@ -126,10 +126,6 @@ class Dropdown extends React.Component {
       keys = filtered;
     }
 
-    console.log("_onChangeMulti. key: " + option.key);
-    console.log("     new index list: " + keys);
-    console.log("     isOpen: " + this.state.isOpen);
-
     this.setState(
       {
         _selectedIndices: keys,
@@ -139,15 +135,14 @@ class Dropdown extends React.Component {
   }
 
   //If it's multiselect, only notify UXPin of changes on blur.
-  _onBlur() {
-
-    console.log("onBlur. indexes: " + this.state._selectedIndices);
-
+  _onDismiss() {
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onChoiceChange) {
         let items = this.state.items;
         let indexes = this.state._selectedIndices;
+
+        console.log("onDismiss list: " + indexes);
 
         // We'll filter this list the old fashioned way...
         var keys = [];
@@ -160,6 +155,8 @@ class Dropdown extends React.Component {
         }
         let list = keys.sort().toString();
         this.props.onChoiceChange(list);
+
+        console.log("   Sorted: " + list);
       }
 
       this.setState(
@@ -199,8 +196,7 @@ class Dropdown extends React.Component {
             id={ttTargetID}
             aria-describedby={tooltipID}
             onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
-            // onBlur={() => this._onBlur()}
-            onDismiss={() => this._onBlur()}
+            onDismiss={() => this._onDismiss()}
           />
 
         </TooltipHost>
