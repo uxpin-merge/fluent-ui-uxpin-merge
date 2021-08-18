@@ -55,8 +55,8 @@ class Dropdown extends React.Component {
     var index = undefined;
     var list = [];
 
-    //Props are 1 based. Subtract 1 from whatever the user entered.
-    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+    //Props are 1 based. 
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, 0);
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -143,7 +143,7 @@ class Dropdown extends React.Component {
     else {
       //Case Single Select
       // Option info is undefined. The Index is the index of the newly selected item. 
-      this._onChangeSingle(index);
+      this._onChangeSingle(index + 1);
     }
   }
 
