@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { CommandButton as FCommandButton } from '@fluentui/react/lib/Button';
-import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
