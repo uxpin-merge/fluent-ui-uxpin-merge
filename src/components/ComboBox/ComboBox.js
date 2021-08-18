@@ -133,12 +133,9 @@ class ComboBox extends React.Component {
   }
 
   //If it's multiselect, only notify UXPin of changes on blur.
-  _onDismiss() {
-
-    console.log("onDismiss: " + this.state._selectedIndices);
-
+  _onBlur() {
     if (this.state.isDirty && this.props.multiSelect) {
-      //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
+      //Raise this event to UXPin
       if (this.props.onChoiceChange) {
         let list = this.state._selectedIndices?.sort()?.toString();
         this.props.onChoiceChange(list);
@@ -189,7 +186,7 @@ class ComboBox extends React.Component {
             errorMessage={this.props.errorMessage}
             disabled={this.props.disabled}
             onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
-            onBlur={() => this._onDismiss()}
+            onBlur={() => this._onBlur()}
           />
         </TooltipHost>
       </div>
