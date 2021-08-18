@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
 import * as UXPinParser from '../_helpers/UXPinParser';
-
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 //Default nav items to populate the control with.
@@ -19,36 +19,29 @@ class ChoiceGroup extends React.Component {
   constructor(props) {
     super(props);
 
-    //Track the selected index state within the control
     this.state = {
-      _index: 1,
+      _index: 0,
       items: []
     }
   }
 
   componentDidMount() {
-    this.setItems();
-
-    //Store the selected index as 1 based, same as user input
-    this.setState(
-      {
-        _items: [],
-        _index: 0,
-      }
-    )
+    this.set();
   }
 
   set() {
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => ({
-        key: index,
-        text: item.text ? item.text : '',
-        iconProps: this.props.tiled ? { iconName: item?.iconName } : '',
-        disabled: this.props.disabled,
-      }));
+    var menuItems = UxpMenuUtils.parseSimpleListText(this.props.items, this.props.tiled, this.props.disabled);
+
+    // let items = UXPinParser.parse(this.props.items).map(
+    //   (item, index) => ({
+    //     key: index,
+    //     text: item.text ? item.text : '',
+    //     iconProps: this.props.tiled ? { iconName: item?.iconName } : '',
+    //     disabled: this.props.disabled,
+    //   }));
 
     this.setState({
-      _items: items,
+      _items: menuItems,
       _index: this.props.selectedIndex,
     });
   }

@@ -71,6 +71,47 @@ export const UxpMenuUtils = {
       return false;
    },
 
+   parseSimpleListText: function (rawPropText, parseIcon, isDisabled) {
+      var propsList = [];
+
+      if (rawPropText) {
+         //Split each line out.
+         let items = rawPropText.match(/[^\r\n]+/g);
+
+         if (items && items.length) {
+            var i;
+            for (i = 0; i < items.length; i++) {
+               var item = items[i]?.trim();
+
+               //Parse the individual item. It may have an icon.
+               let parsedItems = UXPinParser.parse(item);
+
+               if (parsedItems && parsedItems.length > 0) {
+                  let pItem = parsedItems[0];
+                  let trimmedText = pItem?.text?.trim();
+
+                  if (pItem && trimmedText) {
+                     let iconProps = {
+                        iconName: pItem?.iconName || '',
+                     };
+
+                     let itemProps = {
+                        key: i,
+                        text: trimmedText,
+                        iconProps: parseIcon ? iconProps : '',
+                        disabled: isDisabled,
+                     };
+
+                     propsList.push(itemProps);
+                  }
+               }
+            }
+         }
+      }
+
+      return propsList;
+   },
+
    parseItemText: function (rawPropText, isContextMenuType) {
       var propsList = [];
 
