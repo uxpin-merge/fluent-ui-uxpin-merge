@@ -4,7 +4,7 @@ import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import * as UXPinParser from '../_helpers/UXPinParser';
-import UxpMenuUtils from '../_helpers/uxpmenuutils';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 const defaultText = 'SplitButton';
