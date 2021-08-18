@@ -161,6 +161,7 @@ export const UxpMenuUtils = {
                iconName: iconName ? iconName : ''
             },
             uxpType: uxpType,
+            onClick: undefined,
          };
          return menuProps;
       }

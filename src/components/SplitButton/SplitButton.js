@@ -66,12 +66,7 @@ class SplitButton extends React.Component {
         let item = menuProps[i];
         if (item) {
           if (!item.itemType) {
-
-            let onClickProps = {
-              onClick: () => { this._onClick(itemKey) }
-            };
-
-            item.onClick = onClickProps;
+            item.onClick = this._onClick(itemKey);
           }
         }
       }
