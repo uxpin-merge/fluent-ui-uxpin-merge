@@ -5,16 +5,16 @@ import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
-
-const defaultItems = `Option A
-Option B
-Option C
+const defaultItems = `Fruit
+* Apples
+* Bananas
+* "I love you, Grapes!"
 divider
-Option D
-Option E
-Option F`;
+Grains
+Vegetables`;
 
 const childTag = "*";
 const dividerText1 = "divider";
@@ -50,22 +50,23 @@ class ComboBox extends React.Component {
   }
 
   set() {
+    let menuItems = UxpMenuUtils.parseItemText(this.props.items, false);
 
-    //Figure out the items
-    let hasHeadersAndChildren = this._testForHeaders();
+    // //Figure out the items
+    // let hasHeadersAndChildren = this._testForHeaders();
 
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => (
-        this._getItemProps(index, item?.text, hasHeadersAndChildren)
-      )
-    );
+    // let items = UXPinParser.parse(this.props.items).map(
+    //   (item, index) => (
+    //     this._getItemProps(index, item?.text, hasHeadersAndChildren)
+    //   )
+    // );
 
     //Figure out the selected indexes
     var index = undefined;
     var list = [];
 
     //Props are 1 based. Subtract 1 from whatever the user entered.
-    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, 0);
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -73,60 +74,60 @@ class ComboBox extends React.Component {
     }
 
     this.setState({
-      items: items,
+      items: menuItems,
       _selectedIndex: index,
       _selectedIndices: list,
     })
   }
 
-  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
-  _testForHeaders() {
-    if (this.props.items) {
-      let items = this.props.items.match(/[^\r\n]+/g);
+  // //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
+  // _testForHeaders() {
+  //   if (this.props.items) {
+  //     let items = this.props.items.match(/[^\r\n]+/g);
 
-      if (items && items.length) {
-        for (var i = 0; i < items.length; i++) {
-          let item = items[i]?.trim();
-          if (item.startsWith(childTag)) {
-            return true;
-          }
-        }
-      }
-    }
+  //     if (items && items.length) {
+  //       for (var i = 0; i < items.length; i++) {
+  //         let item = items[i]?.trim();
+  //         if (item.startsWith(childTag)) {
+  //           return true;
+  //         }
+  //       }
+  //     }
+  //   }
 
-    //Else if we made it this far, there are no headers/children pattern
-    return false;
-  }
+  //   //Else if we made it this far, there are no headers/children pattern
+  //   return false;
+  // }
 
-  _getItemProps(index, text, hasHeadersAndChildren) {
-    let key = index;
-    let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
+  // _getItemProps(index, text, hasHeadersAndChildren) {
+  //   let key = index;
+  //   let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
 
-    if (text && isDivider) {
-      let itemProps = {
-        key: "divider_" + key,
-        itemType: itemTypeDivider,
-      };
-      return itemProps;
-    }
-    else {
-      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
+  //   if (text && isDivider) {
+  //     let itemProps = {
+  //       key: "divider_" + key,
+  //       itemType: itemTypeDivider,
+  //     };
+  //     return itemProps;
+  //   }
+  //   else {
+  //     let isChild = hasHeadersAndChildren && text.startsWith(childTag);
 
-      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
-      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
+  //     let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
+  //     let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
 
-      let itemText = hasHeadersAndChildren && isChild ?
-        text.substring(text.indexOf(childTag) + 1).trim() : text;
+  //     let itemText = hasHeadersAndChildren && isChild ?
+  //       text.substring(text.indexOf(childTag) + 1).trim() : text;
 
-      let itemProps = {
-        key: itemKey,
-        text: itemText,
-        itemType: itemType,
-        disabled: false,
-      };
-      return itemProps;
-    }
-  }
+  //     let itemProps = {
+  //       key: itemKey,
+  //       text: itemText,
+  //       itemType: itemType,
+  //       disabled: false,
+  //     };
+  //     return itemProps;
+  //   }
+  // }
 
   //The main entry point for the control's onChange event. 
   // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
@@ -142,7 +143,7 @@ class ComboBox extends React.Component {
     else {
       //Case Single Select
       // Option info is undefined. The Index is the index of the newly selected item. 
-      this._onChangeSingle(index);
+      this._onChangeSingle(index + 1);
     }
   }
 
@@ -160,7 +161,7 @@ class ComboBox extends React.Component {
     //For the end user in UXPin, convert the index to a 1-based number. 
     //Always pass a string -- not a number. 
     if (this.props.onChoiceChange) {
-      this.props.onChoiceChange((index + 1).toString());
+      this.props.onChoiceChange((index).toString());
     }
   }
 
@@ -198,23 +199,25 @@ class ComboBox extends React.Component {
   }
 
   //If it's multiselect, only notify UXPin of changes on blur.
-  _onBlur() {
+  _onDismiss() {
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
       if (this.props.onChoiceChange) {
-        let items = this.state.items;
-        let indexes = this.state._selectedIndices;
+        // let items = this.state.items;
+        // let indexes = this.state._selectedIndices;
 
-        // We'll filter this list the old fashioned way...
-        var keys = [];
-        var i;
-        for (i = 0; i < indexes.length; i++) {
-          let index = indexes[i];
-          if (items[index]) {
-            items[index].itemType ? '' : keys.push(index);
-          }
-        }
-        let list = keys.sort().map(key => key + 1).toString();
+        // // We'll filter this list the old fashioned way...
+        // var keys = [];
+        // var i;
+        // for (i = 0; i < indexes.length; i++) {
+        //   let index = indexes[i];
+        //   if (items[index]) {
+        //     items[index].itemType ? '' : keys.push(index);
+        //   }
+        // }
+        // let list = keys.sort().map(key => key + 1).toString();
+
+        let list = this.state._selectedIndices?.sort()?.toString();
         this.props.onChoiceChange(list);
       }
 
@@ -263,7 +266,7 @@ class ComboBox extends React.Component {
             errorMessage={this.props.errorMessage}
             disabled={this.props.disabled}
             onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
-            onBlur={() => this._onBlur()}
+            onDismiss={() => this._onDismiss()}
           />
         </TooltipHost>
       </div>
