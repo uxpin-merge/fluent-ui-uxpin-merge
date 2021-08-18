@@ -138,25 +138,8 @@ class Dropdown extends React.Component {
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onChoiceChange) {
-        // let items = this.state.items;
-        // let indexes = this.state._selectedIndices;
-
-        // console.log("onDismiss list: " + indexes);
-
-        // // We'll filter this list the old fashioned way...
-        // var keys = [];
-        // var i;
-        // for (i = 0; i < indexes.length; i++) {
-        //   let index = indexes[i];
-        //   if (items[index]) {
-        //     items[index].itemType ? '' : keys.push(index);
-        //   }
-        // }
-
-        let list = this.state._selectedIndices.sort().toString();
+        let list = this.state._selectedIndices?.sort()?.toString();
         this.props.onChoiceChange(list);
-
-        console.log("   Sorted: " + list);
       }
 
       this.setState(
