@@ -200,23 +200,12 @@ class ComboBox extends React.Component {
 
   //If it's multiselect, only notify UXPin of changes on blur.
   _onDismiss() {
+
+    console.log("onDismiss: " + this.state._selectedIndices);
+
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. We'll send them the new index value in case they can catch it.
       if (this.props.onChoiceChange) {
-        // let items = this.state.items;
-        // let indexes = this.state._selectedIndices;
-
-        // // We'll filter this list the old fashioned way...
-        // var keys = [];
-        // var i;
-        // for (i = 0; i < indexes.length; i++) {
-        //   let index = indexes[i];
-        //   if (items[index]) {
-        //     items[index].itemType ? '' : keys.push(index);
-        //   }
-        // }
-        // let list = keys.sort().map(key => key + 1).toString();
-
         let list = this.state._selectedIndices?.sort()?.toString();
         this.props.onChoiceChange(list);
       }
