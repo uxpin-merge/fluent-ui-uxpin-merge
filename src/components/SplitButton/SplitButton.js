@@ -69,7 +69,7 @@ class SplitButton extends React.Component {
             let newProps = {
               onClick: () => { this._onClick(item.key) },
             }
-            item = newProps;
+            item.onClick = newProps;
           }
         }
       }
