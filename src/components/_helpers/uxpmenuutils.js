@@ -76,14 +76,14 @@ export const UxpMenuUtils = {
 
       if (rawPropText) {
          //Split each line out.
-         let items = this.props.items.match(/[^\r\n]+/g);
+         let items = rawPropText.match(/[^\r\n]+/g);
          let hasHeadersAndChildren = this.testForChildren(rawPropText);
 
          if (items && items.length) {
             var i;
             for (i = 0; i < items.length; i++) {
                var item = items[i]?.trim();
-               let isChild = item?.startsWith(childTag);
+               let isChild = item?.startsWith(this.childTag);
 
                if (isChild) {
                   //We must remove the * before parsing.
@@ -101,7 +101,7 @@ export const UxpMenuUtils = {
                      let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, hasHeadersAndChildren, isChild);
 
                      if (props) {
-                        itemList.push(props);
+                        propsList.push(props);
                      }
                   }
                }

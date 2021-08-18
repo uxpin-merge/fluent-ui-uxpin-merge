@@ -4,7 +4,7 @@ import { ContextualMenuItemType } from '@fluentui/react/lib/ContextualMenu';
 import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import * as UXPinParser from '../_helpers/UXPinParser';
-
+import UxpMenuUtils from '../_helpers/uxpmenuutils';
 
 
 const defaultText = 'SplitButton';
@@ -48,6 +48,10 @@ class SplitButton extends React.Component {
   }
 
   set() {
+
+    let testing = UxpMenuUtils.parseItemText(this.props.items);
+    console.log(">>>>>>>>>>>>>>\n" + JSON.stringify(testing));
+
     this.setState({
       items: this._parseMenuItems()
     });
