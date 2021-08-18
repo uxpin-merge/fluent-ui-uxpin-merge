@@ -16,12 +16,6 @@ icon(Photo2Add) Add Picture
 divider
 icon(AddFriend) Add User`;
 
-const childTag = "*";
-const dividerText1 = "divider";
-const dividerText2 = "----";
-const itemTypeHeader = ContextualMenuItemType.Header;
-const itemTypeDivider = ContextualMenuItemType.Divider;
-
 
 
 class SplitButton extends React.Component {
@@ -57,7 +51,6 @@ class SplitButton extends React.Component {
   }
 
   _addClickHandlers(menuProps) {
-    let updatedList = [];
     if (menuProps) {
       var i;
       for (i = 0; i < menuProps.length; i++) {
