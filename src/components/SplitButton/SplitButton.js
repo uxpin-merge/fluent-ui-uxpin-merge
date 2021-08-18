@@ -71,7 +71,7 @@ class SplitButton extends React.Component {
           }
           else {
 
-            item.onClick = this._onClick(item.key);
+            item.onClick = () => this._onClick(item.key);
             updatedList.push(item);
 
             // let newProps = {
