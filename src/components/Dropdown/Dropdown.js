@@ -126,6 +126,9 @@ class Dropdown extends React.Component {
       keys = filtered;
     }
 
+    console.log("_onChangeMulti. key: " + option.key);
+    console.log("     new index list: " + keys);
+
     this.setState(
       {
         _selectedIndices: keys,
@@ -136,6 +139,9 @@ class Dropdown extends React.Component {
 
   //If it's multiselect, only notify UXPin of changes on blur.
   _onBlur() {
+
+    console.log("onBlur. indexes: " + this.state._selectedIndices);
+
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onChoiceChange) {
