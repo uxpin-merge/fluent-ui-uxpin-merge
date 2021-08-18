@@ -316,7 +316,7 @@ Facepile.propTypes = {
  */
 Facepile.defaultProps = {
     size: 'size32',
-    selectedIndex: '',
+    selectedIndex: 3,
     number: 5,
     faceCount: 5,
     showAddButton: false,

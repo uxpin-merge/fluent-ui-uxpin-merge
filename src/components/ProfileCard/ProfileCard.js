@@ -58,9 +58,11 @@ class ProfileCard extends React.Component {
 
             email = (
                 <Link
-                    {...this.props}
+                    // {...this.props}
                     value={this.props.email}
-                    linkHref={link ? link : ''}
+                    href={link ? link : ''}
+                    bold={false}
+                    italic={false}
                 />
             );
         }
