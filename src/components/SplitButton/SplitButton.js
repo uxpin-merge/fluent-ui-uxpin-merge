@@ -49,8 +49,9 @@ class SplitButton extends React.Component {
 
   set() {
 
-    let testing = UxpMenuUtils.parseItemText(this.props.items);
-    console.log(">>>>>>>>>>>>>>\n" + JSON.stringify(testing));
+    var testItems = UxpMenuUtils.parseItemText(this.props.items);
+    testItems = this._addClickHandlers(testItems);
+    console.log(">>>>>>>>>>>>>>\n" + JSON.stringify(testItems));
 
     this.setState({
       items: this._parseMenuItems()
