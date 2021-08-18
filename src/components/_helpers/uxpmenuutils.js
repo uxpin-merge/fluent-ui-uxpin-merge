@@ -8,42 +8,42 @@ export const UxpMenuUtils = {
    /**
    * The preferred tag for a child menu item. 
    */
-   childTag = "*",
+   childTag: "*",
 
    /**
    * The preferred divider string for a menu: 'divider' 
    */
-   dividerText1 = "divider",
+   dividerText1: "divider",
 
    /**
    * An alternative divider string for a menu: '----' 
    */
-   dividerText2 = "----",
+   dividerText2: "----",
 
-   uxpTypeDivider = "divider",
-   uxpTypeGroup = "group",
-   uxpTypeChild = "child",
-   uxpTypeStandardItem = "item",
+   uxpTypeDivider: "divider",
+   uxpTypeGroup: "group",
+   uxpTypeChild: "child",
+   uxpTypeStandardItem: "item",
 
    /**
    * For context menus, the enum to use for a header item.
    */
-   cmItemTypeHeader = ContextualMenuItemType.Header,
+   cmItemTypeHeader: ContextualMenuItemType.Header,
 
    /**
    * For context menus, the enum to use for a divider item.
    */
-   cmItemTypeDivider = ContextualMenuItemType.Divider,
+   cmItemTypeDivider: ContextualMenuItemType.Divider,
 
    /**
    * For 'selectable option menus', such as Dividers and Comboboxes, the enum to use for a header item.
    */
-   somItemTypeHeader = SelectableOptionMenuItemType.Header,
+   somItemTypeHeader: SelectableOptionMenuItemType.Header,
 
    /**
    * For 'selectable option menus', such as Dividers and Comboboxes, the enum to use for a divider item.
    */
-   somItemTypeDivider = SelectableOptionMenuItemType.Divider,
+   somItemTypeDivider: SelectableOptionMenuItemType.Divider,
 
    /**
     * Tests whether the raw UXPin prop text for a menu or item list includes 
