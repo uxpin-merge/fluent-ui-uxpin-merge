@@ -55,7 +55,7 @@ class SplitButton extends React.Component {
 
     this.setState({
       // items: this._parseMenuItems()
-      items = testItems,
+      items: testItems,
     });
   }
 
