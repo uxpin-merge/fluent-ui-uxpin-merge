@@ -74,6 +74,8 @@ export const UxpMenuUtils = {
    parseItemText: function (rawPropText) {
       var propsList = [];
 
+      console.log("*** entered parseItemText");
+
       if (rawPropText) {
          //Split each line out.
          let items = rawPropText.match(/[^\r\n]+/g);
