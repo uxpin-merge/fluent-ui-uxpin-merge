@@ -104,7 +104,8 @@ export const UxpMenuUtils = {
                   let trimmedText = menuItem?.text?.trim();
 
                   if (menuItem && trimmedText) {
-                     let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, hasHeadersAndChildren, isChild);
+                     let mayBeHeader = hasHeadersAndChildren && hasChild;
+                     let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, mayBeHeader, isChild);
 
                      if (props) {
                         propsList.push(props);
@@ -125,7 +126,7 @@ export const UxpMenuUtils = {
       }
 
       return false;
-   }
+   },
 
    /**
     * Tests whether the raw UXPin prop text for a menu or item list includes 
@@ -134,7 +135,7 @@ export const UxpMenuUtils = {
     * @param {number} index The raw UXPin prop text for a menu or item list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
     * @returns {bool} Returns true if explicitly identified children are found, false otherwise. 
     */
-   getContextMenuProps: function (index, text, iconName, hasHeadersAndChildren, isChild) {
+   getContextMenuProps: function (index, text, iconName, isHeaderCandidate, isChild) {
       let key = index + 1;
       let isDivider = (text?.toLowerCase() === this.dividerText1) || text?.startsWith(this.dividerText2);
 
@@ -147,9 +148,9 @@ export const UxpMenuUtils = {
          return menuProps;
       }
       else {
-         let itemKey = !hasHeadersAndChildren || isChild ? key : 'header_' + key;
-         let itemType = !hasHeadersAndChildren || isChild ? '' : this.somItemTypeHeader;
-         let uxpType = !hasHeadersAndChildren ? this.uxpTypeStandardItem :
+         let itemKey = !isHeaderCandidate || isChild ? key : 'header_' + key;
+         let itemType = !isHeaderCandidate || isChild ? '' : this.somItemTypeHeader;
+         let uxpType = !isHeaderCandidate ? this.uxpTypeStandardItem :
             isChild ? this.uxpTypeChild : this.uxpTypeGroup;
 
          let menuProps = {
