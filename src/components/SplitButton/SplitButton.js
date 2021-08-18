@@ -85,7 +85,7 @@ class SplitButton extends React.Component {
       }
     }
 
-    return updatedList;
+    return menuProps;
   }
 
 
