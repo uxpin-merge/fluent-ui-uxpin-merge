@@ -49,13 +49,13 @@ class SplitButton extends React.Component {
 
   set() {
 
-    var testItems = UxpMenuUtils.parseItemText(this.props.items);
-    testItems = this._addClickHandlers(testItems);
-    console.log(">>>>>>>>>>>>>>\n" + JSON.stringify(testItems));
+    var menuItems = UxpMenuUtils.parseItemText(this.props.items);
+    menuItems = this._addClickHandlers(menuItems);
+    console.log(">>>>>>>>>>>>>>\n" + JSON.stringify(menuItems));
 
     this.setState({
       // items: this._parseMenuItems()
-      items: testItems,
+      items: menuItems,
     });
   }
 
@@ -66,20 +66,9 @@ class SplitButton extends React.Component {
       for (i = 0; i < menuProps.length; i++) {
         let item = menuProps[i];
         if (item) {
-          if (item.itemType) {
-            updatedList.push(item);
-          }
-          else {
-
+          //Dividers and Section Headers have item types
+          if (!item.itemType) {
             item.onClick = () => this._onClick(item.key);
-            updatedList.push(item);
-
-            // let newProps = {
-            //   ...item.props,
-            //   onClick: () => { this._onClick(item.key) },
-            // };
-            // let newItem = newProps;
-            // updatedList.push(newItem);
           }
         }
       }
