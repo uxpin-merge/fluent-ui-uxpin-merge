@@ -95,10 +95,9 @@ class Dropdown extends React.Component {
       }
     )
 
-
     // Raise this event to UXPin. 
-    if (this.props.onControlChange) {
-      this.props.onControlChange((index).toString());
+    if (this.props.onChoiceChange) {
+      this.props.onChoiceChange((index).toString());
     }
   }
 
