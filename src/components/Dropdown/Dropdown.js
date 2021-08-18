@@ -48,7 +48,8 @@ class Dropdown extends React.Component {
     //   )
     // );
 
-    let menuItems = UxpMenuUtils.parseItemText(this.props.items, true);
+    let menuItems = UxpMenuUtils.parseItemText(this.props.items, false);
+    console.log(">>>>>>>>\n" + JSON.stringify(menuItems));
 
     //Figure out the selected indexes
     var index = undefined;
