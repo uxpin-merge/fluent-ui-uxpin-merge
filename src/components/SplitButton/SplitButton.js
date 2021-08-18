@@ -11,10 +11,12 @@ const defaultIcon = '';
 
 //Default items list to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultItems = `icon(PageAdd) Add Document
-icon(Photo2Add) Add Picture
+const defaultItems = `Files 
+* icon(Document) Add Document
+* icon(FileCode) Add Code File
 divider
-icon(AddFriend) Add User`;
+icon(Picture) Add Picture
+icon(AddGroup) Add Group`;
 
 
 
