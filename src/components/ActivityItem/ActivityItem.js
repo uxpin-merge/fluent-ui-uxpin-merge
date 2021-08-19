@@ -9,8 +9,8 @@ import * as UXPinParser from '../_helpers/UXPinParser';
 
 const defaultIcon = "Info";
 const defaultIconColor = "#000000";
-const defaultDescription = 'link(Tahlia) ran a new system test';
-const defaultBody = 'link(System Test #420) contains 3 components. You have been given access privileges.';
+const defaultDescription = 'Tahlia ran a new link(system test)';
+const defaultBody = 'System Test link(#420) contains 3 components. You have been given access privileges.';
 const defaultTimeStamp = 'Just now';
 const linkTarget = 'uxpin_proto_';
 

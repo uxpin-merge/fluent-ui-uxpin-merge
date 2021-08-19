@@ -1,22 +1,18 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Dropdown as FDropdown } from '@fluentui/react/lib/Dropdown';
-import { SelectableOptionMenuItemType } from '@fluentui/react/';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
-const defaultItems = `Apples
-Bananas
-"I love you, Grapes!"
-Pears`;
-
-const childTag = "*";
-const dividerText1 = "divider";
-const dividerText2 = "----";
-const itemTypeHeader = SelectableOptionMenuItemType.Header;
-const itemTypeDivider = SelectableOptionMenuItemType.Divider;
+const defaultItems = `Fruit
+* Apples
+* Bananas
+* "I love you, Grapes!"
+divider
+Grains
+Vegetables`;
 
 
 
@@ -38,21 +34,14 @@ class Dropdown extends React.Component {
   }
 
   set() {
-    //Figure out the items
-    let hasHeadersAndChildren = this._testForHeaders();
-
-    let items = UXPinParser.parse(this.props.items).map(
-      (item, index) => (
-        this._getItemProps(index, item?.text, hasHeadersAndChildren)
-      )
-    );
+    let menuItems = UxpMenuUtils.parseItemText(this.props.items, false);
 
     //Figure out the selected indexes
     var index = undefined;
     var list = [];
 
-    //Props are 1 based. Subtract 1 from whatever the user entered.
-    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, -1);
+    //Props are 1 based. 
+    let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, 0);
 
     if (selected && selected.length > 0) {
       index = selected[0];
@@ -62,7 +51,7 @@ class Dropdown extends React.Component {
     this.setState({
       _selectedIndex: index,
       _selectedIndices: list,
-      items: items,
+      items: menuItems,
     })
   }
 
@@ -73,55 +62,6 @@ class Dropdown extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.selected !== this.props.selected) {
       this.set();
-    }
-  }
-
-  //If one item starts with the child tag, then we'll need to parse using the Headers + Items strategy
-  _testForHeaders() {
-    if (this.props.items) {
-      let items = this.props.items.match(/[^\r\n]+/g);
-
-      if (items && items.length) {
-        for (var i = 0; i < items.length; i++) {
-          let item = items[i]?.trim();
-          if (item.startsWith(childTag)) {
-            return true;
-          }
-        }
-      }
-    }
-
-    //Else if we made it this far, there are no headers/children pattern
-    return false;
-  }
-
-  _getItemProps(index, text, hasHeadersAndChildren) {
-    let key = index;
-    let isDivider = (text?.toLowerCase() === dividerText1) || text?.startsWith(dividerText2);
-
-    if (text && isDivider) {
-      let itemProps = {
-        key: "divider_" + key,
-        itemType: itemTypeDivider,
-      };
-      return itemProps;
-    }
-    else {
-      let isChild = hasHeadersAndChildren && text.startsWith(childTag);
-
-      let itemKey = hasHeadersAndChildren && !isChild ? 'header_' + key : key;
-      let itemType = hasHeadersAndChildren && !isChild ? itemTypeHeader : '';
-
-      let itemText = hasHeadersAndChildren && isChild ?
-        text.substring(text.indexOf(childTag) + 1).trim() : text;
-
-      let itemProps = {
-        key: itemKey,
-        text: itemText,
-        itemType: itemType,
-        disabled: false,
-      };
-      return itemProps;
     }
   }
 
@@ -139,7 +79,7 @@ class Dropdown extends React.Component {
     else {
       //Case Single Select
       // Option info is undefined. The Index is the index of the newly selected item. 
-      this._onChangeSingle(index);
+      this._onChangeSingle(index + 1);
     }
   }
 
@@ -154,10 +94,9 @@ class Dropdown extends React.Component {
       }
     )
 
-
     // Raise this event to UXPin. 
-    if (this.props.onControlChange) {
-      this.props.onControlChange((index + 1).toString());
+    if (this.props.onChoiceChange) {
+      this.props.onChoiceChange((index).toString());
     }
   }
 
@@ -195,23 +134,11 @@ class Dropdown extends React.Component {
   }
 
   //If it's multiselect, only notify UXPin of changes on blur.
-  _onBlur() {
+  _onDismiss() {
     if (this.state.isDirty && this.props.multiSelect) {
       //Raise this event to UXPin. 
       if (this.props.onChoiceChange) {
-        let items = this.state.items;
-        let indexes = this.state._selectedIndices;
-
-        // We'll filter this list the old fashioned way...
-        var keys = [];
-        var i;
-        for (i = 0; i < indexes.length; i++) {
-          let index = indexes[i];
-          if (items[index]) {
-            items[index].itemType ? '' : keys.push(index);
-          }
-        }
-        let list = keys.sort().map(key => key + 1).toString();
+        let list = this.state._selectedIndices?.sort()?.toString();
         this.props.onChoiceChange(list);
       }
 
@@ -252,7 +179,7 @@ class Dropdown extends React.Component {
             id={ttTargetID}
             aria-describedby={tooltipID}
             onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
-            onBlur={() => this._onBlur()}
+            onDismiss={() => this._onDismiss()}
           />
 
         </TooltipHost>
