@@ -71,6 +71,13 @@ export const UxpMenuUtils = {
       return false;
    },
 
+   /**
+    * Parses a simple list of raw UXPin prop text from a codeeditor. Does not support dividers or groups. 
+    * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
+    * @param {bool} parseIcon True to parse the prop text for an icon name. Will set the iconProps params. False to skip icon name processing.
+    * @param {bool} isDisabled Set the 'disabled' prop.
+    * @returns {Array} Returns an array of props. Props include key, text, iconProps and disabled. 
+    */
    parseSimpleListText: function (rawPropText, parseIcon, isDisabled) {
       var propsList = [];
 
@@ -112,6 +119,12 @@ export const UxpMenuUtils = {
       return propsList;
    },
 
+   /**
+    * Parses a complex list of raw UXPin prop text from a codeeditor. Supports dividers and groups. 
+    * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
+    * @param {bool} isContextMenuType Fluent has two types of enums for Dividers and Group Headers. Set true to set these with the Context Menu set of enum values. False for the Selectable Option kind. 
+    * @returns {Array} Returns an array of props. Props include key, itemType, text, iconProps and a custom uxpType. 
+    */
    parseItemText: function (rawPropText, isContextMenuType) {
       var propsList = [];
 
@@ -132,7 +145,7 @@ export const UxpMenuUtils = {
                   item = item.substring(1).trim();
                }
                else if (hasHeadersAndChildren) {
-                  hasChild = this.hasChild(items, i + 1);
+                  hasChild = this.isChildItem(items, i + 1);
                }
 
                //Parse the individual item. It may have an icon.
@@ -158,7 +171,13 @@ export const UxpMenuUtils = {
       return propsList;
    },
 
-   hasChild: function (itemList, testIndex) {
+   /**
+    * Affirms whether the item at the specified index is a child menu/list item. If it starts with the childTab, then it will return true. 
+    * @param {Array} itemList A array of strings. 
+    * @param {number} testIndex The index for the string to test whether it starts with the childTag. 
+    * @returns {bool} True if the item at the specified index starts with the childTag. False otherwise.  
+    */
+   isChildItem: function (itemList, testIndex) {
       if (itemList && itemList.length && itemList.length > testIndex) {
          let item = itemList[testIndex]?.trim();
          return item?.startsWith(this.childTag);
@@ -168,11 +187,14 @@ export const UxpMenuUtils = {
    },
 
    /**
-    * Tests whether the raw UXPin prop text for a menu or item list includes 
-    * any explicitly identified children. 
-    * The preferred childTag must be the first character on the line. 
-    * @param {number} index The raw UXPin prop text for a menu or item list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
-    * @returns {bool} Returns true if explicitly identified children are found, false otherwise. 
+    * Creates a menu item params object with the specified values. Params include key, itemType, text, iconProps and a proprietary uxpType. 
+    * @param {number} index Index value to use in creating the item's key prop.
+    * @param {string} text The value to use for the text prop. 
+    * @param {string} iconName The value to use for the iconProps iconName prop. 
+    * @param {bool} isHeaderCandidate True if this item might be a header item.
+    * @param {bool} isChild True if this item is a known child item. 
+    * @param {bool} isContextMenuType True to apply Context Menu enums for Divider and Header items. False to use Selectable Option enums instead. 
+    * @returns {string} Returns a JSON props object representing a menu item. 
     */
    getContextMenuProps: function (index, text, iconName, isHeaderCandidate, isChild, isContextMenuType) {
       let key = index + 1;
