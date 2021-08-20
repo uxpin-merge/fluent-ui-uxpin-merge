@@ -11,6 +11,7 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ActionButton from '../ActionButton/ActionButton';
 import { DirectionalHint } from '@fluentui/react/lib/common/DirectionalHint';
+import Link from '../Link/Link';
 
 //The max count for the persona list 
 const maxPersonaCount = 99;
@@ -74,9 +75,8 @@ class Facepile extends React.Component {
         }
     }
 
-    _onRenderPersonaCoin(personaProps) {
+    _onRenderPersonaCoin(personaProps, isSinglePersona) {
         // className={customPersonaStyles}
-
         // Get the presence label from presence code
         function getPresenceLabel(presenceCode) {
             let presenceLabel
@@ -108,6 +108,23 @@ class Facepile extends React.Component {
             return presenceLabel
         }
 
+        var linkedEmail = '';
+        if (personaProps.email && personaProps?.email?.trim().length > 0) {
+
+            let trimmedLink = personaProps.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            linkedEmail = (
+                <Link
+                    // {...this.props}
+                    value={personaProps.email}
+                    href={link ? link : ''}
+                    bold={false}
+                    italic={false}
+                />
+            );
+        }
+
         function onRenderPlainCard() {
             return (
                 <ProfileCard
@@ -137,13 +154,14 @@ class Facepile extends React.Component {
                 <div style={{ cursor: 'pointer' }}>
                     <Persona
                         {...personaProps}
-                        hidePersonaDetails={true}
-                        size={PersonaSize[this.props.size]}
+                        presence={this.props.showPresence ? personaProps.presence : 0}
+                        hidePersonaDetails={isSinglePersona ? false : true}
+                        size={isSinglePersona ? "size40" : PersonaSize[this.props.size]}
                         imageUrl={personaProps.imageUrl}
                         imageInitials={personaProps.imageInitials}
                         initialsColor={personaProps.initialsColor}
                         text={personaProps.text}
-                        secondaryText={personaProps.role}
+                        secondaryText={isSinglePersona ? linkedEmail : personaProps.role}
                         tertiaryText={personaProps.email}
                         onClick={() => { this._onClick(personaProps) }}
                     />
@@ -230,7 +248,7 @@ class Facepile extends React.Component {
                 maxDisplayablePersonas={this.props.faceCount}
                 personas={this.state.personaList.slice(0, this.props.number)}
                 // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
-                onRenderPersona={(p) => this._onRenderPersonaCoin(p)}
+                onRenderPersona={(p) => this._onRenderPersonaCoin(p, true)}
                 onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
                 addButtonProps={addButtonParams}
                 overflowButtonType={ovbType}
@@ -284,6 +302,13 @@ Facepile.propTypes = {
     showOverflowButton: PropTypes.bool,
 
     /** 
+    * @uxpindescription Whether to display the presence dot on facepile avatars. 
+    * @uxpinpropname Show Presence
+    */
+    showPresence: PropTypes.bool,
+
+
+    /** 
     * @uxpindescription Whether to display details on hover. 
     * @uxpinpropname Show Details
     */
@@ -322,6 +347,7 @@ Facepile.defaultProps = {
     showAddButton: false,
     showOverflowButton: true,
     showDetails: true,
+    showPresence: true
 };
 
 
