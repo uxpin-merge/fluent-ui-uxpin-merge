@@ -6,25 +6,35 @@ import {
 } from '@fluentui/react/lib/Facepile';
 import { HoverCard as FHoverCard, HoverCardType } from '@fluentui/react/lib/HoverCard';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
-import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ActionButton from '../ActionButton/ActionButton';
+import { Callout } from '@fluentui/react/lib/Callout';
 import { DirectionalHint } from '@fluentui/react/lib/common/DirectionalHint';
 import Link from '../Link/Link';
 
 //The max count for the persona list 
 const maxPersonaCount = 99;
 
+const styles = {
 
+    callout: {
+        padding: '16px',
+    },
+    overflowItems: {
+        margin: '4px 0'
+    }
+
+};
 
 class Facepile extends React.Component {
-    
+
     constructor(props) {
         super(props);
 
         this.state = {
-            personaList: []
+            personaList: [],
+            overflowHoverIsShown: false
         }
     }
 
@@ -141,7 +151,7 @@ class Facepile extends React.Component {
                 </ProfileCard>
             )
         }
-        
+
         return (
             <FHoverCard
                 type={HoverCardType.plain}
@@ -196,12 +206,6 @@ class Facepile extends React.Component {
 
     // }
 
-    _onClickOverflow(event) {
-        //Raise this event to UXPin. 
-        if (this.props.onOverflowClick) {
-            this.props.onOverflowClick();
-        }
-    }
 
     _onClickAddButton(event) {
         //Raise this event to UXPin. 
@@ -222,6 +226,17 @@ class Facepile extends React.Component {
         }
     }
 
+    _toggleIsCalloutVisible(overflowHoverIsShown) {
+        overflowHoverIsShown ?
+            this.setState(
+                { overflowHoverIsShown: false }
+            )
+            :
+            this.setState(
+                { overflowHoverIsShown: true }
+            )
+
+    }
 
     render() {
 
@@ -231,9 +246,12 @@ class Facepile extends React.Component {
             ovbType = OverflowButtonType['descriptive'];
         }
 
-        //Add the Overflow Button click listener. 
+        //Add the Overflow Button props. 
         const overflowButtonParams = {
-            onClick: ((e) => this._onClickOverflow(e))
+            onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            onMouseLeave: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            id: "overflow-button",
+            title: null
         };
 
         //Add the Add Button click listener. 
@@ -241,19 +259,51 @@ class Facepile extends React.Component {
             onClick: ((e) => this._onClickAddButton(e))
         };
 
+
         return (
-            <FFacepile
-                {...this.props}
-                personaSize={PersonaSize[this.props.size]}
-                maxDisplayablePersonas={this.props.faceCount}
-                personas={this.state.personaList.slice(0, this.props.number)}
-                // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
-                onRenderPersona={(p) => this._onRenderPersonaCoin(p, true)}
-                onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
-                addButtonProps={addButtonParams}
-                overflowButtonType={ovbType}
-                overflowButtonProps={overflowButtonParams}
-            />
+            <>
+                <FFacepile
+                    {...this.props}
+                    personaSize={PersonaSize[this.props.size]}
+                    maxDisplayablePersonas={this.props.faceCount}
+                    personas={this.state.personaList.slice(0, this.props.number)}
+                    // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                    onRenderPersona={(p) => this._onRenderPersonaCoin(p, true)}
+                    onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
+                    addButtonProps={addButtonParams}
+                    overflowButtonType={ovbType}
+                    overflowButtonProps={overflowButtonParams}
+                />
+
+
+                {this.state.overflowHoverIsShown ?
+                    <Callout
+                        gapSpace={0}
+                        target="#overflow-button"
+                        directionalHint={DirectionalHint.rightCenter}
+                        hideOverflow
+                        className={styles.callout}
+                    >
+                        {
+                            this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
+                                return (
+                                    <Persona
+                                        key={anObjectMapped.key}
+                                        presence={this.props.showPresence ? anObjectMapped.presence : 0}
+                                        hidePersonaDetails={false}
+                                        size={PersonaSize["size24"]}
+                                        imageUrl={anObjectMapped.imageUrl}
+                                        imageInitials={anObjectMapped.imageInitials}
+                                        initialsColor={anObjectMapped.initialsColor}
+                                        text={anObjectMapped.text}
+                                        className={styles.overflowItems}
+                                    />
+                                );
+                            })
+                        }
+                    </Callout>
+                    : null}
+            </>
         )
     }
 }
