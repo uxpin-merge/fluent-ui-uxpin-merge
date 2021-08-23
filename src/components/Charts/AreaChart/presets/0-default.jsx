@@ -22,12 +22,15 @@ const chartData =
   'x 6, y 2\n' +
   'x 7, y 1\n' +
   'x 8, y 9\n' +
-  'x 9, y 11'
+  'x 9, y 11';
+
+const defaultColors = `success
+info`;
 
 export default (
   <AreaChart
     animation="gentle"
-    colorRange={"success\n" + "info"}
+    colorRange={defaultColors}
     curve="curveLinear"
     data={chartData}
     opacity="0.6"

@@ -24,6 +24,14 @@ import AreaChartStyles from './AreaChart.styles';
 import * as UXPinParser from '../../_helpers/UXPinParser';
 import { UxpColors } from '../../_helpers/uxpcolorutils';
 
+
+
+const defaultWidth = 500;
+const defaultHeight = 300;
+const defaultStrokeStyle = 'solid';
+const defaultAnimation = 'gentle';
+
+
 export default class AreaChart extends React.Component {
   constructor(props) {
     super(props);
@@ -36,8 +44,13 @@ export default class AreaChart extends React.Component {
     };
   }
 
-  componentDidMount() {
+
+  set() {
     this.setState({ data: this.getData() });
+  }
+
+  componentDidMount() {
+    this.set();
   }
 
   getCrosshair(value, { index }) {
@@ -49,7 +62,21 @@ export default class AreaChart extends React.Component {
   }
 
   getColorRange() {
-    return UXPinParser.parse(this.props.colorRange).map((item) => (UxpColors.getHexFromHexOrToken(item.text)));
+    let colors = [];
+    let list = UXPinParser.parse(this.props.colorRange);
+
+    if (list) {
+      var i;
+      for (i = 0; i < list.length; i++) {
+        let item = list[i];
+        let color = UxpColors.getHexFromHexOrToken(item?.text);
+        if (color) {
+          colors.push(color);
+        }
+      }
+    }
+
+    return colors;
   }
 
   getData() {
@@ -73,7 +100,7 @@ export default class AreaChart extends React.Component {
             y: undefined,
           });
         } else {
-          firstDataSet[firstDataSet.length-1].y = parseInt(parsedOutput[i].text.split('y ')[1]);
+          firstDataSet[firstDataSet.length - 1].y = parseInt(parsedOutput[i].text.split('y ')[1]);
         }
       } else {
         // Is this an odd or even row of the array?
@@ -83,7 +110,7 @@ export default class AreaChart extends React.Component {
             y: undefined,
           });
         } else {
-          secondDataSet[secondDataSet.length-1].y = parseInt(parsedOutput[i].text.split('y ')[1]);
+          secondDataSet[secondDataSet.length - 1].y = parseInt(parsedOutput[i].text.split('y ')[1]);
         }
       }
     }
@@ -160,36 +187,36 @@ export default class AreaChart extends React.Component {
           <AreaSeries
             data={this.getData()}
             color={
-               this.getColorRange !== undefined
-            && this.getColorRange()[0]
-              ? this.getColorRange()[0]
-              : this.props.color
+              this.getColorRange !== undefined
+                && this.getColorRange()[0]
+                ? this.getColorRange()[0]
+                : this.props.color
             }
             curve={curve(this.props.curve)}
             opacity={
               this.props.styles !== undefined
-            && this.props.styles[0]
-            && this.props.styles[0].opacity
+                && this.props.styles[0]
+                && this.props.styles[0].opacity
                 ? parseFloat(this.props.styles[0].opacity)
-                : parseFloat(this.props.opacity)
+                : parseFloat(this.props.opacity / 100)
             }
             stroke={
               this.props.strokeColorRange !== undefined
-            && this.props.strokeColorRange[0]
+                && this.props.strokeColorRange[0]
                 ? this.props.strokeColorRange[0]
                 : this.props.strokeColor
             }
             strokeWidth={
               this.props.styles !== undefined
-            && this.props.styles[0]
-            && this.props.styles[0].strokeWidth
+                && this.props.styles[0]
+                && this.props.styles[0].strokeWidth
                 ? this.props.styles[0].strokeWidth
                 : this.props.strokeWidth
             }
             strokeStyle={
               this.props.styles !== undefined
-            && this.props.styles[0]
-            && this.props.styles[0].strokeStyle
+                && this.props.styles[0]
+                && this.props.styles[0].strokeStyle
                 ? this.props.styles[0].strokeStyle
                 : this.props.strokeStyle
             }
@@ -208,38 +235,38 @@ export default class AreaChart extends React.Component {
               data={this.getData()[i]}
               color={
                 this.getColorRange !== undefined
-                && this.getColorRange()[i]
+                  && this.getColorRange()[i]
                   ? this.getColorRange()[i]
                   : this.props.color
-                }
+              }
               curve={curve(this.props.curve)}
               opacity={
-                  this.props.styles !== undefined
+                this.props.styles !== undefined
                   && this.props.styles[i]
                   && this.props.styles[i].opacity
-                    ? parseFloat(this.props.styles[i].opacity)
-                    : parseFloat(this.props.opacity)
-                }
+                  ? parseFloat(this.props.styles[i].opacity)
+                  : parseFloat(this.props.opacity)
+              }
               stroke={
-                  this.props.strokeColorRange !== undefined
+                this.props.strokeColorRange !== undefined
                   && this.props.strokeColorRange[i]
-                    ? this.props.strokeColorRange[i]
-                    : this.props.strokeColor
-                }
+                  ? this.props.strokeColorRange[i]
+                  : this.props.strokeColor
+              }
               strokeWidth={
-                  this.props.styles !== undefined
+                this.props.styles !== undefined
                   && this.props.styles[i]
                   && this.props.styles[i].strokeWidth
-                    ? this.props.styles[i].strokeWidth
-                    : this.props.strokeWidth
-                }
+                  ? this.props.styles[i].strokeWidth
+                  : this.props.strokeWidth
+              }
               strokeStyle={
-                  this.props.styles !== undefined
+                this.props.styles !== undefined
                   && this.props.styles[i]
                   && this.props.styles[i].strokeStyle
-                    ? this.props.styles[i].strokeStyle
-                    : this.props.strokeStyle
-                }
+                  ? this.props.styles[i].strokeStyle
+                  : this.props.strokeStyle
+              }
               onNearestX={(value, index) => this.getCrosshair(value, index)}
               onNearestXY={this.props.onNearestXY}
               onSeriesClick={this.props.onSeriesClick}
@@ -258,27 +285,39 @@ export default class AreaChart extends React.Component {
 
 /* eslint-disable sort-keys */
 AreaChart.propTypes = {
-  /** Height of the Chart in px. Accepts only numbers. */
+
+  /**
+   * @uxpindescription The chart height in pixels. 
+   * */
   height: PropTypes.number,
-  /** Width of the Chart in px. Accepts only numbers. */
+
+  /**
+   * @uxpindescription The chart width in pixels. 
+   * */
   width: PropTypes.number,
-  /** Turns, on/off animation and allows for selection of different types of animations. */
+
+  /**
+   * @uxpindescription An animation for first appearance on screen.  
+   * */
   animation: PropTypes.oneOf([false, 'noWobble', 'gentle', 'wobbly', 'stiff']),
+
   /**
    * Color to be used on all chart lines, unless colorRange is provided
    * @uxpinignoreprop
    */
   color: PropTypes.string,
-  /** Array with colors to be used across all chart lines. If array doesn't specify color for all the chart lines, color property is used. */
+
   /**
+   * @uxpindescription Specify a list of colors to use for the chart graphics. Use a  color token, hex or gradient value, such as 'themePrimary', 'black','#0070BA','linear-gradient(120deg, #8D7749, #498D77)' or 'radial-gradient(#8D3749, #37EE77)'.
    * @uxpincontroltype codeeditor
    */
   colorRange: PropTypes.string,
+
   /**
-   * Turns on/off crossHair
-   * @uxpindescription Turns on/off crossHair (only in prototype preview)
+   * @uxpindescription To display the crosshair in Preview mode. 
    */
   crossHair: PropTypes.bool,
+
   /** Select the kind of curve for all the chart lines */
   curve: PropTypes.oneOf([
     'no curve',
@@ -300,29 +339,40 @@ AreaChart.propTypes = {
     'curveCardinalOpen',
     'curveCardinalClosed',
   ]),
+
   /**
    * Additional param to modify the curvature of curveBundleBeta
    * @uxpinignoreprop
    */
   curveBundleBeta: PropTypes.string,
+
   /**
    * Additional param to modify the curvature of curveCardinal, curveCardinalOpen, curveCardinalClosed
    * @uxpinignoreprop
    */
   curveCardinalTension: PropTypes.string,
+
   /**
    * Additional param to modify the curvature of curveCatmullRom, curveCatmullRomOpen and curveCatmullRomClosed
    * @uxpinignoreprop
    */
   curveCatmullRomAlpha: PropTypes.string,
+
   /**
    * @uxpincontroltype codeeditor
    */
   data: PropTypes.string,
-  /** Turns on/off horizontal grid lines. */
+
+  /**
+   * @uxpindescription Whether to display the horizontal grid lines.
+   */
   horizontalGridLines: PropTypes.bool,
-  /** Turns on/off vertical grid lines. */
+
+  /**
+   * @uxpindescription Whether to display the vertical grid lines.
+   */
   verticalGridLines: PropTypes.bool,
+
   /**
    * Sets margin for the chart inside of the container. Format: {"top": 0, "right": 0, "bottom": 0, "left": 0 }
    * @uxpinignoreprop
@@ -333,37 +383,51 @@ AreaChart.propTypes = {
     right: PropTypes.number,
     top: PropTypes.number,
   }),
+
   /**
    * @uxpinignoreprop
    */
   onNearestXY: PropTypes.func,
+
   /**
    * @uxpinignoreprop
    */
   onSeriesClick: PropTypes.func,
+
   /**
    * @uxpinignoreprop
    */
   // eslint-disable-next-line react/no-unused-prop-types
   onSeriesMouseOut: PropTypes.func,
+
   /**
    * @uxpinignoreprop
    */
   onSeriesMouseOver: PropTypes.func,
+
   /**
    * @uxpinignoreprop
    */
   onSeriesRightClick: PropTypes.func,
-  /** Specifies opacity for all the chart lines, unless styles array is provided */
-  opacity: PropTypes.string,
+
+  /**
+   * @uxpindescription Use an integer between 0 - 100. Specifies opacity for each of the chart graphics.
+   * @uxpinpropname % Opacity
+   * */
+  opacity: PropTypes.number,
+
   /** Color of the upper edge of the area. Overrides color property/ */
   strokeColor: PropTypes.string,
+
   /** Array of colors of the upper edge of the area. Overrides color property/ */
   strokeColorRange: PropTypes.arrayOf(PropTypes.string),
+
   /** Specifies style of the line for all the chart lines, unless styles array is provided */
   strokeStyle: PropTypes.oneOf(['solid', 'dashed']),
+
   /** Specifies width of the line for all the chart lines, unless styles array is provided */
   strokeWidth: PropTypes.number,
+
   /**
    * Object with styles that allows for specifying styles for every line separtely. Accepts: StrokeStyle, StrokeWidth and Opacity. Format: [{"strokeStyle": "solid"}]
    * @uxpinignoreprop
@@ -371,26 +435,33 @@ AreaChart.propTypes = {
   styles: PropTypes.arrayOf(PropTypes.object),
 
   /**
-   * Turns on/off horizontal labels.
+   * @uxpindescription Whether to display X-Axis labels
    * @uxpinpropname Show X labels
    */
   xLabels: PropTypes.bool,
+
   /**
-   * Turns on/off vertical labels.
+   * @uxpindescription Whether to display Y-Axis labels
    * @uxpinpropname Show Y labels
    */
   yLabels: PropTypes.bool,
 };
-/* eslint-enable sort-keys */
 
+/**
+ * Set the default values for this control in the UXPin Editor.
+ */
 AreaChart.defaultProps = {
+  animation: this.defaultAnimation,
   crossHair: false,
-  height: 300,
+  height: this.defaultHeight,
   horizontalGridLines: true,
-  strokeStyle: 'solid',
+  strokeStyle: this.defaultStrokeStyle,
   strokeWidth: 3,
   verticalGridLines: true,
-  width: 300,
+  width: this.defaultWidth,
   xLabels: true,
   yLabels: true,
 };
+
+
+export { AreaChart as default };
