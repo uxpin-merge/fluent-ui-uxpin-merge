@@ -451,17 +451,15 @@ AreaChart.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 AreaChart.defaultProps = {
-  animation: this.defaultAnimation,
+  animation: defaultAnimation,
   crossHair: false,
-  height: this.defaultHeight,
+  height: defaultHeight,
   horizontalGridLines: true,
-  strokeStyle: this.defaultStrokeStyle,
+  strokeStyle: defaultStrokeStyle,
   strokeWidth: 3,
   verticalGridLines: true,
-  width: this.defaultWidth,
+  width: defaultWidth,
   xLabels: true,
   yLabels: true,
 };
 
-
-export { AreaChart as default };
