@@ -275,7 +275,7 @@ Shape.propTypes = {
     vAlign: PropTypes.oneOf([topAlign, middleAlign, bottomAlign]),
 
     /**
-     * @uxpindescription Use a PayPal UI color token, hex or gradient value, such as 'blue-600', 'black','#0070BA','linear-gradient(120deg, #8D7749, #498D77)' or 'radial-gradient(#8D3749, #37EE77)'.
+     * @uxpindescription Use a UI color token, hex or gradient value, such as 'themePrimary', 'black','#0070BA','linear-gradient(120deg, #8D7749, #498D77)' or 'radial-gradient(#8D3749, #37EE77)'.
      * @uxpinpropname Background
      * */
     bgColor: PropTypes.string,
