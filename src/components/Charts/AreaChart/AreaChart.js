@@ -463,5 +463,3 @@ AreaChart.defaultProps = {
   yLabels: true,
 };
 
-
-export { AreaChart as default };
