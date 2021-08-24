@@ -111,8 +111,7 @@ class Panel extends React.Component {
         <div
           style={{
             width: '100%',
-            height: '24px',
-            color: 'purple',
+            height: '1px',
           }} />
       );
       stackList.push(spacer);
