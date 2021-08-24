@@ -106,7 +106,9 @@ class Pivot extends React.Component {
     }
 
     //The prop is 1-based. The tab keys are also 1-based.
-    let key = (this.state.selectedIndex - 1) < tabList.length ? this.state.selectedIndex : tabList.length;
+    let key = this.state.selectedIndex < 1 ? 1
+      : this.state.selectedIndex > tabList.length ? tabList.length
+        : this.state.selectedIndex;
 
     //With one number, the padding applies to both rows and columns.  
     //Let's make sure we have a positive number. 
