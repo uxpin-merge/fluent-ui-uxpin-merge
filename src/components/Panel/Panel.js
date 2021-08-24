@@ -104,8 +104,18 @@ class Panel extends React.Component {
 
     //Set up the StackItems
     var stackList = [];
-    var footerContent = '';
     if (this.props.children) {
+
+      //Vertical padding
+      let spacer = (
+        <div
+          style={{
+            width: '100%',
+            height: '24px',
+            color: 'purple',
+          }} />
+      );
+      stackList.push(spacer);
 
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
       let childList = React.Children.toArray(this.props.children);
