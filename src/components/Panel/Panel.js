@@ -97,8 +97,11 @@ class Panel extends React.Component {
     //****************************
     //For Inner Stack
 
+    //Let's make sure we have a positive number. 
+    let pad = this.props.gutterPadding > 0 ? this.props.gutterPadding : 0;
+
     const stackTokens = {
-      childrenGap: 24,
+      childrenGap: pad,
       padding: 0,
     };
 
@@ -222,6 +225,13 @@ Panel.propTypes = {
   panelWidth: PropTypes.oneOf(panelSizeList),
 
   /**
+   * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
+   * @uxpindescription Row padding between the items in the group. Value must be 0 or more.  
+   * @uxpinpropname Gutter
+   */
+  gutterPadding: PropTypes.number,
+
+  /**
    * @uxpindescription To put the last child object into the Footer area.
    * @uxpinpropname Footer
    */
@@ -249,6 +259,7 @@ Panel.defaultProps = {
   show: true,
   lightDismiss: true,
   panelWidth: defaultPanelSize,
+  gutterPadding: 24,
   hasFooter: false,
 }
 
