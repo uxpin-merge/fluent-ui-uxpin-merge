@@ -105,16 +105,6 @@ class Panel extends React.Component {
     //Set up the StackItems
     var stackList = [];
 
-    //Vertical padding between the panel header and contents.
-    let spacer = (
-      <div
-        style={{
-          width: '100%',
-          height: '1px',
-        }} />
-    );
-    stackList.push(spacer);
-
     if (this.props.children) {
 
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -153,15 +143,22 @@ class Panel extends React.Component {
     //Do we have children? 
     if (stackList && stackList.length > 0) {
       panelContents = (
-        <Stack
-          {...this.props}
-          tokens={stackTokens}
-          horizontal={false}
-          horizontalAlign={'left'}
-          wrap={false}
-        >
-          {stackList}
-        </Stack>
+        <div>
+          <div
+            style={{
+              width: '100%',
+              height: '24px',
+            }} />
+          <Stack
+            {...this.props}
+            tokens={stackTokens}
+            horizontal={false}
+            horizontalAlign={'left'}
+            wrap={false}
+          >
+            {stackList}
+          </Stack>
+        </div>
       );
     }
 
