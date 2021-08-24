@@ -106,7 +106,9 @@ class Pivot extends React.Component {
     }
 
     //The prop is 1-based. The tab keys are also 1-based.
-    let key = this.state.selectedIndex;
+    let key = this.state.selectedIndex < 1 ? 1
+      : this.state.selectedIndex > tabList.length ? tabList.length
+        : this.state.selectedIndex;
 
     //With one number, the padding applies to both rows and columns.  
     //Let's make sure we have a positive number. 
@@ -117,13 +119,6 @@ class Pivot extends React.Component {
       padding: 0,
     };
 
-    const topStackItemStyles = {
-      root: {
-        height: 'auto',
-        width: 'auto',
-      },
-    };
-
     //Set up the Tab Panel
     var tabPanel = '';
     if (this.props.children) {
@@ -131,7 +126,7 @@ class Pivot extends React.Component {
       let childList = React.Children.toArray(this.props.children);
 
       //Now, we configure the StackItem
-      if (childList.length) {
+      if (childList.length && (key - 1) < childList.length) {
         //Minus 1 for the 0-based array
         let child = childList[key - 1];
 

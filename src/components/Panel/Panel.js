@@ -97,14 +97,17 @@ class Panel extends React.Component {
     //****************************
     //For Inner Stack
 
+    //Let's make sure we have a positive number. 
+    let pad = this.props.gutterPadding > 0 ? this.props.gutterPadding : 0;
+
     const stackTokens = {
-      childrenGap: 24,
+      childrenGap: pad,
       padding: 0,
     };
 
     //Set up the StackItems
     var stackList = [];
-    var footerContent = '';
+
     if (this.props.children) {
 
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -143,15 +146,22 @@ class Panel extends React.Component {
     //Do we have children? 
     if (stackList && stackList.length > 0) {
       panelContents = (
-        <Stack
-          {...this.props}
-          tokens={stackTokens}
-          horizontal={false}
-          horizontalAlign={'left'}
-          wrap={false}
-        >
-          {stackList}
-        </Stack>
+        <div>
+          <div
+            style={{
+              width: '100%',
+              height: '24px',
+            }} />
+          <Stack
+            {...this.props}
+            tokens={stackTokens}
+            horizontal={false}
+            horizontalAlign={'left'}
+            wrap={false}
+          >
+            {stackList}
+          </Stack>
+        </div>
       );
     }
 
@@ -215,6 +225,13 @@ Panel.propTypes = {
   panelWidth: PropTypes.oneOf(panelSizeList),
 
   /**
+   * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
+   * @uxpindescription Row padding between the items in the group. Value must be 0 or more.  
+   * @uxpinpropname Gutter
+   */
+  gutterPadding: PropTypes.number,
+
+  /**
    * @uxpindescription To put the last child object into the Footer area.
    * @uxpinpropname Footer
    */
@@ -242,6 +259,7 @@ Panel.defaultProps = {
   show: true,
   lightDismiss: true,
   panelWidth: defaultPanelSize,
+  gutterPadding: 24,
   hasFooter: false,
 }
 

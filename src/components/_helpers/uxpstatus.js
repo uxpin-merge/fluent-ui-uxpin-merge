@@ -16,6 +16,27 @@ export const UxpStatus = {
       iconName: 'SkypeCircleCheck',
    },
 
+   ok: {
+      role: 'ok',
+      text: 'OK',
+      color: 'success',
+      iconName: 'SkypeCircleCheck',
+   },
+
+   good: {
+      role: 'good',
+      text: 'Good',
+      color: 'success',
+      iconName: 'SkypeCircleCheck',
+   },
+
+   ready: {
+      role: 'ready',
+      text: 'Ready',
+      color: 'success',
+      iconName: 'SkypeCircleCheck',
+   },
+
    warning: {
       role: 'warning',
       text: 'Warning',
@@ -132,6 +153,12 @@ export const UxpStatus = {
                return this.success;
             case 'done':
                return this.done;
+            case 'ok':
+               return this.ok;
+            case 'good':
+               return this.good;
+            case 'ready':
+               return this.ready;
             case 'warning':
                return this.warning;
             case 'error':
@@ -175,6 +202,9 @@ export const UxpStatus = {
 
       statuses.push(this.success);
       statuses.push(this.done);
+      statuses.push(this.ok);
+      statuses.push(this.good);
+      statuses.push(this.ready);
       statuses.push(this.warning);
       statuses.push(this.error);
       statuses.push(this.failed);
