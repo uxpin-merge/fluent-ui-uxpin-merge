@@ -4,17 +4,28 @@ import {
     Facepile as FFacepile,
     OverflowButtonType
 } from '@fluentui/react/lib/Facepile';
-import { HoverCard, HoverCardType, IPlainCardProps } from '@fluentui/react/lib/HoverCard';
+import { HoverCard as FHoverCard, HoverCardType } from '@fluentui/react/lib/HoverCard';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
-import { PersonaPresence } from '@fluentui/react/lib/PersonaPresence';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
-
-
+import ProfileCard from '../ProfileCard/ProfileCard';
+import ActionButton from '../ActionButton/ActionButton';
+import { Callout } from '@fluentui/react/lib/Callout';
+import { DirectionalHint } from '@fluentui/react/lib/common/DirectionalHint';
+import Link from '../Link/Link';
 
 //The max count for the persona list 
 const maxPersonaCount = 99;
 
+const styles = {
 
+    callout: {
+        padding: '16px',
+    },
+    overflowItems: {
+        margin: '4px 0'
+    }
+
+};
 
 class Facepile extends React.Component {
 
@@ -22,7 +33,8 @@ class Facepile extends React.Component {
         super(props);
 
         this.state = {
-            personaList: []
+            personaList: [],
+            overflowHoverIsShown: false
         }
     }
 
@@ -73,68 +85,127 @@ class Facepile extends React.Component {
         }
     }
 
-    _onRenderPersonaCoin(personaProps) {
-
+    _onRenderPersonaCoin(personaProps, isSinglePersona) {
         // className={customPersonaStyles}
-
-        return (
-            <div style={{ cursor: 'pointer' }} >
-
-                <Persona
-                    {...personaProps}
-                    hidePersonaDetails={true}
-                    size={PersonaSize[this.props.size]}
-                    imageUrl={personaProps.imageUrl}
-                    imageInitials={personaProps.imageInitials}
-                    initialsColor={personaProps.initialsColor}
-                    text={personaProps.text}
-                    secondaryText={personaProps.role}
-                    tertiaryText={personaProps.email}
-                    presence={PersonaPresence[personaProps.presence]}
-                    onClick={() => { this._onClick(personaProps) }}
-                />
-
-            </div>
-
-        );
-
-    }
-
-    _onRenderSinglePersona(personaProps) {
-
-        //Sizes 16 and 28 aren's supported in the Persona control.
-        let pSize = this.props.size === 'size16' ? 'size24'
-            : this.props.size === 'size28' ? 'size24'
-                : this.props.size;
-
-        return (
-            <div style={{ cursor: 'pointer' }} >
-
-                <Persona
-                    {...this.props}
-                    hidePersonaDetails={false}
-                    size={PersonaSize[pSize]}
-                    imageUrl={personaProps.imageUrl}
-                    imageInitials={personaProps.imageInitials}
-                    initialsColor={personaProps.initialsColor}
-                    text={personaProps.text}
-                    secondaryText={personaProps.role}
-                    tertiaryText={personaProps.email}
-                    presence={PersonaPresence[personaProps.presence]}
-                    onClick={() => { this._onClick(personaProps) }}
-                />
-
-            </div>
-        );
-
-    }
-
-    _onClickOverflow(event) {
-        //Raise this event to UXPin. 
-        if (this.props.onOverflowClick) {
-            this.props.onOverflowClick();
+        // Get the presence label from presence code
+        function getPresenceLabel(presenceCode) {
+            let presenceLabel
+            switch (presenceCode) {
+                case 0:
+                    presenceLabel = "none"
+                    break
+                case 1:
+                    presenceLabel = "offline"
+                    break
+                case 2:
+                    presenceLabel = "online"
+                    break
+                case 3:
+                    presenceLabel = "away"
+                    break
+                case 4:
+                    presenceLabel = "dnd"
+                    break
+                case 5:
+                    presenceLabel = "blocked"
+                    break
+                case 6:
+                    presenceLabel = "busy"
+                    break
+                default:
+                    presenceLabel = "none"
+            }
+            return presenceLabel
         }
+
+        var linkedEmail = '';
+        if (personaProps.email && personaProps?.email?.trim().length > 0) {
+
+            let trimmedLink = personaProps.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            linkedEmail = (
+                <Link
+                    // {...this.props}
+                    value={personaProps.email}
+                    href={link ? link : ''}
+                    bold={false}
+                    italic={false}
+                />
+            );
+        }
+
+        function onRenderPlainCard() {
+            return (
+                <ProfileCard
+                    imageUrl={personaProps.imageUrl}
+                    initials={personaProps.initials}
+                    ppPresence={getPresenceLabel(personaProps.presence)}
+                    name={personaProps.text}
+                    role={personaProps.role}
+                    email={personaProps.email}
+                >
+                    <ActionButton text="Email" iconName="Mail" />
+                    <ActionButton text="Call" iconName="Phone" />
+                    <ActionButton text="Chat" iconName="OfficeChat" />
+                </ProfileCard>
+            )
+        }
+
+        return (
+            <FHoverCard
+                type={HoverCardType.plain}
+                plainCardProps={{
+                    onRenderPlainCard: onRenderPlainCard,
+                    directionalHint: DirectionalHint.topAutoEdge,
+                }}
+                shouldBlockHoverCard={this.props.showDetails ? false : true}
+            >
+                <div style={{ cursor: 'pointer' }}>
+                    <Persona
+                        {...personaProps}
+                        presence={this.props.showPresence ? personaProps.presence : 0}
+                        hidePersonaDetails={isSinglePersona ? false : true}
+                        size={isSinglePersona ? "size40" : PersonaSize[this.props.size]}
+                        imageUrl={personaProps.imageUrl}
+                        imageInitials={personaProps.imageInitials}
+                        initialsColor={personaProps.initialsColor}
+                        text={personaProps.text}
+                        secondaryText={isSinglePersona ? linkedEmail : personaProps.role}
+                        tertiaryText={personaProps.email}
+                        onClick={() => { this._onClick(personaProps) }}
+                    />
+                </div>
+            </FHoverCard>
+        );
     }
+
+    // _onRenderSinglePersona(personaProps) {
+
+    //     //Sizes 16 and 28 aren's supported in the Persona control.
+    //     let pSize = this.props.size === 'size16' ? 'size24'
+    //         : this.props.size === 'size28' ? 'size24'
+    //             : this.props.size;
+
+    //     return (
+    //         <div style={{ cursor: 'pointer' }} >
+    //              <Persona
+    //                     {...personaProps}
+    //                     hidePersonaDetails={true}
+    //                     size={PersonaSize[this.props.size]}
+    //                     imageUrl={personaProps.imageUrl}
+    //                     imageInitials={personaProps.imageInitials}
+    //                     initialsColor={personaProps.initialsColor}
+    //                     text={personaProps.text}
+    //                     secondaryText={personaProps.role}
+    //                     tertiaryText={personaProps.email}
+    //                     onClick={() => { this._onClick(personaProps) }}
+    //                 />
+    //         </div>
+    //     );
+
+    // }
+
 
     _onClickAddButton(event) {
         //Raise this event to UXPin. 
@@ -144,6 +215,7 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
+        alert(this._getSelectedPersonaIndex(persona));
         let index = this._getSelectedPersonaIndex(persona);
 
         this.props.selectedIndex = index;
@@ -154,6 +226,17 @@ class Facepile extends React.Component {
         }
     }
 
+    _toggleIsCalloutVisible(overflowHoverIsShown) {
+        overflowHoverIsShown ?
+            this.setState(
+                { overflowHoverIsShown: false }
+            )
+            :
+            this.setState(
+                { overflowHoverIsShown: true }
+            )
+
+    }
 
     render() {
 
@@ -163,9 +246,12 @@ class Facepile extends React.Component {
             ovbType = OverflowButtonType['descriptive'];
         }
 
-        //Add the Overflow Button click listener. 
+        //Add the Overflow Button props. 
         const overflowButtonParams = {
-            onClick: ((e) => this._onClickOverflow(e))
+            onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            onMouseLeave: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            id: "overflow-button",
+            title: null
         };
 
         //Add the Add Button click listener. 
@@ -173,20 +259,51 @@ class Facepile extends React.Component {
             onClick: ((e) => this._onClickAddButton(e))
         };
 
+
         return (
-            <FFacepile
-                {...this.props}
-                personaSize={PersonaSize[this.props.size]}
-                maxDisplayablePersonas={this.props.faceCount}
-                personas={this.state.personaList.slice(0, this.props.number)}
+            <>
+                <FFacepile
+                    {...this.props}
+                    personaSize={PersonaSize[this.props.size]}
+                    maxDisplayablePersonas={this.props.faceCount}
+                    personas={this.state.personaList.slice(0, this.props.number)}
+                    // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
+                    onRenderPersona={(p) => this._onRenderPersonaCoin(p, true)}
+                    onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
+                    addButtonProps={addButtonParams}
+                    overflowButtonType={ovbType}
+                    overflowButtonProps={overflowButtonParams}
+                />
 
-                onRenderPersona={(p) => this._onRenderSinglePersona(p)}
-                onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
 
-                addButtonProps={addButtonParams}
-                overflowButtonType={ovbType}
-                overflowButtonProps={overflowButtonParams}
-            />
+                {this.state.overflowHoverIsShown ?
+                    <Callout
+                        gapSpace={0}
+                        target="#overflow-button"
+                        directionalHint={DirectionalHint.rightCenter}
+                        hideOverflow
+                        className={styles.callout}
+                    >
+                        {
+                            this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
+                                return (
+                                    <Persona
+                                        key={anObjectMapped.key}
+                                        presence={this.props.showPresence ? anObjectMapped.presence : 0}
+                                        hidePersonaDetails={false}
+                                        size={PersonaSize["size24"]}
+                                        imageUrl={anObjectMapped.imageUrl}
+                                        imageInitials={anObjectMapped.imageInitials}
+                                        initialsColor={anObjectMapped.initialsColor}
+                                        text={anObjectMapped.text}
+                                        className={styles.overflowItems}
+                                    />
+                                );
+                            })
+                        }
+                    </Callout>
+                    : null}
+            </>
         )
     }
 }
@@ -234,6 +351,19 @@ Facepile.propTypes = {
     */
     showOverflowButton: PropTypes.bool,
 
+    /** 
+    * @uxpindescription Whether to display the presence dot on facepile avatars. 
+    * @uxpinpropname Show Presence
+    */
+    showPresence: PropTypes.bool,
+
+
+    /** 
+    * @uxpindescription Whether to display details on hover. 
+    * @uxpinpropname Show Details
+    */
+    showDetails: PropTypes.bool,
+
     /**
      * @uxpindescription Fires when one of the personas is clicked on.
      * @uxpinpropname * Click
@@ -250,7 +380,9 @@ Facepile.propTypes = {
      * @uxpindescription Fires when the Overflow Button is clicked on.
      * @uxpinpropname Overflow Click
      * */
-    onOverflowClick: PropTypes.func
+    onOverflowClick: PropTypes.func,
+
+
 };
 
 
@@ -259,11 +391,13 @@ Facepile.propTypes = {
  */
 Facepile.defaultProps = {
     size: 'size32',
-    selectedIndex: '',
+    selectedIndex: 3,
     number: 5,
     faceCount: 5,
     showAddButton: false,
     showOverflowButton: true,
+    showDetails: true,
+    showPresence: true
 };
 
 

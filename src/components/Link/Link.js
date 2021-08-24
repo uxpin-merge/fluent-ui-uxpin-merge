@@ -44,7 +44,7 @@ class Link extends React.Component {
                 variant={this.props.size}>
 
                 <FLink
-                    {...this.props}
+                    // {...this.props}
                     href={this.props.linkHref}
                     styles={linkTextStyles}
                     target={linkTarget} //Force open in a new window

@@ -90,6 +90,7 @@ module.exports = {
           'src/components/Panel/Panel.js',
           'src/components/ScrollablePane/ScrollablePane.js',
           'src/components/Tooltip/Tooltip.js',
+          'src/components/HoverCard/HoverCard.js'
         ],
       },
       {
