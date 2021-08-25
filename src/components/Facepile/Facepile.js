@@ -194,9 +194,7 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
-        alert(this._getSelectedPersonaIndex(persona));
         let index = this._getSelectedPersonaIndex(persona);
-
         this.props.selectedIndex = index;
 
         //Raise this event to UXPin. 
