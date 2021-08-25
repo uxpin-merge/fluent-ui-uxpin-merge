@@ -231,7 +231,6 @@ class Facepile extends React.Component {
 
         //Add the Overflow Button props. 
         const overflowButtonParams = {
-            // onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
             onClick: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
             id: "overflow-button",
             title: null
@@ -359,14 +358,6 @@ Facepile.propTypes = {
      * @uxpinpropname Add Click
      * */
     onAddClick: PropTypes.func,
-
-    /**
-     * @uxpindescription Fires when the Overflow Button is clicked on.
-     * @uxpinpropname Overflow Click
-     * */
-    onOverflowClick: PropTypes.func,
-
-
 };
 
 
