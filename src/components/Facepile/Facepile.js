@@ -85,6 +85,27 @@ class Facepile extends React.Component {
         }
     }
 
+    _getLinkedEmail(personaProps) {
+        var linkedEmail = '';
+
+        if (personaProps.email && personaProps?.email?.trim().length > 0) {
+
+            let trimmedLink = personaProps.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            linkedEmail = (
+                <Link
+                    value={personaProps.email}
+                    href={link ? link : ''}
+                    bold={false}
+                    italic={false}
+                />
+            );
+        }
+
+        return linkedEmail;
+    }
+
     _onRenderPersonaCoin(personaProps, isSinglePersona) {
         // className={customPersonaStyles}
         // Get the presence label from presence code
@@ -118,22 +139,7 @@ class Facepile extends React.Component {
             return presenceLabel
         }
 
-        var linkedEmail = '';
-        if (personaProps.email && personaProps?.email?.trim().length > 0) {
-
-            let trimmedLink = personaProps.email.trim();
-            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
-
-            linkedEmail = (
-                <Link
-                    // {...this.props}
-                    value={personaProps.email}
-                    href={link ? link : ''}
-                    bold={false}
-                    italic={false}
-                />
-            );
-        }
+        let linkedEmail = this._getLinkedEmail(personaProps);
 
         function onRenderPlainCard() {
             return (
@@ -166,7 +172,7 @@ class Facepile extends React.Component {
                         {...personaProps}
                         presence={this.props.showPresence ? personaProps.presence : 0}
                         hidePersonaDetails={isSinglePersona ? false : true}
-                        size={isSinglePersona ? "size40" : PersonaSize[this.props.size]}
+                        size={PersonaSize[this.props.size]}
                         imageUrl={personaProps.imageUrl}
                         imageInitials={personaProps.imageInitials}
                         initialsColor={personaProps.initialsColor}
@@ -180,33 +186,6 @@ class Facepile extends React.Component {
         );
     }
 
-    // _onRenderSinglePersona(personaProps) {
-
-    //     //Sizes 16 and 28 aren's supported in the Persona control.
-    //     let pSize = this.props.size === 'size16' ? 'size24'
-    //         : this.props.size === 'size28' ? 'size24'
-    //             : this.props.size;
-
-    //     return (
-    //         <div style={{ cursor: 'pointer' }} >
-    //              <Persona
-    //                     {...personaProps}
-    //                     hidePersonaDetails={true}
-    //                     size={PersonaSize[this.props.size]}
-    //                     imageUrl={personaProps.imageUrl}
-    //                     imageInitials={personaProps.imageInitials}
-    //                     initialsColor={personaProps.initialsColor}
-    //                     text={personaProps.text}
-    //                     secondaryText={personaProps.role}
-    //                     tertiaryText={personaProps.email}
-    //                     onClick={() => { this._onClick(personaProps) }}
-    //                 />
-    //         </div>
-    //     );
-
-    // }
-
-
     _onClickAddButton(event) {
         //Raise this event to UXPin. 
         if (this.props.onAddClick) {
@@ -215,9 +194,7 @@ class Facepile extends React.Component {
     }
 
     _onClick(persona) {
-        alert(this._getSelectedPersonaIndex(persona));
         let index = this._getSelectedPersonaIndex(persona);
-
         this.props.selectedIndex = index;
 
         //Raise this event to UXPin. 
@@ -238,6 +215,12 @@ class Facepile extends React.Component {
 
     }
 
+    _onDismissCallout() {
+        this.setState(
+            { overflowHoverIsShown: false }
+        )
+    }
+
     render() {
 
         //Configure the Overflow button type. Off by default. 
@@ -248,8 +231,7 @@ class Facepile extends React.Component {
 
         //Add the Overflow Button props. 
         const overflowButtonParams = {
-            onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
-            onMouseLeave: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            onClick: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
             id: "overflow-button",
             title: null
         };
@@ -267,7 +249,6 @@ class Facepile extends React.Component {
                     personaSize={PersonaSize[this.props.size]}
                     maxDisplayablePersonas={this.props.faceCount}
                     personas={this.state.personaList.slice(0, this.props.number)}
-                    // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
                     onRenderPersona={(p) => this._onRenderPersonaCoin(p, true)}
                     onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
                     addButtonProps={addButtonParams}
@@ -283,6 +264,7 @@ class Facepile extends React.Component {
                         directionalHint={DirectionalHint.rightCenter}
                         hideOverflow
                         className={styles.callout}
+                        onDismiss={() => { this._onDismissCallout() }}
                     >
                         {
                             this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
@@ -291,11 +273,12 @@ class Facepile extends React.Component {
                                         key={anObjectMapped.key}
                                         presence={this.props.showPresence ? anObjectMapped.presence : 0}
                                         hidePersonaDetails={false}
-                                        size={PersonaSize["size24"]}
+                                        size={PersonaSize["size40"]}
                                         imageUrl={anObjectMapped.imageUrl}
                                         imageInitials={anObjectMapped.imageInitials}
                                         initialsColor={anObjectMapped.initialsColor}
                                         text={anObjectMapped.text}
+                                        secondaryText={this._getLinkedEmail(anObjectMapped)}
                                         className={styles.overflowItems}
                                     />
                                 );
@@ -375,14 +358,6 @@ Facepile.propTypes = {
      * @uxpinpropname Add Click
      * */
     onAddClick: PropTypes.func,
-
-    /**
-     * @uxpindescription Fires when the Overflow Button is clicked on.
-     * @uxpinpropname Overflow Click
-     * */
-    onOverflowClick: PropTypes.func,
-
-
 };
 
 
