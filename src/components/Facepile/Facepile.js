@@ -180,33 +180,6 @@ class Facepile extends React.Component {
         );
     }
 
-    // _onRenderSinglePersona(personaProps) {
-
-    //     //Sizes 16 and 28 aren's supported in the Persona control.
-    //     let pSize = this.props.size === 'size16' ? 'size24'
-    //         : this.props.size === 'size28' ? 'size24'
-    //             : this.props.size;
-
-    //     return (
-    //         <div style={{ cursor: 'pointer' }} >
-    //              <Persona
-    //                     {...personaProps}
-    //                     hidePersonaDetails={true}
-    //                     size={PersonaSize[this.props.size]}
-    //                     imageUrl={personaProps.imageUrl}
-    //                     imageInitials={personaProps.imageInitials}
-    //                     initialsColor={personaProps.initialsColor}
-    //                     text={personaProps.text}
-    //                     secondaryText={personaProps.role}
-    //                     tertiaryText={personaProps.email}
-    //                     onClick={() => { this._onClick(personaProps) }}
-    //                 />
-    //         </div>
-    //     );
-
-    // }
-
-
     _onClickAddButton(event) {
         //Raise this event to UXPin. 
         if (this.props.onAddClick) {
@@ -238,6 +211,12 @@ class Facepile extends React.Component {
 
     }
 
+    _onDismissCallout() {
+        this.setState(
+            { overflowHoverIsShown: false }
+        )
+    }
+
     render() {
 
         //Configure the Overflow button type. Off by default. 
@@ -249,7 +228,7 @@ class Facepile extends React.Component {
         //Add the Overflow Button props. 
         const overflowButtonParams = {
             onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
-            onMouseLeave: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            // onMouseLeave: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
             id: "overflow-button",
             title: null
         };
@@ -283,6 +262,7 @@ class Facepile extends React.Component {
                         directionalHint={DirectionalHint.rightCenter}
                         hideOverflow
                         className={styles.callout}
+                        onDismiss={() => { this._onDismissCallout() }}
                     >
                         {
                             this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
