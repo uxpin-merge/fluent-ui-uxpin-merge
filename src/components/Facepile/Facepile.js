@@ -166,7 +166,7 @@ class Facepile extends React.Component {
                         {...personaProps}
                         presence={this.props.showPresence ? personaProps.presence : 0}
                         hidePersonaDetails={isSinglePersona ? false : true}
-                        size={isSinglePersona ? "size40" : PersonaSize[this.props.size]}
+                        size={PersonaSize[this.props.size]}
                         imageUrl={personaProps.imageUrl}
                         imageInitials={personaProps.imageInitials}
                         initialsColor={personaProps.initialsColor}
