@@ -86,6 +86,8 @@ class Facepile extends React.Component {
     }
 
     _getLinkedEmail(personaProps) {
+        var linkedEmail = '';
+
         if (personaProps.email && personaProps?.email?.trim().length > 0) {
 
             let trimmedLink = personaProps.email.trim();
@@ -99,11 +101,9 @@ class Facepile extends React.Component {
                     italic={false}
                 />
             );
-
-            return linkedEmail;
         }
 
-        return '';
+        return linkedEmail;
     }
 
     _onRenderPersonaCoin(personaProps, isSinglePersona) {
