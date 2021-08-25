@@ -281,7 +281,7 @@ class Facepile extends React.Component {
                                         imageInitials={anObjectMapped.imageInitials}
                                         initialsColor={anObjectMapped.initialsColor}
                                         text={anObjectMapped.text}
-                                        secondaryText={this._getLinkedEmail(anObjectMapped.email)}
+                                        secondaryText={this._getLinkedEmail(anObjectMapped)}
                                         className={styles.overflowItems}
                                     />
                                 );
