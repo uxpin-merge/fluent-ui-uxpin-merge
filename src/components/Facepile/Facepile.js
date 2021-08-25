@@ -85,6 +85,27 @@ class Facepile extends React.Component {
         }
     }
 
+    _getLinkedEmail(personaProps) {
+        if (personaProps.email && personaProps?.email?.trim().length > 0) {
+
+            let trimmedLink = personaProps.email.trim();
+            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            linkedEmail = (
+                <Link
+                    value={personaProps.email}
+                    href={link ? link : ''}
+                    bold={false}
+                    italic={false}
+                />
+            );
+
+            return linkedEmail;
+        }
+
+        return '';
+    }
+
     _onRenderPersonaCoin(personaProps, isSinglePersona) {
         // className={customPersonaStyles}
         // Get the presence label from presence code
@@ -118,22 +139,7 @@ class Facepile extends React.Component {
             return presenceLabel
         }
 
-        var linkedEmail = '';
-        if (personaProps.email && personaProps?.email?.trim().length > 0) {
-
-            let trimmedLink = personaProps.email.trim();
-            let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
-
-            linkedEmail = (
-                <Link
-                    // {...this.props}
-                    value={personaProps.email}
-                    href={link ? link : ''}
-                    bold={false}
-                    italic={false}
-                />
-            );
-        }
+        let linkedEmail = this._getLinkedEmail(personaProps);
 
         function onRenderPlainCard() {
             return (
@@ -227,8 +233,8 @@ class Facepile extends React.Component {
 
         //Add the Overflow Button props. 
         const overflowButtonParams = {
-            onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
-            // onMouseLeave: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            // onMouseEnter: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
+            onClick: ((e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown)),
             id: "overflow-button",
             title: null
         };
@@ -246,7 +252,6 @@ class Facepile extends React.Component {
                     personaSize={PersonaSize[this.props.size]}
                     maxDisplayablePersonas={this.props.faceCount}
                     personas={this.state.personaList.slice(0, this.props.number)}
-                    // onRenderPersona={(p) => this._onRenderSinglePersona(p)}
                     onRenderPersona={(p) => this._onRenderPersonaCoin(p, true)}
                     onRenderPersonaCoin={(p) => this._onRenderPersonaCoin(p)}
                     addButtonProps={addButtonParams}
@@ -271,11 +276,12 @@ class Facepile extends React.Component {
                                         key={anObjectMapped.key}
                                         presence={this.props.showPresence ? anObjectMapped.presence : 0}
                                         hidePersonaDetails={false}
-                                        size={PersonaSize["size24"]}
+                                        size={PersonaSize["size40"]}
                                         imageUrl={anObjectMapped.imageUrl}
                                         imageInitials={anObjectMapped.imageInitials}
                                         initialsColor={anObjectMapped.initialsColor}
                                         text={anObjectMapped.text}
+                                        secondaryText={this._getLinkedEmail(anObjectMapped.email)}
                                         className={styles.overflowItems}
                                     />
                                 );
