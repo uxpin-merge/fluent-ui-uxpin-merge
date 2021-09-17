@@ -101,7 +101,7 @@ class Tooltip extends React.Component {
         }
 
         //Reset the variable to the stack of objects
-        ttContents = (
+        let ttContents = (
             <Stack
                 tokens={ttStackTokens}
                 horizontal={false}
