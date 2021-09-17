@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import Text from '../Text/Text';
 
 
 
@@ -42,11 +43,8 @@ class Tooltip extends React.Component {
     }
 
     render() {
-
         const ttTargetID = _.uniqueId('ttTarget_');
         const tooltipID = _.uniqueId('tooltip_');
-
-        var hasChildren = false;
 
         var ttChild = (
             <div
@@ -60,7 +58,18 @@ class Tooltip extends React.Component {
             </div>
         );
 
-        var ttContents = this.props.text;
+        var ttList = [];
+        if (this.props.text && this.props.text?.trim()?.length > 0) {
+            ttList.push(
+                <StackItem
+                    align={'stretch'}
+                    grow={false}>
+                    <Text
+                        textValue={this.props.text.trim()}
+                        size={'small'} />
+                </StackItem>
+            );
+        }
 
         if (this.props.children) {
 
@@ -70,25 +79,11 @@ class Tooltip extends React.Component {
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
                 ttChild = childList[0];
-                hasChildren = childList.length > 1 ? true : false;
 
                 if (childList.length > 1) {
                     //Let's assemble the list of things to chose in the tooltip
                     let ttChildren = childList.slice(1);
                     if (ttChildren && ttChildren.length > 0) {
-
-                        var ttList = [];
-
-                        if (this.props.text && this.props.text?.trim()?.length > 0) {
-                            ttList.push(
-                                <StackItem
-                                    align={'stretch'}
-                                    grow={false}>
-                                    {this.props.text}
-                                </StackItem>
-                            );
-                        }
-
                         var i;
                         for (i = 0; i < ttChildren.length; i++) {
                             let child = ttChildren[i];
@@ -100,22 +95,22 @@ class Tooltip extends React.Component {
                                 </StackItem>
                             );
                         }
-
-                        //Reset the variable to the stack of objects
-                        ttContents = (
-                            <Stack
-                                tokens={ttStackTokens}
-                                horizontal={false}
-                                wrap={false}
-                                horizontalAlign={'stretch'}
-                            >
-                                {ttList}
-                            </Stack>
-                        )
                     }
                 }
             }
         }
+
+        //Reset the variable to the stack of objects
+        ttContents = (
+            <Stack
+                tokens={ttStackTokens}
+                horizontal={false}
+                wrap={false}
+                horizontalAlign={'stretch'}
+            >
+                {ttList}
+            </Stack>
+        )
 
         const ttProps = {
             gapSpace: 4,
