@@ -85,6 +85,7 @@ module.exports = {
       {
         name: 'Surfaces',
         include: [
+          'src/components/Callout/Callout.js',
           'src/components/Dialog/Dialog.js',
           'src/components/Modal/Modal.js',
           'src/components/Panel/Panel.js',
