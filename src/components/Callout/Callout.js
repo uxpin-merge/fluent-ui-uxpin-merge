@@ -90,7 +90,7 @@ class Callout extends React.Component {
     render() {
         const coTargetID = _.uniqueId('callout_');
 
-        var ttChild = this.props.showMarker ? (
+        var coChild = this.props.showMarker ? (
             <div
                 style={{
                     display: 'inline-block',
@@ -102,9 +102,9 @@ class Callout extends React.Component {
             </div>
         ) : '';
 
-        var ttList = [];
+        var coList = [];
         if (this.props.text && this.props.text?.trim()?.length > 0) {
-            ttList.push(
+            coList.push(
                 <StackItem
                     align={'stretch'}
                     grow={false}>
@@ -122,7 +122,7 @@ class Callout extends React.Component {
 
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
-                ttChild = childList[0];
+                coChild = childList[0];
 
                 if (childList.length > 1) {
                     //Let's assemble the list of things to chose in the tooltip
@@ -131,7 +131,7 @@ class Callout extends React.Component {
                         var i;
                         for (i = 0; i < ttChildren.length; i++) {
                             let child = ttChildren[i];
-                            ttList.push(
+                            coList.push(
                                 <StackItem
                                     align={'stretch'}
                                     grow={false}>
@@ -152,7 +152,7 @@ class Callout extends React.Component {
                 wrap={false}
                 horizontalAlign={'stretch'}
             >
-                {ttList}
+                {coList}
             </Stack>
         )
 
@@ -170,7 +170,7 @@ class Callout extends React.Component {
                     onMouseEnter={() => { this._onMouseEnter() }}
                     onMouseLeave={() => { this.onMouseLeave() }}
                 >
-                    {ttChild}
+                    {coChild}
                 </Stack>
                 {this.state.open && (
                     <MCallout
@@ -182,7 +182,7 @@ class Callout extends React.Component {
                         onDismiss={() => { this._dismissControl() }}
                         setInitialFocus={true}
                     >
-                        {ttList}
+                        {coList}
                     </MCallout>
                 )}
             </>
