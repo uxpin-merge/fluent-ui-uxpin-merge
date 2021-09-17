@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { TooltipHost, } from '@fluentui/react/lib/Tooltip';
-import { Callout } from '@fluentui/react/lib/Callout';
+import { Callout as MCallout } from '@fluentui/react/lib/Callout';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import Text from '../Text/Text';
@@ -173,7 +173,7 @@ class Callout extends React.Component {
                     {ttChild}
                 </Stack>
                 {this.state.open && (
-                    <Callout
+                    <MCallout
                         isBeakVisible={this.props.showBeak}
                         gapSpace={4}
                         doNotLayer={false}
@@ -183,7 +183,7 @@ class Callout extends React.Component {
                         setInitialFocus={true}
                     >
                         {ttList}
-                    </Callout>
+                    </MCallout>
                 )}
             </>
 
