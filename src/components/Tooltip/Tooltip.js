@@ -2,7 +2,15 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
-import { Stack } from '@fluentui/react/lib/Stack';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import Text from '../Text/Text';
+
+
+
+const ttStackTokens = {
+    childrenGap: 12,
+    padding: 6,
+};
 
 
 
@@ -34,13 +42,9 @@ class Tooltip extends React.Component {
         }
     }
 
-
     render() {
-
         const ttTargetID = _.uniqueId('ttTarget_');
         const tooltipID = _.uniqueId('tooltip_');
-
-        var hasChildren = false;
 
         var ttChild = (
             <div
@@ -54,6 +58,19 @@ class Tooltip extends React.Component {
             </div>
         );
 
+        var ttList = [];
+        if (this.props.text && this.props.text?.trim()?.length > 0) {
+            ttList.push(
+                <StackItem
+                    align={'stretch'}
+                    grow={false}>
+                    <Text
+                        textValue={this.props.text.trim()}
+                        size={'small'} />
+                </StackItem>
+            );
+        }
+
         if (this.props.children) {
 
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
@@ -62,9 +79,38 @@ class Tooltip extends React.Component {
             if (childList.length) {
                 //We only use the first child. All other children are ignored.
                 ttChild = childList[0];
-                hasChildren = true;
+
+                if (childList.length > 1) {
+                    //Let's assemble the list of things to chose in the tooltip
+                    let ttChildren = childList.slice(1);
+                    if (ttChildren && ttChildren.length > 0) {
+                        var i;
+                        for (i = 0; i < ttChildren.length; i++) {
+                            let child = ttChildren[i];
+                            ttList.push(
+                                <StackItem
+                                    align={'stretch'}
+                                    grow={false}>
+                                    {child}
+                                </StackItem>
+                            );
+                        }
+                    }
+                }
             }
         }
+
+        //Reset the variable to the stack of objects
+        let ttContents = (
+            <Stack
+                tokens={ttStackTokens}
+                horizontal={false}
+                wrap={false}
+                horizontalAlign={'stretch'}
+            >
+                {ttList}
+            </Stack>
+        )
 
         const ttProps = {
             gapSpace: 4,
@@ -75,14 +121,13 @@ class Tooltip extends React.Component {
         return (
             <>
                 <TooltipHost
-                    content={this.props.text}
+                    content={ttContents}
                     directionalHint={DirectionalHint[this.props.direction]}
                     closeDelay={300}
                     id={tooltipID}
                     calloutProps={ttProps}
                 >
                     <Stack
-                        {...this.props}
                         id={ttTargetID}
                         aria-describedby={tooltipID}
                     >
