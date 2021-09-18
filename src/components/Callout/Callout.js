@@ -9,7 +9,7 @@ import Text from '../Text/Text';
 
 
 const coStackTokens = {
-    childrenGap: 12,
+    childrenGap: 60,
     padding: 12,
 };
 
