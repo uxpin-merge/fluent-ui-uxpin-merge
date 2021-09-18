@@ -10,7 +10,7 @@ import Text from '../Text/Text';
 
 const coStackTokens = {
     childrenGap: 12,
-    padding: 6,
+    padding: 12,
 };
 
 const tNone = "None";
@@ -110,6 +110,7 @@ class Callout extends React.Component {
             </div>
         ) : '';
 
+        //To hold the list of contents
         var coList = [];
 
         //Add the title
