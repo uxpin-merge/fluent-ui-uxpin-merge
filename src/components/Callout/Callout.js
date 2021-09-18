@@ -9,7 +9,7 @@ import Text from '../Text/Text';
 
 
 const coStackTokens = {
-    childGap: 60,
+    childrenGap: 12,
     padding: 12,
 };
 
@@ -180,12 +180,6 @@ class Callout extends React.Component {
             </Stack>
         )
 
-        const ttProps = {
-            gapSpace: 4,
-            target: `#${coTargetID}`,
-            isBeakVisible: this.props.showBeak,
-        };
-
         const coStyles = {
             width: this.props.coWidth > coMinWidth ? this.props.coWidth : coMinWidth,
             padding: coPadding,
@@ -212,7 +206,7 @@ class Callout extends React.Component {
                         setInitialFocus={true}
                         className={coStyles}
                     >
-                        {coList}
+                        {ttContents}
                     </MCallout>
                 )}
             </>
