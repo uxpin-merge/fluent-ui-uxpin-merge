@@ -9,8 +9,8 @@ import Text from '../Text/Text';
 
 
 const coStackTokens = {
-    childrenGap: 12,
-    padding: 12,
+    childrenGap: 6,
+    padding: 6,
 };
 
 const tNone = "None";
