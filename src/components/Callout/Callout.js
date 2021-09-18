@@ -41,6 +41,8 @@ class Callout extends React.Component {
         //Let's see if we can parse a real date
         let direction = this.props.direction;
 
+        console.log("Open: " + this.props.show);
+
         this.setState({
             ttDirection: direction,
             open: this.props.show,
@@ -89,11 +91,6 @@ class Callout extends React.Component {
         }
     }
 
-    _onMouseLeave() {
-        // if (this.props.trigger === tHover) {
-        //     this._dismissControl();
-        // }
-    }
 
     render() {
         const coTargetID = _.uniqueId('callout_');
@@ -191,7 +188,6 @@ class Callout extends React.Component {
                     id={coTargetID}
                     onClick={() => { this._onClick() }}
                     onMouseEnter={() => { this._onMouseEnter() }}
-                    onMouseLeave={() => { this._onMouseLeave() }}
                 >
                     {coChild}
                 </Stack>
