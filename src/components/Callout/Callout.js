@@ -14,8 +14,11 @@ const coStackTokens = {
 };
 
 const tNone = "None";
-const tHover = "On Hover"
-const tClick = "On Click"
+const tHover = "On Hover";
+const tClick = "On Click";
+const coDefaultWidth = 320;
+
+
 
 
 
@@ -103,6 +106,21 @@ class Callout extends React.Component {
         ) : '';
 
         var coList = [];
+
+        //Add the title
+        if (this.props.title && this.props.title?.trim()?.length > 0) {
+            coList.push(
+                <StackItem
+                    align={'stretch'}
+                    grow={false}>
+                    <Text
+                        textValue={this.props.title.trim()}
+                        size={'xLarge'} />
+                </StackItem>
+            );
+        }
+
+        //Add the message
         if (this.props.text && this.props.text?.trim()?.length > 0) {
             coList.push(
                 <StackItem
@@ -110,7 +128,7 @@ class Callout extends React.Component {
                     grow={false}>
                     <Text
                         textValue={this.props.text.trim()}
-                        size={'small'} />
+                        size={'medium'} />
                 </StackItem>
             );
         }
@@ -162,13 +180,18 @@ class Callout extends React.Component {
             isBeakVisible: this.props.showBeak,
         };
 
+        const coStyles = {
+            width: 320,
+            padding: '12px',
+        };
+
         return (
             <>
                 <Stack
                     id={coTargetID}
                     onClick={() => { this._onClick() }}
                     onMouseEnter={() => { this._onMouseEnter() }}
-                    onMouseLeave={() => { this.onMouseLeave() }}
+                    onMouseLeave={() => { this._onMouseLeave() }}
                 >
                     {coChild}
                 </Stack>
@@ -211,6 +234,12 @@ Callout.propTypes = {
     show: PropTypes.bool,
 
     /**
+     * @uxpindescription The callout's width
+     * @uxpinpropname Width
+     */
+    coWidth: PropTypes.number,
+
+    /**
      * @uxpindescription Optionally select an automatic way to trigger the display of the Callout
      * @uxpinpropname Trigger
      */
@@ -221,8 +250,14 @@ Callout.propTypes = {
     ]),
 
     /**
+     * @uxpindescription The control's title text
+     * @uxpinpropname Headline
+     */
+    title: PropTypes.string,
+
+    /**
      * @uxpindescription The main message text
-     * @uxpincontroltype textfield(4)
+     * @uxpincontroltype textfield(6)
      */
     text: PropTypes.string,
 
@@ -266,8 +301,10 @@ Callout.propTypes = {
  */
 Callout.defaultProps = {
     showBeak: true,
+    coWidth: coDefaultWidth,
     trigger: tClick,
-    text: "I'm a Callout",
+    title: "Callout",
+    text: "Set a message and optionally add other Merge controls.",
     direction: "bottomCenter",
     showMarker: false,
 }
