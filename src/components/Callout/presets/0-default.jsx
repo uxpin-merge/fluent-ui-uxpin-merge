@@ -5,7 +5,7 @@ import Text from '../../Text/Text';
 
 
 
-const instructions = 'Add any Merge control to the Callout & decide how to trigger it';
+const instructions = 'Any Merge control can be the Callout\'s focus';
 
 export default (
   <Callout uxpId="callout1" >

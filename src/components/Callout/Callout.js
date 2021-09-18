@@ -16,9 +16,14 @@ const coStackTokens = {
 const tNone = "None";
 const tHover = "On Hover";
 const tClick = "On Click";
+
 const coDefaultWidth = 320;
+const coMinWidth = 20;
+const coPadding = 12;
 
-
+const textHeadingSize = 'large';
+const textBodySize = 'medium';
+const stretch = 'stretch';
 
 
 
@@ -111,11 +116,11 @@ class Callout extends React.Component {
         if (this.props.title && this.props.title?.trim()?.length > 0) {
             coList.push(
                 <StackItem
-                    align={'stretch'}
+                    align={stretch}
                     grow={false}>
                     <Text
                         textValue={this.props.title.trim()}
-                        size={'xLarge'} />
+                        size={textHeadingSize} />
                 </StackItem>
             );
         }
@@ -124,11 +129,11 @@ class Callout extends React.Component {
         if (this.props.text && this.props.text?.trim()?.length > 0) {
             coList.push(
                 <StackItem
-                    align={'stretch'}
+                    align={stretch}
                     grow={false}>
                     <Text
                         textValue={this.props.text.trim()}
-                        size={'medium'} />
+                        size={textBodySize} />
                 </StackItem>
             );
         }
@@ -151,7 +156,7 @@ class Callout extends React.Component {
                             let child = ttChildren[i];
                             coList.push(
                                 <StackItem
-                                    align={'stretch'}
+                                    align={stretch}
                                     grow={false}>
                                     {child}
                                 </StackItem>
@@ -168,7 +173,7 @@ class Callout extends React.Component {
                 tokens={coStackTokens}
                 horizontal={false}
                 wrap={false}
-                horizontalAlign={'stretch'}
+                horizontalAlign={stretch}
             >
                 {coList}
             </Stack>
@@ -181,8 +186,8 @@ class Callout extends React.Component {
         };
 
         const coStyles = {
-            width: 320,
-            padding: '12px',
+            width: this.props.coWidth > coMinWidth ? this.props.coWidth : coMinWidth,
+            padding: coPadding,
         };
 
         return (
@@ -204,6 +209,7 @@ class Callout extends React.Component {
                         directionalHint={DirectionalHint[this.props.direction]}
                         onDismiss={() => { this._dismissControl() }}
                         setInitialFocus={true}
+                        className={coStyles}
                     >
                         {coList}
                     </MCallout>
