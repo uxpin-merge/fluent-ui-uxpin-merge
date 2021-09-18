@@ -90,9 +90,9 @@ class Callout extends React.Component {
     }
 
     _onMouseLeave() {
-        if (this.props.trigger === tHover) {
-            this._dismissControl();
-        }
+        // if (this.props.trigger === tHover) {
+        //     this._dismissControl();
+        // }
     }
 
     render() {
