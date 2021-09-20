@@ -208,6 +208,7 @@ class Coachmark extends React.Component {
                             headline={this.props.title}
                             footerContent={footerText}
                             hasCloseIcon={true}
+                            isWide={this.props.extraWide}
                             primaryButtonProps={priBtnProps}
                             secondaryButtonProps={secBtnProps}
                             onDismiss={() => { this._onDismissClicked() }} >
@@ -245,6 +246,12 @@ Coachmark.propTypes = {
      * @uxpinpropname Show Marker
      */
     showMarker: PropTypes.bool,
+
+    /**
+     * @uxpindescription Whether to give the control extra width. 
+     * @uxpinpropname Extra Wide
+     * */
+    extraWide: PropTypes.bool,
 
     /**
      * @uxpindescription The control's title text
