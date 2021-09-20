@@ -2,7 +2,15 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { TeachingBubble as FTeachingBubble } from '@fluentui/react/lib/TeachingBubble';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 
+
+
+const stretch = 'stretch';
+const coStackTokens = {
+    childrenGap: 6,
+    padding: 0,
+};
 
 
 
@@ -13,20 +21,11 @@ class TeachingBubble extends React.Component {
         this.state = {
             open: false,
         }
-
-        this._targetElm = React.createRef();
     }
 
-
     set() {
-        var isOpen = false;
-
-        if (this.props.show) {
-            isOpen = true;
-        }
-
         this.setState(
-            { open: isOpen }
+            { open: this.props.show }
         )
     }
 
@@ -42,7 +41,6 @@ class TeachingBubble extends React.Component {
         }
     }
 
-
     dismissControl() {
         //Set the control to not open to dismiss it.
         this.setState(
@@ -55,7 +53,7 @@ class TeachingBubble extends React.Component {
     _onDismissClicked() {
         //Notify UXPin that the Close icon has been clicked on.
         if (this.props.dismiss) {
-            this.props.dismiss();
+            this.props.dismiss(false);
         }
 
         this.dismissControl();
@@ -64,7 +62,7 @@ class TeachingBubble extends React.Component {
     _onPrimaryButtonClicked() {
         //Notify UXPin of the event.
         if (this.props.primaryButtonClick) {
-            this.props.primaryButtonClick();
+            this.props.primaryButtonClick(true);
         }
 
         this.dismissControl();
@@ -73,14 +71,79 @@ class TeachingBubble extends React.Component {
     _onSecondaryButtonClicked() {
         //Notify UXPin of the event.
         if (this.props.secondaryButtonClick) {
-            this.props.secondaryButtonClick();
+            this.props.secondaryButtonClick(true);
         }
 
         this.dismissControl();
     }
 
-
     render() {
+        const tbTargetID = _.uniqueId('target_');
+
+        const marker = (<div
+            style={{
+                width: 20,
+                height: 20,
+                background: this.props.showMarker ? '#b4009e' : 'transparent',
+                borderRadius: 4,
+            }} />);
+
+        var coChild = marker;
+
+        //To hold the list of contents
+        var coList = [];
+
+        //If there are any props for the body message, add that first. 
+        if (this.props.text && this.props.text?.trim()?.length > 0) {
+            coList.push((
+                <StackItem
+                    align={stretch}
+                    grow={false}>
+                    {this.props.text.trim()}
+                </StackItem>
+            ));
+        }
+
+        if (this.props.children) {
+
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            if (childList.length) {
+                //The first child is the target for the popup control
+                coChild = childList[0];
+
+                if (childList.length > 1) {
+                    //Let's assemble the list of things to chose in the tooltip
+                    let ttChildren = childList.slice(1);
+                    if (ttChildren && ttChildren.length > 0) {
+                        var i;
+                        for (i = 0; i < ttChildren.length; i++) {
+                            let child = ttChildren[i];
+                            coList.push(
+                                <StackItem
+                                    align={stretch}
+                                    grow={false}>
+                                    {child}
+                                </StackItem>
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        //Create the stack of objects
+        let ttContents = (
+            <Stack
+                tokens={coStackTokens}
+                horizontal={false}
+                wrap={false}
+                horizontalAlign={stretch}
+            >
+                {coList}
+            </Stack>
+        )
 
         //Determine whether to show the Primary and Secondary buttons. 
         var priBtnProps = undefined;
@@ -107,28 +170,25 @@ class TeachingBubble extends React.Component {
 
         return (
             <>
-                <div
-                    className="trigger"
-                    ref={this._targetElm}
-                    style={{
-                        width: 20,
-                        height: 20,
-                        background: this.props.showMarker ? '#b4009e' : 'transparent',
-                        borderRadius: 4,
-                    }} />
+                <Stack
+                    id={tbTargetID}
+                >
+                    {coChild}
+                </Stack>
 
                 {this.state.open && (
                     <FTeachingBubble
-                        target={this._targetElm.current}
+                        target={`#${tbTargetID}`}
                         {...this.props}
                         calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
+                        isWide={this.props.extraWide}
                         headline={this.props.title}
                         footerContent={footerText}
                         hasCloseButton={this.props.hasCloseButton}
                         primaryButtonProps={priBtnProps}
                         secondaryButtonProps={secBtnProps}
                         onDismiss={() => { this._onDismissClicked() }} >
-                        {this.props.text}
+                        {ttContents}
                     </FTeachingBubble>
                 )}
             </>
@@ -143,6 +203,14 @@ class TeachingBubble extends React.Component {
 TeachingBubble.propTypes = {
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
+     */
+    children: PropTypes.node,
+
+    /**
      * @uxpindescription Whether to display the TeachingBubble 
      * @uxpinpropname Show
     */
@@ -153,6 +221,12 @@ TeachingBubble.propTypes = {
      * @uxpinpropname Show Marker
      */
     showMarker: PropTypes.bool,
+
+    /**
+     * @uxpindescription Whether to give the control extra width
+     * @uxpinpropname Extra Wide
+     * */
+    extraWide: PropTypes.bool,
 
     /**
      * @uxpindescription The control's title text
@@ -185,12 +259,6 @@ TeachingBubble.propTypes = {
     secondaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription Whether to display the Close button
-     * @uxpinpropname Show Close Button
-     * */
-    hasCloseButton: PropTypes.bool,
-
-    /**
      * @uxpindescription The control's display direction
      * @uxpinpropname Direction
      */
@@ -210,6 +278,12 @@ TeachingBubble.propTypes = {
         "rightCenter",
         "rightBottomEdge"
     ]),
+
+    /**
+     * @uxpindescription Whether to display the Close button
+     * @uxpinpropname Show Close Button
+     * */
+    hasCloseButton: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the Close button is clicked
@@ -237,8 +311,9 @@ TeachingBubble.propTypes = {
 TeachingBubble.defaultProps = {
     show: true,
     title: "Teaching Bubble",
-    text: "Set my 'Show' property to true to view me in a mockup.",
+    text: "Set my 'Show' property to true to view me in a prototype.",
     footerText: "",
+    extraWide: false,
     direction: "bottomCenter",
     hasCloseButton: true,
     primaryButtonLabel: 'Next',

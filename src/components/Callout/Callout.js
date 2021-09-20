@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { Callout as MCallout } from '@fluentui/react/lib/Callout';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
@@ -13,7 +12,7 @@ const coStackTokens = {
     padding: 6,
 };
 
-const tNone = "None";
+const tManual = "Manual";
 const tHover = "On Hover";
 const tClick = "On Click";
 
@@ -40,8 +39,6 @@ class Callout extends React.Component {
     set() {
         //Let's see if we can parse a real date
         let direction = this.props.direction;
-
-        console.log("Open: " + this.props.show);
 
         this.setState({
             ttDirection: direction,
@@ -80,8 +77,15 @@ class Callout extends React.Component {
     }
 
     _onClick() {
+        //Clicking on the main control n the canvas
         if (this.props.trigger === tClick) {
             this._showControl();
+        }
+    }
+
+    _onClickCallout() {
+        if (this.props.dismissOnClick) {
+            this._dismissControl();
         }
     }
 
@@ -95,7 +99,7 @@ class Callout extends React.Component {
     render() {
         const coTargetID = _.uniqueId('callout_');
 
-        var coChild = this.props.showMarker ? (
+        const marker = (
             <div
                 style={{
                     display: 'inline-block',
@@ -105,7 +109,9 @@ class Callout extends React.Component {
                     background: this.props.showMarker ? '#640487' : 'transparent',
                 }} >
             </div>
-        ) : '';
+        );
+
+        var coChild = marker;
 
         //To hold the list of contents
         var coList = [];
@@ -142,7 +148,7 @@ class Callout extends React.Component {
             let childList = React.Children.toArray(this.props.children);
 
             if (childList.length) {
-                //We only use the first child. All other children are ignored.
+                //The first child is the target for the popup control
                 coChild = childList[0];
 
                 if (childList.length > 1) {
@@ -165,7 +171,7 @@ class Callout extends React.Component {
             }
         }
 
-        //Reset the variable to the stack of objects
+        //Create the stack of objects
         let ttContents = (
             <Stack
                 tokens={coStackTokens}
@@ -198,9 +204,10 @@ class Callout extends React.Component {
                         doNotLayer={false}
                         target={`#${coTargetID}`}
                         directionalHint={DirectionalHint[this.props.direction]}
-                        onDismiss={() => { this._dismissControl() }}
                         setInitialFocus={true}
                         className={coStyles}
+                        onClick={() => { this._onClickCallout() }}
+                        onDismiss={() => { this._dismissControl() }}
                     >
                         {ttContents}
                     </MCallout>
@@ -241,10 +248,15 @@ Callout.propTypes = {
      * @uxpinpropname Trigger
      */
     trigger: PropTypes.oneOf([
-        tNone,
+        tManual,
         tClick,
         tHover
     ]),
+
+    /**
+     * @uxpindescription Whether to dismiss the control when the user clicks on anything contained within it, such as a link, button, or the control's background itself 
+     */
+    dismissOnClick: PropTypes.bool,
 
     /**
      * @uxpindescription The control's title text
@@ -298,8 +310,10 @@ Callout.propTypes = {
  */
 Callout.defaultProps = {
     showBeak: true,
+    showMarker: false,
     coWidth: coDefaultWidth,
     trigger: tClick,
+    dismissOnClick: false,
     title: "Callout",
     text: "Set a message and optionally add other Merge controls.",
     direction: "bottomCenter",
