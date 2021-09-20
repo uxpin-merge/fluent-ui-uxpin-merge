@@ -7,6 +7,7 @@ import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 
+const stretch = 'stretch';
 const coStackTokens = {
     childrenGap: 6,
     padding: 0,
@@ -97,7 +98,7 @@ class TeachingBubble extends React.Component {
 
         //If there are any props for the body message, add that first. 
         if (this.props.text && this.props.text?.trim()?.length > 0) {
-            coList.push(this.props.text?.trim());
+            coList.push(this.props.text.trim());
         }
 
         if (this.props.children) {
