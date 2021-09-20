@@ -223,7 +223,7 @@ TeachingBubble.propTypes = {
     showMarker: PropTypes.bool,
 
     /**
-     * @uxpindescription Whether to give the control extra width. If true, the optional image is shown on the left side. 
+     * @uxpindescription Whether to give the control extra width
      * @uxpinpropname Extra Wide
      * */
     extraWide: PropTypes.bool,
