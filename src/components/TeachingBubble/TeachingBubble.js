@@ -311,7 +311,7 @@ TeachingBubble.propTypes = {
 TeachingBubble.defaultProps = {
     show: true,
     title: "Teaching Bubble",
-    text: "Set my 'Show' property to true to view me in a mockup.",
+    text: "Set my 'Show' property to true to view me in a prototype.",
     footerText: "",
     extraWide: false,
     direction: "bottomCenter",
