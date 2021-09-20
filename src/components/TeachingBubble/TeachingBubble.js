@@ -175,7 +175,7 @@ class TeachingBubble extends React.Component {
                         target={`#${tbTargetID}`}
                         {...this.props}
                         calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
-                        isWide={this.props.isWide}
+                        isWide={this.props.extraWide}
                         headline={this.props.title}
                         footerContent={footerText}
                         hasCloseButton={this.props.hasCloseButton}
@@ -218,9 +218,9 @@ TeachingBubble.propTypes = {
 
     /**
      * @uxpindescription Whether to give the control extra width. If true, the optional image is shown on the left side. 
-     * @uxpinpropname Is Wide
+     * @uxpinpropname Extra Wide
      * */
-    isWide: PropTypes.bool,
+    extraWide: PropTypes.bool,
 
     /**
      * @uxpindescription The control's title text
@@ -253,12 +253,6 @@ TeachingBubble.propTypes = {
     secondaryButtonLabel: PropTypes.string,
 
     /**
-     * @uxpindescription Whether to display the Close button
-     * @uxpinpropname Show Close Button
-     * */
-    hasCloseButton: PropTypes.bool,
-
-    /**
      * @uxpindescription The control's display direction
      * @uxpinpropname Direction
      */
@@ -278,6 +272,12 @@ TeachingBubble.propTypes = {
         "rightCenter",
         "rightBottomEdge"
     ]),
+
+    /**
+     * @uxpindescription Whether to display the Close button
+     * @uxpinpropname Show Close Button
+     * */
+    hasCloseButton: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the Close button is clicked
@@ -307,7 +307,7 @@ TeachingBubble.defaultProps = {
     title: "Teaching Bubble",
     text: "Set my 'Show' property to true to view me in a mockup.",
     footerText: "",
-    isWide: false,
+    extraWide: false,
     direction: "bottomCenter",
     hasCloseButton: true,
     primaryButtonLabel: 'Next',
