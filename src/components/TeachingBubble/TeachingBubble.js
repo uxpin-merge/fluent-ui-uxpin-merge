@@ -95,7 +95,13 @@ class TeachingBubble extends React.Component {
 
         //If there are any props for the body message, add that first. 
         if (this.props.text && this.props.text?.trim()?.length > 0) {
-            coList.push(this.props.text.trim());
+            coList.push((
+                <StackItem
+                    align={stretch}
+                    grow={false}>
+                    {this.props.text.trim()}
+                </StackItem>
+            ));
         }
 
         if (this.props.children) {
