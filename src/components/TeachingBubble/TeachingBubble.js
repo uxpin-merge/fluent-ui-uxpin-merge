@@ -82,6 +82,7 @@ class TeachingBubble extends React.Component {
         const tbTargetID = _.uniqueId('target_');
 
         let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+        console.log("image url: " + imgURL);
 
         const marker = (<div
             style={{
