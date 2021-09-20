@@ -13,7 +13,7 @@ const coStackTokens = {
     padding: 6,
 };
 
-const tNone = "None";
+const tManual = "Manual";
 const tHover = "On Hover";
 const tClick = "On Click";
 
@@ -80,8 +80,15 @@ class Callout extends React.Component {
     }
 
     _onClick() {
+        //Clicking on the host control
         if (this.props.trigger === tClick) {
             this._showControl();
+        }
+    }
+
+    _onClickCallout() {
+        if (this.props.dismissOnClick) {
+            this._dismissControl();
         }
     }
 
@@ -198,9 +205,10 @@ class Callout extends React.Component {
                         doNotLayer={false}
                         target={`#${coTargetID}`}
                         directionalHint={DirectionalHint[this.props.direction]}
-                        onDismiss={() => { this._dismissControl() }}
                         setInitialFocus={true}
                         className={coStyles}
+                        onClick={() => { this._onClickCallout() }}
+                        onDismiss={() => { this._dismissControl() }}
                     >
                         {ttContents}
                     </MCallout>
@@ -241,10 +249,15 @@ Callout.propTypes = {
      * @uxpinpropname Trigger
      */
     trigger: PropTypes.oneOf([
-        tNone,
+        tManual,
         tClick,
         tHover
     ]),
+
+    /**
+     * @uxpindescription Whether to dismiss the control when the user clicks on anything contained within it, such as a link, button, or the control's background itself 
+     */
+    dismissOnClick: PropTypes.bool,
 
     /**
      * @uxpindescription The control's title text
@@ -298,8 +311,10 @@ Callout.propTypes = {
  */
 Callout.defaultProps = {
     showBeak: true,
+    showMarker: false,
     coWidth: coDefaultWidth,
     trigger: tClick,
+    dismissOnClick: false,
     title: "Callout",
     text: "Set a message and optionally add other Merge controls.",
     direction: "bottomCenter",
