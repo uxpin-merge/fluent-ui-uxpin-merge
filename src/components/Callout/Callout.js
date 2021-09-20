@@ -25,18 +25,6 @@ const textHeadingSize = 'large';
 const textBodySize = 'medium';
 const stretch = 'stretch';
 
-const marker = (
-    <div
-        style={{
-            display: 'inline-block',
-            width: 20,
-            height: 20,
-            borderRadius: 10,
-            background: this.props.showMarker ? '#640487' : 'transparent',
-        }} >
-    </div>
-);
-
 
 
 class Callout extends React.Component {
@@ -114,7 +102,7 @@ class Callout extends React.Component {
     render() {
         const coTargetID = _.uniqueId('callout_');
 
-        var coChild = this.props.showMarker ? (
+        const marker = (
             <div
                 style={{
                     display: 'inline-block',
@@ -124,7 +112,9 @@ class Callout extends React.Component {
                     background: this.props.showMarker ? '#640487' : 'transparent',
                 }} >
             </div>
-        ) : '';
+        );
+
+        var coChild = marker;
 
         //To hold the list of contents
         var coList = [];
@@ -161,7 +151,7 @@ class Callout extends React.Component {
             let childList = React.Children.toArray(this.props.children);
 
             if (childList.length) {
-                //We only use the first child. All other children are ignored.
+                //The first child is the target for the popup control
                 coChild = childList[0];
 
                 if (childList.length > 1) {
@@ -184,7 +174,7 @@ class Callout extends React.Component {
             }
         }
 
-        //Reset the variable to the stack of objects
+        //Create the stack of objects
         let ttContents = (
             <Stack
                 tokens={coStackTokens}

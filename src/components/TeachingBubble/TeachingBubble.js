@@ -7,16 +7,6 @@ import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 
-const marker = (<div
-    className="trigger"
-    ref={this._targetElm}
-    style={{
-        width: 20,
-        height: 20,
-        background: this.props.showMarker ? '#b4009e' : 'transparent',
-        borderRadius: 4,
-    }} />);
-
 const coStackTokens = {
     childrenGap: 6,
     padding: 0,
@@ -91,6 +81,16 @@ class TeachingBubble extends React.Component {
         const tbTargetID = _.uniqueId('target_');
 
         let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+
+        const marker = (<div
+            style={{
+                width: 20,
+                height: 20,
+                background: this.props.showMarker ? '#b4009e' : 'transparent',
+                borderRadius: 4,
+            }} />);
+
+        var coChild = marker;
 
         //To hold the list of contents
         var coList = [];
