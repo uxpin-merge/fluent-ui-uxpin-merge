@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { TooltipHost, } from '@fluentui/react/lib/Tooltip';
 import { Callout as MCallout } from '@fluentui/react/lib/Callout';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
