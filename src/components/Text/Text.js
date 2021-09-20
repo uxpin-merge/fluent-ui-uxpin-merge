@@ -123,6 +123,13 @@ class Text extends React.Component {
     </span >)
   }
 
+  _onClick() {
+    //Raise this event to UXPin. 
+    if (this.props.onClickText) {
+      this.props.onClickText(true);
+    }
+  }
+
   render() {
     //Let's see if the user entered a valid color value. This method returns undefined if not. 
     let textColor = UxpColors.getHexFromHexOrToken(this.props.color);
@@ -145,7 +152,9 @@ class Text extends React.Component {
         {...this.props}
         styles={fTextStyles}
         variant={this.props.size}
-        nowrap={this.props.truncate}>
+        nowrap={this.props.truncate}
+        onClick={() => { this._onClick() }}
+      >
 
         {this.state.message}
 
@@ -211,6 +220,12 @@ Text.propTypes = {
    * @uxpindescription Specify a text color with a Hex or color token, such as '#ffffff'. 
    */
   color: PropTypes.string,
+
+  /**
+   * @uxpindescription Fires when the control is clicked on
+   * @uxpinpropname Click
+   */
+  onClickText: PropTypes.func,
 };
 
 
