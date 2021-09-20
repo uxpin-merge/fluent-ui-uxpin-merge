@@ -5,6 +5,15 @@ import {
 } from '@fluentui/react/lib/Coachmark';
 import { TeachingBubbleContent } from '@fluentui/react/lib/TeachingBubble';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+
+
+
+const stretch = 'stretch';
+const coStackTokens = {
+    childrenGap: 6,
+    padding: 0,
+};
 
 
 
@@ -15,19 +24,11 @@ class Coachmark extends React.Component {
         this.state = {
             open: false,
         }
-
-        this._targetElm = React.createRef();
     }
 
     set() {
-        var isOpen = false;
-
-        if (this.props.show) {
-            isOpen = true;
-        }
-
         this.setState(
-            { open: isOpen }
+            { open: this.props.show }
         )
     }
 
@@ -48,6 +49,12 @@ class Coachmark extends React.Component {
         )
 
         this.props.show = false;
+    }
+
+    toggleVisibility() {
+        this.setState({
+            open: !this.state.open
+        })
     }
 
     _onDismissClicked() {
@@ -79,6 +86,72 @@ class Coachmark extends React.Component {
 
 
     render() {
+        const tbTargetID = _.uniqueId('target_');
+
+        const marker = (<div
+            style={{
+                width: 20,
+                height: 20,
+                background: this.props.showMarker ? '#640487' : 'transparent',
+                borderRadius: 4,
+            }} />);
+
+        var coChild = marker;
+
+        //To hold the list of contents
+        var coList = [];
+
+        //If there are any props for the body message, add that first. 
+        if (this.props.text && this.props.text?.trim()?.length > 0) {
+            coList.push((
+                <StackItem
+                    align={stretch}
+                    grow={false}>
+                    {this.props.text.trim()}
+                </StackItem>
+            ));
+        }
+
+        if (this.props.children) {
+
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            if (childList.length) {
+                //The first child is the target for the popup control
+                coChild = childList[0];
+
+                if (childList.length > 1) {
+                    //Let's assemble the list of things to chose in the tooltip
+                    let ttChildren = childList.slice(1);
+                    if (ttChildren && ttChildren.length > 0) {
+                        var i;
+                        for (i = 0; i < ttChildren.length; i++) {
+                            let child = ttChildren[i];
+                            coList.push(
+                                <StackItem
+                                    align={stretch}
+                                    grow={false}>
+                                    {child}
+                                </StackItem>
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        //Create the stack of objects
+        let ttContents = (
+            <Stack
+                tokens={coStackTokens}
+                horizontal={false}
+                wrap={false}
+                horizontalAlign={stretch}
+            >
+                {coList}
+            </Stack>
+        )
 
         //Determine whether to show the Primary and Secondary buttons. 
         var priBtnProps = undefined;
@@ -105,7 +178,7 @@ class Coachmark extends React.Component {
 
         return (
             <>
-                <div
+                {/* <div
                     className="trigger"
                     onClick={() => { this.setState({ open: !this.state.open }) }}
                     ref={this._targetElm}
@@ -114,12 +187,18 @@ class Coachmark extends React.Component {
                         height: 20,
                         background: this.props.showMarker ? '#640487' : 'transparent',
                         borderRadius: 4,
-                    }} />
+                    }} /> */}
+                <Stack
+                    id={tbTargetID}
+                    onClick={() => { this.toggleVisibility() }}
+                >
+                    {coChild}
+                </Stack>
 
                 {this.state.open && (
                     <FCoachmark
                         {...this.props}
-                        target={this._targetElm.current}
+                        target={`#${tbTargetID}`}
                         positioningContainerProps={{
                             doNotLayer: false,
                             directionalHint: DirectionalHint[this.props.direction],
@@ -132,7 +211,7 @@ class Coachmark extends React.Component {
                             primaryButtonProps={priBtnProps}
                             secondaryButtonProps={secBtnProps}
                             onDismiss={() => { this._onDismissClicked() }} >
-                            {this.props.text}
+                            {ttContents}
                         </TeachingBubbleContent>
                     </FCoachmark>
                 )}
@@ -146,6 +225,14 @@ class Coachmark extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 Coachmark.propTypes = {
+
+    /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
+     */
+    children: PropTypes.node,
 
     /**
      * @uxpindescription Whether to display the Coachmark 
