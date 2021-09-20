@@ -80,7 +80,7 @@ class Callout extends React.Component {
     }
 
     _onClick() {
-        //Clicking on the host control
+        //Clicking on the main control n the canvas
         if (this.props.trigger === tClick) {
             this._showControl();
         }
