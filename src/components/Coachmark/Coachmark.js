@@ -328,12 +328,12 @@ Coachmark.propTypes = {
  */
 Coachmark.defaultProps = {
     show: true,
+    showMarker: true,
     title: "Coachmark",
-    text: "Welcome to the land of Coachmarks!",
+    text: "Set my 'Show' property to true to view me in a prototype.",
     direction: "bottomCenter",
     primaryButtonLabel: 'Next',
     secondaryButtonLabel: 'Close',
-    showMarker: true,
 }
 
 
