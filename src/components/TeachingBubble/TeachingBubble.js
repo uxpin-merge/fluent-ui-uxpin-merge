@@ -200,6 +200,14 @@ class TeachingBubble extends React.Component {
 TeachingBubble.propTypes = {
 
     /**
+     * Don't show this prop in the UXPin Editor. 
+     * @uxpinignoreprop 
+     * @uxpindescription Contents for the body of the control. 
+     * @uxpinpropname Children
+     */
+    children: PropTypes.node,
+
+    /**
      * @uxpindescription Whether to display the TeachingBubble 
      * @uxpinpropname Show
     */
