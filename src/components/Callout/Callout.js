@@ -25,6 +25,18 @@ const textHeadingSize = 'large';
 const textBodySize = 'medium';
 const stretch = 'stretch';
 
+const marker = (
+    <div
+        style={{
+            display: 'inline-block',
+            width: 20,
+            height: 20,
+            borderRadius: 10,
+            background: this.props.showMarker ? '#640487' : 'transparent',
+        }} >
+    </div>
+);
+
 
 
 class Callout extends React.Component {
