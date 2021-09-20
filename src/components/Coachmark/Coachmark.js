@@ -329,6 +329,7 @@ Coachmark.propTypes = {
 Coachmark.defaultProps = {
     show: true,
     showMarker: true,
+    extraWide: true,
     title: "Coachmark",
     text: "Set my 'Show' property to true to view me in a prototype.",
     direction: "bottomCenter",
