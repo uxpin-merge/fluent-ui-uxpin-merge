@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { TeachingBubble as FTeachingBubble } from '@fluentui/react/lib/TeachingBubble';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 
 
@@ -80,9 +79,6 @@ class TeachingBubble extends React.Component {
 
     render() {
         const tbTargetID = _.uniqueId('target_');
-
-        let imgURL = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
-        console.log("image url: " + imgURL);
 
         const marker = (<div
             style={{
@@ -180,7 +176,6 @@ class TeachingBubble extends React.Component {
                         {...this.props}
                         calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
                         isWide={this.props.isWide}
-                        illustrationImage={imgURL}
                         headline={this.props.title}
                         footerContent={footerText}
                         hasCloseButton={this.props.hasCloseButton}
@@ -222,6 +217,12 @@ TeachingBubble.propTypes = {
     showMarker: PropTypes.bool,
 
     /**
+     * @uxpindescription Whether to give the control extra width. If true, the optional image is shown on the left side. 
+     * @uxpinpropname Is Wide
+     * */
+    isWide: PropTypes.bool,
+
+    /**
      * @uxpindescription The control's title text
      * @uxpinpropname Headline
      */
@@ -238,19 +239,6 @@ TeachingBubble.propTypes = {
     * @uxpinpropname Footer Text
     */
     footerText: PropTypes.string,
-
-    /**
-    * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
-    * @uxpinpropname Img URL
-    * @uxpincontroltype textfield(6)
-    */
-    imageUrl: PropTypes.string,
-
-    /**
-     * @uxpindescription Whether to give the control extra width. If true, the optional image is shown on the left side. 
-     * @uxpinpropname Is Wide
-     * */
-    isWide: PropTypes.bool,
 
     /**
      * @uxpindescription The displayed text on the Primary Button. Remove text to hide button.
@@ -320,7 +308,6 @@ TeachingBubble.defaultProps = {
     text: "Set my 'Show' property to true to view me in a mockup.",
     footerText: "",
     isWide: false,
-    imageUrl: '',
     direction: "bottomCenter",
     hasCloseButton: true,
     primaryButtonLabel: 'Next',
