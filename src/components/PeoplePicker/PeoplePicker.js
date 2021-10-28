@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { Label } from '@fluentui/react/lib/Label';
 import { NormalPeoplePicker, ListPeoplePicker } from '@fluentui/react/lib/Pickers';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
@@ -347,12 +348,29 @@ class PeoplePicker extends React.Component {
 
    render() {
 
+      let ppID = _.uniqueId('peoplepicker_');
+
+      var ppLabel = '';
+      if (this.props.label?.trim()?.length > 0) {
+         ppLabel = (
+            <Label
+               required={this.props.required}
+               disabled={this.props.disabled}
+               htmlFor={ppID}
+            >
+               {this.props.label?.trim()}
+            </Label>
+         );
+      }
+
       return (
          <>
+            {ppLabel}
             {this.props.inline ?
                <NormalPeoplePicker
                   {...this.props}
                   key={'normal'}
+                  id={ppID}
                   className={'ms-PeoplePicker'}
                   styles={textfieldStyle}
                   pickerSuggestionsProps={suggestionProps}
@@ -367,6 +385,7 @@ class PeoplePicker extends React.Component {
                <ListPeoplePicker
                   {...this.props}
                   key={'list'}
+                  id={ppID}
                   className={'ms-PeoplePicker'}
                   styles={textfieldStyle}
                   pickerSuggestionsProps={suggestionProps}
@@ -389,6 +408,19 @@ class PeoplePicker extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 PeoplePicker.propTypes = {
+
+   /**
+    * @uxpindescription The label for the Text Field
+    * @uxpinpropname Label
+    * @uxpincontroltype textfield(2)
+    * */
+   label: PropTypes.string,
+
+   /**
+    * @uxpindescription To display the 'required' flag on the label
+    * @uxpinpropname Required
+    * */
+   required: PropTypes.bool,
 
    /**
     * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional). This prop's live value is available for scripting.
@@ -424,6 +456,8 @@ PeoplePicker.propTypes = {
 
 
 PeoplePicker.defaultProps = {
+   label: "Testing",
+   required: false,
    selectedIndexes: '',
    persons: '',
    inline: false,
