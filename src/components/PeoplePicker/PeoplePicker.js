@@ -348,6 +348,8 @@ class PeoplePicker extends React.Component {
 
    render() {
 
+      console.log("Selected items: " + this.state.selectedItems)
+
       let ppID = _.uniqueId('peoplepicker_');
 
       var ppLabel = '</>';
