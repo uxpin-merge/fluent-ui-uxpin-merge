@@ -158,6 +158,8 @@ class PeoplePicker extends React.Component {
       if (!rawList || rawList?.trim().length === 0)
          return [];
 
+      console.log("parseSelectedIndexes. " + rawList);
+
       //Find Ints only
       let regex = /\d+/g;
       let result = rawList.match(regex);
