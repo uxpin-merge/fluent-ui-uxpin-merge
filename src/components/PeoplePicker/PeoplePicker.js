@@ -158,14 +158,15 @@ class PeoplePicker extends React.Component {
       if (!rawList || rawList?.trim().length === 0)
          return [];
 
-      console.log("parseSelectedIndexes. " + rawList);
-
       //Find Ints only
       let regex = /\d+/g;
       let result = rawList.match(regex);
 
       var indexList = [];
       let numberOfPersons = this.state.allPersonas ? this.state.allPersonas.length : 0;
+
+      console.log("parseSelectedIndexes > result. " + result);
+      console.log("     > numberOfPersons. " + numberOfPersons);
 
       //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
       if (result && result?.length > 0) {
@@ -183,6 +184,8 @@ class PeoplePicker extends React.Component {
             }
          }
       }
+
+      console.log("     > returnlist. " + indexList);
 
       return indexList;
    }
