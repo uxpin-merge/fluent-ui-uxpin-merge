@@ -162,10 +162,13 @@ class PeoplePicker extends React.Component {
       let regex = /\d+/g;
       let result = rawList.match(regex);
 
+      console.log("parseSelectedIndexes > result. " + result);
+      return result;
+
       var indexList = [];
       let numberOfPersons = this.state.allPersonas ? this.state.allPersonas.length : 0;
 
-      console.log("parseSelectedIndexes > result. " + result);
+
       console.log("     > numberOfPersons. " + numberOfPersons);
 
       //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
