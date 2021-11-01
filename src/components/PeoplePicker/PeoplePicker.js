@@ -50,7 +50,7 @@ class PeoplePicker extends React.Component {
       let personas = this._getPeopleList();
 
       //Determine whether to pre-populate any persons. 
-      let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes);
+      let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas?.length);
 
       console.log("set, prepopulatedList " + prepopulatedList);
 
@@ -154,7 +154,7 @@ class PeoplePicker extends React.Component {
     * @param {string} rawList A string that contains a list of numbers.
     * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
     */
-   parseSelectedIndexes(rawList) {
+   parseSelectedIndexes(rawList, personaCount) {
       if (!rawList || rawList?.trim().length === 0)
          return [];
 
@@ -163,11 +163,10 @@ class PeoplePicker extends React.Component {
       let result = rawList.match(regex);
 
       console.log("parseSelectedIndexes > result. " + result);
-      return result;
+      //return result;
 
       var indexList = [];
-      let numberOfPersons = this.state.allPersonas ? this.state.allPersonas.length : 0;
-
+      let numberOfPersons = personaCount ? personaCount : 0;
 
       console.log("     > numberOfPersons. " + numberOfPersons);
 
