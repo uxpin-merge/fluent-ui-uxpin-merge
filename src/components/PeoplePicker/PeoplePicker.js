@@ -176,12 +176,15 @@ class PeoplePicker extends React.Component {
          for (i = 0; i < result.length; i++) {
             var item = result[i]
 
+            console.log("Item: " + item);
+
             if (item < 1 || item > numberOfPersons) {
                //Toss it. Can't use it. 
             }
             else {
                //User input is 1-based, so subtract 1.
                item = item - 1;
+               console.log(" Setting Item to: " + item);
                indexList.push(item);
             }
          }
