@@ -50,10 +50,9 @@ class PeoplePicker extends React.Component {
       let personas = this._getPeopleList();
 
       //Determine whether to pre-populate any persons. 
-      var prepopulatedList = [];
-      if (this.props.selectedIndexes) {
-         prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes);
-      }
+      let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes);
+
+      console.log("set, prepopulatedList " + prepopulatedList);
 
       var selectedItems = [];
       if (prepopulatedList && prepopulatedList.length > 0) {
@@ -165,8 +164,6 @@ class PeoplePicker extends React.Component {
 
       var indexList = [];
       let numberOfPersons = this.state.allPersonas ? this.state.allPersonas.length : 0;
-
-      console.log("numberOfPersons: " + numberOfPersons);
 
       //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
       if (result && result?.length > 0) {
@@ -345,11 +342,10 @@ class PeoplePicker extends React.Component {
       }
    }
 
-
    render() {
 
       console.log("Selected items: " + this.state.selectedItems);
-      console.log("label text: " + this.props.label);
+      console.log("selectedIndexes: " + this.props.selectedIndexes);
 
       let ppID = _.uniqueId('peoplepicker_');
       let ppLabelText = this.props.label ? this.props.label?.trim() : '';
