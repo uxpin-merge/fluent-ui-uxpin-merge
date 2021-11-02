@@ -116,7 +116,7 @@ export const UxpNumberParser = {
     },
 
     /**
-     * Parses a string that contains a list of int numbers. Accepts comma or space delimited numbers. 
+     * Parses a string that contains a list of int numbers. Accepts comma or space delimited list of numbers. 
      * 		An additional option is available for adjusting the number, for example, to convert a 1-based index to a 0-based index.
      *      Pass in a min or max value to filter those out, too. 
      * @param {string} rawList A string that contains a list of int numbers.
