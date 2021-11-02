@@ -53,9 +53,6 @@ class PeoplePicker extends React.Component {
       //Determine whether to pre-populate any persons. 
       let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas.length);
 
-      console.log("Testing undefined min " + UxpNumberParser.parseIntsWithOptions(this.props.selectedIndexes, 0, undefined, personas.length));
-      console.log("Testing undefined max " + UxpNumberParser.parseIntsWithOptions(this.props.selectedIndexes, 0, 0, undefined));
-
       var selectedItems = [];
       if (prepopulatedList && prepopulatedList.length > 0) {
          var x;
