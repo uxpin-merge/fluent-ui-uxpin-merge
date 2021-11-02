@@ -126,9 +126,10 @@ export const UxpNumberParser = {
             return [];
 
         //Find positive Ints only
-        let regex = /\d+/g;
-        let result = rawList.match(regex);
+        // let regex = /\d+/g;
+        // let result = rawList.match(regex);
 
+        //Find all ints
         let normalizedList = rawList.replace(/[, ]+/g, "|");
         let tokenizedList = normalizedList.split('|');
         let parsedList = [];
@@ -152,38 +153,40 @@ export const UxpNumberParser = {
         console.log("parseIntsWithOptions > tokenizedList: " + tokenizedList);
         console.log("        > parsedList: " + parsedList);
 
-        var indexList = [];
+        return parsedList;
 
-        //Now we have to go through, validate the numbers, and adjust them, if necessary
-        if (result && result.length) {
+        // var indexList = [];
 
-            let min = Number(minValue);
-            let max = Number(maxValue);
+        // //Now we have to go through, validate the numbers, and adjust them, if necessary
+        // if (result && result.length) {
 
-            var adjNum = parseInt(adjustmentNumber);
-            if (isNaN(adjNum)) {
-                adjNum = 0;
-            }
+        //     let min = Number(minValue);
+        //     let max = Number(maxValue);
 
-            var i;
-            for (i = 0; i < result.length; i++) {
-                var num = result[i];
-                num = parseInt(num, 10);
+        //     var adjNum = parseInt(adjustmentNumber);
+        //     if (isNaN(adjNum)) {
+        //         adjNum = 0;
+        //     }
 
-                if (!isNaN(num)) {
-                    num = num + adjNum;
+        //     var i;
+        //     for (i = 0; i < result.length; i++) {
+        //         var num = result[i];
+        //         num = parseInt(num, 10);
 
-                    if (isNaN(num) || num < min || num > max) {
-                        //Do nothing with this value. Too low or minValue is not defined.
-                        //Or, too high or maxValue is not defined.
-                    }
-                    else {
-                        indexList.push(num);
-                    }
-                } //Num validation
-            } //for loop
-        } //if results
+        //         if (!isNaN(num)) {
+        //             num = num + adjNum;
 
-        return indexList;
+        //             if (isNaN(num) || num < min || num > max) {
+        //                 //Do nothing with this value. Too low or minValue is not defined.
+        //                 //Or, too high or maxValue is not defined.
+        //             }
+        //             else {
+        //                 indexList.push(num);
+        //             }
+        //         } //Num validation
+        //     } //for loop
+        // } //if results
+
+        // return indexList;
     },
 };
