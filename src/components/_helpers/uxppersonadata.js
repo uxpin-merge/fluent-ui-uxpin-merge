@@ -21,7 +21,7 @@ export const UxpPersonaData = {
         imageUrl: "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person01.jpg",
         imageInitials: "AD",
         text: "Amaya Davani",
-        presence: 4, //"dnd",
+        presence: 2, //"dnd",
         initialsColor: 17, //"lightRed",
         email: "adavani@company.com",
         role: "Sr. Software Developer",

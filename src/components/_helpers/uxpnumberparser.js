@@ -2,55 +2,62 @@
 export const UxpNumberParser = {
 
     /**
-     * Parses a string that contains a positive int value. 
-     *      If the string contains a % mark, it'll also validate that it's between 0-100%. 
-     *      If the string contains multiple numbers, it'll focus on the first one found.
-     * @param {string} rawStr A string that may contain a positive int percentage value.
+     * Parses a string that contains an int value. 
+     *      If the string contains multiple numbers, it'll return the first one found.     *      If the string contains a % mark anywhere, it'll assume the first number found is a percent and adjust it to fit within the 0-100% range (inclusive). 
+     * @param {string} rawStr A string that may contain an int or int percentage value.
      * @returns {string} Returns a string, such as '15%' or '225'. If nothing could be parsed, the value of undefined is returned.
      * @example '5 6 9 38 50' - Returns the first number: '5'
      * @example '5 6 9% 38 50' - Returns the first number as a percent: '5%'
      * @example '38px' - Returns a number: 38
      * @example '85%' - Returns '85%'
-     * @example '-25%' - Returns '25%'
-     * @example 'Here's a percent: 33%' - Returns '33%'
-     * @example '125%' - Returns undefined
-     * @example '-569' - Returns '569'
+     * @example '-25%' - Returns '-25%'
+     * @example "Here's a percent: 33%" - Returns '33%'
+     * @example '125%' - Returns '100%'
+     * @example '-569' - Returns '-569'
      */
     parsePercentOrInt: function (rawStr) {
-
-        var num = undefined;
-        var isPercent = false;
-
+        //Is it already a number?
         if (typeof (rawStr) == 'number') {
-            num = Number(rawStr);
+            let item = parseInt(rawStr, 10);
+            if (!isNaN(item)) {
+                return item;
+            }
         }
 
+        if (!rawStr || typeof (rawStr) != 'string')
+            return undefined;
+
+        var isPercent = false;
         if (typeof (rawStr) == 'string') {
             isPercent = rawStr.includes('%');
-
-            let regex = /\d+/g;
-            let result = rawStr.match(regex);
-
-            if (result && result.length) {
-                num = Number(result[0]);
-            }
         }
 
-        if (num && typeof (num) == 'number') {
+        //Find all ints. We stop on the first int, positive or negative. 
+        let normalizedList = rawStr.replace(/[, ]+/g, "|");
+        let tokenizedList = normalizedList.split('|');
 
-            if (isPercent) {
-                //Validate it's between 0-100%
-                if (num > -1 && num < 101) {
-                    return num + '%';
+        if (tokenizedList && tokenizedList.length > 0) {
+            let tlLength = tokenizedList.length;
+
+            var i;
+            for (i = 0; i < tlLength; i++) {
+                let item = parseInt(tokenizedList[i], 10);
+
+                if (!isNaN(item)) {
+                    if (isPercent) {
+                        let pct = item < 0 ? '0%' :
+                            item > 100 ? '100%' :
+                                item + '%';
+                        return pct;
+                    }
+                    else {
+                        return item;
+                    }
                 }
             }
-            else {
-                //We'll return the number as-is 
-                return num;
-            }
         }
 
-        //If we made it this far, it wasn't parsable
+        //If we made it this far, we didn't encounter any numbers. 
         return undefined;
     },
 
@@ -82,9 +89,9 @@ export const UxpNumberParser = {
 
     /**
      * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
-     * @param {string} rawList A string that contains a list of positive ints.
+     * @param {string} rawList A string that contains a list of ints.
      * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-     * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
+     * @example '1 3 5 -6 9 38' - Returns an array of numbers: [1,3,5,-6,9,38]
      * @example '38px' - Returns an array of numbers: [38]
      */
     parseInts: function (rawList) {
@@ -95,11 +102,11 @@ export const UxpNumberParser = {
     /**
      * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
      * 		An additional option is available for adjusting the number, for example, to convert a 1-based index to a 0-based index.
-     * @param {string} rawList A string that contains a list of positive ints.
+     * @param {string} rawList A string that contains a list of ints.
      * @param {number} adjustmentNumber A positive or negative number that will be added to each int found. For example, if the user entered values with a 1-based index, use a -1. Pass in '0' for no adjustment.
      * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-     * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
-     * @example '1 3 5 6 9 38' - With an adjustmentNumber of '-1', returns an array of numbers: [0,2,4,5,8,37]
+     * @example '1 3 5 -6 9 38' - Returns an array of numbers: [1,3,5,-6,9,38]
+     * @example '1 3 5 -6 9 38' - With an adjustmentNumber of '-1', returns an array of numbers: [0,2,4,5,-7,37]
      * @example '38px' - Returns an array of numbers: [38]
       */
     parseIntsAdjusted: function (rawList, adjustmentNumber) {
@@ -109,60 +116,46 @@ export const UxpNumberParser = {
     },
 
     /**
-     * Parses a string that contains a list of positive int numbers. Accepts comma or space delimited numbers. 
+     * Parses a string that contains a list of int numbers. Accepts comma or space delimited list of numbers. 
      * 		An additional option is available for adjusting the number, for example, to convert a 1-based index to a 0-based index.
      *      Pass in a min or max value to filter those out, too. 
-     * @param {string} rawList A string that contains a list of positive int numbers.
+     * @param {string} rawList A string that contains a list of int numbers.
      * @param {number} adjustmentNumber A positive or negative number that will be added to each int found. For example, if the user entered values with a 1-based index, use a -1. Pass in '0' for no adjustment.
      * @param {number} minValue After adjustments, the minimum acceptable value. Pass in a non-numeric string to ignore.
      * @param {number} maxValue After adjustments, the maximum acceptable value. Pass in a non-numeric string to ignore.
      * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-     * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
-     * @example '1, 3, 5, 6, 9, 38, 55, 100, 500' - With minValue of 5 and maxValue of 100, returns an array of numbers: [5,6,9,38,55,100]
+     * @example '1 3 -5 6 -9 38' - Returns an array of numbers: [1,3,-5,6,-9,38]
+     * @example '1, 3, 5, 6, 9, -38, 55, 100, 500' - With minValue of 5 and maxValue of 100, returns an array of numbers: [5,6,9,55,100]
      * @example '38px' - Returns an array of numbers: [38]
      */
     parseIntsWithOptions: function (rawList, adjustmentNumber, minValue, maxValue) {
         if (!rawList || typeof (rawList) != 'string')
             return [];
 
-        //Find positive Ints only
-        let regex = /\d+/g;
-        let result = rawList.match(regex);
+        //Find all ints
+        let normalizedList = rawList.replace(/[, ]+/g, "|");
+        let tokenizedList = normalizedList.split('|');
+        let parsedList = [];
+        if (tokenizedList && tokenizedList.length > 0) {
+            let tlLength = tokenizedList.length;
 
-        var indexList = [];
-
-        //Now we have to go through, validate the numbers, and adjust them, if necessary
-        if (result && result.length) {
-
-            let min = Number(minValue);
-            let max = Number(maxValue);
-
-            var adjNum = parseInt(adjustmentNumber);
-            if (isNaN(adjNum)) {
-                adjNum = 0;
-            }
+            let min = parseInt(minValue);
+            let max = parseInt(maxValue);
 
             var i;
-            for (i = 0; i < result.length; i++) {
-                var num = result[i];
-                num = parseInt(num, 10);
+            for (i = 0; i < tlLength; i++) {
+                var item = parseInt(tokenizedList[i], 10);
+                item = item + adjustmentNumber;
 
-                if (!isNaN(num)) {
-                    num = num + adjNum;
+                if (isNaN(item) || item < min || item > max) {
+                    //do nothing
+                }
+                else {
+                    parsedList.push(item);
+                }
+            }
+        }
 
-                    if (!isNaN(min) && num < min) {
-                        //Do nothing with this value. Too low or minValue is not defined.
-                    }
-                    else if (!isNaN(max) && num > max) {
-                        //Do nothing with this value. Too high or maxValue is not defined.
-                    }
-                    else {
-                        indexList.push(num);
-                    }
-                } //Num validation
-            } //for loop
-        } //if results
-
-        return indexList;
+        return parsedList;
     },
 };

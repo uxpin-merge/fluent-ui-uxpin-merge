@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { Label } from '@fluentui/react/lib/Label';
 import { NormalPeoplePicker, ListPeoplePicker } from '@fluentui/react/lib/Pickers';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
@@ -49,10 +51,7 @@ class PeoplePicker extends React.Component {
       let personas = this._getPeopleList();
 
       //Determine whether to pre-populate any persons. 
-      var prepopulatedList = [];
-      if (this.props.selectedIndexes) {
-         prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes);
-      }
+      let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas.length);
 
       var selectedItems = [];
       if (prepopulatedList && prepopulatedList.length > 0) {
@@ -117,6 +116,7 @@ class PeoplePicker extends React.Component {
                   text: tData.text,
                   secondaryText: tData.email,
                   email: tData.email,
+                  imageUrl: tData.imageUrl,
                };
                return personInfo;
             }
@@ -150,41 +150,13 @@ class PeoplePicker extends React.Component {
    }
 
    /**
-    * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
-    * @param {string} rawList A string that contains a list of numbers.
+    * Parses a string that contains a 1-based list of numbers. Accepts comma or space delimited numbers. 
+    * @param {string} rawList A string that contains a list of numbers. This is a 1-based list of numbers.
+    * * @param {string} max The max value for the 1-based list. 
     * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
     */
-   parseSelectedIndexes(rawList) {
-      if (!rawList || rawList?.trim().length === 0)
-         return [];
-
-      //Find Ints only
-      let regex = /\d+/g;
-      let result = rawList.match(regex);
-
-      var indexList = [];
-      let numberOfPersons = this.state.allPersonas ? this.state.allPersonas.length : 0;
-
-      console.log("numberOfPersons: " + numberOfPersons);
-
-      //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
-      if (result && result?.length > 0) {
-         var i;
-         for (i = 0; i < result.length; i++) {
-            var item = result[i]
-
-            if (item < 1 || item > numberOfPersons) {
-               //Toss it. Can't use it. 
-            }
-            else {
-               //User input is 1-based, so subtract 1.
-               item = item - 1;
-               indexList.push(item);
-            }
-         }
-      }
-
-      return indexList;
+   parseSelectedIndexes(rawList, max) {
+      return UxpNumberParser.parseIntsWithOptions(rawList, -1, 0, max);
    }
 
    /**
@@ -344,15 +316,29 @@ class PeoplePicker extends React.Component {
       }
    }
 
-
    render() {
+      let ppID = _.uniqueId('peoplepicker_');
+      let ppLabelText = this.props.label ? this.props.label?.trim() : '';
+
+      let ppLabel = (
+         <Label
+            {...this.props}
+            required={this.props.required}
+            disabled={this.props.disabled}
+            htmlFor={ppID}
+         >
+            {ppLabelText}
+         </Label>
+      );
 
       return (
          <>
+            {ppLabel}
             {this.props.inline ?
                <NormalPeoplePicker
                   {...this.props}
                   key={'normal'}
+                  id={ppID}
                   className={'ms-PeoplePicker'}
                   styles={textfieldStyle}
                   pickerSuggestionsProps={suggestionProps}
@@ -367,6 +353,7 @@ class PeoplePicker extends React.Component {
                <ListPeoplePicker
                   {...this.props}
                   key={'list'}
+                  id={ppID}
                   className={'ms-PeoplePicker'}
                   styles={textfieldStyle}
                   pickerSuggestionsProps={suggestionProps}
@@ -389,6 +376,19 @@ class PeoplePicker extends React.Component {
  * Set up the properties to be available in the UXPin property inspector. 
  */
 PeoplePicker.propTypes = {
+
+   /**
+    * @uxpindescription The label for the Text Field
+    * @uxpinpropname Label
+    * @uxpincontroltype textfield(2)
+    * */
+   label: PropTypes.string,
+
+   /**
+    * @uxpindescription To display the 'required' flag on the label
+    * @uxpinpropname Required
+    * */
+   required: PropTypes.bool,
 
    /**
     * @uxpindescription Of the 10 total Personas available, enter a list of 1-based index values for default items to be shown as selected (Optional). This prop's live value is available for scripting.
@@ -424,6 +424,8 @@ PeoplePicker.propTypes = {
 
 
 PeoplePicker.defaultProps = {
+   label: "Testing",
+   required: false,
    selectedIndexes: '',
    persons: '',
    inline: false,
