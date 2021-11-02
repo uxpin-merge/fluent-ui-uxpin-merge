@@ -131,6 +131,8 @@ export const UxpNumberParser = {
         let normalizedText = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
         let result = normalizedText.split('|');
 
+        console.log("uxpinnumberparser result: " + result);
+
         var indexList = [];
 
         //Now we have to go through, validate the numbers, and adjust them, if necessary
