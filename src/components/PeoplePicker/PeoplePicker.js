@@ -54,15 +54,16 @@ class PeoplePicker extends React.Component {
       let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas.length);
 
       console.log(" >> Test parsePercentOrInt with -37 (number)" + UxpNumberParser.parsePercentOrInt(-37));
-      console.log(" >> Test parsePercentOrInt with -24 (string)" + UxpNumberParser.parsePercentOrInt("-24"));
-      console.log(" >> Test parsePercentOrInt with '5 6 9 38 50'" + UxpNumberParser.parsePercentOrInt('5 6 9 38 50'));
-      console.log(" >> Test parsePercentOrInt with '5 6 9% 38 50'" + UxpNumberParser.parsePercentOrInt('5 6 9% 38 50'));
-      console.log(" >> Test parsePercentOrInt with '38px'" + UxpNumberParser.parsePercentOrInt('38px'));
-      console.log(" >> Test parsePercentOrInt with '85%'" + UxpNumberParser.parsePercentOrInt('85%'));
-      console.log(" >> Test parsePercentOrInt with '-25%'" + UxpNumberParser.parsePercentOrInt('-25%'));
-      console.log(" >> Test parsePercentOrInt with 'Here's a percent: 33%'" + UxpNumberParser.parsePercentOrInt("Here's a percent: 33%"));
-      console.log(" >> Test parsePercentOrInt with '125%'" + UxpNumberParser.parsePercentOrInt('125%'));
-      console.log(" >> Test parsePercentOrInt with '-569'" + UxpNumberParser.parsePercentOrInt('-569'));
+      console.log(" >> Test parsePercentOrInt with -24 (string): " + UxpNumberParser.parsePercentOrInt("-24"));
+      console.log(" >> Test parsePercentOrInt with '5 6 9 38 50' " + UxpNumberParser.parsePercentOrInt('5 6 9 38 50'));
+      console.log(" >> Test parsePercentOrInt with '5 6 9% 38 50' " + UxpNumberParser.parsePercentOrInt('5 6 9% 38 50'));
+      console.log(" >> Test parsePercentOrInt with '38px' " + UxpNumberParser.parsePercentOrInt('38px'));
+      console.log(" >> Test parsePercentOrInt with '85%' " + UxpNumberParser.parsePercentOrInt('85%'));
+      console.log(" >> Test parsePercentOrInt with '-25%' " + UxpNumberParser.parsePercentOrInt('-25%'));
+      console.log(" >> Test parsePercentOrInt with 'Here's a percent: 33%' " + UxpNumberParser.parsePercentOrInt("Here's a percent: 33%"));
+      console.log(" >> Test parsePercentOrInt with '125%' " + UxpNumberParser.parsePercentOrInt('125%'));
+      console.log(" >> Test parsePercentOrInt with '-569' " + UxpNumberParser.parsePercentOrInt('-569'));
+      console.log(" >> Test parsePercentOrInt with '-hello' " + UxpNumberParser.parsePercentOrInt('-hello'));
 
       var selectedItems = [];
       if (prepopulatedList && prepopulatedList.length > 0) {
