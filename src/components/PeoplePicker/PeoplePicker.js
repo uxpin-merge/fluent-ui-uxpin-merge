@@ -116,6 +116,7 @@ class PeoplePicker extends React.Component {
                   text: tData.text,
                   secondaryText: tData.email,
                   email: tData.email,
+                  imageUrl: tData.imageUrl,
                };
                return personInfo;
             }
