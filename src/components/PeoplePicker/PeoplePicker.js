@@ -155,33 +155,7 @@ class PeoplePicker extends React.Component {
     * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
     */
    parseSelectedIndexes(rawList, max) {
-
-      let testing = UxpNumberParser.parseIntsWithOptions(rawList, -1, 0, max);
-      console.log("testing! " + testing);
-
-      if (!rawList || rawList?.trim().length === 0)
-         return [];
-
-      //First, normalize the string. Do the double pipe replace twice
-      let normalizedList = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|');
-
-      let tokenizedList = normalizedList.split('|');
-
-      let parsedList = [];
-      if (tokenizedList && tokenizedList.length > 0) {
-         let tlLength = tokenizedList.length;
-
-         var i;
-         for (i = 0; i < tlLength; i++) {
-            let item = parseInt(tokenizedList[i], 10);
-
-            if (!isNaN(item) && item > 0 && item <= max) {
-               parsedList.push(item - 1);
-            }
-         }
-      }
-
-      return parsedList;
+      return UxpNumberParser.parseIntsWithOptions(rawList, -1, 0, max);
    }
 
    /**
