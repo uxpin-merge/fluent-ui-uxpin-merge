@@ -162,8 +162,36 @@ class PeoplePicker extends React.Component {
 
       let tokenizedList = normalizedList.split('|');
 
-      console.log("parseRawIndexes > tokenizedList: " + tokenizedList);
-      console.log("      > personaCount: " + personaCount);
+      let parsedList = [];
+      if (tokenizedList && tokenizedList.length > 0) {
+         let tlLength = tokenizedList.length;
+
+         var i;
+         for (i = 0; i < tlLength; i++) {
+            let item = parseInt(tokenizedList[i], 10);
+
+            if (!isNaN(item) && item > 0 && item <= personaCount) {
+               parsedList.push(item - 1);
+            }
+         }
+      }
+
+      return parsedList;
+   }
+
+   /**
+    * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
+    * @param {string} rawList A string that contains a list of numbers.
+    * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
+    */
+   parseSelectedIndexes(rawList, personaCount) {
+      if (!rawList || rawList?.trim().length === 0)
+         return [];
+
+      //First, normalize the string. Do the double pipe replace twice
+      let normalizedList = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
+
+      let tokenizedList = normalizedList.split('|');
 
       let parsedList = [];
       if (tokenizedList && tokenizedList.length > 0) {
@@ -179,61 +207,10 @@ class PeoplePicker extends React.Component {
          }
       }
 
-      console.log("     > parsedList: " + parsedList);
-
-      let results = UxpNumberParser.parseIntsAdjusted(rawList, -1);
-      console.log("     > UxpNumberParser results: " + results);
-
-      let results2 = UxpNumberParser.parseIntsWithOptions(rawList, -1, -1, personaCount + 1);
-      console.log("     > UxpNumberParser results2: " + results2);
+      console.log("parseSelectedIndexes > normalizedList: " + normalizedList);
+      console.log("parseSelectedIndexes > Parsed list: " + parsedList);
 
       return parsedList;
-   }
-
-   /**
-    * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
-    * @param {string} rawList A string that contains a list of numbers.
-    * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-    */
-   parseSelectedIndexes(rawList, personaCount) {
-      if (!rawList || rawList?.trim().length === 0)
-         return [];
-
-      //Find Ints only
-      let regex = /\d+/g;
-      let result = rawList.match(regex);
-
-      console.log("parseSelectedIndexes > result. " + result);
-      //return result;
-
-      var indexList = [];
-      let numberOfPersons = personaCount ? personaCount : 0;
-
-      console.log("     > numberOfPersons. " + numberOfPersons);
-
-      //Now we have to go through, validate the numbers, and adjust them to be 0-based index values
-      if (result && result?.length > 0) {
-         var i;
-         for (i = 0; i < result.length; i++) {
-            var item = result[i]
-
-            console.log("Item: " + item);
-
-            if (item < 1 || item > numberOfPersons) {
-               //Toss it. Can't use it. 
-            }
-            else {
-               //User input is 1-based, so subtract 1.
-               item = item - 1;
-               console.log(" Setting Item to: " + item);
-               indexList.push(item);
-            }
-         }
-      }
-
-      console.log("     > returnlist. " + indexList);
-
-      return indexList;
    }
 
    /**
