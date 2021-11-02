@@ -139,12 +139,13 @@ export const UxpNumberParser = {
             for (i = 0; i < tlLength; i++) {
                 var item = parseInt(tokenizedList[i], 10);
                 item = item + adjustmentNumber;
+                console.log("        > adjusted number: " + item);
 
-                if (!isNaN(item) || item <= minValue || item > maxValue) {
+                if (isNaN(item) || item < minValue || item > maxValue) {
                     //do nothing
                 }
                 else {
-                    parsedList.push(item + adjustmentNumber);
+                    parsedList.push(item);
                 }
             }
         }
@@ -172,7 +173,7 @@ export const UxpNumberParser = {
                 if (!isNaN(num)) {
                     num = num + adjNum;
 
-                    if (!isNaN(num) || num < min || num > max) {
+                    if (isNaN(num) || num < min || num > max) {
                         //Do nothing with this value. Too low or minValue is not defined.
                         //Or, too high or maxValue is not defined.
                     }
