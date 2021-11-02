@@ -156,7 +156,7 @@ class PeoplePicker extends React.Component {
     */
    parseSelectedIndexes(rawList, max) {
 
-      let testing = UxpNumberParser.parseIntsAdjusted(rawList, -1);
+      let testing = UxpNumberParser.parseIntsWithOptions(rawList, -1, 0, max);
       console.log("testing! " + testing);
 
       if (!rawList || rawList?.trim().length === 0)
