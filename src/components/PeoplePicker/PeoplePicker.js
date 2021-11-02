@@ -51,12 +51,7 @@ class PeoplePicker extends React.Component {
       let personas = this._getPeopleList();
 
       //Determine whether to pre-populate any persons. 
-      let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas?.length);
-
-      console.log("*** set > prepopulatedList " + prepopulatedList);
-
-      let testpoplist = this.parseRawIndexes(this.props.selectedIndexes, personas?.length);
-      console.log("*** set > testpoplist " + testpoplist);
+      let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas.length);
 
       var selectedItems = [];
       if (prepopulatedList && prepopulatedList.length > 0) {
@@ -153,43 +148,18 @@ class PeoplePicker extends React.Component {
       return undefined;
    }
 
-   parseRawIndexes(rawList, personaCount) {
-      if (!rawList || rawList?.trim().length === 0)
-         return [];
-
-      //First, normalize the string. Do the double pipe replace twice
-      let normalizedList = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
-
-      let tokenizedList = normalizedList.split('|');
-
-      let parsedList = [];
-      if (tokenizedList && tokenizedList.length > 0) {
-         let tlLength = tokenizedList.length;
-
-         var i;
-         for (i = 0; i < tlLength; i++) {
-            let item = parseInt(tokenizedList[i], 10);
-
-            if (!isNaN(item) && item > 0 && item <= personaCount) {
-               parsedList.push(item - 1);
-            }
-         }
-      }
-
-      return parsedList;
-   }
-
    /**
-    * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
-    * @param {string} rawList A string that contains a list of numbers.
+    * Parses a string that contains a 1-based list of numbers. Accepts comma or space delimited numbers. 
+    * @param {string} rawList A string that contains a list of numbers. This is a 1-based list of numbers.
+    * * @param {string} max The max value for the 1-based list. 
     * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
     */
-   parseSelectedIndexes(rawList, personaCount) {
+   parseSelectedIndexes(rawList, max) {
       if (!rawList || rawList?.trim().length === 0)
          return [];
 
       //First, normalize the string. Do the double pipe replace twice
-      let normalizedList = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
+      let normalizedList = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|');
 
       let tokenizedList = normalizedList.split('|');
 
@@ -201,14 +171,11 @@ class PeoplePicker extends React.Component {
          for (i = 0; i < tlLength; i++) {
             let item = parseInt(tokenizedList[i], 10);
 
-            if (!isNaN(item) && item > 0 && item <= personaCount) {
+            if (!isNaN(item) && item > 0 && item <= max) {
                parsedList.push(item - 1);
             }
          }
       }
-
-      console.log("parseSelectedIndexes > normalizedList: " + normalizedList);
-      console.log("parseSelectedIndexes > Parsed list: " + parsedList);
 
       return parsedList;
    }
