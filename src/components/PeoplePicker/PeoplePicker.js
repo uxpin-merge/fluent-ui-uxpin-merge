@@ -157,28 +157,31 @@ class PeoplePicker extends React.Component {
       if (!rawList || rawList?.trim().length === 0)
          return [];
 
-      //First, normalize the string
-      let normalizedList = rawList.replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
+      //First, normalize the string. Do the double pipe replace twice
+      let normalizedList = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
 
       let tokenizedList = normalizedList.split('|');
 
       console.log("parseRawIndexes > tokenizedList: " + tokenizedList);
       console.log("      > personaCount: " + personaCount);
 
-      let indexes = tokenizedList.map(function (x) {
-         let index = parseInt(x, 10);
-         console.log("      > index: " + index);
+      let parsedList = [];
+      if (tokenizedList && tokenizedList.length > 0) {
+         let tlLength = tokenizedList.length;
 
-         if (!isNaN(index) && index > 0 && index < personaCount) {
-            return index;
+         var i;
+         for (i = 0; i < tlLength; i++) {
+            let item = parseInt(tokenizedList[i], 10);
+
+            if (!isNaN(item) && item > 0 && item <= personaCount) {
+               parsedList.push(item - 1);
+            }
          }
-      });
+      }
 
-      console.log("     > indexes: " + indexes);
+      console.log("     > parsedList: " + parsedList);
 
-      return indexes;
-
-
+      return parsedList;
    }
 
    /**
