@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Label } from '@fluentui/react/lib/Label';
 import { NormalPeoplePicker, ListPeoplePicker } from '@fluentui/react/lib/Pickers';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 
@@ -52,7 +53,10 @@ class PeoplePicker extends React.Component {
       //Determine whether to pre-populate any persons. 
       let prepopulatedList = this.parseSelectedIndexes(this.props.selectedIndexes, personas?.length);
 
-      console.log("set, prepopulatedList " + prepopulatedList);
+      console.log("*** set > prepopulatedList " + prepopulatedList);
+
+      let testpoplist = this.parseRawIndexes(this.props.selectedIndexes, personas?.length);
+      console.log("*** set > testpoplist " + testpoplist);
 
       var selectedItems = [];
       if (prepopulatedList && prepopulatedList.length > 0) {
@@ -147,6 +151,34 @@ class PeoplePicker extends React.Component {
 
       //If we made it this far, there were errors.
       return undefined;
+   }
+
+   parseRawIndexes(rawList, personaCount) {
+      if (!rawList || rawList?.trim().length === 0)
+         return [];
+
+      //First, normalize the string
+      let normalizedList = rawList.replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
+
+      let tokenizedList = normalizedList.split('|');
+
+      console.log("parseRawIndexes > tokenizedList: " + tokenizedList);
+      console.log("      > personaCount: " + personaCount);
+
+      let indexes = tokenizedList.map(function (x) {
+         let index = parseInt(x, 10);
+         console.log("      > index: " + index);
+
+         if (!isNaN(index) && index > 0 && index < personaCount) {
+            return index;
+         }
+      });
+
+      console.log("     > indexes: " + indexes);
+
+      return indexes;
+
+
    }
 
    /**
