@@ -139,8 +139,8 @@ export const UxpNumberParser = {
             for (i = 0; i < tlLength; i++) {
                 let item = parseInt(tokenizedList[i], 10);
 
-                if (!isNaN(item) && item > 0 && item <= max) {
-                    parsedList.push(item - 1);
+                if (!isNaN(item) && item > minValue && item <= maxValue) {
+                    parsedList.push(item + adjustmentNumber);
                 }
             }
         }
