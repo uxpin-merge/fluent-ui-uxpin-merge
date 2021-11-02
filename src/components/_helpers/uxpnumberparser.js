@@ -125,10 +125,6 @@ export const UxpNumberParser = {
         if (!rawList || typeof (rawList) != 'string')
             return [];
 
-        //Find positive Ints only
-        // let regex = /\d+/g;
-        // let result = rawList.match(regex);
-
         //Find all ints
         let normalizedList = rawList.replace(/[, ]+/g, "|");
         let tokenizedList = normalizedList.split('|');
@@ -136,22 +132,23 @@ export const UxpNumberParser = {
         if (tokenizedList && tokenizedList.length > 0) {
             let tlLength = tokenizedList.length;
 
+            let min = parseInt(minValue);
+            let max = parseInt(maxValue);
+
             var i;
             for (i = 0; i < tlLength; i++) {
                 var item = parseInt(tokenizedList[i], 10);
                 item = item + adjustmentNumber;
-                console.log("        > adjusted number: " + item);
 
-                if (isNaN(item) || item < minValue || item > maxValue) {
+                if (isNaN(item) || item < min || item > max) {
                     //do nothing
+                    console.log("      > parseoptions. Tossing this item: " + item);
                 }
                 else {
                     parsedList.push(item);
                 }
             }
         }
-        console.log("parseIntsWithOptions > tokenizedList: " + tokenizedList);
-        console.log("        > parsedList: " + parsedList);
 
         return parsedList;
 
@@ -160,8 +157,8 @@ export const UxpNumberParser = {
         // //Now we have to go through, validate the numbers, and adjust them, if necessary
         // if (result && result.length) {
 
-        //     let min = Number(minValue);
-        //     let max = Number(maxValue);
+        // let min = Number(minValue);
+        // let max = Number(maxValue);
 
         //     var adjNum = parseInt(adjustmentNumber);
         //     if (isNaN(adjNum)) {
