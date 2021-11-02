@@ -184,6 +184,9 @@ class PeoplePicker extends React.Component {
       let results = UxpNumberParser.parseIntsAdjusted(rawList, -1);
       console.log("     > UxpNumberParser results: " + results);
 
+      let results2 = UxpNumberParser.parseIntsWithOptions(rawList, -1, -1, personaCount + 1);
+      console.log("     > UxpNumberParser results2: " + results2);
+
       return parsedList;
    }
 
