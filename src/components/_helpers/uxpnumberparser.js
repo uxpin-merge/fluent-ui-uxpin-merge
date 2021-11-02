@@ -126,8 +126,10 @@ export const UxpNumberParser = {
             return [];
 
         //Find positive Ints only
-        let regex = /\d+/g;
-        let result = rawList.match(regex);
+        // let regex = /\d+/g;
+        // let result = rawList.match(regex);
+        let normalizedText = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
+        let result = normalizedText.split('|');
 
         var indexList = [];
 
@@ -150,11 +152,9 @@ export const UxpNumberParser = {
                 if (!isNaN(num)) {
                     num = num + adjNum;
 
-                    if (!isNaN(min) && num < min) {
+                    if (!isNaN(min) || num < min || num > max) {
                         //Do nothing with this value. Too low or minValue is not defined.
-                    }
-                    else if (!isNaN(max) && num > max) {
-                        //Do nothing with this value. Too high or maxValue is not defined.
+                        //Or, too high or maxValue is not defined.
                     }
                     else {
                         indexList.push(num);
