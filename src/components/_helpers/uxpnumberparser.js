@@ -129,9 +129,23 @@ export const UxpNumberParser = {
         let regex = /\d+/g;
         let result = rawList.match(regex);
 
-        let normalizedList = rawList.replace(/,/g, ' ');
-        let tokenizedList = normalizedList.split(' ');
+        let normalizedList = rawList.replace(/[, ]+/g, "|");
+        let tokenizedList = normalizedList.split('|');
+        let parsedList = [];
+        if (tokenizedList && tokenizedList.length > 0) {
+            let tlLength = tokenizedList.length;
+
+            var i;
+            for (i = 0; i < tlLength; i++) {
+                let item = parseInt(tokenizedList[i], 10);
+
+                if (!isNaN(item) && item > 0 && item <= max) {
+                    parsedList.push(item - 1);
+                }
+            }
+        }
         console.log("parseIntsWithOptions > tokenizedList: " + tokenizedList);
+        console.log("        > parsedList: " + parsedList);
 
         var indexList = [];
 
