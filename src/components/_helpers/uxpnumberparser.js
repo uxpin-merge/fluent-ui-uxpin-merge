@@ -128,7 +128,7 @@ export const UxpNumberParser = {
         //Find positive Ints only
         // let regex = /\d+/g;
         // let result = rawList.match(regex);
-        let normalizedText = rawList.trim().replaceAll(' ', '|').replaceAll(',', '|').replaceAll('||', '|').replaceAll('||', '|');
+        let normalizedText = rawList.trim().replace(/ /g, '|').replace(/,/g, '|').replace(/||/g, '|').replace(/||/g, '|');
         let result = normalizedText.split('|');
 
         console.log("uxpinnumberparser result: " + result);
