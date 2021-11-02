@@ -45,8 +45,6 @@ export const UxpNumberParser = {
                 let item = parseInt(tokenizedList[i], 10);
 
                 if (!isNaN(item)) {
-                    return isPercent ? item + '%' : item;
-
                     if (isPercent) {
                         let pct = item < 0 ? '0%' :
                             item > 100 ? '100%' :
