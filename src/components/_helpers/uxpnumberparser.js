@@ -140,7 +140,7 @@ export const UxpNumberParser = {
                 var item = parseInt(tokenizedList[i], 10);
                 item = item + adjustmentNumber;
 
-                if (!isNaN(item) || item <= min || item > max) {
+                if (!isNaN(item) || item <= minValue || item > maxValue) {
                     //do nothing
                 }
                 else {
