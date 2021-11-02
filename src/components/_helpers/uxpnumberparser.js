@@ -17,38 +17,62 @@ export const UxpNumberParser = {
      * @example '-569' - Returns '569'
      */
     parsePercentOrInt: function (rawStr) {
+        if (!rawStr || typeof (rawStr) != 'string')
+            return undefined;
 
-        var num = undefined;
         var isPercent = false;
-
-        if (typeof (rawStr) == 'number') {
-            num = Number(rawStr);
-        }
-
         if (typeof (rawStr) == 'string') {
             isPercent = rawStr.includes('%');
-
-            let regex = /\d+/g;
-            let result = rawStr.match(regex);
-
-            if (result && result.length) {
-                num = Number(result[0]);
-            }
         }
 
-        if (num && typeof (num) == 'number') {
+        //Find all ints. We stop on the first int, positive or negative. 
+        let normalizedList = rawStr.replace(/[, ]+/g, "|");
+        let tokenizedList = normalizedList.split('|');
 
-            if (isPercent) {
-                //Validate it's between 0-100%
-                if (num > -1 && num < 101) {
-                    return num + '%';
+        if (tokenizedList && tokenizedList.length > 0) {
+            let tlLength = tokenizedList.length;
+
+            var i;
+            for (i = 0; i < tlLength; i++) {
+                let item = parseInt(tokenizedList[i], 10);
+
+                if (!isNaN(item)) {
+                    return isPercent ? item + '%' : item;
                 }
             }
-            else {
-                //We'll return the number as-is 
-                return num;
-            }
         }
+
+        //If we made it this far, we didn't encounter any numbers. 
+        return undefined;
+
+        // if (typeof (rawStr) == 'number') {
+        //     num = Number(rawStr);
+        // }
+
+        // if (typeof (rawStr) == 'string') {
+        //     isPercent = rawStr.includes('%');
+
+        //     let regex = /\d+/g;
+        //     let result = rawStr.match(regex);
+
+        //     if (result && result.length) {
+        //         num = Number(result[0]);
+        //     }
+        // }
+
+        // if (num && typeof (num) == 'number') {
+
+        //     if (isPercent) {
+        //         //Validate it's between 0-100%
+        //         if (num > -1 && num < 101) {
+        //             return num + '%';
+        //         }
+        //     }
+        //     else {
+        //         //We'll return the number as-is 
+        //         return num;
+        //     }
+        // }
 
         //If we made it this far, it wasn't parsable
         return undefined;
@@ -142,7 +166,6 @@ export const UxpNumberParser = {
 
                 if (isNaN(item) || item < min || item > max) {
                     //do nothing
-                    console.log("      > parseoptions. Tossing this item: " + item);
                 }
                 else {
                     parsedList.push(item);
@@ -151,39 +174,5 @@ export const UxpNumberParser = {
         }
 
         return parsedList;
-
-        // var indexList = [];
-
-        // //Now we have to go through, validate the numbers, and adjust them, if necessary
-        // if (result && result.length) {
-
-        // let min = Number(minValue);
-        // let max = Number(maxValue);
-
-        //     var adjNum = parseInt(adjustmentNumber);
-        //     if (isNaN(adjNum)) {
-        //         adjNum = 0;
-        //     }
-
-        //     var i;
-        //     for (i = 0; i < result.length; i++) {
-        //         var num = result[i];
-        //         num = parseInt(num, 10);
-
-        //         if (!isNaN(num)) {
-        //             num = num + adjNum;
-
-        //             if (isNaN(num) || num < min || num > max) {
-        //                 //Do nothing with this value. Too low or minValue is not defined.
-        //                 //Or, too high or maxValue is not defined.
-        //             }
-        //             else {
-        //                 indexList.push(num);
-        //             }
-        //         } //Num validation
-        //     } //for loop
-        // } //if results
-
-        // return indexList;
     },
 };
