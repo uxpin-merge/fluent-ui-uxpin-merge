@@ -155,6 +155,10 @@ class PeoplePicker extends React.Component {
     * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
     */
    parseSelectedIndexes(rawList, max) {
+
+      let testing = UxpNumberParser.parseIntsAdjusted(rawList, -1);
+      console.log("testing! " + testing);
+
       if (!rawList || rawList?.trim().length === 0)
          return [];
 
