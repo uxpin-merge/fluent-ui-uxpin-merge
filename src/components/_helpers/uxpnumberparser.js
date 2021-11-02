@@ -82,9 +82,9 @@ export const UxpNumberParser = {
 
     /**
      * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
-     * @param {string} rawList A string that contains a list of positive ints.
+     * @param {string} rawList A string that contains a list of ints.
      * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-     * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
+     * @example '1 3 5 -6 9 38' - Returns an array of numbers: [1,3,5,-6,9,38]
      * @example '38px' - Returns an array of numbers: [38]
      */
     parseInts: function (rawList) {
@@ -95,11 +95,11 @@ export const UxpNumberParser = {
     /**
      * Parses a string that contains a list of numbers. Accepts comma or space delimited numbers. 
      * 		An additional option is available for adjusting the number, for example, to convert a 1-based index to a 0-based index.
-     * @param {string} rawList A string that contains a list of positive ints.
+     * @param {string} rawList A string that contains a list of ints.
      * @param {number} adjustmentNumber A positive or negative number that will be added to each int found. For example, if the user entered values with a 1-based index, use a -1. Pass in '0' for no adjustment.
      * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-     * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
-     * @example '1 3 5 6 9 38' - With an adjustmentNumber of '-1', returns an array of numbers: [0,2,4,5,8,37]
+     * @example '1 3 5 -6 9 38' - Returns an array of numbers: [1,3,5,-6,9,38]
+     * @example '1 3 5 -6 9 38' - With an adjustmentNumber of '-1', returns an array of numbers: [0,2,4,5,-7,37]
      * @example '38px' - Returns an array of numbers: [38]
       */
     parseIntsAdjusted: function (rawList, adjustmentNumber) {
@@ -109,16 +109,16 @@ export const UxpNumberParser = {
     },
 
     /**
-     * Parses a string that contains a list of positive int numbers. Accepts comma or space delimited numbers. 
+     * Parses a string that contains a list of int numbers. Accepts comma or space delimited numbers. 
      * 		An additional option is available for adjusting the number, for example, to convert a 1-based index to a 0-based index.
      *      Pass in a min or max value to filter those out, too. 
-     * @param {string} rawList A string that contains a list of positive int numbers.
+     * @param {string} rawList A string that contains a list of int numbers.
      * @param {number} adjustmentNumber A positive or negative number that will be added to each int found. For example, if the user entered values with a 1-based index, use a -1. Pass in '0' for no adjustment.
      * @param {number} minValue After adjustments, the minimum acceptable value. Pass in a non-numeric string to ignore.
      * @param {number} maxValue After adjustments, the maximum acceptable value. Pass in a non-numeric string to ignore.
      * @returns {Array} Returns an array of numbers. If nothing could be parsed, it is an empty array.
-     * @example '1 3 5 6 9 38' - Returns an array of numbers: [1,3,5,6,9,38]
-     * @example '1, 3, 5, 6, 9, 38, 55, 100, 500' - With minValue of 5 and maxValue of 100, returns an array of numbers: [5,6,9,38,55,100]
+     * @example '1 3 -5 6 -9 38' - Returns an array of numbers: [1,3,-5,6,-9,38]
+     * @example '1, 3, 5, 6, 9, -38, 55, 100, 500' - With minValue of 5 and maxValue of 100, returns an array of numbers: [5,6,9,55,100]
      * @example '38px' - Returns an array of numbers: [38]
      */
     parseIntsWithOptions: function (rawList, adjustmentNumber, minValue, maxValue) {
