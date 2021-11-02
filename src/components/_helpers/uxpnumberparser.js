@@ -12,11 +12,19 @@ export const UxpNumberParser = {
      * @example '38px' - Returns a number: 38
      * @example '85%' - Returns '85%'
      * @example '-25%' - Returns '25%'
-     * @example 'Here's a percent: 33%' - Returns '33%'
+     * @example "Here's a percent: 33%" - Returns '33%'
      * @example '125%' - Returns undefined
      * @example '-569' - Returns '569'
      */
     parsePercentOrInt: function (rawStr) {
+        //Is it already a number?
+        if (typeof (rawStr) == 'number') {
+            let item = parseInt(rawStr, 10);
+            if (!isNaN(item)) {
+                return item;
+            }
+        }
+
         if (!rawStr || typeof (rawStr) != 'string')
             return undefined;
 
@@ -38,6 +46,16 @@ export const UxpNumberParser = {
 
                 if (!isNaN(item)) {
                     return isPercent ? item + '%' : item;
+
+                    if (isPercent) {
+                        let pct = item < 0 ? '0%' :
+                            item > 100 ? '100%' :
+                                item + '%';
+                        return pct;
+                    }
+                    else {
+                        return item;
+                    }
                 }
             }
         }
