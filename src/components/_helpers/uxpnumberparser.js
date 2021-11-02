@@ -2,19 +2,18 @@
 export const UxpNumberParser = {
 
     /**
-     * Parses a string that contains a positive int value. 
-     *      If the string contains a % mark, it'll also validate that it's between 0-100%. 
-     *      If the string contains multiple numbers, it'll focus on the first one found.
-     * @param {string} rawStr A string that may contain a positive int percentage value.
+     * Parses a string that contains an int value. 
+     *      If the string contains multiple numbers, it'll return the first one found.     *      If the string contains a % mark anywhere, it'll assume the first number found is a percent and adjust it to fit within the 0-100% range (inclusive). 
+     * @param {string} rawStr A string that may contain an int or int percentage value.
      * @returns {string} Returns a string, such as '15%' or '225'. If nothing could be parsed, the value of undefined is returned.
      * @example '5 6 9 38 50' - Returns the first number: '5'
      * @example '5 6 9% 38 50' - Returns the first number as a percent: '5%'
      * @example '38px' - Returns a number: 38
      * @example '85%' - Returns '85%'
-     * @example '-25%' - Returns '25%'
+     * @example '-25%' - Returns '-25%'
      * @example "Here's a percent: 33%" - Returns '33%'
-     * @example '125%' - Returns undefined
-     * @example '-569' - Returns '569'
+     * @example '125%' - Returns '100%'
+     * @example '-569' - Returns '-569'
      */
     parsePercentOrInt: function (rawStr) {
         //Is it already a number?
@@ -59,38 +58,6 @@ export const UxpNumberParser = {
         }
 
         //If we made it this far, we didn't encounter any numbers. 
-        return undefined;
-
-        // if (typeof (rawStr) == 'number') {
-        //     num = Number(rawStr);
-        // }
-
-        // if (typeof (rawStr) == 'string') {
-        //     isPercent = rawStr.includes('%');
-
-        //     let regex = /\d+/g;
-        //     let result = rawStr.match(regex);
-
-        //     if (result && result.length) {
-        //         num = Number(result[0]);
-        //     }
-        // }
-
-        // if (num && typeof (num) == 'number') {
-
-        //     if (isPercent) {
-        //         //Validate it's between 0-100%
-        //         if (num > -1 && num < 101) {
-        //             return num + '%';
-        //         }
-        //     }
-        //     else {
-        //         //We'll return the number as-is 
-        //         return num;
-        //     }
-        // }
-
-        //If we made it this far, it wasn't parsable
         return undefined;
     },
 
