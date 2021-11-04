@@ -45,8 +45,10 @@ class Nav extends React.Component {
             }));
 
         //Trying parser next
-        if (this.props.items)
-            UxpMenuUtils.parseNavItemText(this.props.items, true);
+        if (this.props.items) {
+            let parsedNavItemText = UxpMenuUtils.parseNavItemText(this.props.items, true);
+            console.log('Parsed JSON for Nav control: ' + JSON.stringify(parsedNavItemText));
+        }
 
         this.setState({
             disabledIndexes: disabledItems,
