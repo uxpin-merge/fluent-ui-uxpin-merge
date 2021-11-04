@@ -44,7 +44,9 @@ class Nav extends React.Component {
                 disabled: disabledItems.includes(index + 1),
             }));
 
-        UxpMenuUtils.parseNavItemText(this.props.items, true);
+        //Trying parser next
+        if (this.props.items)
+            UxpMenuUtils.parseNavItemText(this.props.items, true);
 
         this.setState({
             disabledIndexes: disabledItems,
