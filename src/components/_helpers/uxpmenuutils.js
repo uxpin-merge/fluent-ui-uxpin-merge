@@ -217,7 +217,7 @@ export const UxpMenuUtils = {
             }
 
             console.log("     > isChild " + isChild);
-            console.log("     Checking in... > propslist length: " + propsList.legth);
+            console.log("     Checking in... > propslist length: " + propsList.length);
 
             //Parse the individual item. It may have an icon.
             let parsedNavItems = UXPinParser.parse(item);
@@ -236,8 +236,8 @@ export const UxpMenuUtils = {
                   if (props) {
 
                      if (isChild) {
-                        console.log("    > propslist length: " + propsList.legth);
-                        let parent = propsList[propsList.legth - 1];
+                        console.log("    > propslist length: " + propsList.length);
+                        let parent = propsList[propsList.length - 1];
 
                         console.log("    > this is the parent: " + parent);
                         console.log("    > its child: " + props.text);
