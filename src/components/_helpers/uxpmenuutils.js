@@ -347,11 +347,11 @@ export const UxpMenuUtils = {
       if (parentItem && childItem) {
 
          console.log("append > child item: " + childItem);
-         console.log("       > Parent's original links : " + JSON.stringify(parentItem.links));
+         console.log("       > Parent's original props: " + JSON.stringify(parentItem));
 
          parentItem.links.concat(childItem);
 
-         console.log("       > Parent's links prop now: " + JSON.stringify(parentItem.links));
+         console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
          return links;
       }
    }
