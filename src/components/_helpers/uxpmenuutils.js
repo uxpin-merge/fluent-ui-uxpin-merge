@@ -350,12 +350,13 @@ export const UxpMenuUtils = {
 
          console.log("append > plinks: " + plinks);
          console.log("       > child item: " + childItem);
+         console.log("       > Parent's original links : " + JSON.stringify(parentItem.links));
 
          if (plinks) {
             parentItem.links.concat(childItem);
          }
 
-         console.log("       > item in first spot: " + parentItem.links);
+         console.log("       > Parent's links prop now: " + JSON.stringify(parentItem.links));
          return links;
       }
    }
