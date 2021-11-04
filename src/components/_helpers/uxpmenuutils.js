@@ -240,11 +240,7 @@ export const UxpMenuUtils = {
 
                         console.log("    > this is the parent: " + parent.text);
                         console.log("    > its child: " + props.text);
-
-                        let links = this.appendNavItemChildProps(parent, props);
-
-                        parent.links = links;
-                        console.log("parsing.... parent links: " + parent.links);
+                        console.log("    > After appending the child: " + parent.links);
                      }
                      else {
                         console.log("pushing props to the propsList for: " + props.text);
