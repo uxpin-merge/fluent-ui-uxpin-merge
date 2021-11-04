@@ -172,8 +172,75 @@ export const UxpMenuUtils = {
    },
 
    /**
-    * Affirms whether the item at the specified index is a child menu/list item. If it starts with the childTab, then it will return true. 
-    * @param {Array} itemList A array of strings. 
+    * Parses a complex list of raw UXPin prop text from a codeeditor for the Nav control. 
+    * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
+    * @param {string} allowChildren True to allow child groupings. False to disallow children and have a single layer. If False, also removes the starting childTag, if present. 
+    * @returns {Array} Returns an array of props. Props include key, itemType, text, iconProps and a custom uxpType. 
+    */
+   parseNavItemText: function (rawPropText, allowChildren) {
+      //If this list has children, then the top level array represents groups. 
+      var propsList = [];
+
+      if (rawPropText) {
+         //Split each line out.
+         let items = rawPropText.match(/[^\r\n]+/g);
+         let hasChildren = allowChildren ? this.testForChildren(rawPropText) : false;
+
+         //The first item must be a regular nav item.
+         var i;
+         for (i = 0; i < items.length; i++) {
+            var item = items[i]?.trim();
+
+            var isChild = item?.startsWith(this.childTag);
+            var hasChild = false;
+            if (isChild) {
+               //We must remove the * before parsing.
+               item = item.substring(1).trim();
+
+               //If it's the first item, then we will force it to be a parent.
+               if (i < 1) {
+                  isChild = false;
+               }
+            }
+            else if (hasChildren) {
+               hasChild = this.isChildItem(items, i + 1);
+            }
+
+            //Parse the individual item. It may have an icon.
+            let parsedNavItems = UXPinParser.parse(item);
+
+            if (parsedNavItems && parsedNavItems.length > 0) {
+               let parsedItem = parsedNavItems[0];
+               let trimmedText = parsedItem?.text?.trim();
+
+               if (parsedItem && trimmedText) {
+                  let iconName = hasChild ? undefined : parsedItem?.iconName;
+                  let props = this.getNavItemProps(i, trimmedText, iconName, false);
+
+                  //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
+                  if (props) {
+                     if (isChild) {
+                        let parent = propsList[propsList.legth - 1];
+                        let links = this.appendNavItemChildProps(parent, props);
+                        parent.links = links;
+                        console.log("parsing.... parent links: " + parent.links);
+                     }
+                     else {
+                        propsList.push(props);
+                     }
+                  }
+               }
+            }
+
+         }
+      }
+
+      return propsList;
+   },
+
+   /**
+    * Affirms whether the item at the specified index is a child menu/list item. If it starts with the childTag, then it will return true. 
+    * @param {Array} itemList An array of strings. 
     * @param {number} testIndex The index for the string to test whether it starts with the childTag. 
     * @returns {bool} True if the item at the specified index starts with the childTag. False otherwise.  
     */
@@ -226,5 +293,38 @@ export const UxpMenuUtils = {
          };
          return menuProps;
       }
+   },
+
+   /**
+    * Creates a Nav item params object with the specified values. Params include key, text, icon name, and whether it should be disabled. 
+    * @param {number} index Index value to use in creating the item's key prop.
+    * @param {string} text The value to use for the text prop. 
+    * @param {string} iconName The value to use for the iconProps icon prop.
+    * @param {string} isExpanded If a group, whether it should be shown as expande by default.
+    * @param {bool} disabled True if this item should be disabled. False otherwise.
+    * @returns {string} Returns a JSON props object representing a generic Nav item. 
+    */
+   getNavItemProps: function (index, text, iconName, isExpanded, disabled) {
+      let key = index + 1;
+
+      let navProps = {
+         key: key,
+         text: text ? text : '',
+         icon: iconName ? iconName : '',
+         isExpanded: isExpanded,
+         disabled: disabled,
+      };
+      return navProps;
+   },
+
+   appendNavItemChildProps: function (parentItem, childItem) {
+      if (parentItem && childItem) {
+         let links = {
+            links: { ...parentItem?.links, ...childItem }
+         };
+         console.log("append: " + links.links);
+         return links;
+      }
    }
+
 };
