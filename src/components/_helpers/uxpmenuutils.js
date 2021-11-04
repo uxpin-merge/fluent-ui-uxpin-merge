@@ -247,6 +247,7 @@ export const UxpMenuUtils = {
                         console.log("parsing.... parent links: " + parent.links);
                      }
                      else {
+                        console.log("pushing props to the propsList for: " + props.text);
                         propsList.push(props);
                      }
                   }
