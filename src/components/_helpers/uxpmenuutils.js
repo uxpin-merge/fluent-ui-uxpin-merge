@@ -194,7 +194,7 @@ export const UxpMenuUtils = {
          let items = rawPropText.match(/[^\r\n]+/g);
          let hasChildren = allowChildren ? this.testForChildren(rawPropText) : false;
 
-         onsole.log("parseNavItemText > hasChildren " + hasChildren);
+         console.log("parseNavItemText > hasChildren " + hasChildren);
 
          //The first item must be a regular nav item.
          var i;
@@ -216,12 +216,16 @@ export const UxpMenuUtils = {
                hasChild = this.isChildItem(items, i + 1);
             }
 
+            console.log("     > isChild " + isChild);
+
             //Parse the individual item. It may have an icon.
             let parsedNavItems = UXPinParser.parse(item);
 
             if (parsedNavItems && parsedNavItems.length > 0) {
                let parsedItem = parsedNavItems[0];
                let trimmedText = parsedItem?.text?.trim();
+
+               console.log("     > trimmedText " + trimmedText);
 
                if (parsedItem && trimmedText) {
                   let iconName = hasChild ? undefined : parsedItem?.iconName;
