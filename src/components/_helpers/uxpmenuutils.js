@@ -217,7 +217,6 @@ export const UxpMenuUtils = {
             }
 
             console.log("     > isChild " + isChild);
-            console.log("     Checking in... > propslist length: " + propsList.length);
 
             //Parse the individual item. It may have an icon.
             let parsedNavItems = UXPinParser.parse(item);
@@ -239,7 +238,7 @@ export const UxpMenuUtils = {
                         console.log("    > propslist length: " + propsList.length);
                         let parent = propsList[propsList.length - 1];
 
-                        console.log("    > this is the parent: " + parent);
+                        console.log("    > this is the parent: " + parent.text);
                         console.log("    > its child: " + props.text);
 
                         let links = this.appendNavItemChildProps(parent, props);
@@ -339,6 +338,7 @@ export const UxpMenuUtils = {
          icon: iconName ? iconName : '',
          isExpanded: isExpanded,
          disabled: disabled,
+         links: [],
       }
       return navProps;
    },
@@ -348,8 +348,8 @@ export const UxpMenuUtils = {
          let plinks = parentItem?.links;
          var links;
 
-         console.log("plinks: " + plinks);
-         console.log("    child item: " + childItem);
+         console.log("append > plinks: " + plinks);
+         console.log("       > child item: " + childItem);
 
          if (plinks) {
             links = {
@@ -362,7 +362,7 @@ export const UxpMenuUtils = {
             };
          }
 
-         console.log("append: " + links.links);
+         console.log("       > appending" + links.links);
          return links;
       }
    }
