@@ -328,6 +328,7 @@ export const UxpMenuUtils = {
       let key = index + 1;
 
       console.log("Entering getNavItemProps for " + text);
+      //this.getNavItemProps(i, trimmedText, iconName, false, false);
 
       let navProps = {
          key: key,
@@ -335,7 +336,7 @@ export const UxpMenuUtils = {
          icon: iconName ? iconName : '',
          isExpanded: isExpanded,
          disabled: disabled,
-      };
+      }
       return navProps;
    },
 
