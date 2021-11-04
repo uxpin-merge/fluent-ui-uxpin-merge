@@ -348,7 +348,7 @@ export const UxpMenuUtils = {
       console.log("append > child item: " + childItem);
       console.log("       > Parent's original props: " + JSON.stringify(parentItem));
 
-      parentItem.links = [{ ...parentItem.links, ...childItem }];
+      parentItem.links = { ...parentItem.links, ...childItem };
 
       console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
       return true;
