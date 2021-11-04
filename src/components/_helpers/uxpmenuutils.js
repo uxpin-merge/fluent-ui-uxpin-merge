@@ -346,9 +346,7 @@ export const UxpMenuUtils = {
    appendNavItemChildProps: function (parentItem, childItem) {
       if (parentItem && childItem) {
 
-
-         console.log("append > plinks: " + plinks);
-         console.log("       > child item: " + childItem);
+         console.log("append > child item: " + childItem);
          console.log("       > Parent's original links : " + JSON.stringify(parentItem.links));
 
          parentItem.links.concat(childItem);
