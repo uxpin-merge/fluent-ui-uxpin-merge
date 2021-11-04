@@ -319,9 +319,20 @@ export const UxpMenuUtils = {
 
    appendNavItemChildProps: function (parentItem, childItem) {
       if (parentItem && childItem) {
-         let links = {
-            links: { ...parentItem?.links, ...childItem }
-         };
+         let plinks = parentItem?.links;
+         var links;
+
+         if (plinks) {
+            links = {
+               links: { ...plinks, ...childItem }
+            };
+         }
+         else {
+            links = {
+               links: childItem,
+            };
+         }
+
          console.log("append: " + links.links);
          return links;
       }
