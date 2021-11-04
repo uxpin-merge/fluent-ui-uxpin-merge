@@ -352,17 +352,10 @@ export const UxpMenuUtils = {
          console.log("       > child item: " + childItem);
 
          if (plinks) {
-            links = {
-               links: { ...plinks, ...childItem }
-            };
-         }
-         else {
-            links = {
-               links: childItem,
-            };
+            parentItem.links.concat(childItem);
          }
 
-         console.log("       > appending" + links.links);
+         console.log("       > item in first spot: " + parentItem.links[0]);
          return links;
       }
    }
