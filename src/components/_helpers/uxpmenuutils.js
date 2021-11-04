@@ -355,7 +355,7 @@ export const UxpMenuUtils = {
             parentItem.links.concat(childItem);
          }
 
-         console.log("       > item in first spot: " + parentItem.links[0]);
+         console.log("       > item in first spot: " + parentItem.links);
          return links;
       }
    }
