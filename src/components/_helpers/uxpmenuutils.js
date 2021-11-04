@@ -322,6 +322,9 @@ export const UxpMenuUtils = {
          let plinks = parentItem?.links;
          var links;
 
+         console.log("plinks: " + plinks);
+         console.log("    child item: " + childItem);
+
          if (plinks) {
             links = {
                links: { ...plinks, ...childItem }
