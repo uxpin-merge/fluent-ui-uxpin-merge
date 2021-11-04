@@ -229,7 +229,7 @@ export const UxpMenuUtils = {
 
                if (parsedItem && trimmedText) {
                   let iconName = hasChild ? undefined : parsedItem?.iconName;
-                  let props = this.getNavItemProps(i, trimmedText, iconName, false);
+                  let props = this.getNavItemProps(i, trimmedText, iconName, false, false);
 
                   //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
                   if (props) {
@@ -326,6 +326,8 @@ export const UxpMenuUtils = {
     */
    getNavItemProps: function (index, text, iconName, isExpanded, disabled) {
       let key = index + 1;
+
+      console.log("Entering getNavItemProps for " + text);
 
       let navProps = {
          key: key,
