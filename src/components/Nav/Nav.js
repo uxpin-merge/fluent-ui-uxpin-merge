@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 
@@ -42,6 +43,8 @@ class Nav extends React.Component {
                 icon: item?.iconName,
                 disabled: disabledItems.includes(index + 1),
             }));
+
+        UxpMenuUtils.parseNavItemText(this.props.items, true);
 
         this.setState({
             disabledIndexes: disabledItems,
