@@ -178,13 +178,23 @@ export const UxpMenuUtils = {
     * @returns {Array} Returns an array of props. Props include key, itemType, text, iconProps and a custom uxpType. 
     */
    parseNavItemText: function (rawPropText, allowChildren) {
+
+      if (!rawPropText || typeof (rawPropText) != 'string' || rawPropText.trim().length < 1)
+         return undefined;
+
       //If this list has children, then the top level array represents groups. 
       var propsList = [];
 
       if (rawPropText) {
+
+         console.log("parseNavItemText > Entering parser... " + rawPropText);
+
+
          //Split each line out.
          let items = rawPropText.match(/[^\r\n]+/g);
          let hasChildren = allowChildren ? this.testForChildren(rawPropText) : false;
+
+         onsole.log("parseNavItemText > hasChildren " + hasChildren);
 
          //The first item must be a regular nav item.
          var i;
