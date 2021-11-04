@@ -237,7 +237,7 @@ export const UxpMenuUtils = {
                      if (isChild) {
                         let parent = propsList[propsList.legth - 1];
 
-                        console.log("parseNavItemText > this is the parent: " + parent.text);
+                        console.log("parseNavItemText > this is the parent: " + parent);
                         console.log("    > its child: " + props.text);
 
                         let links = this.appendNavItemChildProps(parent, props);
