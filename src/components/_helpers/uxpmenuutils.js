@@ -240,6 +240,9 @@ export const UxpMenuUtils = {
 
                         console.log("    > this is the parent: " + parent.text);
                         console.log("    > its child: " + props.text);
+
+                        this.appendNavItemChildProps(parent, props);
+
                         console.log("    > After appending the child: " + parent.links);
                      }
                      else {
@@ -340,21 +343,21 @@ export const UxpMenuUtils = {
    },
 
    appendNavItemChildProps: function (parentItem, childItem) {
-      if (parentItem && childItem) {
-
-         console.log("append > child item: " + childItem);
-         console.log("       > Parent's original props: " + JSON.stringify(parentItem));
-
-         let links = {
-            links: { childItem },
-         };
 
 
-         parentItem.links = links;
+      console.log("append > child item: " + childItem);
+      console.log("       > Parent's original props: " + JSON.stringify(parentItem));
 
-         console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
-         return links;
-      }
+      let links = {
+         links: { childItem },
+      };
+
+
+      parentItem.links = links;
+
+      console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
+      return links;
+
    }
 
 };
