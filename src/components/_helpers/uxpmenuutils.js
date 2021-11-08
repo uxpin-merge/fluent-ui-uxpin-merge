@@ -177,7 +177,9 @@ export const UxpMenuUtils = {
     * @param {string} allowChildren True to allow child groupings. False to disallow children and have a single layer. If False, also removes the starting childTag, if present. 
     * @returns {Array} Returns an array of props. Props include key, itemType, text, iconProps and a custom uxpType. 
     */
-   parseNavItemText: function (rawPropText, allowChildren) {
+   parseNavItemText: function (rawPropText, disabledList, allowChildren) {
+      //Let's reasonably guarantee an array for the disabled items
+      let dList = disabledList ? disabledList : [];
 
       if (!rawPropText || typeof (rawPropText) != 'string' || rawPropText.trim().length < 1)
          return undefined;
@@ -219,17 +221,17 @@ export const UxpMenuUtils = {
 
                if (parsedItem && trimmedText) {
                   let iconName = hasChild ? undefined : parsedItem?.iconName;
-                  let props = this.getNavItemProps(i, trimmedText, iconName, false, false);
+
+                  let disabled = dList.contains(i + 1) ? true : false;
+
+                  let props = this.getNavItemProps(i, trimmedText, iconName, false, disabled);
 
                   //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
                   if (props) {
 
                      if (isChild) {
                         let parent = propsList[propsList.length - 1];
-
                         this.appendNavItemChildProps(parent, props);
-
-                        console.log("    > After appending the child: " + JSON.stringify(parent));
                      }
                      else {
                         propsList.push(props);
