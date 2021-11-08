@@ -313,7 +313,7 @@ export const UxpMenuUtils = {
    getNavItemProps: function (index, text, iconName, isExpanded, disabled) {
       let navProps = {
          key: index + 1,
-         text: text ? text : '',
+         name: text ? text : '',
          icon: iconName ? iconName : '',
          isExpanded: isExpanded,
          disabled: disabled,
