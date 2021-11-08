@@ -343,20 +343,14 @@ export const UxpMenuUtils = {
    },
 
    appendNavItemChildProps: function (parentItem, childItem) {
+      if (!parentItem || !childItem)
+         return false;
 
-
-      console.log("append > child item: " + childItem);
-      console.log("       > Parent's original props: " + JSON.stringify(parentItem));
-
-      let plinks = parentItem.links.concat(childItem);
-
-      console.log("       > plinks: " + JSON.stringify(plinks));
-
-      parentItem.links = plinks;
+      parentItem.links = parentItem.links.concat(childItem);
 
       console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
-      return true;
 
+      return true;
    }
 
 };
