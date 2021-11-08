@@ -222,7 +222,7 @@ export const UxpMenuUtils = {
                if (parsedItem && trimmedText) {
                   let iconName = hasChild ? undefined : parsedItem?.iconName;
 
-                  let disabled = dList.contains(i + 1) ? true : false;
+                  let disabled = dList.includes(i + 1) ? true : false;
 
                   let props = this.getNavItemProps(i, trimmedText, iconName, false, disabled);
 
