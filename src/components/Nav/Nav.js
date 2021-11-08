@@ -36,7 +36,7 @@ class Nav extends React.Component {
     set() {
         let disabledItems = UxpNumberParser.parseInts(this.props.disabled);
 
-        let items = UXPinParser.parse(this.props.items).map(
+        var items = UXPinParser.parse(this.props.items).map(
             (item, index) => ({
                 key: index + 1,
                 name: item.text ? item.text : '',
@@ -47,6 +47,7 @@ class Nav extends React.Component {
         //Trying parser next
         if (this.props.items) {
             let parsedNavItemText = UxpMenuUtils.parseNavItemText(this.props.items, true);
+            items = parseNavItemText;
             console.log('Parsed JSON for Nav control: ' + JSON.stringify(parsedNavItemText));
         }
 
