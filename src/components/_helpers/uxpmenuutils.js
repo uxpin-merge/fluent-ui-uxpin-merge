@@ -348,8 +348,15 @@ export const UxpMenuUtils = {
       console.log("append > child item: " + childItem);
       console.log("       > Parent's original props: " + JSON.stringify(parentItem));
 
-      let plinks = parentItem.links;
-      parentItem.links = [{ ...plinks, childItem }];
+      var plinks = childItem;
+
+      if (parentItem.links && parentItem.links?.length > 0) {
+         plinks = parentItem.links.concat(childItem);
+      }
+
+      console.log("       > plinks: " + JSON.stringify(plinks));
+
+      parentItem.links = plinks;
 
       console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
       return true;
