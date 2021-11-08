@@ -186,15 +186,9 @@ export const UxpMenuUtils = {
       var propsList = [];
 
       if (rawPropText) {
-
-         console.log("parseNavItemText > Entering parser... " + rawPropText);
-
-
          //Split each line out.
          let items = rawPropText.match(/[^\r\n]+/g);
          let hasChildren = allowChildren ? this.testForChildren(rawPropText) : false;
-
-         console.log("parseNavItemText > hasChildren " + hasChildren);
 
          //The first item must be a regular nav item.
          var i;
@@ -216,16 +210,12 @@ export const UxpMenuUtils = {
                hasChild = this.isChildItem(items, i + 1);
             }
 
-            console.log("     > isChild " + isChild);
-
             //Parse the individual item. It may have an icon.
             let parsedNavItems = UXPinParser.parse(item);
 
             if (parsedNavItems && parsedNavItems.length > 0) {
                let parsedItem = parsedNavItems[0];
                let trimmedText = parsedItem?.text?.trim();
-
-               console.log("     > trimmedText " + trimmedText);
 
                if (parsedItem && trimmedText) {
                   let iconName = hasChild ? undefined : parsedItem?.iconName;
@@ -235,18 +225,13 @@ export const UxpMenuUtils = {
                   if (props) {
 
                      if (isChild) {
-                        console.log("    > propslist length: " + propsList.length);
                         let parent = propsList[propsList.length - 1];
-
-                        console.log("    > this is the parent: " + parent.text);
-                        console.log("    > its child: " + props.text);
 
                         this.appendNavItemChildProps(parent, props);
 
-                        console.log("    > After appending the child: " + parent.links);
+                        console.log("    > After appending the child: " + JSON.stringify(parent));
                      }
                      else {
-                        console.log("pushing props to the propsList for: " + props.text);
                         propsList.push(props);
                      }
                   }
@@ -326,13 +311,8 @@ export const UxpMenuUtils = {
     * @returns {string} Returns a JSON props object representing a generic Nav item. 
     */
    getNavItemProps: function (index, text, iconName, isExpanded, disabled) {
-      let key = index + 1;
-
-      console.log("Entering getNavItemProps for " + text);
-      //this.getNavItemProps(i, trimmedText, iconName, false, false);
-
       let navProps = {
-         key: key,
+         key: index + 1,
          text: text ? text : '',
          icon: iconName ? iconName : '',
          isExpanded: isExpanded,
@@ -347,9 +327,6 @@ export const UxpMenuUtils = {
          return false;
 
       parentItem.links = parentItem.links.concat(childItem);
-
-      console.log("       > Parent's links prop now: " + JSON.stringify(parentItem));
-
       return true;
    }
 
