@@ -2,11 +2,17 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Link from '../Link/Link';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
+import { Stack } from '@fluentui/react/lib/Stack';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
 
 
 
+const leftAlign = 'left';
+const centerAlign = 'center';
+const rightAlign = 'right';
+const stretchAlign = 'stretch';
+const middleAlign = 'middle';
 
 class Timestamp extends React.Component {
 
@@ -75,7 +81,11 @@ class Timestamp extends React.Component {
          target: `#${ttTargetID}`,
       };
 
-      console.log("align: " + this.props.align);
+      let hAlign = this.props.align === leftAlign ? leftAlign :
+         this.props.align === rightAlign ? rightAlign :
+            this.props.align === centerAlign ? centerAlign :
+               stretchAlign;
+
 
       return (
          <>
@@ -86,15 +96,22 @@ class Timestamp extends React.Component {
                closeDelay={500}
                calloutProps={ttProps}
             >
-               <Link
-                  {...this.props}
-                  value={linkText}
-                  linkHref={''}
-                  align={this.props.align}
-                  id={ttTargetID}
-                  aria-describedby={tooltipID}
-                  style={{ width: '100%' }}
-               />
+               <Stack
+                  padding={0}
+                  horizontal={true}
+                  horizontalAlign={hAlign}
+                  verticalAlign={middleAlign}
+               >
+                  <Link
+                     {...this.props}
+                     value={linkText}
+                     linkHref={''}
+                     align={this.props.align}
+                     id={ttTargetID}
+                     aria-describedby={tooltipID}
+                     style={{ width: '100%' }}
+                  />
+               </Stack>
             </TooltipHost>
          </>
       );
@@ -150,7 +167,7 @@ Timestamp.propTypes = {
    /**
    * @uxpindescription Text alignment
    */
-   align: PropTypes.oneOf(['left', 'center', 'right']),
+   align: PropTypes.oneOf([leftAlign, centerAlign, rightAlign]),
 
    /**
     * @uxpindescription The display size, corresponding to a Microsoft Text 'Variant'
@@ -180,7 +197,7 @@ Timestamp.defaultProps = {
    showTime: true,
    showSeconds: false,
    is24: false,
-   align: 'left',
+   align: leftAlign,
    size: 'medium',
    bold: false,
    italic: false,
