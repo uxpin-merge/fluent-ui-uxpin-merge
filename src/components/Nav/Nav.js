@@ -155,7 +155,7 @@ Nav.propTypes = {
     selectedIndex: PropTypes.number,
 
     /**
-     * @uxpindescription The list of nav items. Put each item on a separate line. Specify an icon using: icon(IconName) Nav Text. For a second level child nav item, start the line with a star: * icon(IconName) Child Item. 
+     * @uxpindescription The list of nav items. Put each item on a separate line. Specify an icon using: icon(IconName) Nav Text. For a second level child nav item, start the line with a star: * icon(IconName) Child Item
      * @uxpinpropname Items
      * @uxpincontroltype codeeditor
      */
