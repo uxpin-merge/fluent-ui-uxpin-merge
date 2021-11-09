@@ -99,7 +99,7 @@ class ProfileCard extends React.Component {
         return (
 
             <Stack
-                tokens={stackTokens}
+                //tokens={stackTokens}
                 horizontal={false}
                 horizontalAlign={stackHAlign}
                 verticalAlign={stackVAlign}
