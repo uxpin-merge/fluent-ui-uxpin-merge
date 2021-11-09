@@ -266,7 +266,7 @@ class Facepile extends React.Component {
                         className={styles.callout}
                         onDismiss={() => { this._onDismissCallout() }}
                     >
-                        <div style="overflowX: hidden; overflowY: auto;">
+                        <div style={{ overflowX: 'hidden', overflowY: 'auto' }}>
                             {
                                 this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
                                     return (
