@@ -75,6 +75,7 @@ class ProfileCard extends React.Component {
             const cbarStackTokens = {
                 childrenGap: 6,
                 padding: 0,
+                background: 'purple',
             };
 
             const cbarStackItemStyles = {
