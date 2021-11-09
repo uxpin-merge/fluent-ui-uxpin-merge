@@ -99,7 +99,6 @@ class ProfileCard extends React.Component {
                 styles={{
                     root: {
                         minWidth: '300px',
-                        background: '#333',
                         paddingBottom: '0',
                     }
                 }}>
