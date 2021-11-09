@@ -241,6 +241,11 @@ class Facepile extends React.Component {
             onClick: ((e) => this._onClickAddButton(e))
         };
 
+        const overflowStyle = {
+            overflowX: 'hidden',
+            overflowY: 'auto',
+        };
+
 
         return (
             <>
@@ -266,7 +271,7 @@ class Facepile extends React.Component {
                         className={styles.callout}
                         onDismiss={() => { this._onDismissCallout() }}
                     >
-                        <div style={{ overflowX: 'hidden', overflowY: 'auto' }}>
+                        <div style={overflowStyle}>
                             {
                                 this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
                                     return (
