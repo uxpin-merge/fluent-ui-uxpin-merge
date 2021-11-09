@@ -21,6 +21,7 @@ const stackTokens = {
     childrenGap: '6px',
     padding: 12,
     background: '#800080',
+    midWidth: '300px',
 };
 
 //For the Persona
@@ -32,10 +33,9 @@ const personaStyles = {
 };
 
 //This is the default URL to use for a generic female user
-const defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg";
 const defaultSize = 'size72';
-const cmdBarHAlign = 'left';
-const cmdBarVAlign = 'middle';
+const cmdBarHAlign = 'start';
+const cmdBarVAlign = 'center';
 
 
 
@@ -84,13 +84,12 @@ class ProfileCard extends React.Component {
             };
 
             commandBar = (
-
                 <Stack
                     tokens={cbarStackTokens}
                     styles={cbarStackItemStyles}
                     horizontal={true}
-                    horizontalAlign={'start'}
-                    verticalAlign={'center'}
+                    horizontalAlign={cmdBarHAlign}
+                    verticalAlign={cmdBarVAlign}
                 >
                     {childList}
                 </Stack >
