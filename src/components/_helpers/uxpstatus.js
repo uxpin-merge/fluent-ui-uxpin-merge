@@ -37,6 +37,27 @@ export const UxpStatus = {
       iconName: 'SkypeCircleCheck',
    },
 
+   passed: {
+      role: 'passed',
+      text: 'Passed',
+      color: 'success',
+      iconName: 'SkypeCircleCheck',
+   },
+
+   completed: {
+      role: 'completed',
+      text: 'Completed',
+      color: 'success',
+      iconName: 'SkypeCircleCheck',
+   },
+
+   approved: {
+      role: 'approved',
+      text: 'Approved',
+      color: 'success',
+      iconName: 'SkypeCircleCheck',
+   },
+
    warning: {
       role: 'warning',
       text: 'Warning',
@@ -56,6 +77,13 @@ export const UxpStatus = {
       text: 'Failed',
       color: 'error',
       iconName: 'StatusErrorFull',
+   },
+
+   overridden: {
+      role: 'overridden',
+      text: 'Overridden',
+      color: 'error',
+      iconName: 'AlertSolid',
    },
 
    skipped: {
@@ -107,6 +135,20 @@ export const UxpStatus = {
       iconName: 'Clock',
    },
 
+   pending: {
+      role: 'pending',
+      text: 'Pending',
+      color: 'neutralPrimary',
+      iconName: 'HourGlass',
+   },
+
+   validating: {
+      role: 'validating',
+      text: 'Validating',
+      color: 'neutralPrimary',
+      iconName: 'OpenEnrollment',
+   },
+
    currentStep: {
       role: 'currentStep',
       text: 'Next',
@@ -142,6 +184,20 @@ export const UxpStatus = {
       iconName: 'Info',
    },
 
+   offline: {
+      role: 'offline',
+      text: 'Offline',
+      color: 'neutralPrimary',
+      iconName: 'SkypeCircleMinus',
+   },
+
+   scheduled: {
+      role: 'scheduled',
+      text: 'Scheduled',
+      color: 'success',
+      iconName: 'Calendar',
+   },
+
    getStatusByRole: function (token) {
 
       if (token) {
@@ -159,6 +215,12 @@ export const UxpStatus = {
                return this.good;
             case 'ready':
                return this.ready;
+            case 'passed':
+               return this.passed;
+            case 'completed':
+               return this.completed;
+            case 'approved':
+               return this.approved;
             case 'warning':
                return this.warning;
             case 'error':
@@ -189,6 +251,14 @@ export const UxpStatus = {
                return this.reverted;
             case 'restored':
                return this.restored;
+            case 'offline':
+               return this.offline;
+            case 'pending':
+               return this.pending;
+            case 'validating':
+               return this.validating;
+            case 'scheduled':
+               return this.scheduled;
             default:
                return undefined;
          }
@@ -205,6 +275,9 @@ export const UxpStatus = {
       statuses.push(this.ok);
       statuses.push(this.good);
       statuses.push(this.ready);
+      statuses.push(this.passed);
+      statuses.push(this.completed);
+      statuses.push(this.approved);
       statuses.push(this.warning);
       statuses.push(this.error);
       statuses.push(this.failed);
@@ -220,6 +293,10 @@ export const UxpStatus = {
       statuses.push(this.restored);
       statuses.push(this.currentStep);
       statuses.push(this.futureStep);
+      statuses.push(this.offline);
+      statuses.push(this.pending);
+      statuses.push(this.validating);
+      statuses.push(this.scheduled);
 
       return statuses;
    }
