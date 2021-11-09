@@ -20,6 +20,8 @@ const stackItemStyles = {
 const stackTokens = {
     childrenGap: '6px',
     padding: 12,
+
+    background: 'purple',
 };
 
 //For the Persona
@@ -75,7 +77,6 @@ class ProfileCard extends React.Component {
             const cbarStackTokens = {
                 childrenGap: 6,
                 padding: 0,
-                background: 'purple',
             };
 
             const cbarStackItemStyles = {
@@ -86,8 +87,7 @@ class ProfileCard extends React.Component {
 
             commandBar = (
 
-                < Stack
-                    {...this.props}
+                <Stack
                     tokens={cbarStackTokens}
                     styles={cbarStackItemStyles}
                     horizontal={true}
