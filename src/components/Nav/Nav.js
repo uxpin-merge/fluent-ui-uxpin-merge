@@ -46,9 +46,8 @@ class Nav extends React.Component {
 
         //Trying parser next
         if (this.props.items) {
-            let parsedNavItemText = UxpMenuUtils.parseNavItemText(this.props.items, disabledItems, true);
+            let parsedNavItemText = UxpMenuUtils.parseNavItemText(this.props.items, this.props.selectedIndex, disabledItems, true);
             items = parsedNavItemText;
-            console.log('Parsed JSON for Nav control: ' + JSON.stringify(parsedNavItemText));
         }
 
         this.setState({
