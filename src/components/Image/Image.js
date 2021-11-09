@@ -159,7 +159,7 @@ Image.propTypes = {
 Image.defaultProps = {
     imageToken: defaultImageToken,
     imageUrl: '',
-    imageFit: fitContain,
+    imageFit: fitCenterCover,
     imgWidth: 200,
     imgHeight: 200,
 }
