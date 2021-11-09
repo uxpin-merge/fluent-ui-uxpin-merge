@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Link from '../Link/Link';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
-import { Stack } from '@fluentui/react/lib/Stack';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
@@ -11,17 +11,9 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 //For the Stack
 const stackVAlign = 'center';
 const stackHAlign = 'stretch';
-const stackItemStyles = {
-    root: {
-        height: 'auto',
-        width: 'auto',
-        midWidth: '300px',
-    },
-};
 const stackTokens = {
     childrenGap: '6px',
     padding: 12,
-    background: '#800080',
 };
 
 //For the Persona
@@ -99,31 +91,38 @@ class ProfileCard extends React.Component {
         return (
 
             <Stack
-                //tokens={stackTokens}
+                tokens={stackTokens}
                 horizontal={false}
                 horizontalAlign={stackHAlign}
                 verticalAlign={stackVAlign}
-                wrap={false}>
+                wrap={false}
+                styles={{
+                    root: {
+                        minWidth: '300px',
+                        background: '#333',
+                    }
+                }}>
+                <StackItem>
+                    <Persona
+                        size={PersonaSize[this.props.ppSize]}
+                        imageUrl={imgURL}
+                        imageInitials={this.props.initials}
+                        presence={presenceCode}
+                        initialsColor={this.props.ppInitialsColor}
+                        text={this.props.name}
+                        secondaryText={this.props.role}
+                        tertiaryText={this.props.status}
+                        optionalText={this.props.optional}
+                        children={undefined}
+                        styles={personaStyles}
+                    >
+                        {email}
+                    </Persona>
 
-                <Persona
-                    size={PersonaSize[this.props.ppSize]}
-                    imageUrl={imgURL}
-                    imageInitials={this.props.initials}
-                    presence={presenceCode}
-                    initialsColor={this.props.ppInitialsColor}
-                    text={this.props.name}
-                    secondaryText={this.props.role}
-                    tertiaryText={this.props.status}
-                    optionalText={this.props.optional}
-                    children={undefined}
-                    styles={personaStyles}
-                >
-                    {email}
-                </Persona>
-
-                {commandBar}
-
+                    {commandBar}
+                </StackItem>
             </Stack>
+
         );
     }
 }
