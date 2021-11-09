@@ -28,7 +28,7 @@ const personaStyles = {
 const defaultSize = 'size72';
 const cmdBarHAlign = 'start';
 const cmdBarVAlign = 'center';
-
+const cardMinWidth = '325px';
 
 
 class ProfileCard extends React.Component {
@@ -98,7 +98,7 @@ class ProfileCard extends React.Component {
                 wrap={false}
                 styles={{
                     root: {
-                        minWidth: '300px',
+                        minWidth: cardMinWidth,
                         paddingBottom: '0',
                     }
                 }}>
