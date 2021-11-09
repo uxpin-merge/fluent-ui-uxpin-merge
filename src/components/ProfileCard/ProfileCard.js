@@ -60,7 +60,6 @@ class ProfileCard extends React.Component {
 
             email = (
                 <Link
-                    // {...this.props}
                     value={this.props.email}
                     href={link ? link : ''}
                     bold={false}
@@ -125,6 +124,7 @@ class ProfileCard extends React.Component {
                     styles={personaStyles}
                 >
                     {email}
+                    {"Hello!"}
                 </Persona>
 
                 {commandBar}
