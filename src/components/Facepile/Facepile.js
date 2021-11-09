@@ -244,7 +244,7 @@ class Facepile extends React.Component {
         const overflowStyle = {
             overflowX: 'hidden',
             overflowY: 'auto',
-            maxHeight: '300px',
+            maxHeight: '310px',
         };
 
 
