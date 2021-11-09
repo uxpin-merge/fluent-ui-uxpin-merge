@@ -236,7 +236,9 @@ export const UxpMenuUtils = {
                      if (isChild) {
                         let parent = propsList[propsList.length - 1];
                         this.appendNavItemChildProps(parent, props);
-                        parent.isExpanded = expanded;
+
+                        if (expanded)
+                           parent.isExpanded = expanded;
 
                         console.log("      > parent.isExpanded: " + parent.isExpanded + " for " + parent.name);
                      }
