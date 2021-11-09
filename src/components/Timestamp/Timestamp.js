@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Link from '../Link/Link';
 import { DirectionalHint } from '@fluentui/react/lib/Callout';
-import { Stack } from '@fluentui/react/lib/Stack';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
 
@@ -13,6 +13,8 @@ const centerAlign = 'center';
 const rightAlign = 'right';
 const stretchAlign = 'stretch';
 const middleAlign = 'middle';
+const startAlign = 'start';
+const endAlign = 'end';
 
 class Timestamp extends React.Component {
 
@@ -89,8 +91,8 @@ class Timestamp extends React.Component {
          },
       };
 
-      let hAlign = this.props.align === leftAlign ? leftAlign :
-         this.props.align === rightAlign ? rightAlign :
+      let hAlign = this.props.align === startAlign ? leftAlign :
+         this.props.align === endAlign ? rightAlign :
             this.props.align === centerAlign ? centerAlign :
                stretchAlign;
 
@@ -111,14 +113,17 @@ class Timestamp extends React.Component {
                   verticalAlign={middleAlign}
                   styles={topStackItemStyles}
                >
-                  <Link
-                     {...this.props}
-                     value={linkText}
-                     linkHref={''}
-                     align={this.props.align}
-                     id={ttTargetID}
-                     aria-describedby={tooltipID}
-                  />
+                  <StackItem
+                     horizontalAlign={hAlign}>
+                     <Link
+                        {...this.props}
+                        value={linkText}
+                        linkHref={''}
+                        align={this.props.align}
+                        id={ttTargetID}
+                        aria-describedby={tooltipID}
+                     />
+                  </StackItem>
                </Stack>
             </TooltipHost>
          </>
