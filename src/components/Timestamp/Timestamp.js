@@ -91,8 +91,8 @@ class Timestamp extends React.Component {
          },
       };
 
-      let hAlign = this.props.align === startAlign ? leftAlign :
-         this.props.align === endAlign ? rightAlign :
+      let hAlign = this.props.align === leftAlign ? startAlign :
+         this.props.align === rightAlign ? endAlign :
             this.props.align === centerAlign ? centerAlign :
                stretchAlign;
 
@@ -110,7 +110,7 @@ class Timestamp extends React.Component {
                <Stack
                   padding={0}
                   horizontal={true}
-                  horizontalAlign={stretchAlignhAlign}
+                  horizontalAlign={hAlign}
                   verticalAlign={middleAlign}
                   styles={topStackItemStyles}
                >
