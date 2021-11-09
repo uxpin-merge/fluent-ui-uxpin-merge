@@ -90,7 +90,6 @@ module.exports = {
           'src/components/Dialog/Dialog.js',
           'src/components/Modal/Modal.js',
           'src/components/Panel/Panel.js',
-          'src/components/ScrollablePane/ScrollablePane.js',
           'src/components/Tooltip/Tooltip.js',
         ],
       },
