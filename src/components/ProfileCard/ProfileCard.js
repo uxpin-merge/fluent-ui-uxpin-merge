@@ -9,7 +9,7 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
 //For the Stack
-const stackVAlign = 'start';
+const stackVAlign = 'center';
 const stackHAlign = 'stretch';
 const stackItemStyles = {
     root: {
@@ -72,12 +72,12 @@ class ProfileCard extends React.Component {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
-            const stackTokens = {
+            const cbarStackTokens = {
                 childrenGap: 6,
                 padding: 0,
             };
 
-            const stackItemStyles = {
+            const cbarStackItemStyles = {
                 root: {
                     height: 'auto',
                 },
@@ -87,11 +87,11 @@ class ProfileCard extends React.Component {
 
                 < Stack
                     {...this.props}
-                    tokens={stackTokens}
-                    styles={stackItemStyles}
+                    tokens={cbarStackTokens}
+                    styles={cbarStackItemStyles}
                     horizontal={true}
                     horizontalAlign={'start'}
-                    verticalAlign={'middle'}
+                    verticalAlign={'center'}
                 >
                     {childList}
                 </Stack >
