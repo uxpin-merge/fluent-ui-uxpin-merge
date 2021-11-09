@@ -15,13 +15,13 @@ const stackItemStyles = {
     root: {
         height: 'auto',
         width: 'auto',
+        midWidth: '300px',
     },
 };
 const stackTokens = {
     childrenGap: '6px',
     padding: 12,
     background: '#800080',
-    midWidth: '300px',
 };
 
 //For the Persona
@@ -103,8 +103,7 @@ class ProfileCard extends React.Component {
                 horizontal={false}
                 horizontalAlign={stackHAlign}
                 verticalAlign={stackVAlign}
-                wrap={false}
-                styles={stackItemStyles} >
+                wrap={false}>
 
                 <Persona
                     size={PersonaSize[this.props.ppSize]}
@@ -120,7 +119,6 @@ class ProfileCard extends React.Component {
                     styles={personaStyles}
                 >
                     {email}
-                    {"Hello!"}
                 </Persona>
 
                 {commandBar}
