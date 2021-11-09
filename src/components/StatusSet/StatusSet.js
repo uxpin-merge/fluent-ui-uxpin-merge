@@ -20,11 +20,7 @@ const posEnd = 'end';
 const statusDefault = 'info';
 const statusCustom = 'custom';
 const statusList = [
-   'info', 'success', 'done', 'ok', 'good', 'ready',
-   'passed', 'completed', 'approved',
-   'warning', 'error', 'failed', 'offline',
-   'pending', 'validating',
-   'skipped', 'unknown', 'blocked', 'syncing', 'inProgress', 'queued', 'waiting', 'currentStep', 'futureStep', 'scheduled', 'reverted', 'restored', 'statusCustom'
+   'info', 'success', 'done', 'ok', 'good', 'ready', 'passed', 'completed', 'approved', 'warning', 'error', 'failed', 'offline', 'pending', 'validating', 'skipped', 'unknown', 'blocked', 'syncing', 'inProgress', 'queued', 'waiting', 'currentStep', 'futureStep', 'scheduled', 'reverted', 'restored', statusCustom
 ];
 const iconSizeMap = {
    tiny: 10,
