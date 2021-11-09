@@ -226,6 +226,8 @@ export const UxpMenuUtils = {
                   //If the index is for a parent or one of its children, expand the parent.
                   let expanded = selectedIndex === i + 1 ? true : false;
 
+                  console.log("      > isExpanded: " + expanded + " for " + i);
+
                   let props = this.getNavItemProps(i, trimmedText, iconName, expanded, disabled);
 
                   //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
@@ -235,6 +237,8 @@ export const UxpMenuUtils = {
                         let parent = propsList[propsList.length - 1];
                         this.appendNavItemChildProps(parent, props);
                         parent.isExpanded = expanded;
+
+                        console.log("      > parent.isExpanded: " + parent.isExpanded + " for " + parent.name);
                      }
                      else {
                         propsList.push(props);
