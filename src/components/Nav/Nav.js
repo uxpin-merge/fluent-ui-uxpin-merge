@@ -271,7 +271,7 @@ Nav.defaultProps = {
     navTopPadding: defaultTopPadding,
     selectedIndex: 1,
     items: defaultNavItems,
-    styledBackground: true,
+    styledBackground: false,
     disabled: '',
 };
 
