@@ -99,7 +99,7 @@ class Timestamp extends React.Component {
                <Stack
                   padding={0}
                   horizontal={true}
-                  horizontalAlign={hAlign}
+                  horizontalAlign={stretchAlign}
                   verticalAlign={middleAlign}
                >
                   <Link
