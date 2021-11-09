@@ -89,6 +89,7 @@ class Timestamp extends React.Component {
                   value={linkText}
                   linkHref={''}
                   italic={this.props.italic}
+                  align={this.props.align}
                   id={ttTargetID}
                   aria-describedby={tooltipID}
                />
