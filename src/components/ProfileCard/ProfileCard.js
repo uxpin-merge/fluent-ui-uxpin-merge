@@ -99,7 +99,6 @@ class ProfileCard extends React.Component {
         return (
 
             <Stack
-                {...this.props}
                 tokens={stackTokens}
                 horizontal={false}
                 horizontalAlign={stackHAlign}
@@ -108,7 +107,6 @@ class ProfileCard extends React.Component {
                 styles={stackItemStyles} >
 
                 <Persona
-                    {...this.props}
                     size={PersonaSize[this.props.ppSize]}
                     imageUrl={imgURL}
                     imageInitials={this.props.initials}
