@@ -174,8 +174,10 @@ export const UxpMenuUtils = {
    /**
     * Parses a complex list of raw UXPin prop text from a codeeditor for the Nav control. 
     * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
+    * @param {number} selectedIndex The 1-based index for the Nav control's selected index item. 
+    * @param {Array} disabledList A list of integers. The list represents 1-based indexes of items that should be disabled. 
     * @param {string} allowChildren True to allow child groupings. False to disallow children and have a single layer. If False, also removes the starting childTag, if present. 
-    * @returns {Array} Returns an array of props. Props include key, itemType, text, iconProps and a custom uxpType. 
+    * @returns {Array} Returns an array of props. Props include key, itemType, name, icon and any child groups. 
     */
    parseNavItemText: function (rawPropText, selectedIndex, disabledList, allowChildren) {
       //Let's reasonably guarantee an array for the disabled items
