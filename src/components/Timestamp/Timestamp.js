@@ -93,6 +93,7 @@ class Timestamp extends React.Component {
                   align={this.props.align}
                   id={ttTargetID}
                   aria-describedby={tooltipID}
+                  style={{ width: '100%' }}
                />
             </TooltipHost>
          </>
