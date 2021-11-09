@@ -20,8 +20,7 @@ const stackItemStyles = {
 const stackTokens = {
     childrenGap: '6px',
     padding: 12,
-
-    background: 'purple',
+    background: '#800080',
 };
 
 //For the Persona
