@@ -12,7 +12,7 @@ const leftAlign = 'left';
 const centerAlign = 'center';
 const rightAlign = 'right';
 const stretchAlign = 'stretch';
-const middleAlign = 'middle';
+const middleAlign = 'center';
 const startAlign = 'start';
 const endAlign = 'end';
 
