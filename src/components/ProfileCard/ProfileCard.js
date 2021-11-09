@@ -100,6 +100,7 @@ class ProfileCard extends React.Component {
                     root: {
                         minWidth: '300px',
                         background: '#333',
+                        paddingBottom: '0',
                     }
                 }}>
                 <StackItem>
