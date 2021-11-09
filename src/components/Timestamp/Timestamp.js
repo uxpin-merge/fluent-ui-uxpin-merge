@@ -75,6 +75,12 @@ class Timestamp extends React.Component {
          target: `#${ttTargetID}`,
       };
 
+      let linkTextStyles = {
+         root: {
+            textAlign: this.props.align,
+         }
+      };
+
       return (
          <>
             <TooltipHost
@@ -88,8 +94,7 @@ class Timestamp extends React.Component {
                   {...this.props}
                   value={linkText}
                   linkHref={''}
-                  italic={this.props.italic}
-                  align={this.props.align}
+                  styles={linkTextStyles}
                   id={ttTargetID}
                   aria-describedby={tooltipID}
                />
