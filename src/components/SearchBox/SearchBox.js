@@ -102,6 +102,12 @@ class SearchBox extends React.Component {
 SearchBox.propTypes = {
 
   /**
+   * @uxpindescription The exact name from the icon library. Displays on the right side. 
+   * @uxpinpropname Icon Name
+   * */
+  icon: PropTypes.string,
+
+  /**
    * We give this property a unique name to avoid collisions. We map its value to the control's 'value' prop.
    * @uxpindescription Current value of the text field. This prop's live value is available for scripting.
    * @uxpinpropname * Value
@@ -115,12 +121,6 @@ SearchBox.propTypes = {
    * @uxpinpropname Placeholder
    * */
   placeholder: PropTypes.string,
-
-  /**
-   * @uxpindescription The exact name from the PayPal icon library. Displays on the right side. 
-   * @uxpinpropname Icon Name
-   * */
-  icon: PropTypes.string,
 
   /**
    * @uxpindescription To disable the control
