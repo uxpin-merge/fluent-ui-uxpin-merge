@@ -101,6 +101,7 @@ class Timestamp extends React.Component {
                   horizontal={true}
                   horizontalAlign={stretchAlign}
                   verticalAlign={middleAlign}
+                  style={{ width: '100%' }}
                >
                   <Link
                      {...this.props}
@@ -109,7 +110,6 @@ class Timestamp extends React.Component {
                      align={this.props.align}
                      id={ttTargetID}
                      aria-describedby={tooltipID}
-                     style={{ width: '100%' }}
                   />
                </Stack>
             </TooltipHost>
