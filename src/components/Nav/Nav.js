@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
