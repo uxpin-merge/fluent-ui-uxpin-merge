@@ -81,6 +81,14 @@ class Timestamp extends React.Component {
          target: `#${ttTargetID}`,
       };
 
+      const topStackItemStyles = {
+         root: {
+            background: 'purple',        //undefined is OK
+            height: 'auto',
+            width: '100%',
+         },
+      };
+
       let hAlign = this.props.align === leftAlign ? leftAlign :
          this.props.align === rightAlign ? rightAlign :
             this.props.align === centerAlign ? centerAlign :
@@ -101,7 +109,7 @@ class Timestamp extends React.Component {
                   horizontal={true}
                   horizontalAlign={stretchAlign}
                   verticalAlign={middleAlign}
-                  style={{ width: '100%' }}
+                  styles={topStackItemStyles}
                >
                   <Link
                      {...this.props}
