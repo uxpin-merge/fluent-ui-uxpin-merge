@@ -19,11 +19,15 @@ const maxPersonaCount = 99;
 const styles = {
 
     callout: {
-        padding: '16px',
+        padding: '12px',
     },
     overflowItems: {
         margin: '4px 0'
-    }
+    },
+    overflow: {
+        padding: '12px',
+        paddingRight: '2px',
+    },
 
 };
 
@@ -268,7 +272,7 @@ class Facepile extends React.Component {
                         target="#overflow-button"
                         directionalHint={DirectionalHint.rightCenter}
                         hideOverflow
-                        className={styles.callout}
+                        className={styles.overflow}
                         onDismiss={() => { this._onDismissCallout() }}
                     >
                         <div style={overflowStyle}>
