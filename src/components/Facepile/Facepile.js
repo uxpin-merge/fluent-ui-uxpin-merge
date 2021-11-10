@@ -247,7 +247,6 @@ class Facepile extends React.Component {
             maxHeight: '410px',
         };
 
-
         return (
             <>
                 <FFacepile
