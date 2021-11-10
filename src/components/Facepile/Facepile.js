@@ -27,6 +27,7 @@ const styles = {
     overflow: {
         padding: '12px',
         paddingRight: '2px',
+        maxHeight: '410px',
     },
 
 };
