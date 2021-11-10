@@ -60,9 +60,14 @@ class ProfileCard extends React.Component {
         }
 
         var commandBar = '';
+        var btmPadding = 12;
+
         if (this.props.children) {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
+
+            //If there are children, set bottom padding to 0
+            btmPadding = 0;
 
             const cbarStackTokens = {
                 childrenGap: 6,
@@ -99,7 +104,7 @@ class ProfileCard extends React.Component {
                 styles={{
                     root: {
                         minWidth: cardMinWidth,
-                        paddingBottom: '0',
+                        paddingBottom: btmPadding,
                     }
                 }}>
                 <StackItem>
