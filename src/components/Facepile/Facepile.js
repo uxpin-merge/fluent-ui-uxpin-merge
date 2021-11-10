@@ -27,7 +27,6 @@ const styles = {
     overflow: {
         padding: '12px',
         paddingRight: '2px',
-        maxHeight: '410px',
     },
 
 };
@@ -272,11 +271,11 @@ class Facepile extends React.Component {
                         gapSpace={0}
                         target="#overflow-button"
                         directionalHint={DirectionalHint.rightCenter}
-                        //hideOverflow
+                        hideOverflow
                         className={styles.overflow}
                         onDismiss={() => { this._onDismissCallout() }}
                     >
-                        <div>
+                        <div style={overflowStyle}>
                             {
                                 this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
                                     return (
