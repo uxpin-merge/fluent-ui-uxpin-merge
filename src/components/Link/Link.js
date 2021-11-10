@@ -133,7 +133,7 @@ Link.propTypes = {
  */
 Link.defaultProps = {
     value: 'UXPin.com',
-    linkHref: 'https://www.uxpin.com',
+    linkHref: '',
     size: 'medium',
     bold: false,
     italic: false,

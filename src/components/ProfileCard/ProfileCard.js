@@ -2,21 +2,15 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Link from '../Link/Link';
 import { Persona, PersonaSize } from '@fluentui/react/lib/Persona';
-import { Stack } from '@fluentui/react/lib/Stack';
+import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 import { UxpPersonaData } from '../_helpers/uxppersonadata';
 
 
 
 //For the Stack
-const stackVAlign = 'start';
+const stackVAlign = 'center';
 const stackHAlign = 'stretch';
-const stackItemStyles = {
-    root: {
-        height: 'auto',
-        width: 'auto',
-    },
-};
 const stackTokens = {
     childrenGap: '6px',
     padding: 12,
@@ -31,11 +25,10 @@ const personaStyles = {
 };
 
 //This is the default URL to use for a generic female user
-const defaultPersonaUrl = "https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/person04.jpg";
 const defaultSize = 'size72';
-const cmdBarHAlign = 'left';
-const cmdBarVAlign = 'middle';
-
+const cmdBarHAlign = 'start';
+const cmdBarVAlign = 'center';
+const cardMinWidth = '325px';
 
 
 class ProfileCard extends React.Component {
@@ -58,7 +51,6 @@ class ProfileCard extends React.Component {
 
             email = (
                 <Link
-                    // {...this.props}
                     value={this.props.email}
                     href={link ? link : ''}
                     bold={false}
@@ -72,26 +64,24 @@ class ProfileCard extends React.Component {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
-            const stackTokens = {
+            const cbarStackTokens = {
                 childrenGap: 6,
                 padding: 0,
             };
 
-            const stackItemStyles = {
+            const cbarStackItemStyles = {
                 root: {
                     height: 'auto',
                 },
             };
 
             commandBar = (
-
-                < Stack
-                    {...this.props}
-                    tokens={stackTokens}
-                    styles={stackItemStyles}
+                <Stack
+                    tokens={cbarStackTokens}
+                    styles={cbarStackItemStyles}
                     horizontal={true}
-                    horizontalAlign={'start'}
-                    verticalAlign={'middle'}
+                    horizontalAlign={cmdBarHAlign}
+                    verticalAlign={cmdBarVAlign}
                 >
                     {childList}
                 </Stack >
@@ -101,34 +91,38 @@ class ProfileCard extends React.Component {
         return (
 
             <Stack
-                {...this.props}
                 tokens={stackTokens}
                 horizontal={false}
                 horizontalAlign={stackHAlign}
                 verticalAlign={stackVAlign}
                 wrap={false}
-                styles={stackItemStyles} >
+                styles={{
+                    root: {
+                        minWidth: cardMinWidth,
+                        paddingBottom: '0',
+                    }
+                }}>
+                <StackItem>
+                    <Persona
+                        size={PersonaSize[this.props.ppSize]}
+                        imageUrl={imgURL}
+                        imageInitials={this.props.initials}
+                        presence={presenceCode}
+                        initialsColor={this.props.ppInitialsColor}
+                        text={this.props.name}
+                        secondaryText={this.props.role}
+                        tertiaryText={this.props.status}
+                        optionalText={this.props.optional}
+                        children={undefined}
+                        styles={personaStyles}
+                    >
+                        {email}
+                    </Persona>
 
-                <Persona
-                    {...this.props}
-                    size={PersonaSize[this.props.ppSize]}
-                    imageUrl={imgURL}
-                    imageInitials={this.props.initials}
-                    presence={presenceCode}
-                    initialsColor={this.props.ppInitialsColor}
-                    text={this.props.name}
-                    secondaryText={this.props.role}
-                    tertiaryText={this.props.status}
-                    optionalText={this.props.optional}
-                    children={undefined}
-                    styles={personaStyles}
-                >
-                    {email}
-                </Persona>
-
-                {commandBar}
-
+                    {commandBar}
+                </StackItem>
             </Stack>
+
         );
     }
 }

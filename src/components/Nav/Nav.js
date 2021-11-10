@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav as FNav } from '@fluentui/react/lib/Nav';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 
@@ -35,13 +35,10 @@ class Nav extends React.Component {
     set() {
         let disabledItems = UxpNumberParser.parseInts(this.props.disabled);
 
-        let items = UXPinParser.parse(this.props.items).map(
-            (item, index) => ({
-                key: index + 1,
-                name: item.text ? item.text : '',
-                icon: item?.iconName,
-                disabled: disabledItems.includes(index + 1),
-            }));
+        var items = [];
+        if (this.props.items) {
+            items = UxpMenuUtils.parseNavItemText(this.props.items, this.props.selectedIndex, disabledItems, true);
+        }
 
         this.setState({
             disabledIndexes: disabledItems,
@@ -55,10 +52,10 @@ class Nav extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.selectedIndex !== this.props.selectedIndex) {
-            this.setState(
-                { selectedIndex: this.props.selectedIndex }
-            )
+        if (prevProps.selectedIndex !== this.props.selectedIndex ||
+            prevProps.items !== this.props.items ||
+            prevProps.disabled !== this.props.disabled) {
+            this.set();
         }
 
         //The disabled indexes and items are set in one call
@@ -157,7 +154,7 @@ Nav.propTypes = {
     selectedIndex: PropTypes.number,
 
     /**
-     * @uxpindescription The list of nav items. Put each item on a separate line. Specify an icon using: icon(IconName)
+     * @uxpindescription The list of nav items. Put each item on a separate line. Specify an icon using: icon(IconName) Nav Text. For a second level child nav item, start the line with a star: * icon(IconName) Child Item
      * @uxpinpropname Items
      * @uxpincontroltype codeeditor
      */

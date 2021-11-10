@@ -241,6 +241,11 @@ class Facepile extends React.Component {
             onClick: ((e) => this._onClickAddButton(e))
         };
 
+        const overflowStyle = {
+            overflowX: 'hidden',
+            overflowY: 'auto',
+            maxHeight: '410px',
+        };
 
         return (
             <>
@@ -266,24 +271,26 @@ class Facepile extends React.Component {
                         className={styles.callout}
                         onDismiss={() => { this._onDismissCallout() }}
                     >
-                        {
-                            this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
-                                return (
-                                    <Persona
-                                        key={anObjectMapped.key}
-                                        presence={this.props.showPresence ? anObjectMapped.presence : 0}
-                                        hidePersonaDetails={false}
-                                        size={PersonaSize["size40"]}
-                                        imageUrl={anObjectMapped.imageUrl}
-                                        imageInitials={anObjectMapped.imageInitials}
-                                        initialsColor={anObjectMapped.initialsColor}
-                                        text={anObjectMapped.text}
-                                        secondaryText={this._getLinkedEmail(anObjectMapped)}
-                                        className={styles.overflowItems}
-                                    />
-                                );
-                            })
-                        }
+                        <div style={overflowStyle}>
+                            {
+                                this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
+                                    return (
+                                        <Persona
+                                            key={anObjectMapped.key}
+                                            presence={this.props.showPresence ? anObjectMapped.presence : 0}
+                                            hidePersonaDetails={false}
+                                            size={PersonaSize["size40"]}
+                                            imageUrl={anObjectMapped.imageUrl}
+                                            imageInitials={anObjectMapped.imageInitials}
+                                            initialsColor={anObjectMapped.initialsColor}
+                                            text={anObjectMapped.text}
+                                            secondaryText={this._getLinkedEmail(anObjectMapped)}
+                                            className={styles.overflowItems}
+                                        />
+                                    );
+                                })
+                            }
+                        </div>
                     </Callout>
                     : null}
             </>
