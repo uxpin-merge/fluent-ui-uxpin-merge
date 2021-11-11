@@ -105,10 +105,9 @@ class Banner extends React.Component {
 
       //Let's see if the user entered a valid color value. This method returns undefined if not. 
       var color = UxpStatus.getBackgroundColorByRole(this.props.roleType);
+      color = UxpColors.getHexFromColorToken(color);
       var bColor = UxpStatus.getBorderColorByRole(this.props.roleType);
-
-      console.log("bg color: " + color);
-      console.log("border color: " + bColor);
+      bColor = UxpColors.getHexFromColorToken(bColor);
 
       if (isCustom) {
          color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
@@ -127,9 +126,6 @@ class Banner extends React.Component {
          bColor = 'transparent';
       }
       let bStyle = thickness + 'px ' + defaultBorderLineStyle + ' ' + bColor;
-
-      console.log("bg color - adjusted: " + color);
-      console.log("border color - adjusted: " + bColor);
 
       const topStackItemStyles = {
          root: {
