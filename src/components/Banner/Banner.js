@@ -32,7 +32,7 @@ const outerStackTokens = {
    padding: 24,
 };
 const contentsStackTokens = {
-   childrenGap: 6,
+   childrenGap: 12,
    padding: 0,
 };
 
@@ -107,6 +107,9 @@ class Banner extends React.Component {
       var color = UxpStatus.getBackgroundColorByRole(this.props.roleType);
       var bColor = UxpStatus.getBorderColorByRole(this.props.roleType);
 
+      console.log("bg color: " + color);
+      console.log("border color: " + bColor);
+
       if (isCustom) {
          color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
          bColor = UxpColors.getHexFromHexOrToken(this.props.borderColor);
@@ -124,6 +127,9 @@ class Banner extends React.Component {
          bColor = 'transparent';
       }
       let bStyle = thickness + 'px ' + defaultBorderLineStyle + ' ' + bColor;
+
+      console.log("bg color - adjusted: " + color);
+      console.log("border color - adjusted: " + bColor);
 
       const topStackItemStyles = {
          root: {
