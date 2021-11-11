@@ -29,15 +29,15 @@ const statusList = [
 
 const outerStackTokens = {
    childrenGap: 12,
-   padding: 12,
+   padding: 18,
 };
 const iconStackTokens = {
    childrenGap: 0,
-   padding: 12,
+   padding: 6,
 };
 const contentsStackTokens = {
    childrenGap: 12,
-   padding: 12,
+   padding: 6,
 };
 
 
@@ -179,7 +179,7 @@ class Banner extends React.Component {
          //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
          let childList = React.Children.toArray(this.props.children);
 
-         if (childList.length && childList.length > 1) {
+         if (childList.length && childList.length > 0) {
 
             //Let's assemble the list of additional things to put in the content area
             var i;
