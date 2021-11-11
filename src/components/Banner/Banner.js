@@ -28,18 +28,16 @@ const statusList = [
 ];
 
 const outerStackTokens = {
-   childrenGap: 24,
+   childrenGap: 12,
    padding: 12,
 };
 const iconStackTokens = {
    childrenGap: 0,
-   paddingTop: 12,
-   paddingBottom: 12,
+   padding: 12,
 };
 const contentsStackTokens = {
    childrenGap: 12,
-   paddingTop: 12,
-   paddingBottom: 12,
+   padding: 12,
 };
 
 
