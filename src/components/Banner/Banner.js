@@ -252,6 +252,15 @@ class Banner extends React.Component {
  * Set up the properties to be available in the UXPin property inspector.
  */
 Banner.propTypes = {
+
+   /**
+    * Don't show this prop in the UXPin Editor. 
+    * @uxpinignoreprop 
+    * @uxpindescription Contents for the body of the control. 
+    * @uxpinpropname Children
+    */
+   children: PropTypes.node,
+
    /**
     * @uxpindescription The control's title text
     * @uxpinpropname Headline
