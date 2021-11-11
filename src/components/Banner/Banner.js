@@ -2,10 +2,13 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import ActionButton from '../ActionButton/ActionButton';
+import { Image } from '@fluentui/react/lib/Image';
 import Icon from '../Icon/Icon';
 import Text from '../Text/Text';
-import { UxpStatus } from '../_helpers/uxpstatus';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { UxpImageUtils } from '../_helpers/uxpimageutils';
+import { UxpStatus } from '../_helpers/uxpstatus';
+
 
 
 const defaultIconColor = '#000000';
@@ -40,8 +43,6 @@ const contentsStackTokens = {
 
 
 
-
-
 class Banner extends React.Component {
 
    constructor(props) {
@@ -63,21 +64,62 @@ class Banner extends React.Component {
    render() {
 
       //****************  Setup Icon or Image  ****************
+
+      //Are we using a custom image or one of the built in icons?
+      let isCustom = this.props.roleType === statusCustom ? true : false;
+
+      //Set defaults to icon specs
       var icnName = UxpStatus.info.icon;
       var icnColor = UxpStatus.info.iconColor;
       var icnSize = this.props.size > -1 ? this.props.size : defaultIconSize;
 
+      var iconOrImg = '';
+
+      if (isCustom) {
+         icnName = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
+
+         let imgProps = {
+            shouldFadeIn: true,
+            src: icnName ? icnName : '',
+            imageFit: 'center cover',
+            maximizeFrame: true,
+            width: icnSize,
+            height: icnSize,
+         }
+
+         iconOrImg = (
+            <Image
+               {...imgProps}
+            />
+         );
+      }
+      else {
+         iconOrImg = (
+            <Icon
+               iconName={icnName}
+               color={icnColor}
+               size={icnSize}
+            />
+         );
+      }
 
       //****************  Setup Background & Border  ****************
 
       //Let's see if the user entered a valid color value. This method returns undefined if not. 
-      var color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
-      if (!color)
+      var color = UxpStatus.getBackgroundColorByRole(this.props.roleType);
+      var bColor = UxpStatus.getBorderColorByRole(this.props.roleType);
+
+      if (isCustom) {
+         color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
+         bColor = UxpColors.getHexFromHexOrToken(this.props.borderColor);
+      }
+      if (!color) {
          color = 'transparent';
+      }
 
       //The function returns undefined if it's unparseable
       var thickness = defaultBorderThickness;
-      var bColor = UxpColors.getHexFromHexOrToken(this.props.borderColor);
+
       if (!bColor) {
          thickness = 0;
          bColor = 'transparent';
@@ -171,13 +213,15 @@ class Banner extends React.Component {
             wrap={false}
             styles={topStackItemStyles}>
 
-            <StackItem>
-
+            <StackItem
+               verticalAlign={vertAlign}
+            >
+               {iconOrImg}
             </StackItem>
 
             <StackItem
                align={stretch}
-               grow={false}
+               grow={3}
             >
                {coList}
             </StackItem>
@@ -225,6 +269,16 @@ Banner.propTypes = {
    * @uxpinpropname Icon/Img Size
    * */
    size: PropTypes.number,
+
+   /**
+   * @uxpindescription The URL to an image file. 
+   * Be sure the Img Token is set to 'custom image'!
+   * Must start with 'www' or 'http'.
+   * Supports the full list of image tokens, too.
+   * @uxpinpropname Custom Img URL
+   * @uxpincontroltype textfield(6)
+   */
+   imageUrl: PropTypes.string,
 
    /**
     * @uxpindescription Use a UI color token, hex or gradient value, such as 'themePrimary', 'black','#0070BA','linear-gradient(120deg, #8D7749, #498D77)' or 'radial-gradient(#8D3749, #37EE77)'.

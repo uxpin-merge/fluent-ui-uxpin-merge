@@ -1,3 +1,6 @@
+import uxpinConfig from '../../../uxpin.config';
+import { UxpColors } from '../_helpers/uxpcolorutils';
+
 
 
 export const UxpStatus = {
@@ -198,6 +201,71 @@ export const UxpStatus = {
       iconName: 'Calendar',
    },
 
+   /**
+    * For a given string, returns a color suitable for a UI element's background color that is best associated with a status outcome. These statuses represent a likely outcome for an object or process. For example, for the string 'success', it would return a hex or theme color token that maps to a light green color. 
+    * @param {string} token A string representing the short token name for a status params object. Examples, include "success", "failed", "skipped", ect. 
+   * @returns {string} For a given string, returns a color suitable for a UI element's background color that is best associated with a status outcome. These statuses represent a likely outcome for an object or process. For example, for the string 'success', it would return a hex or theme color token that maps to a light green color.
+    */
+   getBackgroundColorByRole: function (token) {
+      let status = this.getStatusByRole(token);
+
+      if (status) {
+         let c = status.color;
+
+         switch (c) {
+            case 'info':
+               return UxpColors.infoBackground;
+            case 'success':
+               return UxpColors.successBackground;
+            case 'warning':
+               return UxpColors.warningBackground;
+            case 'error':
+               return UxpColors.errorBackground;
+            default:
+               return 'neutralLighter';
+         }
+      }
+
+      //If we made it this far, there must be an error
+      return undefined;
+   },
+
+   /**
+    * For a given string, returns a color suitable for a UI element's border color that is best associated with a status outcome. These statuses represent a likely outcome for an object or process. For example, for the string 'success', it would return a hex or theme color token that maps to a dark green color. 
+    * @param {string} token A string representing the short token name for a status params object. Examples, include "success", "failed", "skipped", ect. 
+   * @returns {string} For a given string, returns a color suitable for a UI element's border color that is best associated with a status outcome. These statuses represent a likely outcome for an object or process. For example, for the string 'success', it would return a hex or theme color token that maps to a dark green color.
+    */
+   getBorderColorByRole: function (token) {
+      let status = this.getStatusByRole(token);
+
+      if (status) {
+         let c = status.color;
+
+         switch (c) {
+            case 'info':
+               return UxpColors.info;
+            case 'success':
+               return UxpColors.success;
+            case 'warning':
+               return UxpColors.warning;
+            case 'error':
+               return UxpColors.error;
+            case 'neutralSecondary':
+               return 'neutralSecondary';
+            default:
+               return 'neutralPrimary';
+         }
+      }
+
+      //If we made it this far, there must be an error
+      return undefined;
+   },
+
+   /**
+    * For a given string, returns its associated status params object. These statuses represent a likely outcome for an object or process. For example, for the string 'success', it would return a params object with a variety of params including an icon, a color, and an associated text string. 
+    * @param {string} token A string representing the short token name for a status params object. Examples, include "success", "failed", "skipped", ect. 
+   * @returns {JSON} For a given string, returns its associated status params object. These statuses represent a likely outcome for an object or process. For example, for the string 'success', it would return a params object with a variety of params including an icon, a color, and an associated text string. 
+    */
    getStatusByRole: function (token) {
 
       if (token) {
@@ -267,6 +335,10 @@ export const UxpStatus = {
       return undefined;
    },
 
+   /**
+    * Returns an array list of supported status params objects.
+   * @returns {Array} Returns an array list of supported status params objects. 
+    */
    getStatuses: function () {
       let statuses = [];
 
