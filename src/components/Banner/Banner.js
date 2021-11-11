@@ -207,6 +207,15 @@ class Banner extends React.Component {
          </Stack>
       )
 
+      let dismissBtn = !this.props.showDismiss ? '' : (
+         <ActionButton
+            iconName="ChromeClose"
+            tooltip="Close"
+            text=''
+            onClick={() => this._onDismissClicked()}
+         />
+      );
+
       return (
 
          <Stack
@@ -229,16 +238,11 @@ class Banner extends React.Component {
                align={stretch}
                grow={3}
             >
-               {coList}
+               {mainContents}
             </StackItem>
 
             <StackItem>
-               <ActionButton
-                  iconName="ChromeClose"
-                  tooltip="Close"
-                  text=''
-                  onClick={() => this._onDismissClicked()}
-               />
+               {dismissBtn}
             </StackItem>
 
 
@@ -312,6 +316,12 @@ Banner.propTypes = {
     * @uxpinpropname Border Radius
     */
    borderRadius: PropTypes.number,
+
+   /**
+    * @uxpindescription Whether to display the Dismiss button 
+    * @uxpinpropname Show Dismiss Button
+    */
+   showDismiss: PropTypes.bool,
 
    /**
     * @uxpindescription Fires when the control is clicked on.
