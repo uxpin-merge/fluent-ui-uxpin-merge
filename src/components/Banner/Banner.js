@@ -33,11 +33,13 @@ const outerStackTokens = {
 };
 const iconStackTokens = {
    childrenGap: 0,
-   padding: 12,
+   paddingTop: 12,
+   paddingBottom: 12,
 };
 const contentsStackTokens = {
    childrenGap: 12,
-   padding: 12,
+   paddingTop: 12,
+   paddingBottom: 12,
 };
 
 
