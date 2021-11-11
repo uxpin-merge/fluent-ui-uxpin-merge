@@ -311,15 +311,10 @@ Banner.propTypes = {
  */
 Banner.defaultProps = {
    roleType: statusDefault,
-   gutterPadding: defaultGutter,
-   iconPosition: posStart,
-   size: defaultSize,
-   text: '',
-   iconName: '',
-   iconColor: '',
-   bold: false,
-   italic: false,
-   tooltip: '',
+   title: "Banner",
+   text: "This is an immersive notification banner.",
+   size: defaultIconSize,
+   borderRadius: defaultRadius,
 };
 
 
