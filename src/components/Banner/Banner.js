@@ -60,11 +60,11 @@ class Banner extends React.Component {
 
       //Are we using a custom image or one of the built in icons?
       let rType = UxpStatus.getStatusByRole(this.props.roleType);
-      let isCustom = this.props.roleType === statusCustom ? true : false;
+      let isCustom = this.props.roleType === statusCustom;
 
       //Set defaults to icon specs
-      var icnName = rType ? rType.icon : UxpStatus.info.icon;
-      var icnColor = rType ? rType.icon : UxpStatus.info.iconColor;
+      var icnName = rType ? rType.iconName : UxpStatus.info.icon;
+      var icnColor = rType ? rType.color : UxpStatus.info.iconColor;
       var icnSize = this.props.size > -1 ? this.props.size : defaultIconSize;
 
       var iconOrImg = '';
@@ -88,6 +88,10 @@ class Banner extends React.Component {
          );
       }
       else {
+         icnColor = UxpColors.getHexFromColorToken(icnColor);
+         if (!icnColor)
+            icnColor = "#000";
+
          iconOrImg = (
             <Icon
                iconName={icnName}
