@@ -109,12 +109,14 @@ class Banner extends React.Component {
 
       //Let's see if the user entered a valid color value. This method returns undefined if not. 
       var color = UxpStatus.getBackgroundColorByRole(this.props.roleType);
+      console.log("original color: " + color);
       color = UxpColors.getHexFromColorToken(color);
       var bColor = UxpStatus.getBorderColorByRole(this.props.roleType);
+      console.log("original border color: " + bColor);
       bColor = UxpColors.getHexFromColorToken(bColor);
 
-      console.log("original color: " + color);
-      console.log("original border color: " + bColor);
+      console.log("after token color: " + color);
+      console.log("after token border color: " + bColor);
 
       if (isCustom) {
          color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
