@@ -29,11 +29,15 @@ const statusList = [
 
 const outerStackTokens = {
    childrenGap: 24,
-   padding: 24,
+   padding: 12,
+};
+const iconStackTokens = {
+   childrenGap: 0,
+   padding: 12,
 };
 const contentsStackTokens = {
    childrenGap: 12,
-   padding: 0,
+   padding: 12,
 };
 
 
@@ -215,6 +219,7 @@ class Banner extends React.Component {
             styles={topStackItemStyles}>
 
             <StackItem
+               tokens={iconStackTokens}
                verticalAlign={vertAlign}
             >
                {iconOrImg}
