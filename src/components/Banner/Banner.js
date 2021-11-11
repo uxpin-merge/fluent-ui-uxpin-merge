@@ -113,6 +113,9 @@ class Banner extends React.Component {
       var bColor = UxpStatus.getBorderColorByRole(this.props.roleType);
       bColor = UxpColors.getHexFromColorToken(bColor);
 
+      console.log("original color: " + color);
+      console.log("original border color: " + bColor);
+
       if (isCustom) {
          color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
          bColor = UxpColors.getHexFromHexOrToken(this.props.borderColor);
@@ -244,8 +247,6 @@ class Banner extends React.Component {
             <StackItem>
                {dismissBtn}
             </StackItem>
-
-
          </Stack>
       );
    }
@@ -340,6 +341,7 @@ Banner.defaultProps = {
    text: "This is an immersive notification banner.",
    size: defaultIconSize,
    borderRadius: defaultRadius,
+   showDismiss: true,
 };
 
 
