@@ -11,12 +11,7 @@ import { UxpStatus } from '../_helpers/uxpstatus';
 
 
 
-const defaultIconColor = '#000000';
-const defaultIcon = 'Home';
 const defaultIconSize = 75;
-
-const defaultBgColor = "themeLighterAlt";
-const defaultBorderColor = "themePrimary";
 const defaultBorderThickness = 1;
 const defaultBorderLineStyle = 'solid';
 const defaultRadius = 5;
@@ -49,8 +44,6 @@ class Banner extends React.Component {
       super(props);
 
       this.state = {
-         statusList: UxpStatus.getStatuses(),
-         status: UxpStatus.info,
       }
    }
 
