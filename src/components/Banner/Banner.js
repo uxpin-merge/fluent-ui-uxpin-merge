@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import ActionButton from '../ActionButton/ActionButton';
-import { Image } from '@fluentui/react/lib/Image';
+import { Image, ImageFit } from '@fluentui/react/lib/Image';
 import Icon from '../Icon/Icon';
 import Text from '../Text/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
@@ -59,11 +59,12 @@ class Banner extends React.Component {
       //****************  Setup Icon or Image  ****************
 
       //Are we using a custom image or one of the built in icons?
+      let rType = UxpStatus.getStatusByRole(this.props.roleType);
       let isCustom = this.props.roleType === statusCustom ? true : false;
 
       //Set defaults to icon specs
-      var icnName = UxpStatus.info.icon;
-      var icnColor = UxpStatus.info.iconColor;
+      var icnName = rType ? rType.icon : UxpStatus.info.icon;
+      var icnColor = rType ? rType.icon : UxpStatus.info.iconColor;
       var icnSize = this.props.size > -1 ? this.props.size : defaultIconSize;
 
       var iconOrImg = '';
@@ -74,7 +75,7 @@ class Banner extends React.Component {
          let imgProps = {
             shouldFadeIn: true,
             src: icnName ? icnName : '',
-            imageFit: 'center cover',
+            imageFit: ImageFit.centerCover,
             maximizeFrame: true,
             width: icnSize,
             height: icnSize,
@@ -112,6 +113,7 @@ class Banner extends React.Component {
 
       //The function returns undefined if it's unparseable
       var thickness = defaultBorderThickness;
+      let bRadius = this.props.borderRadius > -1 ? this.props.borderRadius : 0;
 
       if (!bColor) {
          thickness = 0;
@@ -123,7 +125,7 @@ class Banner extends React.Component {
          root: {
             display: 'flex',
             overflow: 'hidden',
-            borderRadius: defaultRadius,
+            borderRadius: bRadius,
             background: color,
             border: bStyle,
          },
