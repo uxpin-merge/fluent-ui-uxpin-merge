@@ -1,4 +1,3 @@
-import uxpinConfig from '../../../uxpin.config';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
@@ -222,7 +221,7 @@ export const UxpStatus = {
             case 'error':
                return UxpColors.errorBackground;
             default:
-               return 'neutralLighter';
+               return UxpColors.getHexFromColorToken('neutralLighter');
          }
       }
 
@@ -251,9 +250,9 @@ export const UxpStatus = {
             case 'error':
                return UxpColors.error;
             case 'neutralSecondary':
-               return 'neutralSecondary';
+               return UxpColors.getHexFromColorToken('neutralSecondary');;
             default:
-               return 'neutralPrimary';
+               return UxpColors.getHexFromColorToken('neutralPrimary');;
          }
       }
 
