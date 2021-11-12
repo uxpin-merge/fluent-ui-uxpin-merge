@@ -66,6 +66,13 @@ class Nav extends React.Component {
         }
     }
 
+    _onRenderLink(item) {
+        if (!item)
+            return;
+
+        console.log("on render link: " + JSON.stringify(item));
+    }
+
     _onItemClick(item) {
 
         if (!item)
@@ -121,6 +128,7 @@ class Nav extends React.Component {
                         selectedKey={index}
                         styles={navStyles}
                         groups={groupParams}
+                        onRenderLink{(evt, item) => { this._onRenderLink(item) }}
                         onLinkClick={(evt, item) => { this._onItemClick(item) }} />
                     : <div> </div>}
             </>
