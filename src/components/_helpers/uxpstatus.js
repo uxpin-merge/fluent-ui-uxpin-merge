@@ -221,7 +221,7 @@ export const UxpStatus = {
             case 'error':
                return UxpColors.errorBackground;
             default:
-               return UxpColors.getHexFromColorToken('neutralLighter');
+               return UxpColors.getHexFromHexOrToken('neutralLighter');
          }
       }
 
@@ -250,9 +250,9 @@ export const UxpStatus = {
             case 'error':
                return UxpColors.error;
             case 'neutralSecondary':
-               return UxpColors.getHexFromColorToken('neutralSecondary');;
+               return UxpColors.getHexFromHexOrToken('neutralSecondary');;
             default:
-               return UxpColors.getHexFromColorToken('neutralPrimary');;
+               return UxpColors.getHexFromHexOrToken('neutralPrimary');;
          }
       }
 
