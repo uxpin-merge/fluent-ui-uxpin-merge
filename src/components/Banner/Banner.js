@@ -36,7 +36,7 @@ const iconStackTokens = {
    padding: 6,
 };
 const contentsStackTokens = {
-   childrenGap: 12,
+   childrenGap: 8,
    padding: 6,
 };
 
@@ -73,12 +73,6 @@ class Banner extends React.Component {
 
       var iconOrImg = '';
 
-
-      console.log("color test #000: " + UxpColors.getHexFromHexOrToken("#000"));
-      console.log("color test icnColor: " + icnColor + ", " + UxpColors.getHexFromHexOrToken(icnColor));
-      console.log("color test borderColor: " + this.props.borderColor + ", " + UxpColors.getHexFromHexOrToken(this.props.borderColor));
-
-
       if (isCustom) {
          icnName = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
@@ -91,8 +85,6 @@ class Banner extends React.Component {
             height: icnSize,
          };
 
-         console.log("imgProps: " + JSON.stringify(imgProps));
-
          iconOrImg = (
             <Image
                {...imgProps}
@@ -100,7 +92,7 @@ class Banner extends React.Component {
          );
       }
       else {
-         icnColor = UxpColors.getHexFromColorToken(icnColor);
+         icnColor = UxpColors.getHexFromHexOrToken(icnColor);
          if (!icnColor)
             icnColor = "#000";
 
