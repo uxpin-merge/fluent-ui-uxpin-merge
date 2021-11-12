@@ -73,6 +73,12 @@ class Banner extends React.Component {
 
       var iconOrImg = '';
 
+
+      console.log("color test #000: " + UxpColors.getHexFromHexOrToken("#000"));
+      console.log("color test icnColor: " + icnColor + ", " + UxpColors.getHexFromHexOrToken(icnColor));
+      console.log("color test borderColor: " + borderColor + ", " + UxpColors.getHexFromHexOrToken(this.props.borderColor));
+
+
       if (isCustom) {
          icnName = UxpImageUtils.getImageUrlByToken(this.props.imageUrl);
 
