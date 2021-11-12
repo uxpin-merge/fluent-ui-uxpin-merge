@@ -30,6 +30,7 @@ const iconSizeMap = {
    medium: 16,
    mediumPlus: 16,
    large: 18,
+   xLarge: 22,
    xxLarge: 32,
    mega: 64,
 };
