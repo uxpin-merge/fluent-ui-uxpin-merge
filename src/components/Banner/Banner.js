@@ -83,7 +83,9 @@ class Banner extends React.Component {
             maximizeFrame: true,
             width: icnSize,
             height: icnSize,
-         }
+         };
+
+         console.log("imgProps: " + JSON.stringify(imgProps));
 
          iconOrImg = (
             <Image
@@ -110,10 +112,6 @@ class Banner extends React.Component {
       //Let's see if the user entered a valid color value. This method returns undefined if not. 
       var color = UxpStatus.getBackgroundColorByRole(this.props.roleType);
       var bColor = UxpStatus.getBorderColorByRole(this.props.roleType);
-
-      let test = UxpColors.getHexFromColorToken(color);
-
-      console.log("test color: " + test);
 
       if (isCustom) {
          color = UxpColors.getHexFromHexOrToken(this.props.bgColor);
