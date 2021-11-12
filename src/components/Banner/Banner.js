@@ -76,7 +76,7 @@ class Banner extends React.Component {
 
       console.log("color test #000: " + UxpColors.getHexFromHexOrToken("#000"));
       console.log("color test icnColor: " + icnColor + ", " + UxpColors.getHexFromHexOrToken(icnColor));
-      console.log("color test borderColor: " + borderColor + ", " + UxpColors.getHexFromHexOrToken(this.props.borderColor));
+      console.log("color test borderColor: " + this.props.borderColor + ", " + UxpColors.getHexFromHexOrToken(this.props.borderColor));
 
 
       if (isCustom) {
