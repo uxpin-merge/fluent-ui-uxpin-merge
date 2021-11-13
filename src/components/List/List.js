@@ -66,6 +66,8 @@ class List extends React.Component {
         }
     }
 
+
+
     _onItemClick(item) {
 
         if (!item)
@@ -84,6 +86,10 @@ class List extends React.Component {
                 this.props[`onLink${index}Click`](index);
             }
         }
+    }
+
+    _onRenderCell(item, index) {
+        console.log("render cell " + index + "  for : " + JSON.stringify(item));
     }
 
     render() {
@@ -122,6 +128,7 @@ class List extends React.Component {
             <FList
                 {...this.props}
                 items={listItems}
+                onRenderCell={(item, index, isScrolling) => { this._onRenderCell(item, index) }}
             />
 
             // //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
