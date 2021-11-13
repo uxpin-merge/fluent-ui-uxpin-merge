@@ -90,6 +90,9 @@ class List extends React.Component {
 
     _onRenderCell(item, index) {
         console.log("render cell " + index + "  for : " + JSON.stringify(item));
+        console.log("    > name " + item?.name);
+        console.log("    > icon " + item?.icon);
+        console.log("    > date " + item?.date);
     }
 
     render() {
@@ -119,7 +122,7 @@ class List extends React.Component {
 
 
         let listItems =
-            [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }];
+            [{ name: 'Foo', icon: "home", date: "Jan 3, 2021" }, { name: 'Bar', icon: "edit", date: "Mar 8, 2022" }, { name: 'Baz', icon: "Dashboard", date: "July 20, 2023" }];
 
 
 
