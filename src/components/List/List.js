@@ -113,7 +113,7 @@ class List extends React.Component {
 
 
         let listItems =
-            [{ name: 'Foo' }, { name: 'Bar' }];
+            [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }];
 
 
 
