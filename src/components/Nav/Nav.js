@@ -70,12 +70,12 @@ class Nav extends React.Component {
         if (!item)
             return;
 
-        console.log("item name: " + JSON.stringify(item.name));
-        console.log("     key: " + JSON.stringify(item.key));
-        console.log("     icon: " + JSON.stringify(item.icon));
-        console.log("     url: " + JSON.stringify(item.url));
-        console.log("     title: " + JSON.stringify(item.title));
-        console.log("     disabled: " + JSON.stringify(item.disabled));
+        console.log("item name: " + JSON.stringify(item.link.name));
+        console.log("     key: " + JSON.stringify(item.link.key));
+        console.log("     icon: " + JSON.stringify(item.link.icon));
+        console.log("     url: " + JSON.stringify(item.link.url));
+        console.log("     title: " + JSON.stringify(item.link.title));
+        console.log("     disabled: " + JSON.stringify(item.link.disabled));
     }
 
     _onItemClick(item) {
