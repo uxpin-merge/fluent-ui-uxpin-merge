@@ -93,6 +93,16 @@ class List extends React.Component {
         console.log("    > name " + item?.name);
         console.log("    > icon " + item?.icon);
         console.log("    > date " + item?.date);
+        return (
+            <div>
+                <p>
+                    {item?.name} <br />
+                    {item?.icon} <br />
+                    {item?.date}
+                </p>
+            </div>
+
+        );
     }
 
     render() {
