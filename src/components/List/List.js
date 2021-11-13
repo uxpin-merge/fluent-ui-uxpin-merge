@@ -94,7 +94,7 @@ class List extends React.Component {
         console.log("    > icon " + item?.icon);
         console.log("    > date " + item?.date);
         return (
-            <div>
+            <div data-is-focusable>
                 <p>
                     {item?.name} <br />
                     {item?.icon} <br />
