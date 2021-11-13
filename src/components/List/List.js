@@ -93,8 +93,22 @@ class List extends React.Component {
         console.log("    > name " + item?.name);
         console.log("    > icon " + item?.icon);
         console.log("    > date " + item?.date);
+
+        let theStyles = {
+            minHeight: 54,
+            padding: 10,
+            boxSizing: 'border-box',
+            borderBottom: `1px solid ${semanticColors.bodyDivider}`,
+            display: 'flex',
+            selectors: {
+                '&:hover': { background: palette.neutralLight },
+            }
+        };
+
+
+
         return (
-            <div data-is-focusable>
+            <div className={theStyles} data-is-focusable={true}>
                 <p>
                     {item?.name} <br />
                     {item?.icon} <br />
