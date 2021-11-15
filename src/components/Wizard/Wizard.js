@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Nav as FNav } from '@fluentui/react/lib/Nav';
+import { Nav } from '@fluentui/react/lib/Nav';
+import { DetailsList } from '@fluentui/react/lib/DetailsList';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
@@ -33,18 +34,7 @@ class Wizard extends React.Component {
     }
 
     set() {
-        let disabledItems = UxpNumberParser.parseInts(this.props.disabled);
 
-        var items = [];
-        if (this.props.items) {
-            items = UxpMenuUtils.parseNavItemText(this.props.items, this.props.selectedIndex, disabledItems, true);
-        }
-
-        this.setState({
-            disabledIndexes: disabledItems,
-            links: items,
-            selectedIndex: this.props.selectedIndex,
-        });
     }
 
     componentDidMount() {
@@ -52,77 +42,22 @@ class Wizard extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.selectedIndex !== this.props.selectedIndex ||
-            prevProps.items !== this.props.items ||
-            prevProps.disabled !== this.props.disabled) {
-            this.set();
-        }
-
-        //The disabled indexes and items are set in one call
-        //Call them both if one or the other has changed
-        if (prevProps.disabled !== this.props.disabled ||
-            prevProps.items !== this.props.items) {
+        if (prevProps.selectedIndex !== this.props.selectedIndex) {
             this.set();
         }
     }
 
     _onItemClick(item) {
 
-        if (!item)
-            return;
-
-        //The item's key is already its 1-based index.
-        let index = item.key;
-
-        if (index !== this.state.selectedIndex) {
-            this.setState(
-                { selectedIndex: index }
-            )
-
-            //Raise this event to UXPin. We'll send them info about which item was clicked on.
-            if (this.props[`onLink${index}Click`]) {
-                this.props[`onLink${index}Click`](index);
-            }
-        }
     }
 
     render() {
-
-        //Adjust for user input. Neg values not allowed.
-        let index = this.props.selectedIndex > 0 ? this.props.selectedIndex : 1;
-
-        let isStyled = this.props.styledBackground;
-        let topPad = this.props.navTopPadding > 0 ? this.props.navTopPadding : 0;
-
-        let mHeight = this.props.controlHeight > 0 ? this.props.controlHeight : 1;
-
-        let navStyles = {
-            root: {
-                height: 'auto',
-                minHeight: mHeight,
-                width: 'auto',
-                paddingTop: topPad + 'px',
-                backgroundColor: isStyled ? defaultStyledBgColor : 'transparent',
-                borderRight: isStyled ? "1px solid " + defaultStyledBorderColor : 'none',
-            }
-        };
-
-        let groupParams = [
-            { links: this.state.links }
-        ];
 
 
         return (
             //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
             <>
-                {this.state.links.length > 0 ?
-                    <FNav
-                        {...this.props}
-                        selectedKey={index}
-                        styles={navStyles}
-                        groups={groupParams}
-                        onLinkClick={(evt, item) => { this._onItemClick(item) }} />
-                    : <div> </div>}
+
             </>
         )
     }
@@ -134,12 +69,6 @@ class Wizard extends React.Component {
  */
 Wizard.propTypes = {
 
-    /**
-     * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
-     * @uxpindescription Top padding above the control. Value must be 0 or more. 
-     * @uxpinpropname Top Padding
-     */
-    navTopPadding: PropTypes.number,
 
     /**
     * @uxpindescription The height of the control   
@@ -161,106 +90,11 @@ Wizard.propTypes = {
     items: PropTypes.string,
 
     /**
-     * @uxpindescription Whether to apply styling to the control's background
-     * @uxpinpropname Styled Background
-     * */
-    styledBackground: PropTypes.bool,
-
-    /**
      * @uxpindescription The list of nav items to show as disabled, separated with commas. (1-based index)
      * @uxpinpropname Disabled Items
      * */
     disabled: PropTypes.string,
 
-    /**
-    * @uxpindescription Fires when Item 1 is clicked
-    * @uxpinpropname Item 1 Click
-    */
-    onLink1Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 2 is clicked
-    * @uxpinpropname Item 2 Click
-    */
-    onLink2Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 3 is clicked
-    * @uxpinpropname Item 3 Click
-    */
-    onLink3Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 4 is clicked
-    * @uxpinpropname Item 4 Click
-    */
-    onLink4Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 5 is clicked
-    * @uxpinpropname Item 5 Click
-    */
-    onLink5Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 6 is clicked
-    * @uxpinpropname Item 6 Click
-    */
-    onLink6Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 7 is clicked
-    * @uxpinpropname Item 7 Click
-    */
-    onLink7Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 8 is clicked
-    * @uxpinpropname Item 8 Click
-    */
-    onLink8Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 9 is clicked
-    * @uxpinpropname Item 9 Click
-    */
-    onLink9Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 10 is clicked
-    * @uxpinpropname Item 10 Click
-    */
-    onLink10Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 11 is clicked
-    * @uxpinpropname Item 11 Click
-    */
-    onLink11Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 12 is clicked
-    * @uxpinpropname Item 12 Click
-    */
-    onLink12Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 13 is clicked
-    * @uxpinpropname Item 13 Click
-    */
-    onLink13Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 14 is clicked
-    * @uxpinpropname Item 14 Click
-    */
-    onLink14Click: PropTypes.func,
-
-    /**
-    * @uxpindescription Fires when Item 15 is clicked
-    * @uxpinpropname Item 15 Click
-    */
-    onLink15Click: PropTypes.func,
 };
 
 
@@ -268,11 +102,6 @@ Wizard.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Wizard.defaultProps = {
-    navTopPadding: defaultTopPadding,
-    selectedIndex: 1,
-    items: defaultNavItems,
-    styledBackground: false,
-    disabled: '',
 };
 
 
