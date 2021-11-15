@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { List as FList } from '@fluentui/react/lib/List'
+import { Nav as FNav } from '@fluentui/react/lib/Nav';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
@@ -21,7 +21,7 @@ const defaultStyledBorderColor = '#CBD2D6';
 
 
 
-class List extends React.Component {
+class Wizard extends React.Component {
     constructor(props) {
         super(props);
 
@@ -66,8 +66,6 @@ class List extends React.Component {
         }
     }
 
-
-
     _onItemClick(item) {
 
         if (!item)
@@ -86,37 +84,6 @@ class List extends React.Component {
                 this.props[`onLink${index}Click`](index);
             }
         }
-    }
-
-    _onRenderCell(item, index) {
-        console.log("render cell " + index + "  for : " + JSON.stringify(item));
-        console.log("    > name " + item?.name);
-        console.log("    > icon " + item?.icon);
-        console.log("    > date " + item?.date);
-
-        let theStyles = {
-            minHeight: 54,
-            padding: 10,
-            boxSizing: 'border-box',
-            borderBottom: `1px solid ${semanticColors.bodyDivider}`,
-            display: 'flex',
-            selectors: {
-                '&:hover': { background: palette.neutralLight },
-            }
-        };
-
-
-
-        return (
-            <div className={theStyles} data-is-focusable={true}>
-                <p>
-                    {item?.name} <br />
-                    {item?.icon} <br />
-                    {item?.date}
-                </p>
-            </div>
-
-        );
     }
 
     render() {
@@ -145,30 +112,18 @@ class List extends React.Component {
         ];
 
 
-        let listItems =
-            [{ name: 'Foo', icon: "home", date: "Jan 3, 2021" }, { name: 'Bar', icon: "edit", date: "Mar 8, 2022" }, { name: 'Baz', icon: "Dashboard", date: "July 20, 2023" }];
-
-
-
         return (
-
-            <FList
-                {...this.props}
-                items={listItems}
-                onRenderCell={(item, index, isScrolling) => { this._onRenderCell(item, index) }}
-            />
-
-            // //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
-            // <>
-            //     {this.state.links.length > 0 ?
-            //         <FNav
-            //             {...this.props}
-            //             selectedKey={index}
-            //             styles={navStyles}
-            //             groups={groupParams}
-            //             onLinkClick={(evt, item) => { this._onItemClick(item) }} />
-            //         : <div> </div>}
-            // </>
+            //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
+            <>
+                {this.state.links.length > 0 ?
+                    <FNav
+                        {...this.props}
+                        selectedKey={index}
+                        styles={navStyles}
+                        groups={groupParams}
+                        onLinkClick={(evt, item) => { this._onItemClick(item) }} />
+                    : <div> </div>}
+            </>
         )
     }
 }
@@ -177,7 +132,7 @@ class List extends React.Component {
 /** 
  * Set up the properties to be available in the UXPin property inspector. 
  */
-List.propTypes = {
+Wizard.propTypes = {
 
     /**
      * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
@@ -312,7 +267,7 @@ List.propTypes = {
 /**
  * Set the default values for this control in the UXPin Editor.
  */
-List.defaultProps = {
+Wizard.defaultProps = {
     navTopPadding: defaultTopPadding,
     selectedIndex: 1,
     items: defaultNavItems,
@@ -321,4 +276,4 @@ List.defaultProps = {
 };
 
 
-export { List as default };
+export { Wizard as default };

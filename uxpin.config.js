@@ -76,7 +76,6 @@ module.exports = {
           'src/components/Breadcrumb/Breadcrumb.js',
           'src/components/DetailsList/DetailsList.js',
           'src/components/Facepile/Facepile.js',
-          'src/components/List/List.js',
           'src/components/Nav/Nav.js',
           'src/components/Persona/Persona.js',
           'src/components/Pivot/Pivot.js',
@@ -92,6 +91,7 @@ module.exports = {
           'src/components/Modal/Modal.js',
           'src/components/Panel/Panel.js',
           'src/components/Tooltip/Tooltip.js',
+          'src/components/Wizard/Wizard.js',
         ],
       },
       {
