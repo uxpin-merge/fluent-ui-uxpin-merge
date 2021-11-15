@@ -27,9 +27,6 @@ class Wizard extends React.Component {
         super(props);
 
         this.state = {
-            links: [],
-            selectedIndex: 1,
-            disabledIndexes: [],
         }
     }
 
@@ -69,13 +66,6 @@ class Wizard extends React.Component {
  */
 Wizard.propTypes = {
 
-
-    /**
-    * @uxpindescription The height of the control   
-    * @uxpinpropname Height
-    */
-    controlHeight: PropTypes.number,
-
     /**
      * @uxpindescription The 1-based index value of the tab to be shown as selected by default. 
      * @uxpinpropname Selected Index
@@ -88,13 +78,6 @@ Wizard.propTypes = {
      * @uxpincontroltype codeeditor
      */
     items: PropTypes.string,
-
-    /**
-     * @uxpindescription The list of nav items to show as disabled, separated with commas. (1-based index)
-     * @uxpinpropname Disabled Items
-     * */
-    disabled: PropTypes.string,
-
 };
 
 
