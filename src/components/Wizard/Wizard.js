@@ -50,11 +50,12 @@ class Wizard extends React.Component {
 
     render() {
 
+        let hello = "Hello!";
 
         return (
             //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
             <>
-                {"Hello!"}
+                {hello}
             </>
         )
     }
