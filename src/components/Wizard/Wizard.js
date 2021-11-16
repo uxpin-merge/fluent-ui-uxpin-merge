@@ -53,12 +53,16 @@ class Wizard extends React.Component {
             name,
             fieldName: "Steps",
             isResizable: false,
-            minWidth: "100%",
-            maxWidth: "100%",
+            width: "100%",
             isSorted: false,
             isSortedDescending: false,
             isMultiline: true,
+            textAlign: 'center',
         }
+    }
+
+    _onRenderItem(item, index, column) {
+        return (index + "Hi! " + item);
     }
 
     _onItemClick(item) {
@@ -77,11 +81,7 @@ class Wizard extends React.Component {
                 items={items}
                 selectionMode={SelectionMode.none}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-                onRenderRow={(props, defaultRender) => (
-                    <>
-                        {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-                    </>
-                )}
+                onRenderItemColumn{(item, index, column) => { this._onRenderItem(item, index, column) }}
             />
         )
     }
