@@ -73,6 +73,8 @@ class Wizard extends React.Component {
                 for (var i = 0; i < items.length; i++) {
                     let item = items[i];
 
+                    console.log("parsing an item from props: " + item);
+
                     let displayItem = (<Text
                         textValue={item}
                         size={"medium"}
@@ -89,23 +91,25 @@ class Wizard extends React.Component {
         );
     }
 
+    _onRenderItem(item, index) {
+        console.log("_onRenderItem " + index);
+        return item;
+    }
+
     _onItemClick(index) {
         console.log("Clicked on item " + index);
     }
 
     render() {
 
-        //let items = ["foo", "bar"];
-
         return (
-            //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
             <DetailsList
                 isHeaderVisible={false}
                 items={this.state.items}
                 columns={columnParams}
                 selectionMode={SelectionMode.none}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-            //onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index) }}
+                onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index) }}
             //onItemInvoked={(item, index) => { this._onItemClick(index) }}
             />
         )
