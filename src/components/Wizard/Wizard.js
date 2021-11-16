@@ -24,22 +24,22 @@ const defaultStyledBgColor = "#F5F7FA";
 const defaultStyledBorderColor = '#CBD2D6';
 
 
+const colID = _.uniqueId('dlColumn_');
+const columnParams = {
+    key: colID,
+    fieldName: "Steps",
+    isResizable: false,
+    width: "100%",
+    isSorted: false,
+    isSortedDescending: false,
+    isMultiline: true,
+    textAlign: 'center',
+};
+
 
 class Wizard extends React.Component {
     constructor(props) {
         super(props);
-
-        const colID = _.uniqueId('dlColumn_');
-        const columnParams = {
-            key: colID,
-            fieldName: "Steps",
-            isResizable: false,
-            width: "100%",
-            isSorted: false,
-            isSortedDescending: false,
-            isMultiline: true,
-            textAlign: 'center',
-        };
 
         this.state = {
         }
