@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Nav } from '@fluentui/react/lib/Nav';
+import { ConstrainMode, SelectionMode } from '@fluentui/react/';
 import { DetailsList } from '@fluentui/react/lib/DetailsList';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
@@ -26,6 +27,8 @@ class Wizard extends React.Component {
     constructor(props) {
         super(props);
 
+        const colID = _.uniqueId('dlColumn_');
+
         this.state = {
         }
     }
@@ -44,6 +47,20 @@ class Wizard extends React.Component {
         }
     }
 
+    _setColumn() {
+        const columnParams = {
+            key: colID,
+            name,
+            fieldName: "Steps",
+            isResizable: false,
+            minWidth: "100%",
+            maxWidth: "100%",
+            isSorted: false,
+            isSortedDescending: false,
+            isMultiline: true,
+        }
+    }
+
     _onItemClick(item) {
 
     }
@@ -51,12 +68,21 @@ class Wizard extends React.Component {
     render() {
 
         let hello = "Hello!";
+        let items = ["foo", "bar"];
 
         return (
             //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
-            <>
-                {hello}
-            </>
+            <DetailsList
+                isHeaderVisible={false}
+                items={items}
+                selectionMode={SelectionMode.none}
+                constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
+                onRenderRow={(props, defaultRender) => (
+                    <>
+                        {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+                    </>
+                )}
+            />
         )
     }
 }
