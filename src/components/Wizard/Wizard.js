@@ -64,10 +64,11 @@ class Wizard extends React.Component {
     }
 
     setItems() {
+        console.log("entering setItems() ");
         var displayItemList = [];
 
-        if (this.props.links) {
-            let items = this.props.links.match(/[^\r\n]+/g);
+        if (this.props.items) {
+            let items = this.props.items.match(/[^\r\n]+/g);
 
             if (items && items.length) {
                 for (var i = 0; i < items.length; i++) {
