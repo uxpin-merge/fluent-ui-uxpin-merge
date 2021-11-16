@@ -59,7 +59,7 @@ class Wizard extends React.Component {
         }
     }
 
-    _onRenderItem(item, index, column) {
+    _onRenderItem(item, index) {
         console.log("Attempting to render " + index + ", item: " + item);
         return (
             <Text
@@ -86,7 +86,7 @@ class Wizard extends React.Component {
                 columns={columnParams}
                 selectionMode={SelectionMode.item}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-                onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index, column) }}
+                onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index) }}
                 onItemInvoked={(item, index) => { this._onItemClick(index) }}
             />
         )
