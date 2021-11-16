@@ -91,6 +91,7 @@ module.exports = {
           'src/components/Modal/Modal.js',
           'src/components/Panel/Panel.js',
           'src/components/Tooltip/Tooltip.js',
+          'src/components/Wizard/Wizard.js',
         ],
       },
       {
