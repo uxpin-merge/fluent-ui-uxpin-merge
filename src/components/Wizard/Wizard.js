@@ -29,6 +29,8 @@ const columnParams = [{
     key: colID,
     fieldName: "Steps",
     isResizable: false,
+    minWidth: "100%",
+    maxWidth: "100%",
     width: "100%",
     isSorted: false,
     isSortedDescending: false,
@@ -42,11 +44,12 @@ class Wizard extends React.Component {
         super(props);
 
         this.state = {
+            items: [],
         }
     }
 
     set() {
-
+        this.setItems();
     }
 
     componentDidMount() {
@@ -54,19 +57,35 @@ class Wizard extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.selectedIndex !== this.props.selectedIndex) {
+        if (prevProps.selectedIndex !== this.props.selectedIndex ||
+            prevProps.items !== this.props.items) {
             this.set();
         }
     }
 
-    _onRenderItem(item, index) {
-        console.log("Attempting to render " + index + ", item: " + item);
-        return (
-            <Text
-                textValue={item}
-                size={"medium"}
-                align={'left'}
-            />
+    setItems() {
+        var displayItemList = [];
+
+        if (this.props.links) {
+            let items = this.props.links.match(/[^\r\n]+/g);
+
+            if (items && items.length) {
+                for (var i = 0; i < items.length; i++) {
+                    let item = items[i];
+
+                    let displayItem = (<Text
+                        textValue={item}
+                        size={"medium"}
+                        align={'left'}
+                    />);
+
+                    displayItemList.push(displayItem);
+                } //for loop
+            } //if items
+        } //if props.links
+
+        this.setState(
+            { items: displayItemList }
         );
     }
 
@@ -76,7 +95,7 @@ class Wizard extends React.Component {
 
     render() {
 
-        let items = ["foo", "bar"];
+        //let items = ["foo", "bar"];
 
         return (
             //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
@@ -86,8 +105,8 @@ class Wizard extends React.Component {
                 columns={columnParams}
                 selectionMode={SelectionMode.none}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-                onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index) }}
-                onItemInvoked={(item, index) => { this._onItemClick(index) }}
+            //onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index) }}
+            //onItemInvoked={(item, index) => { this._onItemClick(index) }}
             />
         )
     }
