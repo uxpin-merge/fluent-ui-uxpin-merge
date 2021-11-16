@@ -81,7 +81,7 @@ class Wizard extends React.Component {
                 items={items}
                 selectionMode={SelectionMode.none}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-                onRenderItemColumn{(item, index, column) => { this._onRenderItem(item, index, column) }}
+                onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index, column) }}
             />
         )
     }
