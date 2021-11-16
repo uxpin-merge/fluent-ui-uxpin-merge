@@ -4,7 +4,5 @@ import Wizard from '../Wizard';
 
 
 export default (
-    <Wizard
-        uxpId="wizard1"
-    />
+    <Wizard uxpId="wizard1" />
 );
