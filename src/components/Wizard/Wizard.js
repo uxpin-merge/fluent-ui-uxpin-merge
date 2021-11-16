@@ -25,7 +25,7 @@ const defaultStyledBorderColor = '#CBD2D6';
 
 
 const colID = _.uniqueId('dlColumn_');
-const columnParams = {
+const columnParams = [{
     key: colID,
     fieldName: "Steps",
     isResizable: false,
@@ -34,7 +34,7 @@ const columnParams = {
     isSortedDescending: false,
     isMultiline: true,
     textAlign: 'center',
-};
+}];
 
 
 class Wizard extends React.Component {
