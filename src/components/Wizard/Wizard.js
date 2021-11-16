@@ -4,6 +4,7 @@ import { ConstrainMode, SelectionMode } from '@fluentui/react/';
 import { DetailsList } from '@fluentui/react/lib/DetailsList';
 import { Nav } from '@fluentui/react/lib/Nav';
 import { Stack } from '@fluentui/react/lib/Stack';
+import Text from '../Text/Text';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
@@ -64,9 +65,11 @@ class Wizard extends React.Component {
     _onRenderItem(item, index, column) {
         console.log("Attempting to render " + index + ", item: " + item);
         return (
-            <span>
-                {item}
-            </span>
+            <Text
+                textValue={item}
+                size={"medium"}
+                align={'left'}
+            />
         );
     }
 
