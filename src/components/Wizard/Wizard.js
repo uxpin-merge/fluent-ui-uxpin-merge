@@ -30,6 +30,16 @@ class Wizard extends React.Component {
         super(props);
 
         const colID = _.uniqueId('dlColumn_');
+        const columnParams = {
+            key: colID,
+            fieldName: "Steps",
+            isResizable: false,
+            width: "100%",
+            isSorted: false,
+            isSortedDescending: false,
+            isMultiline: true,
+            textAlign: 'center',
+        };
 
         this.state = {
         }
@@ -49,19 +59,6 @@ class Wizard extends React.Component {
         }
     }
 
-    _setColumn() {
-        const columnParams = {
-            key: colID,
-            fieldName: "Steps",
-            isResizable: false,
-            width: "100%",
-            isSorted: false,
-            isSortedDescending: false,
-            isMultiline: true,
-            textAlign: 'center',
-        }
-    }
-
     _onRenderItem(item, index, column) {
         console.log("Attempting to render " + index + ", item: " + item);
         return (
@@ -73,13 +70,12 @@ class Wizard extends React.Component {
         );
     }
 
-    _onItemClick(item) {
-
+    _onItemClick(index) {
+        console.log("Clicked on item " + index);
     }
 
     render() {
 
-        let hello = "Hello!";
         let items = ["foo", "bar"];
 
         return (
@@ -87,9 +83,11 @@ class Wizard extends React.Component {
             <DetailsList
                 isHeaderVisible={false}
                 items={items}
-                selectionMode={SelectionMode.none}
+                columns={columnParams}
+                selectionMode={SelectionMode.item}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
                 onRenderItemColumn={(item, index, column) => { this._onRenderItem(item, index, column) }}
+                onItemInvoked={(item, index) => { this._onItemClick(index) }}
             />
         )
     }
