@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Nav } from '@fluentui/react/lib/Nav';
 import { ConstrainMode, SelectionMode } from '@fluentui/react/';
 import { DetailsList } from '@fluentui/react/lib/DetailsList';
+import { Nav } from '@fluentui/react/lib/Nav';
+import { Stack } from '@fluentui/react/lib/Stack';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
@@ -50,7 +51,6 @@ class Wizard extends React.Component {
     _setColumn() {
         const columnParams = {
             key: colID,
-            name,
             fieldName: "Steps",
             isResizable: false,
             width: "100%",
@@ -62,9 +62,10 @@ class Wizard extends React.Component {
     }
 
     _onRenderItem(item, index, column) {
+        console.log("Attempting to render " + index + ", item: " + item);
         return (
             <span>
-                {index}  {" Hi! "}  {item}
+                {item}
             </span>
         );
     }
