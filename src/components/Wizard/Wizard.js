@@ -94,7 +94,7 @@ class Wizard extends React.Component {
 
     _onRenderItem(item, index) {
         console.log("_onRenderItem " + index + JSON.stringify(item));
-        return item;
+        return item.props;
     }
 
     _onItemClick(index) {
