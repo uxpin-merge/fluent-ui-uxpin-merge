@@ -101,7 +101,7 @@ class Wizard extends React.Component {
             //For some reason, the control will only display properly in UXPin with this weird wrapping & logic. 
             <DetailsList
                 isHeaderVisible={false}
-                items={items}
+                items={this.state.items}
                 columns={columnParams}
                 selectionMode={SelectionMode.none}
                 constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
