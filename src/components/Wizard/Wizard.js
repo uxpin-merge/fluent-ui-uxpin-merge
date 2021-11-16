@@ -62,7 +62,11 @@ class Wizard extends React.Component {
     }
 
     _onRenderItem(item, index, column) {
-        return (index + "Hi! " + item);
+        return (
+            <span>
+                {index}  {" Hi! "}  {item}
+            </span>
+        );
     }
 
     _onItemClick(item) {
