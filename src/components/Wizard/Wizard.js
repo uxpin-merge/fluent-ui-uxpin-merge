@@ -283,7 +283,6 @@ class Wizard extends React.Component {
                             <StackItem
                                 styles={testStyle}
                                 horizontalAlign={stackStretch}
-                                disableShrink={true}
                                 grow={true}>
                                 <Stack
                                     tokens={{
@@ -291,6 +290,7 @@ class Wizard extends React.Component {
                                         padding: 24,
                                     }}
                                     horizontal={false}
+                                    disableShrink={true}
                                     horizontalAlign={stackStretch}
                                     grow={true}>
 
