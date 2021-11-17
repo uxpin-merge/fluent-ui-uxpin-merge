@@ -283,38 +283,40 @@ class Wizard extends React.Component {
                             </StackItem>
 
                             {/* Body Section - Right Side */}
+                            <StackItem
+                                horizontal={true}
+                                horizontalAlign={stackStretch}
+                            >
+                                <Stack
+                                    styles={testStyle}
+                                    tokens={{
+                                        childrenGap: 24,
+                                        padding: 24,
+                                    }}
+                                    horizontal={false}
+                                    grow={true}>
 
+                                    <StackItem
+                                        horizontalAlign={stackStretch}>
+                                        {panelHeading}
+                                    </StackItem>
 
-                            <Stack
-                                styles={testStyle}
-                                tokens={{
-                                    childrenGap: 24,
-                                    padding: 24,
-                                }}
-                                horizontal={false}
-                                grow={true}>
-
-                                <StackItem
-                                    horizontalAlign={stackStretch}>
-                                    {panelHeading}
-                                </StackItem>
-
-                                <StackItem>
-                                    {/* Children Area for each panel */}
-                                    <Stack
-                                        tokens={{
-                                            childrenGap: 12,
-                                            padding: 0,
-                                        }}
-                                        horizontalAlign={stackStretch}
-                                        verticalAlign={stackTop}
-                                        verticalFill={true}
-                                    >
-                                        {"Hello!"}
-                                    </Stack>
-                                </StackItem>
-                            </Stack>
-
+                                    <StackItem>
+                                        {/* Children Area for each panel */}
+                                        <Stack
+                                            tokens={{
+                                                childrenGap: 12,
+                                                padding: 0,
+                                            }}
+                                            horizontalAlign={stackStretch}
+                                            verticalAlign={stackTop}
+                                            verticalFill={true}
+                                        >
+                                            {"Hello!"}
+                                        </Stack>
+                                    </StackItem>
+                                </Stack>
+                            </StackItem>
 
                         </Stack>
 
