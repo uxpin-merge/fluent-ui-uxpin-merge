@@ -284,11 +284,12 @@ class Wizard extends React.Component {
 
                             {/* Body Section - Right Side */}
                             <StackItem
+                                styles={testStyle}
                                 horizontal={true}
                                 horizontalAlign={stackStretch}
                             >
                                 <Stack
-                                    styles={testStyle}
+
                                     tokens={{
                                         childrenGap: 24,
                                         padding: 24,
