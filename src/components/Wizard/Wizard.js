@@ -283,19 +283,15 @@ class Wizard extends React.Component {
 
                             {/* Body Section - Right Side */}
                             <StackItem
-                                styles={testStyle2}
-                                horizontalAlign={stackStretch}
-                                grow={5}>
+                                styles={testStyle}
+                                horizontalAlign={stackStretch}>
                                 <Stack
-                                    styles={testStyle}
                                     tokens={{
                                         childrenGap: 24,
                                         padding: 24,
                                     }}
-                                    grow={3}
                                     horizontal={false}
-                                    horizontalAlign={stackStretch}
-                                    verticalAlign={stackTop}>
+                                    horizontalAlign={stackStretch}>
 
                                     {panelHeading}
 
@@ -305,7 +301,7 @@ class Wizard extends React.Component {
                                             childrenGap: 12,
                                             padding: 0,
                                         }}
-                                        horizontalAlign={stackTop}
+                                        horizontalAlign={stackStretch}
                                         verticalAlign={stackTop}
                                     >
                                         {"Hello!"}
@@ -339,7 +335,7 @@ class Wizard extends React.Component {
                             >
                                 <ActionButton
                                     iconName={"info"}
-                                    text={''}
+                                    text={'Help'}
                                     onClick={() => this._onHelpClick()}
                                 />
                             </StackItem>
