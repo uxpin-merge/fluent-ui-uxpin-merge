@@ -313,8 +313,8 @@ class Wizard extends React.Component {
                                     childrenGap: 6,
                                 }}
                                 horizontalAlign={stackTop}
-                                verticalAlign={stackTop}
-
+                                verticalAlign={stackCenter}
+                                grow={3}
                             >
                                 <ActionButton
                                     iconName={"info"}
@@ -330,7 +330,7 @@ class Wizard extends React.Component {
                                     childrenGap: 12,
                                 }}
                                 horizontal={true}
-                                grow={3}
+                                verticalAlign={stackCenter}
                             >
                                 <Link
                                     value={"Cancel"}
