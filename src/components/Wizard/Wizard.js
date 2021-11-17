@@ -87,12 +87,28 @@ class Wizard extends React.Component {
 
     }
 
-    _onDismissClicked() {
+    _onHelpClick() {
 
     }
 
-    _onHelpClick() {
+    _onDismissClicked() {
+        this.dismissControl(true);
+    }
 
+    dismissControl(notifyUXPin) {
+        //Notify UXPin that the Close icon has been clicked on.
+        if (notifyUXPin && this.props.dismiss) {
+            this.props.dismiss();
+        }
+
+        //Set the control to not open to dismiss it.
+        //We have to set the state and prop twice.
+
+        this.setState(
+            { open: false }
+        )
+
+        this.props.show = false;
     }
 
     render() {
@@ -117,6 +133,11 @@ class Wizard extends React.Component {
                 border: '1px solid ' + navBorderColor,
             },
         };
+        const wizardHeadingTextStyles = {
+            root: {
+                color: "#ffffff",
+            },
+        }
         const panelHeadingTextStyles = {
             root: {
                 color: defaultTextColor,
@@ -128,6 +149,7 @@ class Wizard extends React.Component {
         if (this.props.title) {
             wizardHeading = (
                 <Text
+                    styles={wizardHeadingTextStyles}
                     variant={panelHeadingTextVariant}
                     block>
                     {this.props.title?.trim()}
