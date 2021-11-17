@@ -287,6 +287,7 @@ class Wizard extends React.Component {
                                 styles={testStyle}
                                 horizontal={true}
                                 horizontalAlign={stackStretch}
+                                grow={10}
                             >
                                 <Stack
 
