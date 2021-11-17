@@ -144,6 +144,19 @@ class Wizard extends React.Component {
                 color: defaultTextColor,
             },
         }
+        const dismissBtnStyles = {
+            icon: { color: '#ffffff' },
+            root: {
+                selectors: {
+                    ':hover .ms-Button-icon': {
+                        color: '#f3f2f1' //neutraLighter
+                    },
+                    ':active .ms-Button-icon': {
+                        color: '#e1dfdd' //neutralQuaternaryAlt
+                    }
+                }
+            }
+        };
 
         /** Wizard Heading */
         var wizardHeading = '';
@@ -226,6 +239,7 @@ class Wizard extends React.Component {
                                     iconName={"ChromeClose"}
                                     tooltip={"Close"}
                                     text={''}
+                                    styles={dismissBtnStyles}
                                     onClick={() => this._onDismissClicked()}
                                 />
                             </Stack.Item>
