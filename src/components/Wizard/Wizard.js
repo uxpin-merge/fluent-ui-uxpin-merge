@@ -168,7 +168,7 @@ class Wizard extends React.Component {
             );
         }
 
-        let foo = "Panel Heading! How freaking cool is this?? The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.";
+        let foo = "Panel Heading! How freaking cool is this?? ";
         let panelHeading = (
             <Text
                 styles={panelHeadingTextStyles}
@@ -290,25 +290,24 @@ class Wizard extends React.Component {
                                         padding: 24,
                                     }}
                                     horizontal={false}
-                                    disableShrink={true}
                                     horizontalAlign={stackStretch}
                                     grow={true}>
 
                                     {panelHeading}
-
-                                    {/* Children Area for each panel */}
-                                    <Stack
-                                        tokens={{
-                                            childrenGap: 12,
-                                            padding: 0,
-                                        }}
-                                        horizontalAlign={stackStretch}
-                                        verticalAlign={stackTop}
-                                        verticalFill={true}
-                                    >
-                                        {"Hello!"}
-                                    </Stack>
-
+                                    <StackItem>
+                                        {/* Children Area for each panel */}
+                                        <Stack
+                                            tokens={{
+                                                childrenGap: 12,
+                                                padding: 0,
+                                            }}
+                                            horizontalAlign={stackStretch}
+                                            verticalAlign={stackTop}
+                                            verticalFill={true}
+                                        >
+                                            {"Hello!"}
+                                        </Stack>
+                                    </StackItem>
                                 </Stack>
 
                             </StackItem>
