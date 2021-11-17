@@ -260,7 +260,7 @@ class Wizard extends React.Component {
 
                         <Stack
                             horizontal={true}
-                            grow={5}
+                            grow={true}
                             horizontalAlign={stackStretch}
                             tokens={{
                                 padding: 0,
@@ -270,6 +270,7 @@ class Wizard extends React.Component {
                             {/* Nav: Display for the Steps */}
                             <StackItem
                                 styles={navStackStyles}
+                                grow={false}
                                 verticalFill={true}>
                                 <Stack
                                     horizontalAlign={stackStretch}
@@ -286,7 +287,7 @@ class Wizard extends React.Component {
                                 styles={testStyle}
                                 horizontal={true}
                                 horizontalAlign={stackStretch}
-                                grow={10}
+                                grow={true}
                             >
                                 <Stack
 
