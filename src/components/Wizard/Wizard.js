@@ -131,11 +131,15 @@ class Wizard extends React.Component {
         const navStackStyles = {
             root: {
                 padding: 0,
+                background: navBgColor,
+                borderRight: '1px solid ' + navBorderColor,
+            },
+        };
+        const navStyles = {
+            root: {
                 width: navStepWidth,
                 minHeight: '200',
                 height: 'auto',
-                background: navBgColor,
-                borderRight: '1px solid ' + navBorderColor,
             },
         };
         const footerStackItemStyles = {
@@ -269,6 +273,7 @@ class Wizard extends React.Component {
 
                             {/* Nav: Display for the Steps */}
                             <StackItem
+                                styles={navStackStyles}
                                 grow={false}
                                 verticalFill={true}>
                                 <Stack
@@ -276,7 +281,7 @@ class Wizard extends React.Component {
                                     grow={true}
                                 >
                                     <Nav
-                                        styles={navStackStyles}
+                                        styles={navStyles}
                                         groups={this.state.steps}
                                     />
                                 </Stack>
