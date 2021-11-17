@@ -259,7 +259,7 @@ class Wizard extends React.Component {
                         {/* Middle Section: Nav + Body */}
 
                         <Stack
-                            styles={navStackStyles}
+
                             horizontal={true}
                             grow={5}
                             horizontalAlign={stackStretch}
@@ -319,12 +319,9 @@ class Wizard extends React.Component {
                                     </StackItem>
                                 </Stack>
                             </StackItem>
-
                         </Stack>
 
-
                         {/* Footer Button Area */}
-
                         <Stack
                             horizontal={true}
                             verticalAlign={stackCenter}
