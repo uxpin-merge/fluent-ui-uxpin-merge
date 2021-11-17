@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Modal } from '@fluentui/react/lib/Modal';
 import { Nav } from '@fluentui/react/lib/Nav';
+import { ResponsiveMode } from '@fluentui/react/';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import ActionButton from '../ActionButton/ActionButton';
@@ -183,9 +184,10 @@ class Wizard extends React.Component {
 
                 <Modal
                     isOpen={this.state.open}
+                    responsiveMode={ResponsiveMode.medium}
                     isDarkOverlay={true}
                     isBlocking={true}
-                    dragOptions={_dragOptions}
+                    dragOptions={undefined}
                     onDismiss={() => { this._onDismissClicked() }}
                 >
 
