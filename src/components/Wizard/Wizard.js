@@ -283,6 +283,7 @@ class Wizard extends React.Component {
                             <StackItem
                                 styles={testStyle}
                                 horizontalAlign={stackStretch}
+                                disableShrink={true}
                                 grow={true}>
                                 <Stack
                                     tokens={{
