@@ -168,7 +168,7 @@ class Wizard extends React.Component {
             );
         }
 
-        let foo = "Panel Heading! How freaking cool is this??";
+        let foo = "Panel Heading! How freaking cool is this?? The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.";
         let panelHeading = (
             <Text
                 styles={panelHeadingTextStyles}
@@ -181,14 +181,12 @@ class Wizard extends React.Component {
         const testStyle = {
             root: {
                 background: '#c7e0f4',
-                width: '100%',
-                height: 'auto',
+                width: stackStretch,
             },
         };
         const testStyle2 = {
             root: {
-                width: '100%',
-                height: 'auto',
+                width: stackStretch,
             },
         };
 
