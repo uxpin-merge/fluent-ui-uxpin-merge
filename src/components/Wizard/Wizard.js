@@ -50,10 +50,8 @@ class Wizard extends React.Component {
     set() {
         console.log("Entering Set. Show? " + this.props.show);
 
-        let isOpen = this.props.show ? true : false;
-
         this.setState(
-            { open: isOpen }
+            { open: this.props.show }
         )
     }
 
@@ -64,7 +62,7 @@ class Wizard extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.selectedIndex !== this.props.selectedIndex ||
             prevProps.steps !== this.props.steps ||
-            prevProps.open !== this.props.open) {
+            prevProps.show !== this.props.show) {
             this.set();
         }
     }
@@ -99,6 +97,11 @@ class Wizard extends React.Component {
 
     render() {
         /** Misc Constants */
+        const wizardStackItemStyles = {
+            root: {
+                background: '#ffffff',
+            },
+        };
         const headerStackItemStyles = {
             root: {
                 background: headingBgColor,
@@ -108,6 +111,7 @@ class Wizard extends React.Component {
             root: {
                 padding: 0,
                 width: navStepWidth,
+                minHeight: '200',
                 height: 'auto',
                 background: navBgColor,
                 border: '1px solid ' + navBorderColor,
@@ -167,13 +171,14 @@ class Wizard extends React.Component {
                     <Stack
                         horizontal={false}
                         horizontalAlign={stackStretch}
-                        styles={headerStackItemStyles}>
+                        styles={wizardStackItemStyles}>
 
                         {/* Header and Close button */}
                         <Stack
                             horizontal={true}
                             verticalAlign={stackCenter}
                             horizontalAlign={stackTop}
+                            styles={headerStackItemStyles}
                             tokens={{
                                 padding: 12,
                                 childrenGap: 12,
