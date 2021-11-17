@@ -269,55 +269,53 @@ class Wizard extends React.Component {
                             }}>
 
                             {/* Nav: Display for the Steps */}
+                            <StackItem
+                                grow={false}>
+                                <Stack
+                                    styles={navStackStyles}
+                                    horizontalAlign={stackStretch}
+                                    grow={true}
+                                >
+                                    <Nav
+                                        groups={this.state.steps}
+                                    />
+                                </Stack>
+                            </StackItem>
+
+                            {/* Body Section - Right Side */}
+
 
                             <Stack
-                                styles={navStackStyles}
-                                horizontalAlign={stackStretch}
-                                grow={true}
-                            >
-                                <Nav
-                                    groups={this.state.steps}
-                                />
+                                styles={testStyle}
+                                tokens={{
+                                    childrenGap: 24,
+                                    padding: 24,
+                                }}
+                                horizontal={false}
+                                grow={true}>
+
+                                <StackItem
+                                    horizontalAlign={stackStretch}>
+                                    {panelHeading}
+                                </StackItem>
+
+                                <StackItem>
+                                    {/* Children Area for each panel */}
+                                    <Stack
+                                        tokens={{
+                                            childrenGap: 12,
+                                            padding: 0,
+                                        }}
+                                        horizontalAlign={stackStretch}
+                                        verticalAlign={stackTop}
+                                        verticalFill={true}
+                                    >
+                                        {"Hello!"}
+                                    </Stack>
+                                </StackItem>
                             </Stack>
 
 
-                            {/* Body Section - Right Side */}
-                            <StackItem
-                                styles={testStyle}
-                                horizontalAlign={stackStretch}
-                                grow={true}
-                            >
-
-                                <Stack
-                                    tokens={{
-                                        childrenGap: 24,
-                                        padding: 24,
-                                    }}
-                                    horizontal={false}
-                                    grow={true}>
-
-                                    <StackItem
-                                        horizontalAlign={stackStretch}>
-                                        {panelHeading}
-                                    </StackItem>
-
-                                    <StackItem>
-                                        {/* Children Area for each panel */}
-                                        <Stack
-                                            tokens={{
-                                                childrenGap: 12,
-                                                padding: 0,
-                                            }}
-                                            horizontalAlign={stackStretch}
-                                            verticalAlign={stackTop}
-                                            verticalFill={true}
-                                        >
-                                            {"Hello!"}
-                                        </Stack>
-                                    </StackItem>
-                                </Stack>
-
-                            </StackItem>
                         </Stack>
 
 
