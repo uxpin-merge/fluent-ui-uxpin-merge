@@ -240,7 +240,7 @@ class Wizard extends React.Component {
                             <Stack.Item>
                                 <ActionButton
                                     iconName={"ChromeClose"}
-                                    tooltip={"Close"}
+                                    tooltip={''}
                                     text={''}
                                     onClick={() => this._onDismissClicked()}
                                 />
@@ -273,7 +273,8 @@ class Wizard extends React.Component {
 
                             {/* Body Section - Right Side */}
                             <StackItem
-                                horizontalAlign={stackStretch}>
+                                horizontalAlign={stackStretch}
+                                grow={3}>
                                 <Stack
                                     styles={testStyle}
                                     tokens={{
