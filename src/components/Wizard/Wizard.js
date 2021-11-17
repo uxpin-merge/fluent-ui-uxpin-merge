@@ -259,7 +259,6 @@ class Wizard extends React.Component {
                         {/* Middle Section: Nav + Body */}
 
                         <Stack
-
                             horizontal={true}
                             grow={5}
                             horizontalAlign={stackStretch}
@@ -270,9 +269,9 @@ class Wizard extends React.Component {
 
                             {/* Nav: Display for the Steps */}
                             <StackItem
-                                grow={false}>
+                                styles={navStackStyles}
+                                verticalFill={true}>
                                 <Stack
-                                    styles={navStackStyles}
                                     horizontalAlign={stackStretch}
                                     grow={true}
                                 >
