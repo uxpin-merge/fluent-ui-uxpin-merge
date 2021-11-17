@@ -251,7 +251,7 @@ class Wizard extends React.Component {
                         <Stack
                             styles={navStackStyles}
                             horizontal={true}
-                            grow={3}
+                            grow={5}
                             verticalAlign={stackTop}
                             horizontalAlign={stackStretch}
                             tokens={{
@@ -260,10 +260,12 @@ class Wizard extends React.Component {
                             }}>
 
                             {/* Nav: Display for the Steps */}
-                            <StackItem>
+                            <StackItem
+                                grow={false}>
                                 <Stack
                                     styles={navStackStyles}
                                     horizontalAlign={stackStretch}
+                                    grow={true}
                                 >
                                     <Nav
                                         groups={this.state.steps}
@@ -274,7 +276,7 @@ class Wizard extends React.Component {
                             {/* Body Section - Right Side */}
                             <StackItem
                                 horizontalAlign={stackStretch}
-                                grow={3}>
+                                grow={5}>
                                 <Stack
                                     styles={testStyle}
                                     tokens={{
@@ -294,7 +296,7 @@ class Wizard extends React.Component {
                                             childrenGap: 12,
                                             padding: 0,
                                         }}
-                                        horizontalAlign={stackCenter}
+                                        horizontalAlign={stackTop}
                                         verticalAlign={stackTop}
                                     >
                                         {"Hello!"}
