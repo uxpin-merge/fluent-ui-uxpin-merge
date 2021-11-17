@@ -24,8 +24,8 @@ const defaultNavItems = `1 Details | Details
 3 Review | Review`;
 
 const defaultPanelPadding = 24;
-const headingBgColor = "#0078d4";     //themePrimary
-const headingTextColor = '#ffffff';   //white
+const headingBgColor = "#deecf9";     //themeLighter
+const headingTextColor = '#000000';   //black
 const navBgColor = '#f3f2f1';         //neutralLighter
 const navBorderColor = '#d2d0ce';     //neutralQuaternary
 const defaultTextColor = '#000000';    //black
@@ -136,7 +136,7 @@ class Wizard extends React.Component {
         };
         const wizardHeadingTextStyles = {
             root: {
-                color: "#ffffff",
+                color: headingTextColor,
             },
         }
         const panelHeadingTextStyles = {
