@@ -178,6 +178,12 @@ class Wizard extends React.Component {
         );
 
 
+        const testStyle = {
+            root: {
+                background: '#c7e0f4',
+            },
+        };
+
         return (
 
             <div>
@@ -268,6 +274,7 @@ class Wizard extends React.Component {
                             {/* Body Section - Right Side */}
                             <StackItem>
                                 <Stack
+                                    styles={testStyle}
                                     tokens={{
                                         childrenGap: 24,
                                         padding: 24,
@@ -319,7 +326,6 @@ class Wizard extends React.Component {
                             >
                                 <ActionButton
                                     iconName={"info"}
-                                    tooltip={"Help"}
                                     text={''}
                                     onClick={() => this._onHelpClick()}
                                 />
@@ -328,7 +334,7 @@ class Wizard extends React.Component {
                             <Stack
                                 tokens={{
                                     padding: 0,
-                                    childrenGap: 12,
+                                    childrenGap: 24,
                                 }}
                                 horizontal={true}
                                 verticalAlign={stackCenter}
