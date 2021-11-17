@@ -257,123 +257,129 @@ class Wizard extends React.Component {
                         </StackItem>
 
                         {/* Middle Section: Nav + Body */}
-                        <Stack
-                            styles={navStackStyles}
-                            horizontal={true}
-                            grow={5}
-                            horizontalAlign={stackStretch}
-                            tokens={{
-                                padding: 0,
-                                childrenGap: 0,
-                            }}>
+                        <StackItem>
+                            <Stack
+                                styles={navStackStyles}
+                                horizontal={true}
+                                grow={5}
+                                horizontalAlign={stackStretch}
+                                tokens={{
+                                    padding: 0,
+                                    childrenGap: 0,
+                                }}>
 
-                            {/* Nav: Display for the Steps */}
-                            <StackItem
-                                grow={false}>
-                                <Stack
-                                    styles={navStackStyles}
+                                {/* Nav: Display for the Steps */}
+                                <StackItem
+                                    grow={false}>
+                                    <Stack
+                                        styles={navStackStyles}
+                                        horizontalAlign={stackStretch}
+                                        grow={true}
+                                    >
+                                        <Nav
+                                            groups={this.state.steps}
+                                        />
+                                    </Stack>
+                                </StackItem>
+
+                                {/* Body Section - Right Side */}
+                                <StackItem
+                                    styles={testStyle}
                                     horizontalAlign={stackStretch}
                                     grow={true}
                                 >
-                                    <Nav
-                                        groups={this.state.steps}
-                                    />
-                                </Stack>
-                            </StackItem>
 
-                            {/* Body Section - Right Side */}
-                            <StackItem
-                                styles={testStyle}
-                                horizontalAlign={stackStretch}
-                                grow={true}
-                            >
+                                    <Stack
+                                        tokens={{
+                                            childrenGap: 24,
+                                            padding: 24,
+                                        }}
+                                        horizontal={false}
+                                        grow={true}>
 
-                                <Stack
-                                    tokens={{
-                                        childrenGap: 24,
-                                        padding: 24,
-                                    }}
-                                    horizontal={false}
-                                    grow={true}>
+                                        <StackItem
+                                            horizontalAlign={stackStretch}>
+                                            {panelHeading}
+                                        </StackItem>
 
-                                    <StackItem
-                                        horizontalAlign={stackStretch}>
-                                        {panelHeading}
-                                    </StackItem>
+                                        <StackItem>
+                                            {/* Children Area for each panel */}
+                                            <Stack
+                                                tokens={{
+                                                    childrenGap: 12,
+                                                    padding: 0,
+                                                }}
+                                                horizontalAlign={stackStretch}
+                                                verticalAlign={stackTop}
+                                                verticalFill={true}
+                                            >
+                                                {"Hello!"}
+                                            </Stack>
+                                        </StackItem>
+                                    </Stack>
 
-                                    <StackItem>
-                                        {/* Children Area for each panel */}
-                                        <Stack
-                                            tokens={{
-                                                childrenGap: 12,
-                                                padding: 0,
-                                            }}
-                                            horizontalAlign={stackStretch}
-                                            verticalAlign={stackTop}
-                                            verticalFill={true}
-                                        >
-                                            {"Hello!"}
-                                        </Stack>
-                                    </StackItem>
-                                </Stack>
-
-                            </StackItem>
-                        </Stack>
+                                </StackItem>
+                            </Stack>
+                        </StackItem>
 
                         {/* Footer Button Area */}
-                        <Stack
-                            horizontal={true}
-                            verticalAlign={stackCenter}
-                            horizontalAlign={stackStretch}
-                            styles={footerStackItemStyles}
-                            tokens={{
-                                padding: 12,
-                                childrenGap: 24,
-                            }}>
-
-                            {/* Left Side Help Button */}
-                            <StackItem
-                                tokens={{
-                                    padding: 0,
-                                    childrenGap: 6,
-                                }}
-                                horizontalAlign={stackTop}
-                                verticalAlign={stackCenter}
-                                grow={3}
-                            >
-                                <ActionButton
-                                    iconName={"info"}
-                                    text={''}
-                                    tooltip={'Help'}
-                                    onClick={() => this._onHelpClick()}
-                                />
-                            </StackItem>
-
+                        <StackItem>
                             <Stack
-                                tokens={{
-                                    padding: 0,
-                                    childrenGap: 24,
-                                }}
                                 horizontal={true}
                                 verticalAlign={stackCenter}
-                            >
-                                <Link
-                                    value={"Cancel"}
-                                    href={''}
-                                    onClick={() => this._onCancelClick()}
-                                />
-                                <Button
-                                    primary={false}
-                                    text={"Back"}
-                                    onClick={() => this._onNextClick()}
-                                />
-                                <Button
-                                    primary={true}
-                                    text={"Next"}
-                                    onClick={() => this._onNextClick()}
-                                />
+                                horizontalAlign={stackStretch}
+                                styles={footerStackItemStyles}
+                                tokens={{
+                                    padding: 12,
+                                    childrenGap: 24,
+                                }}>
+
+                                {/* Left Side Help Button */}
+                                <StackItem
+                                    tokens={{
+                                        padding: 0,
+                                        childrenGap: 6,
+                                    }}
+                                    horizontalAlign={stackTop}
+                                    verticalAlign={stackCenter}
+                                    grow={3}
+                                >
+                                    <ActionButton
+                                        iconName={"info"}
+                                        text={''}
+                                        tooltip={'Help'}
+                                        onClick={() => this._onHelpClick()}
+                                    />
+                                </StackItem>
+
+                                <StackItem>
+                                    <Stack
+                                        tokens={{
+                                            padding: 0,
+                                            childrenGap: 24,
+                                        }}
+                                        horizontal={true}
+                                        verticalAlign={stackCenter}
+                                    >
+                                        <Link
+                                            value={"Cancel"}
+                                            href={''}
+                                            onClick={() => this._onCancelClick()}
+                                        />
+                                        <Button
+                                            primary={false}
+                                            text={"Back"}
+                                            onClick={() => this._onNextClick()}
+                                        />
+                                        <Button
+                                            primary={true}
+                                            text={"Next"}
+                                            onClick={() => this._onNextClick()}
+                                        />
+                                    </Stack>
+                                </StackItem>
                             </Stack>
-                        </Stack>
+                        </StackItem>
                     </Stack>
                 </Modal>
             </div>
