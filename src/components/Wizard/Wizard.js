@@ -6,6 +6,8 @@ import { ResponsiveMode } from '@fluentui/react/';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import ActionButton from '../ActionButton/ActionButton';
+import Button from '../Button/Button';
+import Link from '../Link/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
@@ -77,19 +79,19 @@ class Wizard extends React.Component {
     }
 
     _onNextClick() {
-
+        console.log("On next clicked");
     }
 
     _onBackClick() {
-
+        console.log("On back clicked");
     }
 
     _onCancelClick() {
-
+        console.log("On cancel clicked");
     }
 
     _onHelpClick() {
-
+        console.log("On help clicked");
     }
 
     _onDismissClicked() {
@@ -133,9 +135,15 @@ class Wizard extends React.Component {
                 minHeight: '200',
                 height: 'auto',
                 background: navBgColor,
-                border: '1px solid ' + navBorderColor,
+                borderRight: '1px solid ' + navBorderColor,
             },
         };
+        const footerStackItemStyles = {
+            root: {
+                borderTop: '1px dashed ' + navBorderColor,
+            },
+        };
+
         const wizardHeadingTextStyles = {
             root: {
                 color: headingTextColor,
@@ -236,6 +244,7 @@ class Wizard extends React.Component {
                         {/* Middle Section: Nav + Body */}
                         <Stack
                             horizontal={true}
+                            grow={3}
                             verticalAlign={stackTop}
                             horizontalAlign={stackTop}
                             tokens={{
@@ -262,6 +271,7 @@ class Wizard extends React.Component {
                                         childrenGap: 24,
                                         padding: 24,
                                     }}
+                                    grow={3}
                                     horizontal={false}
                                     horizontalAlign={stackStretch}
                                     verticalAlign={stackTop}>
@@ -283,6 +293,61 @@ class Wizard extends React.Component {
                                 </Stack>
 
                             </StackItem>
+                        </Stack>
+
+                        {/* Footer Button Area */}
+                        <Stack
+                            horizontal={true}
+                            verticalAlign={stackCenter}
+                            horizontalAlign={stackTop}
+                            styles={footerStackItemStyles}
+                            tokens={{
+                                padding: 0,
+                                childrenGap: 12,
+                            }}>
+
+                            {/* Left Side Help Button */}
+                            <StackItem
+                                tokens={{
+                                    padding: 0,
+                                    childrenGap: 6,
+                                }}
+                                horizontalAlign={stackTop}
+                                verticalAlign={stackTop}
+
+                            >
+                                <ActionButton
+                                    iconName={"info"}
+                                    tooltip={"Help"}
+                                    text={''}
+                                    onClick={() => this._onHelpClick()}
+                                />
+                            </StackItem>
+
+                            <Stack
+                                tokens={{
+                                    padding: 0,
+                                    childrenGap: 12,
+                                }}
+                                horizontal={true}
+                                grow={3}
+                            >
+                                <Link
+                                    value={"Cancel"}
+                                    href={''}
+                                    onClick={() => this._onCancelClick()}
+                                />
+                                <Button
+                                    primary={false}
+                                    text={"Back"}
+                                    onClick={() => this._onNextClick()}
+                                />
+                                <Button
+                                    primary={true}
+                                    text={"Next"}
+                                    onClick={() => this._onNextClick()}
+                                />
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Modal>
