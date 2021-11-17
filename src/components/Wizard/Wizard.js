@@ -181,7 +181,7 @@ class Wizard extends React.Component {
         const testStyle = {
             root: {
                 background: '#c7e0f4',
-                width: stackStretch,
+                width: '100%',
             },
         };
         const testStyle2 = {
@@ -282,7 +282,7 @@ class Wizard extends React.Component {
                             {/* Body Section - Right Side */}
                             <StackItem
                                 styles={testStyle}
-                                horizontalAlign={stackStretch}
+                                horizontalAlign={stackTop}
                                 grow={true}>
                                 <Stack
                                     tokens={{
@@ -290,10 +290,13 @@ class Wizard extends React.Component {
                                         padding: 24,
                                     }}
                                     horizontal={false}
-                                    horizontalAlign={stackStretch}
+                                    horizontalAlign={stackTop}
                                     grow={true}>
+                                    <StackItem
+                                        horizontalAlign={stackStretch}>
+                                        {panelHeading}
+                                    </StackItem>
 
-                                    {panelHeading}
                                     <StackItem>
                                         {/* Children Area for each panel */}
                                         <Stack
