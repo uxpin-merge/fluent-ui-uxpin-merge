@@ -187,7 +187,7 @@ class Wizard extends React.Component {
         };
         const testStyle2 = {
             root: {
-                width: stackStretch,
+                background: 'pink',
             },
         };
 
@@ -221,38 +221,40 @@ class Wizard extends React.Component {
                         styles={wizardStackItemStyles}>
 
                         {/* Header and Close button */}
-                        <Stack
-                            horizontal={true}
-                            verticalAlign={stackCenter}
-                            horizontalAlign={stackTop}
-                            styles={headerStackItemStyles}
-                            tokens={{
-                                padding: 12,
-                                childrenGap: 12,
-                            }}>
-
-                            {/* Left Side Text */}
+                        <StackItem>
                             <Stack
-                                tokens={{
-                                    padding: 0,
-                                    childrenGap: 6,
-                                }}
+                                horizontal={true}
+                                verticalAlign={stackCenter}
                                 horizontalAlign={stackTop}
-                                verticalAlign={stackTop}
-                                grow={1}
-                            >
-                                {wizardHeading}
-                            </Stack>
+                                styles={headerStackItemStyles}
+                                tokens={{
+                                    padding: 12,
+                                    childrenGap: 12,
+                                }}>
 
-                            <Stack.Item>
-                                <ActionButton
-                                    iconName={"ChromeClose"}
-                                    tooltip={''}
-                                    text={''}
-                                    onClick={() => this._onDismissClicked()}
-                                />
-                            </Stack.Item>
-                        </Stack>
+                                {/* Left Side Text */}
+                                <StackItem
+                                    tokens={{
+                                        padding: 0,
+                                        childrenGap: 6,
+                                    }}
+                                    horizontalAlign={stackTop}
+                                    verticalAlign={stackTop}
+                                    grow={1}
+                                >
+                                    {wizardHeading}
+                                </StackItem>
+
+                                <StackItem>
+                                    <ActionButton
+                                        iconName={"ChromeClose"}
+                                        tooltip={''}
+                                        text={''}
+                                        onClick={() => this._onDismissClicked()}
+                                    />
+                                </StackItem>
+                            </Stack>
+                        </StackItem>
 
                         {/* Middle Section: Nav + Body */}
                         <Stack
