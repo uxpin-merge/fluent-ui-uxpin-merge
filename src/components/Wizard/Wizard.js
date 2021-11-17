@@ -257,70 +257,69 @@ class Wizard extends React.Component {
                         </StackItem>
 
                         {/* Middle Section: Nav + Body */}
-                        <StackItem>
+
+                        <Stack
+                            styles={navStackStyles}
+                            horizontal={true}
+                            grow={5}
+                            horizontalAlign={stackStretch}
+                            tokens={{
+                                padding: 0,
+                                childrenGap: 0,
+                            }}>
+
+                            {/* Nav: Display for the Steps */}
+
                             <Stack
                                 styles={navStackStyles}
-                                horizontal={true}
-                                grow={5}
                                 horizontalAlign={stackStretch}
-                                tokens={{
-                                    padding: 0,
-                                    childrenGap: 0,
-                                }}>
-
-                                {/* Nav: Display for the Steps */}
-                                <StackItem
-                                    grow={false}>
-                                    <Stack
-                                        styles={navStackStyles}
-                                        horizontalAlign={stackStretch}
-                                        grow={true}
-                                    >
-                                        <Nav
-                                            groups={this.state.steps}
-                                        />
-                                    </Stack>
-                                </StackItem>
-
-                                {/* Body Section - Right Side */}
-                                <StackItem
-                                    styles={testStyle}
-                                    horizontalAlign={stackStretch}
-                                    grow={true}
-                                >
-
-                                    <Stack
-                                        tokens={{
-                                            childrenGap: 24,
-                                            padding: 24,
-                                        }}
-                                        horizontal={false}
-                                        grow={true}>
-
-                                        <StackItem
-                                            horizontalAlign={stackStretch}>
-                                            {panelHeading}
-                                        </StackItem>
-
-                                        <StackItem>
-                                            {/* Children Area for each panel */}
-                                            <Stack
-                                                tokens={{
-                                                    childrenGap: 12,
-                                                    padding: 0,
-                                                }}
-                                                horizontalAlign={stackStretch}
-                                                verticalAlign={stackTop}
-                                                verticalFill={true}
-                                            >
-                                                {"Hello!"}
-                                            </Stack>
-                                        </StackItem>
-                                    </Stack>
-
-                                </StackItem>
+                                grow={true}
+                            >
+                                <Nav
+                                    groups={this.state.steps}
+                                />
                             </Stack>
-                        </StackItem>
+
+
+                            {/* Body Section - Right Side */}
+                            <StackItem
+                                styles={testStyle}
+                                horizontalAlign={stackStretch}
+                                grow={true}
+                            >
+
+                                <Stack
+                                    tokens={{
+                                        childrenGap: 24,
+                                        padding: 24,
+                                    }}
+                                    horizontal={false}
+                                    grow={true}>
+
+                                    <StackItem
+                                        horizontalAlign={stackStretch}>
+                                        {panelHeading}
+                                    </StackItem>
+
+                                    <StackItem>
+                                        {/* Children Area for each panel */}
+                                        <Stack
+                                            tokens={{
+                                                childrenGap: 12,
+                                                padding: 0,
+                                            }}
+                                            horizontalAlign={stackStretch}
+                                            verticalAlign={stackTop}
+                                            verticalFill={true}
+                                        >
+                                            {"Hello!"}
+                                        </Stack>
+                                    </StackItem>
+                                </Stack>
+
+                            </StackItem>
+                        </Stack>
+
 
                         {/* Footer Button Area */}
 
@@ -351,7 +350,6 @@ class Wizard extends React.Component {
                                     onClick={() => this._onHelpClick()}
                                 />
                             </StackItem>
-
 
                             <Stack
                                 tokens={{
