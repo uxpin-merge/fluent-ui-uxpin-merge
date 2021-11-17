@@ -183,6 +183,12 @@ class Wizard extends React.Component {
                 background: '#c7e0f4',
             },
         };
+        const testStyle2 = {
+            root: {
+                width: '100%',
+                height: 'auto',
+            },
+        };
 
         return (
 
@@ -275,6 +281,7 @@ class Wizard extends React.Component {
 
                             {/* Body Section - Right Side */}
                             <StackItem
+                                styles={testStyle2}
                                 horizontalAlign={stackStretch}
                                 grow={5}>
                                 <Stack
