@@ -117,6 +117,8 @@ class Wizard extends React.Component {
         const wizardStackItemStyles = {
             root: {
                 background: '#ffffff',
+                minWidth: '80vw',
+                minHeight: '80vh',
             },
         };
         const headerStackItemStyles = {
@@ -144,19 +146,6 @@ class Wizard extends React.Component {
                 color: defaultTextColor,
             },
         }
-        const dismissBtnStyles = {
-            icon: { color: '#ffffff' },
-            root: {
-                selectors: {
-                    ':hover .ms-Button-icon': {
-                        color: '#f3f2f1' //neutraLighter
-                    },
-                    ':active .ms-Button-icon': {
-                        color: '#e1dfdd' //neutralQuaternaryAlt
-                    }
-                }
-            }
-        };
 
         /** Wizard Heading */
         var wizardHeading = '';
@@ -197,7 +186,7 @@ class Wizard extends React.Component {
 
                 <Modal
                     isOpen={this.state.open}
-                    responsiveMode={ResponsiveMode.large}
+                    responsiveMode={ResponsiveMode.xLarge}
                     isDarkOverlay={true}
                     isBlocking={true}
                     dragOptions={undefined}
@@ -239,7 +228,6 @@ class Wizard extends React.Component {
                                     iconName={"ChromeClose"}
                                     tooltip={"Close"}
                                     text={''}
-                                    styles={dismissBtnStyles}
                                     onClick={() => this._onDismissClicked()}
                                 />
                             </Stack.Item>
