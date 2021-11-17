@@ -168,7 +168,7 @@ class Wizard extends React.Component {
             );
         }
 
-        let foo = "Panel Heading!";
+        let foo = "Panel Heading! How freaking cool is this??";
         let panelHeading = (
             <Text
                 styles={panelHeadingTextStyles}
