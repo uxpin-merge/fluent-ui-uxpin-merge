@@ -243,6 +243,7 @@ class Wizard extends React.Component {
 
                         {/* Middle Section: Nav + Body */}
                         <Stack
+                            styles={navStackStyles}
                             horizontal={true}
                             grow={3}
                             verticalAlign={stackTop}
@@ -267,7 +268,6 @@ class Wizard extends React.Component {
                             {/* Body Section - Right Side */}
                             <StackItem>
                                 <Stack
-                                    styles={navStackStyles}
                                     tokens={{
                                         childrenGap: 24,
                                         padding: 24,
