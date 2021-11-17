@@ -184,7 +184,7 @@ class Wizard extends React.Component {
 
                 <Modal
                     isOpen={this.state.open}
-                    responsiveMode={ResponsiveMode.medium}
+                    responsiveMode={ResponsiveMode.large}
                     isDarkOverlay={true}
                     isBlocking={true}
                     dragOptions={undefined}
