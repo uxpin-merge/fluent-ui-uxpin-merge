@@ -128,10 +128,13 @@ class Wizard extends React.Component {
                 background: headingBgColor,
             },
         };
+        const bodyStackStyles = {
+            root: {
+                background: navBgColor,
+            },
+        };
         const navStackStyles = {
             root: {
-                padding: 0,
-                background: navBgColor,
                 borderRight: '1px solid ' + navBorderColor,
             },
         };
@@ -184,14 +187,7 @@ class Wizard extends React.Component {
 
         const testStyle = {
             root: {
-                background: '#c7e0f4',
-                minWidth: '100%',
-                width: '100%',
-            },
-        };
-        const testStyle2 = {
-            root: {
-                background: 'pink',
+                background: '#ffffff',
             },
         };
 
@@ -263,6 +259,7 @@ class Wizard extends React.Component {
                         {/* Middle Section: Nav + Body */}
 
                         <Stack
+                            styles={bodyStackStyles}
                             horizontal={true}
                             grow={true}
                             horizontalAlign={stackStretch}
