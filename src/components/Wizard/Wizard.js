@@ -181,7 +181,6 @@ class Wizard extends React.Component {
         const testStyle = {
             root: {
                 background: '#c7e0f4',
-                minWidth: '100%',
             },
         };
         const testStyle2 = {
