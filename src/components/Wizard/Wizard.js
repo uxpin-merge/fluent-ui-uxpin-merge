@@ -259,7 +259,7 @@ class Wizard extends React.Component {
                             horizontal={true}
                             grow={5}
                             verticalAlign={stackTop}
-                            horizontalAlign={stackStretch}
+                            horizontalAlign={stackTop}
                             tokens={{
                                 padding: 0,
                                 childrenGap: 0,
