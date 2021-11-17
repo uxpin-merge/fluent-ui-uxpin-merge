@@ -316,7 +316,7 @@ class Wizard extends React.Component {
                         <Stack
                             horizontal={true}
                             verticalAlign={stackCenter}
-                            horizontalAlign={stackTop}
+                            horizontalAlign={stackStretch}
                             styles={footerStackItemStyles}
                             tokens={{
                                 padding: 12,
@@ -335,7 +335,8 @@ class Wizard extends React.Component {
                             >
                                 <ActionButton
                                     iconName={"info"}
-                                    text={'Help'}
+                                    text={''}
+                                    tooltip={'Help'}
                                     onClick={() => this._onHelpClick()}
                                 />
                             </StackItem>
