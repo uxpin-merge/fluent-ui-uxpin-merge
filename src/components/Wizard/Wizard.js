@@ -323,63 +323,63 @@ class Wizard extends React.Component {
                         </StackItem>
 
                         {/* Footer Button Area */}
-                        <StackItem>
+
+                        <Stack
+                            horizontal={true}
+                            verticalAlign={stackCenter}
+                            horizontalAlign={stackStretch}
+                            styles={footerStackItemStyles}
+                            tokens={{
+                                padding: 12,
+                                childrenGap: 24,
+                            }}>
+
+                            {/* Left Side Help Button */}
+                            <StackItem
+                                tokens={{
+                                    padding: 0,
+                                    childrenGap: 6,
+                                }}
+                                horizontalAlign={stackTop}
+                                verticalAlign={stackCenter}
+                                grow={3}
+                            >
+                                <ActionButton
+                                    iconName={"info"}
+                                    text={''}
+                                    tooltip={'Help'}
+                                    onClick={() => this._onHelpClick()}
+                                />
+                            </StackItem>
+
+
                             <Stack
+                                tokens={{
+                                    padding: 0,
+                                    childrenGap: 24,
+                                }}
                                 horizontal={true}
                                 verticalAlign={stackCenter}
-                                horizontalAlign={stackStretch}
-                                styles={footerStackItemStyles}
-                                tokens={{
-                                    padding: 12,
-                                    childrenGap: 24,
-                                }}>
-
-                                {/* Left Side Help Button */}
-                                <StackItem
-                                    tokens={{
-                                        padding: 0,
-                                        childrenGap: 6,
-                                    }}
-                                    horizontalAlign={stackTop}
-                                    verticalAlign={stackCenter}
-                                    grow={3}
-                                >
-                                    <ActionButton
-                                        iconName={"info"}
-                                        text={''}
-                                        tooltip={'Help'}
-                                        onClick={() => this._onHelpClick()}
-                                    />
-                                </StackItem>
-
-                                <StackItem>
-                                    <Stack
-                                        tokens={{
-                                            padding: 0,
-                                            childrenGap: 24,
-                                        }}
-                                        horizontal={true}
-                                        verticalAlign={stackCenter}
-                                    >
-                                        <Link
-                                            value={"Cancel"}
-                                            href={''}
-                                            onClick={() => this._onCancelClick()}
-                                        />
-                                        <Button
-                                            primary={false}
-                                            text={"Back"}
-                                            onClick={() => this._onNextClick()}
-                                        />
-                                        <Button
-                                            primary={true}
-                                            text={"Next"}
-                                            onClick={() => this._onNextClick()}
-                                        />
-                                    </Stack>
-                                </StackItem>
+                            >
+                                <Link
+                                    value={"Cancel"}
+                                    href={''}
+                                    onClick={() => this._onCancelClick()}
+                                />
+                                <Button
+                                    primary={false}
+                                    text={"Back"}
+                                    onClick={() => this._onNextClick()}
+                                />
+                                <Button
+                                    primary={true}
+                                    text={"Next"}
+                                    onClick={() => this._onNextClick()}
+                                />
                             </Stack>
-                        </StackItem>
+
+                        </Stack>
+
                     </Stack>
                 </Modal>
             </div>
