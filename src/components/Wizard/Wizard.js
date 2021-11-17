@@ -269,7 +269,6 @@ class Wizard extends React.Component {
 
                             {/* Nav: Display for the Steps */}
                             <StackItem
-                                styles={navStackStyles}
                                 grow={false}
                                 verticalFill={true}>
                                 <Stack
@@ -277,6 +276,7 @@ class Wizard extends React.Component {
                                     grow={true}
                                 >
                                     <Nav
+                                        styles={navStackStyles}
                                         groups={this.state.steps}
                                     />
                                 </Stack>
