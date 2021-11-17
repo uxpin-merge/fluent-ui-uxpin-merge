@@ -181,7 +181,7 @@ class Wizard extends React.Component {
         const testStyle = {
             root: {
                 background: '#c7e0f4',
-                width: '100%',
+                minWidth: '100%',
             },
         };
         const testStyle2 = {
@@ -258,8 +258,8 @@ class Wizard extends React.Component {
                             styles={navStackStyles}
                             horizontal={true}
                             grow={5}
-                            verticalAlign={stackTop}
-                            horizontalAlign={stackTop}
+                            //verticalAlign={stackTop}
+                            //horizontalAlign={stackTop}
                             tokens={{
                                 padding: 0,
                                 childrenGap: 0,
@@ -282,8 +282,9 @@ class Wizard extends React.Component {
                             {/* Body Section - Right Side */}
                             <StackItem
                                 styles={testStyle}
-                                horizontalAlign={stackStretch}
-                                grow={true}>
+                            //horizontalAlign={stackStretch}
+                            //grow={true}
+                            >
 
                                 <Stack
                                     tokens={{
