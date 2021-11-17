@@ -48,6 +48,8 @@ class Wizard extends React.Component {
     }
 
     set() {
+        console.log("Entering Set. Show? " + this.props.show);
+
         let isOpen = this.props.show ? true : false;
 
         this.setState(
@@ -109,31 +111,32 @@ class Wizard extends React.Component {
                 height: 'auto',
                 background: navBgColor,
                 border: '1px solid ' + navBorderColor,
-            }
+            },
         };
         const panelHeadingTextStyles = {
             root: {
                 color: defaultTextColor,
-            }
+            },
         }
 
         /** Wizard Heading */
         var wizardHeading = '';
         if (this.props.title) {
-            headerTxt = (
+            wizardHeading = (
                 <Text
                     variant={panelHeadingTextVariant}
                     block>
-                    {this.props.title.trim()}
+                    {this.props.title?.trim()}
                 </Text>
             );
         }
 
+        let foo = "Panel Heading!";
         let panelHeading = (
             <Text
                 styles={panelHeadingTextStyles}
                 variant={panelHeadingTextVariant}>
-                "Panel Heading!"
+                {foo}
             </Text>
         );
 
@@ -163,7 +166,7 @@ class Wizard extends React.Component {
                     {/* Modal Display Area */}
                     <Stack
                         horizontal={false}
-                        horizontalAlign={'stretch'}
+                        horizontalAlign={stackStretch}
                         styles={headerStackItemStyles}>
 
                         {/* Header and Close button */}
@@ -191,9 +194,9 @@ class Wizard extends React.Component {
 
                             <Stack.Item>
                                 <ActionButton
-                                    iconName="ChromeClose"
-                                    tooltip="Close"
-                                    text=''
+                                    iconName={"ChromeClose"}
+                                    tooltip={"Close"}
+                                    text={''}
                                     onClick={() => this._onDismissClicked()}
                                 />
                             </Stack.Item>
@@ -243,7 +246,7 @@ class Wizard extends React.Component {
                                         horizontalAlign={stackCenter}
                                         verticalAlign={stackTop}
                                     >
-                                        {this.props.children}
+                                        {"Hello!"}
                                     </Stack>
 
                                 </Stack>
