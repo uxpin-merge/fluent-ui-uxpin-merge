@@ -267,6 +267,7 @@ class Wizard extends React.Component {
                             {/* Body Section - Right Side */}
                             <StackItem>
                                 <Stack
+                                    styles={navStackStyles}
                                     tokens={{
                                         childrenGap: 24,
                                         padding: 24,
@@ -302,8 +303,8 @@ class Wizard extends React.Component {
                             horizontalAlign={stackTop}
                             styles={footerStackItemStyles}
                             tokens={{
-                                padding: 0,
-                                childrenGap: 12,
+                                padding: 12,
+                                childrenGap: 24,
                             }}>
 
                             {/* Left Side Help Button */}
