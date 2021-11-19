@@ -28,8 +28,6 @@ const navBorderColor = '#d2d0ce';     //neutralQuaternary
 const defaultTextColor = '#000000';    //black
 const panelHeadingTextVariant = 'xLarge';
 
-/** Width for the Nav control displaying the steps */
-const navStepWidth = 211;
 const stackStretch = 'stretch';
 const stackTop = 'start';
 const stackCenter = 'center';
@@ -44,6 +42,14 @@ const wizardStackItemStyles = {
 const bodyPanelStyle = {
     root: {
         background: '#ffffff',
+    },
+};
+const navStyles = {
+    root: {
+        width: 211,
+        minHeight: '200',
+        height: 'auto',
+        paddingTop: 24,
     },
 };
 
@@ -174,10 +180,6 @@ class Wizard extends React.Component {
         return navProps;
     }
 
-    _onRenderItem(item, index) {
-
-    }
-
     _setNewIndex(index) {
         //Our state is 1 based
         let newIndex = index < 1 ? 1 :
@@ -189,10 +191,6 @@ class Wizard extends React.Component {
                 { index: newIndex }
             )
         }
-    }
-
-    _onStepClick(index) {
-
     }
 
     _onNavItemClick(item) {
@@ -265,14 +263,6 @@ class Wizard extends React.Component {
                 borderRight: '1px solid ' + navBorderColor,
             },
         };
-        const navStyles = {
-            root: {
-                width: navStepWidth,
-                minHeight: '200',
-                height: 'auto',
-                paddingTop: '24px',
-            },
-        };
 
         const footerStackItemStyles = {
             root: {
@@ -321,7 +311,12 @@ class Wizard extends React.Component {
             );
         }
 
-        let selectedNavKey = this.state.navSteps[this.state.index - 1].key;
+        var selectedNavKey = "";
+        if (this.state.index <= this.state.navSteps.length) {
+            let item = this.state.navSteps[this.state.index - 1];
+            if (item)
+                selectedNavKey = item.key;
+        }
         console.log("selectedNavKey: " + selectedNavKey);
         let navGroupParams = [
             { links: this.state.navSteps }
