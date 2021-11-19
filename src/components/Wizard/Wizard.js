@@ -302,7 +302,9 @@ class Wizard extends React.Component {
             onClick={() => this._onBackClick()}
         />);
 
-        let nextBtnLabel = this.state.index === this.state.navSteps.length ? this.props.submitLabel : defaultNextLabel;
+        let nextBtnLabel = this.state.index === this.state.navSteps.length
+            && this.props.submitLabel.trim().length > 0 ?
+            this.props.submitLabel : defaultNextLabel;
 
         console.log("nextBtnLabel: " + nextBtnLabel);
 
@@ -319,6 +321,7 @@ class Wizard extends React.Component {
             );
         }
 
+        //For the Nav control
         var selectedNavKey = "";
         if (this.state.index <= this.state.navSteps.length) {
             let item = this.state.navSteps[this.state.index - 1];
