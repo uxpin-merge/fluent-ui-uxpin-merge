@@ -328,6 +328,8 @@ class Wizard extends React.Component {
             { links: this.state.navSteps }
         ];
 
+        console.log("navGroupParams: " + JSON.stringify(navGroupParams));
+
         return (
 
             <div>
@@ -607,6 +609,7 @@ Wizard.defaultProps = {
     selectedIndex: 1,
     dismissOnCancel: true,
     submitLabel: defaultSubmitLabel,
+    showHelp: true,
 };
 
 
