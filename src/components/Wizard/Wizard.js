@@ -322,6 +322,7 @@ class Wizard extends React.Component {
         }
 
         let selectedNavKey = this.state.navSteps[this.state.index - 1].key;
+        console.log("selectedNavKey: " + selectedNavKey);
         let navGroupParams = [
             { links: this.state.navSteps }
         ];
