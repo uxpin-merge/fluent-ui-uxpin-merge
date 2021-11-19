@@ -11,6 +11,7 @@ import Link from '../Link/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import * as UXPinParser from './UXPinParser';
 
 
 
@@ -28,6 +29,7 @@ const navBorderColor = '#d2d0ce';     //neutralQuaternary
 const defaultTextColor = '#000000';    //black
 const panelHeadingTextVariant = 'xLarge';
 const defaultNextLabel = "Next";
+const defaultSubmitLabel = "Submit";
 
 const stackStretch = 'stretch';
 const stackTop = 'start';
@@ -220,6 +222,8 @@ class Wizard extends React.Component {
 
     _onCancelClick() {
         console.log("On cancel clicked");
+        if (this.props.dismissOnCancel)
+            this.dismissControl(true);
     }
 
     _onHelpClick() {
@@ -227,12 +231,13 @@ class Wizard extends React.Component {
     }
 
     _onDismissClicked() {
-        this.dismissControl(true);
+        if (this.props.dismissOnCancel)
+            this.dismissControl(true);
     }
 
-    dismissControl(notifyUXPin) {
+    dismissControl() {
         //Notify UXPin that the Close icon has been clicked on.
-        if (notifyUXPin && this.props.dismiss) {
+        if (this.props.dismiss) {
             this.props.dismiss();
         }
 
@@ -294,7 +299,12 @@ class Wizard extends React.Component {
             );
         }
 
-        console.log("Render. index: " + this.state.index);
+        let helpBtn = !this.props.showHelp ? '' : (<ActionButton
+            iconName={"info"}
+            text={''}
+            tooltip={'Help'}
+            onClick={() => this._onHelpClick()}
+        />);
 
         let backBtn = this.state.index < 2 ? '' : (<Button
             primary={false}
@@ -302,11 +312,10 @@ class Wizard extends React.Component {
             onClick={() => this._onBackClick()}
         />);
 
-        let nextBtnLabel = this.state.index === this.state.navSteps.length
-            && this.props.submitLabel.trim().length > 0 ?
-            this.props.submitLabel : defaultNextLabel;
-
-        console.log("nextBtnLabel: " + nextBtnLabel);
+        let nextBtnLabel = this.state.index < this.state.navSteps.length ?
+            defaultNextLabel :
+            this.props.submitLabel.trim().length > 0 ?
+                this.props.submitLabel : defaultSubmitLabel;
 
         var panelHeading = undefined;
         if (this.state.index <= this.state.steps.length) {
@@ -492,12 +501,7 @@ class Wizard extends React.Component {
                                 verticalAlign={stackCenter}
                                 grow={3}
                             >
-                                <ActionButton
-                                    iconName={"info"}
-                                    text={''}
-                                    tooltip={'Help'}
-                                    onClick={() => this._onHelpClick()}
-                                />
+                                {helpBtn}
                             </StackItem>
 
                             <Stack
@@ -575,6 +579,12 @@ Wizard.propTypes = {
     submitLabel: PropTypes.string,
 
     /**
+    * @uxpindescription Whether to display the Help Button 
+    * @uxpinpropname Show Help Button
+    */
+    showHelp: PropTypes.bool,
+
+    /**
     * @uxpindescription Whether to hide the Wizard immediately when the user hits the Cancel or Close controls. If False, then the Wizard must be closed by manually setting the Show prop to false. 
     * @uxpinpropname Hide on Dismiss
     */
@@ -609,7 +619,7 @@ Wizard.defaultProps = {
     steps: defaultNavItems,
     selectedIndex: 1,
     dismissOnCancel: true,
-    submitLabel: "Submit",
+    submitLabel: defaultSubmitLabel,
 };
 
 
