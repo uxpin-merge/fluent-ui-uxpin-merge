@@ -368,7 +368,7 @@ class Wizard extends React.Component {
                                 >
                                     <Nav
                                         styles={navStyles}
-                                        groups={this.state.steps}
+                                        groups={this.state.navSteps}
                                     />
                                 </Stack>
                             </StackItem>
@@ -540,6 +540,7 @@ Wizard.defaultProps = {
     show: false,
     title: "Wizard",
     steps: defaultNavItems,
+    selectedIndex: 1,
 };
 
 
