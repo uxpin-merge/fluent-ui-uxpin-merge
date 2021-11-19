@@ -502,7 +502,7 @@ class Wizard extends React.Component {
                                 <Button
                                     primary={false}
                                     text={"Back"}
-                                    onClick={() => this._onNextClick()}
+                                    onClick={() => this._onBackClick()}
                                 />
                                 <Button
                                     primary={true}
