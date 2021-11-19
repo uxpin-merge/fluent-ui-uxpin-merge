@@ -11,7 +11,7 @@ import Link from '../Link/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import * as UXPinParser from './UXPinParser';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -73,8 +73,6 @@ class Wizard extends React.Component {
 
         let stepList = this._getStepList();
         let navItems = this._getStepNavItems(stepList);
-
-        console.log("navItems: " + JSON.stringify(navItems));
 
         //Normalize the Selected Index
         let index = this.props.selectedIndex < 1 ? 1 :
@@ -162,7 +160,6 @@ class Wizard extends React.Component {
             let stepInfo = stepParams[i];
             if (stepInfo.step) {
                 let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined, false);
-                // let navParams = this._getNavItemProps(i, stepInfo.step, undefined, false);
 
                 if (navParams)
                     navItems.push(navParams);
@@ -170,16 +167,6 @@ class Wizard extends React.Component {
         }
 
         return navItems;
-    }
-
-    _getNavItemProps(index, text, iconName, disabled) {
-        let navProps = {
-            key: index + 1,
-            name: text ? text : '',
-            icon: iconName ? iconName : '',
-            disabled: disabled,
-        }
-        return navProps;
     }
 
     _setNewIndex(index) {
