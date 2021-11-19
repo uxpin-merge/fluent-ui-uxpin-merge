@@ -302,7 +302,7 @@ class Wizard extends React.Component {
             onClick={() => this._onBackClick()}
         />);
 
-        let nextBtnLabel = this.state.index === this.state.navSteps.length ? this.props.submitBtnText : defaultNextLabel;
+        let nextBtnLabel = this.state.index === this.state.navSteps.length ? this.props.submitLabel : defaultNextLabel;
 
         console.log("nextBtnLabel: " + nextBtnLabel);
 
@@ -566,7 +566,7 @@ Wizard.propTypes = {
     steps: PropTypes.string,
 
     /**
-     * @uxpindescription The text to be displayed in the Submit button. Defaults to "Submit"; 
+     * @uxpindescription The text to be displayed in the Submit button on the final step.
      * @uxpinpropname Submit Label
      */
     submitLabel: PropTypes.string,
@@ -606,6 +606,7 @@ Wizard.defaultProps = {
     steps: defaultNavItems,
     selectedIndex: 1,
     dismissOnCancel: true,
+    submitLabel: "Submit",
 };
 
 
