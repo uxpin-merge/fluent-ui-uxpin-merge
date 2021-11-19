@@ -61,9 +61,9 @@ class Wizard extends React.Component {
             this.props.selectedIndex > stepList.length ? stepList.length :
                 this.props.selectedIndex;
 
-        console.log("stepList: " + stepList);
-        console.log("navItems: " + navItems);
-        console.log("index: " + index);
+        console.log("stepList: " + JSON.stringify(stepList));
+        console.log("navItems: " + JSON.stringify(navItems));
+        console.log("index: " + index + ", selected index: " + this.props.selectedIndex);
 
         this.setState(
             {
