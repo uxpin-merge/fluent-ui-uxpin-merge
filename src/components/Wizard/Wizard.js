@@ -270,6 +270,7 @@ class Wizard extends React.Component {
                 width: navStepWidth,
                 minHeight: '200',
                 height: 'auto',
+                paddingTop: '24px',
             },
         };
 
@@ -320,6 +321,7 @@ class Wizard extends React.Component {
             );
         }
 
+        let selectedNavKey = this.state.navSteps[this.state.index - 1].key;
         let navGroupParams = [
             { links: this.state.navSteps }
         ];
@@ -415,7 +417,7 @@ class Wizard extends React.Component {
                                             <Nav
                                                 {...this.props}
                                                 styles={navStyles}
-                                                selectedKey={this.state.index - 1}
+                                                selectedKey={selectedNavKey}
                                                 groups={navGroupParams}
                                                 onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
                                             />
