@@ -45,14 +45,12 @@ class Wizard extends React.Component {
 
         this.state = {
             steps: [],
-            pageHeadings: [],
+            navSteps: [],
             open: false,
         }
     }
 
     set() {
-        console.log("Entering Set. Show? " + this.props.show);
-
         this.setState(
             { open: this.props.show }
         )
@@ -68,6 +66,54 @@ class Wizard extends React.Component {
             prevProps.show !== this.props.show) {
             this.set();
         }
+    }
+
+    _getStepList() {
+        let stepList = [];
+
+        if (this.props.steps) {
+            let items = this.props.steps.match(/[^\r\n]+/g);
+
+            if (items && items.length) {
+                for (var i = 0; i < items.length; i++) {
+                    let item = items[i];
+
+                    let stepInfo = this._parseStepInfo(item);
+
+                    if (stepInfo)
+                        stepList.push(stepInfo);
+                }
+            }
+        }
+
+        return stepList;
+    }
+
+    _parseStepInfo(rawStr) {
+        if (rawStr && rawStr.length) {
+
+            //If the user entered it...
+            let sData = rawStr.split("|");
+            console.log("sData: " + sData);
+
+            //Parse left side: display name
+            if (sData && sData.length) {
+
+                let left = sData[0].trim();
+
+                //This is the optional Panel Heading for the step. 
+                let right = sData[1] ? sData[1].trim() : left;
+
+                let stepInfo = {
+                    step: left,
+                    heading: right,
+                };
+                return stepInfo;
+            }
+        }
+
+        //If we made it this far, there were errors.
+        return undefined;
     }
 
     _onRenderItem(item, index) {
@@ -145,6 +191,11 @@ class Wizard extends React.Component {
                 height: 'auto',
             },
         };
+        const bodyPanelStyle = {
+            root: {
+                background: '#ffffff',
+            },
+        };
         const footerStackItemStyles = {
             root: {
                 borderTop: '1px dashed ' + navBorderColor,
@@ -184,12 +235,6 @@ class Wizard extends React.Component {
             </Text>
         );
 
-
-        const testStyle = {
-            root: {
-                background: '#ffffff',
-            },
-        };
 
         return (
 
@@ -286,7 +331,7 @@ class Wizard extends React.Component {
 
                             {/* Body Section - Right Side */}
                             <StackItem
-                                styles={testStyle}
+                                styles={bodyPanelStyle}
                                 horizontal={true}
                                 horizontalAlign={stackStretch}
                                 grow={true}
