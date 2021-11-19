@@ -172,7 +172,7 @@ class Wizard extends React.Component {
             disabled: disabled,
         }
         return navProps;
-    },
+    }
 
     _onRenderItem(item, index) {
 
