@@ -154,7 +154,7 @@ class Wizard extends React.Component {
         for (i = 0; i < stepParams.length; i++) {
             let stepInfo = stepParams[i];
             if (stepInfo.step) {
-                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined, false);
+                let navParams = this.getNavItemProps(i, stepInfo.step, undefined, false);
 
                 if (navParams)
                     navItems.push(navParams);
@@ -163,6 +163,16 @@ class Wizard extends React.Component {
 
         return navItems;
     }
+
+    _getNavItemProps(index, text, iconName, disabled) {
+        let navProps = {
+            key: index + 1,
+            name: text ? text : '',
+            icon: iconName ? iconName : '',
+            disabled: disabled,
+        }
+        return navProps;
+    },
 
     _onRenderItem(item, index) {
 
@@ -280,7 +290,7 @@ class Wizard extends React.Component {
 
         var panelHeading = undefined;
         console.log("index: " + this.state.index + " step count: " + this.state.steps.length);
-        if (this.state.index < this.state.steps.length) {
+        if (this.state.index <= this.state.steps.length) {
             let stepInfo = this.state.steps[this.state.index - 1];
 
             console.log("Panel heading: "
