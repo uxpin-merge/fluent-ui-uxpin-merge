@@ -72,6 +72,8 @@ class Wizard extends React.Component {
         let stepList = this._getStepList();
         let navItems = this._getStepNavItems(stepList);
 
+        console.log("navItems: " + JSON.stringify(navItems));
+
         //Normalize the Selected Index
         let index = this.props.selectedIndex < 1 ? 1 :
             this.props.selectedIndex > stepList.length ? stepList.length :
@@ -300,7 +302,7 @@ class Wizard extends React.Component {
             onClick={() => this._onBackClick()}
         />);
 
-        let nextBtnLabel = this.state.index === this.navSteps.length ? this.props.submitBtnText : defaultNextLabel;
+        let nextBtnLabel = this.state.index === this.state.navSteps.length ? this.props.submitBtnText : defaultNextLabel;
 
         console.log("nextBtnLabel: " + nextBtnLabel);
 
