@@ -27,6 +27,7 @@ const navBgColor = '#f3f2f1';         //neutralLighter
 const navBorderColor = '#d2d0ce';     //neutralQuaternary
 const defaultTextColor = '#000000';    //black
 const panelHeadingTextVariant = 'xLarge';
+const defaultNextLabel = "Next";
 
 const stackStretch = 'stretch';
 const stackTop = 'start';
@@ -75,10 +76,6 @@ class Wizard extends React.Component {
         let index = this.props.selectedIndex < 1 ? 1 :
             this.props.selectedIndex > stepList.length ? stepList.length :
                 this.props.selectedIndex;
-
-        console.log("stepList: " + JSON.stringify(stepList));
-        console.log("navItems: " + JSON.stringify(navItems));
-        console.log("index: " + index + ", selected index: " + this.props.selectedIndex);
 
         this.setState(
             {
@@ -160,7 +157,8 @@ class Wizard extends React.Component {
         for (i = 0; i < stepParams.length; i++) {
             let stepInfo = stepParams[i];
             if (stepInfo.step) {
-                let navParams = this._getNavItemProps(i, stepInfo.step, undefined, false);
+                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined false);
+                // let navParams = this._getNavItemProps(i, stepInfo.step, undefined, false);
 
                 if (navParams)
                     navItems.push(navParams);
@@ -294,13 +292,17 @@ class Wizard extends React.Component {
             );
         }
 
+        let backBtn = this.state.index < 2 ? '' : (<Button
+            primary={false}
+            text={"Back"}
+            onClick={() => this._onBackClick()}
+        />);
+
+        let nextBtnLabel = this.state.index === this.navSteps.length ? this.props.submitBtnText : defaultNextLabel;
+
         var panelHeading = undefined;
-        console.log("index: " + this.state.index + " step count: " + this.state.steps.length);
         if (this.state.index <= this.state.steps.length) {
             let stepInfo = this.state.steps[this.state.index - 1];
-
-            console.log("Panel heading: "
-                + stepInfo.heading);
 
             panelHeading = (
                 <Text
@@ -317,7 +319,6 @@ class Wizard extends React.Component {
             if (item)
                 selectedNavKey = item.key;
         }
-        console.log("selectedNavKey: " + selectedNavKey);
         let navGroupParams = [
             { links: this.state.navSteps }
         ];
@@ -503,14 +504,10 @@ class Wizard extends React.Component {
                                     href={''}
                                     onClick={() => this._onCancelClick()}
                                 />
-                                <Button
-                                    primary={false}
-                                    text={"Back"}
-                                    onClick={() => this._onBackClick()}
-                                />
+                                {backBtn}
                                 <Button
                                     primary={true}
-                                    text={"Next"}
+                                    text={nextBtnLabel}
                                     onClick={() => this._onNextClick()}
                                 />
                             </Stack>
@@ -563,6 +560,18 @@ Wizard.propTypes = {
     steps: PropTypes.string,
 
     /**
+     * @uxpindescription The text to be displayed in the Submit button. Defaults to "Submit"; 
+     * @uxpinpropname Submit Label
+     */
+    submitLabel: PropTypes.string,
+
+    /**
+    * @uxpindescription Whether to hide the Wizard immediately when the user hits the Cancel or Close controls. If False, then the Wizard must be closed by manually setting the Show prop to false. 
+    * @uxpinpropname Hide on Dismiss
+    */
+    dismissOnCancel: PropTypes.bool,
+
+    /**
      * @uxpindescription Fires when the Submit Button is clicked.
      * @uxpinpropname Submit Clicked
      */
@@ -590,6 +599,7 @@ Wizard.defaultProps = {
     title: "Wizard",
     steps: defaultNavItems,
     selectedIndex: 1,
+    dismissOnCancel: true,
 };
 
 
