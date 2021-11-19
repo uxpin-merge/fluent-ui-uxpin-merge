@@ -304,6 +304,7 @@ class Wizard extends React.Component {
             this.props.submitLabel.trim().length > 0 ?
                 this.props.submitLabel : defaultSubmitLabel;
 
+        console.log("panel heading next");
         var panelHeading = undefined;
         if (this.state.index <= this.state.steps.length) {
             let stepInfo = this.state.steps[this.state.index - 1];
@@ -317,6 +318,7 @@ class Wizard extends React.Component {
             );
         }
 
+        console.log("nav control next");
         //For the Nav control
         var navStepControl = '';
         if (this.state.navSteps.length > 0) {
