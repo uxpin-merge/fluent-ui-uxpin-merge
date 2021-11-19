@@ -408,13 +408,16 @@ class Wizard extends React.Component {
                                     horizontalAlign={stackStretch}
                                     grow={true}
                                 >
-                                    <Nav
-                                        {...this.props}
-                                        styles={navStyles}
-                                        selectedKey={this.state.index - 1}
-                                        groups={this.state.navSteps}
-                                        onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
-                                    />
+                                    <>
+                                        {this.state.navSteps.length > 0 ?
+                                            <Nav
+                                                {...this.props}
+                                                styles={navStyles}
+                                                selectedKey={this.state.index - 1}
+                                                groups={this.state.navSteps}
+                                                onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
+                                            />}
+                                    </>
                                 </Stack>
                             </StackItem>
 
