@@ -74,6 +74,8 @@ class Wizard extends React.Component {
         let stepList = this._getStepList();
         let navItems = this._getStepNavItems(stepList);
 
+        console.log("Set! navItems: " + JSON.stringify(navItems));
+
         //Normalize the Selected Index
         let index = this.props.selectedIndex < 1 ? 1 :
             this.props.selectedIndex > stepList.length ? stepList.length :
@@ -321,7 +323,7 @@ class Wizard extends React.Component {
         console.log("nav control next");
         //For the Nav control
         var navStepControl = '';
-        if (this.state.navSteps.length > 0) {
+        if (this.state.navSteps && this.state.navSteps.length > 0) {
             var selectedNavKey = "";
             if (this.state.index <= this.state.navSteps.length) {
                 let item = this.state.navSteps[this.state.index - 1];
