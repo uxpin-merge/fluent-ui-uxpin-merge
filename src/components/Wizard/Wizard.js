@@ -13,11 +13,6 @@ import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
-const _dragOptions = {
-    moveMenuItemText: 'Move',
-    closeMenuItemText: 'Close',
-};
-
 
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
@@ -38,6 +33,20 @@ const navStepWidth = 211;
 const stackStretch = 'stretch';
 const stackTop = 'start';
 const stackCenter = 'center';
+
+const wizardStackItemStyles = {
+    root: {
+        background: '#ffffff',
+        minWidth: '80vw',
+        minHeight: '80vh',
+    },
+};
+const bodyPanelStyle = {
+    root: {
+        background: '#ffffff',
+    },
+};
+
 
 class Wizard extends React.Component {
     constructor(props) {
@@ -200,14 +209,7 @@ class Wizard extends React.Component {
     }
 
     render() {
-        /** Misc Constants */
-        const wizardStackItemStyles = {
-            root: {
-                background: '#ffffff',
-                minWidth: '80vw',
-                minHeight: '80vh',
-            },
-        };
+        /** Misc Dynamic Constants */
         const headerStackItemStyles = {
             root: {
                 background: headingBgColor,
@@ -230,11 +232,7 @@ class Wizard extends React.Component {
                 height: 'auto',
             },
         };
-        const bodyPanelStyle = {
-            root: {
-                background: '#ffffff',
-            },
-        };
+
         const footerStackItemStyles = {
             root: {
                 borderTop: '1px dashed ' + navBorderColor,
@@ -265,9 +263,12 @@ class Wizard extends React.Component {
             );
         }
 
-        var panelHeading = '';
+        var panelHeading = undefined;
         if (this.state.index < this.state.steps) {
             let stepInfo = this.state.steps[this.state.index - 1];
+
+            console.log("Panel heading: "
+                + stepInfo.heading);
 
             panelHeading = (
                 <Text
@@ -368,6 +369,7 @@ class Wizard extends React.Component {
                                 >
                                     <Nav
                                         styles={navStyles}
+                                        selectedKey={this.state.index - 1}
                                         groups={this.state.navSteps}
                                     />
                                 </Stack>
@@ -501,8 +503,8 @@ Wizard.propTypes = {
     title: PropTypes.string,
 
     /**
-     * @uxpindescription The 1-based index value of the tab to be shown as selected by default. 
-     * @uxpinpropname Selected Index
+     * @uxpindescription The 1-based index value of the Steps Navigation control to be shown as selected by default. 
+     * @uxpinpropname Index
      */
     selectedIndex: PropTypes.number,
 
