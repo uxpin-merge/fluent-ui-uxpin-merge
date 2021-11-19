@@ -320,7 +320,9 @@ class Wizard extends React.Component {
             );
         }
 
-
+        let navGroupParams = [
+            { links: this.state.navSteps }
+        ];
 
         return (
 
@@ -414,9 +416,10 @@ class Wizard extends React.Component {
                                                 {...this.props}
                                                 styles={navStyles}
                                                 selectedKey={this.state.index - 1}
-                                                groups={this.state.navSteps}
+                                                groups={navGroupParams}
                                                 onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
-                                            />}
+                                            />
+                                            : <div> </div>}
                                     </>
                                 </Stack>
                             </StackItem>
