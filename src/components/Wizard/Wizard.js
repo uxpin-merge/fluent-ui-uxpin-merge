@@ -154,7 +154,7 @@ class Wizard extends React.Component {
         for (i = 0; i < stepParams.length; i++) {
             let stepInfo = stepParams[i];
             if (stepInfo.step) {
-                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, "", false, false);
+                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined, false);
 
                 if (navParams)
                     navItems.push(navParams);
@@ -170,6 +170,21 @@ class Wizard extends React.Component {
 
     _onStepClick(index) {
 
+    }
+
+    _onNavItemClick(item) {
+        if (!item)
+            return;
+
+        //The item's key is already its 1-based index.
+        let index = item.key;
+        console.log("On nav item clicked: " + index);
+
+        if (index !== this.state.index) {
+            // this.setState(
+            //     { index: index }
+            // )
+        }
     }
 
     _onNextClick() {
@@ -371,6 +386,7 @@ class Wizard extends React.Component {
                                         styles={navStyles}
                                         selectedKey={this.state.index - 1}
                                         groups={this.state.navSteps}
+                                        onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
                                     />
                                 </Stack>
                             </StackItem>
