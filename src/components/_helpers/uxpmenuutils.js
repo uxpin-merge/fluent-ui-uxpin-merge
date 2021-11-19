@@ -50,7 +50,7 @@ export const UxpMenuUtils = {
     * any explicitly identified children. 
     * The preferred childTag must be the first character on the line. 
     * @param {string} rawPropText The raw UXPin prop text for a menu or item list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
-    * @returns {bool} Returns true if explicitly identified children are found, false otherwise. 
+    * @returns {boolean} Returns true if explicitly identified children are found, false otherwise. 
     */
    testForChildren: function (rawPropText) {
       if (rawPropText) {
@@ -74,8 +74,8 @@ export const UxpMenuUtils = {
    /**
     * Parses a simple list of raw UXPin prop text from a codeeditor. Does not support dividers or groups. 
     * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
-    * @param {bool} parseIcon True to parse the prop text for an icon name. Will set the iconProps params. False to skip icon name processing.
-    * @param {bool} isDisabled Set the 'disabled' prop.
+    * @param {boolean} parseIcon True to parse the prop text for an icon name. Will set the iconProps params. False to skip icon name processing.
+    * @param {boolean} isDisabled Set the 'disabled' prop.
     * @returns {Array} Returns an array of props. Props include key, text, iconProps and disabled. 
     */
    parseSimpleListText: function (rawPropText, parseIcon, isDisabled) {
@@ -122,7 +122,7 @@ export const UxpMenuUtils = {
    /**
     * Parses a complex list of raw UXPin prop text from a codeeditor. Supports dividers and groups. 
     * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
-    * @param {bool} isContextMenuType Fluent has two types of enums for Dividers and Group Headers. Set true to set these with the Context Menu set of enum values. False for the Selectable Option kind. 
+    * @param {boolean} isContextMenuType Fluent has two types of enums for Dividers and Group Headers. Set true to set these with the Context Menu set of enum values. False for the Selectable Option kind. 
     * @returns {Array} Returns an array of props. Props include key, itemType, text, iconProps and a custom uxpType. 
     */
    parseItemText: function (rawPropText, isContextMenuType) {
@@ -176,7 +176,7 @@ export const UxpMenuUtils = {
     * @param {string} rawPropText The raw UXPin prop text for a list. Pass in the raw multi-line string, entered into a Codeeditor in the Props Panel.
     * @param {number} selectedIndex The 1-based index for the Nav control's selected index item. 
     * @param {Array} disabledList A list of integers. The list represents 1-based indexes of items that should be disabled. 
-    * @param {string} allowChildren True to allow child groupings. False to disallow children and have a single layer. If False, also removes the starting childTag, if present. 
+    * @param {boolean} allowChildren True to allow child groupings. False to disallow children and have a single layer. If False, also removes the starting childTag, if present. 
     * @returns {Array} Returns an array of props. Props include key, itemType, name, icon and any child groups. 
     */
    parseNavItemText: function (rawPropText, selectedIndex, disabledList, allowChildren) {
@@ -257,7 +257,7 @@ export const UxpMenuUtils = {
     * Affirms whether the item at the specified index is a child menu/list item. If it starts with the childTag, then it will return true. 
     * @param {Array} itemList An array of strings. 
     * @param {number} testIndex The index for the string to test whether it starts with the childTag. 
-    * @returns {bool} True if the item at the specified index starts with the childTag. False otherwise.  
+    * @returns {boolean} True if the item at the specified index starts with the childTag. False otherwise.  
     */
    isChildItem: function (itemList, testIndex) {
       if (itemList && itemList.length && itemList.length > testIndex) {
@@ -273,9 +273,9 @@ export const UxpMenuUtils = {
     * @param {number} index Index value to use in creating the item's key prop.
     * @param {string} text The value to use for the text prop. 
     * @param {string} iconName The value to use for the iconProps iconName prop. 
-    * @param {bool} isHeaderCandidate True if this item might be a header item.
-    * @param {bool} isChild True if this item is a known child item. 
-    * @param {bool} isContextMenuType True to apply Context Menu enums for Divider and Header items. False to use Selectable Option enums instead. 
+    * @param {boolean} isHeaderCandidate True if this item might be a header item.
+    * @param {boolean} isChild True if this item is a known child item. 
+    * @param {boolean} isContextMenuType True to apply Context Menu enums for Divider and Header items. False to use Selectable Option enums instead. 
     * @returns {string} Returns a JSON props object representing a menu item. 
     */
    getContextMenuProps: function (index, text, iconName, isHeaderCandidate, isChild, isContextMenuType) {
@@ -315,8 +315,8 @@ export const UxpMenuUtils = {
     * @param {number} index Index value to use in creating the item's key prop.
     * @param {string} text The value to use for the text prop. 
     * @param {string} iconName The value to use for the iconProps icon prop.
-    * @param {string} isExpanded If a group, whether it should be shown as expande by default.
-    * @param {bool} disabled True if this item should be disabled. False otherwise.
+    * @param {boolean} isExpanded If a group, whether it should be shown as expande by default.
+    * @param {boolean} disabled True if this item should be disabled. False otherwise.
     * @returns {string} Returns a JSON props object representing a generic Nav item. 
     */
    getNavItemProps: function (index, text, iconName, isExpanded, disabled) {
@@ -331,6 +331,11 @@ export const UxpMenuUtils = {
       return navProps;
    },
 
+   /**
+    * Appends the child item's Nav Item-formatted props to the parent item's list of child Links.  
+    * @param {string} parentItem The Nav Item-formatted props for a nav group in a Nav UI control.
+    * @param {string} childItem The Nav Item-formatted props for a child item in a Nav UI control. 
+    */
    appendNavItemChildProps: function (parentItem, childItem) {
       if (!parentItem || !childItem)
          return false;

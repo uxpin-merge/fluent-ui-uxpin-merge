@@ -47,12 +47,27 @@ class Wizard extends React.Component {
             steps: [],
             navSteps: [],
             open: false,
+            index: 1, //1-based
         }
     }
 
     set() {
+
+        let stepList = this._getStepList();
+        let navItems = this._getStepNavItems(stepList);
+
+        //Normalize the Selected Index
+        let index = this.props.selectedIndex < 1 ? 1 :
+            this.props.selectedIndex > stepList.length ? stepList.length :
+                this.props.selectedIndex;
+
         this.setState(
-            { open: this.props.show }
+            {
+                open: this.props.show,
+                index: index,
+                steps: stepList,
+                navSteps: navItems,
+            }
         )
     }
 
@@ -63,6 +78,7 @@ class Wizard extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.selectedIndex !== this.props.selectedIndex ||
             prevProps.steps !== this.props.steps ||
+            prevProps.selectedIndex !== this.props.selectedIndex ||
             prevProps.show !== this.props.show) {
             this.set();
         }
@@ -94,7 +110,6 @@ class Wizard extends React.Component {
 
             //If the user entered it...
             let sData = rawStr.split("|");
-            console.log("sData: " + sData);
 
             //Parse left side: display name
             if (sData && sData.length) {
@@ -114,6 +129,26 @@ class Wizard extends React.Component {
 
         //If we made it this far, there were errors.
         return undefined;
+    }
+
+    _getStepNavItems(stepParams) {
+        if (!stepParams || stepParams.length < 1)
+            return undefined;
+
+        let navItems = [];
+
+        var i;
+        for (i = 0; i < stepParams.length; i++) {
+            let stepInfo = stepParams[i];
+            if (stepInfo.step) {
+                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, "", false, false);
+
+                if (navParams)
+                    navItems.push(navParams);
+            }
+        }
+
+        return navItems;
     }
 
     _onRenderItem(item, index) {
@@ -226,14 +261,19 @@ class Wizard extends React.Component {
             );
         }
 
-        let foo = "Panel Heading! How freaking cool is this?? ";
-        let panelHeading = (
-            <Text
-                styles={panelHeadingTextStyles}
-                variant={panelHeadingTextVariant}>
-                {foo}
-            </Text>
-        );
+        var panelHeading = '';
+        if (this.state.index < this.state.steps) {
+            let stepInfo = this.state.steps[this.state.index - 1];
+
+            panelHeading = (
+                <Text
+                    styles={panelHeadingTextStyles}
+                    variant={panelHeadingTextVariant}>
+                    {stepInfo.heading}
+                </Text>
+            );
+        }
+
 
 
         return (
