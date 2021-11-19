@@ -178,6 +178,19 @@ class Wizard extends React.Component {
 
     }
 
+    _setNewIndex(index) {
+        //Our state is 1 based
+        let newIndex = index < 1 ? 1 :
+            index > this.state.steps.length ? this.state.steps.length :
+                index;
+
+        if (newIndex !== this.state.index) {
+            this.setState(
+                { index: newIndex }
+            )
+        }
+    }
+
     _onStepClick(index) {
 
     }
@@ -189,20 +202,22 @@ class Wizard extends React.Component {
         //The item's key is already its 1-based index.
         let index = item.key;
         console.log("On nav item clicked: " + index);
-
-        if (index !== this.state.index) {
-            // this.setState(
-            //     { index: index }
-            // )
-        }
+        this._setNewIndex(index);
     }
 
     _onNextClick() {
         console.log("On next clicked");
+
+        //If it's not the last item
+        let index = this.state.index + 1;
+        this._setNewIndex(index);
     }
 
     _onBackClick() {
         console.log("On back clicked");
+
+        let index = this.state.index - 1;
+        this._setNewIndex(index);
     }
 
     _onCancelClick() {
@@ -394,6 +409,7 @@ class Wizard extends React.Component {
                                     grow={true}
                                 >
                                     <Nav
+                                        {...this.props}
                                         styles={navStyles}
                                         selectedKey={this.state.index - 1}
                                         groups={this.state.navSteps}
