@@ -318,17 +318,30 @@ class Wizard extends React.Component {
         }
 
         //For the Nav control
-        var selectedNavKey = "";
-        if (this.state.index <= this.state.navSteps.length) {
-            let item = this.state.navSteps[this.state.index - 1];
-            if (item)
-                selectedNavKey = item.key;
-        }
-        let navGroupParams = this.state.navSteps.length < 1 ? [] : [
-            { links: this.state.navSteps }
-        ];
+        var navStepControl = '';
+        if (this.state.navSteps.length > 0) {
+            var selectedNavKey = "";
+            if (this.state.index <= this.state.navSteps.length) {
+                let item = this.state.navSteps[this.state.index - 1];
+                if (item)
+                    selectedNavKey = item.key;
+            }
+            let navGroupParams = [
+                { links: this.state.navSteps }
+            ];
 
-        console.log("navGroupParams: " + JSON.stringify(navGroupParams));
+            navStepControl = (
+                <Nav
+                    {...this.props}
+                    styles={navStyles}
+                    selectedKey={selectedNavKey}
+                    groups={navGroupParams}
+                    onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
+                />
+            );
+
+            console.log("navGroupParams: " + JSON.stringify(navGroupParams));
+        }
 
         return (
 
@@ -416,17 +429,7 @@ class Wizard extends React.Component {
                                     horizontalAlign={stackStretch}
                                     grow={true}
                                 >
-                                    <>
-                                        {this.state.navSteps.length > 0 ?
-                                            <Nav
-                                                {...this.props}
-                                                styles={navStyles}
-                                                selectedKey={selectedNavKey}
-                                                groups={navGroupParams}
-                                                onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
-                                            />
-                                            : <div> </div>}
-                                    </>
+                                    {navStepControl}
                                 </Stack>
                             </StackItem>
 
