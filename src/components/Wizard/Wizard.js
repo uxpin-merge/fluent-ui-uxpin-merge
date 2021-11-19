@@ -324,7 +324,7 @@ class Wizard extends React.Component {
             if (item)
                 selectedNavKey = item.key;
         }
-        let navGroupParams = [
+        let navGroupParams = this.state.navSteps.length < 1 ? [] : [
             { links: this.state.navSteps }
         ];
 
@@ -438,7 +438,6 @@ class Wizard extends React.Component {
                                 grow={true}
                             >
                                 <Stack
-
                                     tokens={{
                                         childrenGap: 24,
                                         padding: 24,
