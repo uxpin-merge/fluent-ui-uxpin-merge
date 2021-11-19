@@ -279,7 +279,8 @@ class Wizard extends React.Component {
         }
 
         var panelHeading = undefined;
-        if (this.state.index < this.state.steps) {
+        console.log("index: " + this.state.index + " step count: " + this.state.steps.length);
+        if (this.state.index < this.state.steps.length) {
             let stepInfo = this.state.steps[this.state.index - 1];
 
             console.log("Panel heading: "
