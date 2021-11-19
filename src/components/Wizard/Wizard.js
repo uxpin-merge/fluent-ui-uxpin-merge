@@ -154,7 +154,7 @@ class Wizard extends React.Component {
         for (i = 0; i < stepParams.length; i++) {
             let stepInfo = stepParams[i];
             if (stepInfo.step) {
-                let navParams = this.getNavItemProps(i, stepInfo.step, undefined, false);
+                let navParams = this._getNavItemProps(i, stepInfo.step, undefined, false);
 
                 if (navParams)
                     navItems.push(navParams);
