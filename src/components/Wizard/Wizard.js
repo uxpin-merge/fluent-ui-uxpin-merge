@@ -292,6 +292,8 @@ class Wizard extends React.Component {
             );
         }
 
+        console.log("Render. index: " + this.state.index);
+
         let backBtn = this.state.index < 2 ? '' : (<Button
             primary={false}
             text={"Back"}
@@ -299,6 +301,8 @@ class Wizard extends React.Component {
         />);
 
         let nextBtnLabel = this.state.index === this.navSteps.length ? this.props.submitBtnText : defaultNextLabel;
+
+        console.log("nextBtnLabel: " + nextBtnLabel);
 
         var panelHeading = undefined;
         if (this.state.index <= this.state.steps.length) {
