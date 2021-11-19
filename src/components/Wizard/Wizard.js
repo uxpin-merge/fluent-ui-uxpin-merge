@@ -85,8 +85,8 @@ class Wizard extends React.Component {
             {
                 open: this.props.show,
                 index: index,
-                steps: stepList,
-                navSteps: navItems,
+                steps: stepList ? stepList : [],
+                navSteps: navItems ? navItems : [],
             }
         )
     }
