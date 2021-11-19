@@ -74,8 +74,6 @@ class Wizard extends React.Component {
         let stepList = this._getStepList();
         let navItems = this._getStepNavItems(stepList);
 
-        console.log("Set! navItems: " + JSON.stringify(navItems));
-
         //Normalize the Selected Index
         let index = this.props.selectedIndex < 1 ? 1 :
             this.props.selectedIndex > stepList.length ? stepList.length :
@@ -306,7 +304,6 @@ class Wizard extends React.Component {
             this.props.submitLabel.trim().length > 0 ?
                 this.props.submitLabel : defaultSubmitLabel;
 
-        console.log("panel heading next");
         var panelHeading = undefined;
         if (this.state.index <= this.state.steps.length) {
             let stepInfo = this.state.steps[this.state.index - 1];
@@ -320,9 +317,8 @@ class Wizard extends React.Component {
             );
         }
 
-        console.log("nav control next");
         //For the Nav control
-        var navStepControl = '';
+        var navStepControl = (<div />);
         if (this.state.navSteps && this.state.navSteps.length > 0) {
             var selectedNavKey = "";
             if (this.state.index <= this.state.navSteps.length) {
@@ -343,8 +339,6 @@ class Wizard extends React.Component {
                     onLinkClick={(evt, item) => { this._onNavItemClick(item) }}
                 />
             );
-
-            console.log("navGroupParams: " + JSON.stringify(navGroupParams));
         }
 
         return (
