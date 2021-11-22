@@ -64,6 +64,7 @@ const navStackStyles = {
 const bodyStackStyles = {
     root: {
         background: '#f3f2f1',  //neutralLighter
+        overflowY: 'auto',
     },
 };
 const footerStackItemStyles = {
@@ -414,10 +415,10 @@ class Wizard extends React.Component {
                             {/* Nav: Display for the Steps */}
                             <StackItem
                                 styles={navStackStyles}
+                                verticalFill={true}
                             >
                                 <Stack
                                     grow={true}
-                                //horizontalAlign={stackStretch}
                                 >
                                     {navStepControl}
                                 </Stack>
