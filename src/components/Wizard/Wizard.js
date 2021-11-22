@@ -460,19 +460,21 @@ class Wizard extends React.Component {
                                         {/* Children Area for each panel */}
 
                                         {this.props.children &&
-                                            <ScrollablePane
-                                                initialScrollPosition={0}
+
+                                            <Stack
+                                                tokens={{
+                                                    childrenGap: 12
+                                                }}
+                                                horizontal={false}
+                                                verticalAlign={stackTop}
                                             >
-                                                <Stack
-                                                    tokens={{
-                                                        childrenGap: 12
-                                                    }}
-                                                    horizontal={false}
-                                                    verticalAlign={stackTop}
+                                                <ScrollablePane
+                                                    initialScrollPosition={0}
                                                 >
                                                     {this.props.children}
-                                                </Stack>
-                                            </ScrollablePane>
+                                                </ScrollablePane>
+                                            </Stack>
+
                                         }
 
                                     </StackItem>
