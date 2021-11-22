@@ -21,12 +21,7 @@ const defaultNavItems = `1 Details | Details
 2 Collaborators | Identify Collaborators
 3 Review | Review`;
 
-const defaultPanelPadding = 24;
-const headingBgColor = "#deecf9";     //themeLighter
-const headingTextColor = '#000000';   //black
-const navBgColor = '#f3f2f1';         //neutralLighter
-const navBorderColor = '#d2d0ce';     //neutralQuaternary
-const defaultTextColor = '#000000';    //black
+
 const panelHeadingTextVariant = 'xLarge';
 const defaultNextLabel = "Next";
 const defaultSubmitLabel = "Submit";
@@ -35,6 +30,11 @@ const stackStretch = 'stretch';
 const stackTop = 'start';
 const stackCenter = 'center';
 
+const headerStackItemStyles = {
+    root: {
+        background: "#deecf9", //themeLighter
+    },
+};
 const wizardStackItemStyles = {
     root: {
         background: '#ffffff',
@@ -55,6 +55,31 @@ const navStyles = {
         paddingTop: 24,
     },
 };
+const navStackStyles = {
+    root: {
+        borderRight: '1px solid #d2d0ce',   //neutralQuaternary
+    },
+};
+const bodyStackStyles = {
+    root: {
+        background: '#f3f2f1',  //neutralLighter
+    },
+};
+const footerStackItemStyles = {
+    root: {
+        borderTop: '1px dashed #d2d0ce',     //neutralQuaternary
+    },
+};
+const wizardHeadingTextStyles = {
+    root: {
+        color: '#000000',
+    },
+}
+const panelHeadingTextStyles = {
+    root: {
+        color: '#000000',
+    },
+}
 
 
 class Wizard extends React.Component {
@@ -239,40 +264,6 @@ class Wizard extends React.Component {
     }
 
     render() {
-        /** Misc Dynamic Constants */
-        const headerStackItemStyles = {
-            root: {
-                background: headingBgColor,
-            },
-        };
-        const bodyStackStyles = {
-            root: {
-                background: navBgColor,
-            },
-        };
-        const navStackStyles = {
-            root: {
-                borderRight: '1px solid ' + navBorderColor,
-            },
-        };
-
-        const footerStackItemStyles = {
-            root: {
-                borderTop: '1px dashed ' + navBorderColor,
-            },
-        };
-
-        const wizardHeadingTextStyles = {
-            root: {
-                color: headingTextColor,
-            },
-        }
-        const panelHeadingTextStyles = {
-            root: {
-                color: defaultTextColor,
-            },
-        }
-
         /** Wizard Heading */
         var wizardHeading = '';
         if (this.props.title) {
@@ -411,7 +402,7 @@ class Wizard extends React.Component {
                         <Stack
                             styles={bodyStackStyles}
                             horizontal={true}
-                            //grow={true}
+                            grow={false}
                             horizontalAlign={stackStretch}
                             tokens={{
                                 padding: 0,
@@ -421,8 +412,10 @@ class Wizard extends React.Component {
                             {/* Nav: Display for the Steps */}
                             <StackItem
                                 styles={navStackStyles}
+                                grow={false}
                             >
                                 <Stack
+                                    grow={false}
                                 //horizontalAlign={stackStretch}
                                 >
                                     {navStepControl}
