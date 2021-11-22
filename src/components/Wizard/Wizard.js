@@ -246,9 +246,14 @@ class Wizard extends React.Component {
     }
 
     _onCancelClick() {
+        //Notify UXPin that the Cancel command has been clicked on.
+        if (this.props.onCancel) {
+            this.props.onCancel();
+        }
+
         console.log("On cancel clicked");
-        if (this.props.dismissOnCancel)
-            this.dismissControl(true);
+        if (dismissOnCancel)
+            this.dismissControl();
     }
 
     _onHelpClick() {
@@ -256,17 +261,16 @@ class Wizard extends React.Component {
     }
 
     _onDismissClicked() {
-        console.log("_onDismissClicked");
-        if (this.props.dismissOnCancel)
-            this.dismissControl(true);
-    }
-
-    dismissControl() {
         //Notify UXPin that the Close icon has been clicked on.
         if (this.props.dismiss) {
             this.props.dismiss();
         }
 
+        console.log("_onDismissClicked");
+        this.dismissControl();
+    }
+
+    dismissControl() {
         //Set the control to not open to dismiss it.
         //We have to set the state and prop twice.
 
@@ -600,8 +604,8 @@ Wizard.propTypes = {
     showHelp: PropTypes.bool,
 
     /**
-    * @uxpindescription Whether to hide the Wizard immediately when the user hits the Cancel or Close controls. If False, then the Wizard must be closed by manually setting the Show prop to false. 
-    * @uxpinpropname Hide on Dismiss
+    * @uxpindescription Whether to hide the Wizard immediately when the user hits the Cancel  link. If False, then the Wizard must be closed by manually setting the Show prop to false. 
+    * @uxpinpropname  Dismiss on Cancel
     */
     dismissOnCancel: PropTypes.bool,
 
@@ -610,6 +614,12 @@ Wizard.propTypes = {
      * @uxpinpropname Submit Clicked
      */
     onSubmit: PropTypes.func,
+
+    /**
+     * @uxpindescription Fires when the Cancel Button is clicked.
+     * @uxpinpropname Cancel Clicked
+     */
+    onCancel: PropTypes.func,
 
     /**
      * @uxpindescription Fires when the Help Button is clicked.
