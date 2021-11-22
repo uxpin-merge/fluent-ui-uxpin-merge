@@ -361,8 +361,8 @@ class Wizard extends React.Component {
                 stepPanel = (
                     <StackItem
                         align={stackStretch}
-                        grow={false}
-                        overflowY={true}
+                        overflowY={'auto'}
+                        overflowX={'hidden'}
                     >
                         {child}
                     </StackItem>
