@@ -446,6 +446,12 @@ class Wizard extends React.Component {
                                     </StackItem>
 
                                     <StackItem
+                                        styles={{
+                                            root: {
+                                                overflowX: 'hidden',
+                                                overflowY: 'auto',
+                                            }
+                                        }}
                                         verticalFill={true}
                                         grow={false}
                                     >
