@@ -50,7 +50,7 @@ const navStyles = {
     root: {
         width: 211,
         maxHeight: '70vh',
-        overflowY: 'auto',
+        //   overflowY: 'auto',
         paddingTop: 24,
     },
 };
@@ -446,12 +446,6 @@ class Wizard extends React.Component {
                                     </StackItem>
 
                                     <StackItem
-                                        styles={{
-                                            root: {
-                                                overflowX: 'hidden',
-                                                overflowY: 'auto',
-                                            }
-                                        }}
                                         verticalFill={true}
                                         grow={false}
                                     >
