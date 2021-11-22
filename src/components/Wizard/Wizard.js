@@ -70,7 +70,7 @@ const bodyScrollRegionStyles = {
     root: {
         overflowY: 'auto',
         overflowX: 'hidden',
-        display: 'block',
+        //        display: 'block',
     }
 }
 const footerStackItemStyles = {
@@ -453,10 +453,8 @@ class Wizard extends React.Component {
                                     </StackItem>
 
                                     <StackItem
-                                        verticalFill={false}
+                                        verticalFill={true}
                                         grow={false}
-                                    //styles={bodyScrollRegionStyles}
-
                                     >
                                         {/* Children Area for each panel */}
 
@@ -468,6 +466,7 @@ class Wizard extends React.Component {
                                                 horizontal={false}
                                                 verticalAlign={stackTop}
                                                 overflowY={'auto'}
+                                                styles={bodyScrollRegionStyles}
                                             >
                                                 {this.props.children}
                                             </Stack>
