@@ -39,7 +39,6 @@ const wizardStackItemStyles = {
     root: {
         background: '#ffffff',
         minWidth: '80vw',
-        minHeight: '80vh',
     },
 };
 const bodyPanelStyle = {
@@ -50,8 +49,7 @@ const bodyPanelStyle = {
 const navStyles = {
     root: {
         width: 211,
-        // minHeight: '200',
-        height: '100%',
+        maxHeight: '70vh',
         overflowY: 'auto',
         paddingTop: 24,
     },
@@ -64,7 +62,8 @@ const navStackStyles = {
 const bodyStackStyles = {
     root: {
         background: '#f3f2f1',  //neutralLighter
-        overflowY: 'auto',
+        minHeight: '70vh',
+        maxHeight: '70vh',
     },
 };
 const footerStackItemStyles = {
