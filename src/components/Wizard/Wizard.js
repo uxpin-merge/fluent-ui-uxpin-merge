@@ -446,24 +446,24 @@ class Wizard extends React.Component {
                                         {panelHeading}
                                     </StackItem>
 
-                                    <StackItem>
+                                    <StackItem
+                                        styles={{
+                                            root: {
+                                                overflowX: 'hidden',
+                                                overflowY: 'auto',
+                                            }
+                                        }}
+                                        verticalFill={true}
+                                        grow={false}
+                                    >
                                         {/* Children Area for each panel */}
                                         <Stack
                                             tokens={{
                                                 childrenGap: 12,
                                                 padding: 0,
                                             }}
-                                            styles={{
-                                                root: {
-                                                    overflowX: 'hidden',
-                                                    overflowY: 'auto',
-                                                }
-                                            }}
                                             horizontalAlign={stackStretch}
                                             verticalAlign={stackTop}
-                                            verticalFill={true}
-                                            grow={false}
-
                                         >
                                             {this.props.children &&
                                                 <Stack
