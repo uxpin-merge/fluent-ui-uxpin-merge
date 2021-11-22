@@ -203,10 +203,15 @@ class Wizard extends React.Component {
     }
 
     _setNewIndex(index) {
+
+
         //Our state is 1 based
         let newIndex = index < 1 ? 1 :
             index > this.state.steps.length ? this.state.steps.length :
                 index;
+
+        console.log("set new index: " + index);
+        console.log("      newIndex: " + newIndex);
 
         if (newIndex !== this.state.index) {
             this.setState(
@@ -346,12 +351,12 @@ class Wizard extends React.Component {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
-            console.log("selected index: " + this.state.selectedIndex);
+            console.log("selected index: " + this.state.index);
 
             //Now, we configure the StackItem
-            if (childList.length && this.state.selectedIndex <= childList.length) {
+            if (childList.length && this.state.index <= childList.length) {
                 //Minus 1 for the 0-based array
-                let child = childList[this.state.selectedIndex - 1];
+                let child = childList[this.state.index - 1];
 
                 console.log("     child: " + JSON.stringify(child));
 
@@ -496,7 +501,6 @@ class Wizard extends React.Component {
                                         {/* Children Area for each panel */}
 
                                         {stepPanel}
-
 
                                     </StackItem>
                                 </Stack>
