@@ -256,6 +256,7 @@ class Wizard extends React.Component {
     }
 
     _onDismissClicked() {
+        console.log("_onDismissClicked");
         if (this.props.dismissOnCancel)
             this.dismissControl(true);
     }
@@ -350,8 +351,6 @@ class Wizard extends React.Component {
         if (this.props.children) {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
-
-            console.log("selected index: " + this.state.index);
 
             //Now, we configure the StackItem
             if (childList.length && this.state.index <= childList.length) {
