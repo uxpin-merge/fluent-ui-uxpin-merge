@@ -103,7 +103,6 @@ class Wizard extends React.Component {
     }
 
     set() {
-
         let stepList = this._getStepList();
         let navItems = this._getStepNavItems(stepList);
 
@@ -203,15 +202,10 @@ class Wizard extends React.Component {
     }
 
     _setNewIndex(index) {
-
-
         //Our state is 1 based
         let newIndex = index < 1 ? 1 :
             index > this.state.steps.length ? this.state.steps.length :
                 index;
-
-        console.log("set new index: " + index);
-        console.log("      newIndex: " + newIndex);
 
         if (newIndex !== this.state.index) {
             this.setState(
@@ -226,21 +220,21 @@ class Wizard extends React.Component {
 
         //The item's key is already its 1-based index.
         let index = item.key;
-        console.log("On nav item clicked: " + index);
         this._setNewIndex(index);
     }
 
     _onNextClick() {
-        console.log("On next clicked");
-
-        //If it's not the last item
-        let index = this.state.index + 1;
-        this._setNewIndex(index);
+        if (this.state.index === this.state.steps.length) {
+            this.dismissControl()
+        }
+        else {
+            //If it's not the last item
+            let index = this.state.index + 1;
+            this._setNewIndex(index);
+        }
     }
 
     _onBackClick() {
-        console.log("On back clicked");
-
         let index = this.state.index - 1;
         this._setNewIndex(index);
     }
@@ -251,13 +245,14 @@ class Wizard extends React.Component {
             this.props.onCancel();
         }
 
-        console.log("On cancel clicked");
         if (this.props.dismissOnCancel)
             this.dismissControl();
     }
 
     _onHelpClick() {
-        console.log("On help clicked");
+        if (this.props.onHelp) {
+            this.props.onHelp();
+        }
     }
 
     _onDismissClicked() {
@@ -266,7 +261,6 @@ class Wizard extends React.Component {
             this.props.dismiss();
         }
 
-        console.log("_onDismissClicked");
         this.dismissControl();
     }
 
