@@ -50,7 +50,6 @@ const navStyles = {
     root: {
         width: 211,
         maxHeight: '70vh',
-        //   overflowY: 'auto',
         paddingTop: 24,
     },
 };
@@ -68,9 +67,10 @@ const bodyStackStyles = {
 };
 const bodyScrollRegionStyles = {
     root: {
+        height: '100%',
         overflowY: 'auto',
         overflowX: 'hidden',
-        //        display: 'block',
+        display: 'inline',
     }
 }
 const footerStackItemStyles = {
@@ -455,6 +455,7 @@ class Wizard extends React.Component {
                                     <StackItem
                                         verticalFill={true}
                                         grow={false}
+                                        styles={bodyScrollRegionStyles}
                                     >
                                         {/* Children Area for each panel */}
 
