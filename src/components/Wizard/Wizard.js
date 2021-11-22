@@ -454,6 +454,7 @@ class Wizard extends React.Component {
                                         <div style={{
                                             overflowX: 'hidden',
                                             overflowY: 'auto',
+                                            display: 'inline-block',
                                         }}>
                                             {this.props.children &&
                                                 <Stack
