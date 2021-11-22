@@ -416,10 +416,11 @@ class Wizard extends React.Component {
                             <StackItem
                                 styles={navStackStyles}
                                 verticalFill={true}
-                                grow={true}
+                                grow={false}
                             >
                                 <Stack
                                     grow={false}
+                                    verticalFill={true}
                                 >
                                     {navStepControl}
                                 </Stack>
