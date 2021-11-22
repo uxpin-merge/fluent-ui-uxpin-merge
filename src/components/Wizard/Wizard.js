@@ -52,7 +52,7 @@ const navStyles = {
         width: 211,
         // minHeight: '200',
         height: '100%',
-        overflowY: 'hidden',
+        overflowY: 'auto',
         paddingTop: 24,
     },
 };
@@ -413,10 +413,10 @@ class Wizard extends React.Component {
                             {/* Nav: Display for the Steps */}
                             <StackItem
                                 styles={navStackStyles}
-                                grow={false}
+                                verticalFill={true}
                             >
                                 <Stack
-                                    grow={false}
+                                    grow={true}
                                 //horizontalAlign={stackStretch}
                                 >
                                     {navStepControl}
