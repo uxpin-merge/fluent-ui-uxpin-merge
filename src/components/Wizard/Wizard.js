@@ -404,7 +404,7 @@ class Wizard extends React.Component {
                         <Stack
                             styles={bodyStackStyles}
                             horizontal={true}
-                            grow={false}
+                            grow={true}
                             horizontalAlign={stackStretch}
                             verticalFill={true}
                             tokens={{
