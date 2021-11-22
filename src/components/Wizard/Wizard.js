@@ -340,6 +340,38 @@ class Wizard extends React.Component {
             );
         }
 
+        //Set up the Step Panel
+        var stepPanel = '';
+        if (this.props.children) {
+            //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+            let childList = React.Children.toArray(this.props.children);
+
+            //Now, we configure the StackItem
+            if (childList.length && (this.state.selectedIndex - 1) < childList.length) {
+                //Minus 1 for the 0-based array
+                let child = childList[this.state.selectedIndex - 1];
+
+                let divStyles = {
+                    height: '100%',
+                    overflowY: 'auto',
+                    overflowX: 'hidden',
+                }
+
+                stepPanel = (
+                    <StackItem
+                        align={stackStretch}
+                        grow={false}
+                    >
+                        <div
+                            style={divStyles}
+                        >
+                            {child}
+                        </div>
+                    </StackItem>
+                );
+            }
+        }
+
         return (
 
             <div>
@@ -459,20 +491,8 @@ class Wizard extends React.Component {
                                     >
                                         {/* Children Area for each panel */}
 
-                                        {this.props.children &&
+                                        {stepPanel}
 
-                                            <Stack
-                                                tokens={{
-                                                    childrenGap: 12
-                                                }}
-                                                horizontal={false}
-                                                verticalAlign={stackTop}
-                                            >
-
-                                                {this.props.children}
-                                            </Stack>
-
-                                        }
 
                                     </StackItem>
                                 </Stack>
