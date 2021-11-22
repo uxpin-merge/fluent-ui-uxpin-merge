@@ -468,6 +468,9 @@ class Wizard extends React.Component {
                                                             overflowY: 'auto',
                                                         }
                                                     }}
+                                                    verticalFill={true}
+                                                    horizontal={false}
+                                                    grow={false}
                                                 >
                                                     {this.props.children}
                                                 </Stack>
