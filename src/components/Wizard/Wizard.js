@@ -252,7 +252,7 @@ class Wizard extends React.Component {
         }
 
         console.log("On cancel clicked");
-        if (dismissOnCancel)
+        if (this.props.dismissOnCancel)
             this.dismissControl();
     }
 
