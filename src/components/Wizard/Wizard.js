@@ -50,8 +50,8 @@ const bodyPanelStyle = {
 const navStyles = {
     root: {
         width: 211,
-        minHeight: '200',
-        height: 'auto',
+        // minHeight: '200',
+        // height: 'auto',
         paddingTop: 24,
     },
 };
@@ -421,12 +421,13 @@ class Wizard extends React.Component {
                             {/* Nav: Display for the Steps */}
                             <StackItem
                                 styles={navStackStyles}
-                                grow={false}
-                                verticalFill={true}>
+                            //grow={false}
+                            //</Stack>verticalFill={true}
+                            >
                                 <Stack
                                     horizontalAlign={stackStretch}
-                                    grow={false}
-                                    verticalFill={true}
+                                //grow={false}
+                                //verticalFill={true}
                                 >
                                     {navStepControl}
                                 </Stack>
