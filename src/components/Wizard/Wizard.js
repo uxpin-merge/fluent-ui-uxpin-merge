@@ -453,7 +453,7 @@ class Wizard extends React.Component {
                                     </StackItem>
 
                                     <StackItem
-                                        verticalFill={true}
+                                        verticalFill={false}
                                         grow={false}
                                     //styles={bodyScrollRegionStyles}
 
