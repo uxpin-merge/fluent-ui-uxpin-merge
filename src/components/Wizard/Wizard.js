@@ -425,7 +425,8 @@ class Wizard extends React.Component {
                                 verticalFill={true}>
                                 <Stack
                                     horizontalAlign={stackStretch}
-                                    grow={true}
+                                    grow={false}
+                                    verticalFill={true}
                                 >
                                     {navStepControl}
                                 </Stack>
