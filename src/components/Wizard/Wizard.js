@@ -453,24 +453,24 @@ class Wizard extends React.Component {
                                                 childrenGap: 12,
                                                 padding: 0,
                                             }}
+                                            styles={{
+                                                root: {
+                                                    overflowX: 'hidden',
+                                                    overflowY: 'auto',
+                                                }
+                                            }}
                                             horizontalAlign={stackStretch}
                                             verticalAlign={stackTop}
                                             verticalFill={true}
+                                            grow={false}
+
                                         >
                                             {this.props.children &&
                                                 <Stack
                                                     tokens={{
                                                         childrenGap: 12
                                                     }}
-                                                    styles={{
-                                                        root: {
-                                                            overflowX: 'hidden',
-                                                            overflowY: 'auto',
-                                                        }
-                                                    }}
-                                                    verticalFill={true}
                                                     horizontal={false}
-                                                    grow={false}
                                                 >
                                                     {this.props.children}
                                                 </Stack>
