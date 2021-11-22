@@ -451,25 +451,28 @@ class Wizard extends React.Component {
                                         grow={false}
                                     >
                                         {/* Children Area for each panel */}
-
-                                        {this.props.children &&
-                                            <Stack
-                                                tokens={{
-                                                    childrenGap: 12
-                                                }}
-                                                styles={{
-                                                    root: {
-                                                        overflowX: 'hidden',
-                                                        overflowY: 'auto',
-                                                    }
-                                                }}
-                                                horizontal={false}
-                                                verticalAlign={stackTop}
-                                            >
-                                                {this.props.children}
-                                            </Stack>
-                                        }
-
+                                        <div style={{
+                                            overflowX: 'hidden',
+                                            overflowY: 'auto',
+                                        }}>
+                                            {this.props.children &&
+                                                <Stack
+                                                    tokens={{
+                                                        childrenGap: 12
+                                                    }}
+                                                    // styles={{
+                                                    //     root: {
+                                                    //         overflowX: 'hidden',
+                                                    //         overflowY: 'auto',
+                                                    //     }
+                                                    // }}
+                                                    horizontal={false}
+                                                    verticalAlign={stackTop}
+                                                >
+                                                    {this.props.children}
+                                                </Stack>
+                                            }
+                                        </div>
                                     </StackItem>
                                 </Stack>
                             </StackItem>
