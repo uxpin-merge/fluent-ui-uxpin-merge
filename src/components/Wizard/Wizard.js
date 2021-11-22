@@ -446,12 +446,7 @@ class Wizard extends React.Component {
                                     </StackItem>
 
                                     <StackItem
-                                        styles={{
-                                            root: {
-                                                overflowX: 'hidden',
-                                                overflowY: 'auto',
-                                            }
-                                        }}
+
                                         verticalFill={true}
                                         grow={false}
                                     >
@@ -461,6 +456,12 @@ class Wizard extends React.Component {
                                             <Stack
                                                 tokens={{
                                                     childrenGap: 12
+                                                }}
+                                                styles={{
+                                                    root: {
+                                                        overflowX: 'hidden',
+                                                        overflowY: 'auto',
+                                                    }
                                                 }}
                                                 horizontal={false}
                                                 verticalAlign={stackTop}
