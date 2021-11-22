@@ -66,6 +66,13 @@ const bodyStackStyles = {
         maxHeight: '70vh',
     },
 };
+const bodyScrollRegionStyles = {
+    root: {
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'block',
+    }
+}
 const footerStackItemStyles = {
     root: {
         borderTop: '1px dashed #d2d0ce',     //neutralQuaternary
@@ -446,34 +453,24 @@ class Wizard extends React.Component {
                                     </StackItem>
 
                                     <StackItem
-
                                         verticalFill={true}
                                         grow={false}
+                                        styles={bodyScrollRegionStyles}
                                     >
                                         {/* Children Area for each panel */}
-                                        <div style={{
-                                            overflowX: 'hidden',
-                                            overflowY: 'auto',
-                                            display: 'block',
-                                        }}>
-                                            {this.props.children &&
-                                                <Stack
-                                                    tokens={{
-                                                        childrenGap: 12
-                                                    }}
-                                                    // styles={{
-                                                    //     root: {
-                                                    //         overflowX: 'hidden',
-                                                    //         overflowY: 'auto',
-                                                    //     }
-                                                    // }}
-                                                    horizontal={false}
-                                                    verticalAlign={stackTop}
-                                                >
-                                                    {this.props.children}
-                                                </Stack>
-                                            }
-                                        </div>
+
+                                        {this.props.children &&
+                                            <Stack
+                                                tokens={{
+                                                    childrenGap: 12
+                                                }}
+                                                horizontal={false}
+                                                verticalAlign={stackTop}
+                                            >
+                                                {this.props.children}
+                                            </Stack>
+                                        }
+
                                     </StackItem>
                                 </Stack>
                             </StackItem>
