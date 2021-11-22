@@ -51,7 +51,7 @@ const navStyles = {
     root: {
         width: 211,
         // minHeight: '200',
-        // height: 'auto',
+        height: 'auto',
         paddingTop: 24,
     },
 };
