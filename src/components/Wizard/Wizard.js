@@ -346,10 +346,14 @@ class Wizard extends React.Component {
             //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
             let childList = React.Children.toArray(this.props.children);
 
+            console.log("selected index: " + this.state.selectedIndex);
+
             //Now, we configure the StackItem
-            if (childList.length && (this.state.selectedIndex - 1) < childList.length) {
+            if (childList.length && this.state.selectedIndex <= childList.length) {
                 //Minus 1 for the 0-based array
                 let child = childList[this.state.selectedIndex - 1];
+
+                console.log("     child: " + JSON.stringify(child));
 
                 let divStyles = {
                     height: '100%',
