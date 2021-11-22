@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Modal } from '@fluentui/react/lib/Modal';
 import { Nav } from '@fluentui/react/lib/Nav';
 import { ResponsiveMode } from '@fluentui/react/';
+import { ScrollablePane } from '@fluentui/react/lib/ScrollablePane';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import ActionButton from '../ActionButton/ActionButton';
@@ -459,17 +460,19 @@ class Wizard extends React.Component {
                                         {/* Children Area for each panel */}
 
                                         {this.props.children &&
-                                            <Stack
-                                                tokens={{
-                                                    childrenGap: 12
-                                                }}
-                                                horizontal={false}
-                                                verticalAlign={stackTop}
-                                                overflowY={'auto'}
-                                                styles={bodyScrollRegionStyles}
+                                            <ScrollablePane
+                                                initialScrollPosition={0}
                                             >
-                                                {this.props.children}
-                                            </Stack>
+                                                <Stack
+                                                    tokens={{
+                                                        childrenGap: 12
+                                                    }}
+                                                    horizontal={false}
+                                                    verticalAlign={stackTop}
+                                                >
+                                                    {this.props.children}
+                                                </Stack>
+                                            </ScrollablePane>
                                         }
 
                                     </StackItem>
