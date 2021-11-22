@@ -358,7 +358,7 @@ class Wizard extends React.Component {
                 //Minus 1 for the 0-based array
                 let child = childList[this.state.index - 1];
 
-                console.log("     child: " + JSON.stringify(child));
+                //console.log("     child: " + JSON.stringify(child));
 
                 let divStyles = {
                     height: '100%',
