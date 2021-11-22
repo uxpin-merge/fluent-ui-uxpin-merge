@@ -455,8 +455,8 @@ class Wizard extends React.Component {
                                     <StackItem
                                         verticalFill={true}
                                         grow={false}
-                                        //styles={bodyScrollRegionStyles}
-                                        overflowY={'auto'}
+                                    //styles={bodyScrollRegionStyles}
+
                                     >
                                         {/* Children Area for each panel */}
 
@@ -467,6 +467,7 @@ class Wizard extends React.Component {
                                                 }}
                                                 horizontal={false}
                                                 verticalAlign={stackTop}
+                                                overflowY={'auto'}
                                             >
                                                 {this.props.children}
                                             </Stack>
