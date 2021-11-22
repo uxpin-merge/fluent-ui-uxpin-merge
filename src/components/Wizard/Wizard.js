@@ -457,25 +457,19 @@ class Wizard extends React.Component {
                                         grow={false}
                                     >
                                         {/* Children Area for each panel */}
-                                        <Stack
-                                            tokens={{
-                                                childrenGap: 12,
-                                                padding: 0,
-                                            }}
-                                            horizontalAlign={stackStretch}
-                                            verticalAlign={stackTop}
-                                        >
-                                            {this.props.children &&
-                                                <Stack
-                                                    tokens={{
-                                                        childrenGap: 12
-                                                    }}
-                                                    horizontal={false}
-                                                >
-                                                    {this.props.children}
-                                                </Stack>
-                                            }
-                                        </Stack>
+
+                                        {this.props.children &&
+                                            <Stack
+                                                tokens={{
+                                                    childrenGap: 12
+                                                }}
+                                                horizontal={false}
+                                                verticalAlign={stackTop}
+                                            >
+                                                {this.props.children}
+                                            </Stack>
+                                        }
+
                                     </StackItem>
                                 </Stack>
                             </StackItem>
