@@ -52,7 +52,7 @@ const navStyles = {
         width: 211,
         // minHeight: '200',
         height: '100%',
-        overflowY: "auto",
+        overflowY: 'hidden',
         paddingTop: 24,
     },
 };
