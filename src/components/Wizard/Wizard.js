@@ -245,6 +245,7 @@ class Wizard extends React.Component {
             let index = this.state.index + 1;
             this._setNewIndex(index);
             this._addVisitedStep(index);
+            this.set();
         }
     }
 
