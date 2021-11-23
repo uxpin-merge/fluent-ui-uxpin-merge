@@ -90,6 +90,19 @@ const panelHeadingTextStyles = {
         color: '#000000',
     },
 }
+const dismissButtonStyles = {
+    icon: { color: 'white' },
+    root: {
+        selectors: {
+            ':hover .ms-Button-icon': {
+                color: '#edebe9'
+            },
+            ':active .ms-Button-icon': {
+                color: '#c8c6c4'
+            }
+        }
+    },
+};
 
 
 class Wizard extends React.Component {
@@ -463,6 +476,7 @@ class Wizard extends React.Component {
                                 <StackItem>
                                     <IconButton
                                         iconProps={{ iconName: 'ChromeClose' }}
+                                        styles={dismissButtonStyles}
                                         title={"Close"}
                                         onClick={() => this._onDismissClicked()}
                                     />
