@@ -21,7 +21,6 @@ const defaultNavItems = `1 Details | Details
 2 Collaborators | Identify Collaborators
 3 Review | Review`;
 
-
 const panelHeadingTextVariant = 'xLarge';
 const defaultNextLabel = "Next";
 const defaultSubmitLabel = "Submit";
@@ -97,6 +96,7 @@ class Wizard extends React.Component {
         this.state = {
             steps: [],
             navSteps: [],
+            visitedSteps: [],
             open: false,
             index: 1, //1-based
         }
@@ -190,8 +190,14 @@ class Wizard extends React.Component {
         var i;
         for (i = 0; i < stepParams.length; i++) {
             let stepInfo = stepParams[i];
+
+            var disabled = true;
+            if (i === 0 || this.state.visitedSteps.indexOf(i + 1) > 0) {
+                disabled = false;
+            }
+
             if (stepInfo.step) {
-                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined, false);
+                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined, disabled);
 
                 if (navParams)
                     navItems.push(navParams);
@@ -214,6 +220,12 @@ class Wizard extends React.Component {
         }
     }
 
+    _addVisitedStep(index) {
+        if (this.state.visitedSteps.indexOf(index) < 0) {
+            this.state.visitedSteps.push(index);
+        }
+    }
+
     _onNavItemClick(item) {
         if (!item)
             return;
@@ -228,9 +240,11 @@ class Wizard extends React.Component {
             this.dismissControl()
         }
         else {
+
             //If it's not the last item
             let index = this.state.index + 1;
             this._setNewIndex(index);
+            this._addVisitedStep(index);
         }
     }
 
@@ -622,7 +636,7 @@ Wizard.propTypes = {
     onHelp: PropTypes.func,
 
     /**
-     * @uxpindescription Fires when the Wizard is dismissed by the Close or Cancel buttons.
+     * @uxpindescription Fires when the Wizard is dismissed using the Close buttons.
      * @uxpinpropname Dismissed
      */
     dismiss: PropTypes.func,
