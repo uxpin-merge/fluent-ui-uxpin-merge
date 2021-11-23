@@ -5,6 +5,7 @@ import { Nav } from '@fluentui/react/lib/Nav';
 import { ResponsiveMode } from '@fluentui/react/';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
+import { IconButton } from '@fluentui/react/lib/Button';
 import ActionButton from '../ActionButton/ActionButton';
 import Button from '../Button/Button';
 import Link from '../Link/Link';
@@ -460,12 +461,17 @@ class Wizard extends React.Component {
                                 </StackItem>
 
                                 <StackItem>
-                                    <ActionButton
+                                    <IconButton
+                                        iconProps={{ iconName: 'ChromeClose' }}
+                                        title={"Close"}
+                                        onClick={() => this._onDismissClicked()}
+                                    />
+                                    {/* <ActionButton
                                         iconName={"ChromeClose"}
                                         tooltip={''}
                                         text={''}
                                         onClick={() => this._onDismissClicked()}
-                                    />
+                                    /> */}
                                 </StackItem>
                             </Stack>
                         </StackItem>
