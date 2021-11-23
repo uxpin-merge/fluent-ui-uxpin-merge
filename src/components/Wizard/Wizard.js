@@ -249,10 +249,11 @@ class Wizard extends React.Component {
             this.dismissControl()
         }
         else {
-            this._addVisitedStep(this.state.index);
+            let index = this.state.index;
 
             //Let's advance forward if it's not the last step
-            this._setNewIndex(this.state.index + 1);
+            this._setNewIndex(index + 1);
+            this._addVisitedStep(index);
 
             //Update the disabled list
             let navItems = this._getStepNavItems(this.state.steps);
