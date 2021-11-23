@@ -93,6 +93,7 @@ const panelHeadingTextStyles = {
 const dismissButtonStyles = {
     icon: { color: 'white' },
     root: {
+        backgroundColor: 'transparent',
         selectors: {
             ':hover .ms-Button-icon': {
                 color: '#edebe9'
@@ -100,7 +101,9 @@ const dismissButtonStyles = {
             ':active .ms-Button-icon': {
                 color: '#c8c6c4'
             }
-        }
+        },
+        rootHovered: { backgroundColor: 'transparent' },
+        rootPressed: { backgroundColor: 'transparent' },
     },
 };
 
