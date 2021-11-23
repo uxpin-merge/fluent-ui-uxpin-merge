@@ -192,7 +192,7 @@ class Wizard extends React.Component {
             let stepInfo = stepParams[i];
 
             var disabled = true;
-            if (i === 0 || this.state.visitedSteps.indexOf(i + 1) > 0) {
+            if (i === 0 || this.state.visitedSteps.indexOf(i + 1) > -1) {
                 disabled = false;
             }
 
