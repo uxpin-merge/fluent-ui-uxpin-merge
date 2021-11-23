@@ -6,3 +6,4 @@ import Wizard from '../Wizard';
 export default (
     <Wizard uxpId="wizard1" />
 );
+

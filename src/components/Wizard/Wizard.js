@@ -15,12 +15,12 @@ import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 
-
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is. 
 const defaultNavItems = `1 Details | Details
 2 Collaborators | Identify Collaborators
 3 Review | Review`;
+
 
 const panelHeadingTextVariant = 'xLarge';
 const defaultNextLabel = "Next";
@@ -512,6 +512,7 @@ class Wizard extends React.Component {
                             }}>
 
                             {/* Nav: Display for the Steps */}
+
                             <StackItem
                                 styles={navStackStyles}
                                 verticalFill={true}
@@ -522,10 +523,12 @@ class Wizard extends React.Component {
                                     verticalFill={true}
                                 >
                                     {navStepControl}
+
                                 </Stack>
                             </StackItem>
 
                             {/* Body Section - Right Side */}
+
                             <StackItem
                                 styles={bodyPanelStyle}
                                 horizontal={true}
@@ -689,6 +692,7 @@ Wizard.propTypes = {
     onHelp: PropTypes.func,
 
     /**
+
      * @uxpindescription Fires when the Wizard is dismissed using the Close buttons.
      * @uxpinpropname Dismissed
      */
