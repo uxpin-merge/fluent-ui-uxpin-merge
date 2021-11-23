@@ -213,7 +213,6 @@ class Wizard extends React.Component {
 
             var disabled = true;
             let hasVisited = this.state.visitedSteps.indexOf(i + 1) > -1;
-            let isLastStep = i + 1 === this.state.steps.length;
             if (i + 1 === this.state.index || hasVisited) {
                 disabled = false;
             }
@@ -277,6 +276,10 @@ class Wizard extends React.Component {
             if (index < navItems.length) {
                 let item = navItems[index];
                 item.disabled = false;
+
+                //If this is also the last item, let's make it's icon a checkmark
+                if (index === navItems.length)
+                    item.icon = visitedStepIcon;
             }
 
             this.setState(
