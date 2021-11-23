@@ -221,11 +221,11 @@ class Wizard extends React.Component {
             index > this.state.steps.length ? this.state.steps.length :
                 index;
 
-        if (newIndex !== this.state.index) {
-            this.setState(
-                { index: newIndex }
-            )
-        }
+        this.setState(
+            { index: newIndex }
+        )
+
+        console.log("setting index. Desired value: " + index + ", newIndex: " + newIndex + ", state: " + this.state.index);
     }
 
     _addVisitedStep(index) {
