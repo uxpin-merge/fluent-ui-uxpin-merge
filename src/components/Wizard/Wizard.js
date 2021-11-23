@@ -245,7 +245,15 @@ class Wizard extends React.Component {
             let index = this.state.index + 1;
             this._setNewIndex(index);
             this._addVisitedStep(index);
-            this.set();
+
+            //Update the disabled list
+            let navItems = this._getStepNavItems(this.state.steps);
+
+            this.setState(
+                {
+                    navSteps: navItems ? navItems : [],
+                }
+            )
         }
     }
 
