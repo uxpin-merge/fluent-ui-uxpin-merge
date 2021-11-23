@@ -33,7 +33,7 @@ const stackCenter = 'center';
 
 const headerStackItemStyles = {
     root: {
-        background: "#deecf9", //themeLighter
+        background: "#005a9e", //themeLighter
     },
 };
 const wizardStackItemStyles = {
@@ -82,7 +82,7 @@ const footerStackItemStyles = {
 };
 const wizardHeadingTextStyles = {
     root: {
-        color: '#000000',
+        color: '#fff',
     },
 }
 const panelHeadingTextStyles = {
