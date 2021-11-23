@@ -96,7 +96,7 @@ const dismissButtonStyles = {
         backgroundColor: 'transparent',
         selectors: {
             ':hover .ms-Button-icon': {
-                color: '#edebe9'
+                color: '#e1dfdd'
             },
             ':active .ms-Button-icon': {
                 color: '#c8c6c4'
