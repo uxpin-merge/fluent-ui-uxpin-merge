@@ -242,12 +242,16 @@ class Wizard extends React.Component {
     }
 
     _onNextClick() {
+        //If we're on the last step, simply dismiss
         if (this.state.index === this.state.steps.length) {
             this.dismissControl()
         }
         else {
+            //If we're on the first step currently, add 1 to the visited step list. 
+            if (this.state.index === 1)
+                this._addVisitedStep(1);
 
-            //If it's not the last item
+            //Let's advance forward if it's not the last step
             let index = this.state.index + 1;
             this._addVisitedStep(index);
             this._setNewIndex(index);
