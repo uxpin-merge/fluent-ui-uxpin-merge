@@ -102,9 +102,9 @@ const dismissButtonStyles = {
                 color: '#c8c6c4'
             }
         },
-        rootHovered: { backgroundColor: 'transparent' },
-        rootPressed: { backgroundColor: 'transparent' },
     },
+    rootHovered: { backgroundColor: 'transparent' },
+    rootPressed: { backgroundColor: 'transparent' },
 };
 
 
