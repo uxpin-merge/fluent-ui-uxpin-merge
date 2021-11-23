@@ -108,6 +108,7 @@ const dismissButtonStyles = {
 };
 
 
+
 class Wizard extends React.Component {
     constructor(props) {
         super(props);
@@ -212,6 +213,7 @@ class Wizard extends React.Component {
 
             var disabled = true;
             let hasVisited = this.state.visitedSteps.indexOf(i + 1) > -1;
+            let isLastStep = i + 1 === this.state.steps.length;
             if (i + 1 === this.state.index || hasVisited) {
                 disabled = false;
             }
@@ -219,7 +221,7 @@ class Wizard extends React.Component {
             if (stepInfo.step) {
                 let navParams = UxpMenuUtils.getNavItemProps(i,
                     stepInfo.step,
-                    hasVisited ? visitedStepIcon : undefined,
+                    hasVisited || isLastStep ? visitedStepIcon : undefined,
                     undefined,
                     disabled);
 
