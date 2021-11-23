@@ -194,7 +194,7 @@ class Wizard extends React.Component {
 
             var disabled = true;
             let hasVisited = this.state.visitedSteps.indexOf(i + 1) > -1;
-            if (i === 0 || hasVisited) {
+            if (i + 1 === this.state.index || hasVisited) {
                 disabled = false;
             }
 
@@ -247,13 +247,10 @@ class Wizard extends React.Component {
             this.dismissControl()
         }
         else {
-            //If we're on the first step currently, add 1 to the visited step list. 
-            if (this.state.index === 1)
-                this._addVisitedStep(1);
+            this._addVisitedStep(this.state.index);
 
             //Let's advance forward if it's not the last step
             let index = this.state.index + 1;
-            this._addVisitedStep(index);
             this._setNewIndex(index);
 
             //Update the disabled list
