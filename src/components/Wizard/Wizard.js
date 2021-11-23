@@ -220,7 +220,7 @@ class Wizard extends React.Component {
             if (stepInfo.step) {
                 let navParams = UxpMenuUtils.getNavItemProps(i,
                     stepInfo.step,
-                    hasVisited || isLastStep ? visitedStepIcon : undefined,
+                    hasVisited ? visitedStepIcon : undefined,
                     undefined,
                     disabled);
 
