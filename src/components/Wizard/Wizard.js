@@ -305,6 +305,7 @@ class Wizard extends React.Component {
             {
                 open: false,
                 visitedSteps: [],
+                index: 1,
             }
         )
 
