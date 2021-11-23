@@ -221,6 +221,7 @@ class Wizard extends React.Component {
     }
 
     _addVisitedStep(index) {
+        console.log("Index of (" + index + ") is: " + this.state.visitedSteps.indexOf(index));
         if (this.state.visitedSteps.indexOf(index) < 0) {
             this.state.visitedSteps.push(index);
         }
@@ -243,8 +244,8 @@ class Wizard extends React.Component {
 
             //If it's not the last item
             let index = this.state.index + 1;
-            this._setNewIndex(index);
             this._addVisitedStep(index);
+            this._setNewIndex(index);
 
             //Update the disabled list
             let navItems = this._getStepNavItems(this.state.steps);
