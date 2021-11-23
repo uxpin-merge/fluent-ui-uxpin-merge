@@ -278,7 +278,7 @@ class Wizard extends React.Component {
                 item.disabled = false;
 
                 //If this is also the last item, let's make it's icon a checkmark
-                if (index === navItems.length)
+                if (index + 1 === navItems.length)
                     item.icon = visitedStepIcon;
             }
 
