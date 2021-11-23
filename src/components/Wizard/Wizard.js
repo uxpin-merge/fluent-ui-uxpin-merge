@@ -24,6 +24,7 @@ const defaultNavItems = `1 Details | Details
 const panelHeadingTextVariant = 'xLarge';
 const defaultNextLabel = "Next";
 const defaultSubmitLabel = "Submit";
+const visitedStepIcon = 'SkypeCircleCheck';
 
 const stackStretch = 'stretch';
 const stackTop = 'start';
@@ -192,12 +193,17 @@ class Wizard extends React.Component {
             let stepInfo = stepParams[i];
 
             var disabled = true;
-            if (i === 0 || this.state.visitedSteps.indexOf(i + 1) > -1) {
+            let hasVisited = this.state.visitedSteps.indexOf(i + 1) > -1;
+            if (i === 0 || hasVisited) {
                 disabled = false;
             }
 
             if (stepInfo.step) {
-                let navParams = UxpMenuUtils.getNavItemProps(i, stepInfo.step, undefined, undefined, disabled);
+                let navParams = UxpMenuUtils.getNavItemProps(i,
+                    stepInfo.step,
+                    hasVisited ? visitedStepIcon : undefined,
+                    undefined,
+                    disabled);
 
                 if (navParams)
                     navItems.push(navParams);
@@ -221,7 +227,6 @@ class Wizard extends React.Component {
     }
 
     _addVisitedStep(index) {
-        console.log("Index of (" + index + ") is: " + this.state.visitedSteps.indexOf(index));
         if (this.state.visitedSteps.indexOf(index) < 0) {
             this.state.visitedSteps.push(index);
         }
@@ -293,7 +298,9 @@ class Wizard extends React.Component {
         //We have to set the state and prop twice.
 
         this.setState(
-            { open: false }
+            {
+                open: false
+            }
         )
 
         this.props.show = false;
