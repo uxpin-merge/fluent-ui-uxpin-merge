@@ -39,6 +39,7 @@ const wizardStackItemStyles = {
     root: {
         background: '#ffffff',
         minWidth: '80vw',
+        maxWidth: '80vw',
     },
 };
 const bodyPanelStyle = {
