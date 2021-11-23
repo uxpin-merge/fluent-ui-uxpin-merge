@@ -257,6 +257,13 @@ class Wizard extends React.Component {
 
             //Update the disabled list
             let navItems = this._getStepNavItems(this.state.steps);
+            //Let's make sure the menu item for the new value is enabled
+            if (index < navItems.length) {
+                let item = navItems[index];
+                item.disabled = false;
+
+                console.log("item: " + JSON.stringify(item));
+            }
 
             this.setState(
                 {
