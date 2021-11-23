@@ -639,6 +639,7 @@ Wizard.propTypes = {
     title: PropTypes.string,
 
     /**
+     * @uxpinignoreprop 
      * @uxpindescription The 1-based index value of the Steps Navigation control to be shown as selected by default. 
      * @uxpinpropname Index
      */
