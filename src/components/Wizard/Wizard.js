@@ -198,8 +198,6 @@ class Wizard extends React.Component {
                 disabled = false;
             }
 
-            console.log("i = " + i + ", state.index = " + this.state.index + ", hasVisited: " + hasVisited);
-
             if (stepInfo.step) {
                 let navParams = UxpMenuUtils.getNavItemProps(i,
                     stepInfo.step,
@@ -224,8 +222,6 @@ class Wizard extends React.Component {
         this.setState(
             { index: newIndex }
         )
-
-        console.log("setting index. Desired value: " + index + ", newIndex: " + newIndex + ", state: " + this.state.index);
     }
 
     _addVisitedStep(index) {
@@ -261,8 +257,6 @@ class Wizard extends React.Component {
             if (index < navItems.length) {
                 let item = navItems[index];
                 item.disabled = false;
-
-                console.log("item: " + JSON.stringify(item));
             }
 
             this.setState(
@@ -309,7 +303,8 @@ class Wizard extends React.Component {
 
         this.setState(
             {
-                open: false
+                open: false,
+                visitedSteps: [],
             }
         )
 
