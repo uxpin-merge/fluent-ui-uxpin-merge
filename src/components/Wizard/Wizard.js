@@ -198,6 +198,8 @@ class Wizard extends React.Component {
                 disabled = false;
             }
 
+            console.log("i = " + i + ", state.index = " + this.state.index + ", hasVisited: " + hasVisited);
+
             if (stepInfo.step) {
                 let navParams = UxpMenuUtils.getNavItemProps(i,
                     stepInfo.step,
@@ -250,8 +252,7 @@ class Wizard extends React.Component {
             this._addVisitedStep(this.state.index);
 
             //Let's advance forward if it's not the last step
-            let index = this.state.index + 1;
-            this._setNewIndex(index);
+            this._setNewIndex(this.state.index + 1);
 
             //Update the disabled list
             let navItems = this._getStepNavItems(this.state.steps);
