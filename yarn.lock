@@ -1758,10 +1758,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@uxpin/merge-cli@^2.7.8":
-  "integrity" "sha512-RpSl6oosg+jk8DRYzCdJMa4scfqzUeZSEW5fa3irJ8TGVQckiVLvTX8NpCzonXMa+kpWLrYD0U+2esL7UFMmJA=="
-  "resolved" "https://registry.npmjs.org/@uxpin/merge-cli/-/merge-cli-2.7.8.tgz"
-  "version" "2.7.8"
+"@uxpin/merge-cli@^2.7.10":
+  "integrity" "sha512-xXGC1dpmPKGPMr+p/HBYI5/rCsaXgDYc6eBfq6vXLEzweWwrIEN/YvNeTDOKa3jDMIJSYmK0djrbxqxTN4RpJQ=="
+  "resolved" "https://registry.npmjs.org/@uxpin/merge-cli/-/merge-cli-2.7.10.tgz"
+  "version" "2.7.10"
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-proposal-class-properties" "^7.2.3"
