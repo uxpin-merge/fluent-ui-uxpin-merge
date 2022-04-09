@@ -16,17 +16,17 @@ const size = "large";
 
 export default (
   <Pivot uxpId="pivot1" >
-    <PivotPanel uxpId="pp1">
-      <Text uxpId="t1" variant={size} textValue={tab1text} />
+    <PivotPanel>
+      <Text variant={size} textValue={tab1text} />
     </PivotPanel>
-    <PivotPanel uxpId="pp2">
-      <Text uxpId="t2" variant={size} textValue={tab2text} />
+    <PivotPanel>
+      <Text variant={size} textValue={tab2text} />
     </PivotPanel>
-    <PivotPanel uxpId="pp3">
-      <Text uxpId="t3" variant={size} textValue={tab3text} />
+    <PivotPanel>
+      <Text variant={size} textValue={tab3text} />
     </PivotPanel>
-    <PivotPanel uxpId="pp4">
-      <Text uxpId="t4" variant={size} textValue={tab4text} />
+    <PivotPanel>
+      <Text variant={size} textValue={tab4text} />
     </PivotPanel>
   </Pivot>
 );
