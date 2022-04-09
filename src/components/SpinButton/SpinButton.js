@@ -28,14 +28,10 @@ class SpinButton extends React.Component {
     render() {
         var labelIconProps = '';
         let icnName = this.props.iconName?.trim();
-        console.log("icnName: " + icnName);
 
         if (icnName.length > 0) {
             labelIconProps = { iconName: icnName };
-            console.log("Yes, we should show a label icon");
         }
-
-        // let iconProps = { iconName: this.props.iconName }
 
         let position = this.props.labelDisplay === posEnd ? Position.end :
             this.props.labelDisplay === posTop ? Position.top :
