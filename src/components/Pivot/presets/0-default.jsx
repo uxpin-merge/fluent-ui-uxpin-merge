@@ -17,7 +17,7 @@ const size = "large";
 export default (
   <Pivot uxpId="pivot1" >
     <PivotPanel uxpId="pp1">
-      <Text uxpId="t1" variant={size}>{tab1text}</Text>
+      <Text uxpId="t1" variant={size} textValue={tab1text} />
     </PivotPanel>
     <PivotPanel uxpId="pp2">
       <Text uxpId="t2" variant={size}>{tab2text}</Text>
