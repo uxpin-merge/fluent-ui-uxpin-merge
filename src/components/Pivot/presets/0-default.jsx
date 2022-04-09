@@ -20,13 +20,13 @@ export default (
       <Text uxpId="t1" variant={size} textValue={tab1text} />
     </PivotPanel>
     <PivotPanel uxpId="pp2">
-      <Text uxpId="t2" variant={size}>{tab2text}</Text>
+      <Text uxpId="t2" variant={size} textValue={tab2text} />
     </PivotPanel>
     <PivotPanel uxpId="pp3">
-      <Text uxpId="t3" variant={size}>{tab3text}</Text>
+      <Text uxpId="t3" variant={size} textValue={tab3text} />
     </PivotPanel>
     <PivotPanel uxpId="pp4">
-      <Text uxpId="t4" variant={size}>{tab4text}</Text>
+      <Text uxpId="t4" variant={size} textValue={tab4text} />
     </PivotPanel>
   </Pivot>
 );
