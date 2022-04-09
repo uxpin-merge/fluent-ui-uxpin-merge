@@ -318,9 +318,9 @@ class PeoplePicker extends React.Component {
 
    render() {
       let ppID = _.uniqueId('peoplepicker_');
-      let ppLabelText = this.props.label ? this.props.label?.trim() : undefined;
+      let ppLabelText = this.props.label ? this.props.label?.trim() : '';
 
-      let ppLabel = ppLabelText ? (
+      let ppLabel = ppLabelText.length > 0 ? (
          <Label
             {...this.props}
             required={this.props.required}
