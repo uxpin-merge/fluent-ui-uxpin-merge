@@ -99,7 +99,7 @@ class Persona extends React.Component {
                 role={this.props.role}
                 status={this.props.status}
                 optional={this.props.optional}
-                email={this.props.email}
+                email={''}
             >
                 <ActionButton text="Email" iconName="Mail" />
                 <ActionButton text="Call" iconName="Phone" />
@@ -119,8 +119,7 @@ class Persona extends React.Component {
                         showMarker={false}
                         showBeak={true}
                         direction={"topLeftEdge"}
-                        dismissOnClick={true}
-                        onDismiss={() => { this._onProfileCardDismiss() }}
+                        dismissOnClick={false}
                     >
                         {personaControl}
                         {profileCardControl}
