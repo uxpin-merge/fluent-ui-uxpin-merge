@@ -95,7 +95,7 @@ class Persona extends React.Component {
                 role={this.props.role}
                 status={this.props.status}
                 optional={this.props.optional}
-                email={''}
+                email={this.props.email}
             >
                 <ActionButton text="Email" iconName="Mail" />
                 <ActionButton text="Chat" iconName="OfficeChat" />

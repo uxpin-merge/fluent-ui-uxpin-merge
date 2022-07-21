@@ -153,11 +153,11 @@ class Facepile extends React.Component {
                     ppPresence={getPresenceLabel(personaProps.presence)}
                     name={personaProps.text}
                     role={personaProps.role}
-                    email={personaProps.email}
+                    email={linkedEmail}
                 >
                     <ActionButton text="Email" iconName="Mail" />
-                    <ActionButton text="Call" iconName="Phone" />
                     <ActionButton text="Chat" iconName="OfficeChat" />
+                    <ActionButton text="Call" iconName="Phone" />
                 </ProfileCard>
             )
         }
