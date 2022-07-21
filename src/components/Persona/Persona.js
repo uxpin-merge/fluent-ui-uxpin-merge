@@ -44,7 +44,7 @@ class Persona extends React.Component {
             this.props.onClick(returnValue);
         }
 
-        if (this.props.showPC == onClck) {
+        if (this.props.showPC === onClck) {
             this.state = {
                 showProfileCard: true,
             }
@@ -52,7 +52,7 @@ class Persona extends React.Component {
     }
 
     _setHover() {
-        if (this.props.showPC == onHvr) {
+        if (this.props.showPC === onHvr) {
             this.state = {
                 showProfileCard: true,
             }
