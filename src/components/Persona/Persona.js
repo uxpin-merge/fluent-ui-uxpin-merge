@@ -113,25 +113,28 @@ class Persona extends React.Component {
                 dismissOnClick={true}
                 onDismiss={() => { this._onProfileCardDismiss() }}
             >
-                <FPersona
-                    {...this.props}
-                    size={PersonaSize[this.props.ppSize]}
-                    presence={presenceCode}
-                    initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
-                    imageUrl={imgURL}
-                    imageInitials={this.props.initials}
-                    text={this.props.name}
-                    secondaryText={this.props.role}
-                    tertiaryText={this.props.status}
-                    optionalText={this.props.optional}
-                    hidePersonaDetails={this.props.hidePersonaDetails}
-                    styles={personaStyles}
-                    onClick={() => { this._onClick() }}
+                <div
                     onMouseEnter={() => this._setHover()}
-                    children={undefined}
                 >
-                    {email}
-                </FPersona>
+                    <FPersona
+                        {...this.props}
+                        size={PersonaSize[this.props.ppSize]}
+                        presence={presenceCode}
+                        initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+                        imageUrl={imgURL}
+                        imageInitials={this.props.initials}
+                        text={this.props.name}
+                        secondaryText={this.props.role}
+                        tertiaryText={this.props.status}
+                        optionalText={this.props.optional}
+                        hidePersonaDetails={this.props.hidePersonaDetails}
+                        styles={personaStyles}
+                        onClick={() => { this._onClick() }}
+                        children={undefined}
+                    >
+                        {email}
+                    </FPersona>
+                </div>
                 {pCard}
             </Callout>
         )
@@ -244,7 +247,7 @@ Persona.defaultProps = {
     ppSize: "size100",
     ppPresence: 'none',
     hidePersonaDetails: false,
-    showPC: onClck,
+    showPC: none,
     ppInitialsColor: 'lightBlue'
 };
 
