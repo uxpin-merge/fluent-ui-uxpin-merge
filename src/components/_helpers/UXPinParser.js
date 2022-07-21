@@ -37,13 +37,13 @@ export function split(inputStr) {
       // This element is finished, start a new element of newRow
       currChar = newRow[++i] = '';
     } else if (currChar === '\n' && insideQuotes) {
-       if (prevChar === '\r') {
-         // Remove the last element
-         newRow[i] = newRow[i].slice(0, -1);
-       }
-       // This array row is finished, start a new row of newArray
-       newRow = newArray[++j] = [currChar = ''];
-       i = 0;
+      if (prevChar === '\r') {
+        // Remove the last element
+        newRow[i] = newRow[i].slice(0, -1);
+      }
+      // This array row is finished, start a new row of newArray
+      newRow = newArray[++j] = [currChar = ''];
+      i = 0;
     } else {
       // If it's not a special character, just add it the current element
       newRow[i] += currChar;
@@ -112,20 +112,20 @@ export function parseRow(inputStr, index) {
         (i >= 2 || parsedOutput[0].type === 'link') ? parsedOutput[0].text += ` ${allTokens[i]}` : parsedOutput[0].text += `${allTokens[i]}`;
       }
     } else if (hasType && tokensWithType?.length >= 1) {
-       if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
-         parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), i));
-         tokenCounter += 1;
-         semaphore = true;
-       } else {
-         // Is this the _start_ of a chain of free text tokens?
-         if (tokenCounter === 0 || semaphore === true) {
-           parsedOutput.push(makeToken(allTokens[i], "text", i));
-           tokenCounter += 1;
-           semaphore = false;
-         } else {
-           parsedOutput[tokenCounter-1].text += ` ${allTokens[i]}`;
-         }
-       }
+      if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
+        parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), i));
+        tokenCounter += 1;
+        semaphore = true;
+      } else {
+        // Is this the _start_ of a chain of free text tokens?
+        if (tokenCounter === 0 || semaphore === true) {
+          parsedOutput.push(makeToken(allTokens[i], "text", i));
+          tokenCounter += 1;
+          semaphore = false;
+        } else {
+          parsedOutput[tokenCounter - 1].text += ` ${allTokens[i]}`;
+        }
+      }
     } else {
       if (createNewToken) {
         parsedOutput.push(makeToken(allTokens[i], "text", index));
@@ -179,11 +179,11 @@ function getFurtherArgs(inputStr) {
 /**
  * Function to normalize links by adding 'http://'
  */
-function normalizeLink(inputStr) {
+export function normalizeLink(inputStr) {
   if (inputStr?.includes('http') ||
-      inputStr?.includes('tel:') ||
-      inputStr?.includes('mailto:') ||
-      inputStr == undefined) {
+    inputStr?.includes('tel:') ||
+    inputStr?.includes('mailto:') ||
+    inputStr == undefined) {
     return inputStr;
   }
   else {
@@ -219,7 +219,7 @@ function makeToken(inputStr, type, order) {
         type: type,
         iconName: getFirstArg(inputStr).trim(),
         color: normalizeIcon(getFurtherArgs(inputStr)?.[0])?.trim(),
-        colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined: getFurtherArgs(inputStr)?.[0]?.trim(),
+        colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined : getFurtherArgs(inputStr)?.[0]?.trim(),
         text: "",
       };
       break;

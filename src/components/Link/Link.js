@@ -2,12 +2,35 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Link as FLink } from '@fluentui/react/lib/Link';
 import { Text } from '@fluentui/react/lib/Text';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
 class Link extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            theHref: ''
+        }
+    }
+
+    set() {
+        let href = UXPinParser.normalizeLink(this.props.linkHref);
+
+        this.setState({
+            theHref: href
+        });
+    }
+
+    componentDidMount() {
+        this.set();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.selected !== this.props.selected) {
+            this.set();
+        }
     }
 
     _onLinkClick() {
@@ -17,7 +40,7 @@ class Link extends React.Component {
 
         //Raise this event to UXPin. We'll send them the HREF value in case they can catch it.
         if (this.props.onLinkClick) {
-            this.props.onLinkClick(this.props.linkHref);
+            this.props.onLinkClick(this.state.theHref);
         }
     }
 
@@ -44,8 +67,7 @@ class Link extends React.Component {
                 variant={this.props.size}>
 
                 <FLink
-                    // {...this.props}
-                    href={this.props.linkHref}
+                    href={this.state.theHref}
                     styles={linkTextStyles}
                     target={linkTarget} //Force open in a new window
                     onClick={() => { this._onLinkClick() }}
