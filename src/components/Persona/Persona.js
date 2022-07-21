@@ -1,6 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import ActionButton from '../ActionButton/ActionButton';
 import Link from '../Link/Link';
+import Callout from '../Callout/Callout';
+import ProfileCard from '../ProfileCard/ProfileCard';
 import {
     Persona as FPersona,
     PersonaSize,
@@ -18,6 +21,9 @@ const personaStyles = {
     },
 };
 
+const onHvr = "on hover";
+const onClck = "on click";
+const none = "none";
 
 
 class Persona extends React.Component {
@@ -27,7 +33,6 @@ class Persona extends React.Component {
     }
 
     _onClick() {
-
         //For the end user in UXPin, let's send the initials as a unique identifier, or full name if no initials have been set. 
         var returnValue = (this.props.initials || this.props.name || "persona");
 
@@ -58,7 +63,7 @@ class Persona extends React.Component {
             );
         }
 
-        return (
+        let personaControl = (
             <FPersona
                 {...this.props}
                 size={PersonaSize[this.props.ppSize]}
@@ -77,6 +82,48 @@ class Persona extends React.Component {
             >
                 {email}
             </FPersona>
+        );
+
+        let profileCardControl = this.props.showPC ? (
+            <ProfileCard
+                imageUrl={imgURL}
+                ppSize={"size72"}
+                ppPresence={this.props.ppPresence}
+                ppInitialsColor={this.props.ppInitialsColor}
+                initials={this.props.initials}
+                name={this.props.name}
+                role={this.props.role}
+                status={this.props.status}
+                optional={this.props.optional}
+                email={this.props.email}
+            >
+                <ActionButton text="Email" iconName="Mail" />
+                <ActionButton text="Chat" iconName="OfficeChat" />
+                <ActionButton text="Call" iconName="Phone" />
+            </ProfileCard>
+        ) : "";
+
+        let pointerStyle = this.props.showPC ? { cursor: 'pointer' } : { cursor: 'auto' };
+
+        return (
+            <div style={pointerStyle} >
+                {this.props.showPC ?
+
+                    <Callout
+                        show={false}
+                        title={""}
+                        text={""}
+                        showMarker={false}
+                        showBeak={false}
+                        direction={"topLeftEdge"}
+                        dismissOnClick={true}
+                    >
+                        {personaControl}
+                        {profileCardControl}
+                    </Callout>
+
+                    : personaControl}
+            </div>
         )
     }
 }
@@ -88,10 +135,10 @@ class Persona extends React.Component {
 Persona.propTypes = {
 
     /**
-    * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
-    * @uxpinpropname Img URL
-    * @uxpincontroltype textfield(6)
-    */
+   * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
+   * @uxpinpropname Img URL
+   * @uxpincontroltype textfield(6)
+   */
     imageUrl: PropTypes.string,
 
     /**
@@ -161,6 +208,12 @@ Persona.propTypes = {
     hidePersonaDetails: PropTypes.bool,
 
     /**
+    * @uxpinpropname Profile Card
+    * @uxpindescription Whether to display a Profile Card on click
+    */
+    showPC: PropTypes.bool,
+
+    /**
      * @uxpindescription Fires when the control is clicked on
      * @uxpinpropname Click
      * */
@@ -179,8 +232,9 @@ Persona.defaultProps = {
     status: '',
     optional: '',
     ppSize: "size100",
-    ppPresence: 'online',
+    ppPresence: 'none',
     hidePersonaDetails: false,
+    showPC: true,
     ppInitialsColor: 'lightBlue'
 };
 

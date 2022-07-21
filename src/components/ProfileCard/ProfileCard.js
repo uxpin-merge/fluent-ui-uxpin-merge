@@ -12,8 +12,8 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 const stackVAlign = 'center';
 const stackHAlign = 'stretch';
 const stackTokens = {
-    childrenGap: '6px',
-    padding: 12,
+    childrenGap: '12',
+    padding: 6,
 };
 
 //For the Persona
@@ -48,6 +48,8 @@ class ProfileCard extends React.Component {
 
             let trimmedLink = this.props.email.trim();
             let link = trimmedLink.startsWith("mailto:") ? trimmedLink : 'mailto:' + trimmedLink;
+
+            console.log("Profile card email link: " + link);
 
             email = (
                 <Link

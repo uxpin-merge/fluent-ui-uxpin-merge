@@ -9,6 +9,7 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -51,8 +52,8 @@ FAQs | http://website.com/faqs
 Github | http://github.website.com/`;
 
 const corpInfoTextSize = '12px';
-const copyright = '© 2002-2021 Company, Inc. All Rights Reserved.';
-const confidentiality = 'CONFIDENTIALITY NOTICE: This web site is intended only for the use of Company employees, and may contain information that is privileged, confidential and exempt from disclosure under applicable law.';
+const copyright = '©' + new Date().getFullYear() + ' Company, Inc. All Rights Reserved.';
+const confidentiality = 'CONFIDENTIALITY NOTICE: This web site is intended only for the use of Company employees, and contains information that is privileged and confidential.';
 
 
 
@@ -126,7 +127,9 @@ class PageFooter extends React.Component {
                 var right = undefined;          //This is the optional link
 
                 if (links[1]) {
-                    right = links[1].trim();
+                    let href = UXPinParser.normalizeLink(links[1]);
+                    if (href)
+                        right = href;
                 }
 
                 let linkInfo = {

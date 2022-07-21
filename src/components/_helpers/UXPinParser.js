@@ -37,13 +37,13 @@ export function split(inputStr) {
       // This element is finished, start a new element of newRow
       currChar = newRow[++i] = '';
     } else if (currChar === '\n' && insideQuotes) {
-       if (prevChar === '\r') {
-         // Remove the last element
-         newRow[i] = newRow[i].slice(0, -1);
-       }
-       // This array row is finished, start a new row of newArray
-       newRow = newArray[++j] = [currChar = ''];
-       i = 0;
+      if (prevChar === '\r') {
+        // Remove the last element
+        newRow[i] = newRow[i].slice(0, -1);
+      }
+      // This array row is finished, start a new row of newArray
+      newRow = newArray[++j] = [currChar = ''];
+      i = 0;
     } else {
       // If it's not a special character, just add it the current element
       newRow[i] += currChar;
@@ -112,20 +112,20 @@ export function parseRow(inputStr, index) {
         (i >= 2 || parsedOutput[0].type === 'link') ? parsedOutput[0].text += ` ${allTokens[i]}` : parsedOutput[0].text += `${allTokens[i]}`;
       }
     } else if (hasType && tokensWithType?.length >= 1) {
-       if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
-         parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), i));
-         tokenCounter += 1;
-         semaphore = true;
-       } else {
-         // Is this the _start_ of a chain of free text tokens?
-         if (tokenCounter === 0 || semaphore === true) {
-           parsedOutput.push(makeToken(allTokens[i], "text", i));
-           tokenCounter += 1;
-           semaphore = false;
-         } else {
-           parsedOutput[tokenCounter-1].text += ` ${allTokens[i]}`;
-         }
-       }
+      if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
+        parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), i));
+        tokenCounter += 1;
+        semaphore = true;
+      } else {
+        // Is this the _start_ of a chain of free text tokens?
+        if (tokenCounter === 0 || semaphore === true) {
+          parsedOutput.push(makeToken(allTokens[i], "text", i));
+          tokenCounter += 1;
+          semaphore = false;
+        } else {
+          parsedOutput[tokenCounter - 1].text += ` ${allTokens[i]}`;
+        }
+      }
     } else {
       if (createNewToken) {
         parsedOutput.push(makeToken(allTokens[i], "text", index));
@@ -177,17 +177,30 @@ function getFurtherArgs(inputStr) {
 }
 
 /**
- * Function to normalize links by adding 'http://'
+ * Function to normalize URIs by trimming the string and adding 'http://', if necessary. If the potential URI string already uses one of these protocols, then no action is taken: http(s), tel, mailto.
+ * @param {string} inputStr - A string
+ * @returns {string} A normalized URI that starts with one of these supported protocols: http(s), tel, mailto. 
+ * @example Adds http - '    uxpin.com' -> 'http://uxpin.com'
+ * @example No change - 'https://uxpin.com' -> 'https://uxpin.com'
+ * @example No change - 'mailto:info@uxpin.com' -> 'mailto:info@uxpin.com'
+ * @example No change - 'tel:+16175551212' -> 'tel:+16175551212'
+ * 
  */
-function normalizeLink(inputStr) {
-  if (inputStr?.includes('http') ||
-      inputStr?.includes('tel:') ||
-      inputStr?.includes('mailto:') ||
-      inputStr == undefined) {
+export function normalizeLink(inputStr) {
+
+  if (inputStr == undefined) {
     return inputStr;
   }
+
+  let token = inputStr?.trim();
+
+  if (token?.startsWith('http') ||
+    token?.startsWith('tel:') ||
+    token?.startsWith('mailto:')) {
+    return token;
+  }
   else {
-    return `http://${inputStr}`;
+    return `http://${token}`;
   }
 }
 
@@ -219,7 +232,7 @@ function makeToken(inputStr, type, order) {
         type: type,
         iconName: getFirstArg(inputStr).trim(),
         color: normalizeIcon(getFurtherArgs(inputStr)?.[0])?.trim(),
-        colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined: getFurtherArgs(inputStr)?.[0]?.trim(),
+        colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined : getFurtherArgs(inputStr)?.[0]?.trim(),
         text: "",
       };
       break;

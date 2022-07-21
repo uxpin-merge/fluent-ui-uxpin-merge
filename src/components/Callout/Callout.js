@@ -18,7 +18,7 @@ const tClick = "On Click";
 
 const coDefaultWidth = 320;
 const coMinWidth = 20;
-const coPadding = 12;
+const coPadding = 6;
 
 const textHeadingSize = 'large';
 const textBodySize = 'medium';

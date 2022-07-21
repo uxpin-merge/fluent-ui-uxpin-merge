@@ -231,7 +231,7 @@ Card.propTypes = {
 Card.defaultProps = {
     boxWidth: 0,
     cardPadding: 0,
-    gutterPadding: 12,
+    gutterPadding: 0,
     align: leftAlign,
     bgColor: '#ffffff',
     borderColor: '#F5F7FA',

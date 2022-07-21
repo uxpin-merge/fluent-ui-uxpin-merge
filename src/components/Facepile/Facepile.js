@@ -143,8 +143,6 @@ class Facepile extends React.Component {
             return presenceLabel
         }
 
-        let linkedEmail = this._getLinkedEmail(personaProps);
-
         function onRenderPlainCard() {
             return (
                 <ProfileCard
@@ -156,8 +154,8 @@ class Facepile extends React.Component {
                     email={personaProps.email}
                 >
                     <ActionButton text="Email" iconName="Mail" />
-                    <ActionButton text="Call" iconName="Phone" />
                     <ActionButton text="Chat" iconName="OfficeChat" />
+                    <ActionButton text="Call" iconName="Phone" />
                 </ProfileCard>
             )
         }

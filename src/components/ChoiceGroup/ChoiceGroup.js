@@ -14,7 +14,8 @@ Oranges`;
 
 const choiceGroupHorizontalStyles = {
   label: {
-    display: "inline"
+    display: "inline",
+    content: "\a"
   },
   flexContainer: {
     columnGap: "1em",
