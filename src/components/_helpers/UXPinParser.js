@@ -177,17 +177,30 @@ function getFurtherArgs(inputStr) {
 }
 
 /**
- * Function to normalize links by adding 'http://'
+ * Function to normalize URIs by trimming the string and adding 'http://', if necessary. If the potential URI string already uses one of these protocols, then no action is taken: http(s), tel, mailto.
+ * @param {string} inputStr - A string
+ * @returns {string} A normalized URI that starts with one of these supported protocols: http(s), tel, mailto. 
+ * @example Adds http - '    uxpin.com' -> 'http://uxpin.com'
+ * @example No change - 'https://uxpin.com' -> 'https://uxpin.com'
+ * @example No change - 'mailto:info@uxpin.com' -> 'mailto:info@uxpin.com'
+ * @example No change - 'tel:+16175551212' -> 'tel:+16175551212'
+ * 
  */
 export function normalizeLink(inputStr) {
-  if (inputStr?.includes('http') ||
-    inputStr?.includes('tel:') ||
-    inputStr?.includes('mailto:') ||
-    inputStr == undefined) {
+
+  if (inputStr == undefined) {
     return inputStr;
   }
+
+  let token = inputStr?.trim();
+
+  if (token?.startsWith('http') ||
+    token?.startsWith('tel:') ||
+    token?.startsWith('mailto:')) {
+    return token;
+  }
   else {
-    return `http://${inputStr}`;
+    return `http://${token}`;
   }
 }
 
