@@ -91,7 +91,7 @@ class Persona extends React.Component {
         let profileCardControl = this.props.showPC ? (
             <ProfileCard
                 imageUrl={imgURL}
-                ppSize={"size100"}
+                ppSize={"size72"}
                 ppPresence={this.props.ppPresence}
                 ppInitialsColor={this.props.ppInitialsColor}
                 initials={this.props.initials}
