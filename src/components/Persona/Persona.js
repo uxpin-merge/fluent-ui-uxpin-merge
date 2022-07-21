@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Link from '../Link/Link';
+import Callout from '../Callout';
+import ProfileCard from '../ProfileCard';
 import {
     Persona as FPersona,
     PersonaSize,
@@ -18,16 +20,22 @@ const personaStyles = {
     },
 };
 
+const onHvr = "on hover";
+const onClck = "on click";
+const none = "none";
 
 
 class Persona extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            showProfileCard: false,
+        }
     }
 
     _onClick() {
-
         //For the end user in UXPin, let's send the initials as a unique identifier, or full name if no initials have been set. 
         var returnValue = (this.props.initials || this.props.name || "persona");
 
@@ -35,6 +43,18 @@ class Persona extends React.Component {
         if (this.props.onClick) {
             this.props.onClick(returnValue);
         }
+
+        if (this.props.showPC == onClck) {
+            this.state = {
+                showProfileCard: true,
+            }
+        }
+    }
+
+    _onProfileCardDismiss() {
+        this.setState({
+            showProfileCard: false,
+        });
     }
 
     render() {
@@ -58,25 +78,53 @@ class Persona extends React.Component {
             );
         }
 
-        return (
-            <FPersona
-                {...this.props}
-                size={PersonaSize[this.props.ppSize]}
-                presence={presenceCode}
-                initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+        let pCard = this.props.showPC ? (
+            <ProfileCard
                 imageUrl={imgURL}
-                imageInitials={this.props.initials}
-                text={this.props.name}
-                secondaryText={this.props.role}
-                tertiaryText={this.props.status}
-                optionalText={this.props.optional}
-                hidePersonaDetails={this.props.hidePersonaDetails}
-                styles={personaStyles}
-                onClick={() => { this._onClick() }}
-                children={undefined}
+                ppSize={"size100"}
+                ppPresence={this.props.ppPresence}
+                ppInitialsColor={this.props.ppInitialsColor}
+                initials={this.props.initials}
+                name={this.props.name}
+                role={this.props.role}
+                status={this.props.status}
+                optional={this.props.optional}
+                email={this.props.email}
+            ></ProfileCard>
+        ) : "";
+
+
+        return (
+            <Callout
+                show={this.state.showProfileCard}
+                title={""}
+                text={""}
+                showMarker={false}
+                showBeak={true}
+                direction={"bottomAutoEdge"}
+                dismissOnClick={true}
+                onDismiss={() => { this._onProfileCardDismiss() }}
             >
-                {email}
-            </FPersona>
+                <FPersona
+                    {...this.props}
+                    size={PersonaSize[this.props.ppSize]}
+                    presence={presenceCode}
+                    initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+                    imageUrl={imgURL}
+                    imageInitials={this.props.initials}
+                    text={this.props.name}
+                    secondaryText={this.props.role}
+                    tertiaryText={this.props.status}
+                    optionalText={this.props.optional}
+                    hidePersonaDetails={this.props.hidePersonaDetails}
+                    styles={personaStyles}
+                    onClick={() => { this._onClick() }}
+                    children={undefined}
+                >
+                    {email}
+                </FPersona>
+                {pCard}
+            </Callout>
         )
     }
 }
@@ -88,10 +136,10 @@ class Persona extends React.Component {
 Persona.propTypes = {
 
     /**
-    * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
-    * @uxpinpropname Img URL
-    * @uxpincontroltype textfield(6)
-    */
+   * @uxpindescription The URL to an image file. Leave empty to display initials instead. Supports the Image Tokens feature, such as 'person1', 'bridge', 'office', and 'dog'. 
+   * @uxpinpropname Img URL
+   * @uxpincontroltype textfield(6)
+   */
     imageUrl: PropTypes.string,
 
     /**
@@ -161,6 +209,12 @@ Persona.propTypes = {
     hidePersonaDetails: PropTypes.bool,
 
     /**
+    * @uxpinpropname Profile Card
+    * @uxpindescription Whether to display a Profile Card 
+    */
+    showPC: PropTypes.oneOf([onClck, onHvr, none]),
+
+    /**
      * @uxpindescription Fires when the control is clicked on
      * @uxpinpropname Click
      * */
@@ -180,7 +234,8 @@ Persona.defaultProps = {
     optional: '',
     ppSize: "size100",
     ppPresence: 'online',
-    hidePersonaDetails: false,
+    hidePersonaDetails: true,
+    showPC: onClck,
     ppInitialsColor: 'lightBlue'
 };
 
