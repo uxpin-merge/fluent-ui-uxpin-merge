@@ -13,7 +13,7 @@ const stackVAlign = 'center';
 const stackHAlign = 'stretch';
 const stackTokens = {
     childrenGap: '12',
-    padding: 12,
+    padding: 6,
 };
 
 //For the Persona
