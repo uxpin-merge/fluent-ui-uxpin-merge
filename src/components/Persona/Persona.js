@@ -114,7 +114,7 @@ class Persona extends React.Component {
                         title={""}
                         text={""}
                         showMarker={false}
-                        showBeak={true}
+                        showBeak={false}
                         direction={"topLeftEdge"}
                         dismissOnClick={true}
                     >
