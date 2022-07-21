@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Link from '../Link/Link';
-import Callout from '../Callout';
-import ProfileCard from '../ProfileCard';
+import Callout from '../Callout/Callout';
+import ProfileCard from '../ProfileCard/ProfileCard';
 import {
     Persona as FPersona,
     PersonaSize,
