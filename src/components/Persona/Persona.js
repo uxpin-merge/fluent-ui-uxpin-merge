@@ -49,6 +49,8 @@ class Persona extends React.Component {
                 showProfileCard: true,
             }
         }
+
+        console.log("_onClick " + this.props.showPC);
     }
 
     _setHover() {
@@ -57,6 +59,8 @@ class Persona extends React.Component {
                 showProfileCard: true,
             }
         }
+
+        console.log("_setHover " + this.props.showPC);
     }
 
     _onProfileCardDismiss() {
