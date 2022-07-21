@@ -119,7 +119,7 @@ class Persona extends React.Component {
                         showMarker={false}
                         showBeak={true}
                         direction={"topLeftEdge"}
-                        dismissOnClick={false}
+                        dismissOnClick={true}
                     >
                         {personaControl}
                         {profileCardControl}
