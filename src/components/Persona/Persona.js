@@ -103,9 +103,10 @@ class Persona extends React.Component {
             </ProfileCard>
         ) : "";
 
+        let pointerStyle = this.props.showPC ? { cursor: 'pointer' } : "";
 
         return (
-            <div>
+            <div style={pointerStyle} >
                 {this.props.showPC ?
 
                     <Callout
