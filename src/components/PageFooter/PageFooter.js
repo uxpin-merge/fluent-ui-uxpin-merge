@@ -9,6 +9,7 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -126,7 +127,9 @@ class PageFooter extends React.Component {
                 var right = undefined;          //This is the optional link
 
                 if (links[1]) {
-                    right = links[1].trim();
+                    let href = UXPinParser.normalizeLink(links[1]);
+                    if (href)
+                        right = href;
                 }
 
                 let linkInfo = {
