@@ -51,7 +51,7 @@ FAQs | http://website.com/faqs
 Github | http://github.website.com/`;
 
 const corpInfoTextSize = '12px';
-const copyright = '© 2002-2021 Company, Inc. All Rights Reserved.';
+const copyright = '©' + new Date().getFullYear() + ' Company, Inc. All Rights Reserved.';
 const confidentiality = 'CONFIDENTIALITY NOTICE: This web site is intended only for the use of Company employees, and may contain information that is privileged, confidential and exempt from disclosure under applicable law.';
 
 
