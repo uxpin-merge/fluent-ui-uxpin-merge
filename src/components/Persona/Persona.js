@@ -51,6 +51,14 @@ class Persona extends React.Component {
         }
     }
 
+    _setHover() {
+        if (this.props.showPC == onHvr) {
+            this.state = {
+                showProfileCard: true,
+            }
+        }
+    }
+
     _onProfileCardDismiss() {
         this.setState({
             showProfileCard: false,
@@ -101,7 +109,7 @@ class Persona extends React.Component {
                 text={""}
                 showMarker={false}
                 showBeak={true}
-                direction={"bottomAutoEdge"}
+                direction={"topAutoEdge"}
                 dismissOnClick={true}
                 onDismiss={() => { this._onProfileCardDismiss() }}
             >
@@ -119,6 +127,7 @@ class Persona extends React.Component {
                     hidePersonaDetails={this.props.hidePersonaDetails}
                     styles={personaStyles}
                     onClick={() => { this._onClick() }}
+                    onMouseEnter={() => this._setHover()}
                     children={undefined}
                 >
                     {email}
