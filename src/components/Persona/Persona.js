@@ -30,10 +30,6 @@ class Persona extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            showProfileCard: false,
-        }
     }
 
     _onClick() {
@@ -102,8 +98,8 @@ class Persona extends React.Component {
                 email={''}
             >
                 <ActionButton text="Email" iconName="Mail" />
-                <ActionButton text="Call" iconName="Phone" />
                 <ActionButton text="Chat" iconName="OfficeChat" />
+                <ActionButton text="Call" iconName="Phone" />
             </ProfileCard>
         ) : "";
 
@@ -113,7 +109,7 @@ class Persona extends React.Component {
                 {this.props.showPC ?
 
                     <Callout
-                        show={this.state.showProfileCard}
+                        show={false}
                         title={""}
                         text={""}
                         showMarker={false}
