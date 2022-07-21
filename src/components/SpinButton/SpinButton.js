@@ -26,8 +26,13 @@ class SpinButton extends React.Component {
     }
 
     render() {
+        var labelIconProps = '';
+        let icnName = this.props.iconName?.trim();
 
-        let iconProps = { iconName: this.props.iconName }
+        if (icnName.length > 0) {
+            labelIconProps = { iconName: icnName };
+        }
+
         let position = this.props.labelDisplay === posEnd ? Position.end :
             this.props.labelDisplay === posTop ? Position.top :
                 Position.start;
@@ -38,7 +43,7 @@ class SpinButton extends React.Component {
                 {...this.props}
                 defaultValue={this.props.value}
                 labelPosition={position}
-                iconProps={iconProps}
+                iconProps={labelIconProps}
                 onChange={(evt, v) => { this._valueChanged(v) }}
             />
         );

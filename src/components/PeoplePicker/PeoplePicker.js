@@ -424,7 +424,7 @@ PeoplePicker.propTypes = {
 
 
 PeoplePicker.defaultProps = {
-   label: "Testing",
+   label: "People Picker",
    required: false,
    selectedIndexes: '',
    persons: '',

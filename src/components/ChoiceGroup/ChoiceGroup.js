@@ -12,6 +12,18 @@ Bananas
 Kiwis
 Oranges`;
 
+const choiceGroupHorizontalStyles = {
+  label: {
+    display: "inline"
+  },
+  flexContainer: {
+    columnGap: "1em",
+    display: "inline-flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  }
+};
+
 
 class ChoiceGroup extends React.Component {
 
@@ -65,12 +77,15 @@ class ChoiceGroup extends React.Component {
     //Subtract 1 because it's stored as a 1-based index to be more user friendly.
     const selectedKey = this.state._index - 1;
 
+    const hstyle = this.props.horizontalRB ? choiceGroupHorizontalStyles : '';
+
     return (
 
       <FChoiceGroup
         {...this.props}
         options={this.state._items}
         selectedKey={selectedKey}
+        styles={hstyle}
         onChange={(e, o) => { this._onChoiceChange(o); }}
       />
 
@@ -112,6 +127,13 @@ ChoiceGroup.propTypes = {
   tiled: PropTypes.bool,
 
   /**
+   * @uxpindescription To display the radio buttons horizontally
+   * @uxpinpropname Horizontal Radio Buttons
+   * */
+  horizontalRB: PropTypes.bool,
+
+
+  /**
    * @uxpindescription To display the 'required' flag on the label
    * @uxpinpropname Required
    * */
@@ -138,7 +160,8 @@ ChoiceGroup.defaultProps = {
   items: defaultChoices,
   selectedIndex: 0,
   required: false,
-  tiled: false
+  tiled: false,
+  horizontalRB: false,
 };
 
 

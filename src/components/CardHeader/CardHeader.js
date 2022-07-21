@@ -53,7 +53,7 @@ class CardHeader extends React.Component {
         };
 
         //With one number, the padding applies to both rows and columns.
-        let pad = '12px';
+        let pad = '9px';
 
         //Let's make sure we have a positive number. 
         let cardPad = this.props.cardPadding < 0 ? 0 : this.props.cardPadding;

@@ -98,13 +98,13 @@ class StatusSet extends React.Component {
             else {
                iconColor = UxpColors.getHexFromHexOrToken(defaultIconColor);
             }
+         }
 
-            if (this.props.text) {
-               textVal = this.props.text.trim();
-            }
-            else {
-               addText = false;
-            }
+         if (this.props.text?.trim()) {
+            textVal = this.props.text.trim();
+         }
+         else {
+            addText = false;
          }
       }
       else {

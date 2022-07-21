@@ -1758,10 +1758,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@uxpin/merge-cli@^2.7.8":
-  "integrity" "sha512-RpSl6oosg+jk8DRYzCdJMa4scfqzUeZSEW5fa3irJ8TGVQckiVLvTX8NpCzonXMa+kpWLrYD0U+2esL7UFMmJA=="
-  "resolved" "https://registry.npmjs.org/@uxpin/merge-cli/-/merge-cli-2.7.8.tgz"
-  "version" "2.7.8"
+"@uxpin/merge-cli@^2.7.10":
+  "integrity" "sha512-xXGC1dpmPKGPMr+p/HBYI5/rCsaXgDYc6eBfq6vXLEzweWwrIEN/YvNeTDOKa3jDMIJSYmK0djrbxqxTN4RpJQ=="
+  "resolved" "https://registry.npmjs.org/@uxpin/merge-cli/-/merge-cli-2.7.10.tgz"
+  "version" "2.7.10"
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-proposal-class-properties" "^7.2.3"
@@ -3350,9 +3350,9 @@
     "lodash.uniq" "^4.5.0"
 
 "caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30000918", "caniuse-lite@^1.0.30000929", "caniuse-lite@^1.0.30001109", "caniuse-lite@^1.0.30001219":
-  "integrity" "sha512-+Nkvv0fHyhISkiMIjnyjmf5YJcQ1IQHZN6U9TLUMroWR38FNwpsC51Gb68yueafX1V6ifOisInSgP9WJFS13ew=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001274.tgz"
-  "version" "1.0.30001274"
+  "integrity" "sha512-wgfRYa9DenEomLG/SdWgQxpIyvdtH3NW8Vq+tB6AwR9e56iOIcu1im5F/wNdDf04XlKHXqIx4N8Jo0PemeBenQ=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001368.tgz"
+  "version" "1.0.30001368"
 
 "capture-exit@^1.2.0":
   "integrity" "sha1-HF/MSJ/QqwDU8ax64QcuMXP7q28="

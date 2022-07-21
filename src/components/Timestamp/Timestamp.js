@@ -202,7 +202,7 @@ Timestamp.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Timestamp.defaultProps = {
-   calDate: "Jul 1, 2021, 4:20 pm",
+   calDate: "April 20, 2022, 4:20 pm",
    showDate: true,
    showTime: true,
    showSeconds: false,
