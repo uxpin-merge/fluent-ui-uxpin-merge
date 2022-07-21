@@ -233,8 +233,8 @@ Persona.defaultProps = {
     status: '',
     optional: '',
     ppSize: "size100",
-    ppPresence: 'online',
-    hidePersonaDetails: true,
+    ppPresence: 'none',
+    hidePersonaDetails: false,
     showPC: onClck,
     ppInitialsColor: 'lightBlue'
 };
