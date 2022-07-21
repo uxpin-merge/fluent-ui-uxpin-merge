@@ -12,7 +12,7 @@ import { UxpPersonaData } from '../_helpers/uxppersonadata';
 const stackVAlign = 'center';
 const stackHAlign = 'stretch';
 const stackTokens = {
-    childrenGap: '6px',
+    childrenGap: '12',
     padding: 12,
 };
 
