@@ -43,30 +43,6 @@ class Persona extends React.Component {
         if (this.props.onClick) {
             this.props.onClick(returnValue);
         }
-
-        if (this.props.showPC === onClck) {
-            this.state = {
-                showProfileCard: true,
-            }
-        }
-
-        console.log("_onClick " + this.props.showPC);
-    }
-
-    _setHover() {
-        if (this.props.showPC === onHvr) {
-            this.state = {
-                showProfileCard: true,
-            }
-        }
-
-        console.log("_setHover " + this.props.showPC);
-    }
-
-    _onProfileCardDismiss() {
-        this.setState({
-            showProfileCard: false,
-        });
     }
 
     render() {
@@ -90,7 +66,28 @@ class Persona extends React.Component {
             );
         }
 
-        let pCard = this.props.showPC ? (
+        let personaControl = (
+            <FPersona
+                {...this.props}
+                size={PersonaSize[this.props.ppSize]}
+                presence={presenceCode}
+                initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
+                imageUrl={imgURL}
+                imageInitials={this.props.initials}
+                text={this.props.name}
+                secondaryText={this.props.role}
+                tertiaryText={this.props.status}
+                optionalText={this.props.optional}
+                hidePersonaDetails={this.props.hidePersonaDetails}
+                styles={personaStyles}
+                onClick={() => { this._onClick() }}
+                children={undefined}
+            >
+                {email}
+            </FPersona>
+        );
+
+        let profileCardControl = this.props.showPC ? (
             <ProfileCard
                 imageUrl={imgURL}
                 ppSize={"size100"}
@@ -107,40 +104,25 @@ class Persona extends React.Component {
 
 
         return (
-            <Callout
-                show={this.state.showProfileCard}
-                title={""}
-                text={""}
-                showMarker={false}
-                showBeak={true}
-                direction={"topAutoEdge"}
-                dismissOnClick={true}
-                onDismiss={() => { this._onProfileCardDismiss() }}
-            >
-                <div
-                    onMouseEnter={() => this._setHover()}
-                >
-                    <FPersona
-                        {...this.props}
-                        size={PersonaSize[this.props.ppSize]}
-                        presence={presenceCode}
-                        initialsColor={PersonaInitialsColor[this.props.ppInitialsColor]}
-                        imageUrl={imgURL}
-                        imageInitials={this.props.initials}
-                        text={this.props.name}
-                        secondaryText={this.props.role}
-                        tertiaryText={this.props.status}
-                        optionalText={this.props.optional}
-                        hidePersonaDetails={this.props.hidePersonaDetails}
-                        styles={personaStyles}
-                        onClick={() => { this._onClick() }}
-                        children={undefined}
+            <div>
+                {this.props.showPC ?
+
+                    <Callout
+                        show={this.state.showProfileCard}
+                        title={""}
+                        text={""}
+                        showMarker={false}
+                        showBeak={true}
+                        direction={"topAutoEdge"}
+                        dismissOnClick={true}
+                        onDismiss={() => { this._onProfileCardDismiss() }}
                     >
-                        {email}
-                    </FPersona>
-                </div>
-                {pCard}
-            </Callout>
+                        {personaControl}
+                        {profileCardControl}
+                    </Callout>
+
+                    : personaControl}
+            </div>
         )
     }
 }
@@ -226,9 +208,9 @@ Persona.propTypes = {
 
     /**
     * @uxpinpropname Profile Card
-    * @uxpindescription Whether to display a Profile Card 
+    * @uxpindescription Whether to display a Profile Card on click
     */
-    showPC: PropTypes.oneOf([onClck, onHvr, none]),
+    showPC: PropTypes.bool,
 
     /**
      * @uxpindescription Fires when the control is clicked on
@@ -251,7 +233,7 @@ Persona.defaultProps = {
     ppSize: "size100",
     ppPresence: 'none',
     hidePersonaDetails: false,
-    showPC: none,
+    showPC: true,
     ppInitialsColor: 'lightBlue'
 };
 
