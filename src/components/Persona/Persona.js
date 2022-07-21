@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import ActionButton from '../ActionButton/ActionButton';
 import Link from '../Link/Link';
 import Callout from '../Callout/Callout';
 import ProfileCard from '../ProfileCard/ProfileCard';
@@ -99,7 +100,11 @@ class Persona extends React.Component {
                 status={this.props.status}
                 optional={this.props.optional}
                 email={this.props.email}
-            ></ProfileCard>
+            >
+                <ActionButton text="Email" iconName="Mail" />
+                <ActionButton text="Call" iconName="Phone" />
+                <ActionButton text="Chat" iconName="OfficeChat" />
+            </ProfileCard>
         ) : "";
 
 
@@ -113,7 +118,7 @@ class Persona extends React.Component {
                         text={""}
                         showMarker={false}
                         showBeak={true}
-                        direction={"topAutoEdge"}
+                        direction={"topLeftEdge"}
                         dismissOnClick={true}
                         onDismiss={() => { this._onProfileCardDismiss() }}
                     >
