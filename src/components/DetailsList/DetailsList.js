@@ -280,7 +280,7 @@ class DetailsList extends React.Component {
   setRows(callback) {
     let rows = [];
 
-    l//et rawRows = this.props.items?.split("\n");
+    //let rawRows = this.props.items?.split("\n");
 
     // console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
     // console.log("Trying rawRows next " + rawRows);
