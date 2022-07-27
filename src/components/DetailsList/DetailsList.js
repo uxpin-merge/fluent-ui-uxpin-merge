@@ -273,6 +273,8 @@ class DetailsList extends React.Component {
 
     let rawRows = this.props.items?.split("\n");
 
+    console.log("Test string: " + UXPinParser.testStrings("  hello!   "));
+
     console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
     console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows));
 
