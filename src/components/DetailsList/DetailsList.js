@@ -291,7 +291,7 @@ class DetailsList extends React.Component {
       for (let i = 0; i < rawRows.length; i++) {
         console.log("Row contents (" + i + "): " + rawRows[i].toString());
 
-        let rowContents = UXPinParser.split(rawRows[i]);
+        let rowContents = UXPinParser.parse(rawRows[i]);
         console.log("Row " + i + ": " + rowContents);
 
         if (rowContents[0]) {
