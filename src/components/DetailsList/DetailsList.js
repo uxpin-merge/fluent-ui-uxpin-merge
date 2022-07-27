@@ -423,14 +423,14 @@ DetailsList.propTypes = {
   * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
   * @uxpinpropname Align Right
   */
-  // alignRight: PropTypes.string,
+  alignRight: PropTypes.string,
 
   /**
   * Example: 2, 3
   * @uxpindescription Enter a comma-separated list of column numbers for center aligning their contents (Optional)
   * @uxpinpropname Align Center
   */
-  // alignCenter: PropTypes.string,
+  alignCenter: PropTypes.string,
 
   /**
   * @uxpindescription Minimum column width width 
@@ -479,8 +479,8 @@ DetailsList.defaultProps = {
   minWidth: 125,
   maxWidth: 350,
   header: true,
-  // alignRight: "5",
-  // alignCenter: "3, 4",
+  alignRight: "5",
+  alignCenter: "3, 4",
   isSearchEnabled: true,
   icon: searchFieldIconName,
   placeholder: searchFieldPlaceholder,
