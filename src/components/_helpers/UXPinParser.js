@@ -21,7 +21,7 @@ export function split(inputStr) {
     return [];
   }
 
-  console.log("Entering split");
+  console.log("Just trimmed in split");
 
   let currChar;             // For looping through characters of the inputStr
   let prevChar = '';        // The previous character we looped around
