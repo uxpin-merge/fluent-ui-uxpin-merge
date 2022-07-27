@@ -274,11 +274,9 @@ class DetailsList extends React.Component {
     let rawRows = this.props.items?.split("\n");
 
     console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
+    console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows));
 
     //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
-
-    console.log("Testing the split on newline parse(rawRows): \n" + UXPinParser.parse(rawRows));
-
 
     csv2arr(this.props.items).forEach((row, rowIndex) => {
       let r = {
