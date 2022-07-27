@@ -280,19 +280,24 @@ class DetailsList extends React.Component {
   setRows(callback) {
     let rows = [];
 
-    //let rawRows = this.props.items?.split("\n");
+    let rawRows = this.props.items?.split("\n");
 
     // console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
     // console.log("Trying rawRows next " + rawRows);
     // console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows.toString()));
 
-    let parsedRows = UXPinParser.parse(this.props.items);
-    console.log("Testing the parse(items): \n" + parsedRows);
-    console.log("Parsed Rows count: " + parsedRows.length);
 
+    if (rawRows && rawRows.length > 0) {
+      for (let i = 0; i < rawRows.length; i++) {
+        console.log("Row contents (" + i + "): " + rawRows[i].toString());
 
-    for (let i = 0; i < parsedRows.length; i++) {
-      console.log("Row contents (" + i + "): " + parsedRows[i].toString());
+        let rowContents = UXPinParser.split(rawRows[i]);
+        console.log("Row " + i + ": " + rowContents);
+
+        if (rowContents[0]) {
+          console.log("type: " + rowContents[0].type + ", text:" + rowContents[0].text)
+        }
+      }
     }
 
 
