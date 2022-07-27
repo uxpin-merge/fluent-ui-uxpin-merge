@@ -14,7 +14,7 @@
  */
 export function split(inputStr) {
   // Handle the edge-case of empty input strings
-  if (!inputStr || inputStr.trim() === '') {
+  if (inputStr.trim() === '') {
     return [];
   }
 

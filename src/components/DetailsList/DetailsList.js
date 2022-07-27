@@ -292,7 +292,7 @@ class DetailsList extends React.Component {
         console.log("Row contents (" + i + "): " + rawRows[i].toString());
 
         let rowContents = UXPinParser.split(rawRows[i]);
-        console.log("Slit Row " + i + ": " + rowContents);
+        console.log("Split Row " + i + ": " + rowContents);
 
         if (rowContents[0]) {
           console.log("row0 raw contents: " + rowContents[0]);
