@@ -9,7 +9,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import { Console } from 'console';
+
 
 
 const searchFieldWidth = 400;
@@ -280,11 +280,11 @@ class DetailsList extends React.Component {
   setRows(callback) {
     let rows = [];
 
-    let rawRows = this.props.items?.split("\n");
+    l//et rawRows = this.props.items?.split("\n");
 
-    console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
-    console.log("Trying rawRows next " + rawRows);
-    console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows.toString()));
+    // console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
+    // console.log("Trying rawRows next " + rawRows);
+    // console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows.toString()));
 
     let parsedRows = UXPinParser.parse(this.props.items);
     console.log("Testing the parse(items): \n" + parsedRows);
