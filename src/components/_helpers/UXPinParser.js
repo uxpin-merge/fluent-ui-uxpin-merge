@@ -12,7 +12,7 @@
  */
 export function split(inputStr) {
   // Handle the edge-case of empty input strings
-  if (inputStr.trim() === '') {
+  if (!inputStr || inputStr?.trim() === '') {
     return [];
   }
 
