@@ -7,6 +7,8 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
+import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 const searchFieldWidth = 400;
@@ -21,9 +23,9 @@ const headerBackgroundColor = 'neutralLighterAlt';
 const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
 
 const defaultRowValues =
-  `link(Component_Name_A), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
-link(Component_Name_B), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
-link(Component_Name_C), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
+  `link(Component_Name_A|google.com), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
+link(Component_Name_B|www.uxpin.com), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
+link(Component_Name_C|http://amazon.com), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
@@ -49,14 +51,26 @@ class DetailsList extends React.Component {
   }
 
   set() {
+    let alignRightCols = UxpNumberParser.parseInts(this.props.alignRight);
+    let alignCenterCols = UxpNumberParser.parseInts(this.props.alignCenter);
+
+    console.log("set Right align: " + alignRightCols);
+    console.log("set Center align: " + alignCenterCols);
 
     this.setState(
       {
-        alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
-        alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
+        alignRight: alignRightCols ? alignRightCols : '',
+        alignCenter: alignCenterCols ? alignCenterCols : '',
         shimmer: this.props.shimmer
       },
       () => this.setColumns(this.setRows)
+
+      // {
+      //   alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
+      //   alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
+      //   shimmer: this.props.shimmer
+      // },
+      // () => this.setColumns(this.setRows)
     );
 
     if (this.props.shimmer) {
