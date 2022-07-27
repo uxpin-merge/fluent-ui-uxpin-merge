@@ -291,12 +291,12 @@ class DetailsList extends React.Component {
       for (let i = 0; i < rawRows.length; i++) {
         console.log("Row contents (" + i + "): " + rawRows[i].toString());
 
-        let rowContents = UXPinParser.split(rawRows[i]);
-        console.log("Split Row " + i + ": " + rowContents);
+        let rowContents = UXPinParser.parseRow(rawRows[i], i);
+        console.log("parseRow " + i + ": " + rowContents);
 
         if (rowContents[0]) {
           console.log("row0 raw contents: " + rowContents[0]);
-          console.log("type: " + rowContents[0].type + ", text:" + rowContents[0].text)
+          console.log("type: " + rowContents[0].type + ", text:" + rowContents[0].text + "/n/n")
         }
       }
     }
