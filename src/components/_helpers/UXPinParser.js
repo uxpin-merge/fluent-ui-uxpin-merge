@@ -13,15 +13,10 @@
  *           ]
  */
 export function split(inputStr) {
-
-  console.log("Entering split");
-
   // Handle the edge-case of empty input strings
-  if (inputStr.trim() === '') {
+  if (!inputStr || inputStr.trim() === '') {
     return [];
   }
-
-  console.log("Just trimmed in split");
 
   let currChar;             // For looping through characters of the inputStr
   let prevChar = '';        // The previous character we looped around
@@ -57,8 +52,6 @@ export function split(inputStr) {
     }
     prevChar = currChar;
   }
-
-  console.log("Leaving split");
 
   return newArray;
 };
