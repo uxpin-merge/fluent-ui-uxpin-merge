@@ -9,6 +9,7 @@ import { UxpColors } from '../_helpers/uxpcolorutils';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import { Console } from 'console';
 
 
 const searchFieldWidth = 400;
@@ -268,6 +269,14 @@ class DetailsList extends React.Component {
     }, callback)
   }
 
+  _setRowsNew(callback) {
+    let rows = [];
+
+    let rawRows = this.props.items?.split("\n");
+
+
+  }
+
   setRows(callback) {
     let rows = [];
 
@@ -279,6 +288,12 @@ class DetailsList extends React.Component {
 
     let parsedRows = UXPinParser.parse(this.props.items);
     console.log("Testing the parse(items): \n" + parsedRows);
+    console.log("Parsed Rows count: " + parsedRows.length);
+
+
+    for (let i = 0; i < parsedRows.length; i++) {
+      console.log("Row contents (" + i + "): " + parsedRows[i].toString());
+    }
 
 
     //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
