@@ -292,7 +292,7 @@ class DetailsList extends React.Component {
         console.log("Row contents (" + i + "): " + rawRows[i].toString());
 
         let rowContents = UXPinParser.parseRow(rawRows[i], i);
-        console.log("parseRow " + i + ": " + rowContents);
+        console.log("parseRow " + i + ": " + rowContents.toString());
 
         if (rowContents[0]) {
           console.log("row0 raw contents: " + rowContents[0]);
