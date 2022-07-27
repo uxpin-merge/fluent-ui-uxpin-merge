@@ -54,9 +54,6 @@ class DetailsList extends React.Component {
     let alignRightCols = UxpNumberParser.parseInts(this.props.alignRight);
     let alignCenterCols = UxpNumberParser.parseInts(this.props.alignCenter);
 
-    console.log("set Right align: " + alignRightCols);
-    console.log("set Center align: " + alignCenterCols);
-
     this.setState(
       {
         alignRight: alignRightCols ? alignRightCols : '',
@@ -64,13 +61,6 @@ class DetailsList extends React.Component {
         shimmer: this.props.shimmer
       },
       () => this.setColumns(this.setRows)
-
-      // {
-      //   alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
-      //   alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
-      //   shimmer: this.props.shimmer
-      // },
-      // () => this.setColumns(this.setRows)
     );
 
     if (this.props.shimmer) {
@@ -280,6 +270,15 @@ class DetailsList extends React.Component {
 
   setRows(callback) {
     let rows = [];
+
+    let rawRows = this.props.items?.split("\n");
+
+    console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
+
+    console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
+
+    console.log("Testing the split on newline parse(rawRows): \n" + UXPinParser.parse(rawRows));
+
 
     csv2arr(this.props.items).forEach((row, rowIndex) => {
       let r = {
