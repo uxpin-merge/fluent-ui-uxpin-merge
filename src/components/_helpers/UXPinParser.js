@@ -1,12 +1,3 @@
-import { Console } from "console";
-
-
-export function testStrings(inputStr) {
-
-  return inputStr.trim();
-
-}
-
 
 
 /**
