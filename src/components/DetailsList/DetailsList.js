@@ -286,17 +286,16 @@ class DetailsList extends React.Component {
     // console.log("Trying rawRows next " + rawRows);
     // console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows.toString()));
 
-
     if (rawRows && rawRows.length > 0) {
       for (let i = 0; i < rawRows.length; i++) {
-        console.log("Row contents (" + i + "): " + rawRows[i].toString());
+        console.log("\n\nRow contents (" + i + "): " + rawRows[i].toString());
 
-        let rowContents = UXPinParser.parseRow(rawRows[i], i);
+        let rowContents = UXPinParser.parse(rawRows[i], i);
         console.log("parseRow " + i + ": " + rowContents.toString());
 
         if (rowContents[0]) {
           console.log("row0 raw contents: " + rowContents[0]);
-          console.log("type: " + rowContents[0].type + ", text:" + rowContents[0].text + "/n/n")
+          console.log("type: " + rowContents[0].type + ", text:" + rowContents[0].text)
         }
       }
     }
