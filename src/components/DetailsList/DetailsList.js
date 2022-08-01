@@ -306,20 +306,25 @@ class DetailsList extends React.Component {
 
             console.log("       >>> cellContents for " + clIndex + ": " + cellContents.toString());
 
-            let cellTokenList = cellList[clIndex];
+            //Now, parse out the contents of an individual cell's list of tokens
+            if (cellContents) {
 
-            //Now, parse out the contents of an individual token
-            if (cellTokenList && cellTokenList.length > 0) {
-              let cellUIElements = cellTokenList.map(
+              let cellUIElements = cellContents.map(
                 (item) => {
                   // If not type compound, return the single element
                   if (item.type !== "compound") {
+
+                    console.log("       *** It's a singular token: " + item?.text)
+
                     return this._getUIElement(item);
                   }
                   else {
                     // If type compound, map the item values
                     elements = item.value.map(
                       (subItem) => {
+
+                        console.log("       *** It's a 'compound' token: " + item?.length)
+
                         // Second map of parsedOutput.value to seperate each object of links, icons, and text
                         return this._getUIElement(subItem);
                       }
