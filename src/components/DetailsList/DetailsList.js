@@ -403,8 +403,8 @@ class DetailsList extends React.Component {
   _getUIElement(item) {
     if (item) {
       return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
-        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
-          : this._getTextElement(key, item?.text);
+        : item.type === "icon" ? this._getIconElement(item?.iconName, item.color ? item.color : item?.colorToken)
+          : this._getTextElement(item?.text);
     }
   }
 
