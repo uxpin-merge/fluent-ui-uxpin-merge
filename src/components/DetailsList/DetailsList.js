@@ -373,6 +373,7 @@ class DetailsList extends React.Component {
     } // if rawRows
 
     console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
+    return rows;
   }
 
 
@@ -382,7 +383,7 @@ class DetailsList extends React.Component {
     let rows = [];
 
     //Testing...
-    this._setRowsNew();
+    let newRows = this._setRowsNew();
 
     //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
 
@@ -407,8 +408,11 @@ class DetailsList extends React.Component {
       rows.push(r)
     });
 
-    this.setState({ rows }, callback);
-    this.setState({ allItems: rows });
+    this.setState({ newRows }, callback);
+    this.setState({ allItems: newRows });
+
+    // this.setState({ rows }, callback);
+    // this.setState({ allItems: rows });
   }
 
   _getUIElement(item) {
