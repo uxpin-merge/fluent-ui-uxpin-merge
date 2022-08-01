@@ -299,7 +299,13 @@ class DetailsList extends React.Component {
         let cellList = UXPinParser.parse(rawRowString, index);
 
         if (cellList && cellList.length > 0) {
+
+          console.log("   >>> Cell list count: " + cellList.length)
+
           cellList.forEach((cellContents, clIndex) => {
+
+            console.log("       >>> cellContents for " + clIndex + ": " + cellContents.toString());
+
             let cellTokenList = cellList[clIndex];
 
             //Now, parse out the contents of an individual token
