@@ -30,7 +30,7 @@ export const UxpPersonaData = {
 
     /**
      * Persona info for Marcus Jones. 
-     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes. 
+     * Some attributes are compatible with a Microsoft Fluent Persona control, plus additional attributes.
      */
     personaMarcus: {
         key: "person02",

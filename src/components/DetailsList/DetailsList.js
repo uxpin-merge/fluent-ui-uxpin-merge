@@ -6,10 +6,12 @@ import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { Text } from '../Text/Text';
+import { Link } from '../Link/Link';
+import { Icon } from '@fluentui/react/lib/Icon';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-
 
 
 const searchFieldWidth = 400;
@@ -17,8 +19,10 @@ const searchFieldIconName = "Filter";
 const searchFieldPlaceholder = "Filter";
 const searchFieldMarginBottom = '24px';
 
-const headerBackgroundColor = 'neutralLighterAlt';
+const dataTextSize = "smallPlus";
+const defaultTextColor = "#000";
 
+const headerBackgroundColor = 'neutralLighterAlt';
 
 //Use this in the default props below.
 const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
@@ -30,6 +34,19 @@ link(Component_Name_C|http://amazon.com), icon(StatusErrorFull|error) Unavailabl
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
+
+const iconSizeMap = {
+  tiny: 10,
+  xSmall: 10,
+  small: 14,
+  smallPlus: 14,
+  medium: 16,
+  mediumPlus: 16,
+  large: 18,
+  xLarge: 22,
+  xxLarge: 32,
+  mega: 64,
+};
 
 
 
@@ -269,37 +286,64 @@ class DetailsList extends React.Component {
     }, callback)
   }
 
-  _setRowsNew(callback) {
+  //Should take callback as param
+  _setRowsNew() {
     let rows = [];
 
     let rawRows = this.props.items?.split("\n");
 
+    if (rawRows && rawRows.length > 0) {
+      rawRows.forEach(rawRowString, index => {
+        console.log("\n\nRow contents (" + i + "): " + rawRowList[i].toString());
+        let cellList = UXPinParser.parse(rawRowList[i], i);
+
+        if (cellList && cellList.length > 0) {
+          cellList.forEach(cellContents, clIndex => {
+            let cellTokenList = cellList[clIndex];
+
+            //Now, parse out the contents of an individual token
+            if (cellTokenList && cellTokenList.length > 0) {
+              let cellUIElements = cellTokenList.map(
+                (item) => {
+                  // If not type compound, return the single element
+                  if (item.type !== "compound") {
+                    return this._getUIElement(item);
+                  }
+                  else {
+                    // If type compound, map the item values
+                    elements = item.value.map(
+                      (subItem) => {
+                        // Second map of parsedOutput.value to seperate each object of links, icons, and text
+                        return this._getUIElement(subItem);
+                      }
+                    )
+                    return elements;
+                  }
+                }
+              )
+
+              console.log("   ** Cell UI elements count: " cellUIElements.length);
+              rows.push(cellUIElements);
+
+            } //if cellTokenList
+
+
+          }) //foreach CelList
+        } //if
+
+      }); //foreach rawRows
+    } //if 
 
   }
+
+
+
 
   setRows(callback) {
     let rows = [];
 
-    let rawRows = this.props.items?.split("\n");
-
-    // console.log("Raw input: Testing the split(items): \n" + UXPinParser.split(this.props.items));
-    // console.log("Trying rawRows next " + rawRows);
-    // console.log("Testing the split on newline split(rawRows): \n" + UXPinParser.split(rawRows.toString()));
-
-    if (rawRows && rawRows.length > 0) {
-      for (let i = 0; i < rawRows.length; i++) {
-        console.log("\n\nRow contents (" + i + "): " + rawRows[i].toString());
-
-        let rowContents = UXPinParser.parse(rawRows[i], i);
-        console.log("parseRow " + i + ": " + rowContents.toString());
-
-        if (rowContents[0]) {
-          console.log("row0 raw contents: " + rowContents[0]);
-          console.log("type: " + rowContents[0].type + ", text:" + rowContents[0].text)
-        }
-      }
-    }
-
+    //Testing...
+    this._setRowsNew();
 
     //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
 
@@ -328,6 +372,54 @@ class DetailsList extends React.Component {
     this.setState({ allItems: rows });
   }
 
+  _getUIElement(item) {
+    if (item) {
+      return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
+        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+          : this._getTextElement(key, item?.text);
+    }
+  }
+
+  _getTextElement(text) {
+    console.log("   > Text element: " + text);
+    return (<Text textValue={text} size={dataTextSize} />);
+  }
+
+  _getLinkElement(text, href) {
+    console.log("   > Link element: " + text + ", and HREF = " + href);
+    return (<Link value={text} linkHref={href} size={dataTextSize} />);
+  }
+
+  _getIconElement(iconName, colorToken) {
+    console.log("   > Icon element: " + iconName + ", color: " + colorToken);
+
+    let key = _.uniqueId('dticn_');
+    let name = iconName ? iconName.trim() : '';
+    let size = iconSizeMap[dataTextSize];
+    let color = UxpColors.getHexFromHexOrToken(colorToken);
+    if (!color) {
+      color = defaultTextColor;
+    }
+    let iconDisplayClass = {
+      color: color,
+      fontSize: size,
+      height: size,
+      width: size,
+      display: 'inline',
+      lineHeight: 'normal',
+    };
+    const spanStyle = {
+      verticalAlign: 'middle',
+      alignItems: 'center',
+    }
+
+    return (<span key={key} style={spanStyle}>
+      <Icon
+        iconName={name}
+        className={iconDisplayClass}
+      />
+    </span >)
+  }
 
   render() {
 
