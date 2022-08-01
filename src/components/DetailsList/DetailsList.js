@@ -358,154 +358,149 @@ class DetailsList extends React.Component {
             console.log("   *** Cell UI elements count: " + cellUIElements.length);
             rows.push(cellUIElements);
 
-          } //if cellTokenList
-
-
-          }) //foreach CelList
-    } //if
-
-  }); //foreach rawRows
-} //if 
-
+          }) //if cellTokenList
+        } //if cellList
+      }) //foreach rawRows
+    } // if rawRows
   }
 
 
 
 
-setRows(callback) {
-  let rows = [];
+  setRows(callback) {
+    let rows = [];
 
-  //Testing...
-  this._setRowsNew();
+    //Testing...
+    this._setRowsNew();
 
-  //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
+    //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
 
-  csv2arr(this.props.items).forEach((row, rowIndex) => {
-    let r = {
-      key: rowIndex,
+    csv2arr(this.props.items).forEach((row, rowIndex) => {
+      let r = {
+        key: rowIndex,
+      }
+      this.state.columns.forEach((column, colInd) => {
+        if (row[colInd]) {
+          const value = row[colInd].trim()
+          let name = getTokens(value).mixed ? getTokens(value).mixed
+            .map((el, i) => typeof el === 'string' ?
+              <span key={i}> {el} </span> :
+              el.suggestions[0])
+            :
+            getTokens(value).text
+
+          r[column.fieldName] = name
+        }
+
+      })
+      rows.push(r)
+    });
+
+    this.setState({ rows }, callback);
+    this.setState({ allItems: rows });
+  }
+
+  _getUIElement(item) {
+    if (item) {
+      return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
+        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+          : this._getTextElement(key, item?.text);
     }
-    this.state.columns.forEach((column, colInd) => {
-      if (row[colInd]) {
-        const value = row[colInd].trim()
-        let name = getTokens(value).mixed ? getTokens(value).mixed
-          .map((el, i) => typeof el === 'string' ?
-            <span key={i}> {el} </span> :
-            el.suggestions[0])
-          :
-          getTokens(value).text
-
-        r[column.fieldName] = name
-      }
-
-    })
-    rows.push(r)
-  });
-
-  this.setState({ rows }, callback);
-  this.setState({ allItems: rows });
-}
-
-_getUIElement(item) {
-  if (item) {
-    return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
-      : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
-        : this._getTextElement(key, item?.text);
-  }
-}
-
-_getTextElement(text) {
-  console.log("   > Text element: " + text);
-  return (<Text textValue={text} size={dataTextSize} />);
-}
-
-_getLinkElement(text, href) {
-  console.log("   > Link element: " + text + ", and HREF = " + href);
-  return (<Link value={text} linkHref={href} size={dataTextSize} />);
-}
-
-_getIconElement(iconName, colorToken) {
-  console.log("   > Icon element: " + iconName + ", color: " + colorToken);
-
-  let key = _.uniqueId('dticn_');
-  let name = iconName ? iconName.trim() : '';
-  let size = iconSizeMap[dataTextSize];
-  let color = UxpColors.getHexFromHexOrToken(colorToken);
-  if (!color) {
-    color = defaultTextColor;
-  }
-  let iconDisplayClass = {
-    color: color,
-    fontSize: size,
-    height: size,
-    width: size,
-    display: 'inline',
-    lineHeight: 'normal',
-  };
-  const spanStyle = {
-    verticalAlign: 'middle',
-    alignItems: 'center',
   }
 
-  return (<span key={key} style={spanStyle}>
-    <Icon
-      iconName={name}
-      className={iconDisplayClass}
-    />
-  </span >)
-}
+  _getTextElement(text) {
+    console.log("   > Text element: " + text);
+    return (<Text textValue={text} size={dataTextSize} />);
+  }
 
-render() {
+  _getLinkElement(text, href) {
+    console.log("   > Link element: " + text + ", and HREF = " + href);
+    return (<Link value={text} linkHref={href} size={dataTextSize} />);
+  }
 
-  return (
+  _getIconElement(iconName, colorToken) {
+    console.log("   > Icon element: " + iconName + ", color: " + colorToken);
 
-    <Stack>
+    let key = _.uniqueId('dticn_');
+    let name = iconName ? iconName.trim() : '';
+    let size = iconSizeMap[dataTextSize];
+    let color = UxpColors.getHexFromHexOrToken(colorToken);
+    if (!color) {
+      color = defaultTextColor;
+    }
+    let iconDisplayClass = {
+      color: color,
+      fontSize: size,
+      height: size,
+      width: size,
+      display: 'inline',
+      lineHeight: 'normal',
+    };
+    const spanStyle = {
+      verticalAlign: 'middle',
+      alignItems: 'center',
+    }
 
-      {this.props.isSearchEnabled &&
-        <StackItem
-          align="end"
-          styles={{ root: { marginBottom: searchFieldMarginBottom } }}
-        >
-          <SearchBox
-            iconProps={{ iconName: this.props.icon.trim() }}
-            placeholder={this.props.placeholder}
-            onChange={(e, v) => { this.searchTable(v) }}
-            onClear={this.onSearchClear}
-            styles={{ root: { width: searchFieldWidth } }}
-          />
-        </StackItem>
-      }
-      <StackItem>
+    return (<span key={key} style={spanStyle}>
+      <Icon
+        iconName={name}
+        className={iconDisplayClass}
+      />
+    </span >)
+  }
 
-        <div style={{ display: 'block' }} className={
-          {
-            selectors: {
-              '& .ms-DetailsHeader': {
-                paddingTop: 0,
-              },
+  render() {
+
+    return (
+
+      <Stack>
+
+        {this.props.isSearchEnabled &&
+          <StackItem
+            align="end"
+            styles={{ root: { marginBottom: searchFieldMarginBottom } }}
+          >
+            <SearchBox
+              iconProps={{ iconName: this.props.icon.trim() }}
+              placeholder={this.props.placeholder}
+              onChange={(e, v) => { this.searchTable(v) }}
+              onClear={this.onSearchClear}
+              styles={{ root: { width: searchFieldWidth } }}
+            />
+          </StackItem>
+        }
+        <StackItem>
+
+          <div style={{ display: 'block' }} className={
+            {
+              selectors: {
+                '& .ms-DetailsHeader': {
+                  paddingTop: 0,
+                },
+              }
             }
-          }
-        }>
-          <ShimmeredDetailsList
-            enableShimmer={this.state.shimmer}
-            {...this.props}
-            columns={this.state.columns}
-            items={this.state.rows}
-            selectionMode={SelectionMode.none}
-            constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-            onRenderRow={(props, defaultRender) => (
-              <>
-                {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-              </>
-            )}
-            isHeaderVisible={this.props.header}
-          />
-        </div>
-      </StackItem>
+          }>
+            <ShimmeredDetailsList
+              enableShimmer={this.state.shimmer}
+              {...this.props}
+              columns={this.state.columns}
+              items={this.state.rows}
+              selectionMode={SelectionMode.none}
+              constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
+              onRenderRow={(props, defaultRender) => (
+                <>
+                  {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+                </>
+              )}
+              isHeaderVisible={this.props.header}
+            />
+          </div>
+        </StackItem>
 
-    </Stack>
+      </Stack>
 
-  );
-}
+    );
+  }
 }
 
 
