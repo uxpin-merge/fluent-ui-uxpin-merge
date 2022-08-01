@@ -322,7 +322,7 @@ class DetailsList extends React.Component {
                 }
               )
 
-              console.log("   ** Cell UI elements count: " cellUIElements.length);
+              console.log("   ** Cell UI elements count: " + cellUIElements.length);
               rows.push(cellUIElements);
 
             } //if cellTokenList
