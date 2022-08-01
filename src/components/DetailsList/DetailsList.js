@@ -405,14 +405,16 @@ class DetailsList extends React.Component {
         }
 
       })
+
+      console.log("    ### legacy R: " + r.toString())
       rows.push(r)
     });
 
-    this.setState({ newRows }, callback);
-    this.setState({ allItems: newRows });
+    // this.setState({ newRows }, callback);
+    // this.setState({ allItems: newRows });
 
-    // this.setState({ rows }, callback);
-    // this.setState({ allItems: rows });
+    this.setState({ rows }, callback);
+    this.setState({ allItems: rows });
   }
 
   _getUIElement(item) {
