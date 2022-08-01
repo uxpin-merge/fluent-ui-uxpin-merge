@@ -295,6 +295,8 @@ class DetailsList extends React.Component {
     if (rawRows && rawRows.length > 0) {
       rawRows.forEach((rawRowString, index) => {
 
+        let rowElements = [];
+
         console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
         let cellList = UXPinParser.parse(rawRowString, index);
 
@@ -313,7 +315,9 @@ class DetailsList extends React.Component {
 
                 console.log("       *** It's a singular token: " + cellContents?.text)
 
-                return this._getUIElement(cellContents);
+                let cell = this._getUIElement(cellContents);
+                rowElements.push(cell);
+                //return this._getUIElement(cellContents);
               }
               else if (cellContents.type === "compound") {
                 // If type compound, map the item values
@@ -326,9 +330,10 @@ class DetailsList extends React.Component {
                     return this._getUIElement(subItem);
                   }
                 )
-                return elements;
-              }
-            }
+                rowElements.push(elements);
+                //return elements;
+              } //if compound
+            } //if cell contents
 
             // let cellUIElements = cellContents.map(
             //   (item) => {
@@ -360,6 +365,13 @@ class DetailsList extends React.Component {
 
           }) //if cellTokenList
         } //if cellList
+
+        if (rowElements.length > 0) {
+
+          console.log("   >>> Pushing row: " + rowElements.toString());
+
+          rows.push(rowElements);
+        }
       }) //foreach rawRows
     } // if rawRows
   }
