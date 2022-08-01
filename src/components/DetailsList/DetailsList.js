@@ -294,8 +294,9 @@ class DetailsList extends React.Component {
 
     if (rawRows && rawRows.length > 0) {
       rawRows.forEach(rawRowString, index => {
-        console.log("\n\nRow contents (" + i + "): " + rawRowList[i].toString());
-        let cellList = UXPinParser.parse(rawRowList[i], i);
+
+        console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
+        let cellList = UXPinParser.parse(rawRowString, index);
 
         if (cellList && cellList.length > 0) {
           cellList.forEach(cellContents, clIndex => {
