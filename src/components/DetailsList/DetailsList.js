@@ -250,12 +250,13 @@ class DetailsList extends React.Component {
               : el.suggestions[0])
 
           const columnParams = {
-            key: columnName,
+            //key: columnName,  
+            key: _.uniqueId('columnName_'), //AH
             name,
             fieldName: columnName,
             isResizable: true,
             minWidth: this.props.minWidth,
-            maxWidth: this.props.maxWidth,
+            //maxWidth: this.props.maxWidth,   //AH
             isSorted: false,
             isSortedDescending: false,
             isMultiline: true,
@@ -295,7 +296,9 @@ class DetailsList extends React.Component {
     if (rawRows && rawRows.length > 0) {
       rawRows.forEach((rawRowString, index) => {
 
-        let rowElements = [];
+        let rowElements = {
+          key: index,
+        }
 
         console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
         let cellList = UXPinParser.parse(rawRowString, index);
@@ -402,6 +405,7 @@ class DetailsList extends React.Component {
             getTokens(value).text
 
           r[column.fieldName] = name
+          //r[column.fieldName] = name
         }
 
       })
