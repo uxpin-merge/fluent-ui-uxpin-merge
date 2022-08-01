@@ -360,9 +360,6 @@ class DetailsList extends React.Component {
             //   }
             // )
 
-            console.log("   *** Cell UI elements count: " + cellUIElements.length);
-            rows.push(cellUIElements);
-
           }) //if cellTokenList
         } //if cellList
 
@@ -374,6 +371,8 @@ class DetailsList extends React.Component {
         }
       }) //foreach rawRows
     } // if rawRows
+
+    console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
   }
 
 
