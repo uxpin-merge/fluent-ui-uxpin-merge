@@ -317,10 +317,10 @@ class DetailsList extends React.Component {
               }
               else if (cellContents.type === "compound") {
                 // If type compound, map the item values
-                elements = cellContents.value.map(
+                let elements = cellContents.value.map(
                   (subItem) => {
 
-                    console.log("       *** It's a 'compound' token: " + subItem?.length)
+                    console.log("       *** It's a 'compound' token: " + cellContents?.length)
 
                     // Second map of parsedOutput.value to seperate each object of links, icons, and text
                     return this._getUIElement(subItem);
