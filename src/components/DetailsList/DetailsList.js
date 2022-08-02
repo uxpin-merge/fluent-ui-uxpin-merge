@@ -378,7 +378,7 @@ class DetailsList extends React.Component {
           r[column.fieldName] = name
           //r[column.fieldName] = name
 
-          console.log("    ### legacy R column: " + name.innerHTML);
+          console.log("    ### legacy R column: " + JSON.stringify(name));
         }
 
       })
