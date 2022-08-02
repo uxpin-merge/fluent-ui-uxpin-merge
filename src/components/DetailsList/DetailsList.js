@@ -451,11 +451,11 @@ class DetailsList extends React.Component {
       rows.push(r)
     });
 
-    // this.setState({ newRows }, callback);
-    // this.setState({ allItems: newRows });
+    this.setState({ newRows }, callback);
+    this.setState({ allItems: newRows });
 
-    this.setState({ rows }, callback);
-    this.setState({ allItems: rows });
+    // this.setState({ rows }, callback);
+    // this.setState({ allItems: rows });
   }
 
   _getUIElement(item) {
