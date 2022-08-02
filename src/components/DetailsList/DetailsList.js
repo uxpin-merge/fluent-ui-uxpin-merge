@@ -296,6 +296,7 @@ class DetailsList extends React.Component {
     if (rawRows && rawRows.length > 0) {
       rawRows.forEach((rawRowString, index) => {
 
+        //This is a hashtable, not an array
         let rowElements = {
           key: index,
         }
@@ -303,75 +304,111 @@ class DetailsList extends React.Component {
         console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
         let cellList = UXPinParser.parse(rawRowString, index);
 
-        if (cellList && cellList.length > 0) {
+        //Let's parse the cells by column 
+        this.state.columns.forEach((column, colInd) => {
 
-          console.log("   >>> Cell list count: " + cellList.length)
+          //Parse the contents of the cell at that column index
+          if (cellList[colInd]) {
+            let cellContents = cellList[colInd];
 
-          cellList.forEach((cellContents, clIndex) => {
+            if (cellContents.type !== "compound") {
 
-            console.log("       >>> cellContents for " + clIndex + ": " + cellContents.toString());
+              console.log("       *** It's a singular token: " + cellContents?.text)
 
-            //Now, parse out the contents of an individual cell's list of tokens
-            if (cellContents) {
+              let cell = this._getUIElement(cellContents);
 
-              if (cellContents.type !== "compound") {
+              rowElements[column.key] = cell;
+            }
+            else if (cellContents.type === "compound") {
+              // If type compound, map the item values
+              let elements = cellContents.value.map(
+                (subItem) => {
 
-                console.log("       *** It's a singular token: " + cellContents?.text)
+                  console.log("       *** It's a 'compound' token: " + cellContents?.length)
 
-                let cell = this._getUIElement(cellContents);
-                rowElements.push(cell);
-                //return this._getUIElement(cellContents);
-              }
-              else if (cellContents.type === "compound") {
-                // If type compound, map the item values
-                let elements = cellContents.value.map(
-                  (subItem) => {
+                  // Second map of parsedOutput.value to seperate each object of links, icons, and text
+                  return this._getUIElement(subItem);
+                }
+              )
 
-                    console.log("       *** It's a 'compound' token: " + cellContents?.length)
+              rowElements[column.key] = elements;
+            } //if compound
 
-                    // Second map of parsedOutput.value to seperate each object of links, icons, and text
-                    return this._getUIElement(subItem);
-                  }
-                )
-                rowElements.push(elements);
-                //return elements;
-              } //if compound
-            } //if cell contents
+          } //if cellList
+        }); //forEach column
 
-            // let cellUIElements = cellContents.map(
-            //   (item) => {
-            //     // If not type compound, return the single element
-            //     if (item.type !== "compound") {
+        console.log("   >>> Pushing row: " + rowElements.toString());
 
-            //       console.log("       *** It's a singular token: " + item?.text)
+        rows.push(rowElements);
 
-            //       return this._getUIElement(item);
-            //     }
-            //     else {
-            //       // If type compound, map the item values
-            //       elements = item.value.map(
-            //         (subItem) => {
 
-            //           console.log("       *** It's a 'compound' token: " + item?.length)
+        // console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
+        // let cellList = UXPinParser.parse(rawRowString, index);
 
-            //           // Second map of parsedOutput.value to seperate each object of links, icons, and text
-            //           return this._getUIElement(subItem);
-            //         }
-            //       )
-            //       return elements;
-            //     }
-            //   }
-            // )
+        // if (cellList && cellList.length > 0) {
 
-          }) //if cellTokenList
-        } //if cellList
+        //   console.log("   >>> Cell list count: " + cellList.length)
 
-        if (rowElements.length > 0) {
+        //   cellList.forEach((cellContents, clIndex) => {
 
-          console.log("   >>> Pushing row: " + rowElements.toString());
+        //     console.log("       >>> cellContents for " + clIndex + ": " + cellContents.toString());
 
-          rows.push(rowElements);
-        }
+        //     //Now, parse out the contents of an individual cell's list of tokens
+        //     if (cellContents) {
+
+        //       if (cellContents.type !== "compound") {
+
+        //         console.log("       *** It's a singular token: " + cellContents?.text)
+
+        //         let cell = this._getUIElement(cellContents);
+        //         rowElements.push(cell);
+        //         //return this._getUIElement(cellContents);
+        //       }
+        //       else if (cellContents.type === "compound") {
+        //         // If type compound, map the item values
+        //         let elements = cellContents.value.map(
+        //           (subItem) => {
+
+        //             console.log("       *** It's a 'compound' token: " + cellContents?.length)
+
+        //             // Second map of parsedOutput.value to seperate each object of links, icons, and text
+        //             return this._getUIElement(subItem);
+        //           }
+        //         )
+        //         rowElements.push(elements);
+        //         //return elements;
+        //       } //if compound
+        //     } //if cell contents
+
+        //     // let cellUIElements = cellContents.map(
+        //     //   (item) => {
+        //     //     // If not type compound, return the single element
+        //     //     if (item.type !== "compound") {
+
+        //     //       console.log("       *** It's a singular token: " + item?.text)
+
+        //     //       return this._getUIElement(item);
+        //     //     }
+        //     //     else {
+        //     //       // If type compound, map the item values
+        //     //       elements = item.value.map(
+        //     //         (subItem) => {
+
+        //     //           console.log("       *** It's a 'compound' token: " + item?.length)
+
+        //     //           // Second map of parsedOutput.value to seperate each object of links, icons, and text
+        //     //           return this._getUIElement(subItem);
+        //     //         }
+        //     //       )
+        //     //       return elements;
+        //     //     }
+        //     //   }
+        //     // )
+
+        //   }) //if cellTokenList
+        // } //if cellList
+
+
       }) //foreach rawRows
     } // if rawRows
 
