@@ -249,7 +249,7 @@ class DetailsList extends React.Component {
               <span key={i}> {el} </span>
               : el.suggestions[0])
 
-          console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name);
+          console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name.toString());
 
           const columnParams = {
             key: columnName,
@@ -315,25 +315,25 @@ class DetailsList extends React.Component {
 
             if (cellContents.type !== "compound") {
 
-              console.log("       *** It's a singular token: " + cellContents?.text)
+              console.log("       *** " + column.fieldName + ". It's a singular token: " + cellContents?.text)
 
               let cell = this._getUIElement(cellContents);
 
-              rowElements[column.key] = cell;
+              rowElements[column.fieldName] = cell;
             }
             else if (cellContents.type === "compound") {
               // If type compound, map the item values
               let elements = cellContents.value.map(
                 (subItem) => {
 
-                  console.log("       *** It's a 'compound' token: " + cellContents?.length)
+                  console.log("       *** " + column.fieldName + ". It's a 'compound' token: " + cellContents?.length)
 
                   // Second map of parsedOutput.value to seperate each object of links, icons, and text
                   return this._getUIElement(subItem);
                 }
               )
 
-              rowElements[column.key] = elements;
+              rowElements[column.fieldName] = elements;
             } //if compound
 
           } //if cellList
