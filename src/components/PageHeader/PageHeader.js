@@ -72,7 +72,7 @@ class PageHeader extends React.Component {
 
             if (left.includes("|")) {
                 let splitStr = left.split('|');
-                left = splitStr[0].trim();
+                left = splitStr[0];
 
                 if (splitStr.length > 1) {
                     right = UXPinParser.normalizeLink(splitStr[1]);
@@ -147,7 +147,7 @@ class PageHeader extends React.Component {
             let superTextProps = this._parseTextAndLink(this.props.superTextValue);
             let left = superTextProps ? superTextProps.text : this.props.superTextValue?.trim();
 
-            console.log("    supertext props left: " + superTextProps.left + "  . Right: " + superTextProps.right);
+            console.log("    supertext props left: " + left + "  . Right: " + superTextProps.href);
 
             if (superTextProps && superTextProps.href?.length) {
                 superText = (
