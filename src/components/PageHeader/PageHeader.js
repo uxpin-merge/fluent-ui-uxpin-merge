@@ -86,6 +86,9 @@ class PageHeader extends React.Component {
     }
 
     render() {
+
+        console.log("render()");
+
         //Outer container stack is a vertical stack.
         //In the middle for the main heading title is a horizontal stack with the toolbar on the right, made from props.children.
 
