@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
+import { Link } from '@fluentui/react/lib/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 
@@ -25,6 +26,19 @@ const defaultInternalPadding = 24;
 const defaultGutterPadding = 6;
 const defaultTextStackPadding = 6;
 
+const linkStyles = {
+    root: {
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        display: 'block', //Required - prevents a bug
+        lineHeight: 'normal', //Required - prevents a bug,
+        width: 'unset !important',
+        // '& .ms-Icon': {
+        //     display: 'none',
+        // },
+    },
+};
+
 
 
 class PageHeader extends React.Component {
@@ -47,7 +61,28 @@ class PageHeader extends React.Component {
         return thickness + 'px ' + borderSolid + ' ' + bColor;
     }
 
+    _parseTextAndLink(rawStr) {
+        let right = '';
+        let left = '';
 
+        if (rawStr) {
+            left = String(rawStr);
+
+            if (left.includes("|")) {
+                let splitStr = left.split('|');
+                left = splitStr[0]?.trim();
+
+                if (splitStr.length > 1) {
+                    right = UXPinParser.normalizeLink(splitStr[1]);
+                }
+            }
+        }
+
+        return {
+            text: left,
+            href: right ? right : '',
+        };
+    };
 
     render() {
         //Outer container stack is a vertical stack.
@@ -63,7 +98,7 @@ class PageHeader extends React.Component {
         //With one number, the padding applies to both rows and columns.  
         const outerStackTokens = {
             childrenGap: defaultTextStackPadding,
-            padding: 0,
+            padding: internalPadding + 'px',
         };
 
         //Let's see if the user entered a valid color value. This method returns undefined if not. 
@@ -102,15 +137,47 @@ class PageHeader extends React.Component {
         var superText = '';
         if (this.props.superTextValue) {
 
-            superText = (
-                <StackItem>
-                    <Text
-                        styles={fTextStyles}
-                        variant={this.props.superTextSize}>
-                        {this.props.superTextValue.trim()}
-                    </Text>
-                </StackItem>
-            );
+            let superTextProps = this._parseTextAndLink(this.props.superTextValue);
+            let left = superTextProps ? superTextProps.text : this.props.superTextValue?.trim();
+
+            if (superTextProps && superTextProps.href?.length) {
+                superText = (
+                    <StackItem>
+                        <Link
+                            styles={linkStyles}
+                            href={superTextProps.href}
+                            target={"_UXPin Mockup"}
+                        >
+                            <Text
+                                styles={linkStyles}
+                                variant={this.props.superTextSize} >
+                                {left}
+                            </Text>
+                        </Link>
+                    </StackItem>
+                );
+            }
+            else {
+                superText = (
+                    <StackItem>
+                        <Text
+                            styles={fTextStyles}
+                            variant={this.props.superTextSize}>
+                            {left}
+                        </Text>
+                    </StackItem>
+                );
+            }
+
+            // superText = (
+            //     <StackItem>
+            //         <Text
+            //             styles={fTextStyles}
+            //             variant={this.props.superTextSize}>
+            //             {this.props.superTextValue.trim()}
+            //         </Text>
+            //     </StackItem>
+            // );
         }
 
         //****************************
@@ -204,7 +271,8 @@ class PageHeader extends React.Component {
                 verticalAlign={'center'}
                 wrap={false}
                 styles={outerStackStyles}
-                padding={internalPadding + 'px'}  >
+            //padding={internalPadding + 'px'}  
+            >
 
 
                 {superText}
