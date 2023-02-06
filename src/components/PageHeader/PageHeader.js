@@ -46,8 +46,9 @@ class PageHeader extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-        }
+        console.log("PH constructor");
+
+        this.state = {}
     }
 
     _getBorderStyle() {
