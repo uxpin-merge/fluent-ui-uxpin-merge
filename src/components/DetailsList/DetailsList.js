@@ -6,7 +6,12 @@ import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import { Text } from '../Text/Text';
+import { Link } from '../Link/Link';
+import { Icon } from '@fluentui/react/lib/Icon';
 
+import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 
 
 const searchFieldWidth = 400;
@@ -14,19 +19,34 @@ const searchFieldIconName = "Filter";
 const searchFieldPlaceholder = "Filter";
 const searchFieldMarginBottom = '24px';
 
-const headerBackgroundColor = 'neutralLighterAlt';
+const dataTextSize = "smallPlus";
+const defaultTextColor = "#000";
 
+const headerBackgroundColor = 'neutralLighterAlt';
 
 //Use this in the default props below.
 const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
 
 const defaultRowValues =
-  `link(Component_Name_A), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
-link(Component_Name_B), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
-link(Component_Name_C), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
+  `link(Component_Name_A|google.com), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
+link(Component_Name_B|www.uxpin.com), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
+link(Component_Name_C|http://amazon.com), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
 
 const defaultShimmerDuration = 1;
 const defaultShimmerLines = 3;
+
+const iconSizeMap = {
+  tiny: 10,
+  xSmall: 10,
+  small: 14,
+  smallPlus: 14,
+  medium: 16,
+  mediumPlus: 16,
+  large: 18,
+  xLarge: 22,
+  xxLarge: 32,
+  mega: 64,
+};
 
 
 
@@ -49,11 +69,13 @@ class DetailsList extends React.Component {
   }
 
   set() {
+    let alignRightCols = UxpNumberParser.parseInts(this.props.alignRight);
+    let alignCenterCols = UxpNumberParser.parseInts(this.props.alignCenter);
 
     this.setState(
       {
-        alignRight: this.props.alignRight ? this.props.alignRight.split(',').map(v => parseInt(v.trim())) : [],
-        alignCenter: this.props.alignCenter ? this.props.alignCenter.split(',').map(v => parseInt(v.trim())) : [],
+        alignRight: alignRightCols ? alignRightCols : '',
+        alignCenter: alignCenterCols ? alignCenterCols : '',
         shimmer: this.props.shimmer
       },
       () => this.setColumns(this.setRows)
@@ -227,13 +249,16 @@ class DetailsList extends React.Component {
               <span key={i}> {el} </span>
               : el.suggestions[0])
 
+          console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name.toString());
+
           const columnParams = {
             key: columnName,
+            //key: _.uniqueId('columnName_'), //AH
             name,
             fieldName: columnName,
             isResizable: true,
             minWidth: this.props.minWidth,
-            maxWidth: this.props.maxWidth,
+            //maxWidth: this.props.maxWidth,   //AH
             isSorted: false,
             isSortedDescending: false,
             isMultiline: true,
@@ -264,8 +289,77 @@ class DetailsList extends React.Component {
     }, callback)
   }
 
+  //Should take callback as param
+  _setRowsNew() {
+    let rows = [];
+
+    let rawRows = this.props.items?.split("\n");
+
+    if (rawRows && rawRows.length > 0) {
+      rawRows.forEach((rawRowString, index) => {
+
+        //This is a hashtable, not an array
+        let rowElements = {
+          key: index,
+        }
+
+        console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
+        let cellList = UXPinParser.parse(rawRowString, index);
+
+        //Let's parse the cells by column 
+        this.state.columns.forEach((column, colInd) => {
+
+          //Parse the contents of the cell at that column index
+          if (cellList[colInd]) {
+            let cellContents = cellList[colInd];
+
+            if (cellContents.type !== "compound") {
+
+              console.log("       *** " + column.fieldName + ". It's a singular token: " + cellContents?.text)
+
+              let cell = this._getUIElement(cellContents);
+
+              rowElements[column.fieldName] = cell;
+            }
+            else if (cellContents.type === "compound") {
+              // If type compound, map the item values
+              let elements = cellContents.value.map(
+                (subItem) => {
+
+                  console.log("       *** " + column.fieldName + ". It's a 'compound' token: " + cellContents?.length)
+
+                  // Second map of parsedOutput.value to seperate each object of links, icons, and text
+                  return this._getUIElement(subItem);
+                }
+              )
+
+              rowElements[column.fieldName] = elements;
+            } //if compound
+
+          } //if cellList
+        }); //forEach column
+
+        console.log("   >>> Pushing row: " + rowElements.toString());
+
+        rows.push(rowElements);
+
+      }) //foreach rawRows
+    } // if rawRows
+
+    console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
+    return rows;
+  }
+
+
+
+
   setRows(callback) {
     let rows = [];
+
+    //Testing...
+    let newRows = this._setRowsNew();
+
+    //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
 
     csv2arr(this.props.items).forEach((row, rowIndex) => {
       let r = {
@@ -282,16 +376,72 @@ class DetailsList extends React.Component {
             getTokens(value).text
 
           r[column.fieldName] = name
+          //r[column.fieldName] = name
+
+          console.log("    ### legacy R column: " + JSON.stringify(name));
         }
 
       })
-      rows.push(r)
+
+      console.log("    ### legacy R: " + r.toString());
+      rows.push(r);
     });
 
-    this.setState({ rows }, callback);
-    this.setState({ allItems: rows });
+    this.setState({ newRows }, callback);
+    this.setState({ allItems: newRows });
+
+    // this.setState({ rows }, callback);
+    // this.setState({ allItems: rows });
   }
 
+  _getUIElement(item) {
+    if (item) {
+      return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
+        : item.type === "icon" ? this._getIconElement(item?.iconName, item.color ? item.color : item?.colorToken)
+          : this._getTextElement(item?.text);
+    }
+  }
+
+  _getTextElement(text) {
+    console.log("   > Text element: " + text);
+    return (<Text textValue={text} size={dataTextSize} />);
+  }
+
+  _getLinkElement(text, href) {
+    console.log("   > Link element: " + text + ", and HREF = " + href);
+    return (<Link value={text} linkHref={href} size={dataTextSize} />);
+  }
+
+  _getIconElement(iconName, colorToken) {
+    console.log("   > Icon element: " + iconName + ", color: " + colorToken);
+
+    let key = _.uniqueId('dticn_');
+    let name = iconName ? iconName.trim() : '';
+    let size = iconSizeMap[dataTextSize];
+    let color = UxpColors.getHexFromHexOrToken(colorToken);
+    if (!color) {
+      color = defaultTextColor;
+    }
+    let iconDisplayClass = {
+      color: color,
+      fontSize: size,
+      height: size,
+      width: size,
+      display: 'inline',
+      lineHeight: 'normal',
+    };
+    const spanStyle = {
+      verticalAlign: 'middle',
+      alignItems: 'center',
+    }
+
+    return (<span key={key} style={spanStyle}>
+      <Icon
+        iconName={name}
+        className={iconDisplayClass}
+      />
+    </span >)
+  }
 
   render() {
 
@@ -409,14 +559,14 @@ DetailsList.propTypes = {
   * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
   * @uxpinpropname Align Right
   */
-  // alignRight: PropTypes.string,
+  alignRight: PropTypes.string,
 
   /**
   * Example: 2, 3
   * @uxpindescription Enter a comma-separated list of column numbers for center aligning their contents (Optional)
   * @uxpinpropname Align Center
   */
-  // alignCenter: PropTypes.string,
+  alignCenter: PropTypes.string,
 
   /**
   * @uxpindescription Minimum column width width 
@@ -465,8 +615,8 @@ DetailsList.defaultProps = {
   minWidth: 125,
   maxWidth: 350,
   header: true,
-  // alignRight: "5",
-  // alignCenter: "3, 4",
+  alignRight: "5",
+  alignCenter: "3, 4",
   isSearchEnabled: true,
   icon: searchFieldIconName,
   placeholder: searchFieldPlaceholder,

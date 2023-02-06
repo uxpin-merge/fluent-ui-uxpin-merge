@@ -2,7 +2,9 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
+import { Link } from '@fluentui/react/lib/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -30,9 +32,7 @@ const defaultTextStackPadding = 6;
 class PageHeader extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-        }
+        this.state = {}
     }
 
     _getBorderStyle() {
@@ -47,7 +47,28 @@ class PageHeader extends React.Component {
         return thickness + 'px ' + borderSolid + ' ' + bColor;
     }
 
+    _parseTextAndLink(rawStr) {
+        let right = '';
+        let left = '';
 
+        if (rawStr) {
+            left = String(rawStr);
+
+            if (left.includes("|")) {
+                let splitStr = left.split('|');
+                left = splitStr[0];
+
+                if (splitStr.length > 1) {
+                    right = UXPinParser.normalizeLink(splitStr[1]);
+                }
+            }
+        }
+
+        return {
+            text: left,
+            href: right ? right : '',
+        };
+    }
 
     render() {
         //Outer container stack is a vertical stack.
@@ -63,7 +84,7 @@ class PageHeader extends React.Component {
         //With one number, the padding applies to both rows and columns.  
         const outerStackTokens = {
             childrenGap: defaultTextStackPadding,
-            padding: 0,
+            padding: internalPadding + 'px',
         };
 
         //Let's see if the user entered a valid color value. This method returns undefined if not. 
@@ -102,15 +123,34 @@ class PageHeader extends React.Component {
         var superText = '';
         if (this.props.superTextValue) {
 
-            superText = (
-                <StackItem>
-                    <Text
-                        styles={fTextStyles}
-                        variant={this.props.superTextSize}>
-                        {this.props.superTextValue.trim()}
-                    </Text>
-                </StackItem>
-            );
+            let superTextProps = this._parseTextAndLink(this.props.superTextValue);
+            let left = superTextProps ? superTextProps.text : this.props.superTextValue?.trim();
+
+            if (superTextProps && superTextProps.href) {
+                superText = (
+                    <StackItem>
+                        <Link
+                            href={superTextProps.href}
+                            target={"_UXPin Mockup"} >
+                            <Text
+                                variant={this.props.superTextSize} >
+                                {left}
+                            </Text>
+                        </Link>
+                    </StackItem>
+                );
+            }
+            else {
+                superText = (
+                    <StackItem>
+                        <Text
+                            styles={fTextStyles}
+                            variant={this.props.superTextSize}>
+                            {left}
+                        </Text>
+                    </StackItem>
+                );
+            }
         }
 
         //****************************
@@ -197,18 +237,14 @@ class PageHeader extends React.Component {
         return (
 
             <Stack      //Outer wrapper stack
-                {...this.props}
                 tokens={outerStackTokens}
                 horizontal={false}
                 horizontalAlign={'start'}
                 verticalAlign={'center'}
                 wrap={false}
-                styles={outerStackStyles}
-                padding={internalPadding + 'px'}  >
-
+                styles={outerStackStyles} >
 
                 {superText}
-
 
                 <StackItem align={'stretch'} >
 
@@ -262,7 +298,8 @@ PageHeader.propTypes = {
     children: PropTypes.node,
 
     /**
-     * @uxpindescription Small text value appearing above the main page heading
+     * @uxpindescription Small text value appearing above the main page heading.
+     * To optionally convert the text to a link, use the pattern:  Display Text | http://www.uxpin.com 
      * @uxpinpropname Top Text
      * @uxpincontroltype textfield(2)
      */
