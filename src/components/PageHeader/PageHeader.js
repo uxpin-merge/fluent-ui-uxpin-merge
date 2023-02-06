@@ -156,7 +156,7 @@ class PageHeader extends React.Component {
                 superText = (
                     <StackItem>
                         <Link
-                            styles={linkStyles}
+                            //styles={linkStyles}
                             href={superTextProps.href}
                             target={"_UXPin Mockup"}
                         >
