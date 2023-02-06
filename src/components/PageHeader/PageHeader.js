@@ -71,7 +71,7 @@ class PageHeader extends React.Component {
 
             if (left.includes("|")) {
                 let splitStr = left.split('|');
-                left = splitStr[0]?.trim();
+                left = splitStr[0].trim();
 
                 if (splitStr.length > 1) {
                     right = UXPinParser.normalizeLink(splitStr[1]);
