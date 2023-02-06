@@ -142,7 +142,7 @@ class PageHeader extends React.Component {
             let superTextProps = this._parseTextAndLink(this.props.superTextValue);
             let left = superTextProps ? superTextProps.text : this.props.superTextValue?.trim();
 
-            console.log("    supertext props left: " + superTextProps.left + "  . Right: " = superTextProps.right);
+            console.log("    supertext props left: " + superTextProps.left + "  . Right: " + superTextProps.right);
 
             if (superTextProps && superTextProps.href?.length) {
                 superText = (
