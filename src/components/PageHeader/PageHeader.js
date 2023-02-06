@@ -151,16 +151,6 @@ class PageHeader extends React.Component {
                     </StackItem>
                 );
             }
-
-            // superText = (
-            //     <StackItem>
-            //         <Text
-            //             styles={fTextStyles}
-            //             variant={this.props.superTextSize}>
-            //             {this.props.superTextValue.trim()}
-            //         </Text>
-            //     </StackItem>
-            // );
         }
 
         //****************************
