@@ -4,6 +4,7 @@ import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { Text } from '@fluentui/react/lib/Text';
 import { Link } from '@fluentui/react/lib/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
+import * as UXPinParser from '../_helpers/UXPinParser';
 
 
 
@@ -82,7 +83,7 @@ class PageHeader extends React.Component {
             text: left,
             href: right ? right : '',
         };
-    };
+    }
 
     render() {
         //Outer container stack is a vertical stack.
