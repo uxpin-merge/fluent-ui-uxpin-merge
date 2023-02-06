@@ -27,27 +27,11 @@ const defaultInternalPadding = 24;
 const defaultGutterPadding = 6;
 const defaultTextStackPadding = 6;
 
-const linkStyles = {
-    root: {
-        fontWeight: 'normal',
-        fontStyle: 'normal',
-        display: 'block', //Required - prevents a bug
-        lineHeight: 'normal', //Required - prevents a bug,
-        width: 'unset !important',
-        // '& .ms-Icon': {
-        //     display: 'none',
-        // },
-    },
-};
-
 
 
 class PageHeader extends React.Component {
     constructor(props) {
         super(props);
-
-        console.log("PH constructor");
-
         this.state = {}
     }
 
@@ -87,9 +71,6 @@ class PageHeader extends React.Component {
     }
 
     render() {
-
-        console.log("render()");
-
         //Outer container stack is a vertical stack.
         //In the middle for the main heading title is a horizontal stack with the toolbar on the right, made from props.children.
 
@@ -137,8 +118,6 @@ class PageHeader extends React.Component {
             }
         }
 
-        console.log("Rendering text next... " + this.props.superTextValue);
-
         //****************************
         //SUPER TEXT
         var superText = '';
@@ -147,21 +126,13 @@ class PageHeader extends React.Component {
             let superTextProps = this._parseTextAndLink(this.props.superTextValue);
             let left = superTextProps ? superTextProps.text : this.props.superTextValue?.trim();
 
-            console.log("    supertext props left: " + left + "  . Right: " + superTextProps.href);
-
             if (superTextProps && superTextProps.href) {
-
-                console.log("    setting up superText object next. ");
-
                 superText = (
                     <StackItem>
                         <Link
-                            //styles={linkStyles}
                             href={superTextProps.href}
-                            target={"_UXPin Mockup"}
-                        >
+                            target={"_UXPin Mockup"} >
                             <Text
-                                styles={linkStyles}
                                 variant={this.props.superTextSize} >
                                 {left}
                             </Text>
