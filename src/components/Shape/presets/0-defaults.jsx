@@ -8,6 +8,8 @@ const instructions = "Add any Merge control to Shape. It's a Vertical Stack with
 
 export default (
     <Shape uxpId="shape1" >
-        <Text uxpId="text1">{instructions}</Text>
+        <Text
+            uxpId="text1"
+            textValue={instructions} />
     </Shape>
 );
