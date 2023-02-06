@@ -247,19 +247,14 @@ class PageHeader extends React.Component {
         return (
 
             <Stack      //Outer wrapper stack
-                {...this.props}
                 tokens={outerStackTokens}
                 horizontal={false}
                 horizontalAlign={'start'}
                 verticalAlign={'center'}
                 wrap={false}
-                styles={outerStackStyles}
-            //padding={internalPadding + 'px'}  
-            >
-
+                styles={outerStackStyles} >
 
                 {superText}
-
 
                 <StackItem align={'stretch'} >
 
@@ -313,7 +308,8 @@ PageHeader.propTypes = {
     children: PropTypes.node,
 
     /**
-     * @uxpindescription Small text value appearing above the main page heading
+     * @uxpindescription Small text value appearing above the main page heading.
+     * To optionally convert the text to a link, use the pattern:  Display Text | http://www.uxpin.com 
      * @uxpinpropname Top Text
      * @uxpincontroltype textfield(2)
      */
