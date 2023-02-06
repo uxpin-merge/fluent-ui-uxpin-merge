@@ -132,6 +132,8 @@ class PageHeader extends React.Component {
             }
         }
 
+        console.log("Rendering text next... " + this.props.superTextValue);
+
         //****************************
         //SUPER TEXT
         var superText = '';
@@ -139,6 +141,8 @@ class PageHeader extends React.Component {
 
             let superTextProps = this._parseTextAndLink(this.props.superTextValue);
             let left = superTextProps ? superTextProps.text : this.props.superTextValue?.trim();
+
+            console.log("    supertext props left: " + superTextProps.left + "  . Right: " = superTextProps.right);
 
             if (superTextProps && superTextProps.href?.length) {
                 superText = (
