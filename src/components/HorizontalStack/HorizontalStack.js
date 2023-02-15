@@ -21,10 +21,12 @@ const endAlign = 'end';
 const stretchAlign = 'stretch';
 
 
-const instructionText = `Horizontal Stack Instructions: 
-1) Determine number of columns. 
-2) Drag in any Merge controls onto the canvas, incl other Stacks and Groups. 
-3) In the Layers Panel, drag and drop them onto this control.`;
+const instructionText = `<p><b>Horizontal Stack Instructions:</b></p><br/>
+<ol>
+<li style="list-style: decimal; list-style-position: inside;">Determine number of columns.</li>
+<li style="list-style: decimal; list-style-position: inside;">Drag in any Merge controls onto the canvas, incl other Stacks and Groups.</li>
+<li style="list-style: decimal; list-style-position: inside;">In the Layers Panel, drag and drop them onto this control.</li>
+</ol>`;
 
 //This is displayed in the codeeditor. It must retain the line break.
 const defaultWidths = `50%
@@ -172,7 +174,8 @@ class HorizontalStack extends React.Component {
                 {...this.props}
                 styles={fTextStyles}
                 variant={'medium'}>
-                {instructionText}
+                    <div dangerouslySetInnerHTML={{ __html: instructionText }} />
+
             </Text>
         );
 
