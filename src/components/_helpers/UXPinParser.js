@@ -1,4 +1,4 @@
-
+import { UxpColors } from "./uxpcolorutils";
 
 /**
  * Function to split a CSV input string into an array of rows of CSV strings
@@ -54,6 +54,54 @@ export function split(inputStr) {
   }
 
   return newArray;
+};
+
+/**
+ * 
+ * @param inputStr Splits a raw input string by line breaks first. Then, for each row, parses the row for CSV blocks ot fext. 
+ * @returns An array of arrays of strings. Each row's contents are contained in its own array of strings representing each block.
+ */
+export function parseMultipleRowsCSV(inputStr) {
+
+  let contents = [];
+
+  //Split rows by new line
+  let rows = inputStr.match(/[^\r\n]+/g) || [];
+
+  for (var i = 0; i < rows.length; i++) {
+    let row = parseRowCSV(rows[i]);
+
+    if (row.length) {
+      contents.push(row);
+    }
+  }
+
+  return contents;
+}
+
+/**
+ * 
+ * @param inputStr CSV with commas separating distinct blocks. This would be 3 blocks: "str, str str str, str"
+ * @returns An array of strings representing each block.
+ * @example "one, two, "  three  "" --> ["one", "two", "  three  "]
+ * @example "icon(Dictionary) abc, link(John Snow|paypal.com), "$1,235"" -->
+ *           ["icon(Dictionary) abc", "link(John Snow|paypal.com)", "$1,235"]
+ */
+export function parseRowCSV(inputStr) {
+
+  //Source: https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
+
+  let parsedCSV = [];
+
+  var matches = inputStr.match(/(\s*"[^"]+"\s*|\s*[^,]+|,)(?=,|$)/g);
+  matches = matches ? matches : [];
+  for (var n = 0; n < matches.length; ++n) {
+    if (matches[n]) {
+      var txt = matches[n].trim();
+      parsedCSV.push(txt);
+    }
+  }
+  return parsedCSV;
 };
 
 /**
@@ -229,11 +277,12 @@ function makeToken(inputStr, type, order) {
 
   switch (type) {
     case "icon":
+      let c = UxpColors.getHexFromHexOrToken(getFurtherArgs(inputStr)?.[0]);
       token = {
         order: order,
         type: type,
         iconName: getFirstArg(inputStr).trim(),
-        color: normalizeIcon(getFurtherArgs(inputStr)?.[0])?.trim(),
+        color: c ? c : '',
         colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined : getFurtherArgs(inputStr)?.[0]?.trim(),
         text: "",
       };

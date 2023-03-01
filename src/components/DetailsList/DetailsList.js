@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyles } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
@@ -8,7 +8,7 @@ import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { Text } from '../Text/Text';
 import { Link } from '../Link/Link';
-import { Icon } from '@fluentui/react/lib/Icon';
+import { Icon } from '../Icon/Icon';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
@@ -50,6 +50,30 @@ const commandBarTokens = {
   childrenGap: 6,
   padding: 0,
 };
+
+const classNames = mergeStyleSets({
+  textContainer: {
+    color: textColor,
+  },
+  linkContainer: {
+    '& div,a,button,span': {
+      display: 'inline !important',
+    },
+    '& + .linkContainer': {
+      marginLeft: '5px',
+    },
+  },
+  iconContainer: {
+    verticalAlign: 'middle',
+    alignItems: 'center',
+    '& .ms-Icon': {
+      display: 'inline',
+    },
+    '& + .iconContainer': {
+      marginLeft: '5px',
+    },
+  },
+});
 
 
 
@@ -382,210 +406,184 @@ class DetailsList extends React.Component {
 
     this.setState({
       columns: columnHeadings,
-    }, callback)
-
-
-
-    // var columnList = [];
-    // if (this.props.columns) {
-    //   columnList = csv2arr(this.props.columns)
-    //     .flat()
-    //     .map((columnName, colIndex) => {
-    //       columnName = columnName.trim()
-
-    //       let name = getTokens(columnName).mixed
-    //         .map((el, i) => typeof el === 'string' ?
-    //           <span key={i}> {el} </span>
-    //           : el.suggestions[0])
-
-    //       console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name.toString());
-
-    //       const columnParams = {
-    //         key: columnName,
-    //         //key: _.uniqueId('columnName_'), //AH
-    //         name,
-    //         fieldName: columnName,
-    //         isResizable: true,
-    //         minWidth: this.props.minWidth,
-    //         //maxWidth: this.props.maxWidth,   //AH
-    //         isSorted: false,
-    //         isSortedDescending: false,
-    //         isMultiline: true,
-    //         onColumnClick: () => this.onColumnClick(columnName),
-    //         headerClassName: this.getColumnClasses(colIndex),
-    //       }
-
-    //       let adjustedIndex = colIndex + 1;
-
-    //       if (this.state.alignRight.includes(adjustedIndex)) {
-    //         columnParams.styles = {
-    //           textAlign: 'right',
-    //         };
-    //       }
-
-    //       if (this.state.alignCenter.includes(adjustedIndex)) {
-    //         columnParams.styles = {
-    //           textAlign: 'center',
-    //         };
-    //       }
-
-    //       return columnParams
-    //     });
-    // }
-
-    // this.setState({
-    //   columns: columnList,
-    // }, callback)
+    }, callback);
   }
 
   //Should take callback as param
   _setRowsNew() {
     let rows = [];
 
-    let rawRows = this.props.items?.split("\n");
+    UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
 
-    if (rawRows && rawRows.length > 0) {
-      rawRows.forEach((rawRowString, index) => {
+      let r = {
+        key: rowIndex,
+      };
 
-        //This is a hashtable, not an array
-        let rowElements = {
-          key: index,
-        }
+      this.state.columns.map((column, colInd) => {
 
-        console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
-        let cellList = UXPinParser.parse(rawRowString, index);
+        if (row[colInd]) {
+          const value = row[colInd].trim();
+          const parsedValue = UXPinParser.parse(value);
+          const parsedRowElements = [];
 
-        //Let's parse the cells by column 
-        this.state.columns.forEach((column, colInd) => {
+          parsedValue.forEach((el, i) => {
 
-          //Parse the contents of the cell at that column index
-          if (cellList[colInd]) {
-            let cellContents = cellList[colInd];
-
-            if (cellContents.type !== "compound") {
-
-              console.log("       *** " + column.fieldName + ". It's a singular token: " + cellContents?.text)
-
-              let cell = this._getUIElement(cellContents);
-
-              rowElements[column.fieldName] = cell;
+            if (el.type !== 'compound') {
+              let cellItem = this._getUIElement(el, i);
+              parsedRowElements.push(cellItem);
             }
-            else if (cellContents.type === "compound") {
-              // If type compound, map the item values
-              let elements = cellContents.value.map(
-                (subItem) => {
+            else {
+              //Else it's a 'compound' array of elements
+              el.value.map((subElement, k) => {
+                let cellItem = this._getUIElement(subElement);
+                parsedRowElements.push(cellItem);
+              });
+            }
+          });
 
-                  console.log("       *** " + column.fieldName + ". It's a 'compound' token: " + cellContents?.length)
+          r[column.fieldName || ''] = parsedRowElements;
+        }
+      });
+      rows.push(r);
+    });
 
-                  // Second map of parsedOutput.value to seperate each object of links, icons, and text
-                  return this._getUIElement(subItem);
-                }
-              )
+    // let rawRows = this.props.items?.split("\n");
 
-              rowElements[column.fieldName] = elements;
-            } //if compound
+    // if (rawRows && rawRows.length > 0) {
+    //   rawRows.forEach((rawRowString, index) => {
 
-          } //if cellList
-        }); //forEach column
+    //     //This is a hashtable, not an array
+    //     let rowElements = {
+    //       key: index,
+    //     }
 
-        console.log("   >>> Pushing row: " + rowElements.toString());
+    //     console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
+    //     let cellList = UXPinParser.parseRowCSV(rawRowString);
 
-        rows.push(rowElements);
+    //     //Let's parse the cells by column 
+    //     this.state.columns.forEach((column, colInd) => {
 
-      }) //foreach rawRows
-    } // if rawRows
+    //       //Parse the contents of the cell at that column index
+    //       if (cellList[colInd]) {
+    //         let cellContents = cellList[colInd];
 
-    console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
-    return rows;
+    //         if (cellContents.type !== "compound") {
+
+    //           console.log("       *** " + column.fieldName + ". It's a singular token: " + cellContents?.text)
+
+    //           let cell = this._getUIElement(cellContents);
+
+    //           rowElements[column.fieldName] = cell;
+    //         }
+    //         else if (cellContents.type === "compound") {
+    //           // If type compound, map the item values
+    //           let elements = cellContents.value.map(
+    //             (subItem) => {
+
+    //               console.log("       *** " + column.fieldName + ". It's a 'compound' token: " + cellContents?.length)
+
+    //               // Second map of parsedOutput.value to seperate each object of links, icons, and text
+    //               return this._getUIElement(subItem);
+    //             }
+    //           )
+
+    //           rowElements[column.fieldName] = elements;
+    //         } //if compound
+
+    //       } //if cellList
+    //     }); //forEach column
+
+    //     console.log("   >>> Pushing row: " + rowElements.toString());
+
+    //     rows.push(rowElements);
+
+    //   }) //foreach rawRows
+    // } // if rawRows
+
+    // console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
+    // return rows;
   }
 
 
 
 
   setRows(callback) {
-    let rows = [];
+    //let rows = [];
 
     //Testing...
     let newRows = this._setRowsNew();
 
     //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
 
-    csv2arr(this.props.items).forEach((row, rowIndex) => {
-      let r = {
-        key: rowIndex,
-      }
-      this.state.columns.forEach((column, colInd) => {
-        if (row[colInd]) {
-          const value = row[colInd].trim()
-          let name = getTokens(value).mixed ? getTokens(value).mixed
-            .map((el, i) => typeof el === 'string' ?
-              <span key={i}> {el} </span> :
-              el.suggestions[0])
-            :
-            getTokens(value).text
+    // csv2arr(this.props.items).forEach((row, rowIndex) => {
+    //   let r = {
+    //     key: rowIndex,
+    //   }
+    //   this.state.columns.forEach((column, colInd) => {
+    //     if (row[colInd]) {
+    //       const value = row[colInd].trim()
+    //       let name = getTokens(value).mixed ? getTokens(value).mixed
+    //         .map((el, i) => typeof el === 'string' ?
+    //           <span key={i}> {el} </span> :
+    //           el.suggestions[0])
+    //         :
+    //         getTokens(value).text
 
-          r[column.fieldName] = name
-          //r[column.fieldName] = name
+    //       r[column.fieldName] = name
+    //       //r[column.fieldName] = name
 
-          console.log("    ### legacy R column: " + JSON.stringify(name));
-        }
+    //       console.log("    ### legacy R column: " + JSON.stringify(name));
+    //     }
 
-      })
+    //   })
 
-      console.log("    ### legacy R: " + r.toString());
-      rows.push(r);
-    });
+    //   console.log("    ### legacy R: " + r.toString());
+    //   rows.push(r);
+    // });
 
     this.setState({ newRows }, callback);
     this.setState({ allItems: newRows });
   }
 
   _getUIElement(item) {
+
+    let key = _.uniqueId("e_");
+
     if (item) {
-      return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
-        : item.type === "icon" ? this._getIconElement(item?.iconName, item.color ? item.color : item?.colorToken)
+      return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
           : this._getTextElement(item?.text);
     }
   }
 
   _getTextElement(text) {
-    console.log("   > Text element: " + text);
-    return (<Text textValue={text} size={dataTextSize} />);
+    //Test for an empty cell item
+    let txt = text === emptyHeaderText1 ? "" : text;
+    return (<Text textValue={text} size={dataTextSize} color={defaultTextColor} />);
   }
 
-  _getLinkElement(text, href) {
-    console.log("   > Link element: " + text + ", and HREF = " + href);
-    return (<Link value={text} linkHref={href} size={dataTextSize} />);
+  _getLinkElement(key, text, href) {
+    return (
+      <span key={key} className={'linkContainer ' + classNames.linkContainer}>
+        <Link
+          value={text}
+          linkHref={href ? href : ""}
+          size={dataTextSize}
+          bold={false}
+          italic={false} />
+      </span>);
   }
 
-  _getIconElement(iconName, colorToken) {
-    console.log("   > Icon element: " + iconName + ", color: " + colorToken);
-
-    let key = _.uniqueId('dticn_');
+  _getIconElement(key, iconName, colorToken) {
     let name = iconName ? iconName.trim() : '';
     let size = iconSizeMap[dataTextSize];
     let color = UxpColors.getHexFromHexOrToken(colorToken);
     if (!color) {
       color = defaultTextColor;
     }
-    let iconDisplayClass = {
-      color: color,
-      fontSize: size,
-      height: size,
-      width: size,
-      display: 'inline',
-      lineHeight: 'normal',
-    };
-    const spanStyle = {
-      verticalAlign: 'middle',
-      alignItems: 'center',
-    }
 
-    return (<span key={key} style={spanStyle}>
-      <Icon
-        iconName={name}
-        className={iconDisplayClass}
-      />
+    return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
+      <Icon iconName={name} size={size} color={color} />
     </span >)
   }
 
