@@ -757,7 +757,7 @@ DetailsList.propTypes = {
    * @uxpinpropname Col Widths
    * @uxpincontroltype codeeditor
    */
-  widths: string,
+  widths: PropTypes.string,
 
   /**
   * Example: 2, 3
