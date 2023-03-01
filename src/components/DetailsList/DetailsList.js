@@ -294,7 +294,6 @@ class DetailsList extends React.Component {
   }
 
   searchTable(queryStr) {
-
     let inputValue = queryStr.trim();
 
     let filteredRows = this.searchText(inputValue);
@@ -331,7 +330,6 @@ class DetailsList extends React.Component {
   }
 
   setColumns(callback) {
-
     let columnHeadings = [];
     let colItems = this.props.columns?.split('\n');
 
@@ -504,9 +502,6 @@ class DetailsList extends React.Component {
     // return rows;
   }
 
-
-
-
   setRows(callback) {
     //let rows = [];
 
@@ -541,8 +536,10 @@ class DetailsList extends React.Component {
     //   rows.push(r);
     // });
 
-    this.setState({ newRows }, callback);
-    this.setState({ allItems: newRows });
+    this.setState({
+      rows: newRows,
+      allItems: newRows,
+    }, callback);
   }
 
   _getUIElement(item) {
