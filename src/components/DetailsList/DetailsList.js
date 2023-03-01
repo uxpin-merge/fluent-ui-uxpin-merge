@@ -413,7 +413,7 @@ class DetailsList extends React.Component {
 
     UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
 
-      console.log("   parseMultipleRowsCSV map > rowIndex: " + rowIndex + "Row contents: " + JSON.stringify(row));
+      console.log("   parseMultipleRowsCSV map > rowIndex: " + rowIndex + ". Row contents: " + JSON.stringify(row));
 
       let r = {
         key: rowIndex,
@@ -421,10 +421,17 @@ class DetailsList extends React.Component {
 
       this.state.columns.map((column, colInd) => {
 
+        console.log("   Looking for contents of column " + colInd);
+
         if (row[colInd]) {
-          const value = row[colInd].trim();
-          const parsedValue = UXPinParser.parse(value);
-          const parsedRowElements = [];
+          let value = row[colInd].trim();
+
+          console.log("   >>> Cell contents " + value);
+
+          let parsedValue = UXPinParser.parse(value);
+          let parsedRowElements = [];
+
+          console.log("   >>> Cell parsedValue " + JSON.stringify(parsedValue));
 
           parsedValue.forEach((el, i) => {
 
@@ -441,9 +448,12 @@ class DetailsList extends React.Component {
             }
           });
 
-          r[column.fieldName || ''] = parsedRowElements;
+          r[column.fieldName] = parsedRowElements;
         }
       });
+
+      console.log("   >>>>> ROW  " + JSON.stringify(r));
+
       rows.push(r);
     });
 
