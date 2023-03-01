@@ -351,7 +351,7 @@ class DetailsList extends React.Component {
         isResizable: true,
         isSorted: false,
         isSortedDescending: false,
-        headerClassName: getColumnClasses(index),
+        headerClassName: this.getColumnClasses(index),
         onColumnClick: () => this.onColumnClick(columnNameText + suffix),
         isMultiline: true,
         className: '',
