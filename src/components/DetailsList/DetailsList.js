@@ -53,7 +53,7 @@ const commandBarTokens = {
 
 const classNames = mergeStyleSets({
   textContainer: {
-    color: textColor,
+    color: "#000",
   },
   linkContainer: {
     '& div,a,button,span': {
