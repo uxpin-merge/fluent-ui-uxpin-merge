@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode, mergeStyles } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
@@ -136,17 +136,17 @@ class DetailsList extends React.Component {
         let right = '', left = '';
         let splitStr = wItem.split('|');
 
-        left = splitStr[0].trim();
+        left = splitStr[0];
         if (splitStr[1]) {
           right = splitStr[1];
         }
 
-        let leftNum = parseInt(left);
+        let leftNum = parseInt(left?.trim());
         if (!isNaN(leftNum)) {
           min = leftNum;
         }
 
-        let rightNum = parseInt(right);
+        let rightNum = parseInt(right?.trim());
         if (!isNaN(rightNum)) {
           max = rightNum;
         }
@@ -358,23 +358,23 @@ class DetailsList extends React.Component {
       };
 
       if (this.state.alignRight.includes(index + 1)) {
-        columnParams.className = mergeStyles({
+        columnParams.className = {
           textAlign: 'right',
-        });
+        };
       }
 
       if (this.state.alignCenter.includes(index + 1)) {
-        columnParams.className = mergeStyles({
+        columnParams.className = {
           textAlign: 'center',
-        });
+        };
       }
 
       if (iconName) {
         columnParams.iconName = iconName;
-        columnParams.iconClassName = mergeStyles({
+        columnParams.iconClassName = {
           marginRight: '6px',
           color: "#000",
-        });
+        };
       }
 
       columnHeadings.push(columnParams);
@@ -538,9 +538,6 @@ class DetailsList extends React.Component {
 
     this.setState({ newRows }, callback);
     this.setState({ allItems: newRows });
-
-    // this.setState({ rows }, callback);
-    // this.setState({ allItems: rows });
   }
 
   _getUIElement(item) {
@@ -595,8 +592,6 @@ class DetailsList extends React.Component {
 
 
   render() {
-
-
     //****************************
     //For Inner Stack - CommandBar
 
@@ -630,7 +625,6 @@ class DetailsList extends React.Component {
     return (
 
       <Stack>
-
         {showCommandBar &&
           <Stack
             tokens={commandBarTokens}
