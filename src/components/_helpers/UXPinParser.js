@@ -68,11 +68,15 @@ export function parseMultipleRowsCSV(inputStr) {
   //Split rows by new line
   let rows = inputStr.match(/[^\r\n]+/g) || [];
 
-  for (var i = 0; i < rows.length; i++) {
-    let row = parseRowCSV(rows[i]);
+  console.log(" In parseMultipleRowsCSV(). Row count: " + rows.length);
 
-    if (row.length) {
-      contents.push(row);
+  if (rows && rows.length > 0) {
+    for (var i = 0; i < rows.length; i++) {
+      let row = parseRowCSV(rows[i]);
+
+      if (row.length) {
+        contents.push(row);
+      }
     }
   }
 
