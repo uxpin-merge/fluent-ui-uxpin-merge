@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyles } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
@@ -12,6 +12,7 @@ import { Icon } from '@fluentui/react/lib/Icon';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 const searchFieldWidth = 400;
@@ -21,19 +22,9 @@ const searchFieldMarginBottom = '24px';
 
 const dataTextSize = "smallPlus";
 const defaultTextColor = "#000";
-
 const headerBackgroundColor = 'neutralLighterAlt';
 
-//Use this in the default props below.
-const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
-
-const defaultRowValues =
-  `link(Component_Name_A|google.com), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
-link(Component_Name_B|www.uxpin.com), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
-link(Component_Name_C|http://amazon.com), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
-
-const defaultShimmerDuration = 1;
-const defaultShimmerLines = 3;
+const emptyHeaderText1 = "----";
 
 const iconSizeMap = {
   tiny: 10,
@@ -46,6 +37,18 @@ const iconSizeMap = {
   xLarge: 22,
   xxLarge: 32,
   mega: 64,
+};
+
+//A StackItem that will spring to fill available space.
+const spanner = (
+  <StackItem grow={1}>
+    <span />
+  </StackItem>
+);
+
+const commandBarTokens = {
+  childrenGap: 6,
+  padding: 0,
 };
 
 
@@ -62,20 +65,22 @@ class DetailsList extends React.Component {
       columns: [],
       rows: [],
       allItems: [],
+      columnWidths: [],
       alignRight: [],
       alignCenter: [],
-      // searchBoxValue: '',
     };
   }
 
   set() {
+    let colWidths = this.parseColumnWidths(this.props.widths);
     let alignRightCols = UxpNumberParser.parseInts(this.props.alignRight);
     let alignCenterCols = UxpNumberParser.parseInts(this.props.alignCenter);
 
     this.setState(
       {
-        alignRight: alignRightCols ? alignRightCols : '',
-        alignCenter: alignCenterCols ? alignCenterCols : '',
+        columnWidths: colWidths,
+        alignRight: alignRightCols ? alignRightCols : [],
+        alignCenter: alignCenterCols ? alignCenterCols : [],
         shimmer: this.props.shimmer
       },
       () => this.setColumns(this.setRows)
@@ -91,7 +96,6 @@ class DetailsList extends React.Component {
         (this.props.shimmerDuration || defaultShimmerDuration) * 1000
       )
     }
-
   }
 
   componentDidMount() {
@@ -105,7 +109,7 @@ class DetailsList extends React.Component {
       prevProps.columns !== this.props.columns ||
       prevProps.items !== this.props.items ||
       prevProps.minWidth !== this.props.minWidth ||
-      prevProps.maxWidth !== this.props.maxWidth ||
+      prevProps.widths !== this.props.widths ||
       prevProps.shimmer !== this.props.shimmer ||
       prevProps.shimmerDuration !== this.props.shimmerDuration ||
       prevProps.shimmerLines !== this.props.shimmerLines
@@ -114,6 +118,78 @@ class DetailsList extends React.Component {
     }
   }
 
+  parseColumnWidths(colWidths) {
+    let mWidth = this.props.minWidth;
+    let columnWidths = [];
+    let cWidths = colWidths?.split('\n');
+
+    for (let i = 0; i < cWidths.length; i++) {
+      let wItem = cWidths[i];
+
+      let min = mWidth;
+      let max = 0;
+      let flex = this.getColWidthFlexInfo(wItem);
+
+      //Did the user specify a min AND a max?
+      if (wItem.includes("|")) {
+        //Min Width on left, and Max Width on Right
+        let right = '', left = '';
+        let splitStr = wItem.split('|');
+
+        left = splitStr[0].trim();
+        if (splitStr[1]) {
+          right = splitStr[1];
+        }
+
+        let leftNum = parseInt(left);
+        if (!isNaN(leftNum)) {
+          min = leftNum;
+        }
+
+        let rightNum = parseInt(right);
+        if (!isNaN(rightNum)) {
+          max = rightNum;
+        }
+      }
+      else {
+        //Did the user specify a default width? 
+        let maxNum = parseInt(wItem?.trim());
+        if (!isNaN(maxNum)) {
+          max = maxNum;
+        }
+      }
+
+      columnWidths.push({
+        index: i,
+        minWidth: min,
+        maxWidth: max,
+        flexGrow: flex,
+      });
+    } //for loop
+
+    return columnWidths;
+  }
+
+  getColWidthFlexInfo(text) {
+    if (text?.length) {
+      let normalizedText = text.toLowerCase().replace(/[\W_]+/g, "");
+
+      if (normalizedText.startsWith("flex")) {
+        if (normalizedText === "flex") {
+          return 1;
+        }
+        else {
+          let flexText = normalizedText.replace("flex", "");
+          let flexNum = parseInt(flexText);
+          if (!isNaN(flexNum)) {
+            return flexNum;
+          }
+        }
+      }
+    }
+
+    return 0;
+  };
 
   getColumnClasses(colIndex) {
 
@@ -201,11 +277,6 @@ class DetailsList extends React.Component {
     this.setState({
       rows: filteredRows,
     });
-
-    // //Raise this event to UXPin.
-    // if (this.props.onSBChange) {
-    //   this.props.onSBChange(inputValue);
-    // }
   }
 
   onSearchClear() {
@@ -237,56 +308,134 @@ class DetailsList extends React.Component {
 
   setColumns(callback) {
 
-    var columnList = [];
-    if (this.props.columns) {
-      columnList = csv2arr(this.props.columns)
-        .flat()
-        .map((columnName, colIndex) => {
-          columnName = columnName.trim()
+    let columnHeadings = [];
+    let colItems = this.props.columns?.split('\n');
 
-          let name = getTokens(columnName).mixed
-            .map((el, i) => typeof el === 'string' ?
-              <span key={i}> {el} </span>
-              : el.suggestions[0])
+    for (let index = 0; index < colItems.length; index++) {
 
-          console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name.toString());
+      let columnNameText = colItems[index]?.trim() || ' ';
 
-          const columnParams = {
-            key: columnName,
-            //key: _.uniqueId('columnName_'), //AH
-            name,
-            fieldName: columnName,
-            isResizable: true,
-            minWidth: this.props.minWidth,
-            //maxWidth: this.props.maxWidth,   //AH
-            isSorted: false,
-            isSortedDescending: false,
-            isMultiline: true,
-            onColumnClick: () => this.onColumnClick(columnName),
-            headerClassName: this.getColumnClasses(colIndex),
-          }
+      let suffix = _.uniqueId('_k_');
 
-          let adjustedIndex = colIndex + 1;
+      //Figure out if the column's header should be empty
+      let colNameTxt = columnNameText.toLowerCase() === emptyHeaderText1 ? ' ' : columnNameText;
 
-          if (this.state.alignRight.includes(adjustedIndex)) {
-            columnParams.styles = {
-              textAlign: 'right',
-            };
-          }
+      //Can we access the widths? 
+      let colWidthInfo = {
+        index: index,
+        minWidth: this.props.minWidth,
+        maxWidth: 0,
+        flexGrow: 0,
+      };
 
-          if (this.state.alignCenter.includes(adjustedIndex)) {
-            columnParams.styles = {
-              textAlign: 'center',
-            };
-          }
+      if (index < this.state.columnWidths.length) {
+        colWidthInfo = this.state.columnWidths[index];
+      };
 
-          return columnParams
+      let iconName = "";
+      if (colNameTxt.includes("icon(")) {
+        let propsList = UxpMenuUtils.parseSimpleListText(colNameTxt, true, false);
+        if (propsList) {
+          iconName = propsList[0].iconProps.iconName;
+          colNameTxt = propsList[0].text ? propsList[0].text : " ";
+        }
+      }
+
+      let columnParams = {
+        key: columnNameText + suffix,
+        name: colNameTxt,
+        fieldName: colNameTxt,
+        flexGrow: colWidthInfo.flexGrow,
+        minWidth: colWidthInfo.minWidth,
+        maxWidth: colWidthInfo.maxWidth,
+        isResizable: true,
+        isSorted: false,
+        isSortedDescending: false,
+        headerClassName: getColumnClasses(index),
+        onColumnClick: () => this.onColumnClick(columnNameText + suffix),
+        isMultiline: true,
+        className: '',
+      };
+
+      if (this.state.alignRight.includes(index + 1)) {
+        columnParams.className = mergeStyles({
+          textAlign: 'right',
         });
+      }
+
+      if (this.state.alignCenter.includes(index + 1)) {
+        columnParams.className = mergeStyles({
+          textAlign: 'center',
+        });
+      }
+
+      if (iconName) {
+        columnParams.iconName = iconName;
+        columnParams.iconClassName = mergeStyles({
+          marginRight: '6px',
+          color: "#000",
+        });
+      }
+
+      columnHeadings.push(columnParams);
     }
 
     this.setState({
-      columns: columnList,
+      columns: columnHeadings,
     }, callback)
+
+
+
+    // var columnList = [];
+    // if (this.props.columns) {
+    //   columnList = csv2arr(this.props.columns)
+    //     .flat()
+    //     .map((columnName, colIndex) => {
+    //       columnName = columnName.trim()
+
+    //       let name = getTokens(columnName).mixed
+    //         .map((el, i) => typeof el === 'string' ?
+    //           <span key={i}> {el} </span>
+    //           : el.suggestions[0])
+
+    //       console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name.toString());
+
+    //       const columnParams = {
+    //         key: columnName,
+    //         //key: _.uniqueId('columnName_'), //AH
+    //         name,
+    //         fieldName: columnName,
+    //         isResizable: true,
+    //         minWidth: this.props.minWidth,
+    //         //maxWidth: this.props.maxWidth,   //AH
+    //         isSorted: false,
+    //         isSortedDescending: false,
+    //         isMultiline: true,
+    //         onColumnClick: () => this.onColumnClick(columnName),
+    //         headerClassName: this.getColumnClasses(colIndex),
+    //       }
+
+    //       let adjustedIndex = colIndex + 1;
+
+    //       if (this.state.alignRight.includes(adjustedIndex)) {
+    //         columnParams.styles = {
+    //           textAlign: 'right',
+    //         };
+    //       }
+
+    //       if (this.state.alignCenter.includes(adjustedIndex)) {
+    //         columnParams.styles = {
+    //           textAlign: 'center',
+    //         };
+    //       }
+
+    //       return columnParams
+    //     });
+    // }
+
+    // this.setState({
+    //   columns: columnList,
+    // }, callback)
   }
 
   //Should take callback as param
@@ -443,28 +592,68 @@ class DetailsList extends React.Component {
     </span >)
   }
 
+
+
   render() {
+
+
+    //****************************
+    //For Inner Stack - CommandBar
+
+    //Set up the StackItems
+    let stackList = [];
+    if (this.props.children) {
+
+      //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+      let childList = React.Children.toArray(this.props.children);
+
+      //Now, we configure the StackItems
+      if (childList && childList.length) {
+
+        for (var i = 0; i < childList.length; i++) {
+          let child = childList[i];
+          let stack = (
+            <StackItem>
+              {child}
+            </StackItem>
+          );
+          stackList.push(stack);
+        } //for loop
+      } //if childList
+    } //If props.children
+
+    let showCommandBar = stackList.length > 0 || this.props.isSearchEnabled;
+
+    //Now, add the spanner
+    stackList.push(spanner);
 
     return (
 
       <Stack>
 
-        {this.props.isSearchEnabled &&
-          <StackItem
-            align="end"
+        {showCommandBar &&
+          <Stack
+            tokens={commandBarTokens}
+            horizontal={true}
+            horizontalAlign={'start'}
+            verticalAlign={'center'}
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
-            <SearchBox
-              iconProps={{ iconName: this.props.icon.trim() }}
-              placeholder={this.props.placeholder}
-              onChange={(e, v) => { this.searchTable(v) }}
-              onClear={this.onSearchClear}
-              styles={{ root: { width: searchFieldWidth } }}
-            />
-          </StackItem>
+            {stackList}
+            {props.isSearchEnabled && (
+              <StackItem>
+                <SearchBox
+                  iconProps={{ iconName: this.props.icon.trim() }}
+                  placeholder={this.props.placeholder}
+                  onChange={(e, v) => { this.searchTable(v) }}
+                  onClear={this.onSearchClear}
+                  styles={{ root: { width: searchFieldWidth } }}
+                />
+              </StackItem>
+            )}
+          </Stack>
         }
         <StackItem>
-
           <div style={{ display: 'block' }} className={
             {
               selectors: {
@@ -504,6 +693,13 @@ class DetailsList extends React.Component {
 DetailsList.propTypes = {
 
   /**
+   * Don't show this prop in the UXPin Editor. 
+   * @uxpinignoreprop   
+   * @uxpinpropname CommandBar Children
+   */
+  children: PropTypes.node,
+
+  /**
   * @uxpindescription Whether to show the filter SearchBox 
   * @uxpinpropname Show Filter
   */
@@ -514,14 +710,6 @@ DetailsList.propTypes = {
    * @uxpinpropname Search Icon
    * */
   icon: PropTypes.string,
-
-  /**
-   * @uxpindescription Current value of the Search field. This prop's live value is available for scripting.
-   * @uxpinpropname * Search Value
-   * @uxpinbind onSBChange
-   * @uxpincontroltype textfield(2)
-   * */
-  // searchValue: PropTypes.string,
 
   /**
    * @uxpindescription Placeholder text to show in the text field when it's empty
@@ -538,7 +726,9 @@ DetailsList.propTypes = {
   /** 
    *  Separate each item with new line or | symbol.
    *  Put at the end of the line [color:blue-600] token to set color for whole column.
-   * @uxpindescription Enter one column per row. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting.
+   * @uxpindescription Enter one column heading value per row. 
+   * To include a comma within the text, wrap it in quotes. 
+   * To specify an empty heading, leave the field empty or typ in "----" (no quotes).
    * @uxpinpropname Headers
    * @uxpincontroltype codeeditor
    * */
@@ -546,13 +736,34 @@ DetailsList.propTypes = {
 
   /** 
    * 
-   * Separate each row with new line or || symbol.
-   * Icon token icon(Snow|blue-600)
-   * @uxpindescription Enter one row per line. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting. 
+   * @uxpindescription Separate each row with a new line. Separate each cell with a comma.
+   * Link syntax: link(Display Text | HREF) 
+   * Icon syntax: icon(IconName | Color_Token or #Hex) 
+   * To specify an empty cell, enter "----" (no quotes).
+   * NOTE: To display text with a comma, wrap the entire cell's contents in double quotes: "$1,234" 
+   * To show an icon plus text with a comma in a cell:  "icon(CashDollar | green-600) $1,234" 
+   * To show a comma within a link, wrap the cell contents in double quotes: "link(Dec 24, 2023, 4:15 pm)"
    * @uxpinpropname Rows
    * @uxpincontroltype codeeditor
    * */
   items: PropTypes.string,
+
+  /**
+  * @uxpindescription Minimum column width  
+  * @uxpinpropname Min Width
+  */
+  minWidth: PropTypes.number,
+
+  /**
+   * @uxpindescription Default Column Widths. Optionally specify default widths for individual columns. 
+   * Leave line blank and the default Min Width will be applied. 
+   * To create a specifically sized column width, enter both a Minimum and Max value as: 24 | 24
+   * Enter "flex" with an optional number, e.g., "flex 2", (no quotes) for a column to proportionally take any remaining available space.
+   * NOTE: The Best Practice is to specify at least one column as "flex" (no quotes). If none is specified, the last column is assigned all remaining horizontal space.
+   * @uxpinpropname Col Widths
+   * @uxpincontroltype codeeditor
+   */
+  widths: string,
 
   /**
   * Example: 2, 3
@@ -567,18 +778,6 @@ DetailsList.propTypes = {
   * @uxpinpropname Align Center
   */
   alignCenter: PropTypes.string,
-
-  /**
-  * @uxpindescription Minimum column width width 
-  * @uxpinpropname Min Width
-  */
-  minWidth: PropTypes.number,
-
-  /**
-  * @uxpindescription Maximum column width width 
-  * @uxpinpropname Max Width
-  */
-  maxWidth: PropTypes.number,
 
   /**
   * @uxpindescription Whether to display the shimmer 
@@ -597,12 +796,6 @@ DetailsList.propTypes = {
   * @uxpinpropname Shimmer Lines
   */
   shimmerLines: PropTypes.number,
-
-  /**
-   * @uxpindescription Fires when the SearchBox's Value property changes.
-   * @uxpinpropname * Search Value Changed
-   * */
-  // onSBChange: PropTypes.func,
 };
 
 
@@ -610,19 +803,19 @@ DetailsList.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 DetailsList.defaultProps = {
-  columns: defaultColumnValues,
-  items: defaultRowValues,
+  columns: '',
+  items: '',
   minWidth: 125,
-  maxWidth: 350,
+  widths: '',
   header: true,
-  alignRight: "5",
-  alignCenter: "3, 4",
+  alignRight: '',
+  alignCenter: '',
   isSearchEnabled: true,
   icon: searchFieldIconName,
   placeholder: searchFieldPlaceholder,
-  shimmer: true,
-  shimmerDuration: defaultShimmerDuration,
-  shimmerLines: defaultShimmerLines
+  shimmer: false,
+  shimmerDuration: 0,
+  shimmerLines: 0
 };
 
 
