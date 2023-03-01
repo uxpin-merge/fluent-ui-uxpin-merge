@@ -610,9 +610,9 @@ class DetailsList extends React.Component {
       let childList = React.Children.toArray(this.props.children);
 
       //Now, we configure the StackItems
-      if (childList && childList.length) {
+      if (childList && childList.length > 0) {
 
-        for (var i = 0; i < childList.length; i++) {
+        for (let i = 0; i < childList.length; i++) {
           let child = childList[i];
           let stack = (
             <StackItem>
@@ -626,10 +626,12 @@ class DetailsList extends React.Component {
 
     let showCommandBar = stackList.length > 0 || this.props.isSearchEnabled;
 
+    console.log("*** New table!! Children /n       " + stackList.length);
+
     //Now, add the spanner
     stackList.push(spanner);
 
-    console.log("*** New table!! Children /n       " + JSON.stringify(stackList));
+
 
     return (
 
