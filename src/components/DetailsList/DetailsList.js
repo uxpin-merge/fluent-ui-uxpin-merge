@@ -428,7 +428,7 @@ class DetailsList extends React.Component {
 
           console.log("   >>> Cell contents " + value);
 
-          let parsedValue = UXPinParser.parse(value);
+          let parsedValue = UXPinParser.parseRow(value);
           let parsedRowElements = [];
 
           console.log("   >>> Cell parsedValue " + JSON.stringify(parsedValue));

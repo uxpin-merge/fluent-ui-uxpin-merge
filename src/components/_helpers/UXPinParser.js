@@ -68,8 +68,6 @@ export function parseMultipleRowsCSV(inputStr) {
   //Split rows by new line
   let rows = inputStr.match(/[^\r\n]+/g) || [];
 
-  console.log(" In parseMultipleRowsCSV(). Row count: " + rows.length);
-
   if (rows && rows.length > 0) {
     for (var i = 0; i < rows.length; i++) {
       let row = parseRowCSV(rows[i]);
@@ -156,17 +154,17 @@ export function parseRow(inputStr, index) {
    *   3. Free text only
    */
   for (let i = 0; i < allTokens.length; i++) {
-    if (hasType && tokensWithType?.length === 1 && (allTokens[0].trim() === tokensWithType[0]?.trim())) {
-      if (createNewToken) {
-        parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), index));
-        createNewToken = false;
-      }
-      else {
-        // i = 0: type; i = 1: text; i >= 2: more text (we need to add space)
-        (i >= 2 || parsedOutput[0].type === 'link') ? parsedOutput[0].text += ` ${allTokens[i]}` : parsedOutput[0].text += `${allTokens[i]}`;
-      }
-    } else if (hasType && tokensWithType?.length >= 1) {
-      if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
+    if (
+      hasType &&
+      tokensWithType?.length === 1 &&
+      allTokens[0].trim() === tokensWithType[0]?.trim()
+    ) {
+      parsedOutput.push(
+        makeToken(allTokens[i], getType(allTokens[i]), index)
+      );
+      createNewToken = true;
+    } else if (hasType && tokensWithType?.length) {
+      if (tokensWithType.map((s) => s.trim()).includes(allTokens[i])) {
         parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), i));
         tokenCounter += 1;
         semaphore = true;
@@ -192,8 +190,8 @@ export function parseRow(inputStr, index) {
 
   // Special return value for use case 2.
   if (parsedOutput?.length > 1) {
-    parsedOutput.map((element, index) => element.order = index);
-    return { order: index, type: 'compound', value: parsedOutput }
+    parsedOutput.map((element, index) => (element.order = index));
+    return { order: index, type: "compound", value: parsedOutput };
   }
 
   // Return value for use case 1. and 3.
