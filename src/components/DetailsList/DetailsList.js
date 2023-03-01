@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode, mergeStyles } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyleSets } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
