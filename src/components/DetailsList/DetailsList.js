@@ -645,7 +645,7 @@ class DetailsList extends React.Component {
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
             {stackList}
-            {props.isSearchEnabled && (
+            {this.props.isSearchEnabled && (
               <StackItem>
                 <SearchBox
                   iconProps={{ iconName: this.props.icon.trim() }}
