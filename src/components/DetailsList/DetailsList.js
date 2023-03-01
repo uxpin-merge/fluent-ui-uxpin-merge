@@ -159,8 +159,6 @@ class DetailsList extends React.Component {
         }
       }
 
-      console.log("*** New table!! /n    index: " + i + " min: " + min + " max: " + max + " flex: " + flex);
-
       columnWidths.push({
         index: i,
         minWidth: min,
@@ -379,8 +377,6 @@ class DetailsList extends React.Component {
         };
       }
 
-      console.log("*** New table!! Column heading!! /n       " + JSON.stringify(columnParams));
-
       columnHeadings.push(columnParams);
     }
 
@@ -596,9 +592,6 @@ class DetailsList extends React.Component {
 
 
   render() {
-
-    console.log("*** New table!! Entering render");
-
     //****************************
     //For Inner Stack - CommandBar
 
@@ -626,12 +619,8 @@ class DetailsList extends React.Component {
 
     let showCommandBar = stackList.length > 0 || this.props.isSearchEnabled;
 
-    console.log("*** New table!! Children /n       " + stackList.length);
-
     //Now, add the spanner
     stackList.push(spanner);
-
-
 
     return (
 
