@@ -359,8 +359,6 @@ class DetailsList extends React.Component {
         className: '',
       };
 
-      console.log("*** New table!! Column heading!! /n       " + JSON.stringify(columnParams));
-
       if (this.state.alignRight.includes(index + 1)) {
         columnParams.className = {
           textAlign: 'right',
@@ -380,6 +378,8 @@ class DetailsList extends React.Component {
           color: "#000",
         };
       }
+
+      console.log("*** New table!! Column heading!! /n       " + JSON.stringify(columnParams));
 
       columnHeadings.push(columnParams);
     }
@@ -596,6 +596,9 @@ class DetailsList extends React.Component {
 
 
   render() {
+
+    console.log("*** New table!! Entering render");
+
     //****************************
     //For Inner Stack - CommandBar
 
@@ -625,6 +628,8 @@ class DetailsList extends React.Component {
 
     //Now, add the spanner
     stackList.push(spanner);
+
+    console.log("*** New table!! Children /n       " + JSON.stringify(stackList));
 
     return (
 
