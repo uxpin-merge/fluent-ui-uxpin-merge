@@ -423,24 +423,25 @@ class DetailsList extends React.Component {
 
       this.state.columns.map((column, colInd) => {
         if (row[colInd]) {
-          let value = row[colInd].trim();
+          let rawCellContents = row[colInd].trim();
 
-          let parsedValue = UXPinParser.parseRow(value, column);
-          let parsedRowElements = [];
+          //Parse one cell at a time
+          let parsedCell = UXPinParser.parseRow(rawCellContents, column);
+          let parsedCellElements = [];
 
-          if (parsedValue.type !== 'compound') {
-            let cellItem = this._getUIElement(parsedValue, i);
-            parsedRowElements.push(cellItem);
+          if (parsedCell.type !== 'compound') {
+            let cellItem = this._getUIElement(parsedCell, i);
+            parsedCellElements.push(cellItem);
           }
           else {
             //Else it's a 'compound' array of elements
-            parsedValue.value.map((subElement, k) => {
+            parsedCell.value.map((subElement, k) => {
               let cellItem = this._getUIElement(subElement);
-              parsedRowElements.push(cellItem);
+              parsedCellElements.push(cellItem);
             });
           }
 
-          r[column.fieldName] = parsedRowElements;
+          r[column.fieldName] = parsedCellElements;
         }
       });
 
