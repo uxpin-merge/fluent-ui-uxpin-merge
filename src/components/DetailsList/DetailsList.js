@@ -368,7 +368,7 @@ class DetailsList extends React.Component {
 
       let columnParams = {
         uxpIndex: index,                    //For proprietary tracking
-        key: columnNameText + suffix,
+        key: "column" + index,
         name: colNameTxt,
         fieldName: colNameTxt,
         flexGrow: colWidthInfo.flexGrow,
@@ -498,11 +498,11 @@ class DetailsList extends React.Component {
       let row = this.state.rows[rowIndex];
       let cellElements = row[column.fieldName];
 
-      console.log("               >>>> cell: \n" + JSON.stringify(cellElements));
+      console.log("               >>>> cell: \n" + JSON.stringify(item));
 
-      return (<React.Fragment><span style={txtAlign}>
-        {cellElements}
-      </span></React.Fragment>);
+      return (<span style={txtAlign}>
+        {item}
+      </span>);
     }
   }
 
