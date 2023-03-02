@@ -147,8 +147,6 @@ class DetailsList extends React.Component {
     let columnWidths = [];
     let cWidths = colWidths?.split('\n');
 
-    console.log("parseColumnWidths > cWidths.length: " + cWidths.length);
-
     for (let i = 0; i < cWidths.length; i++) {
       let wItem = cWidths[i];
 
@@ -335,8 +333,6 @@ class DetailsList extends React.Component {
     let columnHeadings = [];
     let colItems = this.props.columns?.split('\n');
 
-    console.log("setColumns > colItems.length: " + colItems.length);
-
     for (let index = 0; index < colItems.length; index++) {
 
       let columnNameText = colItems[index]?.trim() || ' ';
@@ -353,8 +349,6 @@ class DetailsList extends React.Component {
         maxWidth: 0,
         flexGrow: 0,
       };
-
-      console.log("setColumns > this.state.columnWidths.length: " + this.state.columnWidths.length);
 
       if (index < this.state.columnWidths.length) {
         colWidthInfo = this.state.columnWidths[index];
@@ -413,8 +407,10 @@ class DetailsList extends React.Component {
     }, callback);
   }
 
-  //Should take callback as param
-  _setRowsNew() {
+  setRows(callback) {
+
+    console.log("entering setRows");
+
     let rows = [];
 
     UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
@@ -449,20 +445,11 @@ class DetailsList extends React.Component {
       rows.push(r);
     });
 
-  }
-
-  setRows(callback) {
-
-    console.log("entering setRows");
-
-    //Testing...
-    let newRows = this._setRowsNew();
-
     console.log("   Finished parsing the rows.");
 
     this.setState({
-      rows: newRows,
-      allItems: newRows,
+      rows: rows,
+      allItems: rows,
     }, callback);
   }
 
@@ -508,8 +495,6 @@ class DetailsList extends React.Component {
     </span >)
   }
 
-
-
   render() {
     //****************************
     //For Inner Stack - CommandBar
@@ -520,8 +505,6 @@ class DetailsList extends React.Component {
 
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
       let childList = React.Children.toArray(this.props.children);
-
-      console.log("render > childList.length: " + childList.length);
 
       //Now, we configure the StackItems
       if (childList) {
@@ -536,8 +519,6 @@ class DetailsList extends React.Component {
         } //for loop
       } //if childList
     } //If props.children
-
-    console.log("render > stackList.length: " + stackList.length);
 
     let showCommandBar = stackList.length > 0 || this.props.isSearchEnabled;
 
