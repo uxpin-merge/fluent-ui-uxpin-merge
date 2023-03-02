@@ -423,6 +423,9 @@ class DetailsList extends React.Component {
 
       this.state.columns.map((column, colInd) => {
         if (row[colInd]) {
+
+          console.log("   parsing cell: " + colInd);
+
           let rawCellContents = row[colInd].trim();
 
           //Parse one cell at a time
@@ -432,12 +435,17 @@ class DetailsList extends React.Component {
           if (parsedCell.type !== 'compound') {
             let cellItem = this._getUIElement(parsedCell, i);
             parsedCellElements.push(cellItem);
+
+            console.log("   >> cell simple object: " + JSON.stringify(cellItem));
+
           }
           else {
             //Else it's a 'compound' array of elements
             parsedCell.value.map((subElement, k) => {
               let cellItem = this._getUIElement(subElement);
               parsedCellElements.push(cellItem);
+
+              console.log("   >> cell multi object: " + JSON.stringify(cellItem));
             });
           }
 
