@@ -428,12 +428,13 @@ class DetailsList extends React.Component {
 
           console.log("   >>> Cell contents " + value);
 
-          let parsedValue = UXPinParser.parseRow(value);
+          let parsedValue = UXPinParser.parseRow(value, column);
           let parsedRowElements = [];
 
           console.log("   >>> Cell parsedValue " + JSON.stringify(parsedValue));
 
-          parsedValue.forEach((el, i) => {
+          for (let i = 0; i < parsedValue.length; i++) {
+            let el = parsedValue[i];
 
             if (el.type !== 'compound') {
               let cellItem = this._getUIElement(el, i);
@@ -446,7 +447,22 @@ class DetailsList extends React.Component {
                 parsedRowElements.push(cellItem);
               });
             }
-          });
+          }
+
+          // parsedValue.forEach((el, i) => {
+
+          //   if (el.type !== 'compound') {
+          //     let cellItem = this._getUIElement(el, i);
+          //     parsedRowElements.push(cellItem);
+          //   }
+          //   else {
+          //     //Else it's a 'compound' array of elements
+          //     el.value.map((subElement, k) => {
+          //       let cellItem = this._getUIElement(subElement);
+          //       parsedRowElements.push(cellItem);
+          //     });
+          //   }
+          // });
 
           r[column.fieldName] = parsedRowElements;
         }
