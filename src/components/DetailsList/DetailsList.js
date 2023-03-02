@@ -416,22 +416,17 @@ class DetailsList extends React.Component {
 
           //Parse one cell at a time
           let parsedCell = UXPinParser.parseRow(rawCellContents, column);
-          //let parsedCellElements = [];
-          let parsedCellElements = '';
+          let parsedCellElements = [];
 
           if (parsedCell.type !== 'compound') {
             let cellItem = this._getUIElement(parsedCell);
-            parsedCellElements = cellItem;
-            // parsedCellElements.push(cellItem);
-            //parsedCellElements.push("foo " + colInd);
+            parsedCellElements.push(cellItem);
           }
           else {
             //Else it's a 'compound' array of elements
             parsedCell.value.map((subElement, k) => {
               let cellItem = this._getUIElement(subElement);
-              parsedCellElements += cellItem;
-              // parsedCellElements.push(cellItem);
-              //parsedCellElements.push("hello " + k);
+              parsedCellElements.push(cellItem);
             });
           }
 
