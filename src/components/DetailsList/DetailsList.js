@@ -473,10 +473,10 @@ class DetailsList extends React.Component {
   _getTextElement(key, text) {
     //Test for an empty cell item
     let txt = text === emptyHeaderText1 ? "" : text;
-    return <span key={key} className={'textContainer ' + classNames.textContainer}> {txt} </span>;
-    // return (<span key={key} >
-    //   <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
-    // </span>);
+    // return <span key={key} className={'textContainer ' + classNames.textContainer}> {txt} </span>;
+    return (<span key={key} >
+      <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
+    </span>);
   }
 
   _getLinkElement(key, text, href) {
