@@ -502,12 +502,16 @@ class DetailsList extends React.Component {
     let txtAlign = { textAlign: column.className.textAlign }
 
     if (rowIndex < this.state.rows.length) {
-      let cell = this.state.rows[rowIndex][column.uxpIndex];
-      let renderContents = React.Children.toArray(cell);
+      let cellElements = this.state.rows[rowIndex][column.uxpIndex];
 
-      console.log("               >>>> cell: \n" + renderContents);
+      console.log("               >>>> cell: \n" + cell);
 
-      return (<span style={txtAlign}>{cell}</span>);
+      return (
+        <span style={txtAlign}>
+          {cellElements.map(cellEl => {
+            return ({ cellEl });
+          })}
+        </span>);
     }
   }
 
