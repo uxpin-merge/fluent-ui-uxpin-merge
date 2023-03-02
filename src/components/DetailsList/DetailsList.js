@@ -506,7 +506,7 @@ class DetailsList extends React.Component {
   _onRenderCell(item, rowIndex, column) {
     //determine center or right justify
     console.log("_onRenderCell. align: " + column.className.textAlign);
-    console.log("               item: " + JSON.stringify(item));
+
 
     let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
     let txtAlign = { textAlign: column.className.textAlign }
@@ -514,6 +514,8 @@ class DetailsList extends React.Component {
     if (rowIndex < this.state.rows.length) {
       let cell = this.state.rows[rowIndex][column.uxpIndex];
       let renderContents = React.Children.toArray(cell);
+
+      console.log("               >>>> cell: \n" + JSON.stringify(renderContents));
 
       return (<span style={txtAlign}>{renderContents}</span>);
     }
