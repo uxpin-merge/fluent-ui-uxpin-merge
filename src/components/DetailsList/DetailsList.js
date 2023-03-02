@@ -432,7 +432,8 @@ class DetailsList extends React.Component {
             });
           }
 
-          r[column.fieldName || ''] = parsedCellElements;
+          r[column.uxpIndex || ''] = parsedCellElements;
+          // r[column.fieldName || ''] = parsedCellElements;
         }
       });
 
@@ -510,7 +511,12 @@ class DetailsList extends React.Component {
     let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
     let txtAlign = { textAlign: column.className.textAlign }
 
-    return (<span style={txtAlign}>{id}</span>);
+    if (rowIndex < this.state.rows.length) {
+      let cell = this.state.rows[rowIndex][column.uxpIndex];
+      let renderContents = React.Children.toArray(cell);
+
+      return (<span style={txtAlign}>{renderContents}</span>);
+    }
   }
 
   render() {
