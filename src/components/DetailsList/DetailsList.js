@@ -471,14 +471,16 @@ class DetailsList extends React.Component {
     if (item) {
       return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
         : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
-          : this._getTextElement(item?.text);
+          : this._getTextElement(key, item?.text);
     }
   }
 
-  _getTextElement(text) {
+  _getTextElement(key, text) {
     //Test for an empty cell item
     let txt = text === emptyHeaderText1 ? "" : text;
-    return (<Text textValue={text} size={dataTextSize} color={defaultTextColor} />);
+    return (<span key={key} >
+      <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
+    </span>);
   }
 
   _getLinkElement(key, text, href) {
