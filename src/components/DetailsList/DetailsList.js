@@ -521,9 +521,10 @@ class DetailsList extends React.Component {
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
       let childList = React.Children.toArray(this.props.children);
 
-      //Now, we configure the StackItems
-      if (childList && childList.length > 0) {
+      console.log("render > childList.length: " + childList.length);
 
+      //Now, we configure the StackItems
+      if (childList) {
         for (let i = 0; i < childList.length; i++) {
           let child = childList[i];
           let stack = (
@@ -535,6 +536,8 @@ class DetailsList extends React.Component {
         } //for loop
       } //if childList
     } //If props.children
+
+    console.log("render > stackList.length: " + stackList.length);
 
     let showCommandBar = stackList.length > 0 || this.props.isSearchEnabled;
 
