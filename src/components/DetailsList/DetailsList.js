@@ -535,7 +535,7 @@ class DetailsList extends React.Component {
     //Testing...
     let newRows = this._setRowsNew();
 
-    console.log("   Finished parsing the rows. Row count: " + newRows.length);
+    console.log("   Finished parsing the rows.");
 
     //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
 
