@@ -432,14 +432,16 @@ class DetailsList extends React.Component {
           let parsedCellElements = [];
 
           if (parsedCell.type !== 'compound') {
-            let cellItem = this._getUIElement(parsedCell, i);
-            parsedCellElements.push(cellItem);
+            let cellItem = this._getUIElement(parsedCell);
+            //parsedCellElements.push(cellItem);
+            parsedCellElements.push("foo " + i);
           }
           else {
             //Else it's a 'compound' array of elements
             parsedCell.value.map((subElement, k) => {
               let cellItem = this._getUIElement(subElement);
-              parsedCellElements.push(cellItem);
+              //parsedCellElements.push(cellItem);
+              parsedCellElements.push("hello " + k);
             });
           }
 
@@ -454,7 +456,7 @@ class DetailsList extends React.Component {
 
     this.setState({
       rows: rows,
-      //allItems: rows,
+      allItems: rows,
     }, callback);
   }
 
