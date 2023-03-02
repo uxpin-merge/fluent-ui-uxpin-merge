@@ -379,7 +379,7 @@ class DetailsList extends React.Component {
         isSortedDescending: false,
         headerClassName: this.getColumnClasses(index),
         onColumnClick: () => this.onColumnClick(columnNameText + suffix),
-        onRender: (item, rowIndex, column) => this._onRenderCell(item, rowIndex, column),
+        onRender: (item, rowIndex, column) => this._onRenderCell(rowIndex, column),
         isMultiline: true,
         className: {
           textAlign: txtAlign,
@@ -488,9 +488,9 @@ class DetailsList extends React.Component {
     </span >)
   }
 
-  _onRenderCell(item, rowIndex, column) {
-    let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
+  _onRenderCell(rowIndex, column) {
     let txtAlign = { textAlign: column.className.textAlign };
+    let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
 
     console.log("_onRenderCell. id: " + id);
 
@@ -498,11 +498,12 @@ class DetailsList extends React.Component {
       let row = this.state.rows[rowIndex];
       let cellElements = row[column.fieldName];
 
-      console.log("               >>>> cell: \n" + JSON.stringify(item));
+      console.log("               >>>> cell: \n" + JSON.stringify(cellElements));
 
-      return (<span style={txtAlign}>
-        {item}
-      </span>);
+      return (
+        <span style={txtAlign}>
+          {cellElements}
+        </span>);
     }
   }
 
