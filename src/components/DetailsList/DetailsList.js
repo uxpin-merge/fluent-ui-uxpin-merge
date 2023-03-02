@@ -379,7 +379,7 @@ class DetailsList extends React.Component {
         isSortedDescending: false,
         headerClassName: this.getColumnClasses(index),
         onColumnClick: () => this.onColumnClick(columnNameText + suffix),
-        //onRender: (item, rowIndex, column) => this._onRenderCell(item, rowIndex, column),
+        onRender: (item, rowIndex, column) => this._onRenderCell(item, rowIndex, column),
         isMultiline: true,
         className: {
           textAlign: txtAlign,
