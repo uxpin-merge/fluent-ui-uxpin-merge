@@ -433,21 +433,18 @@ class DetailsList extends React.Component {
 
           console.log("   >>> Cell parsedValue " + JSON.stringify(parsedValue));
 
-          for (let i = 0; i < parsedValue.length; i++) {
-            let el = parsedValue[i];
-
-            if (el.type !== 'compound') {
-              let cellItem = this._getUIElement(el, i);
-              parsedRowElements.push(cellItem);
-            }
-            else {
-              //Else it's a 'compound' array of elements
-              el.value.map((subElement, k) => {
-                let cellItem = this._getUIElement(subElement);
-                parsedRowElements.push(cellItem);
-              });
-            }
+          if (parsedValue.type !== 'compound') {
+            let cellItem = this._getUIElement(parsedValue, i);
+            parsedRowElements.push(cellItem);
           }
+          else {
+            //Else it's a 'compound' array of elements
+            parsedValue.value.map((subElement, k) => {
+              let cellItem = this._getUIElement(subElement);
+              parsedRowElements.push(cellItem);
+            });
+          }
+
 
           // parsedValue.forEach((el, i) => {
 
