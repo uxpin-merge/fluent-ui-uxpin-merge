@@ -430,8 +430,8 @@ class DetailsList extends React.Component {
             });
           }
 
-          r[column.uxpIndex || ''] = parsedCellElements;
-          // r[column.fieldName || ''] = parsedCellElements;
+          //r[column.uxpIndex || ''] = parsedCellElements;
+          r[column.fieldName || ''] = parsedCellElements;
         }
       });
 
@@ -489,16 +489,13 @@ class DetailsList extends React.Component {
   }
 
   _onRenderCell(item, rowIndex, column) {
-    //determine center or right justify
-
-
-
     let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
     let txtAlign = { textAlign: column.className.textAlign }
     console.log("_onRenderCell. id: " + id);
 
     if (rowIndex < this.state.rows.length) {
-      let cellElements = this.state.rows[rowIndex][column.uxpIndex];
+      let row = this.state.rows[rowIndex];
+      let cellElements = row[column.fieldName];
 
       console.log("               >>>> cell: \n" + JSON.stringify(cellElements));
 
