@@ -407,24 +407,15 @@ class DetailsList extends React.Component {
   }
 
   setRows(callback) {
-
-    console.log("entering setRows");
-
     let rows = [];
 
     UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
-
-      console.log("parseMultipleRowsCSV > rowIndex: " + rowIndex);
-
       let r = {
         key: rowIndex,
       };
 
       this.state.columns.map((column, colInd) => {
         if (row[colInd]) {
-
-          console.log("   parsing cell: " + colInd);
-
           let rawCellContents = row[colInd].trim();
 
           //Parse one cell at a time
@@ -451,8 +442,6 @@ class DetailsList extends React.Component {
 
       rows.push(r);
     });
-
-    console.log("   Finished parsing the rows.");
 
     this.setState({
       rows: rows,
@@ -589,11 +578,11 @@ class DetailsList extends React.Component {
               items={this.state.rows}
               selectionMode={SelectionMode.none}
               constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-              onRenderRow={(props, defaultRender) => (
-                <>
-                  {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-                </>
-              )}
+              // onRenderRow={(props, defaultRender) => (
+              //   <>
+              //     {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+              //   </>
+              // )}
               isHeaderVisible={this.props.header}
             />
           </div>
