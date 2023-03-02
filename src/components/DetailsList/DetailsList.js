@@ -413,25 +413,16 @@ class DetailsList extends React.Component {
 
     UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
 
-      console.log("   parseMultipleRowsCSV map > rowIndex: " + rowIndex + ". Row contents: " + JSON.stringify(row));
-
       let r = {
         key: rowIndex,
       };
 
       this.state.columns.map((column, colInd) => {
-
-        console.log("   Looking for contents of column " + colInd);
-
         if (row[colInd]) {
           let value = row[colInd].trim();
 
-          console.log("   >>> Cell contents " + value);
-
           let parsedValue = UXPinParser.parseRow(value, column);
           let parsedRowElements = [];
-
-          console.log("   >>> Cell parsedValue " + JSON.stringify(parsedValue));
 
           if (parsedValue.type !== 'compound') {
             let cellItem = this._getUIElement(parsedValue, i);
@@ -445,125 +436,23 @@ class DetailsList extends React.Component {
             });
           }
 
-
-          // parsedValue.forEach((el, i) => {
-
-          //   if (el.type !== 'compound') {
-          //     let cellItem = this._getUIElement(el, i);
-          //     parsedRowElements.push(cellItem);
-          //   }
-          //   else {
-          //     //Else it's a 'compound' array of elements
-          //     el.value.map((subElement, k) => {
-          //       let cellItem = this._getUIElement(subElement);
-          //       parsedRowElements.push(cellItem);
-          //     });
-          //   }
-          // });
-
           r[column.fieldName] = parsedRowElements;
         }
       });
 
-      console.log("   >>>>> ROW  " + JSON.stringify(r));
-
       rows.push(r);
     });
 
-    // let rawRows = this.props.items?.split("\n");
-
-    // if (rawRows && rawRows.length > 0) {
-    //   rawRows.forEach((rawRowString, index) => {
-
-    //     //This is a hashtable, not an array
-    //     let rowElements = {
-    //       key: index,
-    //     }
-
-    //     console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
-    //     let cellList = UXPinParser.parseRowCSV(rawRowString);
-
-    //     //Let's parse the cells by column 
-    //     this.state.columns.forEach((column, colInd) => {
-
-    //       //Parse the contents of the cell at that column index
-    //       if (cellList[colInd]) {
-    //         let cellContents = cellList[colInd];
-
-    //         if (cellContents.type !== "compound") {
-
-    //           console.log("       *** " + column.fieldName + ". It's a singular token: " + cellContents?.text)
-
-    //           let cell = this._getUIElement(cellContents);
-
-    //           rowElements[column.fieldName] = cell;
-    //         }
-    //         else if (cellContents.type === "compound") {
-    //           // If type compound, map the item values
-    //           let elements = cellContents.value.map(
-    //             (subItem) => {
-
-    //               console.log("       *** " + column.fieldName + ". It's a 'compound' token: " + cellContents?.length)
-
-    //               // Second map of parsedOutput.value to seperate each object of links, icons, and text
-    //               return this._getUIElement(subItem);
-    //             }
-    //           )
-
-    //           rowElements[column.fieldName] = elements;
-    //         } //if compound
-
-    //       } //if cellList
-    //     }); //forEach column
-
-    //     console.log("   >>> Pushing row: " + rowElements.toString());
-
-    //     rows.push(rowElements);
-
-    //   }) //foreach rawRows
-    // } // if rawRows
-
-    // console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
-    // return rows;
   }
 
   setRows(callback) {
 
     console.log("entering setRows");
-    //let rows = [];
 
     //Testing...
     let newRows = this._setRowsNew();
 
     console.log("   Finished parsing the rows.");
-
-    //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
-
-    // csv2arr(this.props.items).forEach((row, rowIndex) => {
-    //   let r = {
-    //     key: rowIndex,
-    //   }
-    //   this.state.columns.forEach((column, colInd) => {
-    //     if (row[colInd]) {
-    //       const value = row[colInd].trim()
-    //       let name = getTokens(value).mixed ? getTokens(value).mixed
-    //         .map((el, i) => typeof el === 'string' ?
-    //           <span key={i}> {el} </span> :
-    //           el.suggestions[0])
-    //         :
-    //         getTokens(value).text
-
-    //       r[column.fieldName] = name
-    //       //r[column.fieldName] = name
-
-    //       console.log("    ### legacy R column: " + JSON.stringify(name));
-    //     }
-
-    //   })
-
-    //   console.log("    ### legacy R: " + r.toString());
-    //   rows.push(r);
-    // });
 
     this.setState({
       rows: newRows,
