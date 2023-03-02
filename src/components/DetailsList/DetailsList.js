@@ -147,6 +147,8 @@ class DetailsList extends React.Component {
     let columnWidths = [];
     let cWidths = colWidths?.split('\n');
 
+    console.log("parseColumnWidths > cWidths.length: " + cWidths.length);
+
     for (let i = 0; i < cWidths.length; i++) {
       let wItem = cWidths[i];
 
@@ -195,7 +197,7 @@ class DetailsList extends React.Component {
   }
 
   getColWidthFlexInfo(text) {
-    if (text?.length) {
+    if (text) {
       let normalizedText = text.toLowerCase().replace(/[\W_]+/g, "");
 
       if (normalizedText.startsWith("flex")) {
@@ -333,6 +335,8 @@ class DetailsList extends React.Component {
     let columnHeadings = [];
     let colItems = this.props.columns?.split('\n');
 
+    console.log("setColumns > colItems.length: " + colItems.length);
+
     for (let index = 0; index < colItems.length; index++) {
 
       let columnNameText = colItems[index]?.trim() || ' ';
@@ -349,6 +353,8 @@ class DetailsList extends React.Component {
         maxWidth: 0,
         flexGrow: 0,
       };
+
+      console.log("setColumns > this.state.columnWidths.length: " + this.state.columnWidths.length);
 
       if (index < this.state.columnWidths.length) {
         colWidthInfo = this.state.columnWidths[index];
