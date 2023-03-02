@@ -490,7 +490,7 @@ class DetailsList extends React.Component {
 
   _onRenderCell(item, rowIndex, column) {
     let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
-    let txtAlign = { textAlign: column.className.textAlign }
+    let txtAlign = { textAlign: column.className.textAlign };
     console.log("_onRenderCell. id: " + id);
 
     if (rowIndex < this.state.rows.length) {
@@ -499,10 +499,7 @@ class DetailsList extends React.Component {
 
       console.log("               >>>> cell: \n" + JSON.stringify(cellElements));
 
-      return (
-        <span style={txtAlign}>
-          {cellElements}
-        </span>);
+      return this._getCellContents(cellElements);
 
       // return (
       //   <span style={txtAlign}>
@@ -511,6 +508,15 @@ class DetailsList extends React.Component {
       //     })}
       //   </span>);
     }
+  }
+
+  _getCellContents(contents) {
+    return (
+      <span>
+        {contents.map(token => {
+          return ({ token });
+        })}
+      </span>);
   }
 
   render() {
