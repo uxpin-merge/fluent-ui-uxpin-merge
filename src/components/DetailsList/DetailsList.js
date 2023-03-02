@@ -374,6 +374,7 @@ class DetailsList extends React.Component {
         isSortedDescending: false,
         headerClassName: this.getColumnClasses(index),
         onColumnClick: () => this.onColumnClick(columnNameText + suffix),
+        onRender: (item, rowIndex, column) => this._onRenderCell(item, rowIndex, column),
         isMultiline: true,
         className: '',
       };
@@ -504,6 +505,13 @@ class DetailsList extends React.Component {
     // return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
     //   <Icon iconName={name} size={size} color={color} />
     // </span >)
+  }
+
+  _onRenderCell(item, rowIndex, column) {
+    //determine center or right justify
+    console.log("_onRenderCell. align: " + column.className.textAlign);
+    let id = "ROW" + rowIndex;
+    return (<span>{id} {item}</span>);
   }
 
   render() {
