@@ -415,6 +415,8 @@ class DetailsList extends React.Component {
 
     UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
 
+      console.log("parseMultipleRowsCSV > rowIndex: " + rowIndex);
+
       let r = {
         key: rowIndex,
       };
