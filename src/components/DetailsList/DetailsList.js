@@ -504,7 +504,7 @@ class DetailsList extends React.Component {
     if (rowIndex < this.state.rows.length) {
       let cellElements = this.state.rows[rowIndex][column.uxpIndex];
 
-      console.log("               >>>> cell: \n" + cell);
+      console.log("               >>>> cell: \n" + JSON.stringify(cellElements));
 
       return (
         <span style={txtAlign}>
