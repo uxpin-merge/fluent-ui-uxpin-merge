@@ -504,7 +504,7 @@ class DetailsList extends React.Component {
 
       console.log("               >>>> cell: \n" + JSON.stringify(renderContents));
 
-      return (<span style={txtAlign}>{renderContents}</span>);
+      return (<span style={txtAlign}>{cell}</span>);
     }
   }
 
