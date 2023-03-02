@@ -51,7 +51,7 @@ const commandBarTokens = {
   padding: 0,
 };
 
-const classNames = mergeStyleSets({
+const classNames = {
   textContainer: {
     color: "#000",
   },
@@ -73,7 +73,7 @@ const classNames = mergeStyleSets({
       marginLeft: '5px',
     },
   },
-});
+};
 
 
 
