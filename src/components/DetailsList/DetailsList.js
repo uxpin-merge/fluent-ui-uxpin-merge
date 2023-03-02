@@ -362,7 +362,12 @@ class DetailsList extends React.Component {
         }
       }
 
+      let txtAlign = this.state.alignRight.includes(index + 1) ? 'right' :
+        this.state.alignCenter.includes(index + 1) ? 'center' :
+          'left';
+
       let columnParams = {
+        uxpIndex: index,                    //For proprietary tracking
         key: columnNameText + suffix,
         name: colNameTxt,
         fieldName: colNameTxt,
@@ -376,20 +381,10 @@ class DetailsList extends React.Component {
         onColumnClick: () => this.onColumnClick(columnNameText + suffix),
         onRender: (item, rowIndex, column) => this._onRenderCell(item, rowIndex, column),
         isMultiline: true,
-        className: '',
+        className: {
+          textAlign: txtAlign,
+        },
       };
-
-      if (this.state.alignRight.includes(index + 1)) {
-        columnParams.className = {
-          textAlign: 'right',
-        };
-      }
-
-      if (this.state.alignCenter.includes(index + 1)) {
-        columnParams.className = {
-          textAlign: 'center',
-        };
-      }
 
       if (iconName) {
         columnParams.iconName = iconName;
@@ -510,8 +505,12 @@ class DetailsList extends React.Component {
   _onRenderCell(item, rowIndex, column) {
     //determine center or right justify
     console.log("_onRenderCell. align: " + column.className.textAlign);
-    let id = "ROW" + rowIndex;
-    return (<span>{id} {item}</span>);
+    console.log("               item: " + JSON.stringify(item));
+
+    let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
+    let txtAlign = { textAlign: column.className.textAlign }
+
+    return (<span style={txtAlign}>{id}</span>);
   }
 
   render() {
