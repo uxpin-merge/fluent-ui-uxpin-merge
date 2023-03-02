@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode, mergeStyleSets } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 import { Text } from '../Text/Text';
 import { Link } from '../Link/Link';
@@ -435,21 +434,16 @@ class DetailsList extends React.Component {
           if (parsedCell.type !== 'compound') {
             let cellItem = this._getUIElement(parsedCell, i);
             parsedCellElements.push(cellItem);
-
-            console.log("   >> cell simple object: " + JSON.stringify(cellItem));
-
           }
           else {
             //Else it's a 'compound' array of elements
             parsedCell.value.map((subElement, k) => {
               let cellItem = this._getUIElement(subElement);
               parsedCellElements.push(cellItem);
-
-              console.log("   >> cell multi object: " + JSON.stringify(cellItem));
             });
           }
 
-          r[column.fieldName] = parsedCellElements;
+          r[column.fieldName || ''] = parsedCellElements;
         }
       });
 
@@ -460,12 +454,11 @@ class DetailsList extends React.Component {
 
     this.setState({
       rows: rows,
-      allItems: rows,
+      //allItems: rows,
     }, callback);
   }
 
   _getUIElement(item) {
-
     let key = _.uniqueId("e_");
 
     if (item) {
