@@ -501,10 +501,15 @@ class DetailsList extends React.Component {
 
       return (
         <span style={txtAlign}>
-          {cellElements.map(cellEl => {
-            return ({ cellEl });
-          })}
+          {cellElements}
         </span>);
+
+      // return (
+      //   <span style={txtAlign}>
+      //     {cellElements.map(cellEl => {
+      //       return ({ cellEl });
+      //     })}
+      //   </span>);
     }
   }
 
