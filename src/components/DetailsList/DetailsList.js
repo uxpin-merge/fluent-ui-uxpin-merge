@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyleSets } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
@@ -50,7 +50,7 @@ const commandBarTokens = {
   padding: 0,
 };
 
-const classNames = {
+const classNames = mergeStyleSets({
   textContainer: {
     color: "#000",
   },
@@ -72,7 +72,7 @@ const classNames = {
       marginLeft: '5px',
     },
   },
-};
+});
 
 
 
