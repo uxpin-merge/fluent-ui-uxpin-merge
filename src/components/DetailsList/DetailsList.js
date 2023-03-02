@@ -490,11 +490,12 @@ class DetailsList extends React.Component {
 
   _onRenderCell(item, rowIndex, column) {
     //determine center or right justify
-    console.log("_onRenderCell. align: " + column.className.textAlign);
+
 
 
     let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
     let txtAlign = { textAlign: column.className.textAlign }
+    console.log("_onRenderCell. id: " + id);
 
     if (rowIndex < this.state.rows.length) {
       let cellElements = this.state.rows[rowIndex][column.uxpIndex];
