@@ -433,8 +433,8 @@ class DetailsList extends React.Component {
 
           if (parsedCell.type !== 'compound') {
             let cellItem = this._getUIElement(parsedCell);
-            //parsedCellElements.push(cellItem);
-            parsedCellElements.push("foo " + colInd);
+            parsedCellElements.push(cellItem);
+            //parsedCellElements.push("foo " + colInd);
           }
           else {
             //Else it's a 'compound' array of elements
