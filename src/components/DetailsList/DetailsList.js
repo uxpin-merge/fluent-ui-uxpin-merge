@@ -473,21 +473,28 @@ class DetailsList extends React.Component {
   _getTextElement(key, text) {
     //Test for an empty cell item
     let txt = text === emptyHeaderText1 ? "" : text;
-    return (<span key={key} >
-      <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
-    </span>);
+    return txt;
+    // return (<span key={key} >
+    //   <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
+    // </span>);
   }
 
   _getLinkElement(key, text, href) {
-    return (
-      <span key={key} className={'linkContainer ' + classNames.linkContainer}>
-        <Link
-          value={text}
-          linkHref={href ? href : ""}
-          size={dataTextSize}
-          bold={false}
-          italic={false} />
-      </span>);
+    return (<Link
+      value={text}
+      linkHref={href ? href : ""}
+      size={dataTextSize}
+      bold={false}
+      italic={false} />);
+    // return (
+    //   <span key={key} className={'linkContainer ' + classNames.linkContainer}>
+    //     <Link
+    //       value={text}
+    //       linkHref={href ? href : ""}
+    //       size={dataTextSize}
+    //       bold={false}
+    //       italic={false} />
+    //   </span>);
   }
 
   _getIconElement(key, iconName, colorToken) {
@@ -498,9 +505,11 @@ class DetailsList extends React.Component {
       color = defaultTextColor;
     }
 
-    return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
-      <Icon iconName={name} size={size} color={color} />
-    </span >)
+    return (
+      <Icon iconName={name} size={size} color={color} />)
+    // return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
+    //   <Icon iconName={name} size={size} color={color} />
+    // </span >)
   }
 
   render() {
