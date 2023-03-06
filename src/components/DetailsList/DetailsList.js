@@ -381,8 +381,7 @@ class DetailsList extends React.Component {
         isSorted: false,
         isSortedDescending: false,
         headerClassName: this.getColumnClasses(index),
-        onColumnClick: () => this.onColumnClick(columnNameText + suffix),
-        // onRender: (item, rowIndex, column) => this._onRenderCell(rowIndex, column),
+        onColumnClick: () => this.onColumnClick("column" + index),
         isMultiline: true,
         className: {
           textAlign: txtAlign,
@@ -448,7 +447,7 @@ class DetailsList extends React.Component {
   }
 
   _getUIElement(item) {
-    let key = _.uniqueId("e_");
+    let key = _.uniqueId("__el__");
 
     if (item) {
       return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
