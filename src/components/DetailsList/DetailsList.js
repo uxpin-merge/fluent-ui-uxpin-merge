@@ -324,7 +324,8 @@ class DetailsList extends React.Component {
         newCol.isSortedDescending = true;
       }
     })
-    const newRows = this.sortColumns(rows, currColumn.fieldName, currColumn.isSortedDescending);
+    //currColumn.fieldName
+    const newRows = this.sortColumns(rows, currColumn.key, currColumn.isSortedDescending);
     this.setState({
       columns: newColumns,
       rows: newRows
