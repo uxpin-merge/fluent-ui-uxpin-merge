@@ -5,6 +5,7 @@ import {
   PivotItem
 } from '@fluentui/react/lib/Pivot';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 
