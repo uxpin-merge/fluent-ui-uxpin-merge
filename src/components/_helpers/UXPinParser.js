@@ -1,3 +1,4 @@
+import { inputProperties } from "@fluentui/react";
 import { UxpColors } from "./uxpcolorutils";
 
 /**
@@ -222,10 +223,12 @@ function getFurtherArgs(inputStr) {
 
   if (args && args.length > 0) {
     args = args[0].split(',').map(output => output.trim());
+
+    // E.g. [bar, red-600]
+    return args;
   }
 
-  // E.g. [bar, red-600]
-  return args;
+  return undefined;
 }
 
 /**
@@ -276,6 +279,8 @@ function normalizeIcon(inputStr) {
  */
 function makeToken(inputStr, type, order) {
   let token = {};
+
+  console.log("makeToken, type: " + type + ", contents: " + JSON.stringify(inputStr));
 
   switch (type) {
     case "icon":
