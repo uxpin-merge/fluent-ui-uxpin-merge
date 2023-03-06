@@ -95,6 +95,11 @@ export const UxpMenuUtils = {
 
                if (parsedItems && parsedItems.length > 0) {
                   let pItem = parsedItems[0];
+
+
+                  console.log("parse simple pItem: " + JSON.stringify(pItem));
+
+
                   let trimmedText = pItem?.text?.trim();
 
                   if (pItem && trimmedText) {
