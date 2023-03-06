@@ -46,7 +46,10 @@ class Link extends React.Component {
 
 
     render() {
-        const linkTarget = "_UXPin Mockup";
+        let linkTarget = "_UXPin Mockup";
+        if (this.state.theHref && this.state.theHref.includes("preview.uxpin.com")) {
+            linkTarget = undefined;
+        }
 
         let linkTextStyles = {
             root: {

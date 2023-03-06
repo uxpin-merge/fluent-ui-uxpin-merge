@@ -1,17 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode } from '@fluentui/react/';
+import { Icon, Link, ConstrainMode, SelectionMode, mergeStyleSets } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { getTokens, csv2arr } from '../_helpers/parser';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import { Text } from '../Text/Text';
-import { Link } from '../Link/Link';
-import { Icon } from '@fluentui/react/lib/Icon';
-
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
 const searchFieldWidth = 400;
@@ -21,19 +17,10 @@ const searchFieldMarginBottom = '24px';
 
 const dataTextSize = "smallPlus";
 const defaultTextColor = "#000";
-
 const headerBackgroundColor = 'neutralLighterAlt';
+const linkTarget = "_UXPin Mockup";
 
-//Use this in the default props below.
-const defaultColumnValues = `Column A, Column B, Column C, Column D, Actions`;
-
-const defaultRowValues =
-  `link(Component_Name_A|google.com), icon(SkypeCircleCheck|success) Ready, C-1, D-1, icon(MoreVertical|themePrimary)
-link(Component_Name_B|www.uxpin.com), icon(WarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
-link(Component_Name_C|http://amazon.com), icon(StatusErrorFull|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
-
-const defaultShimmerDuration = 1;
-const defaultShimmerLines = 3;
+const emptyHeaderText1 = "----";
 
 const iconSizeMap = {
   tiny: 10,
@@ -46,6 +33,48 @@ const iconSizeMap = {
   xLarge: 22,
   xxLarge: 32,
   mega: 64,
+};
+
+//A StackItem that will spring to fill available space.
+const spanner = (
+  <StackItem grow={1}>
+    <span />
+  </StackItem>
+);
+
+const commandBarTokens = {
+  childrenGap: 6,
+  padding: 0,
+};
+
+const classNames = mergeStyleSets({
+  textContainer: {
+    color: "#000",
+  },
+  linkContainer: {
+    '& div,a,button,span': {
+      display: 'inline !important',
+    },
+    '& + .linkContainer': {
+      marginLeft: '5px',
+    },
+  },
+  iconContainer: {
+    verticalAlign: 'middle',
+    alignItems: 'center',
+    '& .ms-Icon': {
+      display: 'inline',
+    },
+    '& + .iconContainer': {
+      marginLeft: '5px',
+    },
+  },
+});
+
+let spanStyle = {
+  display: 'inline-block',
+  marginLeft: '5px',
+  verticalAlign: 'middle',
 };
 
 
@@ -62,20 +91,22 @@ class DetailsList extends React.Component {
       columns: [],
       rows: [],
       allItems: [],
+      columnWidths: [],
       alignRight: [],
       alignCenter: [],
-      // searchBoxValue: '',
     };
   }
 
   set() {
+    let colWidths = this.parseColumnWidths(this.props.widths);
     let alignRightCols = UxpNumberParser.parseInts(this.props.alignRight);
     let alignCenterCols = UxpNumberParser.parseInts(this.props.alignCenter);
 
     this.setState(
       {
-        alignRight: alignRightCols ? alignRightCols : '',
-        alignCenter: alignCenterCols ? alignCenterCols : '',
+        columnWidths: colWidths,
+        alignRight: alignRightCols ? alignRightCols : [],
+        alignCenter: alignCenterCols ? alignCenterCols : [],
         shimmer: this.props.shimmer
       },
       () => this.setColumns(this.setRows)
@@ -91,7 +122,6 @@ class DetailsList extends React.Component {
         (this.props.shimmerDuration || defaultShimmerDuration) * 1000
       )
     }
-
   }
 
   componentDidMount() {
@@ -105,7 +135,7 @@ class DetailsList extends React.Component {
       prevProps.columns !== this.props.columns ||
       prevProps.items !== this.props.items ||
       prevProps.minWidth !== this.props.minWidth ||
-      prevProps.maxWidth !== this.props.maxWidth ||
+      prevProps.widths !== this.props.widths ||
       prevProps.shimmer !== this.props.shimmer ||
       prevProps.shimmerDuration !== this.props.shimmerDuration ||
       prevProps.shimmerLines !== this.props.shimmerLines
@@ -114,6 +144,78 @@ class DetailsList extends React.Component {
     }
   }
 
+  parseColumnWidths(colWidths) {
+    let mWidth = this.props.minWidth;
+    let columnWidths = [];
+    let cWidths = colWidths?.split('\n');
+
+    for (let i = 0; i < cWidths.length; i++) {
+      let wItem = cWidths[i];
+
+      let min = mWidth;
+      let max = 0;
+      let flex = this.getColWidthFlexInfo(wItem);
+
+      //Did the user specify a min AND a max?
+      if (wItem.includes("|")) {
+        //Min Width on left, and Max Width on Right
+        let right = '', left = '';
+        let splitStr = wItem.split('|');
+
+        left = splitStr[0];
+        if (splitStr[1]) {
+          right = splitStr[1];
+        }
+
+        let leftNum = parseInt(left?.trim());
+        if (!isNaN(leftNum)) {
+          min = leftNum;
+        }
+
+        let rightNum = parseInt(right?.trim());
+        if (!isNaN(rightNum)) {
+          max = rightNum;
+        }
+      }
+      else {
+        //Did the user specify a default width? 
+        let maxNum = parseInt(wItem?.trim());
+        if (!isNaN(maxNum)) {
+          max = maxNum;
+        }
+      }
+
+      columnWidths.push({
+        index: i,
+        minWidth: min,
+        maxWidth: max,
+        flexGrow: flex,
+      });
+    } //for loop
+
+    return columnWidths;
+  }
+
+  getColWidthFlexInfo(text) {
+    if (text) {
+      let normalizedText = text.toLowerCase().replace(/[\W_]+/g, "");
+
+      if (normalizedText.startsWith("flex")) {
+        if (normalizedText === "flex") {
+          return 1;
+        }
+        else {
+          let flexText = normalizedText.replace("flex", "");
+          let flexNum = parseInt(flexText);
+          if (!isNaN(flexNum)) {
+            return flexNum;
+          }
+        }
+      }
+    }
+
+    return 0;
+  };
 
   getColumnClasses(colIndex) {
 
@@ -157,6 +259,8 @@ class DetailsList extends React.Component {
    */
   getTextContent(elem) {
 
+    //console.log("getTextContent " + JSON.stringify(elem));
+
     return elem.reduce((_text, part) => {
       const children = part.props.children;
       if (children) {
@@ -194,18 +298,12 @@ class DetailsList extends React.Component {
   }
 
   searchTable(queryStr) {
-
     let inputValue = queryStr.trim();
 
     let filteredRows = this.searchText(inputValue);
     this.setState({
       rows: filteredRows,
     });
-
-    // //Raise this event to UXPin.
-    // if (this.props.onSBChange) {
-    //   this.props.onSBChange(inputValue);
-    // }
   }
 
   onSearchClear() {
@@ -228,7 +326,8 @@ class DetailsList extends React.Component {
         newCol.isSortedDescending = true;
       }
     })
-    const newRows = this.sortColumns(rows, currColumn.fieldName, currColumn.isSortedDescending);
+    //currColumn.fieldName
+    const newRows = this.sortColumns(rows, currColumn.key, currColumn.isSortedDescending);
     this.setState({
       columns: newColumns,
       rows: newRows
@@ -236,206 +335,173 @@ class DetailsList extends React.Component {
   }
 
   setColumns(callback) {
+    let columnHeadings = [];
+    let colItems = this.props.columns?.split('\n');
 
-    var columnList = [];
-    if (this.props.columns) {
-      columnList = csv2arr(this.props.columns)
-        .flat()
-        .map((columnName, colIndex) => {
-          columnName = columnName.trim()
+    for (let index = 0; index < colItems.length; index++) {
 
-          let name = getTokens(columnName).mixed
-            .map((el, i) => typeof el === 'string' ?
-              <span key={i}> {el} </span>
-              : el.suggestions[0])
+      let columnNameText = colItems[index]?.trim() || ' ';
 
-          console.log("Setting column " + colIndex + " columnName: '" + columnName + "' and name: " + name.toString());
+      let suffix = _.uniqueId('_k_');
 
-          const columnParams = {
-            key: columnName,
-            //key: _.uniqueId('columnName_'), //AH
-            name,
-            fieldName: columnName,
-            isResizable: true,
-            minWidth: this.props.minWidth,
-            //maxWidth: this.props.maxWidth,   //AH
-            isSorted: false,
-            isSortedDescending: false,
-            isMultiline: true,
-            onColumnClick: () => this.onColumnClick(columnName),
-            headerClassName: this.getColumnClasses(colIndex),
-          }
+      //Figure out if the column's header should be empty
+      let colNameTxt = columnNameText.toLowerCase() === emptyHeaderText1 ? ' ' : columnNameText;
 
-          let adjustedIndex = colIndex + 1;
+      //Can we access the widths? 
+      let colWidthInfo = {
+        index: index,
+        minWidth: this.props.minWidth,
+        maxWidth: 0,
+        flexGrow: 0,
+      };
 
-          if (this.state.alignRight.includes(adjustedIndex)) {
-            columnParams.styles = {
-              textAlign: 'right',
-            };
-          }
+      if (index < this.state.columnWidths.length) {
+        colWidthInfo = this.state.columnWidths[index];
+      };
 
-          if (this.state.alignCenter.includes(adjustedIndex)) {
-            columnParams.styles = {
-              textAlign: 'center',
-            };
-          }
+      let iconName = "";
+      if (colNameTxt.includes("icon(")) {
+        let propsList = UxpMenuUtils.parseSimpleListText(colNameTxt, true, false);
+        if (propsList) {
+          iconName = propsList[0].iconProps.iconName;
+          colNameTxt = propsList[0].text ? propsList[0].text : " ";
+        }
+      }
 
-          return columnParams
-        });
+      let txtAlign = this.state.alignRight.includes(index + 1) ? 'right' :
+        this.state.alignCenter.includes(index + 1) ? 'center' :
+          'left';
+
+      let columnParams = {
+        uxpIndex: index,                    //For proprietary tracking
+        key: "column" + index,
+        name: colNameTxt,
+        fieldName: colNameTxt,
+        flexGrow: colWidthInfo.flexGrow,
+        minWidth: colWidthInfo.minWidth,
+        maxWidth: colWidthInfo.maxWidth,
+        isResizable: true,
+        isSorted: false,
+        isSortedDescending: false,
+        headerClassName: this.getColumnClasses(index),
+        onColumnClick: () => this.onColumnClick("column" + index),
+        isMultiline: true,
+        className: {
+          textAlign: txtAlign,
+        },
+      };
+
+      //console.log("Column key: " + columnParams.key);
+
+      if (iconName) {
+        columnParams.iconName = iconName;
+        columnParams.iconClassName = {
+          marginRight: '6px',
+          color: "#000",
+        };
+      }
+
+      columnHeadings.push(columnParams);
     }
 
     this.setState({
-      columns: columnList,
-    }, callback)
+      columns: columnHeadings,
+    }, callback);
   }
-
-  //Should take callback as param
-  _setRowsNew() {
-    let rows = [];
-
-    let rawRows = this.props.items?.split("\n");
-
-    if (rawRows && rawRows.length > 0) {
-      rawRows.forEach((rawRowString, index) => {
-
-        //This is a hashtable, not an array
-        let rowElements = {
-          key: index,
-        }
-
-        console.log("\n\nRow contents (" + index + "): " + rawRowString.toString());
-        let cellList = UXPinParser.parse(rawRowString, index);
-
-        //Let's parse the cells by column 
-        this.state.columns.forEach((column, colInd) => {
-
-          //Parse the contents of the cell at that column index
-          if (cellList[colInd]) {
-            let cellContents = cellList[colInd];
-
-            if (cellContents.type !== "compound") {
-
-              console.log("       *** " + column.fieldName + ". It's a singular token: " + cellContents?.text)
-
-              let cell = this._getUIElement(cellContents);
-
-              rowElements[column.fieldName] = cell;
-            }
-            else if (cellContents.type === "compound") {
-              // If type compound, map the item values
-              let elements = cellContents.value.map(
-                (subItem) => {
-
-                  console.log("       *** " + column.fieldName + ". It's a 'compound' token: " + cellContents?.length)
-
-                  // Second map of parsedOutput.value to seperate each object of links, icons, and text
-                  return this._getUIElement(subItem);
-                }
-              )
-
-              rowElements[column.fieldName] = elements;
-            } //if compound
-
-          } //if cellList
-        }); //forEach column
-
-        console.log("   >>> Pushing row: " + rowElements.toString());
-
-        rows.push(rowElements);
-
-      }) //foreach rawRows
-    } // if rawRows
-
-    console.log("   ^^^ Exiting set Rows. Found this many rows: " + rows.length);
-    return rows;
-  }
-
-
-
 
   setRows(callback) {
     let rows = [];
 
-    //Testing...
-    let newRows = this._setRowsNew();
-
-    //console.log("Raw input: Testing parse(items): \n" + UXPinParser.parse(this.props.items));
-
-    csv2arr(this.props.items).forEach((row, rowIndex) => {
+    UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
       let r = {
         key: rowIndex,
-      }
-      this.state.columns.forEach((column, colInd) => {
+      };
+
+      this.state.columns.map((column, colInd) => {
         if (row[colInd]) {
-          const value = row[colInd].trim()
-          let name = getTokens(value).mixed ? getTokens(value).mixed
-            .map((el, i) => typeof el === 'string' ?
-              <span key={i}> {el} </span> :
-              el.suggestions[0])
-            :
-            getTokens(value).text
+          let rawCellContents = row[colInd].trim();
 
-          r[column.fieldName] = name
-          //r[column.fieldName] = name
+          //Parse one cell at a time
+          let parsedCell = UXPinParser.parseRow(rawCellContents, column);
+          let parsedCellElements = [];
 
-          console.log("    ### legacy R column: " + JSON.stringify(name));
+          if (parsedCell.type !== 'compound') {
+            let cellItem = this._getUIElement(parsedCell[0]);
+            parsedCellElements.push(cellItem);
+          }
+          else {
+            //Else it's a 'compound' array of elements
+            parsedCell.value.map((subElement, k) => {
+              let cellItem = this._getUIElement(subElement);
+              parsedCellElements.push(cellItem);
+            });
+          }
+
+          //r[column.uxpIndex || ''] = parsedCellElements;
+          r[column.fieldName || ''] = parsedCellElements;
         }
+      });
 
-      })
-
-      console.log("    ### legacy R: " + r.toString());
       rows.push(r);
     });
 
-    this.setState({ newRows }, callback);
-    this.setState({ allItems: newRows });
-
-    // this.setState({ rows }, callback);
-    // this.setState({ allItems: rows });
+    this.setState({
+      rows: rows,
+      allItems: rows,
+    }, callback);
   }
 
   _getUIElement(item) {
+    let key = _.uniqueId("__el__");
+
     if (item) {
-      return item.type === "link" ? this._getLinkElement(item?.text, item?.href)
-        : item.type === "icon" ? this._getIconElement(item?.iconName, item.color ? item.color : item?.colorToken)
-          : this._getTextElement(item?.text);
+      return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+          : this._getTextElement(key, item?.text);
     }
   }
 
-  _getTextElement(text) {
-    console.log("   > Text element: " + text);
-    return (<Text textValue={text} size={dataTextSize} />);
+  _getTextElement(key, text) {
+    //Test for an empty cell item
+    let txt = text === emptyHeaderText1 ? "" : text;
+    return (<span key={key} style={spanStyle}> {txt} </span>);
   }
 
-  _getLinkElement(text, href) {
-    console.log("   > Link element: " + text + ", and HREF = " + href);
-    return (<Link value={text} linkHref={href} size={dataTextSize} />);
+  _getLinkElement(key, text, href) {
+    let txt = text ? text : href ? href : '';
+    let target = linkTarget;
+    if (href && href.includes("preview.uxpin.com")) {
+      target = undefined;
+    }
+
+    return (
+      <span key={key} className={'linkContainer ' + classNames.linkContainer} style={spanStyle}>
+        <Link
+          href={href ? href : ""}
+          target={target} >
+          {txt}
+        </Link>
+      </span>);
   }
 
-  _getIconElement(iconName, colorToken) {
-    console.log("   > Icon element: " + iconName + ", color: " + colorToken);
-
-    let key = _.uniqueId('dticn_');
+  _getIconElement(key, iconName, colorToken) {
     let name = iconName ? iconName.trim() : '';
     let size = iconSizeMap[dataTextSize];
     let color = UxpColors.getHexFromHexOrToken(colorToken);
     if (!color) {
       color = defaultTextColor;
     }
-    let iconDisplayClass = {
+
+    const iconDisplayClass = {
       color: color,
       fontSize: size,
       height: size,
       width: size,
-      display: 'inline',
+      display: 'block',
       lineHeight: 'normal',
     };
-    const spanStyle = {
-      verticalAlign: 'middle',
-      alignItems: 'center',
-    }
 
-    return (<span key={key} style={spanStyle}>
+    return (<span key={key} className={'iconContainer ' + classNames.iconContainer} style={spanStyle}>
       <Icon
         iconName={name}
         className={iconDisplayClass}
@@ -444,27 +510,61 @@ class DetailsList extends React.Component {
   }
 
   render() {
+    //****************************
+    //For Inner Stack - CommandBar
+
+    //Set up the StackItems
+    let stackList = [];
+    if (this.props.children) {
+
+      //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
+      let childList = React.Children.toArray(this.props.children);
+
+      //Now, we configure the StackItems
+      if (childList) {
+        for (let i = 0; i < childList.length; i++) {
+          let child = childList[i];
+          let stack = (
+            <StackItem>
+              {child}
+            </StackItem>
+          );
+          stackList.push(stack);
+        } //for loop
+      } //if childList
+    } //If props.children
+
+    let showCommandBar = stackList.length > 0 || this.props.isSearchEnabled;
+
+    //Now, add the spanner
+    stackList.push(spanner);
 
     return (
 
       <Stack>
-
-        {this.props.isSearchEnabled &&
-          <StackItem
-            align="end"
+        {showCommandBar &&
+          <Stack
+            tokens={commandBarTokens}
+            horizontal={true}
+            horizontalAlign={'start'}
+            verticalAlign={'center'}
             styles={{ root: { marginBottom: searchFieldMarginBottom } }}
           >
-            <SearchBox
-              iconProps={{ iconName: this.props.icon.trim() }}
-              placeholder={this.props.placeholder}
-              onChange={(e, v) => { this.searchTable(v) }}
-              onClear={this.onSearchClear}
-              styles={{ root: { width: searchFieldWidth } }}
-            />
-          </StackItem>
+            {stackList}
+            {this.props.isSearchEnabled && (
+              <StackItem>
+                <SearchBox
+                  iconProps={{ iconName: this.props.icon.trim() }}
+                  placeholder={this.props.placeholder}
+                  onChange={(e, v) => { this.searchTable(v) }}
+                  onClear={this.onSearchClear}
+                  styles={{ root: { width: searchFieldWidth } }}
+                />
+              </StackItem>
+            )}
+          </Stack>
         }
         <StackItem>
-
           <div style={{ display: 'block' }} className={
             {
               selectors: {
@@ -481,11 +581,11 @@ class DetailsList extends React.Component {
               items={this.state.rows}
               selectionMode={SelectionMode.none}
               constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
-              onRenderRow={(props, defaultRender) => (
-                <>
-                  {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
-                </>
-              )}
+              // onRenderRow={(props, defaultRender) => (
+              //   <>
+              //     {defaultRender({ ...props, styles: { root: { background: 'white' } } })}
+              //   </>
+              // )}
               isHeaderVisible={this.props.header}
             />
           </div>
@@ -504,6 +604,13 @@ class DetailsList extends React.Component {
 DetailsList.propTypes = {
 
   /**
+   * Don't show this prop in the UXPin Editor. 
+   * @uxpinignoreprop   
+   * @uxpinpropname CommandBar Children
+   */
+  children: PropTypes.node,
+
+  /**
   * @uxpindescription Whether to show the filter SearchBox 
   * @uxpinpropname Show Filter
   */
@@ -514,14 +621,6 @@ DetailsList.propTypes = {
    * @uxpinpropname Search Icon
    * */
   icon: PropTypes.string,
-
-  /**
-   * @uxpindescription Current value of the Search field. This prop's live value is available for scripting.
-   * @uxpinpropname * Search Value
-   * @uxpinbind onSBChange
-   * @uxpincontroltype textfield(2)
-   * */
-  // searchValue: PropTypes.string,
 
   /**
    * @uxpindescription Placeholder text to show in the text field when it's empty
@@ -538,7 +637,9 @@ DetailsList.propTypes = {
   /** 
    *  Separate each item with new line or | symbol.
    *  Put at the end of the line [color:blue-600] token to set color for whole column.
-   * @uxpindescription Enter one column per row. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting.
+   * @uxpindescription Enter one column heading value per row. 
+   * To include a comma within the text, wrap it in quotes. 
+   * To specify an empty heading, leave the field empty or typ in "----" (no quotes).
    * @uxpinpropname Headers
    * @uxpincontroltype codeeditor
    * */
@@ -546,13 +647,34 @@ DetailsList.propTypes = {
 
   /** 
    * 
-   * Separate each row with new line or || symbol.
-   * Icon token icon(Snow|blue-600)
-   * @uxpindescription Enter one row per line. Supports these features: link(Link Text) and icon(Name|color-blue-600). Also supports CSV formatting. 
+   * @uxpindescription Separate each row with a new line. Separate each cell with a comma.
+   * Link syntax: link(Display Text | HREF) 
+   * Icon syntax: icon(IconName | Color_Token or #Hex) 
+   * To specify an empty cell, enter "----" (no quotes).
+   * NOTE: To display text with a comma, wrap the entire cell's contents in double quotes: "$1,234" 
+   * To show an icon plus text with a comma in a cell:  "icon(CashDollar | green-600) $1,234" 
+   * To show a comma within a link, wrap the cell contents in double quotes: "link(Dec 24, 2023, 4:15 pm)"
    * @uxpinpropname Rows
    * @uxpincontroltype codeeditor
    * */
   items: PropTypes.string,
+
+  /**
+  * @uxpindescription Minimum column width  
+  * @uxpinpropname Min Width
+  */
+  minWidth: PropTypes.number,
+
+  /**
+   * @uxpindescription Default Column Widths. Optionally specify default widths for individual columns. 
+   * Leave line blank and the default Min Width will be applied. 
+   * To create a specifically sized column width, enter both a Minimum and Max value as: 24 | 24
+   * Enter "flex" with an optional number, e.g., "flex 2", (no quotes) for a column to proportionally take any remaining available space.
+   * NOTE: The Best Practice is to specify at least one column as "flex" (no quotes). If none is specified, the last column is assigned all remaining horizontal space.
+   * @uxpinpropname Col Widths
+   * @uxpincontroltype codeeditor
+   */
+  widths: PropTypes.string,
 
   /**
   * Example: 2, 3
@@ -567,18 +689,6 @@ DetailsList.propTypes = {
   * @uxpinpropname Align Center
   */
   alignCenter: PropTypes.string,
-
-  /**
-  * @uxpindescription Minimum column width width 
-  * @uxpinpropname Min Width
-  */
-  minWidth: PropTypes.number,
-
-  /**
-  * @uxpindescription Maximum column width width 
-  * @uxpinpropname Max Width
-  */
-  maxWidth: PropTypes.number,
 
   /**
   * @uxpindescription Whether to display the shimmer 
@@ -597,12 +707,6 @@ DetailsList.propTypes = {
   * @uxpinpropname Shimmer Lines
   */
   shimmerLines: PropTypes.number,
-
-  /**
-   * @uxpindescription Fires when the SearchBox's Value property changes.
-   * @uxpinpropname * Search Value Changed
-   * */
-  // onSBChange: PropTypes.func,
 };
 
 
@@ -610,19 +714,19 @@ DetailsList.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 DetailsList.defaultProps = {
-  columns: defaultColumnValues,
-  items: defaultRowValues,
+  columns: '',
+  items: '',
   minWidth: 125,
-  maxWidth: 350,
+  widths: '',
   header: true,
-  alignRight: "5",
-  alignCenter: "3, 4",
+  alignRight: '',
+  alignCenter: '',
   isSearchEnabled: true,
   icon: searchFieldIconName,
   placeholder: searchFieldPlaceholder,
-  shimmer: true,
-  shimmerDuration: defaultShimmerDuration,
-  shimmerLines: defaultShimmerLines
+  shimmer: false,
+  shimmerDuration: 0,
+  shimmerLines: 0
 };
 
 

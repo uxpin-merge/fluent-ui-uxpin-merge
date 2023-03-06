@@ -1,4 +1,4 @@
-
+import { UxpColors } from "./uxpcolorutils";
 
 /**
  * Function to split a CSV input string into an array of rows of CSV strings
@@ -57,6 +57,56 @@ export function split(inputStr) {
 };
 
 /**
+ * 
+ * @param inputStr Splits a raw input string by line breaks first. Then, for each row, parses the row for CSV blocks ot fext. 
+ * @returns An array of arrays of strings. Each row's contents are contained in its own array of strings representing each block.
+ */
+export function parseMultipleRowsCSV(inputStr) {
+
+  let contents = [];
+
+  //Split rows by new line
+  let rows = inputStr.match(/[^\r\n]+/g) || [];
+
+  if (rows && rows.length > 0) {
+    for (var i = 0; i < rows.length; i++) {
+      let row = parseRowCSV(rows[i]);
+
+      if (row.length) {
+        contents.push(row);
+      }
+    }
+  }
+
+  return contents;
+}
+
+/**
+ * 
+ * @param inputStr CSV with commas separating distinct blocks. This would be 3 blocks: "str, str str str, str"
+ * @returns An array of strings representing each block.
+ * @example "one, two, "  three  "" --> ["one", "two", "  three  "]
+ * @example "icon(Dictionary) abc, link(John Snow|paypal.com), "$1,235"" -->
+ *           ["icon(Dictionary) abc", "link(John Snow|paypal.com)", "$1,235"]
+ */
+export function parseRowCSV(inputStr) {
+
+  //Source: https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
+
+  let parsedCSV = [];
+
+  var matches = inputStr.match(/(\s*"[^"]+"\s*|\s*[^,]+|,)(?=,|$)/g);
+  matches = matches ? matches : [];
+  for (var n = 0; n < matches.length; ++n) {
+    if (matches[n]) {
+      var txt = matches[n].trim();
+      parsedCSV.push(txt);
+    }
+  }
+  return parsedCSV;
+};
+
+/**
  * Function to parse an array of CSV values and return an array of objects
  *
  * @param {string} inputStr - array of CSVs: ["one", "two", "three"]
@@ -104,17 +154,17 @@ export function parseRow(inputStr, index) {
    *   3. Free text only
    */
   for (let i = 0; i < allTokens.length; i++) {
-    if (hasType && tokensWithType?.length === 1 && (allTokens[0].trim() === tokensWithType[0]?.trim())) {
-      if (createNewToken) {
-        parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), index));
-        createNewToken = false;
-      }
-      else {
-        // i = 0: type; i = 1: text; i >= 2: more text (we need to add space)
-        (i >= 2 || parsedOutput[0].type === 'link') ? parsedOutput[0].text += ` ${allTokens[i]}` : parsedOutput[0].text += `${allTokens[i]}`;
-      }
-    } else if (hasType && tokensWithType?.length >= 1) {
-      if (tokensWithType.map(s => s.trim()).includes(allTokens[i])) {
+    if (
+      hasType &&
+      tokensWithType?.length === 1 &&
+      allTokens[0].trim() === tokensWithType[0]?.trim()
+    ) {
+      parsedOutput.push(
+        makeToken(allTokens[i], getType(allTokens[i]), index)
+      );
+      createNewToken = true;
+    } else if (hasType && tokensWithType?.length) {
+      if (tokensWithType.map((s) => s.trim()).includes(allTokens[i])) {
         parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), i));
         tokenCounter += 1;
         semaphore = true;
@@ -140,8 +190,8 @@ export function parseRow(inputStr, index) {
 
   // Special return value for use case 2.
   if (parsedOutput?.length > 1) {
-    parsedOutput.map((element, index) => element.order = index);
-    return { order: index, type: 'compound', value: parsedOutput }
+    parsedOutput.map((element, index) => (element.order = index));
+    return { order: index, type: "compound", value: parsedOutput };
   }
 
   // Return value for use case 1. and 3.
@@ -229,11 +279,12 @@ function makeToken(inputStr, type, order) {
 
   switch (type) {
     case "icon":
+      let c = UxpColors.getHexFromHexOrToken(getFurtherArgs(inputStr)?.[0]);
       token = {
         order: order,
         type: type,
         iconName: getFirstArg(inputStr).trim(),
-        color: normalizeIcon(getFurtherArgs(inputStr)?.[0])?.trim(),
+        color: c ? c : '',
         colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined : getFurtherArgs(inputStr)?.[0]?.trim(),
         text: "",
       };
