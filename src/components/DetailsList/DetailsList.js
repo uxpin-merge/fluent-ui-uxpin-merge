@@ -98,7 +98,8 @@ class DetailsList extends React.Component {
 
       console.log("Items: " + this.props.items);
 
-      setColumns();
+      this.setColumns();
+      this.setRows();
 
    }
 
