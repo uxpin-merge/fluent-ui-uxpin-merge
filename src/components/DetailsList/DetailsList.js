@@ -259,6 +259,8 @@ class DetailsList extends React.Component {
    */
   getTextContent(elem) {
 
+    console.log("getTextContent " + JSON.stringify(elem));
+
     return elem.reduce((_text, part) => {
       const children = part.props.children;
       if (children) {
