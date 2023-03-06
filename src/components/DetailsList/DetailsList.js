@@ -236,8 +236,10 @@ class DetailsList extends React.Component {
                console.log("Row " + rowIndex + ", Column " + colInd + ", Contents: \n    " + rawCellContents);
 
                //Parse one cell at a time
-               let parsedCell = UXPinParser.parseRow(rawCellContents, column);
+               let parsedCell = UXPinParser.parseRow(rawCellContents, colInd);
                let parsedCellElements = [];
+
+               console.log("parsedCell obj: " + JSON.stringify(parsedCell));
 
                if (parsedCell.type !== 'compound') {
                   let cellItem = this._getUIElement(parsedCell);
@@ -267,10 +269,9 @@ class DetailsList extends React.Component {
    _getUIElement(item) {
       let key = _.uniqueId("e_");
 
+      console.log(">>> Looking at item " + item.type + ", Text: " + item.text);
+
       if (item) {
-
-         console.log(">>> Looking at item " + item.type + ", Text: " + item.text);
-
          if (item.type === "link") {
             return "link: " + item?.href + "  |  " + item?.text;
          }
