@@ -57,7 +57,11 @@ class Pivot extends React.Component {
 
       let propsList = UxpMenuUtils.parseSimpleListText(pivotItems[i], true, false);
       if (propsList) {
-        let iconName = propsList[0].iconProps.iconName ? propsList[0].iconProps.iconName : '';
+
+        console.log("     Raw props: " + JSON.stringify(propsList[0]));
+
+
+        let iconName = propsList[0]?.iconProps?.iconName ? propsList[0].iconProps.iconName : '';
         let pivotText = propsList[0].text ? propsList[0].text : " ";
 
         console.log("     text: " + pivotText + ", iconName: " + iconName);
