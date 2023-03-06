@@ -376,7 +376,7 @@ class DetailsList extends React.Component {
         isSortedDescending: false,
         headerClassName: this.getColumnClasses(index),
         onColumnClick: () => this.onColumnClick(columnNameText + suffix),
-        onRender: (item, rowIndex, column) => this._onRenderCell(rowIndex, column),
+        // onRender: (item, rowIndex, column) => this._onRenderCell(rowIndex, column),
         isMultiline: true,
         className: {
           textAlign: txtAlign,
@@ -416,7 +416,7 @@ class DetailsList extends React.Component {
           let parsedCellElements = [];
 
           if (parsedCell.type !== 'compound') {
-            let cellItem = this._getUIElement(parsedCell);
+            let cellItem = this._getUIElement(parsedCell[0]);
             parsedCellElements.push(cellItem);
           }
           else {
