@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode, mergeStyleSets, Icon } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyleSets, Icon, Link } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 //import { Text } from '../Text/Text';
-import { Link } from '../Link/Link';
+//import { Link } from '../Link/Link';
 //import { Icon } from '../Icon/Icon';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
@@ -22,6 +22,7 @@ const searchFieldMarginBottom = '24px';
 const dataTextSize = "smallPlus";
 const defaultTextColor = "#000";
 const headerBackgroundColor = 'neutralLighterAlt';
+const linkTarget = "_UXPin Mockup";
 
 const emptyHeaderText1 = "----";
 
@@ -316,11 +317,11 @@ class DetailsList extends React.Component {
       return (
          <span key={key} className={'linkContainer ' + classNames.linkContainer}>
             <Link
-               value={text}
-               linkHref={href ? href : ""}
-               size={dataTextSize}
-               bold={false}
-               italic={false} />
+               href={href ? href : ""}
+               target={linkTarget}
+            >
+               {text}
+            </Link>
          </span>);
    }
 
