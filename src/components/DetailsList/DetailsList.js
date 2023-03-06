@@ -459,7 +459,10 @@ class DetailsList extends React.Component {
 
   _getLinkElement(key, text, href) {
     let txt = text ? text : href ? href : '';
-    let target = href.includes("preview.uxpin.com" ? undefined : linkTarget);
+    let target = linkTarget);
+    if (href && href.includes("preview.uxpin.com")) {
+      target = undefined;
+    }
 
     return (
       <span key={key} className={'linkContainer ' + classNames.linkContainer}>
