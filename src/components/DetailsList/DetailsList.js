@@ -321,9 +321,9 @@ class DetailsList extends React.Component {
       }
 
       return (<span key={key}>
-         <Text styles={fTextStyles} >
-            {txt}
-         </Text >
+
+         {txt}
+
       </span>);
    }
 
