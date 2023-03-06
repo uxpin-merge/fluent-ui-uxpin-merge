@@ -97,9 +97,8 @@ class DetailsList extends React.Component {
    set() {
 
       console.log("Items: " + this.props.items);
-      console.log("Columns: " + this.props.columns);
 
-      let cList = this.setColumns();
+      setColumns();
 
    }
 
@@ -217,6 +216,64 @@ class DetailsList extends React.Component {
       this.setState({
          columns: columnHeadings,
       });
+   }
+
+   setRows() {
+      let rows = [];
+
+      UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
+         let r = {
+            key: rowIndex,
+         };
+
+         this.state.columns.map((column, colInd) => {
+            if (row[colInd]) {
+               let rawCellContents = row[colInd];
+
+               console.log("Row " + rowIndex + ", Column " + colInd + ", Contents: \n    " + rawCellContents);
+
+               //Parse one cell at a time
+               let parsedCell = UXPinParser.parseRow(rawCellContents, column);
+               let parsedCellElements = [];
+
+               if (parsedCell.type !== 'compound') {
+                  let cellItem = this._getUIElement(parsedCell);
+                  parsedCellElements.push(cellItem);
+               }
+               else {
+                  //Else it's a 'compound' array of elements
+                  parsedCell.value.map((subElement, k) => {
+                     let cellItem = this._getUIElement(subElement);
+                     parsedCellElements.push(cellItem);
+                  });
+               }
+
+               r[column.fieldName || ''] = parsedCellElements;
+            }
+         });
+
+         rows.push(r);
+      });
+
+      this.setState({
+         rows: rows,
+         allItems: rows,
+      });
+   }
+
+   _getUIElement(item) {
+      let key = _.uniqueId("e_");
+
+      if (item) {
+
+         console.log(">>> Looking at item " + item.type + ", Text: " + item.text);
+
+         return item?.text;
+
+         // return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
+         //    : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+         //       : this._getTextElement(key, item?.text);
+      }
    }
 
 
