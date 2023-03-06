@@ -297,11 +297,9 @@ class DetailsList extends React.Component {
          }
 
          else {
-            return "text obj: " + item?.text;
-            //return this._getTextElement(key, item?.text);
+            //return "text obj: " + item?.text;
+            return this._getTextElement(key, item?.text);
          }
-
-         return item?.text;
 
          // return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
          //    : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
