@@ -503,26 +503,6 @@ class DetailsList extends React.Component {
     </span >)
   }
 
-  _onRenderCell(rowIndex, column) {
-    let txtAlign = { textAlign: column.className.textAlign };
-    let id = "ROW " + rowIndex + ", COL " + column.uxpIndex;
-
-    console.log("_onRenderCell. id: " + id);
-
-    if (rowIndex < this.state.rows.length) {
-      let row = this.state.rows[rowIndex];
-      let cellElements = row[column.fieldName];
-
-      console.log("               >>>> cell: \n" + JSON.stringify(cellElements));
-
-      return (
-        <span style={txtAlign}>
-          {cellElements}
-        </span>);
-    }
-  }
-
-
   render() {
     //****************************
     //For Inner Stack - CommandBar
