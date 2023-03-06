@@ -259,7 +259,7 @@ class DetailsList extends React.Component {
    */
   getTextContent(elem) {
 
-    console.log("getTextContent " + JSON.stringify(elem));
+    //console.log("getTextContent " + JSON.stringify(elem));
 
     return elem.reduce((_text, part) => {
       const children = part.props.children;
@@ -391,7 +391,7 @@ class DetailsList extends React.Component {
         },
       };
 
-      console.log("Column key: " + columnParams.key);
+      //console.log("Column key: " + columnParams.key);
 
       if (iconName) {
         columnParams.iconName = iconName;
