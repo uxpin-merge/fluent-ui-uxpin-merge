@@ -388,6 +388,8 @@ class DetailsList extends React.Component {
         },
       };
 
+      console.log("Column key: " + columnParams.key);
+
       if (iconName) {
         columnParams.iconName = iconName;
         columnParams.iconClassName = {
