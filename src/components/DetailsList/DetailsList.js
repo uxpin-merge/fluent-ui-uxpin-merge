@@ -50,10 +50,11 @@ const commandBarTokens = {
 const classNames = mergeStyleSets({
   textContainer: {
     color: "#000",
+    display: 'inline-block',
   },
   linkContainer: {
     '& div,a,button,span': {
-      display: 'inline !important',
+      display: 'inline-block'  //'inline !important',
     },
     '& + .linkContainer': {
       marginLeft: '5px',
@@ -63,7 +64,7 @@ const classNames = mergeStyleSets({
     verticalAlign: 'middle',
     alignItems: 'center',
     '& .ms-Icon': {
-      display: 'inline',
+      display: 'inline-block',       // 'inline',
     },
     '& + .iconContainer': {
       marginLeft: '5px',
@@ -72,7 +73,7 @@ const classNames = mergeStyleSets({
 });
 
 let spanStyle = {
-  display: 'inline-block'   // 'inline !important'
+  //display: 'inline-block'   // 'inline !important'
 };
 
 
