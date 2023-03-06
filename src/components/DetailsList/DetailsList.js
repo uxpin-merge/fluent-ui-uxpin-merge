@@ -222,6 +222,8 @@ class DetailsList extends React.Component {
    setRows() {
       let rows = [];
 
+      console.log("Entering setRows() ");
+
       UXPinParser.parseMultipleRowsCSV(this.props.items).map((row, rowIndex) => {
          let r = {
             key: rowIndex,
@@ -269,12 +271,32 @@ class DetailsList extends React.Component {
 
          console.log(">>> Looking at item " + item.type + ", Text: " + item.text);
 
+         if (item.type === "link") {
+            return "link: " + item?.href + "  |  " + item?.text;
+         }
+         else if (item.type === "icon") {
+            return "icon: " + item?.iconName + "  |  item.color: " + item.color + "  |  item?.colorToken: " + item?.colorToken;
+         }
+
+         else {
+            return this._getTextElement(key, item?.text);
+         }
+
          return item?.text;
 
          // return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
          //    : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
          //       : this._getTextElement(key, item?.text);
       }
+   }
+
+   _getTextElement(key, text) {
+      //Test for an empty cell item
+      let txt = text === emptyHeaderText1 ? "" : text;
+
+      return (<span key={key}>
+         <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
+      </span>);
    }
 
 
