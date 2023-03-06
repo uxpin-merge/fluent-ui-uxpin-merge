@@ -74,6 +74,7 @@ const classNames = mergeStyleSets({
 let spanStyle = {
   display: 'inline-block',
   marginLeft: '5px',
+  verticalAlign: 'middle',
 };
 
 
