@@ -289,11 +289,11 @@ class DetailsList extends React.Component {
 
       if (item) {
          if (item.type === "link") {
-            return "link: " + item?.href + "  |  " + item?.text;
+            return this._getLinkElement(key, item?.text, item?.href);
          }
          else if (item.type === "icon") {
 
-            return this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+            return this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken);
          }
 
          else {
