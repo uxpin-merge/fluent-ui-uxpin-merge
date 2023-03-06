@@ -48,12 +48,30 @@ class Pivot extends React.Component {
 
   set() {
 
-    let items = UXPinParser.parse(this.props.tabs).map(
-      (item, index) => ({
-        key: index + 1,
-        text: item.text ? item.text : '',
-        icon: item?.iconName,
-      }));
+    let items = [];
+    let pivotItems = this.props.tabs?.split('\n');
+    for (i = 0; i < pivotItems.length; i++) {
+      let propsList = UxpMenuUtils.parseSimpleListText(pivotItems, true, false);
+      if (propsList) {
+        let iconName = propsList[0].iconProps.iconName;
+        let pivotText = propsList[0].text ? propsList[0].text : " ";
+
+        let pivotProps = {
+          key: i + 1,
+          text: pivotText ? pivotText : '',
+          icon: iconName ? iconName : undefined,
+        };
+
+        items.push(pivotProps);
+      }
+    }
+
+    // let items = UXPinParser.parse(this.props.tabs).map(
+    //   (item, index) => ({
+    //     key: index + 1,
+    //     text: item.text ? item.text : '',
+    //     icon: item?.iconName,
+    //   }));
 
     this.setState({
       tabs: items,
