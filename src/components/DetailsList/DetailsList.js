@@ -291,7 +291,7 @@ class DetailsList extends React.Component {
             return "link: " + item?.href + "  |  " + item?.text;
          }
          else if (item.type === "icon") {
-            console.log(">>> Looking at item?.iconName " + item?.iconName + ", item.color: " + item.color);
+
             return this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
          }
 
@@ -325,12 +325,16 @@ class DetailsList extends React.Component {
    }
 
    _getIconElement(key, iconName, colorToken) {
+
+
       let name = iconName ? iconName.trim() : '';
       let size = iconSizeMap[dataTextSize];
       let color = UxpColors.getHexFromHexOrToken(colorToken);
       if (!color) {
          color = defaultTextColor;
       }
+
+      console.log(">>> Looking at item?.iconName " + name + ", colorToken: " + colorToken + ", color: " + color);
 
       return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
          <Icon iconName={name} size={size} color={color} />
