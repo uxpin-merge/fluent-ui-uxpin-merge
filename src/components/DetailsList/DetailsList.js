@@ -242,12 +242,13 @@ class DetailsList extends React.Component {
                console.log("parsedCell obj: " + JSON.stringify(parsedCell));
 
                if (parsedCell.type !== 'compound') {
-                  let cellItem = this._getUIElement(parsedCell);
+                  let cellItem = this._getUIElement(parsedCell[0]);
                   parsedCellElements.push(cellItem);
                }
                else {
                   //Else it's a 'compound' array of elements
                   parsedCell.value.map((subElement, k) => {
+                     console.log("subElement obj: " + JSON.stringify(subElement));
                      let cellItem = this._getUIElement(subElement);
                      parsedCellElements.push(cellItem);
                   });
