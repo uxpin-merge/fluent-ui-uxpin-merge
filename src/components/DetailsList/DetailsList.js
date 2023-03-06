@@ -99,6 +99,8 @@ class DetailsList extends React.Component {
       console.log("Items: " + this.props.items);
       console.log("Columns: " + this.props.columns);
 
+      let cList = this.setColumns();
+
    }
 
    componentDidMount() {
@@ -123,6 +125,100 @@ class DetailsList extends React.Component {
       }
    }
 
+   getColumnClasses(colIndex) {
+
+      let alignHeaderLabels = {};
+      if (this.state.alignCenter.includes(colIndex + 1))
+         alignHeaderLabels = { margin: '0 auto' };
+
+      if (this.state.alignRight.includes(colIndex + 1))
+         alignHeaderLabels = { margin: '0 0 0 auto' };
+
+      const headerBg = UxpColors.getHexFromHexOrToken(headerBackgroundColor);
+
+      return {
+         background: headerBg,
+         selectors: {
+            '& .ms-DetailsHeader-cellName': alignHeaderLabels,
+         }
+      }
+   }
+
+   setColumns() {
+      let columnHeadings = [];
+      let colItems = this.props.columns?.split('\n');
+
+      for (let index = 0; index < colItems.length; index++) {
+
+         let columnNameText = colItems[index]?.trim() || ' ';
+
+         let suffix = _.uniqueId('_k_');
+
+         //Figure out if the column's header should be empty
+         let colNameTxt = columnNameText.toLowerCase() === emptyHeaderText1 ? ' ' : columnNameText;
+
+         //Can we access the widths? 
+         let colWidthInfo = {
+            index: index,
+            minWidth: this.props.minWidth,
+            maxWidth: 0,
+            flexGrow: 0,
+         };
+
+         if (index < this.state.columnWidths.length) {
+            colWidthInfo = this.state.columnWidths[index];
+         };
+
+         let iconName = "";
+         if (colNameTxt.includes("icon(")) {
+            let propsList = UxpMenuUtils.parseSimpleListText(colNameTxt, true, false);
+            if (propsList) {
+               iconName = propsList[0].iconProps.iconName;
+               colNameTxt = propsList[0].text ? propsList[0].text : " ";
+            }
+         }
+
+         let txtAlign = this.state.alignRight.includes(index + 1) ? 'right' :
+            this.state.alignCenter.includes(index + 1) ? 'center' :
+               'left';
+
+         let columnParams = {
+            uxpIndex: index,                    //For proprietary tracking
+            key: "column" + index,
+            name: colNameTxt,
+            fieldName: colNameTxt,
+            flexGrow: colWidthInfo.flexGrow,
+            minWidth: colWidthInfo.minWidth,
+            maxWidth: colWidthInfo.maxWidth,
+            isResizable: true,
+            isSorted: false,
+            isSortedDescending: false,
+            headerClassName: this.getColumnClasses(index),
+
+            //  onColumnClick: () => this.onColumnClick(columnNameText + suffix),
+
+            isMultiline: true,
+            className: {
+               textAlign: txtAlign,
+            },
+         };
+
+         if (iconName) {
+            columnParams.iconName = iconName;
+            columnParams.iconClassName = {
+               marginRight: '6px',
+               color: defaultTextColor,
+            };
+         }
+
+         columnHeadings.push(columnParams);
+      }
+
+      this.setState({
+         columns: columnHeadings,
+      });
+   }
+
 
    render() {
 
@@ -143,8 +239,8 @@ class DetailsList extends React.Component {
                }>
                   <ShimmeredDetailsList
                      {...this.props}
-                     // columns={this.state.columns}
-                     // items={this.state.rows}
+                     columns={this.state.columns}
+                     items={this.state.rows}
                      selectionMode={SelectionMode.none}
                      constrainMode={ConstrainMode[ConstrainMode.horizontalConstrained]}
                      isHeaderVisible={this.props.header}
