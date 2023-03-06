@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode, mergeStyleSets } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyleSets, Text } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import { Text } from '../Text/Text';
+//import { Text } from '../Text/Text';
 import { Link } from '../Link/Link';
 import { Icon } from '../Icon/Icon';
 
@@ -311,8 +311,19 @@ class DetailsList extends React.Component {
       //Test for an empty cell item
       let txt = text === emptyHeaderText1 ? "" : text;
 
+      let fTextStyles = {
+         root: {
+            //Fixes the 'nudge up/down' issues for larger and smaller sizes
+            display: 'block',
+            //Fixes the janked line height issues for larger and smaller sizes
+            lineHeight: 'normal',
+         }
+      }
+
       return (<span key={key}>
-         <Text textValue={txt} size={dataTextSize} color={defaultTextColor} />
+         <Text styles={fTextStyles} >
+            {txt}
+         </Text >
       </span>);
    }
 
