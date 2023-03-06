@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ConstrainMode, SelectionMode, mergeStyleSets, Text } from '@fluentui/react/';
+import { ConstrainMode, SelectionMode, mergeStyleSets, Icon } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
 import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 //import { Text } from '../Text/Text';
 import { Link } from '../Link/Link';
-import { Icon } from '../Icon/Icon';
+//import { Icon } from '../Icon/Icon';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
@@ -334,10 +334,22 @@ class DetailsList extends React.Component {
          color = defaultTextColor;
       }
 
+      const iconDisplayClass = {
+         color: color,
+         fontSize: size,
+         height: size,
+         width: size,
+         display: 'block',
+         lineHeight: 'normal',
+      };
+
       console.log(">>> Looking at item?.iconName " + name + ", colorToken: " + colorToken + ", color: " + color);
 
       return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
-         <Icon iconName={name} size={size} color={color} />
+         <Icon
+            iconName={name}
+            className={iconDisplayClass}
+         />
       </span >)
    }
 

@@ -18,9 +18,9 @@ Column B
 Column C
 Column D
 Actions`;
-const defaultRows = `link(PayPal.com|www.paypal.com), icon(CircleCheckSolid|success) Ready, C-1, D-1, icon(Deploy|blue-600) Deploy
-link(Component_Name_B), icon(CircleWarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|blue-600)
-link(Component_Name_C), icon(CircleClearSolid|error) Unavailable, C-3, D-3, icon(MoreVertical|blue-600)`;
+const defaultRows = `link(UXPin.com|www.uxpin.com), icon(CircleCheckSolid|success) Ready, C-1, D-1, icon(Deploy|themePrimary) Deploy
+link(Component_Name_B), icon(CircleWarningSolid|warning) Restarting..., C-2, D-2, icon(MoreVertical|themePrimary)
+link(Component_Name_C), icon(CircleClearSolid|error) Unavailable, C-3, D-3, icon(MoreVertical|themePrimary)`;
 
 
 
