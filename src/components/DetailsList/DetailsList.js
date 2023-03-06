@@ -72,7 +72,7 @@ const classNames = mergeStyleSets({
 });
 
 let spanStyle = {
-  display: 'inline !important'
+  display: 'inline-block'   // 'inline !important'
 };
 
 
