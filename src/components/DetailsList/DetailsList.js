@@ -71,6 +71,10 @@ const classNames = mergeStyleSets({
   },
 });
 
+let spanStyle = {
+  display: 'inline !important'
+};
+
 
 
 class DetailsList extends React.Component {
@@ -454,7 +458,7 @@ class DetailsList extends React.Component {
   _getTextElement(key, text) {
     //Test for an empty cell item
     let txt = text === emptyHeaderText1 ? "" : text;
-    return (<span key={key}> {txt} </span>);
+    return (<span key={key} style={spanStyle}> {txt} </span>);
   }
 
   _getLinkElement(key, text, href) {
@@ -465,7 +469,7 @@ class DetailsList extends React.Component {
     }
 
     return (
-      <span key={key} className={'linkContainer ' + classNames.linkContainer}>
+      <span key={key} className={'linkContainer ' + classNames.linkContainer} style={spanStyle}>
         <Link
           href={href ? href : ""}
           target={target} >
@@ -491,9 +495,7 @@ class DetailsList extends React.Component {
       lineHeight: 'normal',
     };
 
-    console.log(">>> Looking at item?.iconName " + name + ", colorToken: " + colorToken + ", color: " + color);
-
-    return (<span key={key} className={'iconContainer ' + classNames.iconContainer}>
+    return (<span key={key} className={'iconContainer ' + classNames.iconContainer} style={spanStyle}>
       <Icon
         iconName={name}
         className={iconDisplayClass}
