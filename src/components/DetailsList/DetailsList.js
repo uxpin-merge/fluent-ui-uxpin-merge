@@ -243,14 +243,30 @@ class DetailsList extends React.Component {
 
                if (parsedCell.type !== 'compound') {
                   let cellItem = this._getUIElement(parsedCell[0]);
-                  parsedCellElements.push(cellItem);
+
+                  if (cellItem) {
+                     parsedCellElements.push(cellItem);
+                  }
+                  else {
+                     console.log("  **** UNDEFINED parsedCell obj ");
+                  }
+
+
                }
                else {
                   //Else it's a 'compound' array of elements
                   parsedCell.value.map((subElement, k) => {
+
                      console.log("subElement obj: " + JSON.stringify(subElement));
+
                      let cellItem = this._getUIElement(subElement);
-                     parsedCellElements.push(cellItem);
+
+                     if (cellItem) {
+                        parsedCellElements.push(cellItem);
+                     }
+                     else {
+                        console.log("  **** UNDEFINED parsedCell obj");
+                     }
                   });
                }
 
@@ -281,7 +297,8 @@ class DetailsList extends React.Component {
          }
 
          else {
-            return this._getTextElement(key, item?.text);
+            return "text obj: " + item?.text;
+            //return this._getTextElement(key, item?.text);
          }
 
          return item?.text;
