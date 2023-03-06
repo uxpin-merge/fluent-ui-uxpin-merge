@@ -286,13 +286,12 @@ class DetailsList extends React.Component {
    _getUIElement(item) {
       let key = _.uniqueId("e_");
 
-      console.log(">>> Looking at item " + item.type + ", Text: " + item.text);
-
       if (item) {
          if (item.type === "link") {
             return "link: " + item?.href + "  |  " + item?.text;
          }
          else if (item.type === "icon") {
+            console.log(">>> Looking at item?.iconName " + item?.iconName + ", item.color: " + item.color);
             return this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
          }
 
