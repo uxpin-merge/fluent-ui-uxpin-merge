@@ -6,13 +6,7 @@ import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
-const defaultItems = `Fruit
-* Apples
-* Bananas
-* "I love you, Grapes!"
-divider
-Grains
-Vegetables`;
+
 
 
 
@@ -268,12 +262,12 @@ ComboBox.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 ComboBox.defaultProps = {
-  label: "ComboBox",
-  placeholder: "- Select -",
+  label: "",
+  placeholder: "",
   disabled: false,
   multiSelect: false,
   autoComplete: false,
-  items: defaultItems,
+  items: '',
   tooltip: '',
 };
 
