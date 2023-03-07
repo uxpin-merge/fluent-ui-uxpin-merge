@@ -113,7 +113,7 @@ export const UxpMenuUtils = {
                   };
 
                   if (parseIcon) {
-                     props.iconProps = { iconName: parseIcon ? icon : '' };
+                     props.iconProps = { iconName: icon ? icon : '' };
                   }
 
                   propsList.push(props);
