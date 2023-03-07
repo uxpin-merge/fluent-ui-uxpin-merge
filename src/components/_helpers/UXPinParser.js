@@ -410,12 +410,20 @@ function extractNextToken(inputStr) {
   //Is first token Text WITH Icon or Link??
   if (iconIndex > 0 || linkIndex > 0) {
     //First, determin if link or icon is first
-    let endIndex = iconIndex < linkIndex ? iconIndex : linkIndex;
+    let endIndex = inputStr.length;
+
+    if (iconIndex > 0 && linkIndex > 0)
+      endIndex = iconIndex < linkIndex ? iconIndex : linkIndex;
+    else if (iconIndex > 0)
+      endIndex = iconIndex;
+    else if (linkIndex > 0)
+      endIndex = linkIndex;
+
     type = "text";
     rawToken = inputStr.slice(0, endIndex);
     remainder = inputStr.slice(endIndex);
 
-    console.log("Text token w/icon/link. endIndex:  " + endIndex + ". iconIndex: " + iconIndex);
+    console.log("Text token w/icon/link. endIndex:  " + endIndex + ". iconIndex: " + iconIndex + ". linkIndex: " + linkIndex);
 
   }
   else if (iconIndex === 0 || linkIndex === 0) {
