@@ -88,35 +88,61 @@ export const UxpMenuUtils = {
          if (items && items.length) {
             var i;
             for (i = 0; i < items.length; i++) {
-               var item = items[i]?.trim();
 
                //Parse the individual item. It may have an icon.
-               let parsedItems = UXPinParser.parse(item);
+               let parsedItems = UXPinParser.parseSimpleTokensRow(items[i]);
 
                if (parsedItems && parsedItems.length > 0) {
-                  let pItem = parsedItems[0];
+                  let icon = '';
+                  let text = '';
 
-
-                  console.log("parse simple pItem: " + JSON.stringify(pItem));
-
-
-                  let trimmedText = pItem?.text?.trim();
-
-                  if (pItem && trimmedText) {
-                     let iconProps = {
-                        iconName: pItem?.iconName || '',
-                     };
-
-                     let itemProps = {
-                        key: i,
-                        text: trimmedText,
-                        iconProps: parseIcon ? iconProps : '',
-                        disabled: isDisabled,
-                     };
-
-                     propsList.push(itemProps);
+                  for (let x = 0; x < parsedItems.length; x++) {
+                     let tokenInfo = parsedItems[x];
+                     if (tokenInfo.type === "icon") {
+                        icon = tokenInfo.iconName ? tokenInfo.iconName : '';
+                     }
+                     else if (tokenInfo.type === "text") {
+                        text = tokenInfo.text ? tokenInfo.text : '';
+                     }
                   }
+
+                  let props = {
+                     key: i,
+                     text: text,
+                     iconProps: parseIcon ? icon : '',
+                     disabled: isDisabled,
+                  };
+
+                  propsList.push(props);
                }
+
+               // //Parse the individual item. It may have an icon.
+               // let parsedItems = UXPinParser.parse(item);
+
+               // if (parsedItems && parsedItems.length > 0) {
+               //    let pItem = parsedItems[0];
+
+
+               //    console.log("parse simple pItem: " + JSON.stringify(pItem));
+
+
+               //    let trimmedText = pItem?.text?.trim();
+
+               //    if (pItem && trimmedText) {
+               //       let iconProps = {
+               //          iconName: pItem?.iconName || '',
+               //       };
+
+               //       let itemProps = {
+               //          key: i,
+               //          text: trimmedText,
+               //          iconProps: parseIcon ? iconProps : '',
+               //          disabled: isDisabled,
+               //       };
+
+               //       propsList.push(itemProps);
+               //    }
+               // }
             }
          }
       }
@@ -179,23 +205,6 @@ export const UxpMenuUtils = {
                      propsList.push(props);
                   }
                }
-
-               // //Parse the individual item. It may have an icon.
-               // let parsedMenuItems = UXPinParser.parse(item);
-
-               // if (parsedMenuItems && parsedMenuItems.length > 0) {
-               //    let menuItem = parsedMenuItems[0];
-               //    let trimmedText = menuItem?.text?.trim();
-
-               //    if (menuItem && trimmedText) {
-               //       let mayBeHeader = hasHeadersAndChildren && hasChild;
-               //       let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, mayBeHeader, isChild, isContextMenuType);
-
-               //       if (props) {
-               //          propsList.push(props);
-               //       }
-               //    }
-               // }
             }
          }
       }

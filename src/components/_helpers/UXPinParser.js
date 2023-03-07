@@ -422,9 +422,6 @@ function extractNextToken(inputStr) {
     type = "text";
     rawToken = inputStr.slice(0, endIndex);
     remainder = inputStr.slice(endIndex);
-
-    console.log("Text token w/icon/link. endIndex:  " + endIndex + ". iconIndex: " + iconIndex + ". linkIndex: " + linkIndex);
-
   }
   else if (iconIndex === 0 || linkIndex === 0) {
     rawToken = inputStr.slice(0, rightParensIndex);
