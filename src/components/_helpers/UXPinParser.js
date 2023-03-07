@@ -322,7 +322,7 @@ function makeToken(inputStr, type, order) {
  * @param {boolean} includeEmptyRows 
  * @returns 
  */
-function parseSimpleTokens(inputStr, includeEmptyRows) {
+export function parseSimpleTokens(inputStr, includeEmptyRows) {
 
   let contents = [];
 
@@ -344,7 +344,12 @@ function parseSimpleTokens(inputStr, includeEmptyRows) {
   return contents;
 }
 
-function parseSimpleTokensRow(inputStr) {
+/**
+ * For parsing one line, such as one line in a list of Tab or Nav items.
+ * @param {string} inputStr 
+ * @returns 
+ */
+export function parseSimpleTokensRow(inputStr) {
   if (!inputStr)
     return undefined;
 

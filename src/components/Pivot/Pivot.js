@@ -50,31 +50,63 @@ class Pivot extends React.Component {
   set() {
 
     let items = [];
-    let pivotItems = this.props.tabs?.split('\n');
-    for (i = 0; i < pivotItems.length; i++) {
 
-      console.log("Looking at: " + pivotItems[i]);
+    let rows = UXPinParser.parseSimpleTokens(this.props.tabs, false);
+    for (i = 0; i < rows.length; i++) {
+      //This can be 1 or more tokens, depending if it's an icon as well as text.
+      let tabItemSet = rows[i];
 
-      let propsList = UxpMenuUtils.parseSimpleListText(pivotItems[i], true, false);
-      if (propsList) {
+      let tabIcon = '';
+      let tabText = '';
 
-        console.log("     Raw props: " + JSON.stringify(propsList[0]));
-
-
-        let iconName = propsList[0]?.iconProps?.iconName ? propsList[0].iconProps.iconName : '';
-        let pivotText = propsList[0].text ? propsList[0].text : " ";
-
-        console.log("     text: " + pivotText + ", iconName: " + iconName);
-
-        let pivotProps = {
-          key: i + 1,
-          text: pivotText ? pivotText : '',
-          icon: iconName ? iconName : undefined,
-        };
-
-        items.push(pivotProps);
+      for (x = 0; x < tabItemSet.length; x++) {
+        let tokenInfo = tabItemSet[x];
+        if (tokenInfo.type === "icon") {
+          tabIcon = tokenInfo.iconName;
+        }
+        else if (tokenInfo.type === "text") {
+          tabText = tokenInfo.text;
+        }
       }
+
+      let pivotProps = {
+        key: i + 1,
+        text: tabText ? tabText : '',
+        icon: tabIcon ? tabIcon : undefined,
+      };
+
+      items.push(pivotProps);
     }
+
+
+
+    //   let pivotItems = this.props.tabs?.split('\n');
+    // for (i = 0; i < pivotItems.length; i++) {
+
+    //   console.log("Looking at: " + pivotItems[i]);
+
+
+
+    //   let propsList = UxpMenuUtils.parseSimpleListText(pivotItems[i], true, false);
+    //   if (propsList) {
+
+    //     console.log("     Raw props: " + JSON.stringify(propsList[0]));
+
+
+    //     let iconName = propsList[0]?.iconProps?.iconName ? propsList[0].iconProps.iconName : '';
+    //     let pivotText = propsList[0].text ? propsList[0].text : " ";
+
+    //     console.log("     text: " + pivotText + ", iconName: " + iconName);
+
+    //     let pivotProps = {
+    //       key: i + 1,
+    //       text: pivotText ? pivotText : '',
+    //       icon: iconName ? iconName : undefined,
+    //     };
+
+    //     items.push(pivotProps);
+    //   }
+    // }
 
     // let items = UXPinParser.parse(this.props.tabs).map(
     //   (item, index) => ({
