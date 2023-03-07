@@ -234,7 +234,7 @@ export const UxpMenuUtils = {
                for (let x = 0; x < parsedItems.length; x++) {
                   let tokenInfo = parsedItems[x];
                   if (tokenInfo.type === "icon") {
-                     icon = tokenInfo.iconName ? tokenInfo.iconName : '';
+                     icon = !hasChild && tokenInfo.iconName ? tokenInfo.iconName : '';
                   }
                   else if (tokenInfo.type === "text") {
                      text = tokenInfo.text ? tokenInfo.text : '';
@@ -257,16 +257,7 @@ export const UxpMenuUtils = {
                      propsList.push(props);
                   }
                }
-
-               // let parsedItem = parsedNavItems[0];
-               // let trimmedText = parsedItem?.text?.trim();
-
-               // if (parsedItem && trimmedText) {
-               //    let iconName = hasChild ? undefined : parsedItem?.iconName;
-               //    let disabled = dList.includes(i + 1) ? true : false;
-               // }
             }
-
          }
       }
 
