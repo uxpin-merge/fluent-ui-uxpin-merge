@@ -461,7 +461,7 @@ function makeSimpleToken(index, type, inputStr) {
       token = {
         order: index,
         type: type,
-        iconName: splits[0],
+        iconName: splits[0]?.trim(),
         color: c ? c : '',
         colorToken: c ? c : '',
         text: '',
@@ -472,8 +472,8 @@ function makeSimpleToken(index, type, inputStr) {
       token = {
         order: index,
         type: type,
-        text: splits[0],
-        href: href,
+        text: splits[0]?.trim(),
+        href: href ? href : '',
       };
       break;
     case 'text':
@@ -481,7 +481,7 @@ function makeSimpleToken(index, type, inputStr) {
       token = {
         order: index,
         type: type,
-        text: inputStr,
+        text: inputStr?.trim(),
       };
       break;
   }

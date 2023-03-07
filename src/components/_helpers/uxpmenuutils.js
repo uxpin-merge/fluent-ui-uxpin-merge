@@ -200,8 +200,7 @@ export const UxpMenuUtils = {
          let hasChildren = allowChildren ? this.testForChildren(rawPropText) : false;
 
          //The first item must be a regular nav item.
-         var i;
-         for (i = 0; i < items.length; i++) {
+         for (let i = 0; i < items.length; i++) {
             var item = items[i]?.trim();
 
             var isChild = item?.startsWith(this.childTag);
@@ -220,36 +219,52 @@ export const UxpMenuUtils = {
             }
 
             //Parse the individual item. It may have an icon.
-            let parsedNavItems = UXPinParser.parse(item);
+            // let parsedNavItems = UXPinParser.parse(item);
+            let parsedItems = UXPinParser.parseSimpleTokensRow(item);
 
-            if (parsedNavItems && parsedNavItems.length > 0) {
-               let parsedItem = parsedNavItems[0];
-               let trimmedText = parsedItem?.text?.trim();
+            if (parsedItems && parsedItems.length > 0) {
 
-               if (parsedItem && trimmedText) {
-                  let iconName = hasChild ? undefined : parsedItem?.iconName;
-                  let disabled = dList.includes(i + 1) ? true : false;
+               let icon = '';
+               let text = '';
 
-                  //If the index is for a parent or one of its children, expand the parent.
-                  let expanded = selectedIndex === i + 1 ? true : false;
+               let disabled = dList.includes(i + 1) ? true : false;
+               //If the index is for a parent or one of its children, expand the parent.
+               let expanded = selectedIndex === i + 1 ? true : false;
 
-                  let props = this.getNavItemProps(i, trimmedText, iconName, expanded, disabled);
-
-                  //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
-                  if (props) {
-
-                     if (isChild) {
-                        let parent = propsList[propsList.length - 1];
-                        this.appendNavItemChildProps(parent, props);
-
-                        if (expanded)
-                           parent.isExpanded = expanded;
-                     }
-                     else {
-                        propsList.push(props);
-                     }
+               for (let x = 0; x < parsedItems.length; x++) {
+                  let tokenInfo = parsedItems[x];
+                  if (tokenInfo.type === "icon") {
+                     icon = tokenInfo.iconName ? tokenInfo.iconName : '';
+                  }
+                  else if (tokenInfo.type === "text") {
+                     text = tokenInfo.text ? tokenInfo.text : '';
                   }
                }
+
+               let props = this.getNavItemProps(i, text, icon, expanded, disabled);
+
+               //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
+               if (props) {
+
+                  if (isChild) {
+                     let parent = propsList[propsList.length - 1];
+                     this.appendNavItemChildProps(parent, props);
+
+                     if (expanded)
+                        parent.isExpanded = expanded;
+                  }
+                  else {
+                     propsList.push(props);
+                  }
+               }
+
+               // let parsedItem = parsedNavItems[0];
+               // let trimmedText = parsedItem?.text?.trim();
+
+               // if (parsedItem && trimmedText) {
+               //    let iconName = hasChild ? undefined : parsedItem?.iconName;
+               //    let disabled = dList.includes(i + 1) ? true : false;
+               // }
             }
 
          }

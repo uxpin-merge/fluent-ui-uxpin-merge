@@ -48,7 +48,6 @@ class Pivot extends React.Component {
   }
 
   set() {
-
     let items = [];
 
     let rows = UXPinParser.parseSimpleTokens(this.props.tabs, false);
@@ -77,43 +76,6 @@ class Pivot extends React.Component {
 
       items.push(pivotProps);
     }
-
-
-
-    //   let pivotItems = this.props.tabs?.split('\n');
-    // for (i = 0; i < pivotItems.length; i++) {
-
-    //   console.log("Looking at: " + pivotItems[i]);
-
-
-
-    //   let propsList = UxpMenuUtils.parseSimpleListText(pivotItems[i], true, false);
-    //   if (propsList) {
-
-    //     console.log("     Raw props: " + JSON.stringify(propsList[0]));
-
-
-    //     let iconName = propsList[0]?.iconProps?.iconName ? propsList[0].iconProps.iconName : '';
-    //     let pivotText = propsList[0].text ? propsList[0].text : " ";
-
-    //     console.log("     text: " + pivotText + ", iconName: " + iconName);
-
-    //     let pivotProps = {
-    //       key: i + 1,
-    //       text: pivotText ? pivotText : '',
-    //       icon: iconName ? iconName : undefined,
-    //     };
-
-    //     items.push(pivotProps);
-    //   }
-    // }
-
-    // let items = UXPinParser.parse(this.props.tabs).map(
-    //   (item, index) => ({
-    //     key: index + 1,
-    //     text: item.text ? item.text : '',
-    //     icon: item?.iconName,
-    //   }));
 
     this.setState({
       tabs: items,
