@@ -4,13 +4,6 @@ import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
-//Default nav items to populate the control with.
-//Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultChoices = `Apples
-Bananas
-"I love you, Grapes!"
-Kiwis
-Oranges`;
 
 const choiceGroupHorizontalStyles = {
   label: {
@@ -157,8 +150,8 @@ ChoiceGroup.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 ChoiceGroup.defaultProps = {
-  label: 'Basic ChoiceGroup',
-  items: defaultChoices,
+  label: '',
+  items: '',
   selectedIndex: 0,
   required: false,
   tiled: false,
