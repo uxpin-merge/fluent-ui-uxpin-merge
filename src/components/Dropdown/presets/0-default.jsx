@@ -8,7 +8,7 @@ const placeholder = '- Select -';
 const defaultItems = `Fruit
 * Apples
 * Bananas
-* "I love you, Grapes!"
+* I love you, Grapes!
 divider
 Grains
 Vegetables`;
