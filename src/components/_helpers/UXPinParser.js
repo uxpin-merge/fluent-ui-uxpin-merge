@@ -1,3 +1,4 @@
+import { inputProperties } from "@fluentui/react";
 import { UxpColors } from "./uxpcolorutils";
 
 /**
@@ -222,10 +223,12 @@ function getFurtherArgs(inputStr) {
 
   if (args && args.length > 0) {
     args = args[0].split(',').map(output => output.trim());
+
+    // E.g. [bar, red-600]
+    return args;
   }
 
-  // E.g. [bar, red-600]
-  return args;
+  return undefined;
 }
 
 /**
@@ -277,6 +280,8 @@ function normalizeIcon(inputStr) {
 function makeToken(inputStr, type, order) {
   let token = {};
 
+  console.log("makeToken, type: " + type + ", contents: " + JSON.stringify(inputStr));
+
   switch (type) {
     case "icon":
       let c = UxpColors.getHexFromHexOrToken(getFurtherArgs(inputStr)?.[0]);
@@ -307,4 +312,203 @@ function makeToken(inputStr, type, order) {
   }
 
   return token;
+}
+
+
+
+/**
+ * A rewrite of the single line parser, suitable for Nav, Pivot, and Dropdown. 
+ * @param {string} inputStr 
+ * @param {boolean} includeEmptyRows 
+ * @returns 
+ */
+export function parseSimpleTokens(inputStr, includeEmptyRows) {
+
+  let contents = [];
+
+  //Split rows by new line
+  let rows = inputStr.match(/[^\r\n]+/g) || [];
+
+  if (rows && rows.length) {
+    for (var i = 0; i < rows.length; i++) {
+      let row = parseSimpleTokensRow(rows[i]);
+
+      if (row) {
+        if (row.length || includeEmptyRows) {
+          contents.push(row);
+        }
+      }
+    }
+  }
+
+  return contents;
+}
+
+/**
+ * For parsing one line, such as one line in a list of Tab or Nav items.
+ * @param {string} inputStr 
+ * @returns 
+ */
+export function parseSimpleTokensRow(inputStr) {
+  if (!inputStr)
+    return undefined;
+
+  if (inputStr.trim().length < 1) {
+    return '';
+  }
+
+  let tokens = [];
+  let hasMoreTokens = true;
+  let remainder = inputStr;
+  let i = 0;
+
+  do {
+
+    hasMoreTokens = false;
+
+    let results = extractNextToken(remainder);
+
+    console.log("parseSimpleTokensRow. raw token: " + results.rawToken + "  >>> remainder: " + results.remainder);
+
+    //found a token?
+    if (results?.token !== "none") {
+      let t = makeSimpleToken(i, results.type, results.rawToken);
+      if (t) {
+        tokens.push(t);
+      }
+      i++;
+    }
+
+    if (results?.remainder && results.remainder.length) {
+      remainder = results.remainder;
+      hasMoreTokens = true;
+    }
+  } //do
+  while (hasMoreTokens && i < 5);
+
+  return tokens;
+}
+
+function extractNextToken(inputStr) {
+
+  if (!inputStr)
+    return undefined;
+
+  if (inputStr.trim().length < 1) {
+    return undefined;
+  }
+
+  inputStr = inputStr.trim();
+
+  let type = "none";
+  let rawToken = '';
+  let remainder = undefined;
+  let rightParensIndex = inputStr.indexOf(')');
+  let iconIndex = inputStr.indexOf('icon(');
+  let linkIndex = inputStr.indexOf('link(');
+
+  //Is first token Text WITH Icon or Link??
+  if (iconIndex > 0 || linkIndex > 0) {
+    //First, determin if link or icon is first
+    let endIndex = inputStr.length;
+
+    if (iconIndex > 0 && linkIndex > 0)
+      endIndex = iconIndex < linkIndex ? iconIndex : linkIndex;
+    else if (iconIndex > 0)
+      endIndex = iconIndex;
+    else if (linkIndex > 0)
+      endIndex = linkIndex;
+
+    type = "text";
+    rawToken = inputStr.slice(0, endIndex);
+    remainder = inputStr.slice(endIndex);
+  }
+  else if (iconIndex === 0 || linkIndex === 0) {
+    rawToken = inputStr.slice(0, rightParensIndex);
+    if (inputStr.length > rightParensIndex) {
+      remainder = inputStr.slice(rightParensIndex + 1)
+    }
+
+    if (iconIndex === 0) {
+      type = "icon";
+      rawToken = rawToken.replace('icon(', '');
+    }
+    else if (linkIndex === 0) {
+      type = "link";
+      rawToken = rawToken.replace('link(', '');
+    }
+  }
+  else {
+    //Else the whole length is a Text token
+    type = "text";
+    rawToken = inputStr
+    remainder = '';
+  }
+
+  return {
+    type: type,
+    rawToken: rawToken,
+    remainder: remainder,
+  };
+}
+
+function makeSimpleToken(index, type, inputStr) {
+  let token = {};
+  let splits = [];
+
+  if (type === 'icon' || type === 'link') {
+    let rawSplits = splitOnPipe(inputStr);
+    if (rawSplits && rawSplits.length) {
+      splits = rawSplits;
+    }
+  }
+
+  switch (type) {
+    case 'icon':
+      let c = splits.length > 1 ? UxpColors.getHexFromHexOrToken(splits[1]) : '';
+      token = {
+        order: index,
+        type: type,
+        iconName: splits[0]?.trim(),
+        color: c ? c : '',
+        colorToken: c ? c : '',
+        text: '',
+      };
+      break;
+    case 'link':
+      let href = splits.length > 1 ? normalizeLink(splits[1]) : '';
+      token = {
+        order: index,
+        type: type,
+        text: splits[0]?.trim(),
+        href: href ? href : '',
+      };
+      break;
+    case 'text':
+    default:
+      token = {
+        order: index,
+        type: type,
+        text: inputStr?.trim(),
+      };
+      break;
+  }
+
+  return token;
+}
+
+function splitOnPipe(inputStr) {
+  let splits = [];
+
+  if (inputStr && inputStr.length) {
+    if (inputStr.includes("|")) {
+      splits = inputStr.split('|');
+    }
+    else {
+      //We'll return the input string as the first item
+      splits.push(inputStr);
+    }
+  }
+
+  return splits;
 }

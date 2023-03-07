@@ -5,6 +5,7 @@ import {
   PivotItem
 } from '@fluentui/react/lib/Pivot';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 
@@ -47,13 +48,34 @@ class Pivot extends React.Component {
   }
 
   set() {
+    let items = [];
 
-    let items = UXPinParser.parse(this.props.tabs).map(
-      (item, index) => ({
-        key: index + 1,
-        text: item.text ? item.text : '',
-        icon: item?.iconName,
-      }));
+    let rows = UXPinParser.parseSimpleTokens(this.props.tabs, false);
+    for (let i = 0; i < rows.length; i++) {
+      //This can be 1 or more tokens, depending if it's an icon as well as text.
+      let tabItemSet = rows[i];
+
+      let tabIcon = '';
+      let tabText = '';
+
+      for (let x = 0; x < tabItemSet.length; x++) {
+        let tokenInfo = tabItemSet[x];
+        if (tokenInfo.type === "icon") {
+          tabIcon = tokenInfo.iconName;
+        }
+        else if (tokenInfo.type === "text") {
+          tabText = tokenInfo.text;
+        }
+      }
+
+      let pivotProps = {
+        key: i + 1,
+        text: tabText ? tabText : '',
+        icon: tabIcon ? tabIcon : undefined,
+      };
+
+      items.push(pivotProps);
+    }
 
     this.setState({
       tabs: items,

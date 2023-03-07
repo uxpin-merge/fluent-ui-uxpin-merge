@@ -6,14 +6,6 @@ import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 
-const defaultItems = `Fruit
-* Apples
-* Bananas
-* "I love you, Grapes!"
-divider
-Grains
-Vegetables`;
-
 
 
 class Dropdown extends React.Component {
@@ -263,10 +255,10 @@ Dropdown.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 Dropdown.defaultProps = {
-  label: "Basic Dropdown",
-  items: defaultItems,
+  label: "",
+  items: '',
   selected: '',
-  placeholder: "- Select -",
+  placeholder: "",
   disabled: false,
   required: false,
   tooltip: '',
