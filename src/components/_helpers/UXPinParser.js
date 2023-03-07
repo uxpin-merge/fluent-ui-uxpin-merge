@@ -366,7 +366,7 @@ export function parseSimpleTokensRow(inputStr) {
 
     hasMoreTokens = false;
 
-    let results = extractFirstToken(remainder);
+    let results = extractNextToken(remainder);
 
     console.log("parseSimpleTokensRow. raw token: " + results.rawToken + "  >>> remainder: " + results.remainder);
 
@@ -389,7 +389,7 @@ export function parseSimpleTokensRow(inputStr) {
   return tokens;
 }
 
-function extractFirstToken(inputStr) {
+function extractNextToken(inputStr) {
 
   if (!inputStr)
     return undefined;
@@ -407,7 +407,7 @@ function extractFirstToken(inputStr) {
   let iconIndex = inputStr.indexOf('icon(');
   let linkIndex = inputStr.indexOf('link(');
 
-  //Is first token TEXT?
+  //Is first token Text WITH Icon or Link??
   if (iconIndex > 0 || linkIndex > 0) {
     //First, determin if link or icon is first
     let endIndex = iconIndex < linkIndex ? iconIndex : linkIndex;
@@ -415,7 +415,7 @@ function extractFirstToken(inputStr) {
     rawToken = inputStr.slice(0, endIndex);
     remainder = inputStr.slice(endIndex);
   }
-  else {
+  else if (iconIndex === 0 || linkIndex === 0) {
     rawToken = inputStr.slice(0, rightParensIndex);
     if (inputStr.length > rightParensIndex) {
       remainder = inputStr.slice(rightParensIndex + 1)
@@ -429,6 +429,12 @@ function extractFirstToken(inputStr) {
       type = "link";
       rawToken = rawToken.replace('link(', '');
     }
+  }
+  else {
+    //Else the whole length is a Text token
+    type = "text";
+    rawToken = inputStr
+    remainder = '';
   }
 
   return {
