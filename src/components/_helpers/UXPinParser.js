@@ -364,28 +364,25 @@ export function parseSimpleTokensRow(inputStr) {
 
   do {
     let results = extractFirstToken(remainder);
-    if (results) {
 
-      console.log("parseSimpleTokensRow. raw token: " + results.rawToken + "  >>> remainder: " + results.remainder);
+    console.log("parseSimpleTokensRow. raw token: " + results.rawToken + "  >>> remainder: " + results.remainder);
 
-
-      //found a token?
-      if (results.token !== "none") {
-        let t = makeSimpleToken(i, results.type, results.rawToken);
-        if (t) {
-          tokens.push(t);
-        }
-        i++;
+    //found a token?
+    if (results?.token !== "none") {
+      let t = makeSimpleToken(i, results.type, results.rawToken);
+      if (t) {
+        tokens.push(t);
       }
+      i++;
+    }
 
-      if (results.remainder && results.remainder.length) {
-        remainder = results.remainder;
-        hasMoreTokens = true;
-      }
-      else {
-        remainder = '';
-        hasMoreTokens = false;
-      }
+    if (results?.remainder && results.remainder.length) {
+      remainder = results.remainder;
+      hasMoreTokens = true;
+    }
+    else {
+      remainder = '';
+      hasMoreTokens = false;
     }
   } //do
   while (hasMoreTokens);
