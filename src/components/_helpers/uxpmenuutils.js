@@ -154,21 +154,48 @@ export const UxpMenuUtils = {
                }
 
                //Parse the individual item. It may have an icon.
-               let parsedMenuItems = UXPinParser.parse(item);
+               let parsedItems = UXPinParser.parseSimpleTokensRow(item);
 
-               if (parsedMenuItems && parsedMenuItems.length > 0) {
-                  let menuItem = parsedMenuItems[0];
-                  let trimmedText = menuItem?.text?.trim();
+               if (parsedItems && parsedItems.length > 0) {
+                  let mayBeHeader = hasHeadersAndChildren && hasChild;
 
-                  if (menuItem && trimmedText) {
-                     let mayBeHeader = hasHeadersAndChildren && hasChild;
-                     let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, mayBeHeader, isChild, isContextMenuType);
+                  let icon = '';
+                  let text = '';
 
-                     if (props) {
-                        propsList.push(props);
+                  for (let x = 0; x < parsedItems.length; x++) {
+                     let tokenInfo = parsedItems[x];
+                     if (!hasChild && tokenInfo.type === "icon") {
+                        icon = tokenInfo.iconName ? tokenInfo.iconName : '';
+                     }
+                     else if (tokenInfo.type === "text") {
+                        text = tokenInfo.text ? tokenInfo.text : '';
                      }
                   }
+
+                  let props = this.getContextMenuProps(i, text, icon, mayBeHeader, isChild, isContextMenuType);
+
+                  //OK! If this is a child item, append it to the last item in the props array. If it's not, push it to the props array.
+                  if (props) {
+                     propsList.push(props);
+                  }
                }
+
+               // //Parse the individual item. It may have an icon.
+               // let parsedMenuItems = UXPinParser.parse(item);
+
+               // if (parsedMenuItems && parsedMenuItems.length > 0) {
+               //    let menuItem = parsedMenuItems[0];
+               //    let trimmedText = menuItem?.text?.trim();
+
+               //    if (menuItem && trimmedText) {
+               //       let mayBeHeader = hasHeadersAndChildren && hasChild;
+               //       let props = this.getContextMenuProps(i, trimmedText, menuItem?.iconName, mayBeHeader, isChild, isContextMenuType);
+
+               //       if (props) {
+               //          propsList.push(props);
+               //       }
+               //    }
+               // }
             }
          }
       }
@@ -219,22 +246,20 @@ export const UxpMenuUtils = {
             }
 
             //Parse the individual item. It may have an icon.
-            // let parsedNavItems = UXPinParser.parse(item);
             let parsedItems = UXPinParser.parseSimpleTokensRow(item);
 
             if (parsedItems && parsedItems.length > 0) {
-
-               let icon = '';
-               let text = '';
-
                let disabled = dList.includes(i + 1) ? true : false;
                //If the index is for a parent or one of its children, expand the parent.
                let expanded = selectedIndex === i + 1 ? true : false;
 
+               let icon = '';
+               let text = '';
+
                for (let x = 0; x < parsedItems.length; x++) {
                   let tokenInfo = parsedItems[x];
-                  if (tokenInfo.type === "icon") {
-                     icon = !hasChild && tokenInfo.iconName ? tokenInfo.iconName : '';
+                  if (!hasChild && tokenInfo.type === "icon") {
+                     icon = tokenInfo.iconName ? tokenInfo.iconName : '';
                   }
                   else if (tokenInfo.type === "text") {
                      text = tokenInfo.text ? tokenInfo.text : '';
