@@ -19,14 +19,6 @@ class GroupButton extends React.Component {
    }
 
    set() {
-
-      // let items = UXPinParser.parse(this.props.items).map(
-      //    (item, index) => ({
-      //       key: index + 1,
-      //       text: item.text ? item.text : '',
-      //       icon: item?.iconName,
-      //    }));
-
       let items = UxpMenuUtils.parseSimpleListText(this.props.items, true, false);
 
       if (!items || items.length < 1) {
@@ -178,7 +170,7 @@ GroupButton.propTypes = {
  */
 GroupButton.defaultProps = {
    disabled: false,
-   items: defaultItems,
+   items: '',
    selectedIndex: 0,
 };
 
