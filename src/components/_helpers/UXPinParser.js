@@ -384,7 +384,7 @@ export function parseSimpleTokensRow(inputStr) {
       hasMoreTokens = true;
     }
   } //do
-  while (hasMoreTokens);
+  while (hasMoreTokens && i < 5);
 
   return tokens;
 }
