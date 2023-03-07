@@ -3,14 +3,8 @@ import * as PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
 import * as UXPinParser from '../_helpers/UXPinParser';
+import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
-
-//Default nav items to populate the control with.
-//Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultItems = `icon(EmojiDisappointed) Poor
-icon(EmojiNeutral) Neutral
-icon(Emoji2) Good`;
 
 
 class GroupButton extends React.Component {
@@ -26,16 +20,18 @@ class GroupButton extends React.Component {
 
    set() {
 
-      let items = UXPinParser.parse(this.props.items).map(
-         (item, index) => ({
-            key: index + 1,
-            text: item.text ? item.text : '',
-            icon: item?.iconName,
-         }));
+      // let items = UXPinParser.parse(this.props.items).map(
+      //    (item, index) => ({
+      //       key: index + 1,
+      //       text: item.text ? item.text : '',
+      //       icon: item?.iconName,
+      //    }));
+
+      let items = UxpMenuUtils.parseSimpleListText(this.props.items, true, false);
 
       if (!items || items.length < 1) {
          items.push({
-            key: 1,
+            key: 0,
             text: "Group Button",
             icon: '',
          });
@@ -68,8 +64,8 @@ class GroupButton extends React.Component {
 
    _onButtonClick(index) {
 
-      //The index comes in 1-based. 1 is also our value floor.
-      let newIndex = index > 0 ? index : 1;
+      //The index comes in 0-based. 0 is our value floor.
+      let newIndex = index + 1;
 
       if (newIndex !== this.state.selectedIndex) {
          this.setState(
@@ -98,6 +94,8 @@ class GroupButton extends React.Component {
 
       for (i = 0; i < items.length; i++) {
          let btn = items[i];
+         let text = btn.text;
+         let icon = btn?.iconProps?.iconName ? btn.iconProps.iconName : '';
 
          let isPrimary = ((i + 1) === this.state.selectedIndex) ? true : false;
 
@@ -107,8 +105,8 @@ class GroupButton extends React.Component {
             <Button
                {...this.props}
                primary={isPrimary}
-               text={btn.text}
-               iconName={btn.icon}
+               text={text}
+               iconName={icon}
                disabled={this.props.disabled}
                styles={btnStyles}
                onClick={() => { this._onButtonClick(btn.key) }}
