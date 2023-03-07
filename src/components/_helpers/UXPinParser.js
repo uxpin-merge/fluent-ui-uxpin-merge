@@ -363,6 +363,9 @@ export function parseSimpleTokensRow(inputStr) {
   let i = 0;
 
   do {
+
+    hasMoreTokens = false;
+
     let results = extractFirstToken(remainder);
 
     console.log("parseSimpleTokensRow. raw token: " + results.rawToken + "  >>> remainder: " + results.remainder);
@@ -379,10 +382,6 @@ export function parseSimpleTokensRow(inputStr) {
     if (results?.remainder && results.remainder.length) {
       remainder = results.remainder;
       hasMoreTokens = true;
-    }
-    else {
-      remainder = '';
-      hasMoreTokens = false;
     }
   } //do
   while (hasMoreTokens);
