@@ -109,9 +109,12 @@ export const UxpMenuUtils = {
                   let props = {
                      key: i,
                      text: text,
-                     iconProps: { iconName: parseIcon ? icon : '' },
                      disabled: isDisabled,
                   };
+
+                  if (parseIcon) {
+                     props.iconProps = { iconName: parseIcon ? icon : '' };
+                  }
 
                   propsList.push(props);
                }
