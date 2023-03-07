@@ -52,14 +52,14 @@ class Pivot extends React.Component {
     let items = [];
 
     let rows = UXPinParser.parseSimpleTokens(this.props.tabs, false);
-    for (i = 0; i < rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) {
       //This can be 1 or more tokens, depending if it's an icon as well as text.
       let tabItemSet = rows[i];
 
       let tabIcon = '';
       let tabText = '';
 
-      for (x = 0; x < tabItemSet.length; x++) {
+      for (let x = 0; x < tabItemSet.length; x++) {
         let tokenInfo = tabItemSet[x];
         if (tokenInfo.type === "icon") {
           tabIcon = tokenInfo.iconName;
