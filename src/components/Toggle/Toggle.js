@@ -2,10 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Toggle as FToggle } from '@fluentui/react/lib/Toggle';
 
-
-
 class Toggle extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -17,13 +14,11 @@ class Toggle extends React.Component {
 
     this.state = {
       _isChecked: checked,
-    }
+    };
   }
 
   set() {
-    this.setState(
-      { _isChecked: this.props.isChecked }
-    )
+    this.setState({ _isChecked: this.props.isChecked });
   }
 
   componentDidMount() {
@@ -39,9 +34,7 @@ class Toggle extends React.Component {
 
   _onSelectionChange(isChecked) {
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
-    this.setState(
-      { _isChecked: isChecked }
-    )
+    this.setState({ _isChecked: isChecked });
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onCheckChanged) {
@@ -53,23 +46,21 @@ class Toggle extends React.Component {
     let checked = this.state._isChecked;
 
     return (
-
       <FToggle
         {...this.props}
         checked={checked}
-        onChange={(e, v) => { this._onSelectionChange(v); }}
+        onChange={(e, v) => {
+          this._onSelectionChange(v);
+        }}
       />
-
     );
   }
 }
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 Toggle.propTypes = {
-
   /**
    * @uxpindescription The checked state of the control. This prop's live value is available for scripting.
    * @uxpinpropname * Checked
@@ -111,21 +102,19 @@ Toggle.propTypes = {
    * @uxpindescription Fires when the control's Checked value changes
    * @uxpinpropname * Checked Changed
    * */
-  onCheckChanged: PropTypes.func
+  onCheckChanged: PropTypes.func,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 Toggle.defaultProps = {
   isChecked: true,
-  label: "Toggle Switch",
-  onText: "On",
-  offText: "Off",
+  label: 'Toggle Switch',
+  onText: 'On',
+  offText: 'Off',
   inlineLabel: true,
   disabled: false,
 };
-
 
 export { Toggle as default };

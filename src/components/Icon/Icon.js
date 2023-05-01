@@ -3,24 +3,18 @@ import * as PropTypes from 'prop-types';
 import { Icon as IconM } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
-
-
 const defaultColor = '#000000';
 const defaultIcon = 'Home';
 const defaultSize = 50;
-
-
 
 class Icon extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    }
+    this.state = {};
   }
 
   render() {
-
     let size = this.props.size;
 
     let color = UxpColors.getHexFromHexOrToken(this.props.color);
@@ -38,15 +32,7 @@ class Icon extends React.Component {
       lineHeight: 'normal',
     };
 
-    return (
-
-      <IconM
-        {...this.props}
-        iconName={this.props.iconName.trim()}
-        className={iconDisplayClass}
-      />
-
-    );
+    return <IconM {...this.props} iconName={this.props.iconName.trim()} className={iconDisplayClass} />;
   }
 }
 
@@ -76,4 +62,4 @@ Icon.defaultProps = {
   color: defaultColor,
 };
 
-export { Icon as default }
+export { Icon as default };

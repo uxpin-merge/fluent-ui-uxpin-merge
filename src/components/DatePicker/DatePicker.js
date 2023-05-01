@@ -1,10 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { DatePicker as FDatePicker } from '@fluentui/react/lib/DatePicker';
-import { DayOfWeek, DateRangeType } from '@fluentui/react/lib/DateTimeUtilities'
+import { DayOfWeek, DateRangeType } from '@fluentui/react/lib/DateTimeUtilities';
 import { UxpDateTimeUtils } from '../_helpers/uxpdatetimeutils';
-
-
 
 const dayPickerStrings = {
   months: UxpDateTimeUtils.months,
@@ -16,33 +14,23 @@ const dayPickerStrings = {
   invalidInputErrorMessage: 'Invalid date format.',
 };
 
-const workWeekDays = [
-  DayOfWeek.Monday,
-  DayOfWeek.Tuesday,
-  DayOfWeek.Wednesday,
-  DayOfWeek.Thursday,
-  DayOfWeek.Friday
-];
-
-
+const workWeekDays = [DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday];
 
 class DatePicker extends React.Component {
   constructor(props) {
     super(props);
 
-    //This control wants a real Date object or null. 
+    //This control wants a real Date object or null.
     this.state = {
-      selectedDate: ''
-    }
+      selectedDate: '',
+    };
   }
 
   set() {
     //Let's see if we can parse a real date
     let dt = UxpDateTimeUtils.parseDate(this.props.calDate);
 
-    this.setState(
-      { selectedDate: dt ? dt : '' }
-    )
+    this.setState({ selectedDate: dt ? dt : '' });
   }
 
   componentDidMount() {
@@ -56,22 +44,18 @@ class DatePicker extends React.Component {
   }
 
   _onChange(date) {
-
-    this.setState(
-      { selectedDate: date }
-    )
+    this.setState({ selectedDate: date });
 
     if (this.props.onChange) {
-      //Format this before surfacing with style: 'Feb 8, 2020' 
+      //Format this before surfacing with style: 'Feb 8, 2020'
       let dt = UxpDateTimeUtils.getFormattedDate(date);
       this.props.onChange(dt ? dt : '');
     }
   }
 
-
   /**
    * A callback to format the date as in our preferred way
-   * @param {*} dateStr 
+   * @param {*} dateStr
    */
   _onFormatDate(dateStr) {
     let dt = UxpDateTimeUtils.getFormattedDate(dateStr);
@@ -87,9 +71,7 @@ class DatePicker extends React.Component {
     return dt ? dt : '';
   }
 
-
   render() {
-
     const calProps = {
       dateRangeType: DateRangeType.Day,
       autoNavigateOnSelection: true,
@@ -102,10 +84,8 @@ class DatePicker extends React.Component {
     let dt = this.state.selectedDate ? this.state.selectedDate : new Date();
 
     return (
-
       <FDatePicker
         {...this.props}
-
         firstDayOfWeek={DayOfWeek.Sunday}
         strings={dayPickerStrings}
         disableAutoFocus={true}
@@ -115,9 +95,7 @@ class DatePicker extends React.Component {
         showCloseButton={true}
         showGoToToday={true}
         showMonthPickerAsOverlay={true}
-
         calendarProps={calProps}
-
         label={this.props.label}
         value={this.state.selectedDate}
         placeholder={this.props.placeholder}
@@ -126,20 +104,19 @@ class DatePicker extends React.Component {
         showWeekNumbers={this.props.showWeekNumbers}
         disabled={this.props.disabled}
         isRequired={this.props.required}
-
-        onSelectDate={(d, sdr) => this._onChange(d)}
+        onSelectDate={(d) => this._onChange(d)}
         onFormatDate={(d) => this._onFormatDate(d)}
         parseDateFromString={(d) => this._onParseDate(d)}
       />
     );
   }
-};
+}
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 DatePicker.propTypes = {
+  disabled: PropTypes.bool,
 
   /**
    * @uxpindescription The label for the control
@@ -149,7 +126,7 @@ DatePicker.propTypes = {
   label: PropTypes.string,
 
   /**
-   * A unique name for this property. Got some weird behavior with the same name as the control's prop. 
+   * A unique name for this property. Got some weird behavior with the same name as the control's prop.
    * @uxpindescription Set the date in the control using one of these formats: Feb 8, 2020 -OR- 2/6/2020. This prop's live value is available for scripting.
    * @uxpinpropname * Date
    * @uxpinbind onChange
@@ -186,18 +163,17 @@ DatePicker.propTypes = {
   onChange: PropTypes.func,
 };
 
-
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 DatePicker.defaultProps = {
-  label: "DatePicker",
-  placeholder: "Enter date: Jan 15, 2021 or 1/15/2021",
-  calDate: "",
+  disabled: false,
+  label: 'DatePicker',
+  placeholder: 'Enter date: Jan 15, 2021 or 1/15/2021',
+  calDate: '',
   allowTextInput: true,
   required: false,
   showWeekNumbers: false,
 };
-
 
 export { DatePicker as default };

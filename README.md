@@ -1,3 +1,4 @@
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 # Fluent UI React + UXPin Merge
 Integration of [Fluent UI](https://github.com/microsoft/fluentui) with UXPin Merge Technology.
 

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import PeoplePicker from '../PeoplePicker';
 
-
-
 const defaultPeople = `Person1
 Person2
 Person3
@@ -24,10 +22,4 @@ Person18
 Person19
 Person20`;
 
-
-
-export default (
-   <PeoplePicker
-      uxpId="peoplepicker1"
-      persons={defaultPeople} />
-);
+export default <PeoplePicker uxpId="peoplepicker1" persons={defaultPeople} />;

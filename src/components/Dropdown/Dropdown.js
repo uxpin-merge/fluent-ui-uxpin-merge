@@ -5,11 +5,7 @@ import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
-
-
 class Dropdown extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -22,7 +18,7 @@ class Dropdown extends React.Component {
 
       items: [],
       isDirty: false,
-    }
+    };
   }
 
   set() {
@@ -32,7 +28,7 @@ class Dropdown extends React.Component {
     var index = undefined;
     var list = [];
 
-    //Props are 1 based. 
+    //Props are 1 based.
     let selected = UxpNumberParser.parseIntsAdjusted(this.props.selected, 0);
 
     if (selected && selected.length > 0) {
@@ -44,7 +40,7 @@ class Dropdown extends React.Component {
       _selectedIndex: index,
       _selectedIndices: list,
       items: menuItems,
-    })
+    });
   }
 
   componentDidMount() {
@@ -57,44 +53,38 @@ class Dropdown extends React.Component {
     }
   }
 
-  //The main entry point for the control's onChange event. 
-  // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
-  // And in the case of multi-select, each individual item comes in separately. 
+  //The main entry point for the control's onChange event.
+  // Note that 'changed' means its changed from checked to unchecked, or vice versa.
+  // And in the case of multi-select, each individual item comes in separately.
   _onChoiceChange(option, index) {
-
     if (this.props.multiSelect) {
       //Case Multi Select
-      // Option info has the new selection state info for a specific item. 
-      // Option.selected has its new selection state, true or false. Index is its index. 
+      // Option info has the new selection state info for a specific item.
+      // Option.selected has its new selection state, true or false. Index is its index.
       this._onChangeMulti(option);
-    }
-    else {
+    } else {
       //Case Single Select
-      // Option info is undefined. The Index is the index of the newly selected item. 
+      // Option info is undefined. The Index is the index of the newly selected item.
       this._onChangeSingle(index + 1);
     }
   }
 
-  // To process the onChange event for a single select use case. 
+  // To process the onChange event for a single select use case.
   _onChangeSingle(index) {
-
     // We MUST set the state with the updated index value. This will also force the control to update in UXPin at runtime.
-    this.setState(
-      {
-        _selectedIndex: index,
-        isDirty: false,
-      }
-    )
+    this.setState({
+      _selectedIndex: index,
+      isDirty: false,
+    });
 
-    // Raise this event to UXPin. 
+    // Raise this event to UXPin.
     if (this.props.onChoiceChange) {
-      this.props.onChoiceChange((index).toString());
+      this.props.onChoiceChange(index.toString());
     }
   }
 
-  //To process the onChange event for a multi-select use case. 
+  //To process the onChange event for a multi-select use case.
   _onChangeMulti(option) {
-
     let selected = option.selected;
     let key = option.key;
 
@@ -104,50 +94,40 @@ class Dropdown extends React.Component {
     //If selected, let's add it to our tracking array prop.
     if (selected && included == false) {
       keys.push(key);
-    }
-    else if (selected == false && included) {
-
-      //Otherwise let's remove it from our tracking array. 
-      var filtered = keys.filter(
-        function (currVal) {
-          return currVal != key;
-        });
+    } else if (selected == false && included) {
+      //Otherwise let's remove it from our tracking array.
+      var filtered = keys.filter(function (currVal) {
+        return currVal != key;
+      });
 
       // Now we set the filtered array to the keys array.
       keys = filtered;
     }
 
-    this.setState(
-      {
-        _selectedIndices: keys,
-        isDirty: true,
-      }
-    )
+    this.setState({
+      _selectedIndices: keys,
+      isDirty: true,
+    });
   }
 
   //If it's multiselect, only notify UXPin of changes on blur.
   _onDismiss() {
     if (this.state.isDirty && this.props.multiSelect) {
-      //Raise this event to UXPin. 
+      //Raise this event to UXPin.
       if (this.props.onChoiceChange) {
         let list = this.state._selectedIndices?.sort()?.toString();
         this.props.onChoiceChange(list);
       }
 
-      this.setState(
-        { isDirty: false }
-      )
+      this.setState({ isDirty: false });
     }
   }
 
   render() {
-
     //We muse set both props.
     // One of these must be set to undefined, depending on whether this is single or multi select.
-    let sIndex = this.props.multiSelect ? undefined
-      : this.state._selectedIndex;
-    let mIndices = this.props.multiSelect ? this.state._selectedIndices
-      : undefined;
+    let sIndex = this.props.multiSelect ? undefined : this.state._selectedIndex;
+    let mIndices = this.props.multiSelect ? this.state._selectedIndices : undefined;
 
     const ttTargetID = _.uniqueId('ttTarget_');
     const tooltipID = _.uniqueId('tooltip_');
@@ -158,11 +138,7 @@ class Dropdown extends React.Component {
 
     return (
       <div>
-        <TooltipHost
-          content={this.props.tooltip}
-          id={tooltipID}
-          calloutProps={ttProps}
-        >
+        <TooltipHost content={this.props.tooltip} id={tooltipID} calloutProps={ttProps}>
           <FDropdown
             {...this.props}
             options={this.state.items}
@@ -170,23 +146,21 @@ class Dropdown extends React.Component {
             selectedKeys={mIndices}
             id={ttTargetID}
             aria-describedby={tooltipID}
-            onChange={(e, o, i) => { this._onChoiceChange(o, i); }}
+            onChange={(e, o, i) => {
+              this._onChoiceChange(o, i);
+            }}
             onDismiss={() => this._onDismiss()}
           />
-
         </TooltipHost>
       </div>
     );
   }
 }
 
-
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 Dropdown.propTypes = {
-
   /**
    * @uxpindescription The label for the control
    * @uxpinpropname Label
@@ -250,19 +224,17 @@ Dropdown.propTypes = {
   onChoiceChange: PropTypes.func,
 };
 
-
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 Dropdown.defaultProps = {
-  label: "",
+  label: '',
   items: '',
   selected: '',
-  placeholder: "",
+  placeholder: '',
   disabled: false,
   required: false,
   tooltip: '',
 };
-
 
 export { Dropdown as default };

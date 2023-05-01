@@ -4,29 +4,25 @@ import { DefaultButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
 const defaultText = 'SplitButton';
 const defaultIcon = '';
 
 //Default items list to populate the control with.
-//Leave these left aligned as they show up in UXPin exactly as-is. 
-const defaultItems = `Files 
+//Leave these left aligned as they show up in UXPin exactly as-is.
+const defaultItems = `Files
 * icon(Document) Add Document
 * icon(FileCode) Add Code File
 divider
 icon(Picture) Add Picture
 icon(AddGroup) Add Group`;
 
-
-
 class SplitButton extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      items: []
-    }
+      items: [],
+    };
   }
 
   componentDidMount() {
@@ -34,15 +30,12 @@ class SplitButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.items !== this.props.items
-    ) {
+    if (prevProps.items !== this.props.items) {
       this.set();
     }
   }
 
   set() {
-
     var menuItems = UxpMenuUtils.parseItemText(this.props.items, true);
     menuItems = this._addClickHandlers(menuItems);
 
@@ -69,7 +62,6 @@ class SplitButton extends React.Component {
   }
 
   _onClick(index) {
-
     //The main Button always passes 0.
     //Any sub-menu buttons pass their 1-based index value.
 
@@ -80,7 +72,6 @@ class SplitButton extends React.Component {
   }
 
   render() {
-
     const targetID = _.uniqueId('target_');
     const tooltipID = _.uniqueId('tooltip_');
     const ttProps = {
@@ -88,13 +79,13 @@ class SplitButton extends React.Component {
       target: `#${targetID}`,
     };
 
-    let iconProps = { iconName: this.props.iconName }
+    let iconProps = { iconName: this.props.iconName };
 
     var menuProps = undefined;
     if (this.state.items?.length) {
       menuProps = {
         items: this.state.items,
-        directionalHintFixed: true
+        directionalHintFixed: true,
       };
     }
 
@@ -103,16 +94,12 @@ class SplitButton extends React.Component {
         //Fixes the 'nudge up/down' issue
         display: 'block',
         lineHeight: 'normal',
-      }
-    }
+      },
+    };
 
     return (
       <div>
-        <TooltipHost
-          content={this.props.tooltip}
-          id={tooltipID}
-          calloutProps={ttProps}
-        >
+        <TooltipHost content={this.props.tooltip} id={tooltipID} calloutProps={ttProps}>
           <DefaultButton
             {...this.props}
             id={targetID}
@@ -120,26 +107,23 @@ class SplitButton extends React.Component {
             aria-describedby={tooltipID}
             split={true}
             primary={this.props.primary}
-            iconProps={iconProps}
             menuProps={menuProps}
             styles={btnStyles}
             //Always send 0 for the main button part
-            onClick={() => { this._onClick(0) }}
+            onClick={() => {
+              this._onClick(0);
+            }}
           />
-
         </TooltipHost>
       </div>
     );
   }
-
 }
-
 
 /**
  * Set up the properties to be available in the UXPin property inspector.
  */
 SplitButton.propTypes = {
-
   /**
    * @uxpindescription To display the button in the filled style. Otherwise, displays in the outline style
    * @uxpinpropname Primary Style
@@ -147,9 +131,9 @@ SplitButton.propTypes = {
   primary: PropTypes.bool,
 
   /**
-  * @uxpindescription The displayed text on the button
-  * @uxpinpropname Text
-  * */
+   * @uxpindescription The displayed text on the button
+   * @uxpinpropname Text
+   * */
   text: PropTypes.string,
 
   /**
@@ -172,25 +156,24 @@ SplitButton.propTypes = {
   tooltip: PropTypes.string,
 
   /**
-  * @uxpindescription To disable the control
-  * @uxpinpropname Disabled
-  * */
+   * @uxpindescription To disable the control
+   * @uxpinpropname Disabled
+   * */
   disabled: PropTypes.bool,
 
   /**
-  * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting. (Used at runtime only.)
-  * @uxpinpropname * Selected Index
-  * @uxpinbind onButtonClick
-  */
+   * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting. (Used at runtime only.)
+   * @uxpinpropname * Selected Index
+   * @uxpinbind onButtonClick
+   */
   index: PropTypes.number,
 
   /**
- * @uxpindescription Fires when the button is clicked on.
- * @uxpinpropname * Click
- * */
+   * @uxpindescription Fires when the button is clicked on.
+   * @uxpinpropname * Click
+   * */
   onButtonClick: PropTypes.func,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
@@ -203,6 +186,5 @@ SplitButton.defaultProps = {
   items: defaultItems,
   tooltip: '',
 };
-
 
 export { SplitButton as default };

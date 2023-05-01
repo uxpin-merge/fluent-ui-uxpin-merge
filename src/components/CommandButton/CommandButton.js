@@ -4,9 +4,8 @@ import { CommandButton as FCommandButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
-const defaultIcon = "Add";
-const defaultText = "Command Button";
+const defaultIcon = 'Add';
+const defaultText = 'Command Button';
 const defaultItems = `Files 
 * icon(Document) Add Document
 * icon(FileCode) Add Code File
@@ -14,16 +13,13 @@ divider
 icon(Picture) Add Picture
 icon(AddGroup) Add Group`;
 
-
-
 class CommandButton extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      items: []
-    }
+      items: [],
+    };
   }
 
   componentDidMount() {
@@ -63,7 +59,6 @@ class CommandButton extends React.Component {
   }
 
   _onClick(index) {
-
     //The main Button always passes 0.
     //Any popup menu buttons pass their 1-based index value.
 
@@ -74,8 +69,7 @@ class CommandButton extends React.Component {
   }
 
   render() {
-
-    let iconProps = { iconName: this.props.iconName }
+    let iconProps = { iconName: this.props.iconName };
 
     const buttonID = _.uniqueId('commandbutton_');
     const tooltipID = _.uniqueId('tooltip_');
@@ -102,8 +96,8 @@ class CommandButton extends React.Component {
         whiteSpace: 'nowrap',
         margin: labelMargin,
         padding: 0,
-      }
-    }
+      },
+    };
 
     var menuProps = undefined;
     if (this.props.items) {
@@ -115,15 +109,11 @@ class CommandButton extends React.Component {
 
     let menuIconProps = {
       iconName: 'MoreVertical',
-    }
+    };
 
     return (
       <div>
-        <TooltipHost
-          content={this.props.tooltip}
-          id={tooltipID}
-          calloutProps={ttProps}
-        >
+        <TooltipHost content={this.props.tooltip} id={tooltipID} calloutProps={ttProps}>
           <FCommandButton
             {...this.props}
             id={buttonID}
@@ -133,25 +123,24 @@ class CommandButton extends React.Component {
             menuProps={menuProps}
             menuIconProps={this.props.ellipsis ? menuIconProps : ''}
             styles={styles}
-            onClick={() => { this._onClick(0) }}
+            onClick={() => {
+              this._onClick(0);
+            }}
           />
         </TooltipHost>
       </div>
     );
   }
-
 }
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 CommandButton.propTypes = {
-
   /**
-    * @uxpindescription The displayed text on the button (Optional)
-    * @uxpinpropname Text
-    * */
+   * @uxpindescription The displayed text on the button (Optional)
+   * @uxpinpropname Text
+   * */
   text: PropTypes.string,
 
   /**
@@ -180,16 +169,16 @@ CommandButton.propTypes = {
   ellipsis: PropTypes.bool,
 
   /**
-  * @uxpindescription To disable the control
-  * @uxpinpropname Disabled
-  * */
+   * @uxpindescription To disable the control
+   * @uxpinpropname Disabled
+   * */
   disabled: PropTypes.bool,
 
   /**
-  * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting. (Used at runtime only.)
-  * @uxpinpropname * Selected Index
-  * @uxpinbind onButtonClick
-  */
+   * @uxpindescription The index of the button or menu item that the user clicked on at runtime. 0 = the base button. 1 or more is one of the popup menu items. This prop's live value is available for scripting. (Used at runtime only.)
+   * @uxpinpropname * Selected Index
+   * @uxpinbind onButtonClick
+   */
   index: PropTypes.number,
 
   /**
@@ -198,7 +187,6 @@ CommandButton.propTypes = {
    * */
   onButtonClick: PropTypes.func,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
@@ -212,6 +200,5 @@ CommandButton.defaultProps = {
   ellipsis: false,
   index: 0,
 };
-
 
 export { CommandButton as default };

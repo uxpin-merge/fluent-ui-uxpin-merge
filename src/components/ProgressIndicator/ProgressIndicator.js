@@ -3,10 +3,7 @@ import * as PropTypes from 'prop-types';
 import { ProgressIndicator as FProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
-
-
-
-const defaultLabel = "Progress";
+const defaultLabel = 'Progress';
 const defaultVal = 50;
 
 const roleDefault = 'default';
@@ -14,23 +11,20 @@ const roleSuccess = 'success';
 const roleWarning = 'warning';
 const roleError = 'error';
 
-const defaultColor = "themePrimary";
+const defaultColor = 'themePrimary';
 const minVal = 0;
 const maxVal = 100;
 const defaultHeight = 10;
 
-
-
 class ProgressIndicator extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   set() {
     this.setState({
-      _percent: this.props.percent
-    })
+      _percent: this.props.percent,
+    });
   }
 
   componentDidMount() {
@@ -38,37 +32,36 @@ class ProgressIndicator extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.percent !== this.props.percent
-    ) {
+    if (prevProps.percent !== this.props.percent) {
       this.set();
     }
   }
 
   getProgressIndicatorClasses() {
-
-    var bgColor = this.props.roleType === roleSuccess ? UxpColors.success
-      : this.props.roleType === roleWarning ? UxpColors.warning
-        : this.props.roleType === roleError ? UxpColors.error
-          : UxpColors.getHexFromColorToken(defaultColor);
+    var bgColor =
+      this.props.roleType === roleSuccess
+        ? UxpColors.success
+        : this.props.roleType === roleWarning
+        ? UxpColors.warning
+        : this.props.roleType === roleError
+        ? UxpColors.error
+        : UxpColors.getHexFromColorToken(defaultColor);
 
     return {
       selectors: {
         '& .ms-ProgressIndicator-progressBar': {
           backgroundColor: bgColor,
         },
-
-      }
-    }
+      },
+    };
   }
 
-  //Determine what value to set as the progress indicator's value, if at all. 
+  //Determine what value to set as the progress indicator's value, if at all.
   _getValidatedPercent() {
-
-    //Set the default to undefined. We'll use it if it's in indeterminate mode. 
+    //Set the default to undefined. We'll use it if it's in indeterminate mode.
     var percent = undefined;
 
-    //If it's not indeterminate mode, let's find out what this value should be. 
+    //If it's not indeterminate mode, let's find out what this value should be.
     //This will set the value to an int between 0 - 100
     if (!this.props.indeterminate) {
       var p = this.state._percent;
@@ -76,40 +69,30 @@ class ProgressIndicator extends React.Component {
         p = Number(p);
       }
 
-      percent = (!p || p < minVal) ? minVal :
-        (p > maxVal) ? maxVal :
-          p;
+      percent = !p || p < minVal ? minVal : p > maxVal ? maxVal : p;
 
       //Now, convert the value to a float between 0 - 1
-      percent = (percent > 0) ? (percent / 100) : 0;
+      percent = percent > 0 ? percent / 100 : 0;
     }
 
     //Return the final value
     return percent;
   }
 
-
   render() {
-
     //Get a validated percentage value
-    let percent = this._getValidatedPercent()
+    let percent = this._getValidatedPercent();
 
     return (
-      <FProgressIndicator
-        {...this.props}
-        percentComplete={percent}
-        className={this.getProgressIndicatorClasses()}
-      />
+      <FProgressIndicator {...this.props} percentComplete={percent} className={this.getProgressIndicatorClasses()} />
     );
   }
 }
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 ProgressIndicator.propTypes = {
-
   /**
    * @uxpindescription The label for the control
    * @uxpinpropname Label
@@ -136,7 +119,7 @@ ProgressIndicator.propTypes = {
   roleType: PropTypes.oneOf([roleDefault, roleSuccess, roleWarning, roleError]),
 
   /**
-   * @uxpindescription Control height. Value must be 0 or more. 
+   * @uxpindescription Control height. Value must be 0 or more.
    * @uxpinpropname Height
    */
   barHeight: PropTypes.number,
@@ -146,12 +129,11 @@ ProgressIndicator.propTypes = {
    * @uxpinpropname Indeterminate
    * */
   indeterminate: PropTypes.bool,
-}
-
+};
 
 /**
  * Set the default values.
- * 
+ *
  */
 ProgressIndicator.defaultProps = {
   label: defaultLabel,
@@ -160,7 +142,6 @@ ProgressIndicator.defaultProps = {
   description: '',
   barHeight: defaultHeight,
   indeterminate: false,
-}
-
+};
 
 export { ProgressIndicator as default };

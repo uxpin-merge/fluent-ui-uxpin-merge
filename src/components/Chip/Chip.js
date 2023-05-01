@@ -3,8 +3,6 @@ import * as PropTypes from 'prop-types';
 import { Text } from '@fluentui/react/lib/Text';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
-
-
 const defaultTextValue = 'chip';
 
 const roleDefault = 'default';
@@ -18,36 +16,31 @@ const borderSyle = '1px solid ';
 const borderRadius = 10;
 
 //MS Fluent Color Tokens
-const defaultBg = "neutralLighterAlt";
-const defaultText = "black";
-const defaultBorder = "neutralQuaternary";
-const defaultHover = "neutralQuaternaryAlt";
+const defaultBg = 'neutralLighterAlt';
+const defaultText = 'black';
+const defaultBorder = 'neutralQuaternary';
+const defaultHover = 'neutralQuaternaryAlt';
 
 //Padding: left and right
 const padLR = '8px ';
 //Padding: top and bottom
 const padTB = '4px ';
 
-
-
 class Chip extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       chipStyles: '',
-    }
+    };
   }
 
   set() {
     let style = this._getStyles();
 
-    this.setState(
-      {
-        chipStyles: style,
-      }
-    )
+    this.setState({
+      chipStyles: style,
+    });
   }
 
   componentDidMount() {
@@ -61,32 +54,51 @@ class Chip extends React.Component {
   }
 
   _getStyles() {
-
     let role = this.props.role;
 
-    let border = role === roleInfo ? UxpColors.info
-      : role === roleSuccess ? UxpColors.success
-        : role === roleWarning ? UxpColors.warning
-          : role === roleError ? UxpColors.error
-            : UxpColors.getHexFromColorToken(defaultBorder);
+    let border =
+      role === roleInfo
+        ? UxpColors.info
+        : role === roleSuccess
+        ? UxpColors.success
+        : role === roleWarning
+        ? UxpColors.warning
+        : role === roleError
+        ? UxpColors.error
+        : UxpColors.getHexFromColorToken(defaultBorder);
 
-    let bg = role === roleInfo ? UxpColors.infoBackground
-      : role === roleSuccess ? UxpColors.successBackground
-        : role === roleWarning ? UxpColors.warningBackground
-          : role === roleError ? UxpColors.errorBackground
-            : UxpColors.getHexFromColorToken(defaultBg);
+    let bg =
+      role === roleInfo
+        ? UxpColors.infoBackground
+        : role === roleSuccess
+        ? UxpColors.successBackground
+        : role === roleWarning
+        ? UxpColors.warningBackground
+        : role === roleError
+        ? UxpColors.errorBackground
+        : UxpColors.getHexFromColorToken(defaultBg);
 
-    let textColor = role === roleInfo ? UxpColors.infoText
-      : role === roleSuccess ? UxpColors.successText
-        : role === roleWarning ? UxpColors.warningText
-          : role === roleError ? UxpColors.errorText
-            : UxpColors.getHexFromColorToken(defaultText);
+    let textColor =
+      role === roleInfo
+        ? UxpColors.infoText
+        : role === roleSuccess
+        ? UxpColors.successText
+        : role === roleWarning
+        ? UxpColors.warningText
+        : role === roleError
+        ? UxpColors.errorText
+        : UxpColors.getHexFromColorToken(defaultText);
 
-    let hover = role === roleInfo ? UxpColors.infoBackgroundHover
-      : role === roleSuccess ? UxpColors.successBackgroundHover
-        : role === roleWarning ? UxpColors.warningBackgroundHover
-          : role === roleError ? UxpColors.errorBackgroundHover
-            : UxpColors.getHexFromColorToken(defaultHover);
+    let hover =
+      role === roleInfo
+        ? UxpColors.infoBackgroundHover
+        : role === roleSuccess
+        ? UxpColors.successBackgroundHover
+        : role === roleWarning
+        ? UxpColors.warningBackgroundHover
+        : role === roleError
+        ? UxpColors.errorBackgroundHover
+        : UxpColors.getHexFromColorToken(defaultHover);
 
     return {
       text: textColor,
@@ -113,8 +125,8 @@ class Chip extends React.Component {
         color: textColor,
         fontWeight: 'normal',
         fontStyle: 'normal',
-        display: 'block',  //Fixes the 'nudge up/down' issues for larger and smaller sizes
-        lineHeight: 'normal',  //Fixes the janked line height issues for larger and smaller sizes
+        display: 'block', //Fixes the 'nudge up/down' issues for larger and smaller sizes
+        lineHeight: 'normal', //Fixes the janked line height issues for larger and smaller sizes
         textAlign: alignCenter,
         padding: padTB + padLR + padTB + padLR,
         background: chipStyles.background,
@@ -125,8 +137,8 @@ class Chip extends React.Component {
             background: this.props.hoverEffect ? chipStyles.hover : '',
           },
         },
-      }
-    }
+      },
+    };
 
     let message = this.props.textValue ? this.props.textValue.trim() : '';
 
@@ -137,29 +149,28 @@ class Chip extends React.Component {
         variant={this.props.size}
         block={true}
         nowrap={true}
-        onClick={() => this._onClick()} >
+        onClick={() => this._onClick()}
+      >
         {message}
       </Text>
     );
   }
 }
 
-
 /**
-* Set up the properties to be available in the UXPin property inspector.
-*/
+ * Set up the properties to be available in the UXPin property inspector.
+ */
 Chip.propTypes = {
-
   /**
    * @uxpindescription The text value to display. Supports the link(Click Me) feature.
-   * @uxpinpropname Text 
+   * @uxpinpropname Text
    * @uxpincontroltype textfield(2)
    */
   textValue: PropTypes.string,
 
   /**
-  * @uxpindescription The visual style based on the role of the control
-  */
+   * @uxpindescription The visual style based on the role of the control
+   */
   role: PropTypes.oneOf([roleDefault, roleInfo, roleSuccess, roleWarning, roleError]),
 
   /**
@@ -191,7 +202,6 @@ Chip.propTypes = {
   onChipClick: PropTypes.func,
 };
 
-
 /**
  * Set the default values for this control in the UXPin Editor.
  */
@@ -201,6 +211,5 @@ Chip.defaultProps = {
   role: roleDefault,
   hoverEffect: true,
 };
-
 
 export { Chip as default };

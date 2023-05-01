@@ -1,216 +1,215 @@
-
 export const UxpDateTimeUtils = {
+  months: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
 
-	months: [
-		'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-	],
+  monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 
-	monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 
-	days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  daysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 
-	daysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+  timeAM: 'am',
+  timePM: 'pm',
 
-	timeAM: 'am',
-	timePM: 'pm',
+  /**
+   * Tests a string to see if it can be converted into a valid Date object.
+   * Can be either a JS Date object or a string, such as 'Feb 8 2020' or '2/8/20'.
+   * @param {string} dateStr A JavaScript Date object or a string representation of a date.
+   * @example A representation of a valid Date object, such as 'new Date()'.
+   * @example 'Feb 8 2020' where the date is February 8, 2020.
+   * @example '2/8/20' where the date is February 8, 2020.
+   * returns {boolean} True if the string entered can make a valid JavaScript Date object. False otherwise.
+   */
+  isValidDate: function (dateStr) {
+    //If we have an empty date string, return false.
+    if (!dateStr || dateStr === null) return false;
 
+    //Test what was entered
+    let timestamp = Date.parse(dateStr);
+    if (!isNaN(timestamp)) {
+      return true;
+    }
 
-	/**
-	* Tests a string to see if it can be converted into a valid Date object. 
-	* Can be either a JS Date object or a string, such as 'Feb 8 2020' or '2/8/20'.
-	* @param {string} dateStr A JavaScript Date object or a string representation of a date.
-	* @example A representation of a valid Date object, such as 'new Date()'.
-	* @example 'Feb 8 2020' where the date is February 8, 2020. 
-	* @example '2/8/20' where the date is February 8, 2020.
-	* returns {boolean} True if the string entered can make a valid JavaScript Date object. False otherwise. 
-	*/
-	isValidDate: function (dateStr) {
-		//If we have an empty date string, return false.
-		if (!dateStr || dateStr === null)
-			return false;
+    //Else, there was some other issue
+    return false;
+  },
 
-		//Test what was entered
-		let timestamp = Date.parse(dateStr);
-		if (!isNaN(timestamp)) {
-			return true;
-		}
+  parseDate: function (dateStr) {
+    if (this.isValidDate(dateStr)) {
+      return new Date(dateStr);
+    }
 
-		//Else, there was some other issue
-		return false;
-	},
+    return undefined;
+  },
 
-	parseDate: function (dateStr) {
-		if (this.isValidDate(dateStr)) {
-			return new Date(dateStr);
-		}
+  //Local time in Epoch seconds
+  getEpochSeconds: function (dateStr) {
+    if (!this.isValidDate(dateStr)) {
+      return undefined;
+    }
 
-		return undefined;
-	},
+    let date = new Date(dateStr);
 
-	//Local time in Epoch seconds
-	getEpochSeconds: function (dateStr) {
-		if (!this.isValidDate(dateStr)) {
-			return undefined;
-		}
+    return Math.round(date.getTime() / 1000);
+  },
 
-		let date = new Date(dateStr);
+  //Full local date/time in UTC
+  getUtcString: function (dateStr) {
+    if (!this.isValidDate(dateStr)) {
+      return undefined;
+    }
 
-		return Math.round(date.getTime() / 1000);
-	},
+    let date = new Date(dateStr);
 
-	//Full local date/time in UTC
-	getUtcString: function (dateStr) {
-		if (!this.isValidDate(dateStr)) {
-			return undefined;
-		}
+    return date.toUTCString();
+  },
 
-		let date = new Date(dateStr);
+  getNowFormattedDate: function () {
+    return this.getFormattedDate(new Date());
+  },
 
-		return date.toUTCString();
-	},
+  getNowFormattedTime: function () {
+    return this.getFormattedTime(new Date());
+  },
 
-	getNowFormattedDate: function () {
-		return this.getFormattedDate(new Date());
-	},
+  getNowFormattedDateTime: function () {
+    return this.getFormattedDateTime(new Date());
+  },
 
-	getNowFormattedTime: function () {
-		return this.getFormattedTime(new Date());
-	},
+  getFormattedDate: function (dateStr) {
+    if (!this.isValidDate(dateStr)) {
+      return undefined;
+    }
 
-	getNowFormattedDateTime: function () {
-		return this.getFormattedDateTime(new Date());
-	},
+    //Get the parts
+    let dt = new Date(dateStr);
 
-	getFormattedDate: function (dateStr) {
+    let year = dt.getFullYear();
+    let date = dt.getDate();
+    let i = dt.getMonth(); //0-based
 
-		if (!this.isValidDate(dateStr)) {
-			return undefined;
-		}
+    //Assemble the preferred format like: 'Feb 8, 2020'
+    let month = this.monthsShort[i];
+    return month + ' ' + date + ', ' + year;
+  },
 
-		//Get the parts
-		let dt = new Date(dateStr);
+  getFormattedTime: function (dateStr) {
+    return this.getFormattedTimeAdvanced(dateStr, true, false);
+  },
 
-		let year = dt.getFullYear();
-		let date = dt.getDate();
-		let i = dt.getMonth() //0-based
+  getFormattedDateTime: function (dateStr) {
+    let dt = this.getFormattedDate(dateStr);
+    let time = this.getFormattedTime(dateStr);
 
-		//Assemble the preferred format like: 'Feb 8, 2020'
-		let month = this.monthsShort[i];
-		return month + " " + date + ", " + year;
-	},
+    if (dt && time) {
+      return dt + ', ' + time;
+    }
+  },
 
-	getFormattedTime: function (dateStr) {
-		return this.getFormattedTimeAdvanced(dateStr, true, false);
-	},
+  getFormattedDateTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
+    let dt = this.getFormattedDate(dateStr);
+    let time = this.getFormattedTimeAdvanced(dateStr, in12HrFormat, withSeconds);
 
+    if (dt && time) {
+      return dt + ', ' + time;
+    }
+  },
 
-	getFormattedDateTime: function (dateStr) {
+  getFormattedTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
+    if (!this.isValidDate(dateStr)) {
+      return undefined;
+    }
 
-		let dt = this.getFormattedDate(dateStr);
-		let time = this.getFormattedTime(dateStr);
+    //Get the parts
+    let dt = new Date(dateStr);
+    let hour = dt.getHours(); //0-23
+    let min = dt.getMinutes(); //0-59
 
-		if (dt && time) {
-			return dt + ", " + time;
-		}
-	},
+    var hourAdjusted = hour;
+    var minAdjusted = min;
 
-	getFormattedDateTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
+    if (in12HrFormat) {
+      hourAdjusted = hour > 12 ? hour - 12 : hour;
+    }
 
-		let dt = this.getFormattedDate(dateStr);
-		let time = this.getFormattedTimeAdvanced(dateStr, in12HrFormat, withSeconds);
+    //Add the leading 0
+    if (min < 10) {
+      minAdjusted = '0' + minAdjusted;
+    }
 
-		if (dt && time) {
-			return dt + ", " + time;
-		}
-	},
+    //Assemble the time component
+    var time = hourAdjusted + ':' + minAdjusted;
 
-	getFormattedTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
-		if (!this.isValidDate(dateStr)) {
-			return undefined;
-		}
+    //Add seconds?
+    if (withSeconds) {
+      var seconds = dt.getSeconds();
 
-		//Get the parts	
-		let dt = new Date(dateStr);
-		let hour = dt.getHours(); //0-23
-		let min = dt.getMinutes(); //0-59
+      //Add the leading 0
+      if (seconds < 10) {
+        seconds = '0' + seconds;
+      }
 
-		var hourAdjusted = hour;
-		var minAdjusted = min;
+      time = time + ':' + seconds;
+    }
 
-		if (in12HrFormat) {
-			hourAdjusted = ((hour > 12) ? hour - 12 : hour);
-		}
+    //Add am/pm?
+    if (in12HrFormat) {
+      var suffix = this.timeAM;
 
-		//Add the leading 0
-		if (min < 10) {
-			minAdjusted = "0" + minAdjusted;
-		}
+      if (hour > 11) {
+        suffix = this.timePM;
+      }
 
-		//Assemble the time component
-		var time = hourAdjusted + ":" + minAdjusted;
+      time = time + ' ' + suffix;
+    }
 
-		//Add seconds?
-		if (withSeconds) {
-			var seconds = dt.getSeconds();
+    return time;
+  },
 
-			//Add the leading 0
-			if (seconds < 10) {
-				seconds = "0" + seconds;
-			}
+  getFullDate: function (dateStr) {
+    if (!this.isValidDate(dateStr)) {
+      return undefined;
+    }
 
-			time = time + ":" + seconds;
-		}
+    //Get the parts
+    let dt = new Date(dateStr);
 
-		//Add am/pm?
-		if (in12HrFormat) {
-			var suffix = this.timeAM;
+    let year = dt.getFullYear();
+    let date = dt.getDate();
+    let i = dt.getMonth(); //0-based
 
-			if (hour > 11) {
-				suffix = this.timePM;
-			}
+    //Assemble the preferred format like: 'February 8, 2020'
+    let month = this.months[i];
+    return month + ' ' + date + ', ' + year;
+  },
 
-			time = time + " " + suffix;
-		}
+  getFullDateTime: function (dateStr) {
+    let dt = this.getFullDate(dateStr);
+    let time = this.getFormattedTime(dateStr);
 
-		return time;
-	},
+    if (dt && time) {
+      return dt + ', ' + time;
+    }
+  },
 
-	getFullDate: function (dateStr) {
+  getFullDateTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
+    let dt = this.getFullDate(dateStr);
+    let time = this.getFormattedTimeAdvanced(dateStr, in12HrFormat, withSeconds);
 
-		if (!this.isValidDate(dateStr)) {
-			return undefined;
-		}
-
-		//Get the parts
-		let dt = new Date(dateStr);
-
-		let year = dt.getFullYear();
-		let date = dt.getDate();
-		let i = dt.getMonth() //0-based
-
-		//Assemble the preferred format like: 'February 8, 2020'
-		let month = this.months[i];
-		return month + " " + date + ", " + year;
-	},
-
-	getFullDateTime: function (dateStr) {
-
-		let dt = this.getFullDate(dateStr);
-		let time = this.getFormattedTime(dateStr);
-
-		if (dt && time) {
-			return dt + ", " + time;
-		}
-	},
-
-	getFullDateTimeAdvanced: function (dateStr, in12HrFormat, withSeconds) {
-
-		let dt = this.getFullDate(dateStr);
-		let time = this.getFormattedTimeAdvanced(dateStr, in12HrFormat, withSeconds);
-
-		if (dt && time) {
-			return dt + ", " + time;
-		}
-	},
-
-}
+    if (dt && time) {
+      return dt + ', ' + time;
+    }
+  },
+};

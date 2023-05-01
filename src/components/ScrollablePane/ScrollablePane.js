@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { getTheme, mergeStyleSets } from '@fluentui/react/lib/Styling';
 // import { lorem } from '@fluentui/example-data';
 import { ScrollablePane as ScrollablePaneM } from '@fluentui/react/lib/ScrollablePane';
-import { IScrollablePaneStyles } from '@fluentui/react/lib/ScrollablePane';
 import { Sticky, StickyPositionType } from '@fluentui/react/lib/Sticky';
 
 // export interface IScrollablePaneExampleItem {
@@ -37,7 +36,7 @@ const classNames = mergeStyleSets({
 const colors = ['#eaeaea', '#dadada', '#d0d0d0', '#c8c8c8', '#a6a6a6', '#c7e0f4', '#71afe5', '#eff6fc', '#deecf9'];
 const items = Array.from({ length: 5 }).map((item, index) => ({
   color: colors.splice(Math.floor(Math.random() * colors.length), 1)[0],
-  text: "Sample sentence",
+  text: 'Sample sentence',
   index,
 }));
 const createContentArea = (item) => (
@@ -70,7 +69,6 @@ const ScrollablePane = () => (
  * Set up the properties to be available in the UXPin property inspector.
  */
 ScrollablePane.propTypes = {
-
   /**
    * @uxpindescription To display the ScrollablePane in the filled style. Otherwise, displays in the outline style
    * @uxpinpropname Primary Style
@@ -78,7 +76,6 @@ ScrollablePane.propTypes = {
   scrollContainerFocus: PropTypes.bool,
   initialScrollPosition: PropTypes.number,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
