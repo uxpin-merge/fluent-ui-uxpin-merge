@@ -21,6 +21,10 @@
     "css-loader": "6.7.3",
     "d3-shape": "^2.1.0",
     "emotion": "^11.0.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
     "luxon": "^1.26.0",
     "prettier": "^2.8.8",
     "react": "^17.0.2",
@@ -35,13 +39,8 @@
     "start": "webpack serve --mode development",
     "build": "webpack",
     "uxpin": "npx uxpin-merge --disable-tunneling",
-    "prettier": "npx prettier --write src/"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "prettier": "npx prettier --write src/",
+    "lint": "npx eslint src/"
   },
   "browserslist": {
     "production": [
