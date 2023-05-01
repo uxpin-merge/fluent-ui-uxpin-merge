@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Pivot as FPivot, PivotItem } from '@fluentui/react/lib/Pivot';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
-import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 import * as UXPinParser from '../_helpers/UXPinParser';
 
 //Default pivot tab items to populate the control with.
@@ -16,7 +15,7 @@ const verticalAlign = 'start';
 const stretchAlign = 'stretch';
 
 //In case we can't parse user-entered internal padding info or it's unspecified
-const defaultPadding = '12';
+// const defaultPadding = '12';
 
 class Pivot extends React.Component {
   constructor(props) {

@@ -79,6 +79,11 @@ class Link extends React.Component {
  */
 Link.propTypes = {
   /**
+   * @uxpinignoreprop
+   */
+  selected: PropTypes.string,
+
+  /**
    * @uxpindescription The text value to display
    * @uxpinpropname Link Text
    * @uxpincontroltype textfield(6)

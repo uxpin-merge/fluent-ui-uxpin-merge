@@ -9,7 +9,7 @@ const defaultIcon = '';
 
 //Default items list to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is.
-const defaultItems = `Files 
+const defaultItems = `Files
 * icon(Document) Add Document
 * icon(FileCode) Add Code File
 divider
@@ -107,7 +107,6 @@ class SplitButton extends React.Component {
             aria-describedby={tooltipID}
             split={true}
             primary={this.props.primary}
-            iconProps={iconProps}
             menuProps={menuProps}
             styles={btnStyles}
             //Always send 0 for the main button part

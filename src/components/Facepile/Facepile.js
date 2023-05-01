@@ -12,6 +12,7 @@ import Link from '../Link/Link';
 
 //The max count for the persona list
 const maxPersonaCount = 99;
+let linkedEmail = '';
 
 const styles = {
   callout: {
@@ -81,8 +82,6 @@ class Facepile extends React.Component {
   }
 
   _getLinkedEmail(personaProps) {
-    var linkedEmail = '';
-
     if (personaProps.email && personaProps?.email?.trim().length > 0) {
       let trimmedLink = personaProps.email.trim();
       let link = trimmedLink.startsWith('mailto:') ? trimmedLink : 'mailto:' + trimmedLink;
@@ -173,7 +172,7 @@ class Facepile extends React.Component {
     );
   }
 
-  _onClickAddButton(event) {
+  _onClickAddButton() {
     //Raise this event to UXPin.
     if (this.props.onAddClick) {
       this.props.onAddClick();
@@ -209,7 +208,7 @@ class Facepile extends React.Component {
 
     //Add the Overflow Button props.
     const overflowButtonParams = {
-      onClick: (e) => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown),
+      onClick: () => this._toggleIsCalloutVisible(this.state.overflowHoverIsShown),
       id: 'overflow-button',
       title: null,
     };
@@ -251,7 +250,7 @@ class Facepile extends React.Component {
             }}
           >
             <div style={overflowStyle}>
-              {this.state.personaList.slice(this.props.faceCount).map((anObjectMapped, index) => {
+              {this.state.personaList.slice(this.props.faceCount).map((anObjectMapped) => {
                 return (
                   <Persona
                     key={anObjectMapped.key}

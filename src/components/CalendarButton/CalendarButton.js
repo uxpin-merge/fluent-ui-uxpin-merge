@@ -152,7 +152,7 @@ class CalendarButton extends React.Component {
                   workWeekDays={workWeekDays}
                   strings={dayPickerStrings}
                   showWeekNumbers={this.props.showWeekNumbers}
-                  onSelectDate={(d, sdr) => this._onChange(d)}
+                  onSelectDate={(d) => this._onChange(d)}
                 />
               </FocusTrapZone>
             </Callout>

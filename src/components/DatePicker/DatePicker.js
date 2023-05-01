@@ -104,7 +104,7 @@ class DatePicker extends React.Component {
         showWeekNumbers={this.props.showWeekNumbers}
         disabled={this.props.disabled}
         isRequired={this.props.required}
-        onSelectDate={(d, sdr) => this._onChange(d)}
+        onSelectDate={(d) => this._onChange(d)}
         onFormatDate={(d) => this._onFormatDate(d)}
         parseDateFromString={(d) => this._onParseDate(d)}
       />
@@ -116,6 +116,8 @@ class DatePicker extends React.Component {
  * Set up the properties to be available in the UXPin property inspector.
  */
 DatePicker.propTypes = {
+  disabled: PropTypes.bool,
+
   /**
    * @uxpindescription The label for the control
    * @uxpinpropname Label
@@ -165,6 +167,7 @@ DatePicker.propTypes = {
  * Set the default values for this control in the UXPin Editor.
  */
 DatePicker.defaultProps = {
+  disabled: false,
   label: 'DatePicker',
   placeholder: 'Enter date: Jan 15, 2021 or 1/15/2021',
   calDate: '',

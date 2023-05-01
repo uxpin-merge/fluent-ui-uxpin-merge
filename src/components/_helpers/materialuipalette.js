@@ -271,21 +271,21 @@ export const MaterialUIPalette = {
       let color = token.trim().toLowerCase().replace('gray', 'grey');
       let colorPalette =
         color === 'blue'
-          ? blue
+          ? MaterialUIPalette.blue
           : color === 'red'
-          ? red
+          ? MaterialUIPalette.red
           : color === 'pink'
-          ? pink
+          ? MaterialUIPalette.pink
           : color === 'purple'
-          ? purple
+          ? MaterialUIPalette.purple
           : color === 'green'
-          ? green
+          ? MaterialUIPalette.green
           : color === 'yellow'
-          ? yellow
+          ? MaterialUIPalette.yellow
           : color === 'orange'
-          ? orange
+          ? MaterialUIPalette.orange
           : color === 'grey'
-          ? grey
+          ? MaterialUIPalette.grey
           : undefined;
       return colorPalette;
     }

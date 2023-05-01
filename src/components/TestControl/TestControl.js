@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-
-import { DefaultPalette } from '@fluentui/react/lib/Theme';
 import { SemanticColors } from '@fluentui/react/lib/Theme';
 
 //The smallest allowed box size
@@ -41,7 +39,7 @@ class TestControl extends React.Component {
     let df = SemanticColors;
     if (df) {
       for (var key in df) {
-        if (df.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(df, key)) {
           console.log('Semantic Color ' + key + ': ' + df[key]);
         }
       }

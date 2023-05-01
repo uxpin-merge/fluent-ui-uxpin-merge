@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import HorizontalStack from '../HorizontalStack/HorizontalStack';
-import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 class GroupButton extends React.Component {

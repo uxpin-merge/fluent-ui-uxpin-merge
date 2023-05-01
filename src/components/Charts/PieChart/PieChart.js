@@ -39,7 +39,7 @@ export default class PieChart extends React.Component {
 
   getData() {
     let output = [];
-    UXPinParser.parse(this.props.data).forEach((element, index) => {
+    UXPinParser.parse(this.props.data).forEach((element) => {
       // Is this an odd or even row of the array?
       if (element.order % 2 == 0) {
         output.push({

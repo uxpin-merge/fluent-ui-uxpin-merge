@@ -2,18 +2,11 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ConstrainMode, SelectionMode, mergeStyleSets, Icon, Link } from '@fluentui/react/';
 import { ShimmeredDetailsList } from '@fluentui/react/lib/ShimmeredDetailsList';
-import { SearchBox } from '@fluentui/react/lib/SearchBox';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
 import * as UXPinParser from '../_helpers/UXPinParser';
-import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
-
-const searchFieldWidth = 400;
-const searchFieldIconName = 'Filter';
-const searchFieldPlaceholder = 'Filter';
-const searchFieldMarginBottom = '24px';
 
 const dataTextSize = 'smallPlus';
 const defaultTextColor = '#000';
@@ -36,16 +29,16 @@ const iconSizeMap = {
 };
 
 //A StackItem that will spring to fill available space.
-const spanner = (
-  <StackItem grow={1}>
-    <span />
-  </StackItem>
-);
+// const spanner = (
+//   <StackItem grow={1}>
+//     <span />
+//   </StackItem>
+// );
 
-const commandBarTokens = {
-  childrenGap: 6,
-  padding: 0,
-};
+// const commandBarTokens = {
+//   childrenGap: 6,
+//   padding: 0,
+// };
 
 const classNames = mergeStyleSets({
   textContainer: {
@@ -139,8 +132,6 @@ class DetailsList extends React.Component {
 
     for (let index = 0; index < colItems.length; index++) {
       let columnNameText = colItems[index]?.trim() || ' ';
-
-      let suffix = _.uniqueId('_k_');
 
       //Figure out if the column's header should be empty
       let colNameTxt = columnNameText.toLowerCase() === emptyHeaderText1 ? ' ' : columnNameText;
@@ -241,7 +232,7 @@ class DetailsList extends React.Component {
             }
           } else {
             //Else it's a 'compound' array of elements
-            parsedCell.value.map((subElement, k) => {
+            parsedCell.value.map((subElement) => {
               console.log('subElement obj: ' + JSON.stringify(subElement));
 
               let cellItem = this._getUIElement(subElement);
@@ -423,7 +414,7 @@ DetailsList.propTypes = {
    * @uxpindescription Minimum column width
    * @uxpinpropname Min Width
    */
-  // minWidth: PropTypes.number,
+  minWidth: PropTypes.number,
 
   /**
    * @uxpindescription Default Column Widths. Optionally specify default widths for individual columns.

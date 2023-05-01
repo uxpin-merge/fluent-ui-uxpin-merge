@@ -16,6 +16,7 @@ const defaultSubText = 'TIP: Add Action, Icon and/or Command Buttons to make a T
 const defaultSubTextSize = 'medium';
 
 const defaultTextColor = 'black';
+const defaultTextColorHex = '#000000';
 const defaultBgColor = 'themeLighterAlt';
 const defaultBorderColor = 'themeSecondary';
 const defaultBorderThickness = 1;

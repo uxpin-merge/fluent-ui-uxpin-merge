@@ -172,7 +172,7 @@ class Panel extends React.Component {
           type={panelType}
           isFooterAtBottom={true}
           onRenderFooterContent={() => this._onRenderFooterContent()}
-          onDismiss={(evt) => this._onDismiss()}
+          onDismiss={() => this._onDismiss()}
         >
           {panelContents}
         </FPanel>

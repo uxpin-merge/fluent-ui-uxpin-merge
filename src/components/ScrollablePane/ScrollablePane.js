@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { getTheme, mergeStyleSets } from '@fluentui/react/lib/Styling';
 // import { lorem } from '@fluentui/example-data';
 import { ScrollablePane as ScrollablePaneM } from '@fluentui/react/lib/ScrollablePane';
-import { IScrollablePaneStyles } from '@fluentui/react/lib/ScrollablePane';
 import { Sticky, StickyPositionType } from '@fluentui/react/lib/Sticky';
 
 // export interface IScrollablePaneExampleItem {

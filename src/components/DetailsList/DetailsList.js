@@ -16,6 +16,7 @@ const searchFieldMarginBottom = '24px';
 
 const dataTextSize = 'smallPlus';
 const defaultTextColor = '#000';
+const defaultShimmerDuration = 0;
 const headerBackgroundColor = 'neutralLighterAlt';
 const linkTarget = '_UXPin Mockup';
 
@@ -330,8 +331,6 @@ class DetailsList extends React.Component {
     for (let index = 0; index < colItems.length; index++) {
       let columnNameText = colItems[index]?.trim() || ' ';
 
-      let suffix = _.uniqueId('_k_');
-
       //Figure out if the column's header should be empty
       let colNameTxt = columnNameText.toLowerCase() === emptyHeaderText1 ? ' ' : columnNameText;
 
@@ -423,7 +422,7 @@ class DetailsList extends React.Component {
             parsedCellElements.push(cellItem);
           } else {
             //Else it's a 'compound' array of elements
-            parsedCell.value.map((subElement, k) => {
+            parsedCell.value.map((subElement) => {
               let cellItem = this._getUIElement(subElement);
               parsedCellElements.push(cellItem);
             });

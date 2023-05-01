@@ -75,10 +75,10 @@ class SearchBox extends React.Component {
         onChange={(e, v) => {
           this._onValueChange(v);
         }} //Only catch the value
-        onSearch={(e) => {
+        onSearch={() => {
           this._onSearch();
         }} //Don't need to catch a value
-        onClear={(e) => {
+        onClear={() => {
           this._onClear();
         }} //Don't need to catch a value
       />

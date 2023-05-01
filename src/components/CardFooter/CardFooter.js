@@ -204,6 +204,11 @@ CardFooter.propTypes = {
    * @uxpinpropname Spanner Index
    */
   spannerIndex: PropTypes.number,
+
+  /**
+   * @uxpinignoreprop
+   */
+  stretch: PropTypes.bool,
 };
 
 /**

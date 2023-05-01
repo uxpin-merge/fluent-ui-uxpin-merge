@@ -108,6 +108,7 @@ class ProfileCard extends React.Component {
             secondaryText={this.props.role}
             tertiaryText={this.props.status}
             optionalText={this.props.optional}
+            // eslint-disable-next-line react/no-children-prop
             children={undefined}
             styles={personaStyles}
           >

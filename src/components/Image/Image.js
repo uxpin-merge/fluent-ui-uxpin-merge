@@ -4,8 +4,8 @@ import { Image as FImage, ImageFit } from '@fluentui/react/lib/Image';
 import { UxpImageUtils } from '../_helpers/uxpimageutils';
 
 //This is the default URL to use for a generic female user
-let defaultImageURL =
-  'https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/golden_gate_bridge.jpg';
+// let defaultImageURL =
+//   'https://raw.githubusercontent.com/uxpin-merge/fluent-ui-uxpin-merge/master/src/components/_helpers/_images/golden_gate_bridge.jpg';
 
 const fitCenter = 'center';
 const fitCenterCover = 'center cover';

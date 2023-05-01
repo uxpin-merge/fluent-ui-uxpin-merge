@@ -276,6 +276,11 @@ Callout.propTypes = {
     'rightCenter',
     'rightBottomEdge',
   ]),
+
+  /**
+   * @uxpinignoreprop
+   */
+  open: PropTypes.bool,
 };
 
 /**
@@ -290,7 +295,6 @@ Callout.defaultProps = {
   title: 'Callout',
   text: 'Set a message and optionally add other Merge controls.',
   direction: 'bottomCenter',
-  showMarker: false,
 };
 
 export { Callout as default };

@@ -80,7 +80,7 @@ class Calendar extends React.Component {
         firstDayOfWeek={DayOfWeek.Sunday}
         workWeekDays={workWeekDays}
         strings={dayPickerStrings}
-        onSelectDate={(d, sdr) => this._onChange(d)}
+        onSelectDate={(d) => this._onChange(d)}
       />
     );
   }

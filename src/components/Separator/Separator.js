@@ -4,7 +4,6 @@ import { Separator as FSeparator } from '@fluentui/react/lib/Separator';
 import { Text } from '@fluentui/react/lib/Text';
 import { Icon } from '@fluentui/react/lib/Icon';
 import { UxpColors } from '../_helpers/uxpcolorutils';
-import { TextAlignMiddleIcon } from '@fluentui/react-icons-mdl2';
 
 const defaultTextColor = 'black';
 const defaultBgColor = 'white';

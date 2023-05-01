@@ -26,10 +26,10 @@ class MetaDataGroup extends React.Component {
     //****************************
     //For Outer Stack
 
-    var horizAlign = horizontalAlign;
-    if (this.props.stretch) {
-      horizAlign = 'stretch';
-    }
+    // var horizAlign = horizontalAlign;
+    // if (this.props.stretch) {
+    //   horizAlign = 'stretch';
+    // }
 
     const topStackItemStyles = {
       root: {

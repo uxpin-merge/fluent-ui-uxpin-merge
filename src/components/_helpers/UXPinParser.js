@@ -1,4 +1,3 @@
-import { inputProperties } from '@fluentui/react';
 import { UxpColors } from './uxpcolorutils';
 
 /**
@@ -133,7 +132,7 @@ export function parseRow(inputStr, index) {
   inputStr = inputStr.trim();
 
   // Regex patterns for tokens, and tokens that have specific type (Icon, Link etc.)
-  let allTokens = inputStr.split(/\s(?![^\(]*\))/g);
+  let allTokens = inputStr.split(/\s(?![^(]*\))/g);
   let tokensWithType = inputStr.match(new RegExp(/(\s|)(icon|link)\((.*?)\)(\s|)/gi));
 
   let parsedOutput = []; // The return value that we will build
@@ -248,6 +247,7 @@ export function normalizeLink(inputStr) {
 /**
  * Function to normalize color tokens and turn them into hex values
  */
+// eslint-disable-next-line no-unused-vars
 function normalizeIcon(inputStr) {
   let acceptableColour = /^#?[0-9|a-f|A-F]{6}$/;
 
@@ -265,12 +265,12 @@ function normalizeIcon(inputStr) {
  */
 function makeToken(inputStr, type, order) {
   let token = {};
-
+  let c = '';
   console.log('makeToken, type: ' + type + ', contents: ' + JSON.stringify(inputStr));
 
   switch (type) {
     case 'icon':
-      let c = UxpColors.getHexFromHexOrToken(getFurtherArgs(inputStr)?.[0]);
+      c = UxpColors.getHexFromHexOrToken(getFurtherArgs(inputStr)?.[0]);
       token = {
         order: order,
         type: type,
@@ -427,6 +427,8 @@ function extractNextToken(inputStr) {
 function makeSimpleToken(index, type, inputStr) {
   let token = {};
   let splits = [];
+  let c = '';
+  let href = '';
 
   if (type === 'icon' || type === 'link') {
     let rawSplits = splitOnPipe(inputStr);
@@ -437,7 +439,7 @@ function makeSimpleToken(index, type, inputStr) {
 
   switch (type) {
     case 'icon':
-      let c = splits.length > 1 ? UxpColors.getHexFromHexOrToken(splits[1]) : '';
+      c = splits.length > 1 ? UxpColors.getHexFromHexOrToken(splits[1]) : '';
       token = {
         order: index,
         type: type,
@@ -448,7 +450,7 @@ function makeSimpleToken(index, type, inputStr) {
       };
       break;
     case 'link':
-      let href = splits.length > 1 ? normalizeLink(splits[1]) : '';
+      href = splits.length > 1 ? normalizeLink(splits[1]) : '';
       token = {
         order: index,
         type: type,

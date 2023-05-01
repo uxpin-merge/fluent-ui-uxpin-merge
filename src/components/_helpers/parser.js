@@ -3,7 +3,7 @@ import { ActionButton } from '@fluentui/react/lib/Button';
 import { Link } from '@fluentui/react/lib/Link';
 import { UxpColors } from '../_helpers/uxpcolorutils';
 
-const defaultIconColor = '#005EA6';
+// const defaultIconColor = '#005EA6';
 
 export const csv2arr = (text) => {
   if (text.trim() === '') {
@@ -68,6 +68,7 @@ export const getTokens = (inputStr) => {
 
   const getPosition = (t) => {
     let position = {};
+    // eslint-disable-next-line no-unused-vars
     const [start, end] = [str.indexOf(t), str.indexOf(t) + t.length];
     if (str.indexOf(t) === 0) position.placement = 'start';
     if (str.indexOf(t) + t.length === str.length) position.placement = 'end';
@@ -132,7 +133,7 @@ export const getTokens = (inputStr) => {
   };
 
   let tokens = ts.map((t) => makeToken(t));
-  let mixed = str.split(/\s(?![^\(]*\))/g).map((el) => {
+  let mixed = str.split(/\s(?![^(]*\))/g).map((el) => {
     let token = el.match(reg);
     return token ? makeToken(el) : el;
   });

@@ -9,10 +9,7 @@ import { IconButton } from '@fluentui/react/lib/Button';
 import ActionButton from '../ActionButton/ActionButton';
 import Button from '../Button/Button';
 import Link from '../Link/Link';
-import { UxpColors } from '../_helpers/uxpcolorutils';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
-import { UxpNumberParser } from '../_helpers/uxpnumberparser';
-import * as UXPinParser from '../_helpers/UXPinParser';
 
 //Default nav items to populate the control with.
 //Leave these left aligned as they show up in UXPin exactly as-is.

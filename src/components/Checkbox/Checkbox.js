@@ -17,7 +17,7 @@ class Checkbox extends React.Component {
     this.setState({ isChecked: this.props.isChecked });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     //Handles prop updates in the UXPin Editor
     if (prevProps.isChecked !== this.props.isChecked) {
       this.setState({ isChecked: this.props.isChecked });

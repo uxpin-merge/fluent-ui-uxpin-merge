@@ -196,7 +196,7 @@ export const UxpColors = {
   getHexFromFluentDefaultPalette: function (token) {
     let palette = DefaultPalette;
     if (palette && token) {
-      if (palette.hasOwnProperty(token)) {
+      if (Object.prototype.hasOwnProperty.call(palette, token)) {
         let color = palette[token];
         if (color) return color;
       }
@@ -208,7 +208,7 @@ export const UxpColors = {
   getHexFromFluentSharedColors: function (token) {
     let palette = SharedColors;
     if (palette && token) {
-      if (palette.hasOwnProperty(token)) {
+      if (Object.prototype.hasOwnProperty.call(palette, token)) {
         let color = palette[token];
         if (color) return color;
       }
@@ -220,7 +220,7 @@ export const UxpColors = {
   getHexFromFluentNeutralColors: function (token) {
     let palette = NeutralColors;
     if (palette && token) {
-      if (palette.hasOwnProperty(token)) {
+      if (Object.prototype.hasOwnProperty.call(palette, token)) {
         let color = palette[token];
         if (color) return color;
       }
@@ -232,7 +232,7 @@ export const UxpColors = {
   getHexFromFluentCommunicationColors: function (token) {
     let palette = CommunicationColors;
     if (palette && token) {
-      if (palette.hasOwnProperty(token)) {
+      if (Object.prototype.hasOwnProperty.call(palette, token)) {
         let color = palette[token];
         if (color) return color;
       }

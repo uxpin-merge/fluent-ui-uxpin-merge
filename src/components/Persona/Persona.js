@@ -15,9 +15,9 @@ const personaStyles = {
   },
 };
 
-const onHvr = 'on hover';
-const onClck = 'on click';
-const none = 'none';
+// const onHvr = 'on hover';
+// const onClck = 'on click';
+// const none = 'none';
 
 class Persona extends React.Component {
   constructor(props) {
@@ -64,6 +64,7 @@ class Persona extends React.Component {
         onClick={() => {
           this._onClick();
         }}
+        // eslint-disable-next-line react/no-children-prop
         children={undefined}
       >
         {email}
