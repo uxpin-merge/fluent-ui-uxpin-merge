@@ -3,24 +3,18 @@ import * as PropTypes from 'prop-types';
 import { ActionButton as FActionButton } from '@fluentui/react/lib/Button';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
-
-
-const defaultIcon = "Add";
-const defaultText = "Action Button";
+const defaultIcon = 'Add';
+const defaultText = 'Action Button';
 const posStart = 'start';
 const posEnd = 'end';
 
-
-
 class ActionButton extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   render() {
-
-    let iconProps = { iconName: this.props.iconName }
+    let iconProps = { iconName: this.props.iconName };
 
     //We want the root's margin to help the control to equal 40px. We need to make up 14px when there is no text.
     var rootPadding = '0 7px';
@@ -40,12 +34,13 @@ class ActionButton extends React.Component {
         whiteSpace: 'nowrap',
         margin: labelMargin,
         padding: 0,
-      }
-    }
+      },
+    };
 
-    if (this.props.iconPosition === posEnd) styles.flexContainer = {
-      flexDirection: 'row-reverse'
-    }
+    if (this.props.iconPosition === posEnd)
+      styles.flexContainer = {
+        flexDirection: 'row-reverse',
+      };
 
     const buttonID = _.uniqueId('actionbutton_');
     const tooltipID = _.uniqueId('tooltip_');
@@ -54,14 +49,9 @@ class ActionButton extends React.Component {
       target: `#${buttonID}`,
     };
 
-
     return (
       <div>
-        <TooltipHost
-          content={this.props.tooltip}
-          id={tooltipID}
-          calloutProps={ttProps}
-        >
+        <TooltipHost content={this.props.tooltip} id={tooltipID} calloutProps={ttProps}>
           <FActionButton
             {...this.props}
             id={buttonID}
@@ -73,19 +63,16 @@ class ActionButton extends React.Component {
       </div>
     );
   }
-
 }
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 ActionButton.propTypes = {
-
   /**
-    * @uxpindescription The displayed text on the button (Optional)
-    * @uxpinpropname Text
-    * */
+   * @uxpindescription The displayed text on the button (Optional)
+   * @uxpinpropname Text
+   * */
   text: PropTypes.string,
 
   /**
@@ -107,18 +94,17 @@ ActionButton.propTypes = {
   tooltip: PropTypes.string,
 
   /**
-  * @uxpindescription To disable the control
-  * @uxpinpropname Disabled
-  * */
+   * @uxpindescription To disable the control
+   * @uxpinpropname Disabled
+   * */
   disabled: PropTypes.bool,
 
   /**
    * @uxpindescription Fires when the main button or a popup menu button is clicked on
    * @uxpinpropname Click
    * */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
@@ -130,6 +116,5 @@ ActionButton.defaultProps = {
   tooltip: '',
   iconPosition: posStart,
 };
-
 
 export { ActionButton as default };

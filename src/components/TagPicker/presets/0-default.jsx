@@ -1,9 +1,7 @@
 import * as React from 'react';
 import TagPicker from '../TagPicker';
 
-
-
-//Default items to populate the control with. 
+//Default items to populate the control with.
 const defaultItems = `Alabaster
 Black
 Blue
@@ -24,9 +22,4 @@ Violet
 White
 Yellow`;
 
-
-export default (
-   <TagPicker
-      uxpId="tagpicker1"
-      items={defaultItems} />
-);
+export default <TagPicker uxpId="tagpicker1" items={defaultItems} />;

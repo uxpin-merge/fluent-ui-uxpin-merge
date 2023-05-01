@@ -2,28 +2,23 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { TextField } from '@fluentui/react/lib/TextField';
 
-
-
-const autocompleteHintNone = "off";
-
-
+const autocompleteHintNone = 'off';
 
 class TextArea extends React.Component {
-
   constructor(props) {
     super(props);
 
     //Track the control's text value internally
     this.state = {
       _textValue: this.props.textValue,
-    }
+    };
   }
 
   set() {
     this.setState({
       //Initialize with the props value
-      _textValue: this.props.textValue
-    })
+      _textValue: this.props.textValue,
+    });
   }
 
   componentDidMount() {
@@ -38,15 +33,13 @@ class TextArea extends React.Component {
 
   _onChange(newValue) {
     //We only want to know what the new value should be.
-    //Assumption: That Microsoft really is only sending strings and it's not undefined. 
+    //Assumption: That Microsoft really is only sending strings and it's not undefined.
 
-    //Get the value. 
+    //Get the value.
     const textVal = newValue.toString();
 
     //Set the state with the updated checked value. This will force the control to update in UXPin at runtime.
-    this.setState(
-      { currentValue: textVal }
-    )
+    this.setState({ currentValue: textVal });
 
     //Raise this event to UXPin. We'll send them the value in case they can catch it.
     if (this.props.onTFChange) {
@@ -66,9 +59,7 @@ class TextArea extends React.Component {
     }
   }
 
-
   render() {
-
     //Get the value from State.
     let textVal = this.state._textValue;
 
@@ -78,21 +69,24 @@ class TextArea extends React.Component {
         value={textVal}
         multiline={true}
         autoComplete={autocompleteHintNone}
-        onChange={(e, v) => { this._onChange(v); }}   //Only catch the value
-        onFocus={() => { this._onFocus() }}
-        onBlur={() => { this._onBlur() }}
+        onChange={(e, v) => {
+          this._onChange(v);
+        }} //Only catch the value
+        onFocus={() => {
+          this._onFocus();
+        }}
+        onBlur={() => {
+          this._onBlur();
+        }}
       />
     );
   }
 }
 
-
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 TextArea.propTypes = {
-
   /**
    * @uxpindescription The label for the Text Area
    * @uxpinpropname Label
@@ -170,35 +164,34 @@ TextArea.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * We give this property a unique name to avoid collisions. 
+   * We give this property a unique name to avoid collisions.
    * @uxpindescription Fires when the control's Value property changes.
    * @uxpinpropname * Value Changed
    * */
   onTFChange: PropTypes.func,
 
   /**
-   * We give this property a unique name to avoid collisions. 
+   * We give this property a unique name to avoid collisions.
    * @uxpindescription Fires when the control gains focus
    * @uxpinpropname Focused
    * */
   onTFFocused: PropTypes.func,
 
   /**
- * We give this property a unique name to avoid collisions. 
- * @uxpindescription Fires when the control loses focus
- * @uxpinpropname Blurred
- * */
+   * We give this property a unique name to avoid collisions.
+   * @uxpindescription Fires when the control loses focus
+   * @uxpinpropname Blurred
+   * */
   onTFBlurred: PropTypes.func,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 TextArea.defaultProps = {
-  label: "Basic Text Area",
-  textValue: "",
-  placeholder: "Enter some text",
+  label: 'Basic Text Area',
+  textValue: '',
+  placeholder: 'Enter some text',
   rows: '3',
   autoAdjustHeight: false,
   borderless: false,
@@ -206,6 +199,5 @@ TextArea.defaultProps = {
   readOnly: false,
   disabled: false,
 };
-
 
 export { TextArea as default };

@@ -2,10 +2,7 @@
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Hint,
-  RadialChart,
-} from 'react-vis';
+import { Hint, RadialChart } from 'react-vis';
 import ChartStyles from '../chartStyles/chart.styles';
 import * as UXPinParser from '../../_helpers/UXPinParser';
 import { UxpColors } from '../../_helpers/uxpcolorutils';
@@ -27,7 +24,9 @@ export default class PieChart extends React.Component {
 
   getHint(value) {
     if (!this.state.showHint) {
-      const hintContent = value.label ? { Data: value.label, Value: `${value.theta * 10}%` } : { Value: `${value.theta * 10}%` };
+      const hintContent = value.label
+        ? { Data: value.label, Value: `${value.theta * 10}%` }
+        : { Value: `${value.theta * 10}%` };
       this.setState({ hintValue: hintContent, showHint: true });
     } else {
       this.setState({ hintValue: '', showHint: false });
@@ -35,7 +34,7 @@ export default class PieChart extends React.Component {
   }
 
   getColorRange() {
-    return UXPinParser.parse(this.props.colorRange).map((item) => (UxpColors.getHexFromHexOrToken(item.text)));
+    return UXPinParser.parse(this.props.colorRange).map((item) => UxpColors.getHexFromHexOrToken(item.text));
   }
 
   getData() {
@@ -48,7 +47,7 @@ export default class PieChart extends React.Component {
           theta: undefined,
         });
       } else {
-        output[output.length-1].theta = parseInt(element.text.split('theta ')[1]);
+        output[output.length - 1].theta = parseInt(element.text.split('theta ')[1]);
       }
     });
 
@@ -77,12 +76,9 @@ export default class PieChart extends React.Component {
         onSeriesRightClick={this.props.onSeriesRightClick}
         onSeriesMouseOver={this.props.onSeriesMouseOver}
         onSeriesMouseOut={this.props.onSeriesMouseOver}
-        animation={this.props.animation}>
-        {this.props.hint && this.state.showHint ? (
-          <Hint value={this.state.hintValue} />
-        ) : (
-          undefined
-        )}
+        animation={this.props.animation}
+      >
+        {this.props.hint && this.state.showHint ? <Hint value={this.state.hintValue} /> : undefined}
       </RadialChart>
     );
   }

@@ -5,13 +5,7 @@ import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
-
-
-
-
 class ComboBox extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -21,7 +15,7 @@ class ComboBox extends React.Component {
       _selectedIndices: [],
       items: [],
       isDirty: false,
-    }
+    };
   }
 
   componentDidMount() {
@@ -29,8 +23,7 @@ class ComboBox extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.items !== this.props.items
-      || prevProps.selected !== this.props.selected) {
+    if (prevProps.items !== this.props.items || prevProps.selected !== this.props.selected) {
       this.set();
     }
   }
@@ -54,46 +47,42 @@ class ComboBox extends React.Component {
       items: menuItems,
       _selectedIndex: index,
       _selectedIndices: list,
-    })
+    });
   }
 
-  //The main entry point for the control's onChange event. 
-  // Note that 'changed' means its changed from checked to unchecked, or vice versa. 
-  // And in the case of multi-select, each individual item comes in separately. 
+  //The main entry point for the control's onChange event.
+  // Note that 'changed' means its changed from checked to unchecked, or vice versa.
+  // And in the case of multi-select, each individual item comes in separately.
   _onChoiceChange(option, index) {
-
     if (this.props.multiSelect) {
       //Case Multi Select
-      // Option info has the new selection state info for a specific item. 
-      // Option.selected has its new selection state, true or false. Index is its index. 
+      // Option info has the new selection state info for a specific item.
+      // Option.selected has its new selection state, true or false. Index is its index.
       this._onChangeMulti(option);
-    }
-    else {
+    } else {
       //Case Single Select
-      // Option info is undefined. The Index is the index of the newly selected item. 
+      // Option info is undefined. The Index is the index of the newly selected item.
       this._onChangeSingle(index + 1);
     }
   }
 
-  //To process the onChange event for a single select use case. 
+  //To process the onChange event for a single select use case.
   _onChangeSingle(index) {
     //We MUST set the state with the updated index value. This will also force the control to update in UXPin at runtime.
-    this.setState(
-      {
-        _selectedIndex: index,
-        isDirty: false,
-      }
-    )
+    this.setState({
+      _selectedIndex: index,
+      isDirty: false,
+    });
 
     //Raise this event to UXPin. We'll send them the new index value.
-    //For the end user in UXPin, convert the index to a 1-based number. 
-    //Always pass a string -- not a number. 
+    //For the end user in UXPin, convert the index to a 1-based number.
+    //Always pass a string -- not a number.
     if (this.props.onChoiceChange) {
-      this.props.onChoiceChange((index).toString());
+      this.props.onChoiceChange(index.toString());
     }
   }
 
-  //To process the onChange event for a multi-select use case. 
+  //To process the onChange event for a multi-select use case.
   _onChangeMulti(option) {
     let selected = option.selected;
     let key = option.key;
@@ -104,26 +93,21 @@ class ComboBox extends React.Component {
     //If selected, let's add it to our tracking array prop.
     if (selected && included === false) {
       keys.push(key);
-    }
-    else if (selected === false && included) {
-
-      //Otherwise let's remove it from our tracking array. 
-      let filtered = keys.filter(
-        function (currVal) {
-          return currVal != key;
-        });
+    } else if (selected === false && included) {
+      //Otherwise let's remove it from our tracking array.
+      let filtered = keys.filter(function (currVal) {
+        return currVal != key;
+      });
 
       // Now we set the filtered array to the keys array.
       keys = filtered;
     }
 
     //We MUST update the state with the new values. This will also force the control to update in UXPin at runtime.
-    this.setState(
-      {
-        _selectedIndices: keys,
-        isDirty: true,
-      }
-    )
+    this.setState({
+      _selectedIndices: keys,
+      isDirty: true,
+    });
   }
 
   //If it's multiselect, only notify UXPin of changes on blur.
@@ -135,23 +119,20 @@ class ComboBox extends React.Component {
         this.props.onChoiceChange(list);
       }
 
-      this.setState(
-        { isDirty: false }
-      )
+      this.setState({ isDirty: false });
     }
   }
 
   render() {
-    //Microsoft uses one prop for both single and multi-select use cases, unlike the Dropdown. 
+    //Microsoft uses one prop for both single and multi-select use cases, unlike the Dropdown.
     var keys = this.state._selectedIndex;
 
-    if (this.props.multiSelect &&
-      this.state._selectedIndices) {
+    if (this.props.multiSelect && this.state._selectedIndices) {
       keys = this.state._selectedIndices;
     }
 
     //Convert the autocomplete boolean to one of Microsoft's preferred strings.
-    let autoComplete = this.props.autoComplete ? "on" : "off";
+    let autoComplete = this.props.autoComplete ? 'on' : 'off';
 
     const ttTargetID = _.uniqueId('ttTarget_');
     const tooltipID = _.uniqueId('tooltip_');
@@ -162,11 +143,7 @@ class ComboBox extends React.Component {
 
     return (
       <div>
-        <TooltipHost
-          content={this.props.tooltip}
-          id={tooltipID}
-          calloutProps={ttProps}
-        >
+        <TooltipHost content={this.props.tooltip} id={tooltipID} calloutProps={ttProps}>
           <FComboBox
             id={ttTargetID}
             aria-describedby={tooltipID}
@@ -179,20 +156,21 @@ class ComboBox extends React.Component {
             multiSelect={this.props.multiSelect}
             errorMessage={this.props.errorMessage}
             disabled={this.props.disabled}
-            onChange={(e, o, i, v) => { this._onChoiceChange(o, i); }}
+            onChange={(e, o, i, v) => {
+              this._onChoiceChange(o, i);
+            }}
             onBlur={() => this._onBlur()}
           />
         </TooltipHost>
       </div>
-    )
+    );
   }
-};
+}
 
 /**
  * Set up the properties to be available in the UXPin property inspector.
  */
 ComboBox.propTypes = {
-
   /**
    * @uxpindescription The label for the control
    * @uxpinpropname Label
@@ -226,8 +204,8 @@ ComboBox.propTypes = {
   multiSelect: PropTypes.bool,
 
   /**
-   * Microsoft uses the values: "on", "off" 
-   * @uxpindescription Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options. 
+   * Microsoft uses the values: "on", "off"
+   * @uxpindescription Whether the ComboBox auto completes. As the user is inputing text, it will be suggested potential matches from the list of options.
    * @uxpinpropname Auto-Complete
    */
   autoComplete: PropTypes.bool,
@@ -239,9 +217,9 @@ ComboBox.propTypes = {
   errorMessage: PropTypes.string,
 
   /**
-     * @uxpindescription Tooltip for the control
-     * @uxpinpropname Tooltip
-     * */
+   * @uxpindescription Tooltip for the control
+   * @uxpinpropname Tooltip
+   * */
   tooltip: PropTypes.string,
 
   /**
@@ -257,19 +235,17 @@ ComboBox.propTypes = {
   onChoiceChange: PropTypes.func,
 };
 
-
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 ComboBox.defaultProps = {
-  label: "",
-  placeholder: "",
+  label: '',
+  placeholder: '',
   disabled: false,
   multiSelect: false,
   autoComplete: false,
   items: '',
   tooltip: '',
 };
-
 
 export { ComboBox as default };

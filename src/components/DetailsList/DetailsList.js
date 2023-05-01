@@ -9,18 +9,17 @@ import * as UXPinParser from '../_helpers/UXPinParser';
 import { UxpNumberParser } from '../_helpers/uxpnumberparser';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
 const searchFieldWidth = 400;
-const searchFieldIconName = "Filter";
-const searchFieldPlaceholder = "Filter";
+const searchFieldIconName = 'Filter';
+const searchFieldPlaceholder = 'Filter';
 const searchFieldMarginBottom = '24px';
 
-const dataTextSize = "smallPlus";
-const defaultTextColor = "#000";
+const dataTextSize = 'smallPlus';
+const defaultTextColor = '#000';
 const headerBackgroundColor = 'neutralLighterAlt';
-const linkTarget = "_UXPin Mockup";
+const linkTarget = '_UXPin Mockup';
 
-const emptyHeaderText1 = "----";
+const emptyHeaderText1 = '----';
 
 const iconSizeMap = {
   tiny: 10,
@@ -49,7 +48,7 @@ const commandBarTokens = {
 
 const classNames = mergeStyleSets({
   textContainer: {
-    color: "#000",
+    color: '#000',
   },
   linkContainer: {
     '& div,a,button,span': {
@@ -76,8 +75,6 @@ let spanStyle = {
   marginLeft: '5px',
   verticalAlign: 'middle',
 };
-
-
 
 class DetailsList extends React.Component {
   constructor(props) {
@@ -107,20 +104,17 @@ class DetailsList extends React.Component {
         columnWidths: colWidths,
         alignRight: alignRightCols ? alignRightCols : [],
         alignCenter: alignCenterCols ? alignCenterCols : [],
-        shimmer: this.props.shimmer
+        shimmer: this.props.shimmer,
       },
       () => this.setColumns(this.setRows)
     );
 
     if (this.props.shimmer) {
-      setTimeout(
-        () => {
-          this.setState({
-            shimmer: false
-          })
-        },
-        (this.props.shimmerDuration || defaultShimmerDuration) * 1000
-      )
+      setTimeout(() => {
+        this.setState({
+          shimmer: false,
+        });
+      }, (this.props.shimmerDuration || defaultShimmerDuration) * 1000);
     }
   }
 
@@ -157,9 +151,10 @@ class DetailsList extends React.Component {
       let flex = this.getColWidthFlexInfo(wItem);
 
       //Did the user specify a min AND a max?
-      if (wItem.includes("|")) {
+      if (wItem.includes('|')) {
         //Min Width on left, and Max Width on Right
-        let right = '', left = '';
+        let right = '',
+          left = '';
         let splitStr = wItem.split('|');
 
         left = splitStr[0];
@@ -176,9 +171,8 @@ class DetailsList extends React.Component {
         if (!isNaN(rightNum)) {
           max = rightNum;
         }
-      }
-      else {
-        //Did the user specify a default width? 
+      } else {
+        //Did the user specify a default width?
         let maxNum = parseInt(wItem?.trim());
         if (!isNaN(maxNum)) {
           max = maxNum;
@@ -198,14 +192,13 @@ class DetailsList extends React.Component {
 
   getColWidthFlexInfo(text) {
     if (text) {
-      let normalizedText = text.toLowerCase().replace(/[\W_]+/g, "");
+      let normalizedText = text.toLowerCase().replace(/[\W_]+/g, '');
 
-      if (normalizedText.startsWith("flex")) {
-        if (normalizedText === "flex") {
+      if (normalizedText.startsWith('flex')) {
+        if (normalizedText === 'flex') {
           return 1;
-        }
-        else {
-          let flexText = normalizedText.replace("flex", "");
+        } else {
+          let flexText = normalizedText.replace('flex', '');
           let flexNum = parseInt(flexText);
           if (!isNaN(flexNum)) {
             return flexNum;
@@ -215,16 +208,13 @@ class DetailsList extends React.Component {
     }
 
     return 0;
-  };
+  }
 
   getColumnClasses(colIndex) {
-
     let alignHeaderLabels = {};
-    if (this.state.alignCenter.includes(colIndex + 1))
-      alignHeaderLabels = { margin: '0 auto' };
+    if (this.state.alignCenter.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 auto' };
 
-    if (this.state.alignRight.includes(colIndex + 1))
-      alignHeaderLabels = { margin: '0 0 0 auto' };
+    if (this.state.alignRight.includes(colIndex + 1)) alignHeaderLabels = { margin: '0 0 0 auto' };
 
     const headerBg = UxpColors.getHexFromHexOrToken(headerBackgroundColor);
 
@@ -232,8 +222,8 @@ class DetailsList extends React.Component {
       background: headerBg,
       selectors: {
         '& .ms-DetailsHeader-cellName': alignHeaderLabels,
-      }
-    }
+      },
+    };
   }
 
   /**
@@ -255,46 +245,46 @@ class DetailsList extends React.Component {
    * Goes through all children contained in a row object in state and uses element.props.children to get all text visible to the user (ignores the props and attributes like color and icons passed as user input) and returns the string by joining all parts after trimming.
    * @param elem the react element or a component that renders a cell
    * @returns the text content of the elements/components (similar to DOM textContent property which returns the text content of the specified node, and its immediate descendants)
-   * 
+   *
    */
   getTextContent(elem) {
-
     //console.log("getTextContent " + JSON.stringify(elem));
 
-    return elem.reduce((_text, part) => {
-      const children = part.props.children;
-      if (children) {
-        if (Array.isArray(children)) {
-          _text.push(children.join('').trim())
-        } else {
-          _text.push(children.trim())
+    return elem
+      .reduce((_text, part) => {
+        const children = part.props.children;
+        if (children) {
+          if (Array.isArray(children)) {
+            _text.push(children.join('').trim());
+          } else {
+            _text.push(children.trim());
+          }
         }
-      }
-      return _text;
-    }, []).join(' ')
+        return _text;
+      }, [])
+      .join(' ');
   }
 
   /**
-   * 
+   *
    * This function checks whether row contains any cell that has the text visible to the user which contains the search term. The tags and attributes (colors and icon names) passed as children as ignored from the search.
    * @param i the row object that holds data for a row
    * @param search the search term
    * @returns true, if the search term is a substring of the text content of any cell, false, otherwise
-   * 
+   *
    */
   includesText(i, search) {
-
-    return Object.values(i).some(elem => {
+    return Object.values(i).some((elem) => {
       if (Array.isArray(elem)) {
         const text = this.getTextContent(elem);
-        return text.toLowerCase().includes(search.toLowerCase())
+        return text.toLowerCase().includes(search.toLowerCase());
       }
       return false;
     });
   }
 
   searchText(text) {
-    return this.state.allItems.filter(i => this.includesText(i, text));
+    return this.state.allItems.filter((i) => this.includesText(i, text));
   }
 
   searchTable(queryStr) {
@@ -312,12 +302,11 @@ class DetailsList extends React.Component {
   }
 
   onColumnClick(columnKey) {
-
     const { columns, rows } = this.state;
     const newColumns = columns.slice();
-    const currColumn = newColumns.filter(currCol => columnKey === currCol.key)[0];
+    const currColumn = newColumns.filter((currCol) => columnKey === currCol.key)[0];
 
-    newColumns.forEach(newCol => {
+    newColumns.forEach((newCol) => {
       if (newCol == currColumn) {
         currColumn.isSortedDescending = !currColumn.isSortedDescending;
         currColumn.isSorted = true;
@@ -325,13 +314,13 @@ class DetailsList extends React.Component {
         newCol.isSorted = false;
         newCol.isSortedDescending = true;
       }
-    })
+    });
     //currColumn.fieldName
     const newRows = this.sortColumns(rows, currColumn.key, currColumn.isSortedDescending);
     this.setState({
       columns: newColumns,
-      rows: newRows
-    })
+      rows: newRows,
+    });
   }
 
   setColumns(callback) {
@@ -339,7 +328,6 @@ class DetailsList extends React.Component {
     let colItems = this.props.columns?.split('\n');
 
     for (let index = 0; index < colItems.length; index++) {
-
       let columnNameText = colItems[index]?.trim() || ' ';
 
       let suffix = _.uniqueId('_k_');
@@ -347,7 +335,7 @@ class DetailsList extends React.Component {
       //Figure out if the column's header should be empty
       let colNameTxt = columnNameText.toLowerCase() === emptyHeaderText1 ? ' ' : columnNameText;
 
-      //Can we access the widths? 
+      //Can we access the widths?
       let colWidthInfo = {
         index: index,
         minWidth: this.props.minWidth,
@@ -357,24 +345,26 @@ class DetailsList extends React.Component {
 
       if (index < this.state.columnWidths.length) {
         colWidthInfo = this.state.columnWidths[index];
-      };
+      }
 
-      let iconName = "";
-      if (colNameTxt.includes("icon(")) {
+      let iconName = '';
+      if (colNameTxt.includes('icon(')) {
         let propsList = UxpMenuUtils.parseSimpleListText(colNameTxt, true, false);
         if (propsList) {
           iconName = propsList[0].iconProps.iconName;
-          colNameTxt = propsList[0].text ? propsList[0].text : " ";
+          colNameTxt = propsList[0].text ? propsList[0].text : ' ';
         }
       }
 
-      let txtAlign = this.state.alignRight.includes(index + 1) ? 'right' :
-        this.state.alignCenter.includes(index + 1) ? 'center' :
-          'left';
+      let txtAlign = this.state.alignRight.includes(index + 1)
+        ? 'right'
+        : this.state.alignCenter.includes(index + 1)
+        ? 'center'
+        : 'left';
 
       let columnParams = {
-        uxpIndex: index,                    //For proprietary tracking
-        key: "column" + index,
+        uxpIndex: index, //For proprietary tracking
+        key: 'column' + index,
         name: colNameTxt,
         fieldName: colNameTxt,
         flexGrow: colWidthInfo.flexGrow,
@@ -384,7 +374,7 @@ class DetailsList extends React.Component {
         isSorted: false,
         isSortedDescending: false,
         headerClassName: this.getColumnClasses(index),
-        onColumnClick: () => this.onColumnClick("column" + index),
+        onColumnClick: () => this.onColumnClick('column' + index),
         isMultiline: true,
         className: {
           textAlign: txtAlign,
@@ -397,16 +387,19 @@ class DetailsList extends React.Component {
         columnParams.iconName = iconName;
         columnParams.iconClassName = {
           marginRight: '6px',
-          color: "#000",
+          color: '#000',
         };
       }
 
       columnHeadings.push(columnParams);
     }
 
-    this.setState({
-      columns: columnHeadings,
-    }, callback);
+    this.setState(
+      {
+        columns: columnHeadings,
+      },
+      callback
+    );
   }
 
   setRows(callback) {
@@ -428,8 +421,7 @@ class DetailsList extends React.Component {
           if (parsedCell.type !== 'compound') {
             let cellItem = this._getUIElement(parsedCell[0]);
             parsedCellElements.push(cellItem);
-          }
-          else {
+          } else {
             //Else it's a 'compound' array of elements
             parsedCell.value.map((subElement, k) => {
               let cellItem = this._getUIElement(subElement);
@@ -445,43 +437,52 @@ class DetailsList extends React.Component {
       rows.push(r);
     });
 
-    this.setState({
-      rows: rows,
-      allItems: rows,
-    }, callback);
+    this.setState(
+      {
+        rows: rows,
+        allItems: rows,
+      },
+      callback
+    );
   }
 
   _getUIElement(item) {
-    let key = _.uniqueId("__el__");
+    let key = _.uniqueId('__el__');
 
     if (item) {
-      return item.type === "link" ? this._getLinkElement(key, item?.text, item?.href)
-        : item.type === "icon" ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
-          : this._getTextElement(key, item?.text);
+      return item.type === 'link'
+        ? this._getLinkElement(key, item?.text, item?.href)
+        : item.type === 'icon'
+        ? this._getIconElement(key, item?.iconName, item.color ? item.color : item?.colorToken)
+        : this._getTextElement(key, item?.text);
     }
   }
 
   _getTextElement(key, text) {
     //Test for an empty cell item
-    let txt = text === emptyHeaderText1 ? "" : text;
-    return (<span key={key} style={spanStyle}> {txt} </span>);
+    let txt = text === emptyHeaderText1 ? '' : text;
+    return (
+      <span key={key} style={spanStyle}>
+        {' '}
+        {txt}{' '}
+      </span>
+    );
   }
 
   _getLinkElement(key, text, href) {
     let txt = text ? text : href ? href : '';
     let target = linkTarget;
-    if (href && href.includes("preview.uxpin.com")) {
+    if (href && href.includes('preview.uxpin.com')) {
       target = undefined;
     }
 
     return (
       <span key={key} className={'linkContainer ' + classNames.linkContainer} style={spanStyle}>
-        <Link
-          href={href ? href : ""}
-          target={target} >
+        <Link href={href ? href : ''} target={target}>
           {txt}
         </Link>
-      </span>);
+      </span>
+    );
   }
 
   _getIconElement(key, iconName, colorToken) {
@@ -501,12 +502,11 @@ class DetailsList extends React.Component {
       lineHeight: 'normal',
     };
 
-    return (<span key={key} className={'iconContainer ' + classNames.iconContainer} style={spanStyle}>
-      <Icon
-        iconName={name}
-        className={iconDisplayClass}
-      />
-    </span >)
+    return (
+      <span key={key} className={'iconContainer ' + classNames.iconContainer} style={spanStyle}>
+        <Icon iconName={name} className={iconDisplayClass} />
+      </span>
+    );
   }
 
   render() {
@@ -516,7 +516,6 @@ class DetailsList extends React.Component {
     //Set up the StackItems
     let stackList = [];
     if (this.props.children) {
-
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
       let childList = React.Children.toArray(this.props.children);
 
@@ -524,11 +523,7 @@ class DetailsList extends React.Component {
       if (childList) {
         for (let i = 0; i < childList.length; i++) {
           let child = childList[i];
-          let stack = (
-            <StackItem>
-              {child}
-            </StackItem>
-          );
+          let stack = <StackItem>{child}</StackItem>;
           stackList.push(stack);
         } //for loop
       } //if childList
@@ -540,9 +535,8 @@ class DetailsList extends React.Component {
     stackList.push(spanner);
 
     return (
-
       <Stack>
-        {showCommandBar &&
+        {showCommandBar && (
           <Stack
             tokens={commandBarTokens}
             horizontal={true}
@@ -556,24 +550,27 @@ class DetailsList extends React.Component {
                 <SearchBox
                   iconProps={{ iconName: this.props.icon.trim() }}
                   placeholder={this.props.placeholder}
-                  onChange={(e, v) => { this.searchTable(v) }}
+                  onChange={(e, v) => {
+                    this.searchTable(v);
+                  }}
                   onClear={this.onSearchClear}
                   styles={{ root: { width: searchFieldWidth } }}
                 />
               </StackItem>
             )}
           </Stack>
-        }
+        )}
         <StackItem>
-          <div style={{ display: 'block' }} className={
-            {
+          <div
+            style={{ display: 'block' }}
+            className={{
               selectors: {
                 '& .ms-DetailsHeader': {
                   paddingTop: 0,
                 },
-              }
-            }
-          }>
+              },
+            }}
+          >
             <ShimmeredDetailsList
               enableShimmer={this.state.shimmer}
               {...this.props}
@@ -590,34 +587,30 @@ class DetailsList extends React.Component {
             />
           </div>
         </StackItem>
-
       </Stack>
-
     );
   }
 }
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 DetailsList.propTypes = {
-
   /**
-   * Don't show this prop in the UXPin Editor. 
-   * @uxpinignoreprop   
+   * Don't show this prop in the UXPin Editor.
+   * @uxpinignoreprop
    * @uxpinpropname CommandBar Children
    */
   children: PropTypes.node,
 
   /**
-  * @uxpindescription Whether to show the filter SearchBox 
-  * @uxpinpropname Show Filter
-  */
+   * @uxpindescription Whether to show the filter SearchBox
+   * @uxpinpropname Show Filter
+   */
   isSearchEnabled: PropTypes.bool,
 
   /**
-   * @uxpindescription The exact name from the icon library. Displays on the right side. 
+   * @uxpindescription The exact name from the icon library. Displays on the right side.
    * @uxpinpropname Search Icon
    * */
   icon: PropTypes.string,
@@ -629,30 +622,30 @@ DetailsList.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-  * @uxpindescription Whether to display the table headers 
-  * @uxpinpropname Show Headers
-  */
+   * @uxpindescription Whether to display the table headers
+   * @uxpinpropname Show Headers
+   */
   header: PropTypes.bool,
 
-  /** 
+  /**
    *  Separate each item with new line or | symbol.
    *  Put at the end of the line [color:blue-600] token to set color for whole column.
-   * @uxpindescription Enter one column heading value per row. 
-   * To include a comma within the text, wrap it in quotes. 
+   * @uxpindescription Enter one column heading value per row.
+   * To include a comma within the text, wrap it in quotes.
    * To specify an empty heading, leave the field empty or typ in "----" (no quotes).
    * @uxpinpropname Headers
    * @uxpincontroltype codeeditor
    * */
   columns: PropTypes.string,
 
-  /** 
-   * 
+  /**
+   *
    * @uxpindescription Separate each row with a new line. Separate each cell with a comma.
-   * Link syntax: link(Display Text | HREF) 
-   * Icon syntax: icon(IconName | Color_Token or #Hex) 
+   * Link syntax: link(Display Text | HREF)
+   * Icon syntax: icon(IconName | Color_Token or #Hex)
    * To specify an empty cell, enter "----" (no quotes).
-   * NOTE: To display text with a comma, wrap the entire cell's contents in double quotes: "$1,234" 
-   * To show an icon plus text with a comma in a cell:  "icon(CashDollar | green-600) $1,234" 
+   * NOTE: To display text with a comma, wrap the entire cell's contents in double quotes: "$1,234"
+   * To show an icon plus text with a comma in a cell:  "icon(CashDollar | green-600) $1,234"
    * To show a comma within a link, wrap the cell contents in double quotes: "link(Dec 24, 2023, 4:15 pm)"
    * @uxpinpropname Rows
    * @uxpincontroltype codeeditor
@@ -660,14 +653,14 @@ DetailsList.propTypes = {
   items: PropTypes.string,
 
   /**
-  * @uxpindescription Minimum column width  
-  * @uxpinpropname Min Width
-  */
+   * @uxpindescription Minimum column width
+   * @uxpinpropname Min Width
+   */
   minWidth: PropTypes.number,
 
   /**
-   * @uxpindescription Default Column Widths. Optionally specify default widths for individual columns. 
-   * Leave line blank and the default Min Width will be applied. 
+   * @uxpindescription Default Column Widths. Optionally specify default widths for individual columns.
+   * Leave line blank and the default Min Width will be applied.
    * To create a specifically sized column width, enter both a Minimum and Max value as: 24 | 24
    * Enter "flex" with an optional number, e.g., "flex 2", (no quotes) for a column to proportionally take any remaining available space.
    * NOTE: The Best Practice is to specify at least one column as "flex" (no quotes). If none is specified, the last column is assigned all remaining horizontal space.
@@ -677,38 +670,37 @@ DetailsList.propTypes = {
   widths: PropTypes.string,
 
   /**
-  * Example: 2, 3
-  * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
-  * @uxpinpropname Align Right
-  */
+   * Example: 2, 3
+   * @uxpindescription Enter a comma-separated list of column numbers for right aligning their contents (Optional)
+   * @uxpinpropname Align Right
+   */
   alignRight: PropTypes.string,
 
   /**
-  * Example: 2, 3
-  * @uxpindescription Enter a comma-separated list of column numbers for center aligning their contents (Optional)
-  * @uxpinpropname Align Center
-  */
+   * Example: 2, 3
+   * @uxpindescription Enter a comma-separated list of column numbers for center aligning their contents (Optional)
+   * @uxpinpropname Align Center
+   */
   alignCenter: PropTypes.string,
 
   /**
-  * @uxpindescription Whether to display the shimmer 
-  * @uxpinpropname Shimmer
-  */
+   * @uxpindescription Whether to display the shimmer
+   * @uxpinpropname Shimmer
+   */
   shimmer: PropTypes.bool,
 
   /**
-  * @uxpindescription Shimmer duration, in seconds
-  * @uxpinpropname Shimmer Duration
-  */
+   * @uxpindescription Shimmer duration, in seconds
+   * @uxpinpropname Shimmer Duration
+   */
   shimmerDuration: PropTypes.number,
 
   /**
-  * @uxpindescription Number of Shimmer lines
-  * @uxpinpropname Shimmer Lines
-  */
+   * @uxpindescription Number of Shimmer lines
+   * @uxpinpropname Shimmer Lines
+   */
   shimmerLines: PropTypes.number,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
@@ -726,8 +718,7 @@ DetailsList.defaultProps = {
   placeholder: searchFieldPlaceholder,
   shimmer: false,
   shimmerDuration: 0,
-  shimmerLines: 0
+  shimmerLines: 0,
 };
-
 
 export { DetailsList as default };

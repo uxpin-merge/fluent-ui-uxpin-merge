@@ -3,8 +3,6 @@ import * as PropTypes from 'prop-types';
 import { Panel as FPanel, PanelType } from '@fluentui/react/lib/Panel';
 import { Stack, StackItem } from '@fluentui/react/lib/Stack';
 
-
-
 const panelSize = {
   small: PanelType.smallFluid,
   medium: PanelType.medium,
@@ -12,10 +10,8 @@ const panelSize = {
   xLarge: PanelType.extraLarge,
 };
 
-const panelSizeList = ["small", "medium", "large", "xLarge"];
+const panelSizeList = ['small', 'medium', 'large', 'xLarge'];
 const defaultPanelSize = 'medium';
-
-
 
 class Panel extends React.Component {
   constructor(props) {
@@ -23,7 +19,7 @@ class Panel extends React.Component {
 
     this.state = {
       isOpen: false,
-    }
+    };
   }
 
   componentDidMount() {
@@ -55,16 +51,8 @@ class Panel extends React.Component {
           let key = _.uniqueId('child_');
 
           let footerContent = (
-            <Stack
-              horizontal={true}
-              horizontalAlign={'left'}
-              wrap={false}
-            >
-              <StackItem
-                key={key}
-                align={'stretch'}
-                grow={false}
-              >
+            <Stack horizontal={true} horizontalAlign={'left'} wrap={false}>
+              <StackItem key={key} align={'stretch'} grow={false}>
                 {child}
               </StackItem>
             </Stack>
@@ -97,7 +85,7 @@ class Panel extends React.Component {
     //****************************
     //For Inner Stack
 
-    //Let's make sure we have a positive number. 
+    //Let's make sure we have a positive number.
     let pad = this.props.gutterPadding > 0 ? this.props.gutterPadding : 0;
 
     const stackTokens = {
@@ -109,7 +97,6 @@ class Panel extends React.Component {
     var stackList = [];
 
     if (this.props.children) {
-
       //First, let's create our own array of children, since UXPin returns an object for 1 child, or an array for 2 or more.
       let childList = React.Children.toArray(this.props.children);
 
@@ -121,17 +108,12 @@ class Panel extends React.Component {
           let child = childList[i];
 
           if (this.props.hasFooter && i === footerIndex) {
-            //Ignore this object for now. We'll render it later. 
-          }
-          else {
+            //Ignore this object for now. We'll render it later.
+          } else {
             let key = _.uniqueId('child_');
 
             let stack = (
-              <StackItem
-                key={key}
-                align={'stretch'}
-                grow={false}
-              >
+              <StackItem key={key} align={'stretch'} grow={false}>
                 {child}
               </StackItem>
             );
@@ -143,7 +125,7 @@ class Panel extends React.Component {
 
     let panelContents = '';
 
-    //Do we have children? 
+    //Do we have children?
     if (stackList && stackList.length > 0) {
       panelContents = (
         <div>
@@ -151,14 +133,9 @@ class Panel extends React.Component {
             style={{
               width: '100%',
               height: '24px',
-            }} />
-          <Stack
-            {...this.props}
-            tokens={stackTokens}
-            horizontal={false}
-            horizontalAlign={'left'}
-            wrap={false}
-          >
+            }}
+          />
+          <Stack {...this.props} tokens={stackTokens} horizontal={false} horizontalAlign={'left'} wrap={false}>
             {stackList}
           </Stack>
         </div>
@@ -166,20 +143,28 @@ class Panel extends React.Component {
     }
 
     return (
-      <div >
-        <div  //A visual aid for the designer to see in UXPin
+      <div>
+        <div //A visual aid for the designer to see in UXPin
           style={{
             width: '100px',
             height: '100px',
-            color: "white",
-            textAlign: "center",
-            verticalAlign: "middle",
-            background: "#666600",
-            borderRadius: 10
-          }}><br /><em><strong>Panel:</strong></em><br />Move this marker offscreen</div>
+            color: 'white',
+            textAlign: 'center',
+            verticalAlign: 'middle',
+            background: '#666600',
+            borderRadius: 10,
+          }}
+        >
+          <br />
+          <em>
+            <strong>Panel:</strong>
+          </em>
+          <br />
+          Move this marker offscreen
+        </div>
         <FPanel
           {...this.props}
-          closeButtonAriaLabel={"Close"}
+          closeButtonAriaLabel={'Close'}
           headerText={this.props.headerText}
           isOpen={this.state.isOpen}
           hasCloseButton={true}
@@ -191,14 +176,13 @@ class Panel extends React.Component {
         >
           {panelContents}
         </FPanel>
-      </div >
+      </div>
     );
   }
-};
+}
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 Panel.propTypes = {
   /**
@@ -207,26 +191,26 @@ Panel.propTypes = {
   children: PropTypes.node,
 
   /**
-   * @uxpindescription To show or hide the panel. 
+   * @uxpindescription To show or hide the panel.
    * @uxpinpropname Show
    */
   show: PropTypes.bool,
 
   /**
-  * @uxpindescription The text to be displayed in the header of the panel 
-  * @uxpinpropname Header Text
-  */
+   * @uxpindescription The text to be displayed in the header of the panel
+   * @uxpinpropname Header Text
+   */
   headerText: PropTypes.string,
 
   /**
-  * @uxpindescription The display width of the panel. 
-  * @uxpinpropname Panel Size
-  */
+   * @uxpindescription The display width of the panel.
+   * @uxpinpropname Panel Size
+   */
   panelWidth: PropTypes.oneOf(panelSizeList),
 
   /**
    * NOTE: This cannot be called just 'padding,' or else there is a namespace collision with regular CSS 'padding.'
-   * @uxpindescription Row padding between the items in the group. Value must be 0 or more.  
+   * @uxpindescription Row padding between the items in the group. Value must be 0 or more.
    * @uxpinpropname Gutter
    */
   gutterPadding: PropTypes.number,
@@ -244,24 +228,22 @@ Panel.propTypes = {
   lightDismiss: PropTypes.bool,
 
   /**
-    * @uxpindescription Fires when the Panel is closed
-    * @uxpinpropname Dismiss
-    */
-  onPanelDismiss: PropTypes.func
+   * @uxpindescription Fires when the Panel is closed
+   * @uxpinpropname Dismiss
+   */
+  onPanelDismiss: PropTypes.func,
 };
-
 
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 Panel.defaultProps = {
-  headerText: "Panel Header",
+  headerText: 'Panel Header',
   show: true,
   lightDismiss: true,
   panelWidth: defaultPanelSize,
   gutterPadding: 24,
   hasFooter: false,
-}
-
+};
 
 export { Panel as default };

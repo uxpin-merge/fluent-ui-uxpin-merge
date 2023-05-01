@@ -21,7 +21,8 @@ export default class BarChart extends React.Component {
     const getStartData = () => {
       if (Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
         return this.props.startData;
-      } if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
+      }
+      if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
         return this.props.startData;
       }
 
@@ -65,7 +66,8 @@ export default class BarChart extends React.Component {
         onMouseLeave={() => this.restartCrosshair()}
         xType={this.props.xScaleType}
         yType={this.props.yScaleType}
-        margin={this.props.margin}>
+        margin={this.props.margin}
+      >
         {this.props.verticalGridLines ? <VerticalGridLines /> : undefined}
         {this.props.horizontalGridLines ? <HorizontalGridLines /> : undefined}
         {this.props.xLabels ? <XAxis title={this.props.xAxisTitle} /> : undefined}
@@ -79,23 +81,17 @@ export default class BarChart extends React.Component {
                 : this.props.color
             }
             fill={
-              this.props.fillRange !== undefined && this.props.fillRange[0]
-                ? this.props.fillRange[0]
-                : this.props.fill
+              this.props.fillRange !== undefined && this.props.fillRange[0] ? this.props.fillRange[0] : this.props.fill
             }
             opacity={
-              this.props.styles !== undefined
-              && this.props.styles[0]
-              && this.props.styles[0].opacity
+              this.props.styles !== undefined && this.props.styles[0] && this.props.styles[0].opacity
                 ? parseFloat(this.props.styles[0].opacity)
                 : parseFloat(this.props.opacity)
             }
             stroke={this.props.stroke}
             barWidth={parseFloat(this.props.barWidth)}
             cluster={
-              this.props.styles !== undefined
-              && this.props.styles[0]
-              && this.props.styles[0].cluster
+              this.props.styles !== undefined && this.props.styles[0] && this.props.styles[0].cluster
                 ? this.props.styles[0].cluster
                 : ''
             }
@@ -114,33 +110,27 @@ export default class BarChart extends React.Component {
               key={i}
               data={this.state.data[i]}
               color={
-                  this.props.colorRange !== undefined
-                  && this.props.colorRange[i]
-                    ? this.props.colorRange[i]
-                    : this.props.color
-                }
+                this.props.colorRange !== undefined && this.props.colorRange[i]
+                  ? this.props.colorRange[i]
+                  : this.props.color
+              }
               fill={
-                  this.props.fillRange !== undefined
-                  && this.props.fillRange[i]
-                    ? this.props.fillRange[i]
-                    : this.props.fill
-                }
+                this.props.fillRange !== undefined && this.props.fillRange[i]
+                  ? this.props.fillRange[i]
+                  : this.props.fill
+              }
               opacity={
-                  this.props.styles !== undefined
-                  && this.props.styles[i]
-                  && this.props.styles[i].opacity
-                    ? parseFloat(this.props.styles[i].opacity)
-                    : parseFloat(this.props.opacity)
-                }
+                this.props.styles !== undefined && this.props.styles[i] && this.props.styles[i].opacity
+                  ? parseFloat(this.props.styles[i].opacity)
+                  : parseFloat(this.props.opacity)
+              }
               stroke={this.props.stroke}
               barWidth={parseFloat(this.props.barWidth)}
               cluster={
-                  this.props.styles !== undefined
-                  && this.props.styles[0]
-                  && this.props.styles[0].cluster
-                    ? this.props.styles[0].cluster
-                    : ''
-                }
+                this.props.styles !== undefined && this.props.styles[0] && this.props.styles[0].cluster
+                  ? this.props.styles[0].cluster
+                  : ''
+              }
               onValueClick={(value) => this.getHint(value)}
               onNearestX={(value, index) => this.getCrosshair(value, index)}
               onNearestXY={this.props.onNearestXY}
@@ -152,16 +142,8 @@ export default class BarChart extends React.Component {
             />
           ))
         )}
-        {this.props.crossHair ? (
-          <Crosshair values={this.state.crosshairValues} />
-        ) : (
-          undefined
-        )}
-        {this.props.hint && this.state.showHint ? (
-          <Hint value={this.state.hintValue} />
-        ) : (
-          undefined
-        )}
+        {this.props.crossHair ? <Crosshair values={this.state.crosshairValues} /> : undefined}
+        {this.props.hint && this.state.showHint ? <Hint value={this.state.hintValue} /> : undefined}
       </XYPlot>
     );
   }

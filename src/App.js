@@ -1,6 +1,6 @@
-import React from "react";
-import { DefaultButton, PrimaryButton } from "@fluentui/react";
-import "./App.css";
+import React from 'react';
+import { DefaultButton, PrimaryButton } from '@fluentui/react';
+import './App.css';
 
 export default function App() {
   return (

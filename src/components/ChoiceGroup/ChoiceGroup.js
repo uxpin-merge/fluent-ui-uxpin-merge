@@ -3,31 +3,27 @@ import * as PropTypes from 'prop-types';
 import { ChoiceGroup as FChoiceGroup } from '@fluentui/react/lib/ChoiceGroup';
 import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
-
-
 const choiceGroupHorizontalStyles = {
   label: {
-    display: "inline",
-    content: "\a"
+    display: 'inline',
+    content: 'a',
   },
   flexContainer: {
-    columnGap: "1em",
-    display: "inline-flex",
-    flexDirection: "row",
-    flexWrap: "wrap"
-  }
+    columnGap: '1em',
+    display: 'inline-flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
 };
 
-
 class ChoiceGroup extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       _index: 0,
-      items: []
-    }
+      items: [],
+    };
   }
 
   set() {
@@ -44,9 +40,11 @@ class ChoiceGroup extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.items !== this.props.items ||
+    if (
+      prevProps.items !== this.props.items ||
       prevProps.tiled !== this.props.tiled ||
-      prevProps.selectedIndex !== this.props.selectedIndex) {
+      prevProps.selectedIndex !== this.props.selectedIndex
+    ) {
       this.set();
     }
   }
@@ -55,44 +53,39 @@ class ChoiceGroup extends React.Component {
     //Get the value. Add 1 because it's stored as a 1-based index to be more user friendly.
     const i = option.key + 1;
 
-    //Set the state with the updated index value. 
-    this.setState(
-      { _index: i }
-    )
+    //Set the state with the updated index value.
+    this.setState({ _index: i });
 
-    //Raise this event to UXPin. 
+    //Raise this event to UXPin.
     if (this.props.onChoiceChange) {
       this.props.onChoiceChange(i);
     }
   }
 
   render() {
-
     //Subtract 1 because it's stored as a 1-based index to be more user friendly.
     const selectedKey = this.state._index - 1;
 
     const hstyle = this.props.horizontalRB ? choiceGroupHorizontalStyles : '';
 
     return (
-
       <FChoiceGroup
         {...this.props}
         options={this.state._items}
         selectedKey={selectedKey}
         styles={hstyle}
-        onChange={(e, o) => { this._onChoiceChange(o); }}
+        onChange={(e, o) => {
+          this._onChoiceChange(o);
+        }}
       />
-
     );
   }
 }
 
-
-/** 
- * Set up the properties to be available in the UXPin property inspector. 
+/**
+ * Set up the properties to be available in the UXPin property inspector.
  */
 ChoiceGroup.propTypes = {
-
   /**
    * @uxpindescription The label for the options
    * @uxpinpropname Label
@@ -101,16 +94,16 @@ ChoiceGroup.propTypes = {
   label: PropTypes.string,
 
   /**
-  * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional). This prop's live value is available for scripting.
-  * @uxpinbind onChoiceChange
-  * @uxpinpropname * Index
+   * @uxpindescription The 1-based index value of the default item to be shown as selected (Optional). This prop's live value is available for scripting.
+   * @uxpinbind onChoiceChange
+   * @uxpinpropname * Index
    * */
   selectedIndex: PropTypes.number,
 
   /**
-  * @uxpindescription The list of options. Put each option on a separate line. Enclose an item in quotes to include a comma within it.  For tiled choices, check the Tiled property and add an icon(IconName) at the start of each line.
-  * @uxpinpropname Items
-  * @uxpincontroltype codeeditor
+   * @uxpindescription The list of options. Put each option on a separate line. Enclose an item in quotes to include a comma within it.  For tiled choices, check the Tiled property and add an icon(IconName) at the start of each line.
+   * @uxpinpropname Items
+   * @uxpincontroltype codeeditor
    * */
   items: PropTypes.string,
 
@@ -125,7 +118,6 @@ ChoiceGroup.propTypes = {
    * @uxpinpropname Horizontal Radio Buttons
    * */
   horizontalRB: PropTypes.bool,
-
 
   /**
    * @uxpindescription To display the 'required' flag on the label
@@ -143,7 +135,7 @@ ChoiceGroup.propTypes = {
    * @uxpindescription Fires when the selected index value changes.
    * @uxpinpropname * Index Changed
    * */
-  onChoiceChange: PropTypes.func
+  onChoiceChange: PropTypes.func,
 };
 
 /**
@@ -157,6 +149,5 @@ ChoiceGroup.defaultProps = {
   tiled: false,
   horizontalRB: false,
 };
-
 
 export { ChoiceGroup as default };

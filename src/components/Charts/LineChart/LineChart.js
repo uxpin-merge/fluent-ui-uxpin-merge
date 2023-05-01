@@ -11,15 +11,7 @@ import {
 } from 'd3-shape';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Crosshair,
-  HorizontalGridLines,
-  LineSeries,
-  VerticalGridLines,
-  XAxis,
-  XYPlot,
-  YAxis,
-} from 'react-vis';
+import { Crosshair, HorizontalGridLines, LineSeries, VerticalGridLines, XAxis, XYPlot, YAxis } from 'react-vis';
 import ChartStyles from '../chartStyles/chart.styles';
 
 export default class LineChart extends React.Component {
@@ -29,7 +21,8 @@ export default class LineChart extends React.Component {
     const getStartData = () => {
       if (Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
         return this.props.startData;
-      } if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
+      }
+      if (!Array.isArray(this.props.startData[0]) && this.props.startData.length === this.props.data.length) {
         return this.props.startData;
       }
 
@@ -80,31 +73,19 @@ export default class LineChart extends React.Component {
         case 'curveStepBefore':
           return type;
         case 'curveCatmullRom':
-          return curveCatmullRom.alpha(
-            parseFloat(this.props.curveCatmullRomAlpha)
-          );
+          return curveCatmullRom.alpha(parseFloat(this.props.curveCatmullRomAlpha));
         case 'curveCatmullRomClosed':
-          return curveCatmullRomClosed.alpha(
-            parseFloat(this.props.curveCatmullRomAlpha)
-          );
+          return curveCatmullRomClosed.alpha(parseFloat(this.props.curveCatmullRomAlpha));
         case 'curveCatmullRomOpen':
-          return curveCatmullRomOpen.alpha(
-            parseFloat(this.props.curveCatmullRomAlpha)
-          );
+          return curveCatmullRomOpen.alpha(parseFloat(this.props.curveCatmullRomAlpha));
         case 'curveBundle':
           return curveBundle.beta(parseFloat(this.props.curveBundleBeta));
         case 'curveCardinal':
-          return curveCardinal.tension(
-            parseFloat(this.props.curveCardinalTension)
-          );
+          return curveCardinal.tension(parseFloat(this.props.curveCardinalTension));
         case 'curveCardinalOpen':
-          return curveCardinalOpen.tension(
-            parseFloat(this.props.curveCardinalTension)
-          );
+          return curveCardinalOpen.tension(parseFloat(this.props.curveCardinalTension));
         case 'curveCardinalClosed':
-          return curveCardinalClosed.tension(
-            parseFloat(this.props.curveCardinalTension)
-          );
+          return curveCardinalClosed.tension(parseFloat(this.props.curveCardinalTension));
         case 'no curve':
         default:
           return '';
@@ -116,7 +97,8 @@ export default class LineChart extends React.Component {
         width={this.props.width}
         css={ChartStyles}
         onMouseLeave={() => this.restartCrosshair()}
-        margin={this.props.margin}>
+        margin={this.props.margin}
+      >
         {this.props.verticalGridLines ? <VerticalGridLines /> : undefined}
         {this.props.horizontalGridLines ? <HorizontalGridLines /> : undefined}
         {this.props.xLabels ? <XAxis /> : undefined}
@@ -125,30 +107,23 @@ export default class LineChart extends React.Component {
           <LineSeries
             data={this.state.data}
             color={
-              this.props.colorRange !== undefined
-            && this.props.colorRange[0]
+              this.props.colorRange !== undefined && this.props.colorRange[0]
                 ? this.props.colorRange[0]
                 : this.props.color
             }
             curve={curve(this.props.curve)}
             opacity={
-              this.props.styles !== undefined
-            && this.props.styles[0]
-            && this.props.styles[0].opacity
+              this.props.styles !== undefined && this.props.styles[0] && this.props.styles[0].opacity
                 ? parseFloat(this.props.styles[0].opacity)
                 : parseFloat(this.props.opacity)
             }
             strokeWidth={
-              this.props.styles !== undefined
-            && this.props.styles[0]
-            && this.props.styles[0].strokeWidth
+              this.props.styles !== undefined && this.props.styles[0] && this.props.styles[0].strokeWidth
                 ? this.props.styles[0].strokeWidth
                 : this.props.strokeWidth
             }
             strokeStyle={
-              this.props.styles !== undefined
-            && this.props.styles[0]
-            && this.props.styles[0].strokeStyle
+              this.props.styles !== undefined && this.props.styles[0] && this.props.styles[0].strokeStyle
                 ? this.props.styles[0].strokeStyle
                 : this.props.strokeStyle
             }
@@ -166,33 +141,26 @@ export default class LineChart extends React.Component {
               key={i}
               data={this.state.data[i]}
               color={
-                  this.props.colorRange !== undefined
-                  && this.props.colorRange[i]
-                    ? this.props.colorRange[i]
-                    : this.props.color
-                }
+                this.props.colorRange !== undefined && this.props.colorRange[i]
+                  ? this.props.colorRange[i]
+                  : this.props.color
+              }
               curve={curve(this.props.curve)}
               opacity={
-                  this.props.styles !== undefined
-                  && this.props.styles[i]
-                  && this.props.styles[i].opacity
-                    ? parseFloat(this.props.styles[i].opacity)
-                    : parseFloat(this.props.opacity)
-                }
+                this.props.styles !== undefined && this.props.styles[i] && this.props.styles[i].opacity
+                  ? parseFloat(this.props.styles[i].opacity)
+                  : parseFloat(this.props.opacity)
+              }
               strokeWidth={
-                  this.props.styles !== undefined
-                  && this.props.styles[i]
-                  && this.props.styles[i].strokeWidth
-                    ? this.props.styles[i].strokeWidth
-                    : this.props.strokeWidth
-                }
+                this.props.styles !== undefined && this.props.styles[i] && this.props.styles[i].strokeWidth
+                  ? this.props.styles[i].strokeWidth
+                  : this.props.strokeWidth
+              }
               strokeStyle={
-                  this.props.styles !== undefined
-                  && this.props.styles[i]
-                  && this.props.styles[i].strokeStyle
-                    ? this.props.styles[i].strokeStyle
-                    : this.props.strokeStyle
-                }
+                this.props.styles !== undefined && this.props.styles[i] && this.props.styles[i].strokeStyle
+                  ? this.props.styles[i].strokeStyle
+                  : this.props.strokeStyle
+              }
               onNearestX={(value, index) => this.getCrosshair(value, index)}
               onNearestXY={this.props.onNearestXY}
               onSeriesClick={this.props.onSeriesClick}

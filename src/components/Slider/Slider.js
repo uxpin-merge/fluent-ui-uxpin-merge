@@ -1,8 +1,7 @@
-import * as React from "react";
-import * as PropTypes from "prop-types";
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { Slider as FSlider } from '@fluentui/react/lib/Slider';
 import { mergeStyles } from '@fluentui/merge-styles';
-
 
 class Slider extends React.Component {
   constructor(props) {
@@ -10,15 +9,15 @@ class Slider extends React.Component {
 
     //Set the default value
     this.state = {
-      _sliderValue: this.props.sliderValue
-    }
+      _sliderValue: this.props.sliderValue,
+    };
   }
 
   set() {
     //Track the slider value state within the control
     this.setState({
-      _sliderValue: this.props.sliderValue
-    })
+      _sliderValue: this.props.sliderValue,
+    });
   }
 
   componentDidMount() {
@@ -26,9 +25,7 @@ class Slider extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.sliderValue !== this.props.sliderValue
-    ) {
+    if (prevProps.sliderValue !== this.props.sliderValue) {
       this.set();
     }
   }
@@ -36,7 +33,7 @@ class Slider extends React.Component {
   _onValueChange(newValue) {
     //The newValue object here is the new slider value already as a number.
 
-    //Let's cut down on noise & return if it's the same value. 
+    //Let's cut down on noise & return if it's the same value.
     if (newValue === this.state._sliderValue) {
       return;
     }
@@ -70,7 +67,6 @@ class Slider extends React.Component {
         onChange={(v) => {
           this._onValueChange(v);
         }}
-
       />
     );
   }
@@ -80,7 +76,6 @@ class Slider extends React.Component {
  * Set up the properties to be available in the UXPin property inspector.
  */
 Slider.propTypes = {
-
   /**
    * @uxpindescription Description label of the Slider
    * @uxpinpropname Label
@@ -132,27 +127,25 @@ Slider.propTypes = {
   verticalHeight: PropTypes.number,
 
   /**
-   * Providing a different event name to avoid uncontrolled collision with built in onChange event. 
+   * Providing a different event name to avoid uncontrolled collision with built in onChange event.
    * @uxpindescription Fires when the control's Value property changes.
    * @uxpinpropname * Value Changed
    * */
   onValueChange: PropTypes.func,
 };
 
-
 /**
  * Set the default values for this control in the UXPin Editor.
  */
 Slider.defaultProps = {
-  label: "Slider",
+  label: 'Slider',
   min: 0,
   max: 10,
   step: 1,
   sliderValue: 2,
   showValue: true,
   vertical: false,
-  verticalHeight: 300
+  verticalHeight: 300,
 };
-
 
 export { Slider as default };

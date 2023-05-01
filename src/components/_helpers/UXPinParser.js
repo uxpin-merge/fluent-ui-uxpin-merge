@@ -1,5 +1,5 @@
-import { inputProperties } from "@fluentui/react";
-import { UxpColors } from "./uxpcolorutils";
+import { inputProperties } from '@fluentui/react';
+import { UxpColors } from './uxpcolorutils';
 
 /**
  * Function to split a CSV input string into an array of rows of CSV strings
@@ -19,13 +19,13 @@ export function split(inputStr) {
     return [];
   }
 
-  let currChar;             // For looping through characters of the inputStr
-  let prevChar = '';        // The previous character we looped around
-  let insideQuotes = true;  // Are we currently inside quotes?
-  let newRow = [''];        // Represents a row in our newArray
-  let newArray = [newRow];  // The processed array that we will return
-  let i = 0;                // Index variable for elements in newRow
-  let j = 0;                // Index variable for rows in newArray
+  let currChar; // For looping through characters of the inputStr
+  let prevChar = ''; // The previous character we looped around
+  let insideQuotes = true; // Are we currently inside quotes?
+  let newRow = ['']; // Represents a row in our newArray
+  let newArray = [newRow]; // The processed array that we will return
+  let i = 0; // Index variable for elements in newRow
+  let j = 0; // Index variable for rows in newArray
 
   // For each character in the inputStr
   for (currChar of inputStr) {
@@ -45,7 +45,7 @@ export function split(inputStr) {
         newRow[i] = newRow[i].slice(0, -1);
       }
       // This array row is finished, start a new row of newArray
-      newRow = newArray[++j] = [currChar = ''];
+      newRow = newArray[++j] = [(currChar = '')];
       i = 0;
     } else {
       // If it's not a special character, just add it the current element
@@ -55,15 +55,14 @@ export function split(inputStr) {
   }
 
   return newArray;
-};
+}
 
 /**
- * 
- * @param inputStr Splits a raw input string by line breaks first. Then, for each row, parses the row for CSV blocks ot fext. 
+ *
+ * @param inputStr Splits a raw input string by line breaks first. Then, for each row, parses the row for CSV blocks ot fext.
  * @returns An array of arrays of strings. Each row's contents are contained in its own array of strings representing each block.
  */
 export function parseMultipleRowsCSV(inputStr) {
-
   let contents = [];
 
   //Split rows by new line
@@ -83,7 +82,7 @@ export function parseMultipleRowsCSV(inputStr) {
 }
 
 /**
- * 
+ *
  * @param inputStr CSV with commas separating distinct blocks. This would be 3 blocks: "str, str str str, str"
  * @returns An array of strings representing each block.
  * @example "one, two, "  three  "" --> ["one", "two", "  three  "]
@@ -91,7 +90,6 @@ export function parseMultipleRowsCSV(inputStr) {
  *           ["icon(Dictionary) abc", "link(John Snow|paypal.com)", "$1,235"]
  */
 export function parseRowCSV(inputStr) {
-
   //Source: https://stackoverflow.com/questions/8493195/how-can-i-parse-a-csv-string-with-javascript-which-contains-comma-in-data
 
   let parsedCSV = [];
@@ -105,7 +103,7 @@ export function parseRowCSV(inputStr) {
     }
   }
   return parsedCSV;
-};
+}
 
 /**
  * Function to parse an array of CSV values and return an array of objects
@@ -123,9 +121,7 @@ export function parse(inputStr) {
 
   parsedOutput = split(inputStr)
     .flat()
-    .map((value, index) => (
-      parseRow(value, index)
-    ));
+    .map((value, index) => parseRow(value, index));
 
   return parsedOutput.flat();
 }
@@ -140,11 +136,11 @@ export function parseRow(inputStr, index) {
   let allTokens = inputStr.split(/\s(?![^\(]*\))/g);
   let tokensWithType = inputStr.match(new RegExp(/(\s|)(icon|link)\((.*?)\)(\s|)/gi));
 
-  let parsedOutput = [];                    // The return value that we will build
-  let hasType = tokensWithType !== null;    // Icon, Link etc. found; not free text
-  let createNewToken = true;                // Switch between creating new token or adding to a token
-  let semaphore = false;                    // Switch between creating/adding with compound types, E.g. Text --> Link --> Icon --> Text
-  let tokenCounter = 0;                     // Incremented with each call to makeToken()
+  let parsedOutput = []; // The return value that we will build
+  let hasType = tokensWithType !== null; // Icon, Link etc. found; not free text
+  let createNewToken = true; // Switch between creating new token or adding to a token
+  let semaphore = false; // Switch between creating/adding with compound types, E.g. Text --> Link --> Icon --> Text
+  let tokenCounter = 0; // Incremented with each call to makeToken()
 
   /**
    * This algorithm deals with three broad use-cases:
@@ -155,14 +151,8 @@ export function parseRow(inputStr, index) {
    *   3. Free text only
    */
   for (let i = 0; i < allTokens.length; i++) {
-    if (
-      hasType &&
-      tokensWithType?.length === 1 &&
-      allTokens[0].trim() === tokensWithType[0]?.trim()
-    ) {
-      parsedOutput.push(
-        makeToken(allTokens[i], getType(allTokens[i]), index)
-      );
+    if (hasType && tokensWithType?.length === 1 && allTokens[0].trim() === tokensWithType[0]?.trim()) {
+      parsedOutput.push(makeToken(allTokens[i], getType(allTokens[i]), index));
       createNewToken = true;
     } else if (hasType && tokensWithType?.length) {
       if (tokensWithType.map((s) => s.trim()).includes(allTokens[i])) {
@@ -172,7 +162,7 @@ export function parseRow(inputStr, index) {
       } else {
         // Is this the _start_ of a chain of free text tokens?
         if (tokenCounter === 0 || semaphore === true) {
-          parsedOutput.push(makeToken(allTokens[i], "text", i));
+          parsedOutput.push(makeToken(allTokens[i], 'text', i));
           tokenCounter += 1;
           semaphore = false;
         } else {
@@ -181,7 +171,7 @@ export function parseRow(inputStr, index) {
       }
     } else {
       if (createNewToken) {
-        parsedOutput.push(makeToken(allTokens[i], "text", index));
+        parsedOutput.push(makeToken(allTokens[i], 'text', index));
         createNewToken = false;
       } else {
         parsedOutput[0].text += ` ${allTokens[i]}`;
@@ -192,7 +182,7 @@ export function parseRow(inputStr, index) {
   // Special return value for use case 2.
   if (parsedOutput?.length > 1) {
     parsedOutput.map((element, index) => (element.order = index));
-    return { order: index, type: "compound", value: parsedOutput };
+    return { order: index, type: 'compound', value: parsedOutput };
   }
 
   // Return value for use case 1. and 3.
@@ -222,7 +212,7 @@ function getFurtherArgs(inputStr) {
   let args = inputStr.match(/(?<=\|).*?(?=\))/g);
 
   if (args && args.length > 0) {
-    args = args[0].split(',').map(output => output.trim());
+    args = args[0].split(',').map((output) => output.trim());
 
     // E.g. [bar, red-600]
     return args;
@@ -234,27 +224,23 @@ function getFurtherArgs(inputStr) {
 /**
  * Function to normalize URIs by trimming the string and adding 'http://', if necessary. If the potential URI string already uses one of these protocols, then no action is taken: http(s), tel, mailto.
  * @param {string} inputStr - A string
- * @returns {string} A normalized URI that starts with one of these supported protocols: http(s), tel, mailto. 
+ * @returns {string} A normalized URI that starts with one of these supported protocols: http(s), tel, mailto.
  * @example Adds http - '    uxpin.com' -> 'http://uxpin.com'
  * @example No change - 'https://uxpin.com' -> 'https://uxpin.com'
  * @example No change - 'mailto:info@uxpin.com' -> 'mailto:info@uxpin.com'
  * @example No change - 'tel:+16175551212' -> 'tel:+16175551212'
- * 
+ *
  */
 export function normalizeLink(inputStr) {
-
   if (inputStr == undefined) {
     return inputStr;
   }
 
   let token = inputStr?.trim();
 
-  if (token?.startsWith('http') ||
-    token?.startsWith('tel:') ||
-    token?.startsWith('mailto:')) {
+  if (token?.startsWith('http') || token?.startsWith('tel:') || token?.startsWith('mailto:')) {
     return token;
-  }
-  else {
+  } else {
     return `http://${token}`;
   }
 }
@@ -280,21 +266,21 @@ function normalizeIcon(inputStr) {
 function makeToken(inputStr, type, order) {
   let token = {};
 
-  console.log("makeToken, type: " + type + ", contents: " + JSON.stringify(inputStr));
+  console.log('makeToken, type: ' + type + ', contents: ' + JSON.stringify(inputStr));
 
   switch (type) {
-    case "icon":
+    case 'icon':
       let c = UxpColors.getHexFromHexOrToken(getFurtherArgs(inputStr)?.[0]);
       token = {
         order: order,
         type: type,
         iconName: getFirstArg(inputStr).trim(),
         color: c ? c : '',
-        colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === "" ? undefined : getFurtherArgs(inputStr)?.[0]?.trim(),
-        text: "",
+        colorToken: getFurtherArgs(inputStr)?.[0]?.trim() === '' ? undefined : getFurtherArgs(inputStr)?.[0]?.trim(),
+        text: '',
       };
       break;
-    case "link":
+    case 'link':
       token = {
         order: order,
         type: type,
@@ -302,7 +288,7 @@ function makeToken(inputStr, type, order) {
         href: normalizeLink(getFurtherArgs(inputStr)?.[0])?.trim(),
       };
       break;
-    case "text":
+    case 'text':
     default:
       token = {
         order: order,
@@ -314,16 +300,13 @@ function makeToken(inputStr, type, order) {
   return token;
 }
 
-
-
 /**
- * A rewrite of the single line parser, suitable for Nav, Pivot, and Dropdown. 
- * @param {string} inputStr 
- * @param {boolean} includeEmptyRows 
- * @returns 
+ * A rewrite of the single line parser, suitable for Nav, Pivot, and Dropdown.
+ * @param {string} inputStr
+ * @param {boolean} includeEmptyRows
+ * @returns
  */
 export function parseSimpleTokens(inputStr, includeEmptyRows) {
-
   let contents = [];
 
   //Split rows by new line
@@ -346,12 +329,11 @@ export function parseSimpleTokens(inputStr, includeEmptyRows) {
 
 /**
  * For parsing one line, such as one line in a list of Tab or Nav items.
- * @param {string} inputStr 
- * @returns 
+ * @param {string} inputStr
+ * @returns
  */
 export function parseSimpleTokensRow(inputStr) {
-  if (!inputStr)
-    return undefined;
+  if (!inputStr) return undefined;
 
   if (inputStr.trim().length < 1) {
     return '';
@@ -363,15 +345,14 @@ export function parseSimpleTokensRow(inputStr) {
   let i = 0;
 
   do {
-
     hasMoreTokens = false;
 
     let results = extractNextToken(remainder);
 
-    console.log("parseSimpleTokensRow. raw token: " + results.rawToken + "  >>> remainder: " + results.remainder);
+    console.log('parseSimpleTokensRow. raw token: ' + results.rawToken + '  >>> remainder: ' + results.remainder);
 
     //found a token?
-    if (results?.token !== "none") {
+    if (results?.token !== 'none') {
       let t = makeSimpleToken(i, results.type, results.rawToken);
       if (t) {
         tokens.push(t);
@@ -383,16 +364,13 @@ export function parseSimpleTokensRow(inputStr) {
       remainder = results.remainder;
       hasMoreTokens = true;
     }
-  } //do
-  while (hasMoreTokens && i < 5);
+  } while (hasMoreTokens && i < 5); //do
 
   return tokens;
 }
 
 function extractNextToken(inputStr) {
-
-  if (!inputStr)
-    return undefined;
+  if (!inputStr) return undefined;
 
   if (inputStr.trim().length < 1) {
     return undefined;
@@ -400,7 +378,7 @@ function extractNextToken(inputStr) {
 
   inputStr = inputStr.trim();
 
-  let type = "none";
+  let type = 'none';
   let rawToken = '';
   let remainder = undefined;
   let rightParensIndex = inputStr.indexOf(')');
@@ -412,36 +390,30 @@ function extractNextToken(inputStr) {
     //First, determin if link or icon is first
     let endIndex = inputStr.length;
 
-    if (iconIndex > 0 && linkIndex > 0)
-      endIndex = iconIndex < linkIndex ? iconIndex : linkIndex;
-    else if (iconIndex > 0)
-      endIndex = iconIndex;
-    else if (linkIndex > 0)
-      endIndex = linkIndex;
+    if (iconIndex > 0 && linkIndex > 0) endIndex = iconIndex < linkIndex ? iconIndex : linkIndex;
+    else if (iconIndex > 0) endIndex = iconIndex;
+    else if (linkIndex > 0) endIndex = linkIndex;
 
-    type = "text";
+    type = 'text';
     rawToken = inputStr.slice(0, endIndex);
     remainder = inputStr.slice(endIndex);
-  }
-  else if (iconIndex === 0 || linkIndex === 0) {
+  } else if (iconIndex === 0 || linkIndex === 0) {
     rawToken = inputStr.slice(0, rightParensIndex);
     if (inputStr.length > rightParensIndex) {
-      remainder = inputStr.slice(rightParensIndex + 1)
+      remainder = inputStr.slice(rightParensIndex + 1);
     }
 
     if (iconIndex === 0) {
-      type = "icon";
+      type = 'icon';
       rawToken = rawToken.replace('icon(', '');
-    }
-    else if (linkIndex === 0) {
-      type = "link";
+    } else if (linkIndex === 0) {
+      type = 'link';
       rawToken = rawToken.replace('link(', '');
     }
-  }
-  else {
+  } else {
     //Else the whole length is a Text token
-    type = "text";
-    rawToken = inputStr
+    type = 'text';
+    rawToken = inputStr;
     remainder = '';
   }
 
@@ -501,10 +473,9 @@ function splitOnPipe(inputStr) {
   let splits = [];
 
   if (inputStr && inputStr.length) {
-    if (inputStr.includes("|")) {
+    if (inputStr.includes('|')) {
       splits = inputStr.split('|');
-    }
-    else {
+    } else {
       //We'll return the input string as the first item
       splits.push(inputStr);
     }
