@@ -108,6 +108,7 @@ class Tooltip extends React.Component {
           closeDelay={300}
           id={tooltipID}
           calloutProps={ttProps}
+          className={'merge-component'}
         >
           <Stack id={ttTargetID} aria-describedby={tooltipID}>
             {ttChild}

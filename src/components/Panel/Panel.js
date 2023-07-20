@@ -173,6 +173,7 @@ class Panel extends React.Component {
           isFooterAtBottom={true}
           onRenderFooterContent={() => this._onRenderFooterContent()}
           onDismiss={() => this._onDismiss()}
+          className={'merge-component'}
         >
           {panelContents}
         </FPanel>

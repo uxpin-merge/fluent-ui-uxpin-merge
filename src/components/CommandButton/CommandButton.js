@@ -6,7 +6,7 @@ import { UxpMenuUtils } from '../_helpers/uxpmenuutils';
 
 const defaultIcon = 'Add';
 const defaultText = 'Command Button';
-const defaultItems = `Files 
+const defaultItems = `Files
 * icon(Document) Add Document
 * icon(FileCode) Add Code File
 divider
@@ -19,6 +19,7 @@ class CommandButton extends React.Component {
 
     this.state = {
       items: [],
+      className: 'merge-component',
     };
   }
 
@@ -35,7 +36,6 @@ class CommandButton extends React.Component {
   set() {
     var menuItems = UxpMenuUtils.parseItemText(this.props.items, true);
     menuItems = this._addClickHandlers(menuItems);
-
     this.setState({
       items: menuItems,
     });
@@ -50,6 +50,7 @@ class CommandButton extends React.Component {
           //Dividers and Section Headers have item types
           if (!item.itemType) {
             item.onClick = () => this._onClick(item.key);
+            item.className = 'merge-component';
           }
         }
       }

@@ -66,6 +66,7 @@ class Persona extends React.Component {
         }}
         // eslint-disable-next-line react/no-children-prop
         children={undefined}
+        className={'merge-component'}
       >
         {email}
       </FPersona>

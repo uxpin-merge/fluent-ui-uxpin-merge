@@ -183,7 +183,7 @@ class Callout extends React.Component {
             target={`#${coTargetID}`}
             directionalHint={DirectionalHint[this.props.direction]}
             setInitialFocus={true}
-            className={coStyles}
+            className={(coStyles, 'merge-component')}
             onClick={() => {
               this._onClickCallout();
             }}
