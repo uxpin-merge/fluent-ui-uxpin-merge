@@ -426,6 +426,7 @@ class Wizard extends React.Component {
           onDismiss={() => {
             this._onDismissClicked();
           }}
+          className={'merge-component'}
         >
           {/* Modal Display Area */}
           <Stack horizontal={false} horizontalAlign={stackStretch} styles={wizardStackItemStyles}>

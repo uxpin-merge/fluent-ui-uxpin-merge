@@ -93,6 +93,7 @@ class Modal extends React.Component {
           onDismiss={() => {
             this._onDismissClicked();
           }}
+          className={'merge-component'}
         >
           {/* Modal Display Area */}
           <Stack horizontalAlign={'stretch'}>
