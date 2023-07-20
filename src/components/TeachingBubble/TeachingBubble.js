@@ -163,7 +163,7 @@ class TeachingBubble extends React.Component {
           <FTeachingBubble
             target={`#${tbTargetID}`}
             {...this.props}
-            calloutProps={{ directionalHint: DirectionalHint[this.props.direction] }}
+            calloutProps={{ directionalHint: DirectionalHint[this.props.direction], className: 'merge-component' }}
             isWide={this.props.extraWide}
             headline={this.props.title}
             footerContent={footerText}

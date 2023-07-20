@@ -192,6 +192,7 @@ class Coachmark extends React.Component {
               directionalHint: DirectionalHint[this.props.direction],
               directionalHintFixed: true,
             }}
+            className={'merge-component'}
           >
             <TeachingBubbleContent
               headline={this.props.title}
