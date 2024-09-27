@@ -34,20 +34,12 @@ export default function UXPinWrapper({ children }) {
   const appTheme = {
     defaultFontStyle: { fontFamily: 'DM Sans' },
     fonts: {
-      small: {
-        fontSize: '11px',
-      },
-      medium: {
-        fontSize: '13px',
-      },
       large: {
-        fontSize: '20px',
-        fontWeight: 'semibold',
+        fontFamily: 'Space Grotesk',
       },
       xLarge: {
         fontFamily: 'Space Grotesk',
         fontSize: '100px',
-        fontWeight: 'semibold',
       },
     },
     palette: {
